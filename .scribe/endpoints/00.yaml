@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"ok":true,"ts":"2025-10-14T22:34:15+00:00"}'
+        content: '{"ok":true,"ts":"2025-10-14T23:13:27+00:00"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

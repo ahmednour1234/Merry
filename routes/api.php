@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\System\AuditLogController;
 use App\Http\Controllers\Api\System\UserController;
 use App\Http\Controllers\Api\System\RoleController;
 use App\Http\Controllers\Api\System\PermissionController;
+use App\Http\Controllers\Api\System\InsuranceCompanyController;
+
 
 Route::get('/health', fn () => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
@@ -98,4 +100,16 @@ Route::prefix('v1/admin/system')
             ->middleware('perm:system.permissions.destroy');
         Route::post('permissions/{id}/toggle', [PermissionController::class, 'toggle'])
             ->middleware('perm:system.permissions.toggle');
+
+        // ===== Insurance Companies =====
+        Route::get('insurance-companies', [InsuranceCompanyController::class, 'index'])
+    ->middleware('perm:system.insurance_companies.index');
+Route::post('insurance-companies', [InsuranceCompanyController::class, 'store'])
+    ->middleware('perm:system.insurance_companies.store');
+Route::put('insurance-companies/{id}', [InsuranceCompanyController::class, 'update'])
+    ->middleware('perm:system.insurance_companies.update');
+Route::delete('insurance-companies/{id}', [InsuranceCompanyController::class, 'destroy'])
+    ->middleware('perm:system.insurance_companies.destroy');
+Route::post('insurance-companies/{id}/toggle', [InsuranceCompanyController::class, 'toggle'])
+    ->middleware('perm:system.insurance_companies.toggle');
     });

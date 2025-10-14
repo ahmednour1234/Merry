@@ -18,6 +18,7 @@ class SystemDatabaseSeeder extends Seeder
             RolesSeeder::class,
             PermissionsSeeder::class,
             RolePermissionPivotSeeder::class, // اختياري للربط
+ModulesSeeder::class,
             // AuditLogsSeeder::class, // اختياري
         ]);
     }

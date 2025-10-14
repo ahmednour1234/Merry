@@ -59,6 +59,13 @@ class PermissionsSeeder extends Seeder
 
             // audit logs (اختياري عرض فقط)
             ['slug'=>'system.audit_logs.index',  'name'=>'List Audit Logs',    'guard'=>'api','active'=>1],
+            // insurance companies
+['slug'=>'system.insurance_companies.index',  'name'=>'List Insurance Companies', 'guard'=>'api','active'=>1],
+['slug'=>'system.insurance_companies.store',  'name'=>'Store Insurance Company',  'guard'=>'api','active'=>1],
+['slug'=>'system.insurance_companies.update', 'name'=>'Update Insurance Company', 'guard'=>'api','active'=>1],
+['slug'=>'system.insurance_companies.destroy','name'=>'Delete Insurance Company', 'guard'=>'api','active'=>1],
+['slug'=>'system.insurance_companies.toggle', 'name'=>'Toggle Insurance Company', 'guard'=>'api','active'=>1],
+
         ];
 
         foreach ($perms as $p) {

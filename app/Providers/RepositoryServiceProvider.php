@@ -29,6 +29,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\System\Contracts\UserRepositoryInterface::class,
             \App\Repositories\System\UserRepository::class
         );
+        $this->app->bind(
+    \App\Repositories\System\Contracts\InsuranceCompanyRepositoryInterface::class,
+    \App\Repositories\System\InsuranceCompanyRepository::class
+);
+
     }
 
     public function boot(): void
