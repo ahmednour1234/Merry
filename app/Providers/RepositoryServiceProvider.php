@@ -25,6 +25,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\System\Contracts\ExchangeRateRepositoryInterface::class,
             \App\Repositories\System\ExchangeRateRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\System\Contracts\UserRepositoryInterface::class,
+            \App\Repositories\System\UserRepository::class
+        );
     }
 
     public function boot(): void

@@ -3,6 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\CheckPermission;
+// Sanctum ability middlewares
+use Laravel\Sanctum\Http\Middleware\CheckAbilities;
+use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,15 +19,24 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         App\Providers\ApiFormattingServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,   // <-- ربط الـ Repositories
-        App\Providers\ModulesServiceProvider::class,      // <-- تحميل الموديولز من DB
+        App\Providers\ModulesServiceProvider::class,      // <-- تحميل الموديولز من DB (لو بتستخدمه)
     ])
     ->withMiddleware(function (Middleware $middleware): void {
-        // مجموعة مخصّصة للتينانت (لو هتستخدمها على روتات معيّنة)
-        $middleware->group('tenant', [
-            App\Http\Middleware\ResolveTenant::class,
+        // (اختياري) مجموعة للتينانت لو محتاجها
+        // $middleware->group('tenant', [
+        //     App\Http\Middleware\ResolveTenant::class,
+        // ]);
+
+        // aliases لميدل وير Sanctum abilities
+        $middleware->alias([
+                    'perm' => CheckPermission::class, // << استخدمه في الراوتس
+            // يتأكد إن التوكن يمتلك "كل" القدرات الممرّرة
+            'abilities' => CheckAbilities::class,
+            // يتأكد إن التوكن يمتلك "أي" قدرة من القدرات الممرّرة
+            'ability'   => CheckForAnyAbility::class,
         ]);
 
-        // أو تضيفه على كل الطلبات:
+        // (اختياري) تلزق ميدل وير عام على كل الطلبات:
         // $middleware->append(App\Http\Middleware\ResolveTenant::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

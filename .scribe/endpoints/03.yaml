@@ -4,7 +4,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/system/exchange-rates
+    uri: api/v1/admin/system/exchange-rates
     metadata:
       groupName: 'System / Exchange Rates'
       groupDescription: ''
@@ -27,8 +27,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"status":"success","message":"Exchange rates","data":[],"meta":{"pagination":{"current_page":1,"per_page":15,"from":null,"to":null,"total":0,"last_page":1,"has_more":false,"next_page_url":null,"prev_page_url":null},"summary":{"count":0}}}'
+        status: 401
+        content: '{"message":"Unauthenticated."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -44,7 +44,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/system/exchange-rates
+    uri: api/v1/admin/system/exchange-rates
     metadata:
       groupName: 'System / Exchange Rates'
       groupDescription: ''
@@ -130,7 +130,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/system/exchange-rates/toggle
+    uri: api/v1/admin/system/exchange-rates/toggle
     metadata:
       groupName: 'System / Exchange Rates'
       groupDescription: ''

@@ -21,6 +21,7 @@ return [
         Sanctum::currentApplicationUrlWithPort(),
         // Sanctum::currentRequestHost(),
     ))),
+'connection' => env('SANCTUM_CONNECTION', 'system'),
 
     /*
     |--------------------------------------------------------------------------

@@ -39,11 +39,10 @@ return [
         ],
 
         'database' => [
-            'driver' => 'database',
-            'connection' => env('DB_CACHE_CONNECTION'),
-            'table' => env('DB_CACHE_TABLE', 'cache'),
-            'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
-            'lock_table' => env('DB_CACHE_LOCK_TABLE'),
+                 'driver'     => 'database',
+        'table'      => env('CACHE_TABLE', 'cache'),
+        'connection' => env('DB_CACHE_CONNECTION', 'system'), // <-- مهم
+        'lock_table' => env('CACHE_LOCKS_TABLE', 'cache_locks'),
         ],
 
         'file' => [
