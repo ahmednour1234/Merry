@@ -3,7 +3,11 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+
+// Middlewares
 use App\Http\Middleware\CheckPermission;
+use App\Http\Middleware\ForceJsonResponse;
+
 // Sanctum ability middlewares
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
 use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
@@ -18,28 +22,49 @@ return Application::configure(basePath: dirname(__DIR__))
     // سجل مزوّداتك هنا (وليس داخل config/app.php في Laravel 12)
     ->withProviders([
         App\Providers\ApiFormattingServiceProvider::class,
-        App\Providers\RepositoryServiceProvider::class,   // <-- ربط الـ Repositories
-        App\Providers\ModulesServiceProvider::class,      // <-- تحميل الموديولز من DB (لو بتستخدمه)
+        App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ModulesServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
-        // (اختياري) مجموعة للتينانت لو محتاجها
-        // $middleware->group('tenant', [
-        //     App\Http\Middleware\ResolveTenant::class,
-        // ]);
-
-        // aliases لميدل وير Sanctum abilities
+        // Aliases
         $middleware->alias([
-                    'perm' => CheckPermission::class, // << استخدمه في الراوتس
-            // يتأكد إن التوكن يمتلك "كل" القدرات الممرّرة
+            'perm'      => CheckPermission::class,
             'abilities' => CheckAbilities::class,
-            // يتأكد إن التوكن يمتلك "أي" قدرة من القدرات الممرّرة
             'ability'   => CheckForAnyAbility::class,
         ]);
 
-        // (اختياري) تلزق ميدل وير عام على كل الطلبات:
+        // إجبار كل ريكوست API يرجّع JSON (حتى في الأخطاء)
+        $middleware->appendToGroup('api', ForceJsonResponse::class);
+
+        // (اختياري) لو عندك Tenant resolver
+        // $middleware->group('tenant', [ App\Http\Middleware\ResolveTenant::class ]);
+        // أو على كل الطلبات:
         // $middleware->append(App\Http\Middleware\ResolveTenant::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // توحيد مخرجات الأخطاء كـ JSON
+        $exceptions->render(function (\Throwable $e, $request) {
+            // أي طلب API أو طلب يتوقع JSON
+            if ($request->is('api/*') || $request->expectsJson()) {
+                $status = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
+
+                // لو عندك ApiResponder مقيّد في الحاوية، استخدمه
+                if (app()->bound('api.responder')) {
+                    /** @var \App\Support\Api\ApiResponder $responder */
+                    $responder = app('api.responder');
+                    return $responder->fail(
+                        app()->hasDebugModeEnabled() ? $e->getMessage() : 'Server Error',
+                        status: $status,
+                        meta: app()->hasDebugModeEnabled() ? ['exception' => get_class($e)] : []
+                    );
+                }
+
+                // fallback JSON
+                return response()->json([
+                    'success' => false,
+                    'message' => app()->hasDebugModeEnabled() ? $e->getMessage() : 'Server Error',
+                ], $status);
+            }
+        });
     })
     ->create();
