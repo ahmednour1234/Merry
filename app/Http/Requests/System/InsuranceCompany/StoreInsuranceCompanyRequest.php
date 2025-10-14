@@ -15,6 +15,9 @@ class StoreInsuranceCompanyRequest extends FormRequest
             'website' => ['nullable','url','max:191'],
             'logo'    => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
             'active'  => ['nullable','boolean'],
+
+        'insurance_amount' => ['nullable','numeric','min:0'],
+        'currency_code'    => ['nullable','string','max:8','exists:system.currencies,code'],
         ];
     }
 
@@ -26,6 +29,8 @@ class StoreInsuranceCompanyRequest extends FormRequest
             'website' => ['description'=>'Website URL','example'=>'https://abc-ins.com'],
             'logo'    => ['description'=>'Image file (jpg/png/webp)','example'=>'(binary file)'],
             'active'  => ['description'=>'Active flag','example'=>true],
+               'insurance_amount' => ['description'=>'Insurance amount in company base currency','example'=>10000.00],
+        'currency_code'    => ['description'=>'Currency code (from currencies.code)','example'=>'EGP'],
         ];
     }
 }
