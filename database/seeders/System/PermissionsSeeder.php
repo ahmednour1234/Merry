@@ -70,6 +70,12 @@ class PermissionsSeeder extends Seeder
 ['slug'=>'system.cities.update', 'name'=>'Update City',  'guard'=>'api','active'=>1],
 ['slug'=>'system.cities.destroy','name'=>'Delete City',  'guard'=>'api','active'=>1],
 ['slug'=>'system.cities.toggle', 'name'=>'Toggle City',  'guard'=>'api','active'=>1],
+['slug'=>'system.offices.index','name'=>'List Offices','guard'=>'api','active'=>1],
+['slug'=>'system.offices.store','name'=>'Store Office','guard'=>'api','active'=>1],
+['slug'=>'system.offices.update','name'=>'Update Office','guard'=>'api','active'=>1],
+['slug'=>'system.offices.block','name'=>'Block/Unblock Office','guard'=>'api','active'=>1],
+['slug'=>'system.offices.toggle','name'=>'Toggle Office','guard'=>'api','active'=>1],
+['slug'=>'system.offices.destroy','name'=>'Delete Office','guard'=>'api','active'=>1],
 
         ];
 

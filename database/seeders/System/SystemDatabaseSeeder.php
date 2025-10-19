@@ -20,6 +20,7 @@ class SystemDatabaseSeeder extends Seeder
             RolePermissionPivotSeeder::class, // اختياري للربط
             ModulesSeeder::class,
             SaudiCitiesSeeder::class,
+            OfficesSeeder::class,
 
             // AuditLogsSeeder::class, // اختياري
         ]);
