@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\System\UserController;
 use App\Http\Controllers\Api\System\RoleController;
 use App\Http\Controllers\Api\System\PermissionController;
 use App\Http\Controllers\Api\System\InsuranceCompanyController;
-
+use App\Http\Controllers\Api\System\CityController;
 
 Route::get('/health', fn () => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
@@ -23,7 +23,7 @@ Route::prefix('v1')->group(function () {
 });
 
 // ===== Admin/System APIs (محميّة) =====
-// ملاحظة: بنحتفظ بـ ability عامة (system.manage) + بنحط perm مخصص لكل Endpoint
+// ability عام: system.manage + صلاحيات perm لكل Endpoint
 Route::prefix('v1/admin/system')
     ->middleware(['auth:sanctum', 'ability:system.manage'])
     ->group(function () {
@@ -71,7 +71,6 @@ Route::prefix('v1/admin/system')
             ->middleware('perm:system.users.toggle');
         Route::post('users/{id}/sync-roles', [UserController::class, 'syncRoles'])
             ->middleware('perm:system.users.sync_roles');
-        // (اختياري) ربط صلاحيات مباشرة للمستخدم:
         // Route::post('users/{id}/sync-permissions', [UserController::class, 'syncPermissions'])
         //     ->middleware('perm:system.users.sync_permissions');
 
@@ -103,13 +102,25 @@ Route::prefix('v1/admin/system')
 
         // ===== Insurance Companies =====
         Route::get('insurance-companies', [InsuranceCompanyController::class, 'index'])
-    ->middleware('perm:system.insurance_companies.index');
-Route::post('insurance-companies', [InsuranceCompanyController::class, 'store'])
-    ->middleware('perm:system.insurance_companies.store');
-Route::put('insurance-companies/{id}', [InsuranceCompanyController::class, 'update'])
-    ->middleware('perm:system.insurance_companies.update');
-Route::delete('insurance-companies/{id}', [InsuranceCompanyController::class, 'destroy'])
-    ->middleware('perm:system.insurance_companies.destroy');
-Route::post('insurance-companies/{id}/toggle', [InsuranceCompanyController::class, 'toggle'])
-    ->middleware('perm:system.insurance_companies.toggle');
+            ->middleware('perm:system.insurance_companies.index');
+        Route::post('insurance-companies', [InsuranceCompanyController::class, 'store'])
+            ->middleware('perm:system.insurance_companies.store');
+        Route::put('insurance-companies/{id}', [InsuranceCompanyController::class, 'update'])
+            ->middleware('perm:system.insurance_companies.update');
+        Route::delete('insurance-companies/{id}', [InsuranceCompanyController::class, 'destroy'])
+            ->middleware('perm:system.insurance_companies.destroy');
+        Route::post('insurance-companies/{id}/toggle', [InsuranceCompanyController::class, 'toggle'])
+            ->middleware('perm:system.insurance_companies.toggle');
+
+        // ===== Cities =====
+        Route::get('cities', [CityController::class, 'index'])
+            ->middleware('perm:system.cities.index');
+        Route::post('cities', [CityController::class, 'store'])
+            ->middleware('perm:system.cities.store');
+        Route::put('cities/{id}', [CityController::class, 'update'])
+            ->middleware('perm:system.cities.update');
+        Route::delete('cities/{id}', [CityController::class, 'destroy'])
+            ->middleware('perm:system.cities.destroy');
+        Route::post('cities/{id}/toggle', [CityController::class, 'toggle'])
+            ->middleware('perm:system.cities.toggle');
     });

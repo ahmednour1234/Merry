@@ -82,8 +82,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
+        status: 500
+        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

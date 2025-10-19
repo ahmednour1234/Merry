@@ -84,8 +84,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
+        status: 500
+        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -160,10 +160,32 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         custom: []
+      insurance_amount:
+        name: insurance_amount
+        description: 'Insurance amount in company base currency. Must be at least 0.'
+        required: false
+        example: 10000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      currency_code:
+        name: currency_code
+        description: 'Currency code (from currencies.code). The <code>code</code> of an existing record in the system.currencies table. Must not be greater than 8 characters.'
+        required: false
+        example: EGP
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
     cleanBodyParameters:
       name: consequatur
       website: consequatur
       active: false
+      insurance_amount: 10000.0
+      currency_code: EGP
     fileParameters:
       logo: null
     responses: []
@@ -246,10 +268,32 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      insurance_amount:
+        name: insurance_amount
+        description: 'Insurance amount in company base currency. Must be at least 0.'
+        required: false
+        example: 10000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      currency_code:
+        name: currency_code
+        description: 'Currency code (from currencies.code). The <code>code</code> of an existing record in the system.currencies table. Must not be greater than 8 characters.'
+        required: false
+        example: EGP
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
     cleanBodyParameters:
       name: consequatur
       website: consequatur
       active: false
+      insurance_amount: 10000.0
+      currency_code: EGP
     fileParameters:
       logo: null
     responses: []

@@ -1,16 +1,16 @@
-name: 'System / Insurance Companies'
+name: 'System / Cities'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/insurance-companies
+    uri: api/v1/admin/system/cities
     metadata:
-      groupName: 'System / Insurance Companies'
+      groupName: 'System / Cities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'List cities'
       description: ''
       authenticated: false
       deprecated: false
@@ -23,9 +23,19 @@ endpoints:
     queryParameters:
       q:
         name: q
-        description: 'Search name/website.'
+        description: 'Search by translated name.'
         required: false
-        example: comp
+        example: Riy
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      country:
+        name: country
+        description: 'ISO-2 country.'
+        required: false
+        example: SA
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -72,7 +82,8 @@ endpoints:
         nullable: false
         custom: []
     cleanQueryParameters:
-      q: comp
+      q: Riy
+      country: SA
       active: true
       from: '2025-10-01'
       to: '2025-10-15'
@@ -99,93 +110,75 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/system/insurance-companies
+    uri: api/v1/admin/system/cities
     metadata:
-      groupName: 'System / Insurance Companies'
+      groupName: 'System / Cities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Create a city with translations'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
     headers:
-      Content-Type: multipart/form-data
+      Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
-        description: ''
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      website:
-        name: website
-        description: ''
+      slug:
+        name: slug
+        description: 'Unique slug.'
         required: false
-        example: consequatur
+        example: riyadh
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
-      logo:
-        name: logo
-        description: image
+      country_code:
+        name: country_code
+        description: ISO-2.
         required: false
-        example: null
-        type: file
+        example: SA
+        type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
       active:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
-      insurance_amount:
-        name: insurance_amount
-        description: 'Insurance amount in company base currency. Must be at least 0.'
-        required: false
-        example: 10000.0
-        type: number
+      translations:
+        name: translations
+        description: 'Map of lang_code=>name.'
+        required: true
+        example:
+          ar: الرياض
+          en: Riyadh
+        type: object
         enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      currency_code:
-        name: currency_code
-        description: 'Currency code (from currencies.code). The <code>code</code> of an existing record in the system.currencies table. Must not be greater than 8 characters.'
-        required: false
-        example: EGP
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
+        exampleWasSpecified: true
+        nullable: false
         custom: []
     cleanBodyParameters:
-      name: consequatur
-      website: consequatur
-      active: false
-      insurance_amount: 10000.0
-      currency_code: EGP
-    fileParameters:
-      logo: null
+      slug: riyadh
+      country_code: SA
+      active: true
+      translations:
+        ar: الرياض
+        en: Riyadh
+    fileParameters: []
     responses: []
     responseFields: []
     auth: []
@@ -196,24 +189,24 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/v1/admin/system/insurance-companies/{id}'
+    uri: 'api/v1/admin/system/cities/{id}'
     metadata:
-      groupName: 'System / Insurance Companies'
+      groupName: 'System / Cities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Update a city and/or its translations'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
     headers:
-      Content-Type: multipart/form-data
+      Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: 'The ID of the insurance company.'
+        description: 'The ID of the city.'
         required: true
         example: consequatur
         type: string
@@ -226,39 +219,29 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
-        description: ''
+      slug:
+        name: slug
+        description: 'Unique slug. Must not be greater than 191 characters.'
         required: false
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      website:
-        name: website
-        description: ''
-        required: false
-        example: consequatur
+        example: riyadh
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
-      logo:
-        name: logo
-        description: image
+      country_code:
+        name: country_code
+        description: 'ISO-2. Must be 2 characters.'
         required: false
-        example: null
-        type: file
+        example: SA
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
       active:
         name: active
-        description: ''
+        description: 'Active flag.'
         required: false
         example: false
         type: boolean
@@ -266,34 +249,24 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-      insurance_amount:
-        name: insurance_amount
-        description: 'Insurance amount in company base currency. Must be at least 0.'
+      translations:
+        name: translations
+        description: 'This field is required when <code>translations</code> is present. Must not be greater than 191 characters.'
         required: false
-        example: 10000.0
-        type: number
+        example:
+          - vmqeopfuudtdsufvyvddq
+        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
-        nullable: true
-        custom: []
-      currency_code:
-        name: currency_code
-        description: 'Currency code (from currencies.code). The <code>code</code> of an existing record in the system.currencies table. Must not be greater than 8 characters.'
-        required: false
-        example: EGP
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
+        nullable: false
         custom: []
     cleanBodyParameters:
-      name: consequatur
-      website: consequatur
+      slug: riyadh
+      country_code: SA
       active: false
-      insurance_amount: 10000.0
-      currency_code: EGP
-    fileParameters:
-      logo: null
+      translations:
+        - vmqeopfuudtdsufvyvddq
+    fileParameters: []
     responses: []
     responseFields: []
     auth: []
@@ -304,13 +277,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/admin/system/insurance-companies/{id}'
+    uri: 'api/v1/admin/system/cities/{id}'
     metadata:
-      groupName: 'System / Insurance Companies'
+      groupName: 'System / Cities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Soft delete a city'
       description: ''
       authenticated: false
       deprecated: false
@@ -321,7 +294,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the insurance company.'
+        description: 'The ID of the city.'
         required: true
         example: consequatur
         type: string
@@ -346,13 +319,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/v1/admin/system/insurance-companies/{id}/toggle'
+    uri: 'api/v1/admin/system/cities/{id}/toggle'
     metadata:
-      groupName: 'System / Insurance Companies'
+      groupName: 'System / Cities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Toggle active'
       description: ''
       authenticated: false
       deprecated: false
@@ -363,7 +336,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the insurance company.'
+        description: 'The ID of the city.'
         required: true
         example: consequatur
         type: string

@@ -65,6 +65,11 @@ class PermissionsSeeder extends Seeder
 ['slug'=>'system.insurance_companies.update', 'name'=>'Update Insurance Company', 'guard'=>'api','active'=>1],
 ['slug'=>'system.insurance_companies.destroy','name'=>'Delete Insurance Company', 'guard'=>'api','active'=>1],
 ['slug'=>'system.insurance_companies.toggle', 'name'=>'Toggle Insurance Company', 'guard'=>'api','active'=>1],
+['slug'=>'system.cities.index',  'name'=>'List Cities',  'guard'=>'api','active'=>1],
+['slug'=>'system.cities.store',  'name'=>'Store City',   'guard'=>'api','active'=>1],
+['slug'=>'system.cities.update', 'name'=>'Update City',  'guard'=>'api','active'=>1],
+['slug'=>'system.cities.destroy','name'=>'Delete City',  'guard'=>'api','active'=>1],
+['slug'=>'system.cities.toggle', 'name'=>'Toggle City',  'guard'=>'api','active'=>1],
 
         ];
 

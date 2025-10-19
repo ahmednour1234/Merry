@@ -10,14 +10,21 @@ class ModulesSeeder extends Seeder
     public function run(): void
     {
         $db = DB::connection('system');
-        if (!$db->getSchemaBuilder()->hasTable('modules')) return;
 
-        // Insurance Companies module
+        // لو جدول modules مش موجود نخرج بهدوء
+        if (! $db->getSchemaBuilder()->hasTable('modules')) {
+            return;
+        }
+
+        // التأكد أن عمود name مميز (اختياري لكن مستحب)
+        // يفضل يكون معمول UNIQUE في الميجريشن.
+
+        // ============== Insurance Companies ==============
         $db->table('modules')->updateOrInsert(
-            ['name' => 'Insurance Companies'], // مفتاح فريد (name)
+            ['name' => 'Insurance Companies'], // مفتاح فريد
             [
                 'namespace' => 'App\\Http\\Controllers\\Api\\System',
-                'provider'  => null, // لو عندك ServiceProvider خاص بالموديول حط اسمه هنا
+                'provider'  => null, // ضع اسم ServiceProvider لو عندك واحد خاص بالموديول
                 'path'      => 'v1/admin/system/insurance-companies',
                 'enabled'   => 1,
                 'meta'      => json_encode([
@@ -29,10 +36,32 @@ class ModulesSeeder extends Seeder
                         'destroy' => 'DELETE /api/v1/admin/system/insurance-companies/{id}',
                         'toggle'  => 'POST   /api/v1/admin/system/insurance-companies/{id}/toggle',
                     ],
-                ]),
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 'updated_at' => now(),
                 'created_at' => now(),
-                'deleted_at' => null,
+            ]
+        );
+
+        // ====================== Cities ======================
+        $db->table('modules')->updateOrInsert(
+            ['name' => 'Cities'],
+            [
+                'namespace' => 'App\\Http\\Controllers\\Api\\System',
+                'provider'  => null,
+                'path'      => 'v1/admin/system/cities',
+                'enabled'   => 1,
+                'meta'      => json_encode([
+                    'permissions_prefix' => 'system.cities',
+                    'routes' => [
+                        'index'   => 'GET    /api/v1/admin/system/cities',
+                        'store'   => 'POST   /api/v1/admin/system/cities',
+                        'update'  => 'PUT    /api/v1/admin/system/cities/{id}',
+                        'destroy' => 'DELETE /api/v1/admin/system/cities/{id}',
+                        'toggle'  => 'POST   /api/v1/admin/system/cities/{id}/toggle',
+                    ],
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                'updated_at' => now(),
+                'created_at' => now(),
             ]
         );
     }

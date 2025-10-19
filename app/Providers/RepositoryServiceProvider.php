@@ -33,6 +33,11 @@ class RepositoryServiceProvider extends ServiceProvider
     \App\Repositories\System\Contracts\InsuranceCompanyRepositoryInterface::class,
     \App\Repositories\System\InsuranceCompanyRepository::class
 );
+$this->app->bind(
+    \App\Repositories\System\Contracts\CityRepositoryInterface::class,
+    \App\Repositories\System\CityRepository::class
+);
+
 
     }
 
