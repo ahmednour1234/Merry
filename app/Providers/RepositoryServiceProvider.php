@@ -30,15 +30,29 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\System\UserRepository::class
         );
         $this->app->bind(
-    \App\Repositories\System\Contracts\InsuranceCompanyRepositoryInterface::class,
-    \App\Repositories\System\InsuranceCompanyRepository::class
-);
-$this->app->bind(
-    \App\Repositories\System\Contracts\CityRepositoryInterface::class,
-    \App\Repositories\System\CityRepository::class
-);
-
-
+            \App\Repositories\System\Contracts\InsuranceCompanyRepositoryInterface::class,
+            \App\Repositories\System\InsuranceCompanyRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\System\Contracts\CityRepositoryInterface::class,
+            \App\Repositories\System\CityRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\System\Subscriptions\Contracts\PlanRepositoryInterface::class,
+            \App\Repositories\System\Subscriptions\PlanRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\System\Subscriptions\Contracts\SubscriptionRepositoryInterface::class,
+            \App\Repositories\System\Subscriptions\SubscriptionRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\System\Subscriptions\Contracts\CouponRepositoryInterface::class,
+            \App\Repositories\System\Subscriptions\CouponRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\System\Subscriptions\Contracts\PromotionRepositoryInterface::class,
+            \App\Repositories\System\Subscriptions\PromotionRepository::class
+        );
     }
 
     public function boot(): void

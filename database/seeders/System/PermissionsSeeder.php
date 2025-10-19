@@ -76,6 +76,28 @@ class PermissionsSeeder extends Seeder
 ['slug'=>'system.offices.block','name'=>'Block/Unblock Office','guard'=>'api','active'=>1],
 ['slug'=>'system.offices.toggle','name'=>'Toggle Office','guard'=>'api','active'=>1],
 ['slug'=>'system.offices.destroy','name'=>'Delete Office','guard'=>'api','active'=>1],
+// plans
+['slug'=>'system.plans.index','name'=>'List Plans','guard'=>'api','active'=>1],
+['slug'=>'system.plans.store','name'=>'Create Plan','guard'=>'api','active'=>1],
+['slug'=>'system.plans.update','name'=>'Update Plan','guard'=>'api','active'=>1],
+['slug'=>'system.plans.destroy','name'=>'Delete Plan','guard'=>'api','active'=>1],
+['slug'=>'system.plans.toggle','name'=>'Toggle Plan','guard'=>'api','active'=>1],
+['slug'=>'system.plans.translations','name'=>'Plan Translations','guard'=>'api','active'=>1],
+['slug'=>'system.plans.features','name'=>'Plan Features','guard'=>'api','active'=>1],
+
+// coupons
+['slug'=>'system.coupons.index','name'=>'List Coupons','guard'=>'api','active'=>1],
+['slug'=>'system.coupons.store','name'=>'Create Coupon','guard'=>'api','active'=>1],
+['slug'=>'system.coupons.update','name'=>'Update Coupon','guard'=>'api','active'=>1],
+['slug'=>'system.coupons.destroy','name'=>'Delete Coupon','guard'=>'api','active'=>1],
+['slug'=>'system.coupons.toggle','name'=>'Toggle Coupon','guard'=>'api','active'=>1],
+
+// promotions
+['slug'=>'system.promotions.index','name'=>'List Promotions','guard'=>'api','active'=>1],
+['slug'=>'system.promotions.store','name'=>'Create Promotion','guard'=>'api','active'=>1],
+['slug'=>'system.promotions.update','name'=>'Update Promotion','guard'=>'api','active'=>1],
+['slug'=>'system.promotions.destroy','name'=>'Delete Promotion','guard'=>'api','active'=>1],
+['slug'=>'system.promotions.toggle','name'=>'Toggle Promotion','guard'=>'api','active'=>1],
 
         ];
 
