@@ -26,14 +26,50 @@ class CityController extends ApiController
      * @queryParam to date Example: 2025-10-15
      * @queryParam per_page integer Example: 15
      */
-    public function index(Request $r)
-    {
-        $filters = $r->only(['q','country','active','from','to']);
-        $per = (int) $r->integer('per_page', 15);
-        $p = $this->repo->paginate($filters, $per > 0 ? $per : 15);
+   public function index(Request $r)
+{
+    $filters = $r->only(['q','country','active','from','to']);
+    $per = (int) $r->integer('per_page', 15);
 
-        return $this->responder->paginated($p->load('translations'), CityResource::class, 'Cities');
+    // دعم ?all=1 أو ?per_page=0 لإرجاع كل النتائج بدون paginate
+    if ($per === 0 || $r->boolean('all')) {
+        $paginated = app(\App\Repositories\System\Contracts\CityRepositoryInterface::class)
+            ->paginate($filters, PHP_INT_MAX);   // نطلب رقم كبير
+
+        // إذا الكائن يرجع getCollection() نستخدمها، وإلا نبني Eloquent Collection من العناصر
+        if (is_object($paginated) && method_exists($paginated, 'getCollection')) {
+            $all = $paginated->getCollection();                  // ناخد الكولكشن فقط
+        } elseif (is_object($paginated) && method_exists($paginated, 'items')) {
+            $all = \Illuminate\Database\Eloquent\Collection::make($paginated->items());
+        } elseif (is_array($paginated)) {
+            $all = \Illuminate\Database\Eloquent\Collection::make($paginated);
+        } else {
+            $all = \Illuminate\Database\Eloquent\Collection::make((array) $paginated);
+        }
+
+        // لو حابب بدون paginate نهائيًا:
+        // $all = \App\Models\City::on('system')->with('translations')->get();
+
+        $all->load('translations');
+        return $this->responder->ok(
+            \App\Http\Resources\System\CityResource::collection($all),
+            'Cities list',
+            meta: ['pagination' => null]
+        );
     }
+
+    // الحالة الطبيعية (paginate)
+    $p = $this->repo->paginate($filters, $per > 0 ? $per : 15);
+
+    // حمّل الـ translations على مجموعة العناصر داخل الـ paginator
+    $p->getCollection()->load('translations');
+
+    return $this->responder->paginated(
+        $p,
+        \App\Http\Resources\System\CityResource::class,
+        'Cities'
+    );
+}
 
     /**
      * @group System / Cities
