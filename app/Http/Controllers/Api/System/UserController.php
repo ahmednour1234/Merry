@@ -18,15 +18,17 @@ class UserController extends ApiController
 
     /**
      * @group System / Users
-     * List users with filters.
-     * @queryParam name string
-     * @queryParam email string
-     * @queryParam active boolean
-     * @queryParam guard string
-     * @queryParam role string Role slug/name/id
-     * @queryParam from date
-     * @queryParam to date
-     * @queryParam per_page integer
+     * @authenticated
+     * List users with filters
+     *
+     * @queryParam name string Example: Ahmed
+     * @queryParam email string Example: admin@example.com
+     * @queryParam active boolean Example: 1
+     * @queryParam guard string Example: api
+     * @queryParam role string Role slug/name/id. Example: admin
+     * @queryParam from date Example: 2025-01-01
+     * @queryParam to date Example: 2025-12-31
+     * @queryParam per_page integer Example: 15
      */
     public function index(Request $r)
     {
@@ -39,39 +41,78 @@ class UserController extends ApiController
 
     /**
      * @group System / Users
-     * Create user (and attach roles).
+     * @authenticated
+     * Create user (and attach roles)
+     *
+     * يقبل roles[] أو role_id (اختصار لدور واحد).
      */
     public function store(StoreUserRequest $r)
     {
-        $row = $this->repo->store($r->validated());
-        return $this->responder->created(new UserResource($row->load('roles')), 'User created');
+        $data = $r->validated();
+
+        // تطبيع: لو جالي role_id استخدمه بدل/مع roles[]
+        if (!empty($data['role_id'])) {
+            $data['roles'] = array_values(array_unique(array_merge(
+                (array)($data['roles'] ?? []),
+                [(int)$data['role_id']]
+            )));
+            unset($data['role_id']);
+        }
+
+        $row = $this->repo->store($data);
+
+        return $this->responder->created(
+            new UserResource($row->load('roles')),
+            'User created'
+        );
     }
 
     /**
      * @group System / Users
-     * Update user (and sync roles if provided).
+     * @authenticated
+     * Update user (and sync roles if provided)
+     *
+     * يقبل roles[] أو role_id (هيستبدّل الأدوار لو المصفوفة موجودة/مُشتقّة من role_id).
      */
     public function update(int $id, UpdateUserRequest $r)
     {
-        $row = $this->repo->update($id, $r->validated());
+        $data = $r->validated();
+
+        if (array_key_exists('role_id', $data)) {
+            // لو role_id مبعوت—even إن roles مش مبعوتة—نحوّله إلى roles = [role_id]
+            $data['roles'] = isset($data['roles'])
+                ? array_values(array_unique(array_merge((array)$data['roles'], [(int)$data['role_id']])))
+                : [(int)$data['role_id']];
+            unset($data['role_id']);
+        }
+
+        $row = $this->repo->update($id, $data);
         if (!$row) return $this->responder->fail('User not found', status:404);
-        return $this->responder->ok(new UserResource($row->load('roles')), 'User updated');
+
+        return $this->responder->ok(
+            new UserResource($row->load('roles')),
+            'User updated'
+        );
     }
 
     /**
      * @group System / Users
-     * Soft delete user.
+     * @authenticated
+     * Soft delete user
      */
     public function destroy(int $id)
     {
         $ok = $this->repo->destroy($id);
-        return $ok ? $this->responder->ok(null, 'User deleted') : $this->responder->fail('User not found', status:404);
+        return $ok
+            ? $this->responder->ok(null, 'User deleted')
+            : $this->responder->fail('User not found', status:404);
     }
 
     /**
      * @group System / Users
-     * Toggle active.
-     * @bodyParam active boolean required
+     * @authenticated
+     * Toggle active
+     * @bodyParam active boolean required Example: 1
      */
     public function toggle(Request $r, int $id)
     {
@@ -83,21 +124,20 @@ class UserController extends ApiController
 
     /**
      * @group System / Users
-     * Sync roles.
-     * @bodyParam roles array required List of role IDs.
+     * @authenticated
+     * Sync roles
+     * @bodyParam roles array required List of role IDs. Example: [1,2]
      */
-// ...
-public function syncRoles(Request $r, $id) // <-- شيل typehint عشان ما يرميش BadType
-{
-    $data = $r->validate([
-        'roles'   => ['required','array'],
-        'roles.*' => ['integer','exists:system.roles,id'],
-    ]);
+    public function syncRoles(Request $r, $id) // تسيبها بدون typehint علشان مشاكل سابقة
+    {
+        $data = $r->validate([
+            'roles'   => ['required','array'],
+            'roles.*' => ['integer','exists:system.roles,id'],
+        ]);
 
-    $row = $this->repo->syncRoles((int)$id, $data['roles']); // <-- cast هنا
-    if (!$row) return $this->responder->fail('User not found', status:404);
+        $row = $this->repo->syncRoles((int)$id, $data['roles']);
+        if (!$row) return $this->responder->fail('User not found', status:404);
 
-    return $this->responder->ok(new UserResource($row->load('roles')), 'User roles synced');
-}
-
+        return $this->responder->ok(new UserResource($row->load('roles')), 'User roles synced');
+    }
 }
