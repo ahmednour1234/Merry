@@ -162,6 +162,31 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-system-categories" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="system-categories">
+                    <a href="#system-categories">System / Categories</a>
+                </li>
+                                    <ul id="tocify-subheader-system-categories" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="system-categories-GETapi-v1-admin-system-categories">
+                                <a href="#system-categories-GETapi-v1-admin-system-categories">List categories</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-categories-POSTapi-v1-admin-system-categories">
+                                <a href="#system-categories-POSTapi-v1-admin-system-categories">Create category</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-categories-PUTapi-v1-admin-system-categories--id-">
+                                <a href="#system-categories-PUTapi-v1-admin-system-categories--id-">Update category</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-categories-DELETEapi-v1-admin-system-categories--id-">
+                                <a href="#system-categories-DELETEapi-v1-admin-system-categories--id-">Delete category (soft)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-categories-POSTapi-v1-admin-system-categories--id--toggle">
+                                <a href="#system-categories-POSTapi-v1-admin-system-categories--id--toggle">Toggle active</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-categories-POSTapi-v1-admin-system-categories--id--translations">
+                                <a href="#system-categories-POSTapi-v1-admin-system-categories--id--translations">Upsert translation</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-system-cities" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="system-cities">
                     <a href="#system-cities">System / Cities</a>
@@ -275,6 +300,31 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="system-languages-POSTapi-v1-admin-system-languages">
                                 <a href="#system-languages-POSTapi-v1-admin-system-languages">Store or update a system language</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-system-nationalities" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="system-nationalities">
+                    <a href="#system-nationalities">System / Nationalities</a>
+                </li>
+                                    <ul id="tocify-subheader-system-nationalities" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="system-nationalities-GETapi-v1-admin-system-nationalities">
+                                <a href="#system-nationalities-GETapi-v1-admin-system-nationalities">List nationalities</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-nationalities-POSTapi-v1-admin-system-nationalities">
+                                <a href="#system-nationalities-POSTapi-v1-admin-system-nationalities">Create nationality</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-nationalities-PUTapi-v1-admin-system-nationalities--id-">
+                                <a href="#system-nationalities-PUTapi-v1-admin-system-nationalities--id-">Update nationality</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-nationalities-DELETEapi-v1-admin-system-nationalities--id-">
+                                <a href="#system-nationalities-DELETEapi-v1-admin-system-nationalities--id-">Delete nationality</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-nationalities-POSTapi-v1-admin-system-nationalities--id--toggle">
+                                <a href="#system-nationalities-POSTapi-v1-admin-system-nationalities--id--toggle">Toggle nationality</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-nationalities-POSTapi-v1-admin-system-nationalities--id--translations">
+                                <a href="#system-nationalities-POSTapi-v1-admin-system-nationalities--id--translations">Upsert translation</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -397,7 +447,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 20, 2025</li>
+        <li>Last updated: October 25, 2025</li>
     </ul>
 </div>
 
@@ -471,7 +521,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;ok&quot;: true,
-    &quot;ts&quot;: &quot;2025-10-20T21:18:39+00:00&quot;
+    &quot;ts&quot;: &quot;2025-10-25T21:21:03+00:00&quot;
 }</code>
  </pre>
     </span>
@@ -1775,7 +1825,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"email\": \"ablanda@example.org\",
     \"password\": \"\'YAKYLk4&gt;SJIrIV#lz.\",
     \"active\": false,
-    \"blocked\": true
+    \"blocked\": false
 }"
 </code></pre></div>
 
@@ -1799,7 +1849,7 @@ let body = {
     "email": "ablanda@example.org",
     "password": "'YAKYLk4&gt;SJIrIV#lz.",
     "active": false,
-    "blocked": true
+    "blocked": false
 };
 
 fetch(url, {
@@ -2011,7 +2061,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -4176,6 +4226,1136 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>date Example: <code>consequatur</code></p>
             </div>
                 </form>
+
+                <h1 id="system-categories">System / Categories</h1>
+
+    
+
+                                <h2 id="system-categories-GETapi-v1-admin-system-categories">List categories</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/admin/system/categories?q=clean&amp;active=1&amp;parent_id=5&amp;from=consequatur&amp;to=consequatur&amp;per_page=15" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/categories"
+);
+
+const params = {
+    "q": "clean",
+    "active": "1",
+    "parent_id": "5",
+    "from": "consequatur",
+    "to": "consequatur",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-categories">
+            <blockquote>
+            <p>Example response (500):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;error&quot;,
+    &quot;message&quot;: &quot;Server Error&quot;,
+    &quot;errors&quot;: {},
+    &quot;meta&quot;: {}
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-categories"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-categories">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-categories" data-method="GET"
+      data-path="api/v1/admin/system/categories"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-categories"
+                    onclick="tryItOut('GETapi-v1-admin-system-categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-categories"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-categories"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/categories</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="q"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="clean"
+               data-component="query">
+    <br>
+<p>Search slug/name. Example: <code>clean</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="GETapi-v1-admin-system-categories" style="display: none">
+            <input type="radio" name="active"
+                   value="1"
+                   data-endpoint="GETapi-v1-admin-system-categories"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-v1-admin-system-categories" style="display: none">
+            <input type="radio" name="active"
+                   value="0"
+                   data-endpoint="GETapi-v1-admin-system-categories"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>parent_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="parent_id"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="5"
+               data-component="query">
+    <br>
+<p>Example: <code>5</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="consequatur"
+               data-component="query">
+    <br>
+<p>date Example: <code>consequatur</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="consequatur"
+               data-component="query">
+    <br>
+<p>date Example: <code>consequatur</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-admin-system-categories"
+               value="15"
+               data-component="query">
+    <br>
+<p>Example: <code>15</code></p>
+            </div>
+                </form>
+
+                    <h2 id="system-categories-POSTapi-v1-admin-system-categories">Create category</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/admin/system/categories" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"parent_id\": 1,
+    \"slug\": \"home-cleaning\",
+    \"name\": \"Home Cleaning\",
+    \"active\": true,
+    \"translations\": [
+        {
+            \"lang_code\": \"ar\",
+            \"name\": \"تنظيف منزلي\"
+        }
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/categories"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "parent_id": 1,
+    "slug": "home-cleaning",
+    "name": "Home Cleaning",
+    "active": true,
+    "translations": [
+        {
+            "lang_code": "ar",
+            "name": "تنظيف منزلي"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-categories">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-categories"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-categories">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-categories" data-method="POST"
+      data-path="api/v1/admin/system/categories"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-categories"
+                    onclick="tryItOut('POSTapi-v1-admin-system-categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-categories"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-categories"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/categories</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>parent_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="parent_id"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="1"
+               data-component="body">
+    <br>
+<p>nullable Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="home-cleaning"
+               data-component="body">
+    <br>
+<p>nullable Example: <code>home-cleaning</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="Home Cleaning"
+               data-component="body">
+    <br>
+<p>Example: <code>Home Cleaning</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-categories" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-categories"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-categories" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-categories"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>translations</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.lang_code"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="vmqeopfuud"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 12 characters. Example: <code>vmqeopfuud</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.name"                data-endpoint="POSTapi-v1-admin-system-categories"
+               value="tdsufvyvddqamniihfqco"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 191 characters. Example: <code>tdsufvyvddqamniihfqco</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="system-categories-PUTapi-v1-admin-system-categories--id-">Update category</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-system-categories--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/v1/admin/system/categories/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"parent_id\": 1,
+    \"slug\": \"deep-cleaning\",
+    \"name\": \"Deep Cleaning\",
+    \"active\": false,
+    \"translations\": [
+        {
+            \"lang_code\": \"ar\",
+            \"name\": \"تنظيف عميق\"
+        }
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/categories/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "parent_id": 1,
+    "slug": "deep-cleaning",
+    "name": "Deep Cleaning",
+    "active": false,
+    "translations": [
+        {
+            "lang_code": "ar",
+            "name": "تنظيف عميق"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-system-categories--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-system-categories--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-system-categories--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-system-categories--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-system-categories--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-system-categories--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-system-categories--id-" data-method="PUT"
+      data-path="api/v1/admin/system/categories/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-system-categories--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-system-categories--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-system-categories--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-system-categories--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-system-categories--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-system-categories--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/system/categories/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>parent_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="parent_id"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>Parent category ID. The <code>id</code> of an existing record in the system.categories table. Must not be one of <code>0</code>. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="deep-cleaning"
+               data-component="body">
+    <br>
+<p>Unique slug. Must not be greater than 191 characters. Example: <code>deep-cleaning</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="Deep Cleaning"
+               data-component="body">
+    <br>
+<p>Default name. Must not be greater than 191 characters. Example: <code>Deep Cleaning</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-system-categories--id-" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-system-categories--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-system-categories--id-" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-system-categories--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Active flag. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>translations</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Replace/upsert translations.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.lang_code"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="vmqeopfuud"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 12 characters. Example: <code>vmqeopfuud</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.name"                data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="tdsufvyvddqamniihfqco"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 191 characters. Example: <code>tdsufvyvddqamniihfqco</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="system-categories-DELETEapi-v1-admin-system-categories--id-">Delete category (soft)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-system-categories--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/v1/admin/system/categories/17" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/categories/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-system-categories--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-system-categories--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-system-categories--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-system-categories--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-system-categories--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-system-categories--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-system-categories--id-" data-method="DELETE"
+      data-path="api/v1/admin/system/categories/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-system-categories--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-system-categories--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-system-categories--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-system-categories--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-system-categories--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-system-categories--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/system/categories/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-system-categories--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-system-categories--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-admin-system-categories--id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="system-categories-POSTapi-v1-admin-system-categories--id--toggle">Toggle active</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-categories--id--toggle">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/admin/system/categories/17/toggle" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"active\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/categories/17/toggle"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "active": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-categories--id--toggle">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-categories--id--toggle" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-categories--id--toggle"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-categories--id--toggle"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-categories--id--toggle" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-categories--id--toggle">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-categories--id--toggle" data-method="POST"
+      data-path="api/v1/admin/system/categories/{id}/toggle"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-categories--id--toggle', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-categories--id--toggle"
+                    onclick="tryItOut('POSTapi-v1-admin-system-categories--id--toggle');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-categories--id--toggle"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-categories--id--toggle');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-categories--id--toggle"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/categories/{id}/toggle</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-categories--id--toggle"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-system-categories--id--toggle"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-categories--id--toggle"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-categories--id--toggle" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-categories--id--toggle"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-categories--id--toggle" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-categories--id--toggle"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="system-categories-POSTapi-v1-admin-system-categories--id--translations">Upsert translation</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-categories--id--translations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/admin/system/categories/17/translations" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"lang_code\": \"ar\",
+    \"name\": \"تنظيف\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/categories/17/translations"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "lang_code": "ar",
+    "name": "تنظيف"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-categories--id--translations">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-categories--id--translations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-categories--id--translations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-categories--id--translations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-categories--id--translations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-categories--id--translations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-categories--id--translations" data-method="POST"
+      data-path="api/v1/admin/system/categories/{id}/translations"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-categories--id--translations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-categories--id--translations"
+                    onclick="tryItOut('POSTapi-v1-admin-system-categories--id--translations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-categories--id--translations"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-categories--id--translations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-categories--id--translations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/categories/{id}/translations</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-categories--id--translations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-system-categories--id--translations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-categories--id--translations"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="lang_code"                data-endpoint="POSTapi-v1-admin-system-categories--id--translations"
+               value="ar"
+               data-component="body">
+    <br>
+<p>Example: <code>ar</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-system-categories--id--translations"
+               value="تنظيف"
+               data-component="body">
+    <br>
+<p>Example: <code>تنظيف</code></p>
+        </div>
+        </form>
 
                 <h1 id="system-cities">System / Cities</h1>
 
@@ -7329,7 +8509,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\phpB35E.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\phpC825.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -7461,7 +8641,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\phpB35E.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\phpC825.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -7529,7 +8709,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\phpB36F.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\phpC836.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -7673,7 +8853,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\phpB36F.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\phpC836.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -8363,6 +9543,1098 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 
+        </div>
+        </form>
+
+                <h1 id="system-nationalities">System / Nationalities</h1>
+
+    
+
+                                <h2 id="system-nationalities-GETapi-v1-admin-system-nationalities">List nationalities</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-nationalities">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/admin/system/nationalities?q=sa&amp;active=1&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/nationalities"
+);
+
+const params = {
+    "q": "sa",
+    "active": "1",
+    "from": "2025-01-01",
+    "to": "2025-12-31",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-nationalities">
+            <blockquote>
+            <p>Example response (500):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;error&quot;,
+    &quot;message&quot;: &quot;Server Error&quot;,
+    &quot;errors&quot;: {},
+    &quot;meta&quot;: {}
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-nationalities" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-nationalities"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-nationalities"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-nationalities" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-nationalities">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-nationalities" data-method="GET"
+      data-path="api/v1/admin/system/nationalities"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-nationalities', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-nationalities"
+                    onclick="tryItOut('GETapi-v1-admin-system-nationalities');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-nationalities"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-nationalities');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-nationalities"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/nationalities</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="q"                data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="sa"
+               data-component="query">
+    <br>
+<p>Search by code/name. Example: <code>sa</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="GETapi-v1-admin-system-nationalities" style="display: none">
+            <input type="radio" name="active"
+                   value="1"
+                   data-endpoint="GETapi-v1-admin-system-nationalities"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-v1-admin-system-nationalities" style="display: none">
+            <input type="radio" name="active"
+                   value="0"
+                   data-endpoint="GETapi-v1-admin-system-nationalities"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Filter by active. Example: <code>true</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="2025-01-01"
+               data-component="query">
+    <br>
+<p>date Example: <code>2025-01-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="2025-12-31"
+               data-component="query">
+    <br>
+<p>date Example: <code>2025-12-31</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="15"
+               data-component="query">
+    <br>
+<p>Example: <code>15</code></p>
+            </div>
+                </form>
+
+                    <h2 id="system-nationalities-POSTapi-v1-admin-system-nationalities">Create nationality</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-nationalities">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/admin/system/nationalities" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"code\": \"SA\",
+    \"name\": \"Saudi\",
+    \"active\": true,
+    \"translations\": [
+        {
+            \"lang_code\": \"ar\",
+            \"name\": \"سعودي\"
+        }
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/nationalities"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "code": "SA",
+    "name": "Saudi",
+    "active": true,
+    "translations": [
+        {
+            "lang_code": "ar",
+            "name": "سعودي"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-nationalities">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-nationalities" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-nationalities"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-nationalities"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-nationalities" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-nationalities">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-nationalities" data-method="POST"
+      data-path="api/v1/admin/system/nationalities"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-nationalities', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-nationalities"
+                    onclick="tryItOut('POSTapi-v1-admin-system-nationalities');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-nationalities"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-nationalities');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-nationalities"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/nationalities</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="code"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="SA"
+               data-component="body">
+    <br>
+<p>Unique code. Example: <code>SA</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="Saudi"
+               data-component="body">
+    <br>
+<p>Default name. Example: <code>Saudi</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-nationalities" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-nationalities"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-nationalities" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-nationalities"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Active flag. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>translations</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Translations list.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.lang_code"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="vmqeopfuud"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 12 characters. Example: <code>vmqeopfuud</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.name"                data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="tdsufvyvddqamniihfqco"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 191 characters. Example: <code>tdsufvyvddqamniihfqco</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="system-nationalities-PUTapi-v1-admin-system-nationalities--id-">Update nationality</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-system-nationalities--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/v1/admin/system/nationalities/3" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"code\": \"EG\",
+    \"name\": \"Egyptian\",
+    \"active\": false,
+    \"translations\": [
+        {
+            \"lang_code\": \"ar\",
+            \"name\": \"مصري\"
+        }
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/nationalities/3"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "code": "EG",
+    "name": "Egyptian",
+    "active": false,
+    "translations": [
+        {
+            "lang_code": "ar",
+            "name": "مصري"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-system-nationalities--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-system-nationalities--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-system-nationalities--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-system-nationalities--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-system-nationalities--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-system-nationalities--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-system-nationalities--id-" data-method="PUT"
+      data-path="api/v1/admin/system/nationalities/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-system-nationalities--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-system-nationalities--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-system-nationalities--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-system-nationalities--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-system-nationalities--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-system-nationalities--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/system/nationalities/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="3"
+               data-component="url">
+    <br>
+<p>Nationality ID. Example: <code>3</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="code"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="EG"
+               data-component="body">
+    <br>
+<p>Unique code. Example: <code>EG</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="Egyptian"
+               data-component="body">
+    <br>
+<p>Default name. Example: <code>Egyptian</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-system-nationalities--id-" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-system-nationalities--id-" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Active flag. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>translations</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Replace/upsert translations.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.lang_code"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="vmqeopfuud"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 12 characters. Example: <code>vmqeopfuud</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="translations.0.name"                data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="tdsufvyvddqamniihfqco"
+               data-component="body">
+    <br>
+<p>This field is required when <code>translations</code> is present. Must not be greater than 191 characters. Example: <code>tdsufvyvddqamniihfqco</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="system-nationalities-DELETEapi-v1-admin-system-nationalities--id-">Delete nationality</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-system-nationalities--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/v1/admin/system/nationalities/3" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/nationalities/3"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-system-nationalities--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-system-nationalities--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-system-nationalities--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-system-nationalities--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-system-nationalities--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-system-nationalities--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-system-nationalities--id-" data-method="DELETE"
+      data-path="api/v1/admin/system/nationalities/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-system-nationalities--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-system-nationalities--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-system-nationalities--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-system-nationalities--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-system-nationalities--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-system-nationalities--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/system/nationalities/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-system-nationalities--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-system-nationalities--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-admin-system-nationalities--id-"
+               value="3"
+               data-component="url">
+    <br>
+<p>Nationality ID. Example: <code>3</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="system-nationalities-POSTapi-v1-admin-system-nationalities--id--toggle">Toggle nationality</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-nationalities--id--toggle">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/admin/system/nationalities/3/toggle" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"active\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/nationalities/3/toggle"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "active": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-nationalities--id--toggle">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-nationalities--id--toggle" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-nationalities--id--toggle"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-nationalities--id--toggle"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-nationalities--id--toggle" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-nationalities--id--toggle">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-nationalities--id--toggle" data-method="POST"
+      data-path="api/v1/admin/system/nationalities/{id}/toggle"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-nationalities--id--toggle', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-nationalities--id--toggle"
+                    onclick="tryItOut('POSTapi-v1-admin-system-nationalities--id--toggle');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-nationalities--id--toggle"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-nationalities--id--toggle');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-nationalities--id--toggle"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/nationalities/{id}/toggle</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle"
+               value="3"
+               data-component="url">
+    <br>
+<p>Nationality ID. Example: <code>3</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>1/0. Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="system-nationalities-POSTapi-v1-admin-system-nationalities--id--translations">Upsert translation</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-nationalities--id--translations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/admin/system/nationalities/3/translations" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"lang_code\": \"ar\",
+    \"name\": \"سعودي\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/admin/system/nationalities/3/translations"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "lang_code": "ar",
+    "name": "سعودي"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-nationalities--id--translations">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-nationalities--id--translations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-nationalities--id--translations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-nationalities--id--translations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-nationalities--id--translations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-nationalities--id--translations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-nationalities--id--translations" data-method="POST"
+      data-path="api/v1/admin/system/nationalities/{id}/translations"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-nationalities--id--translations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-nationalities--id--translations"
+                    onclick="tryItOut('POSTapi-v1-admin-system-nationalities--id--translations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-nationalities--id--translations"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-nationalities--id--translations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-nationalities--id--translations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/nationalities/{id}/translations</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--translations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--translations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--translations"
+               value="3"
+               data-component="url">
+    <br>
+<p>Nationality ID. Example: <code>3</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="lang_code"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--translations"
+               value="ar"
+               data-component="body">
+    <br>
+<p>Language code. Example: <code>ar</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-system-nationalities--id--translations"
+               value="سعودي"
+               data-component="body">
+    <br>
+<p>Translated name. Example: <code>سعودي</code></p>
         </div>
         </form>
 
@@ -12458,8 +14730,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"active\": false,
     \"roles\": [
         17
-    ],
-    \"role_id\": 1
+    ]
 }"
 </code></pre></div>
 
@@ -12483,8 +14754,7 @@ let body = {
     "active": false,
     "roles": [
         17
-    ],
-    "role_id": 1
+    ]
 };
 
 fetch(url, {
@@ -12656,17 +14926,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The <code>id</code> of an existing record in the system.roles table.</p>
         </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>role_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="role_id"                data-endpoint="POSTapi-v1-admin-system-users"
-               value="1"
-               data-component="body">
-    <br>
-<p>Single role ID (shortcut). If sent, it will be merged into roles[]. The <code>id</code> of an existing record in the system.roles table. Example: <code>1</code></p>
-        </div>
         </form>
 
                     <h2 id="system-users-PUTapi-v1-admin-system-users--id-">PUT api/v1/admin/system/users/{id}</h2>
@@ -12695,8 +14954,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"active\": false,
     \"roles\": [
         17
-    ],
-    \"role_id\": 3
+    ]
 }"
 </code></pre></div>
 
@@ -12720,8 +14978,7 @@ let body = {
     "active": false,
     "roles": [
         17
-    ],
-    "role_id": 3
+    ]
 };
 
 fetch(url, {
@@ -12904,17 +15161,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>The <code>id</code> of an existing record in the system.roles table.</p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>role_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="role_id"                data-endpoint="PUTapi-v1-admin-system-users--id-"
-               value="3"
-               data-component="body">
-    <br>
-<p>Single role ID (shortcut). If present, will be merged into roles[] or replace when roles not provided. The <code>id</code> of an existing record in the system.roles table. Example: <code>3</code></p>
         </div>
         </form>
 

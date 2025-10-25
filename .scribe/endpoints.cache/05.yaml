@@ -224,16 +224,6 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-      role_id:
-        name: role_id
-        description: 'Single role ID (shortcut). If sent, it will be merged into roles[]. The <code>id</code> of an existing record in the system.roles table.'
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
     cleanBodyParameters:
       name: 'Ahmed Ali'
       email: admin@example.com
@@ -243,7 +233,6 @@ endpoints:
       active: false
       roles:
         - 17
-      role_id: 1
     fileParameters: []
     responses: []
     responseFields: []
@@ -356,16 +345,6 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-      role_id:
-        name: role_id
-        description: 'Single role ID (shortcut). If present, will be merged into roles[] or replace when roles not provided. The <code>id</code> of an existing record in the system.roles table.'
-        required: false
-        example: 3
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
     cleanBodyParameters:
       name: 'Ahmed Updated'
       email: admin2@example.com
@@ -375,7 +354,6 @@ endpoints:
       active: false
       roles:
         - 17
-      role_id: 3
     fileParameters: []
     responses: []
     responseFields: []

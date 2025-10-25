@@ -22,6 +22,8 @@ class SystemDatabaseSeeder extends Seeder
             SaudiCitiesSeeder::class,
             OfficesSeeder::class,
             PlansSeeder::class,
+            NationalitiesSeeder::class,
+            CategoriesSeeder::class,
 
             // AuditLogsSeeder::class, // اختياري
         ]);

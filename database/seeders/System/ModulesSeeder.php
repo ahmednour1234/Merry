@@ -87,6 +87,31 @@ class ModulesSeeder extends Seeder
         'deleted_at'=>null,
     ]
 );
+$db = DB::connection('system');
+if ($db->getSchemaBuilder()->hasTable('modules')) {
+    $db->table('modules')->updateOrInsert(
+        ['name'=>'Categories'],
+        [
+            'namespace'=>'App\\Http\\Controllers\\Api\\System',
+            'provider'=>null,
+            'path'=>'v1/admin/system/categories',
+            'enabled'=>1,
+            'meta'=> json_encode([
+                'permissions_prefix'=>'system.categories',
+                'routes'=>[
+                    'index'   => 'GET    /api/v1/admin/system/categories',
+                    'store'   => 'POST   /api/v1/admin/system/categories',
+                    'update'  => 'PUT    /api/v1/admin/system/categories/{id}',
+                    'destroy' => 'DELETE /api/v1/admin/system/categories/{id}',
+                    'toggle'  => 'POST   /api/v1/admin/system/categories/{id}/toggle',
+                    'trans'   => 'POST   /api/v1/admin/system/categories/{id}/translations',
+                ],
+            ]),
+            'updated_at'=>now(),'created_at'=>now(),
+            // احذف deleted_at لو جدول modules مش فيه العمود ده
+        ]
+    );
+}
 
     }
 }

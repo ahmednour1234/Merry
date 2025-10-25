@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\System\PlanController;
 use App\Http\Controllers\Api\System\CouponController;
 use App\Http\Controllers\Api\System\PromotionController;
 use App\Http\Controllers\Api\System\NationalityController;
+use App\Http\Controllers\Api\System\CategoryController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -140,6 +141,14 @@ Route::prefix('v1/admin/system')
         Route::delete('nationalities/{id}', [NationalityController::class, 'destroy'])->middleware('perm:system.nationalities.destroy');
         Route::post('nationalities/{id}/toggle', [NationalityController::class, 'toggle'])->middleware('perm:system.nationalities.toggle');
         Route::post('nationalities/{id}/translations', [NationalityController::class, 'upsertTranslation'])->middleware('perm:system.nationalities.translations');
+
+        // Categories
+        Route::get('categories', [CategoryController::class, 'index'])->middleware('perm:system.categories.index');
+        Route::post('categories', [CategoryController::class, 'store'])->middleware('perm:system.categories.store');
+        Route::put('categories/{id}', [CategoryController::class, 'update'])->middleware('perm:system.categories.update');
+        Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->middleware('perm:system.categories.destroy');
+        Route::post('categories/{id}/toggle', [CategoryController::class, 'toggle'])->middleware('perm:system.categories.toggle');
+        Route::post('categories/{id}/translations', [CategoryController::class, 'upsertTranslation'])->middleware('perm:system.categories.translations');
     });
 
 /*

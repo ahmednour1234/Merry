@@ -107,6 +107,14 @@ class PermissionsSeeder extends Seeder
 ['slug'=>'system.nationalities.toggle',       'name'=>'Toggle Nationality',      'guard'=>'api','active'=>1],
 ['slug'=>'system.nationalities.translations', 'name'=>'Upsert Nationality Translations','guard'=>'api','active'=>1],
 
+// categories
+['slug'=>'system.categories.index',        'name'=>'List Categories',      'guard'=>'api','active'=>1],
+['slug'=>'system.categories.store',        'name'=>'Store Category',       'guard'=>'api','active'=>1],
+['slug'=>'system.categories.update',       'name'=>'Update Category',      'guard'=>'api','active'=>1],
+['slug'=>'system.categories.destroy',      'name'=>'Delete Category',      'guard'=>'api','active'=>1],
+['slug'=>'system.categories.toggle',       'name'=>'Toggle Category',      'guard'=>'api','active'=>1],
+['slug'=>'system.categories.translations', 'name'=>'Upsert Category Translations','guard'=>'api','active'=>1],
+
         ];
 
         foreach ($perms as $p) {
