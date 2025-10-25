@@ -53,6 +53,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\System\Subscriptions\Contracts\PromotionRepositoryInterface::class,
             \App\Repositories\System\Subscriptions\PromotionRepository::class
         );
+        $this->app->bind(
+    \App\Repositories\System\Contracts\NationalityRepositoryInterface::class,
+    \App\Repositories\System\NationalityRepository::class
+);
+
     }
 
     public function boot(): void

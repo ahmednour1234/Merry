@@ -64,5 +64,29 @@ class ModulesSeeder extends Seeder
                 'created_at' => now(),
             ]
         );
+        $db->table('modules')->updateOrInsert(
+    ['name'=>'Nationalities'],
+    [
+        'namespace'=>'App\\Http\\Controllers\\Api\\System',
+        'provider'=>null,
+        'path'=>'v1/admin/system/nationalities',
+        'enabled'=>1,
+        'meta'=> json_encode([
+            'permissions_prefix'=>'system.nationalities',
+            'routes'=>[
+                'index'   => 'GET    /api/v1/admin/system/nationalities',
+                'store'   => 'POST   /api/v1/admin/system/nationalities',
+                'update'  => 'PUT    /api/v1/admin/system/nationalities/{id}',
+                'destroy' => 'DELETE /api/v1/admin/system/nationalities/{id}',
+                'toggle'  => 'POST   /api/v1/admin/system/nationalities/{id}/toggle',
+                'trans'   => 'POST   /api/v1/admin/system/nationalities/{id}/translations',
+            ],
+        ]),
+        'updated_at'=>now(),
+        'created_at'=>now(),
+        'deleted_at'=>null,
+    ]
+);
+
     }
 }

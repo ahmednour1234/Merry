@@ -98,6 +98,14 @@ class PermissionsSeeder extends Seeder
 ['slug'=>'system.promotions.update','name'=>'Update Promotion','guard'=>'api','active'=>1],
 ['slug'=>'system.promotions.destroy','name'=>'Delete Promotion','guard'=>'api','active'=>1],
 ['slug'=>'system.promotions.toggle','name'=>'Toggle Promotion','guard'=>'api','active'=>1],
+// nationalities
+// nationalities
+['slug'=>'system.nationalities.index',        'name'=>'List Nationalities',      'guard'=>'api','active'=>1],
+['slug'=>'system.nationalities.store',        'name'=>'Store Nationality',       'guard'=>'api','active'=>1],
+['slug'=>'system.nationalities.update',       'name'=>'Update Nationality',      'guard'=>'api','active'=>1],
+['slug'=>'system.nationalities.destroy',      'name'=>'Delete Nationality',      'guard'=>'api','active'=>1],
+['slug'=>'system.nationalities.toggle',       'name'=>'Toggle Nationality',      'guard'=>'api','active'=>1],
+['slug'=>'system.nationalities.translations', 'name'=>'Upsert Nationality Translations','guard'=>'api','active'=>1],
 
         ];
 

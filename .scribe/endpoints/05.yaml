@@ -10,9 +10,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List users with filters.'
+      title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -25,91 +25,91 @@ endpoints:
         name: name
         description: ''
         required: false
-        example: consequatur
+        example: Ahmed
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       email:
         name: email
         description: ''
         required: false
-        example: qkunze@example.com
+        example: admin@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       active:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       guard:
         name: guard
         description: ''
         required: false
-        example: consequatur
+        example: api
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       role:
         name: role
-        description: 'Role slug/name/id'
+        description: 'Role slug/name/id.'
         required: false
-        example: consequatur
+        example: admin
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       from:
         name: from
         description: date
         required: false
-        example: consequatur
+        example: '2025-01-01'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       to:
         name: to
         description: date
         required: false
-        example: consequatur
+        example: '2025-12-31'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       per_page:
         name: per_page
         description: ''
         required: false
-        example: 17
+        example: 15
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanQueryParameters:
-      name: consequatur
-      email: qkunze@example.com
-      active: false
-      guard: consequatur
-      role: consequatur
-      from: consequatur
-      to: consequatur
-      per_page: 17
+      name: Ahmed
+      email: admin@example.com
+      active: true
+      guard: api
+      role: admin
+      from: '2025-01-01'
+      to: '2025-12-31'
+      per_page: 15
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -138,9 +138,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create user (and attach roles).'
+      title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -222,6 +222,16 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      role_id:
+        name: role_id
+        description: 'Single role ID (shortcut). If sent, it will be merged into roles[]. The <code>id</code> of an existing record in the system.roles table.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
     cleanBodyParameters:
       name: 'Ahmed Ali'
       email: admin@example.com
@@ -231,6 +241,7 @@ endpoints:
       active: false
       roles:
         - 17
+      role_id: 1
     fileParameters: []
     responses: []
     responseFields: []
@@ -248,9 +259,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update user (and sync roles if provided).'
+      title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -343,6 +354,16 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
+      role_id:
+        name: role_id
+        description: 'Single role ID (shortcut). If present, will be merged into roles[] or replace when roles not provided. The <code>id</code> of an existing record in the system.roles table.'
+        required: false
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
     cleanBodyParameters:
       name: 'Ahmed Updated'
       email: admin2@example.com
@@ -352,6 +373,7 @@ endpoints:
       active: false
       roles:
         - 17
+      role_id: 3
     fileParameters: []
     responses: []
     responseFields: []
@@ -369,9 +391,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Soft delete user.'
+      title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -411,9 +433,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Toggle active.'
+      title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -439,14 +461,14 @@ endpoints:
         name: active
         description: ''
         required: true
-        example: false
+        example: true
         type: boolean
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      active: false
+      active: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -464,9 +486,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Sync roles.'
+      title: ''
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -493,15 +515,17 @@ endpoints:
         description: 'List of role IDs.'
         required: true
         example:
-          - consequatur
+          - 1
+          - 2
         type: 'string[]'
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
       roles:
-        - consequatur
+        - 1
+        - 2
     fileParameters: []
     responses: []
     responseFields: []

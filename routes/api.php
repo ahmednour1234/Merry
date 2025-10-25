@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\System\OfficeController;
 use App\Http\Controllers\Api\System\PlanController;
 use App\Http\Controllers\Api\System\CouponController;
 use App\Http\Controllers\Api\System\PromotionController;
+use App\Http\Controllers\Api\System\NationalityController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -131,6 +132,14 @@ Route::prefix('v1/admin/system')
         Route::put('promotions/{id}', [PromotionController::class, 'update'])->middleware('perm:system.promotions.update');
         Route::delete('promotions/{id}', [PromotionController::class, 'destroy'])->middleware('perm:system.promotions.destroy');
         Route::post('promotions/{id}/toggle', [PromotionController::class, 'toggle'])->middleware('perm:system.promotions.toggle');
+
+        // Nationalities
+        Route::get('nationalities', [NationalityController::class, 'index'])->middleware('perm:system.nationalities.index');
+        Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
+        Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
+        Route::delete('nationalities/{id}', [NationalityController::class, 'destroy'])->middleware('perm:system.nationalities.destroy');
+        Route::post('nationalities/{id}/toggle', [NationalityController::class, 'toggle'])->middleware('perm:system.nationalities.toggle');
+        Route::post('nationalities/{id}/translations', [NationalityController::class, 'upsertTranslation'])->middleware('perm:system.nationalities.translations');
     });
 
 /*
@@ -155,9 +164,9 @@ Route::prefix('v1/office')->group(function () {
         Route::delete('fcm-tokens',      [FcmTokenController::class, 'destroy']);
 
         // Subscriptions (office self)
-        Route::get('plans',                  [SubscriptionController::class, 'plans']);       // priced list for office
-        Route::get('subscription',           [SubscriptionController::class, 'current']);
-        Route::post('subscribe',             [SubscriptionController::class, 'subscribe']);
+        Route::get('plans',                   [SubscriptionController::class, 'plans']);
+        Route::get('subscription',            [SubscriptionController::class, 'current']);
+        Route::post('subscribe',              [SubscriptionController::class, 'subscribe']);
         Route::post('subscription/auto-renew',[SubscriptionController::class, 'autoRenew']);
     });
 });

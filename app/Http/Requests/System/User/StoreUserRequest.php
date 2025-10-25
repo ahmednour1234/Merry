@@ -23,7 +23,6 @@ class StoreUserRequest extends FormRequest
             'roles.*'  => ['integer','exists:system.roles,id'],
 
             // اختصار لدور واحد
-            'role_id'  => ['nullable','integer','exists:system.roles,id'],
         ];
     }
 
@@ -38,7 +37,6 @@ class StoreUserRequest extends FormRequest
             'guard'=> ['description'=>'Auth guard','example'=>'api'],
             'active'=> ['description'=>'Active flag','example'=>true],
             'roles' => ['description'=>'Role IDs to attach','example'=>[1,2]],
-            'role_id' => ['description'=>'Single role ID (shortcut). If sent, it will be merged into roles[]','example'=>1],
         ];
     }
 }

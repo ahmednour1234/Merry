@@ -26,7 +26,6 @@ class UpdateUserRequest extends FormRequest
             'roles.*'  => ['integer','exists:system.roles,id'],
 
             // اختصار لدور واحد (هتحوله داخليًا لـ roles = [role_id])
-            'role_id'  => ['sometimes','integer','exists:system.roles,id'],
         ];
     }
 
@@ -41,7 +40,6 @@ class UpdateUserRequest extends FormRequest
             'guard'=> ['description'=>'Auth guard','example'=>'api'],
             'active'=> ['description'=>'Active flag','example'=>false],
             'roles' => ['description'=>'Replace roles with these IDs','example'=>[2]],
-            'role_id' => ['description'=>'Single role ID (shortcut). If present, will be merged into roles[] or replace when roles not provided','example'=>3],
         ];
     }
 }
