@@ -25,6 +25,7 @@ class SystemDatabaseSeeder extends Seeder
             NationalitiesSeeder::class,
             CategoriesSeeder::class,
 
+
             // AuditLogsSeeder::class, // اختياري
         ]);
     }

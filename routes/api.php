@@ -19,10 +19,12 @@ use App\Http\Controllers\Api\System\CouponController;
 use App\Http\Controllers\Api\System\PromotionController;
 use App\Http\Controllers\Api\System\NationalityController;
 use App\Http\Controllers\Api\System\CategoryController;
+use App\Http\Controllers\Api\System\CvController as AdminCvController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
 use App\Http\Controllers\Api\Office\SubscriptionController;
+use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 
 Route::get('/health', fn () => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
@@ -45,7 +47,6 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v1/admin/system')
     ->middleware(['auth:sanctum', 'ability:system.manage'])
     ->group(function () {
-
         // Languages
         Route::get('languages',  [SystemLanguageController::class, 'index'])->middleware('perm:system.languages.index');
         Route::post('languages', [SystemLanguageController::class, 'store'])->middleware('perm:system.languages.store');
@@ -149,6 +150,15 @@ Route::prefix('v1/admin/system')
         Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->middleware('perm:system.categories.destroy');
         Route::post('categories/{id}/toggle', [CategoryController::class, 'toggle'])->middleware('perm:system.categories.toggle');
         Route::post('categories/{id}/translations', [CategoryController::class, 'upsertTranslation'])->middleware('perm:system.categories.translations');
+
+        // CVs (Admin)
+        Route::get('cvs',                 [AdminCvController::class, 'index'])->middleware('perm:system.cvs.index');
+        Route::get('cvs-stats',           [AdminCvController::class, 'stats'])->middleware('perm:system.cvs.index');
+        Route::post('cvs/{id}/approve',   [AdminCvController::class, 'approve'])->middleware('perm:system.cvs.approve');
+        Route::post('cvs/{id}/reject',    [AdminCvController::class, 'reject'])->middleware('perm:system.cvs.reject');
+        Route::post('cvs/{id}/freeze',    [AdminCvController::class, 'freeze'])->middleware('perm:system.cvs.freeze');
+        Route::post('cvs/{id}/unfreeze',  [AdminCvController::class, 'unfreeze'])->middleware('perm:system.cvs.freeze');
+        Route::delete('cvs/{id}',         [AdminCvController::class, 'destroy'])->middleware('perm:system.cvs.destroy');
     });
 
 /*
@@ -177,5 +187,13 @@ Route::prefix('v1/office')->group(function () {
         Route::get('subscription',            [SubscriptionController::class, 'current']);
         Route::post('subscribe',              [SubscriptionController::class, 'subscribe']);
         Route::post('subscription/auto-renew',[SubscriptionController::class, 'autoRenew']);
+
+        // CVs (Office)
+        Route::get('cvs',                 [OfficeCvController::class, 'index']);
+        Route::post('cvs',                [OfficeCvController::class, 'store']);
+        Route::put('cvs/{id}',            [OfficeCvController::class, 'update']);
+        Route::post('cvs/{id}/toggle',    [OfficeCvController::class, 'toggleActive']);
+        Route::post('cvs/{id}/resubmit',  [OfficeCvController::class, 'resubmit']);
+        Route::delete('cvs/{id}',         [OfficeCvController::class, 'destroy']);
     });
 });
