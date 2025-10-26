@@ -26,7 +26,7 @@ use App\Http\Controllers\Api\Office\FcmTokenController;
 use App\Http\Controllers\Api\Office\SubscriptionController;
 use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 
-Route::get('/health', fn () => ['ok' => true, 'ts' => now()->toIso8601String()]);
+Route::get('/health', fn() => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +82,7 @@ Route::prefix('v1/admin/system')
         Route::delete('roles/{id}', [RoleController::class, 'destroy'])->middleware('perm:system.roles.destroy');
         Route::post('roles/{id}/toggle', [RoleController::class, 'toggle'])->middleware('perm:system.roles.toggle');
         Route::post('roles/{id}/sync-permissions', [RoleController::class, 'syncPermissions'])->middleware('perm:system.roles.sync_permissions');
+        Route::get('roles/{id}', [RoleController::class, 'show'])->middleware('perm:system.roles.index');
 
         // Permissions
         Route::get('permissions', [PermissionController::class, 'index'])->middleware('perm:system.permissions.index');
@@ -186,7 +187,7 @@ Route::prefix('v1/office')->group(function () {
         Route::get('plans',                   [SubscriptionController::class, 'plans']);
         Route::get('subscription',            [SubscriptionController::class, 'current']);
         Route::post('subscribe',              [SubscriptionController::class, 'subscribe']);
-        Route::post('subscription/auto-renew',[SubscriptionController::class, 'autoRenew']);
+        Route::post('subscription/auto-renew', [SubscriptionController::class, 'autoRenew']);
 
         // CVs (Office)
         Route::get('cvs',                 [OfficeCvController::class, 'index']);

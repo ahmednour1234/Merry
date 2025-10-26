@@ -88,6 +88,36 @@ class RoleController extends ApiController
             'Role created'
         );
     }
+    /**
+ * @group System / Roles
+ * @authenticated
+ * Show one role
+ *
+ * يرجّع دور واحد بالتفاصيل (الصلاحيات + عدد المستخدمين المرتبطين).
+ *
+ * @urlParam id integer required Role ID. Example: 4
+ * @responseField id integer
+ * @responseField name string
+ * @responseField slug string
+ * @responseField guard string
+ * @responseField active boolean
+ * @responseField permissions array
+ * @responseField users_count integer
+ */
+public function show($id)
+{
+    $role = Role::on('system')
+        ->with('permissions')
+        ->withCount('users')
+        ->find($id);
+
+    if (!$role) {
+        return $this->responder->fail('Role not found', status: 404);
+    }
+
+    return $this->responder->ok(new RoleResource($role), 'Role');
+}
+
 
     /**
      * @group System / Roles
