@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"ok":true,"ts":"2025-10-25T21:50:37+00:00"}'
+        content: '{"ok":true,"ts":"2025-10-26T00:35:12+00:00"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -625,7 +625,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -635,7 +635,7 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -649,8 +649,8 @@ endpoints:
       phone: mniihfqcoynlazghdtqtq
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
-      active: false
-      blocked: false
+      active: true
+      blocked: true
     fileParameters: []
     responses: []
     responseFields: []
