@@ -13,7 +13,7 @@ class OfficeResetPasswordRequest extends FormRequest
         return [
             'email'                 => ['required','email','exists:system.offices,email'],
             'code'                  => ['required','string','size:6'], // 6 أرقام
-            'password'              => ['required','string','min:6','confirmed'],
+            'password'              => ['required','string','min:6'],
         ];
     }
 
