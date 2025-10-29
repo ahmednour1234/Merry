@@ -31,14 +31,15 @@ class AuthOfficeController extends ApiController
     public function register(OfficeRegisterRequest $r)
     {
         $data = $r->validated();
-        $data['password'] = Hash::make($data['password']);
+        $data['password'] = Hash::make((string) $data['password']);
 
         $office = Office::on('system')->create($data);
 
         // حفظ FCM token لو موجود
-        if ($r->filled('fcm_token')) {
+        $fcmToken = (string) $r->input('fcm_token', '');
+        if ($fcmToken !== '') {
             OfficeFcmToken::on('system')->updateOrCreate(
-                ['token' => $r->string('fcm_token')],
+                ['token' => $fcmToken],
                 [
                     'office_id' => $office->id,
                     'device'    => $r->input('device'),
@@ -58,9 +59,12 @@ class AuthOfficeController extends ApiController
     /** POST /api/v1/office/auth/login */
     public function login(OfficeLoginRequest $r)
     {
-        $office = Office::on('system')->where('email', $r->input('email'))->first();
+        $email = (string) $r->input('email');
+        $password = (string) $r->input('password');
 
-        if (!$office || !Hash::check($r->input('password'), $office->password)) {
+        $office = Office::on('system')->where('email', $email)->first();
+
+        if (!$office || !Hash::check($password, $office->password)) {
             return $this->responder->fail('Invalid credentials', status:401);
         }
         if (!$office->active || $office->blocked) {
@@ -88,14 +92,14 @@ class AuthOfficeController extends ApiController
         $office = $r->user();
 
         if ($office) {
-            // احذف FCM واحد لو مبعوت، أو الكل لو مش مبعوت
-            if ($r->filled('fcm_token')) {
-                OfficeFcmToken::on('system')->where('token', $r->string('fcm_token'))->delete();
+            $fcmToken = (string) $r->input('fcm_token', '');
+
+            if ($fcmToken !== '') {
+                OfficeFcmToken::on('system')->where('token', $fcmToken)->delete();
             } else {
                 OfficeFcmToken::on('system')->where('office_id', $office->id)->delete();
             }
 
-            // إلغاء توكن الدخول الحالي
             $office->currentAccessToken()?->delete();
         }
 
@@ -108,12 +112,12 @@ class AuthOfficeController extends ApiController
      */
     public function forgot(OfficeForgotPasswordRequest $r)
     {
-        $email = $r->string('email');
+        $email = (string) $r->input('email');
 
-        // لو الإيميل مش موجود في offices هنرجّع OK لتفادي كشف وجود الحساب
+        // لا نكشف إن كان البريد موجودًا أم لا
         $officeExists = Office::on('system')->where('email', $email)->exists();
         if (!$officeExists) {
-            return $this->responder->ok(null, 'If the email exists, a reset code has been sent'); // عدم الإفصاح
+            return $this->responder->ok(null, 'If the email exists, a reset code has been sent');
         }
 
         // توليد كود 6 أرقام
@@ -134,7 +138,7 @@ class AuthOfficeController extends ApiController
             ]
         );
 
-        // إرسال الإيميل
+        // إرسال الإيميل (لا تمرر Stringable)
         Mail::to($email)->send(new OfficeResetCodeMail($code));
 
         return $this->responder->ok(null, 'Reset code sent to your email');
@@ -146,8 +150,9 @@ class AuthOfficeController extends ApiController
      */
     public function reset(OfficeResetPasswordRequest $r)
     {
-        $email = $r->string('email');
-        $code  = $r->string('code');
+        $email    = (string) $r->input('email');
+        $code     = (string) $r->input('code');
+        $password = (string) $r->input('password');
 
         $row = DB::connection('system')->table('password_reset_tokens')->where('email', $email)->first();
 
@@ -158,7 +163,6 @@ class AuthOfficeController extends ApiController
 
         // تحقق من الانتهاء
         if (!empty($row->expires_at) && now()->greaterThan($row->expires_at)) {
-            // احذف السجل المنتهي
             DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
             return $this->responder->fail('Code expired', status:422);
         }
@@ -184,7 +188,7 @@ class AuthOfficeController extends ApiController
         }
 
         // غيّر كلمة المرور
-        $office->password = Hash::make($r->string('password'));
+        $office->password = Hash::make($password);
         $office->save();
 
         // امسح السجل بعد النجاح
