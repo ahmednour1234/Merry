@@ -37,7 +37,7 @@ Route::prefix('v1')->group(function () {
     Route::post('auth/login',  [AuthController::class, 'login']);
     Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
-
+        Route::get('cities', [CityController::class, 'index']);
 /*
 |--------------------------------------------------------------------------
 | Admin / System (protected)
@@ -99,7 +99,6 @@ Route::prefix('v1/admin/system')
         Route::post('insurance-companies/{id}/toggle', [InsuranceCompanyController::class, 'toggle'])->middleware('perm:system.insurance_companies.toggle');
 
         // Cities
-        Route::get('cities', [CityController::class, 'index'])->middleware('perm:system.cities.index');
         Route::post('cities', [CityController::class, 'store'])->middleware('perm:system.cities.store');
         Route::put('cities/{id}', [CityController::class, 'update'])->middleware('perm:system.cities.update');
         Route::delete('cities/{id}', [CityController::class, 'destroy'])->middleware('perm:system.cities.destroy');
