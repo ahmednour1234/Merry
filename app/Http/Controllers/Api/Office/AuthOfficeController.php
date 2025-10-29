@@ -44,6 +44,7 @@ class AuthOfficeController extends ApiController
                     'office_id' => $office->id,
                     'device'    => $r->input('device'),
                     'platform'  => $r->input('platform'),
+                    'active'=>false
                 ]
             );
         }
