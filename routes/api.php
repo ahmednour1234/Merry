@@ -36,8 +36,8 @@ Route::get('/health', fn() => ['ok' => true, 'ts' => now()->toIso8601String()]);
 Route::prefix('v1')->group(function () {
     Route::post('auth/login',  [AuthController::class, 'login']);
     Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+            Route::get('cities', [CityController::class, 'index']);
 });
-        Route::get('cities', [CityController::class, 'index']);
 /*
 |--------------------------------------------------------------------------
 | Admin / System (protected)
