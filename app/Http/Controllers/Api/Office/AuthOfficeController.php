@@ -13,7 +13,6 @@ use App\Models\OfficeFcmToken;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OfficeResetCodeMail;
 
@@ -27,15 +26,20 @@ class AuthOfficeController extends ApiController
     /**
      * POST /api/v1/office/auth/register
      * يقبل اختيارياً: fcm_token, device, platform
+     * لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.
      */
     public function register(OfficeRegisterRequest $r)
     {
         $data = $r->validated();
+
+        // إجبار الحالة الافتراضية
         $data['password'] = Hash::make((string) $data['password']);
+        $data['active']   = false;       // قيد المراجعة
+        $data['blocked']  = $data['blocked'] ?? false;
 
         $office = Office::on('system')->create($data);
 
-        // حفظ FCM token لو موجود
+        // حفظ FCM token لو موجود (مع active=false)
         $fcmToken = (string) $r->input('fcm_token', '');
         if ($fcmToken !== '') {
             OfficeFcmToken::on('system')->updateOrCreate(
@@ -44,32 +48,33 @@ class AuthOfficeController extends ApiController
                     'office_id' => $office->id,
                     'device'    => $r->input('device'),
                     'platform'  => $r->input('platform'),
-                    'active'=>false
+                    'active'    => false,
                 ]
             );
         }
 
-        $token = $office->createToken('office', ['office'])->plainTextToken;
-
-        return $this->responder->created([
-            'token'  => $token,
-            'office' => new OfficeResource($office),
-        ], 'Registered');
+        // لا نُعيد توكن — فقط رسالة عربية
+        return $this->responder->created(
+            null,
+            'تم استلام طلبك، حسابك قيد المراجعة.'
+        );
     }
 
     /** POST /api/v1/office/auth/login */
     public function login(OfficeLoginRequest $r)
     {
-        $email = (string) $r->input('email');
+        $email    = (string) $r->input('email');
         $password = (string) $r->input('password');
 
         $office = Office::on('system')->where('email', $email)->first();
 
         if (!$office || !Hash::check($password, $office->password)) {
-            return $this->responder->fail('Invalid credentials', status:401);
+            return $this->responder->fail('بيانات الدخول غير صحيحة.', status: 401);
         }
+
+        // أي حالة غير جاهزة → نفس الرسالة المطلوبة
         if (!$office->active || $office->blocked) {
-            return $this->responder->fail('Office is inactive or blocked', status:403);
+            return $this->responder->fail('حسابك قيد المراجعة.', status: 403);
         }
 
         $office->last_login_at = now();
@@ -80,7 +85,7 @@ class AuthOfficeController extends ApiController
         return $this->responder->ok([
             'token'  => $token,
             'office' => new OfficeResource($office),
-        ], 'Logged in');
+        ], 'تم تسجيل الدخول بنجاح.');
     }
 
     /**
@@ -104,52 +109,52 @@ class AuthOfficeController extends ApiController
             $office->currentAccessToken()?->delete();
         }
 
-        return $this->responder->ok(null, 'Logged out');
+        return $this->responder->ok(null, 'تم تسجيل الخروج بنجاح.');
     }
 
     /**
      * POST /api/v1/office/auth/forgot-password
      * يُرسل كود 6 أرقام للبريد، صالح لمدة 15 دقيقة.
+     * الرد دائمًا عام لتجنّب كشف وجود البريد.
      */
     public function forgot(OfficeForgotPasswordRequest $r)
     {
         $email = (string) $r->input('email');
 
-        // لا نكشف إن كان البريد موجودًا أم لا
-        $officeExists = Office::on('system')->where('email', $email)->exists();
-        if (!$officeExists) {
-            return $this->responder->ok(null, 'If the email exists, a reset code has been sent');
+        $exists = Office::on('system')->where('email', $email)->exists();
+        if (!$exists) {
+            // رسالة عامة
+            return $this->responder->ok(null, 'إن وُجد البريد لدينا فسيتم إرسال رمز الاستعادة.');
         }
 
         // توليد كود 6 أرقام
-        $code = (string) random_int(100000, 999999);
-        $hash = Hash::make($code);
+        $code      = (string) random_int(100000, 999999);
+        $hash      = Hash::make($code);
         $expiresAt = now()->addMinutes(15);
 
         // حفظ/تحديث السجل
         DB::connection('system')->table('password_reset_tokens')->updateOrInsert(
             ['email' => $email],
             [
-                'token'       => null,          // لم نعد نستخدمه
-                'code_hash'   => $hash,
-                'expires_at'  => $expiresAt,
-                'attempts'    => 0,
-                'created_at'  => now(),
-                'updated_at'  => now(),
+                'token'      => null,
+                'code_hash'  => $hash,
+                'expires_at' => $expiresAt,
+                'attempts'   => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         );
 
         // إرسال الإيميل
         Mail::to($email)->send(new OfficeResetCodeMail($code));
 
-        return $this->responder->ok(null, 'Reset code sent to your email');
+        return $this->responder->ok(null, 'تم إرسال رمز الاستعادة إلى بريدك الإلكتروني.');
     }
 
     /**
      * POST /api/v1/office/auth/reset-password
      * يُتحقق من الكود ثم يغيّر كلمة المرور.
-     * يدعم كود bypass للتطوير: 1234 (أو من config('auth.reset_dev_code'))
-     * مفعّل فقط خارج production.
+     * يدعم bypass للتطوير بكود 1234 (أو من config('auth.reset_dev_code')) في بيئات غير الإنتاج.
      */
     public function reset(OfficeResetPasswordRequest $r)
     {
@@ -158,60 +163,58 @@ class AuthOfficeController extends ApiController
         $password = (string) $r->input('password');
 
         // إعداد كود التطوير
-        $devBypassCode = (string) (config('auth.reset_dev_code', '1234'));
-        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
-        $useBypass = $isDevEnv && $code === $devBypassCode;
+        $devBypassCode = (string) config('auth.reset_dev_code', '1234');
+        $isDevEnv      = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $useBypass     = $isDevEnv && $code === $devBypassCode;
 
-        // تأكد من وجود المكتب أولاً
+        // وجود المكتب
         $office = Office::on('system')->where('email', $email)->first();
         if (!$office) {
-            return $this->responder->fail('Office not found', status:404);
+            return $this->responder->fail('المكتب غير موجود.', status: 404);
         }
 
         if (!$useBypass) {
-            // التحقق التقليدي بالكود المخزن
+            // جلب سجل الرمز
             $row = DB::connection('system')->table('password_reset_tokens')->where('email', $email)->first();
 
-            // تحقق من وجود طلب وإتاحة الكود
             if (!$row || empty($row->code_hash)) {
-                return $this->responder->fail('Invalid or expired code', status:422);
+                return $this->responder->fail('الرمز غير صالح أو منتهٍ.', status: 422);
             }
 
-            // تحقق من الانتهاء
+            // انتهاء الصلاحية
             if (!empty($row->expires_at) && now()->greaterThan($row->expires_at)) {
                 DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
-                return $this->responder->fail('Code expired', status:422);
+                return $this->responder->fail('انتهت صلاحية الرمز.', status: 422);
             }
 
-            // محاولات كثيرة؟
-            $attempts = (int)($row->attempts ?? 0);
+            // حدّ المحاولات
+            $attempts = (int) ($row->attempts ?? 0);
             if ($attempts >= 5) {
-                return $this->responder->fail('Too many attempts. Request a new code.', status:429);
+                return $this->responder->fail('عدد المحاولات كبير. فضلاً اطلب رمزاً جديداً.', status: 429);
             }
 
-            // تحقق من الكود
+            // مطابقة الرمز
             if (!Hash::check($code, $row->code_hash)) {
                 DB::connection('system')->table('password_reset_tokens')
                     ->where('email', $email)
                     ->update(['attempts' => $attempts + 1, 'updated_at' => now()]);
-                return $this->responder->fail('Invalid code', status:422);
+                return $this->responder->fail('الرمز غير صحيح.', status: 422);
             }
         }
-        // else: bypass development code => نتخطّى الفحوصات أعلاه
 
-        // غيّر كلمة المرور
+        // تغيير كلمة المرور
         $office->password = Hash::make($password);
         $office->save();
 
-        // امسح السجل بعد النجاح (لو موجود)
+        // حذف سجل الرمز
         DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
 
-        return $this->responder->ok(new OfficeResource($office), 'Password reset');
+        return $this->responder->ok(new OfficeResource($office), 'تم تحديث كلمة المرور بنجاح.');
     }
 
     /** GET /api/v1/office/me */
     public function me(Request $r)
     {
-        return $this->responder->ok(new OfficeResource($r->user()), 'Me');
+        return $this->responder->ok(new OfficeResource($r->user()), 'الملف الشخصي.');
     }
 }
