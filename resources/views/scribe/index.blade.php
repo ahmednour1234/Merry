@@ -118,19 +118,19 @@
                                 <a href="#endpoints-POSTapi-v1-office-auth-login">POST /api/v1/office/auth/login</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-forgot-password">
-                                <a href="#endpoints-POSTapi-v1-office-auth-forgot-password">POST /api/v1/office/auth/forgot-password</a>
+                                <a href="#endpoints-POSTapi-v1-office-auth-forgot-password">POST /api/v1/office/auth/forgot-password
+يُرسل كود 6 أرقام للبريد، صالح لمدة 15 دقيقة.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-reset-password">
-                                <a href="#endpoints-POSTapi-v1-office-auth-reset-password">POST /api/v1/office/auth/reset-password</a>
+                                <a href="#endpoints-POSTapi-v1-office-auth-reset-password">POST /api/v1/office/auth/reset-password
+يُتحقق من الكود ثم يغيّر كلمة المرور.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-office-me">
                                 <a href="#endpoints-GETapi-v1-office-me">GET /api/v1/office/me</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-logout">
                                 <a href="#endpoints-POSTapi-v1-office-auth-logout">POST /api/v1/office/auth/logout
-يقبل اختيارياً: fcm_token
-- إن وُجد fcm_token نحذفه فقط
-- إن لم يوجد نحذف كل التوكنز الخاصة بالمكتب (تقدر تغيّر السلوك حسب احتياجك)</a>
+يقبل اختيارياً: fcm_token</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-fcm-tokens">
                                 <a href="#endpoints-POSTapi-v1-office-fcm-tokens">POST /api/v1/office/fcm-tokens</a>
@@ -503,7 +503,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 26, 2025</li>
+        <li>Last updated: October 29, 2025</li>
     </ul>
 </div>
 
@@ -577,7 +577,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;ok&quot;: true,
-    &quot;ts&quot;: &quot;2025-10-26T00:35:12+00:00&quot;
+    &quot;ts&quot;: &quot;2025-10-29T00:01:38+00:00&quot;
 }</code>
  </pre>
     </span>
@@ -1880,8 +1880,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"phone\": \"mniihfqcoynlazghdtqtq\",
     \"email\": \"ablanda@example.org\",
     \"password\": \"\'YAKYLk4&gt;SJIrIV#lz.\",
-    \"active\": true,
-    \"blocked\": true
+    \"active\": false,
+    \"blocked\": false
 }"
 </code></pre></div>
 
@@ -1904,8 +1904,8 @@ let body = {
     "phone": "mniihfqcoynlazghdtqtq",
     "email": "ablanda@example.org",
     "password": "'YAKYLk4&gt;SJIrIV#lz.",
-    "active": true,
-    "blocked": true
+    "active": false,
+    "blocked": false
 };
 
 fetch(url, {
@@ -2096,7 +2096,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>blocked</code></b>&nbsp;&nbsp;
@@ -2117,7 +2117,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -2831,7 +2831,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-v1-office-auth-forgot-password">POST /api/v1/office/auth/forgot-password</h2>
+                    <h2 id="endpoints-POSTapi-v1-office-auth-forgot-password">POST /api/v1/office/auth/forgot-password
+يُرسل كود 6 أرقام للبريد، صالح لمدة 15 دقيقة.</h2>
 
 <p>
 </p>
@@ -2960,7 +2961,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-v1-office-auth-reset-password">POST /api/v1/office/auth/reset-password</h2>
+                    <h2 id="endpoints-POSTapi-v1-office-auth-reset-password">POST /api/v1/office/auth/reset-password
+يُتحقق من الكود ثم يغيّر كلمة المرور.</h2>
 
 <p>
 </p>
@@ -2978,7 +2980,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"email\": \"office@example.com\",
-    \"token\": \"b8b0b4d6b3d34d5c9c3a7f2b4e0a6f8c9d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5\",
+    \"code\": \"123456\",
     \"password\": \"NewStrongPass!23\"
 }"
 </code></pre></div>
@@ -2996,7 +2998,7 @@ const headers = {
 
 let body = {
     "email": "office@example.com",
-    "token": "b8b0b4d6b3d34d5c9c3a7f2b4e0a6f8c9d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5",
+    "code": "123456",
     "password": "NewStrongPass!23"
 };
 
@@ -3092,15 +3094,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>البريد المرتبط بالحساب. Must be a valid email address. The <code>email</code> of an existing record in the system.offices table. Example: <code>office@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>token</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="token"                data-endpoint="POSTapi-v1-office-auth-reset-password"
-               value="b8b0b4d6b3d34d5c9c3a7f2b4e0a6f8c9d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5"
+                              name="code"                data-endpoint="POSTapi-v1-office-auth-reset-password"
+               value="123456"
                data-component="body">
     <br>
-<p>رمز الاستعادة المُولَّد عبر forgot-password. Example: <code>b8b0b4d6b3d34d5c9c3a7f2b4e0a6f8c9d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5</code></p>
+<p>كود الاستعادة المرسل عبر البريد (6 أرقام). Must be 6 characters. Example: <code>123456</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -3243,9 +3245,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         </form>
 
                     <h2 id="endpoints-POSTapi-v1-office-auth-logout">POST /api/v1/office/auth/logout
-يقبل اختيارياً: fcm_token
-- إن وُجد fcm_token نحذفه فقط
-- إن لم يوجد نحذف كل التوكنز الخاصة بالمكتب (تقدر تغيّر السلوك حسب احتياجك)</h2>
+يقبل اختيارياً: fcm_token</h2>
 
 <p>
 </p>
@@ -10266,7 +10266,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php886B.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php686.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -10398,7 +10398,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php886B.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php686.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -10466,7 +10466,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php887B.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php697.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -10610,7 +10610,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php887B.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php697.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
