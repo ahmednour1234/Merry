@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OfficeResetCodeMail;
 
 class AuthOfficeController extends ApiController
 {
@@ -34,10 +36,9 @@ class AuthOfficeController extends ApiController
         $office = Office::on('system')->create($data);
 
         // حفظ FCM token لو موجود
-        $fcmToken = $r->input('fcm_token');
-        if ($fcmToken) {
+        if ($r->filled('fcm_token')) {
             OfficeFcmToken::on('system')->updateOrCreate(
-                ['token' => $fcmToken],
+                ['token' => $r->string('fcm_token')],
                 [
                     'office_id' => $office->id,
                     'device'    => $r->input('device'),
@@ -80,21 +81,17 @@ class AuthOfficeController extends ApiController
     /**
      * POST /api/v1/office/auth/logout
      * يقبل اختيارياً: fcm_token
-     * - إن وُجد fcm_token نحذفه فقط
-     * - إن لم يوجد نحذف كل التوكنز الخاصة بالمكتب (تقدر تغيّر السلوك حسب احتياجك)
      */
     public function logout(Request $r)
     {
         /** @var Office|null $office */
         $office = $r->user();
 
-        // حذف FCM token(s)
-        $fcmToken = $r->input('fcm_token');
         if ($office) {
-            if ($fcmToken) {
-                OfficeFcmToken::on('system')->where('token', $fcmToken)->delete();
+            // احذف FCM واحد لو مبعوت، أو الكل لو مش مبعوت
+            if ($r->filled('fcm_token')) {
+                OfficeFcmToken::on('system')->where('token', $r->string('fcm_token'))->delete();
             } else {
-                // احذف كل توكنات المكتب الحالية (لو مش عايز كده، علّق السطر الجاي)
                 OfficeFcmToken::on('system')->where('office_id', $office->id)->delete();
             }
 
@@ -105,37 +102,93 @@ class AuthOfficeController extends ApiController
         return $this->responder->ok(null, 'Logged out');
     }
 
-    /** POST /api/v1/office/auth/forgot-password */
+    /**
+     * POST /api/v1/office/auth/forgot-password
+     * يُرسل كود 6 أرقام للبريد، صالح لمدة 15 دقيقة.
+     */
     public function forgot(OfficeForgotPasswordRequest $r)
     {
-        $email = $r->input('email');
+        $email = $r->string('email');
 
-        DB::connection('system')->table('password_reset_tokens')->updateOrInsert(
-            ['email' => $email],
-            ['token' => Str::random(64), 'created_at' => now()]
-        );
-
-        return $this->responder->ok(null, 'Reset token generated');
-    }
-
-    /** POST /api/v1/office/auth/reset-password */
-    public function reset(OfficeResetPasswordRequest $r)
-    {
-        $email = $r->input('email');
-        $token = $r->input('token');
-
-        $row = DB::connection('system')->table('password_reset_tokens')->where('email',$email)->first();
-        if (!$row || $row->token !== $token) {
-            return $this->responder->fail('Invalid token', status:422);
+        // لو الإيميل مش موجود في offices هنرجّع OK لتفادي كشف وجود الحساب
+        $officeExists = Office::on('system')->where('email', $email)->exists();
+        if (!$officeExists) {
+            return $this->responder->ok(null, 'If the email exists, a reset code has been sent'); // عدم الإفصاح
         }
 
-        $office = Office::on('system')->where('email',$email)->first();
-        if (!$office) return $this->responder->fail('Office not found', status:404);
+        // توليد كود 6 أرقام
+        $code = (string) random_int(100000, 999999);
+        $hash = Hash::make($code);
+        $expiresAt = now()->addMinutes(15);
 
-        $office->password = Hash::make($r->input('password'));
+        // حفظ/تحديث السجل
+        DB::connection('system')->table('password_reset_tokens')->updateOrInsert(
+            ['email' => $email],
+            [
+                'token'       => null,          // لم نعد نستخدمه
+                'code_hash'   => $hash,
+                'expires_at'  => $expiresAt,
+                'attempts'    => 0,
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]
+        );
+
+        // إرسال الإيميل
+        Mail::to($email)->send(new OfficeResetCodeMail($code));
+
+        return $this->responder->ok(null, 'Reset code sent to your email');
+    }
+
+    /**
+     * POST /api/v1/office/auth/reset-password
+     * يُتحقق من الكود ثم يغيّر كلمة المرور.
+     */
+    public function reset(OfficeResetPasswordRequest $r)
+    {
+        $email = $r->string('email');
+        $code  = $r->string('code');
+
+        $row = DB::connection('system')->table('password_reset_tokens')->where('email', $email)->first();
+
+        // تحقق من وجود طلب وإتاحة الكود
+        if (!$row || empty($row->code_hash)) {
+            return $this->responder->fail('Invalid or expired code', status:422);
+        }
+
+        // تحقق من الانتهاء
+        if (!empty($row->expires_at) && now()->greaterThan($row->expires_at)) {
+            // احذف السجل المنتهي
+            DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
+            return $this->responder->fail('Code expired', status:422);
+        }
+
+        // محاولات كثيرة؟
+        $attempts = (int)($row->attempts ?? 0);
+        if ($attempts >= 5) {
+            return $this->responder->fail('Too many attempts. Request a new code.', status:429);
+        }
+
+        // تحقق من الكود
+        if (!Hash::check($code, $row->code_hash)) {
+            DB::connection('system')->table('password_reset_tokens')
+                ->where('email', $email)
+                ->update(['attempts' => $attempts + 1, 'updated_at' => now()]);
+            return $this->responder->fail('Invalid code', status:422);
+        }
+
+        // يوجد مكتب؟
+        $office = Office::on('system')->where('email', $email)->first();
+        if (!$office) {
+            return $this->responder->fail('Office not found', status:404);
+        }
+
+        // غيّر كلمة المرور
+        $office->password = Hash::make($r->string('password'));
         $office->save();
 
-        DB::connection('system')->table('password_reset_tokens')->where('email',$email)->delete();
+        // امسح السجل بعد النجاح
+        DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
 
         return $this->responder->ok(new OfficeResource($office), 'Password reset');
     }
