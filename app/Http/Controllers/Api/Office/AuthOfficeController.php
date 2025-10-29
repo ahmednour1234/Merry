@@ -138,7 +138,7 @@ class AuthOfficeController extends ApiController
             ]
         );
 
-        // إرسال الإيميل (لا تمرر Stringable)
+        // إرسال الإيميل
         Mail::to($email)->send(new OfficeResetCodeMail($code));
 
         return $this->responder->ok(null, 'Reset code sent to your email');
@@ -147,6 +147,8 @@ class AuthOfficeController extends ApiController
     /**
      * POST /api/v1/office/auth/reset-password
      * يُتحقق من الكود ثم يغيّر كلمة المرور.
+     * يدعم كود bypass للتطوير: 1234 (أو من config('auth.reset_dev_code'))
+     * مفعّل فقط خارج production.
      */
     public function reset(OfficeResetPasswordRequest $r)
     {
@@ -154,44 +156,53 @@ class AuthOfficeController extends ApiController
         $code     = (string) $r->input('code');
         $password = (string) $r->input('password');
 
-        $row = DB::connection('system')->table('password_reset_tokens')->where('email', $email)->first();
+        // إعداد كود التطوير
+        $devBypassCode = (string) (config('auth.reset_dev_code', '1234'));
+        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $useBypass = $isDevEnv && $code === $devBypassCode;
 
-        // تحقق من وجود طلب وإتاحة الكود
-        if (!$row || empty($row->code_hash)) {
-            return $this->responder->fail('Invalid or expired code', status:422);
-        }
-
-        // تحقق من الانتهاء
-        if (!empty($row->expires_at) && now()->greaterThan($row->expires_at)) {
-            DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
-            return $this->responder->fail('Code expired', status:422);
-        }
-
-        // محاولات كثيرة؟
-        $attempts = (int)($row->attempts ?? 0);
-        if ($attempts >= 5) {
-            return $this->responder->fail('Too many attempts. Request a new code.', status:429);
-        }
-
-        // تحقق من الكود
-        if (!Hash::check($code, $row->code_hash)) {
-            DB::connection('system')->table('password_reset_tokens')
-                ->where('email', $email)
-                ->update(['attempts' => $attempts + 1, 'updated_at' => now()]);
-            return $this->responder->fail('Invalid code', status:422);
-        }
-
-        // يوجد مكتب؟
+        // تأكد من وجود المكتب أولاً
         $office = Office::on('system')->where('email', $email)->first();
         if (!$office) {
             return $this->responder->fail('Office not found', status:404);
         }
 
+        if (!$useBypass) {
+            // التحقق التقليدي بالكود المخزن
+            $row = DB::connection('system')->table('password_reset_tokens')->where('email', $email)->first();
+
+            // تحقق من وجود طلب وإتاحة الكود
+            if (!$row || empty($row->code_hash)) {
+                return $this->responder->fail('Invalid or expired code', status:422);
+            }
+
+            // تحقق من الانتهاء
+            if (!empty($row->expires_at) && now()->greaterThan($row->expires_at)) {
+                DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
+                return $this->responder->fail('Code expired', status:422);
+            }
+
+            // محاولات كثيرة؟
+            $attempts = (int)($row->attempts ?? 0);
+            if ($attempts >= 5) {
+                return $this->responder->fail('Too many attempts. Request a new code.', status:429);
+            }
+
+            // تحقق من الكود
+            if (!Hash::check($code, $row->code_hash)) {
+                DB::connection('system')->table('password_reset_tokens')
+                    ->where('email', $email)
+                    ->update(['attempts' => $attempts + 1, 'updated_at' => now()]);
+                return $this->responder->fail('Invalid code', status:422);
+            }
+        }
+        // else: bypass development code => نتخطّى الفحوصات أعلاه
+
         // غيّر كلمة المرور
         $office->password = Hash::make($password);
         $office->save();
 
-        // امسح السجل بعد النجاح
+        // امسح السجل بعد النجاح (لو موجود)
         DB::connection('system')->table('password_reset_tokens')->where('email', $email)->delete();
 
         return $this->responder->ok(new OfficeResource($office), 'Password reset');
