@@ -116,6 +116,6 @@ return [
     */
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
-'reset_dev_code' => env('OFFICE_RESET_DEV_CODE', '1234'),
+'reset_dev_code' => env('OFFICE_RESET_DEV_CODE', '123456'),
 
 ];
