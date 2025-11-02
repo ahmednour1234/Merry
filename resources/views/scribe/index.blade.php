@@ -112,7 +112,8 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-register">
                                 <a href="#endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
-يقبل اختيارياً: fcm_token, device, platform</a>
+يقبل اختيارياً: fcm_token, device, platform
+لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-login">
                                 <a href="#endpoints-POSTapi-v1-office-auth-login">POST /api/v1/office/auth/login</a>
@@ -245,8 +246,8 @@
                     <a href="#system-cities">System / Cities</a>
                 </li>
                                     <ul id="tocify-subheader-system-cities" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="system-cities-GETapi-v1-admin-system-cities">
-                                <a href="#system-cities-GETapi-v1-admin-system-cities">List cities</a>
+                                                    <li class="tocify-item level-2" data-unique="system-cities-GETapi-v1-cities">
+                                <a href="#system-cities-GETapi-v1-cities">List cities</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="system-cities-POSTapi-v1-admin-system-cities">
                                 <a href="#system-cities-POSTapi-v1-admin-system-cities">Create a city with translations</a>
@@ -503,7 +504,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: October 29, 2025</li>
+        <li>Last updated: November 2, 2025</li>
     </ul>
 </div>
 
@@ -577,7 +578,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;ok&quot;: true,
-    &quot;ts&quot;: &quot;2025-10-29T00:01:38+00:00&quot;
+    &quot;ts&quot;: &quot;2025-11-02T15:12:34+00:00&quot;
 }</code>
  </pre>
     </span>
@@ -1880,7 +1881,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"phone\": \"mniihfqcoynlazghdtqtq\",
     \"email\": \"ablanda@example.org\",
     \"password\": \"\'YAKYLk4&gt;SJIrIV#lz.\",
-    \"active\": false,
+    \"active\": true,
     \"blocked\": false
 }"
 </code></pre></div>
@@ -1904,7 +1905,7 @@ let body = {
     "phone": "mniihfqcoynlazghdtqtq",
     "email": "ablanda@example.org",
     "password": "'YAKYLk4&gt;SJIrIV#lz.",
-    "active": false,
+    "active": true,
     "blocked": false
 };
 
@@ -2096,7 +2097,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>blocked</code></b>&nbsp;&nbsp;
@@ -2482,7 +2483,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     </form>
 
                     <h2 id="endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
-يقبل اختيارياً: fcm_token, device, platform</h2>
+يقبل اختيارياً: fcm_token, device, platform
+لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.</h2>
 
 <p>
 </p>
@@ -2837,7 +2839,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-
+<p>الرد دائمًا عام لتجنّب كشف وجود البريد.</p>
 
 <span id="example-requests-POSTapi-v1-office-auth-forgot-password">
 <blockquote>Example request:</blockquote>
@@ -2967,7 +2969,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-
+<p>يدعم bypass للتطوير بكود 1234 (أو من config('auth.reset_dev_code')) في بيئات غير الإنتاج.</p>
 
 <span id="example-requests-POSTapi-v1-office-auth-reset-password">
 <blockquote>Example request:</blockquote>
@@ -7118,27 +7120,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     
 
-                                <h2 id="system-cities-GETapi-v1-admin-system-cities">List cities</h2>
+                                <h2 id="system-cities-GETapi-v1-cities">List cities</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-v1-admin-system-cities">
+<span id="example-requests-GETapi-v1-cities">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/cities?q=Riy&amp;country=SA&amp;active=1&amp;from=2025-10-01&amp;to=2025-10-15&amp;per_page=15" \
+    --get "http://localhost/api/v1/cities?q=Riy&amp;country=SA&amp;active=1&amp;from=2025-10-01&amp;to=2025-10-15&amp;per_page=15" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities"
+    "http://localhost/api/v1/cities"
 );
 
 const params = {
@@ -7164,9 +7166,9 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-v1-admin-system-cities">
+<span id="example-responses-GETapi-v1-cities">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -7178,50 +7180,65 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;status&quot;: &quot;error&quot;,
-    &quot;message&quot;: &quot;Server Error&quot;,
-    &quot;errors&quot;: {},
-    &quot;meta&quot;: {}
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;message&quot;: &quot;Cities&quot;,
+    &quot;data&quot;: [],
+    &quot;meta&quot;: {
+        &quot;pagination&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;per_page&quot;: 15,
+            &quot;from&quot;: null,
+            &quot;to&quot;: null,
+            &quot;total&quot;: 0,
+            &quot;last_page&quot;: 1,
+            &quot;has_more&quot;: false,
+            &quot;next_page_url&quot;: null,
+            &quot;prev_page_url&quot;: null
+        },
+        &quot;summary&quot;: {
+            &quot;count&quot;: 0
+        }
+    }
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-v1-admin-system-cities" hidden>
+<span id="execution-results-GETapi-v1-cities" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-admin-system-cities"></span>:
+                id="execution-response-status-GETapi-v1-cities"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-cities"
+    <pre class="json"><code id="execution-response-content-GETapi-v1-cities"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-v1-admin-system-cities" hidden>
+<span id="execution-error-GETapi-v1-cities" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-admin-system-cities">
+    <pre><code id="execution-error-message-GETapi-v1-cities">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-v1-admin-system-cities" data-method="GET"
-      data-path="api/v1/admin/system/cities"
+<form id="form-GETapi-v1-cities" data-method="GET"
+      data-path="api/v1/cities"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-cities', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-cities', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-admin-system-cities"
-                    onclick="tryItOut('GETapi-v1-admin-system-cities');">Try it out ⚡
+                    id="btn-tryout-GETapi-v1-cities"
+                    onclick="tryItOut('GETapi-v1-cities');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-admin-system-cities"
-                    onclick="cancelTryOut('GETapi-v1-admin-system-cities');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-v1-cities"
+                    onclick="cancelTryOut('GETapi-v1-cities');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-admin-system-cities"
+                    id="btn-executetryout-GETapi-v1-cities"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -7229,7 +7246,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/v1/admin/system/cities</code></b>
+            <b><code>api/v1/cities</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -7237,7 +7254,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-admin-system-cities"
+                              name="Content-Type"                data-endpoint="GETapi-v1-cities"
                value="application/json"
                data-component="header">
     <br>
@@ -7248,7 +7265,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-admin-system-cities"
+                              name="Accept"                data-endpoint="GETapi-v1-cities"
                value="application/json"
                data-component="header">
     <br>
@@ -7260,7 +7277,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
-                              name="q"                data-endpoint="GETapi-v1-admin-system-cities"
+                              name="q"                data-endpoint="GETapi-v1-cities"
                value="Riy"
                data-component="query">
     <br>
@@ -7271,7 +7288,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
-                              name="country"                data-endpoint="GETapi-v1-admin-system-cities"
+                              name="country"                data-endpoint="GETapi-v1-cities"
                value="SA"
                data-component="query">
     <br>
@@ -7281,17 +7298,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
                 <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
 <small>boolean</small>&nbsp;
 <i>optional</i> &nbsp;
-                <label data-endpoint="GETapi-v1-admin-system-cities" style="display: none">
+                <label data-endpoint="GETapi-v1-cities" style="display: none">
             <input type="radio" name="active"
                    value="1"
-                   data-endpoint="GETapi-v1-admin-system-cities"
+                   data-endpoint="GETapi-v1-cities"
                    data-component="query"             >
             <code>true</code>
         </label>
-        <label data-endpoint="GETapi-v1-admin-system-cities" style="display: none">
+        <label data-endpoint="GETapi-v1-cities" style="display: none">
             <input type="radio" name="active"
                    value="0"
-                   data-endpoint="GETapi-v1-admin-system-cities"
+                   data-endpoint="GETapi-v1-cities"
                    data-component="query"             >
             <code>false</code>
         </label>
@@ -7303,7 +7320,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
-                              name="from"                data-endpoint="GETapi-v1-admin-system-cities"
+                              name="from"                data-endpoint="GETapi-v1-cities"
                value="2025-10-01"
                data-component="query">
     <br>
@@ -7314,7 +7331,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
-                              name="to"                data-endpoint="GETapi-v1-admin-system-cities"
+                              name="to"                data-endpoint="GETapi-v1-cities"
                value="2025-10-15"
                data-component="query">
     <br>
@@ -7325,7 +7342,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>integer</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="per_page"                data-endpoint="GETapi-v1-admin-system-cities"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-cities"
                value="15"
                data-component="query">
     <br>
@@ -7530,7 +7547,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/cities/consequatur" \
+    "http://localhost/api/v1/admin/system/cities/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7546,7 +7563,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities/consequatur"
+    "http://localhost/api/v1/admin/system/cities/1"
 );
 
 const headers = {
@@ -7645,14 +7662,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="PUTapi-v1-admin-system-cities--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-v1-admin-system-cities--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the city. Example: <code>consequatur</code></p>
+<p>The ID of the city. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7726,14 +7743,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/cities/consequatur" \
+    "http://localhost/api/v1/admin/system/cities/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities/consequatur"
+    "http://localhost/api/v1/admin/system/cities/1"
 );
 
 const headers = {
@@ -7822,14 +7839,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="DELETEapi-v1-admin-system-cities--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-admin-system-cities--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the city. Example: <code>consequatur</code></p>
+<p>The ID of the city. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -7846,7 +7863,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cities/consequatur/toggle" \
+    "http://localhost/api/v1/admin/system/cities/1/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7857,7 +7874,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities/consequatur/toggle"
+    "http://localhost/api/v1/admin/system/cities/1/toggle"
 );
 
 const headers = {
@@ -7951,14 +7968,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="POSTapi-v1-admin-system-cities--id--toggle"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-cities--id--toggle"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the city. Example: <code>consequatur</code></p>
+<p>The ID of the city. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -10266,7 +10283,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php686.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php8C58.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -10398,7 +10415,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php686.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php8C58.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -10466,7 +10483,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php697.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php8C68.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -10610,7 +10627,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php697.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php8C68.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -12867,7 +12884,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"active\": true,
     \"meta\": {
         \"color\": \"#1e88e5\"
-    }
+    },
+    \"features\": [
+        \"consequatur\"
+    ]
 }"
 </code></pre></div>
 
@@ -12892,7 +12912,10 @@ let body = {
     "active": true,
     "meta": {
         "color": "#1e88e5"
-    }
+    },
+    "features": [
+        "consequatur"
+    ]
 };
 
 fetch(url, {
@@ -13087,6 +13110,71 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Arbitrary JSON metadata (send as JSON string in form-data).</p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>features</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Feature list (optional).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>feature_key</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="features.0.feature_key"                data-endpoint="POSTapi-v1-admin-system-plans"
+               value="cv.limit"
+               data-component="body">
+    <br>
+<p>One of PlanFeatureKey values. Example: <code>cv.limit</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="features.0.limit"                data-endpoint="POSTapi-v1-admin-system-plans"
+               value="100"
+               data-component="body">
+    <br>
+<p>Limit if applicable. Example: <code>100</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
+<small>mixed</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="features.0.value"                data-endpoint="POSTapi-v1-admin-system-plans"
+               value="{"upload":true}"
+               data-component="body">
+    <br>
+<p>Arbitrary value (send JSON string if multipart). Example: <code>{"upload":true}</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-plans" style="display: none">
+            <input type="radio" name="features.0.active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-plans"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-plans" style="display: none">
+            <input type="radio" name="features.0.active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-plans"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the feature is active. Example: <code>true</code></p>
+                    </div>
+                                    </details>
+        </div>
         </form>
 
                     <h2 id="system-plans-PUTapi-v1-admin-system-plans--code-">PUT api/v1/admin/system/plans/{code}</h2>
@@ -13115,7 +13203,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"active\": false,
     \"meta\": {
         \"badge\": \"popular\"
-    }
+    },
+    \"features\": [
+        \"consequatur\"
+    ]
 }"
 </code></pre></div>
 
@@ -13139,7 +13230,10 @@ let body = {
     "active": false,
     "meta": {
         "badge": "popular"
-    }
+    },
+    "features": [
+        "consequatur"
+    ]
 };
 
 fetch(url, {
@@ -13340,6 +13434,71 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>JSON metadata (send as JSON string).</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>features</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Feature list (optional, replaces existing).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>feature_key</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="features.0.feature_key"                data-endpoint="PUTapi-v1-admin-system-plans--code-"
+               value="office.users.limit"
+               data-component="body">
+    <br>
+<p>One of PlanFeatureKey values. Example: <code>office.users.limit</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="features.0.limit"                data-endpoint="PUTapi-v1-admin-system-plans--code-"
+               value="10"
+               data-component="body">
+    <br>
+<p>Limit if applicable. Example: <code>10</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
+<small>mixed</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="features.0.value"                data-endpoint="PUTapi-v1-admin-system-plans--code-"
+               value="true"
+               data-component="body">
+    <br>
+<p>Arbitrary value (send JSON string if multipart). Example: <code>true</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-system-plans--code-" style="display: none">
+            <input type="radio" name="features.0.active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-system-plans--code-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-system-plans--code-" style="display: none">
+            <input type="radio" name="features.0.active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-system-plans--code-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the feature is active. Example: <code>true</code></p>
+                    </div>
+                                    </details>
         </div>
         </form>
 

@@ -1,16 +1,16 @@
-name: 'System / Exchange Rates'
+name: 'System / Currencies'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/exchange-rates
+    uri: api/v1/admin/system/currencies
     metadata:
-      groupName: 'System / Exchange Rates'
+      groupName: 'System / Currencies'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List exchange rates (paginated). Use ?all=1 to return all.'
+      title: 'List currencies (paginated). Use ?all=1 to return all.'
       description: ''
       authenticated: false
       deprecated: false
@@ -44,13 +44,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/system/exchange-rates
+    uri: api/v1/admin/system/currencies
     metadata:
-      groupName: 'System / Exchange Rates'
+      groupName: 'System / Currencies'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Upsert a rate (base-quote).'
+      title: 'Upsert a currency.'
       description: ''
       authenticated: false
       deprecated: false
@@ -63,42 +63,42 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      base:
-        name: base
-        description: 'Base currency. Must not be greater than 8 characters.'
+      code:
+        name: code
+        description: 'ISO code. Must not be greater than 8 characters.'
         required: true
-        example: USD
+        example: SAR
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      quote:
-        name: quote
-        description: 'Quote currency. The value and <code>base</code> must be different. Must not be greater than 8 characters.'
+      name:
+        name: name
+        description: 'Display name. Must not be greater than 64 characters.'
         required: true
-        example: EGP
+        example: 'Saudi Riyal'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      rate:
-        name: rate
-        description: 'Exchange rate.'
-        required: true
-        example: 48.25
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      fetched_at:
-        name: fetched_at
-        description: 'Timestamp. Must be a valid date.'
+      symbol:
+        name: symbol
+        description: 'Symbol. Must not be greater than 16 characters.'
         required: false
-        example: '2025-10-13T12:00:00Z'
+        example: ﷼
         type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      decimal:
+        name: decimal
+        description: 'Fraction digits. Must be at least 0. Must not be greater than 6.'
+        required: false
+        example: 2
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: true
@@ -114,10 +114,10 @@ endpoints:
         nullable: true
         custom: []
     cleanBodyParameters:
-      base: USD
-      quote: EGP
-      rate: 48.25
-      fetched_at: '2025-10-13T12:00:00Z'
+      code: SAR
+      name: 'Saudi Riyal'
+      symbol: ﷼
+      decimal: 2
       active: false
     fileParameters: []
     responses: []
@@ -129,14 +129,14 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: api/v1/admin/system/exchange-rates/toggle
+      - PUT
+    uri: 'api/v1/admin/system/currencies/{code}'
     metadata:
-      groupName: 'System / Exchange Rates'
+      groupName: 'System / Currencies'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Toggle active for a pair.'
+      title: 'Update a currency.'
       description: ''
       authenticated: false
       deprecated: false
@@ -144,8 +144,147 @@ endpoints:
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
+    urlParameters:
+      code:
+        name: code
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      code: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Display name. Must not be greater than 64 characters.'
+        required: false
+        example: 'Saudi Riyal'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      symbol:
+        name: symbol
+        description: 'Symbol. Must not be greater than 16 characters.'
+        required: false
+        example: ﷼
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      decimal:
+        name: decimal
+        description: 'Fraction digits. Must be at least 0. Must not be greater than 6.'
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      active:
+        name: active
+        description: Enabled.
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: 'Saudi Riyal'
+      symbol: ﷼
+      decimal: 2
+      active: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/admin/system/currencies/{code}'
+    metadata:
+      groupName: 'System / Currencies'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Soft-delete a currency.'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      code:
+        name: code
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      code: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/system/currencies/{code}/toggle'
+    metadata:
+      groupName: 'System / Currencies'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Toggle active flag.'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      code:
+        name: code
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      code: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

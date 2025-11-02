@@ -72,7 +72,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":"success","message":"Plans","data":{"items":[{"code":"pro","name":"Pro", "base_currency":"USD","base_price":49.0,"billing_cycle":"monthly","active":true}],"pagination":{"current_page":1,"per_page":15,"total":1}}}'
+        content: '{"status":"success","message":"Plans","data":{"items":[{"code":"pro","name":"Pro","base_currency":"USD","base_price":49.0,"billing_cycle":"monthly","active":true}],"pagination":{"current_page":1,"per_page":15,"total":1}}}'
         headers: []
         description: OK
         custom: []
@@ -185,6 +185,57 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
+      features:
+        name: features
+        description: 'Feature list (optional).'
+        required: false
+        example:
+          - consequatur
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'features[].feature_key':
+        name: 'features[].feature_key'
+        description: 'One of PlanFeatureKey values.'
+        required: true
+        example: cv.limit
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'features[].limit':
+        name: 'features[].limit'
+        description: 'Limit if applicable.'
+        required: false
+        example: 100
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'features[].value':
+        name: 'features[].value'
+        description: 'Arbitrary value (send JSON string if multipart).'
+        required: false
+        example: '{"upload":true}'
+        type: mixed
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'features[].active':
+        name: 'features[].active'
+        description: 'Whether the feature is active.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       code: pro
       name: Pro
@@ -195,6 +246,8 @@ endpoints:
       active: true
       meta:
         color: '#1e88e5'
+      features:
+        - consequatur
     fileParameters: []
     responses:
       -
@@ -313,6 +366,57 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
+      features:
+        name: features
+        description: 'Feature list (optional, replaces existing).'
+        required: false
+        example:
+          - consequatur
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'features[].feature_key':
+        name: 'features[].feature_key'
+        description: 'One of PlanFeatureKey values.'
+        required: true
+        example: office.users.limit
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'features[].limit':
+        name: 'features[].limit'
+        description: 'Limit if applicable.'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'features[].value':
+        name: 'features[].value'
+        description: 'Arbitrary value (send JSON string if multipart).'
+        required: false
+        example: 'true'
+        type: mixed
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'features[].active':
+        name: 'features[].active'
+        description: 'Whether the feature is active.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanBodyParameters:
       name: 'Pro Plus'
       description: 'For advanced usage'
@@ -322,6 +426,8 @@ endpoints:
       active: false
       meta:
         badge: popular
+      features:
+        - consequatur
     fileParameters: []
     responses:
       -

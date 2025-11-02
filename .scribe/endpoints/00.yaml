@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"ok":true,"ts":"2025-10-29T00:01:38+00:00"}'
+        content: '{"ok":true,"ts":"2025-11-02T15:12:34+00:00"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -625,7 +625,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -649,7 +649,7 @@ endpoints:
       phone: mniihfqcoynlazghdtqtq
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
-      active: false
+      active: true
       blocked: false
     fileParameters: []
     responses: []
@@ -797,6 +797,7 @@ endpoints:
       title: |-
         POST /api/v1/office/auth/register
         يقبل اختيارياً: fcm_token, device, platform
+        لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.
       description: ''
       authenticated: false
       deprecated: false
@@ -960,7 +961,7 @@ endpoints:
       title: |-
         POST /api/v1/office/auth/forgot-password
         يُرسل كود 6 أرقام للبريد، صالح لمدة 15 دقيقة.
-      description: ''
+      description: 'الرد دائمًا عام لتجنّب كشف وجود البريد.'
       authenticated: false
       deprecated: false
       custom: []
@@ -1004,7 +1005,7 @@ endpoints:
       title: |-
         POST /api/v1/office/auth/reset-password
         يُتحقق من الكود ثم يغيّر كلمة المرور.
-      description: ''
+      description: "يدعم bypass للتطوير بكود 1234 (أو من config('auth.reset_dev_code')) في بيئات غير الإنتاج."
       authenticated: false
       deprecated: false
       custom: []

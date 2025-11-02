@@ -1,16 +1,16 @@
-name: 'System / Audit Logs'
+name: 'System / Exchange Rates'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/audit-logs
+    uri: api/v1/admin/system/exchange-rates
     metadata:
-      groupName: 'System / Audit Logs'
+      groupName: 'System / Exchange Rates'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List audit logs (read-only).'
+      title: 'List exchange rates (paginated). Use ?all=1 to return all.'
       description: ''
       authenticated: false
       deprecated: false
@@ -20,63 +20,8 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      user_id:
-        name: user_id
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      action:
-        name: action
-        description: ''
-        required: false
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      model:
-        name: model
-        description: ''
-        required: false
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      from:
-        name: from
-        description: date
-        required: false
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      to:
-        name: to
-        description: date
-        required: false
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanQueryParameters:
-      user_id: 17
-      action: consequatur
-      model: consequatur
-      from: consequatur
-      to: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -90,6 +35,123 @@ endpoints:
           access-control-allow-origin: '*'
         description: null
         custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/system/exchange-rates
+    metadata:
+      groupName: 'System / Exchange Rates'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Upsert a rate (base-quote).'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      base:
+        name: base
+        description: 'Base currency. Must not be greater than 8 characters.'
+        required: true
+        example: USD
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      quote:
+        name: quote
+        description: 'Quote currency. The value and <code>base</code> must be different. Must not be greater than 8 characters.'
+        required: true
+        example: EGP
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      rate:
+        name: rate
+        description: 'Exchange rate.'
+        required: true
+        example: 48.25
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      fetched_at:
+        name: fetched_at
+        description: 'Timestamp. Must be a valid date.'
+        required: false
+        example: '2025-10-13T12:00:00Z'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      active:
+        name: active
+        description: Enabled.
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      base: USD
+      quote: EGP
+      rate: 48.25
+      fetched_at: '2025-10-13T12:00:00Z'
+      active: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/system/exchange-rates/toggle
+    metadata:
+      groupName: 'System / Exchange Rates'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Toggle active for a pair.'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
