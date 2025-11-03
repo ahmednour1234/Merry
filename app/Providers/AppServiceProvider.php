@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
+use App\Events\ExportCompleted;
+use App\Listeners\SendExportCompletedNotification;
 use Laravel\Sanctum\Sanctum;
 use App\Models\SystemPersonalAccessToken;
 use App\Services\SystemSettings;
@@ -25,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
      public function boot(): void
     {
         Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
+        Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
     }
 }

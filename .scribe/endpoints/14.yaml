@@ -1,16 +1,16 @@
-name: 'System / Categories'
+name: 'System / Nationalities'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/categories
+    uri: api/v1/admin/system/nationalities
     metadata:
-      groupName: 'System / Categories'
+      groupName: 'System / Nationalities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List categories'
+      title: 'List nationalities'
       description: ''
       authenticated: true
       deprecated: false
@@ -23,9 +23,9 @@ endpoints:
     queryParameters:
       q:
         name: q
-        description: 'Search slug/name.'
+        description: 'Search by code/name.'
         required: false
-        example: clean
+        example: sa
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -33,20 +33,10 @@ endpoints:
         custom: []
       active:
         name: active
-        description: ''
+        description: 'Filter by active.'
         required: false
         example: true
         type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      parent_id:
-        name: parent_id
-        description: ''
-        required: false
-        example: 5
-        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
@@ -55,20 +45,20 @@ endpoints:
         name: from
         description: date
         required: false
-        example: consequatur
+        example: '2025-01-01'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       to:
         name: to
         description: date
         required: false
-        example: consequatur
+        example: '2025-12-31'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       per_page:
@@ -82,11 +72,10 @@ endpoints:
         nullable: false
         custom: []
     cleanQueryParameters:
-      q: clean
+      q: sa
       active: true
-      parent_id: 5
-      from: consequatur
-      to: consequatur
+      from: '2025-01-01'
+      to: '2025-12-31'
       per_page: 15
     bodyParameters: []
     cleanBodyParameters: []
@@ -110,13 +99,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/system/categories
+    uri: api/v1/admin/system/nationalities
     metadata:
-      groupName: 'System / Categories'
+      groupName: 'System / Nationalities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create category'
+      title: 'Create nationality'
       description: ''
       authenticated: true
       deprecated: false
@@ -129,31 +118,21 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      parent_id:
-        name: parent_id
-        description: nullable
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      slug:
-        name: slug
-        description: nullable
-        required: false
-        example: home-cleaning
+      code:
+        name: code
+        description: 'Unique code.'
+        required: true
+        example: SA
         type: string
         enumValues: []
         exampleWasSpecified: true
-        nullable: true
+        nullable: false
         custom: []
       name:
         name: name
-        description: ''
+        description: 'Default name.'
         required: true
-        example: 'Home Cleaning'
+        example: Saudi
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -161,7 +140,7 @@ endpoints:
         custom: []
       active:
         name: active
-        description: ''
+        description: 'Active flag.'
         required: false
         example: true
         type: boolean
@@ -181,12 +160,12 @@ endpoints:
         custom: []
       translations:
         name: translations
-        description: ''
+        description: 'Translations list.'
         required: false
         example:
           -
             lang_code: ar
-            name: 'تنظيف منزلي'
+            name: سعودي
         type: 'string[]'
         enumValues: []
         exampleWasSpecified: true
@@ -213,14 +192,13 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      parent_id: 1
-      slug: home-cleaning
-      name: 'Home Cleaning'
+      code: SA
+      name: Saudi
       active: true
       translations:
         -
           lang_code: ar
-          name: 'تنظيف منزلي'
+          name: سعودي
     fileParameters: []
     responses: []
     responseFields: []
@@ -232,13 +210,13 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/v1/admin/system/categories/{id}'
+    uri: 'api/v1/admin/system/nationalities/{id}'
     metadata:
-      groupName: 'System / Categories'
+      groupName: 'System / Nationalities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update category'
+      title: 'Update nationality'
       description: ''
       authenticated: true
       deprecated: false
@@ -249,47 +227,37 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: ''
+        description: 'Nationality ID.'
         required: true
-        example: 17
+        example: 3
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 3
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      parent_id:
-        name: parent_id
-        description: 'Parent category ID. The <code>id</code> of an existing record in the system.categories table. Must not be one of <code>0</code>.'
+      code:
+        name: code
+        description: 'Unique code.'
         required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      slug:
-        name: slug
-        description: 'Unique slug. Must not be greater than 191 characters.'
-        required: false
-        example: deep-cleaning
+        example: EG
         type: string
         enumValues: []
-        exampleWasSpecified: false
-        nullable: true
+        exampleWasSpecified: true
+        nullable: false
         custom: []
       name:
         name: name
-        description: 'Default name. Must not be greater than 191 characters.'
+        description: 'Default name.'
         required: false
-        example: 'Deep Cleaning'
+        example: Egyptian
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       active:
@@ -299,7 +267,7 @@ endpoints:
         example: false
         type: boolean
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       meta:
@@ -319,10 +287,10 @@ endpoints:
         example:
           -
             lang_code: ar
-            name: 'تنظيف عميق'
-        type: 'object[]'
+            name: مصري
+        type: 'string[]'
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       'translations[].lang_code':
@@ -346,14 +314,13 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      parent_id: 1
-      slug: deep-cleaning
-      name: 'Deep Cleaning'
+      code: EG
+      name: Egyptian
       active: false
       translations:
         -
           lang_code: ar
-          name: 'تنظيف عميق'
+          name: مصري
     fileParameters: []
     responses: []
     responseFields: []
@@ -365,13 +332,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/admin/system/categories/{id}'
+    uri: 'api/v1/admin/system/nationalities/{id}'
     metadata:
-      groupName: 'System / Categories'
+      groupName: 'System / Nationalities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete category (soft)'
+      title: 'Delete nationality'
       description: ''
       authenticated: true
       deprecated: false
@@ -382,16 +349,16 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: ''
+        description: 'Nationality ID.'
         required: true
-        example: 17
+        example: 3
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 3
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -407,13 +374,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/v1/admin/system/categories/{id}/toggle'
+    uri: 'api/v1/admin/system/nationalities/{id}/toggle'
     metadata:
-      groupName: 'System / Categories'
+      groupName: 'System / Nationalities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Toggle active'
+      title: 'Toggle nationality'
       description: ''
       authenticated: true
       deprecated: false
@@ -424,22 +391,22 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: ''
+        description: 'Nationality ID.'
         required: true
-        example: 17
+        example: 3
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 3
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       active:
         name: active
-        description: ''
+        description: 1/0.
         required: true
         example: true
         type: boolean
@@ -460,9 +427,9 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/v1/admin/system/categories/{id}/translations'
+    uri: 'api/v1/admin/system/nationalities/{id}/translations'
     metadata:
-      groupName: 'System / Categories'
+      groupName: 'System / Nationalities'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
@@ -477,22 +444,22 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: ''
+        description: 'Nationality ID.'
         required: true
-        example: 17
+        example: 3
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 17
+      id: 3
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       lang_code:
         name: lang_code
-        description: ''
+        description: 'Language code.'
         required: true
         example: ar
         type: string
@@ -502,9 +469,9 @@ endpoints:
         custom: []
       name:
         name: name
-        description: ''
+        description: 'Translated name.'
         required: true
-        example: تنظيف
+        example: سعودي
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -512,7 +479,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       lang_code: ar
-      name: تنظيف
+      name: سعودي
     fileParameters: []
     responses: []
     responseFields: []

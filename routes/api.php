@@ -20,6 +20,8 @@ use App\Http\Controllers\Api\System\PromotionController;
 use App\Http\Controllers\Api\System\NationalityController;
 use App\Http\Controllers\Api\System\CategoryController;
 use App\Http\Controllers\Api\System\CvController as AdminCvController;
+use App\Http\Controllers\Api\System\NotificationController as SystemNotificationController;
+use App\Http\Controllers\Api\System\NotificationBroadcastController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -135,6 +137,12 @@ Route::prefix('v1/admin/system')
         Route::delete('promotions/{id}', [PromotionController::class, 'destroy'])->middleware('perm:system.promotions.destroy');
         Route::post('promotions/{id}/toggle', [PromotionController::class, 'toggle'])->middleware('perm:system.promotions.toggle');
 
+        // Notifications (admins)
+        Route::get('notifications', [SystemNotificationController::class, 'index']);
+        Route::post('notifications/{id}/read', [SystemNotificationController::class, 'markRead']);
+        Route::post('notifications/read-all', [SystemNotificationController::class, 'markAllRead']);
+        Route::post('notifications/broadcast', [NotificationBroadcastController::class, 'store'])->middleware('perm:system.notifications.broadcast');
+
         // Nationalities
         Route::get('nationalities', [NationalityController::class, 'index'])->middleware('perm:system.nationalities.index');
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
@@ -195,5 +203,10 @@ Route::prefix('v1/office')->group(function () {
         Route::post('cvs/{id}/toggle',    [OfficeCvController::class, 'toggleActive']);
         Route::post('cvs/{id}/resubmit',  [OfficeCvController::class, 'resubmit']);
         Route::delete('cvs/{id}',         [OfficeCvController::class, 'destroy']);
+
+        // Notifications (offices)
+        Route::get('notifications',       [SystemNotificationController::class, 'index']);
+        Route::post('notifications/{id}/read', [SystemNotificationController::class, 'markRead']);
+        Route::post('notifications/read-all', [SystemNotificationController::class, 'markAllRead']);
     });
 });

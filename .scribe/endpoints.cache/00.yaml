@@ -30,7 +30,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"ok":true,"ts":"2025-11-02T15:12:34+00:00"}'
+        content: '{"ok":true,"ts":"2025-11-03T10:45:37+00:00"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -637,7 +637,7 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -652,7 +652,7 @@ endpoints:
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
       active: true
-      blocked: false
+      blocked: true
     fileParameters: []
     responses: []
     responseFields: []

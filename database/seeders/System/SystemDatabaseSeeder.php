@@ -25,6 +25,9 @@ class SystemDatabaseSeeder extends Seeder
             NationalitiesSeeder::class,
             CategoriesSeeder::class,
 
+            NotificationTemplatesSeeder::class,
+            FakeNotificationsSeeder::class,
+
 
             // AuditLogsSeeder::class, // اختياري
         ]);
