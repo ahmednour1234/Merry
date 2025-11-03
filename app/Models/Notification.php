@@ -11,6 +11,7 @@ class Notification extends Model
 {
     use HasFactory;
 
+    protected $connection = 'system';
     protected $fillable = [
         'type',
         'title',

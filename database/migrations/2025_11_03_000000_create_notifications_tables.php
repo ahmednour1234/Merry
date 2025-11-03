@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    protected $connection = 'system';
+
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::connection($this->connection)->create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('type')->nullable();
             $table->string('title');
@@ -19,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('notification_templates', function (Blueprint $table) {
+        Schema::connection($this->connection)->create('notification_templates', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
             $table->string('channel'); // inapp|email
@@ -29,7 +31,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('notification_recipients', function (Blueprint $table) {
+        Schema::connection($this->connection)->create('notification_recipients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('notification_id')->constrained('notifications')->cascadeOnDelete();
             $table->string('recipient_type'); // user|office|role
@@ -50,9 +52,9 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('notification_recipients');
-        Schema::dropIfExists('notification_templates');
-        Schema::dropIfExists('notifications');
+        Schema::connection($this->connection)->dropIfExists('notification_recipients');
+        Schema::connection($this->connection)->dropIfExists('notification_templates');
+        Schema::connection($this->connection)->dropIfExists('notifications');
     }
 };
 

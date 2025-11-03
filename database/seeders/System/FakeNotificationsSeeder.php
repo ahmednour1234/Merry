@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Notification;
 use App\Models\NotificationRecipient;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\Office;
 
 class FakeNotificationsSeeder extends Seeder
@@ -38,6 +39,8 @@ class FakeNotificationsSeeder extends Seeder
 
         $offices = Office::query()->where('active', true)->limit(10)->get(['id','email']);
 
+        $adminRole = Role::query()->where('slug', 'admin')->first();
+
         foreach ($samples as $sample) {
             $notification = Notification::create([
                 'type' => $sample['type'],
@@ -54,7 +57,7 @@ class FakeNotificationsSeeder extends Seeder
                         NotificationRecipient::create([
                             'notification_id' => $notification->id,
                             'recipient_type' => 'role',
-                            'recipient_id' => 'admin',
+                            'recipient_id' => $adminRole?->id,
                             'resolved_user_id' => $u->id,
                             'channel' => $channel,
                             'status' => $channel === 'inapp' ? 'sent' : 'queued',

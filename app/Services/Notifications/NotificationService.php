@@ -40,7 +40,8 @@ class NotificationService
             ->where('active', true)
             ->get(['id','email','name']);
 
-        return $this->deliverToUsers($notification, $adminUsers, $channels, 'role', 'admin');
+        $adminRoleId = Role::query()->where('slug', 'admin')->value('id');
+        return $this->deliverToUsers($notification, $adminUsers, $channels, 'role', $adminRoleId);
     }
 
     /**
@@ -77,7 +78,7 @@ class NotificationService
     /**
      * Deliver to a collection of users.
      */
-    public function deliverToUsers(Notification $notification, Collection $users, array $channels, string $recipientType = 'user', ?string $recipientKey = null): int
+    public function deliverToUsers(Notification $notification, Collection $users, array $channels, string $recipientType = 'user', $recipientKey = null): int
     {
         $count = 0;
         $seen = [];

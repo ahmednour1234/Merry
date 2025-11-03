@@ -9,6 +9,7 @@ class NotificationTemplate extends Model
 {
     use HasFactory;
 
+    protected $connection = 'system';
     protected $fillable = [
         'key',
         'channel',

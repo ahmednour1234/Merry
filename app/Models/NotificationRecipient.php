@@ -10,6 +10,7 @@ class NotificationRecipient extends Model
 {
     use HasFactory;
 
+    protected $connection = 'system';
     protected $fillable = [
         'notification_id',
         'recipient_type',
