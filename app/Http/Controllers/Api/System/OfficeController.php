@@ -19,7 +19,8 @@ class OfficeController extends ApiController
 
     /**
      * @group System / Offices
-     * @queryParam q string Search name/email/CR. Example: 1010
+     * @queryParam search string بحث بالاسم/السجل/الهاتف/الإيميل. Example: 1010
+     * @queryParam q string (alias of search)
      * @queryParam city_id integer
      * @queryParam active boolean
      * @queryParam blocked boolean
@@ -31,12 +32,14 @@ class OfficeController extends ApiController
     {
         $q = Office::on('system')->orderByDesc('created_at');
 
-        if ($s = $r->string('q')) {
+        $s = (string) ($r->input('search') ?? $r->input('q'));
+        if ($s !== '') {
             $s = '%'.$s.'%';
             $q->where(function($w) use ($s) {
                 $w->where('name','like',$s)
                   ->orWhere('email','like',$s)
-                  ->orWhere('commercial_reg_no','like',$s);
+                  ->orWhere('commercial_reg_no','like',$s)
+                  ->orWhere('phone','like',$s);
             });
         }
         if ($r->filled('city_id')) $q->where('city_id', $r->integer('city_id'));
