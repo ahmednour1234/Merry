@@ -30,7 +30,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"ok":true,"ts":"2025-11-03T10:45:37+00:00"}'
+        content: '{"ok":true,"ts":"2025-11-05T09:30:42+00:00"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -392,6 +392,57 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - GET
+    uri: 'api/v1/admin/system/offices/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'عرض مكتب واحد حسب المعرّف'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the office.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/system/offices
     metadata:
@@ -542,14 +593,14 @@ endpoints:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: consequatur
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -627,7 +678,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -651,7 +702,7 @@ endpoints:
       phone: mniihfqcoynlazghdtqtq
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
-      active: true
+      active: false
       blocked: true
     fileParameters: []
     responses: []
@@ -683,14 +734,14 @@ endpoints:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: consequatur
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -725,14 +776,14 @@ endpoints:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: consequatur
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -767,14 +818,14 @@ endpoints:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: consequatur
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
