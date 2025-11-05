@@ -7,6 +7,8 @@ use App\Http\Requests\Office\StoreOfficeRequest;
 use App\Http\Requests\Office\UpdateOfficeRequest;
 use App\Http\Resources\Office\OfficeResource;
 use App\Models\Office;
+use App\Models\Cv;
+use App\Http\Resources\System\OfficeStatsResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -52,6 +54,27 @@ class OfficeController extends ApiController
         $p = $q->paginate($per)->appends($r->query());
 
         return $this->responder->paginated($p, OfficeResource::class, 'Offices');
+    }
+
+    /**
+     * @group System / Offices
+     * إحصائيات سريعة للمكاتب وملفات السير الذاتية
+     *
+     * @responseFile storage/app/private/scribe/examples/ok.json
+     */
+    public function stats(Request $r)
+    {
+        $total = Office::on('system')->count();
+        $active = Office::on('system')->where('active', true)->count();
+        $blocked = Office::on('system')->where('blocked', true)->count();
+        $cvs = Cv::on('system')->count();
+
+        return $this->responder->ok(new OfficeStatsResource([
+            'total_offices' => $total,
+            'active_offices' => $active,
+            'blocked_offices' => $blocked,
+            'total_cvs' => $cvs,
+        ]), 'Office stats');
     }
 
     public function store(StoreOfficeRequest $r)
