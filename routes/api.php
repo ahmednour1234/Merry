@@ -108,6 +108,7 @@ Route::prefix('v1/admin/system')
 
         // Offices (admin)
         Route::get('offices', [OfficeController::class, 'index'])->middleware('perm:system.offices.index');
+        Route::get('offices/{id}', [OfficeController::class, 'show'])->middleware('perm:system.offices.index');
         Route::post('offices', [OfficeController::class, 'store'])->middleware('perm:system.offices.store');
         Route::put('offices/{id}', [OfficeController::class, 'update'])->middleware('perm:system.offices.update');
         Route::post('offices/{id}/block', [OfficeController::class, 'block'])->middleware('perm:system.offices.block');

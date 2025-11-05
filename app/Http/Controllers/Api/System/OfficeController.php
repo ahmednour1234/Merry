@@ -60,6 +60,17 @@ class OfficeController extends ApiController
         return $this->responder->created(new OfficeResource($row), 'Office created');
     }
 
+    /**
+     * عرض مكتب واحد حسب المعرّف
+     */
+    public function show($id)
+    {
+        $row = Office::on('system')->find((int)$id);
+        if (!$row) return $this->responder->fail('Office not found', status:404);
+
+        return $this->responder->ok(new OfficeResource($row), 'Office');
+    }
+
     public function update($id, UpdateOfficeRequest $r)
     {
         $row = Office::on('system')->find((int)$id);

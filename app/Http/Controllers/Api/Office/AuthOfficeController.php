@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OfficeResetCodeMail;
+use App\Events\OfficeRegistered;
 
 class AuthOfficeController extends ApiController
 {
@@ -52,6 +53,9 @@ class AuthOfficeController extends ApiController
                 ]
             );
         }
+
+        // إرسال حدث للتنبيهات: مكتب جديد للتفعيل
+        event(new OfficeRegistered($office->id));
 
         // لا نُعيد توكن — فقط رسالة عربية
         return $this->responder->created(

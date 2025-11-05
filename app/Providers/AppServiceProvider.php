@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\ExportCompleted;
 use App\Listeners\SendExportCompletedNotification;
+use App\Events\OfficeRegistered;
+use App\Listeners\NotifyAdminsOfNewOfficeRegistration;
+use App\Observers\OfficeObserver;
+use App\Models\Office;
 use Laravel\Sanctum\Sanctum;
 use App\Models\SystemPersonalAccessToken;
 use App\Services\SystemSettings;
@@ -29,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
         Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
+        Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
+        Office::observe($this->app->make(OfficeObserver::class));
     }
 }
