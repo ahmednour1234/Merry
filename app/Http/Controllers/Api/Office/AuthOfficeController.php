@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OfficeResetCodeMail;
 use App\Events\OfficeRegistered;
+use App\Support\Uploads\ImageUploader;
 
 class AuthOfficeController extends ApiController
 {
@@ -33,18 +34,21 @@ class AuthOfficeController extends ApiController
     {
         $data = $r->validated();
 
-        // إجبار الحالة الافتراضية
+        // رفع الصورة إن وجدت
+        if ($r->hasFile('image')) {
+            $data['image'] = ImageUploader::upload($r->file('image'), 'offices');
+        }
+
         $data['password'] = Hash::make((string) $data['password']);
-        $data['active']   = false;       // قيد المراجعة
+        $data['active']   = false;
         $data['blocked']  = $data['blocked'] ?? false;
 
         $office = Office::on('system')->create($data);
 
-        // حفظ FCM token لو موجود (مع active=false)
-        $fcmToken = (string) $r->input('fcm_token', '');
-        if ($fcmToken !== '') {
+        // حفظ FCM token إن وجد
+        if ($r->filled('fcm_token')) {
             OfficeFcmToken::on('system')->updateOrCreate(
-                ['token' => $fcmToken],
+                ['token' => $r->fcm_token],
                 [
                     'office_id' => $office->id,
                     'device'    => $r->input('device'),
@@ -54,12 +58,11 @@ class AuthOfficeController extends ApiController
             );
         }
 
-        // إرسال حدث للتنبيهات: مكتب جديد للتفعيل
+        // إرسال إشعار للإدارة
         event(new OfficeRegistered($office->id));
 
-        // لا نُعيد توكن — فقط رسالة عربية
         return $this->responder->created(
-            null,
+            ['office' => new OfficeResource($office)],
             'تم استلام طلبك، حسابك قيد المراجعة.'
         );
     }

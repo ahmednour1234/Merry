@@ -16,7 +16,7 @@ class Office extends Authenticatable
 
     protected $fillable = [
         'name','commercial_reg_no','city_id','address','phone','email','password',
-        'active','blocked','last_login_at','remember_token'
+        'active','blocked','last_login_at','remember_token','image',
     ];
 
     protected $hidden = ['password','remember_token'];
@@ -26,4 +26,9 @@ class Office extends Authenticatable
         'blocked' => 'boolean',
         'last_login_at' => 'datetime',
     ];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
 }
