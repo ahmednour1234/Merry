@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost";
+        var tryItOutBaseUrl = "https://mery.alemtayaz.com/";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -424,6 +424,9 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
                                                     <li class="tocify-item level-2" data-unique="system-offices-GETapi-v1-admin-system-offices">
                                 <a href="#system-offices-GETapi-v1-admin-system-offices">GET api/v1/admin/system/offices</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="system-offices-GETapi-v1-admin-system-offices-stats">
+                                <a href="#system-offices-GETapi-v1-admin-system-offices-stats">إحصائيات سريعة للمكاتب وملفات السير الذاتية</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-system-plans" class="tocify-header">
@@ -548,7 +551,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
         <h1 id="introduction">Introduction</h1>
 <p>Auto-generated API docs and Postman collection.</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>https://mery.alemtayaz.com/</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -556,7 +559,8 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
 
         <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is not authenticated.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer your-token"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 
         <h1 id="endpoints">Endpoints</h1>
 
@@ -575,14 +579,14 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/health" \
+    --get "https://mery.alemtayaz.com/api/health" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/health"
+    "https://mery.alemtayaz.com/api/health"
 );
 
 const headers = {
@@ -612,7 +616,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;ok&quot;: true,
-    &quot;ts&quot;: &quot;2025-11-05T09:30:42+00:00&quot;
+    &quot;ts&quot;: &quot;2025-11-05T10:29:35+00:00&quot;
 }</code>
  </pre>
     </span>
@@ -700,14 +704,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/login" \
+    "https://mery.alemtayaz.com/api/v1/auth/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/login"
+    "https://mery.alemtayaz.com/api/v1/auth/login"
 );
 
 const headers = {
@@ -808,14 +812,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/logout" \
+    "https://mery.alemtayaz.com/api/v1/auth/logout" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/logout"
+    "https://mery.alemtayaz.com/api/v1/auth/logout"
 );
 
 const headers = {
@@ -916,14 +920,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/permissions" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/permissions" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/permissions"
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions"
 );
 
 const headers = {
@@ -1043,7 +1047,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/permissions" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1057,7 +1061,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/permissions"
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions"
 );
 
 const headers = {
@@ -1221,7 +1225,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/permissions/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1235,7 +1239,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/permissions/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions/consequatur"
 );
 
 const headers = {
@@ -1411,14 +1415,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/permissions/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/permissions/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions/consequatur"
 );
 
 const headers = {
@@ -1531,14 +1535,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/permissions/consequatur/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/permissions/consequatur/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/permissions/consequatur/toggle"
 );
 
 const headers = {
@@ -1651,14 +1655,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/offices/1" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/offices/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices/1"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1"
 );
 
 const headers = {
@@ -1790,7 +1794,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/offices" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1809,7 +1813,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices"
 );
 
 const headers = {
@@ -2043,7 +2047,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/offices/1" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2062,7 +2066,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices/1"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1"
 );
 
 const headers = {
@@ -2308,14 +2312,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/offices/1/block" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1/block" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices/1/block"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1/block"
 );
 
 const headers = {
@@ -2428,14 +2432,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/offices/1/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices/1/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1/toggle"
 );
 
 const headers = {
@@ -2548,14 +2552,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/offices/1" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices/1"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices/1"
 );
 
 const headers = {
@@ -2670,7 +2674,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/auth/register" \
+    "https://mery.alemtayaz.com/api/v1/office/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2687,7 +2691,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/auth/register"
+    "https://mery.alemtayaz.com/api/v1/office/auth/register"
 );
 
 const headers = {
@@ -2877,7 +2881,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/auth/login" \
+    "https://mery.alemtayaz.com/api/v1/office/auth/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2889,7 +2893,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/auth/login"
+    "https://mery.alemtayaz.com/api/v1/office/auth/login"
 );
 
 const headers = {
@@ -3020,7 +3024,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/auth/forgot-password" \
+    "https://mery.alemtayaz.com/api/v1/office/auth/forgot-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3031,7 +3035,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/auth/forgot-password"
+    "https://mery.alemtayaz.com/api/v1/office/auth/forgot-password"
 );
 
 const headers = {
@@ -3150,7 +3154,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/auth/reset-password" \
+    "https://mery.alemtayaz.com/api/v1/office/auth/reset-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3163,7 +3167,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/auth/reset-password"
+    "https://mery.alemtayaz.com/api/v1/office/auth/reset-password"
 );
 
 const headers = {
@@ -3305,14 +3309,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/office/me" \
+    --get "https://mery.alemtayaz.com/api/v1/office/me" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/me"
+    "https://mery.alemtayaz.com/api/v1/office/me"
 );
 
 const headers = {
@@ -3433,14 +3437,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/auth/logout" \
+    "https://mery.alemtayaz.com/api/v1/office/auth/logout" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/auth/logout"
+    "https://mery.alemtayaz.com/api/v1/office/auth/logout"
 );
 
 const headers = {
@@ -3541,7 +3545,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/fcm-tokens" \
+    "https://mery.alemtayaz.com/api/v1/office/fcm-tokens" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3554,7 +3558,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/fcm-tokens"
+    "https://mery.alemtayaz.com/api/v1/office/fcm-tokens"
 );
 
 const headers = {
@@ -3696,14 +3700,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/office/fcm-tokens" \
+    "https://mery.alemtayaz.com/api/v1/office/fcm-tokens" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/fcm-tokens"
+    "https://mery.alemtayaz.com/api/v1/office/fcm-tokens"
 );
 
 const headers = {
@@ -3804,14 +3808,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/office/plans" \
+    --get "https://mery.alemtayaz.com/api/v1/office/plans" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/plans"
+    "https://mery.alemtayaz.com/api/v1/office/plans"
 );
 
 const headers = {
@@ -3931,14 +3935,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/office/subscription" \
+    --get "https://mery.alemtayaz.com/api/v1/office/subscription" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/subscription"
+    "https://mery.alemtayaz.com/api/v1/office/subscription"
 );
 
 const headers = {
@@ -4058,14 +4062,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/subscribe" \
+    "https://mery.alemtayaz.com/api/v1/office/subscribe" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/subscribe"
+    "https://mery.alemtayaz.com/api/v1/office/subscribe"
 );
 
 const headers = {
@@ -4166,14 +4170,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/subscription/auto-renew" \
+    "https://mery.alemtayaz.com/api/v1/office/subscription/auto-renew" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/subscription/auto-renew"
+    "https://mery.alemtayaz.com/api/v1/office/subscription/auto-renew"
 );
 
 const headers = {
@@ -4279,14 +4283,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/notifications?page=1" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/notifications?page=1" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/notifications"
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications"
 );
 
 const params = {
@@ -4296,6 +4301,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4376,6 +4382,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-notifications"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4425,17 +4442,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/notifications/123/read" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications/123/read" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/notifications/123/read"
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications/123/read"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4497,6 +4516,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-notifications--id--read"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4546,17 +4576,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/notifications/read-all" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications/read-all" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/notifications/read-all"
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications/read-all"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4618,6 +4650,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-notifications-read-all"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -4655,7 +4698,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/notifications/broadcast" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications/broadcast" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4677,10 +4721,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/notifications/broadcast"
+    "https://mery.alemtayaz.com/api/v1/admin/system/notifications/broadcast"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4757,6 +4802,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/notifications/broadcast</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-notifications-broadcast"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -4855,14 +4911,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/office/notifications?page=1" \
+    --get "https://mery.alemtayaz.com/api/v1/office/notifications?page=1" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/notifications"
+    "https://mery.alemtayaz.com/api/v1/office/notifications"
 );
 
 const params = {
@@ -4872,6 +4929,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -4952,6 +5010,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-office-notifications"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5001,17 +5070,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/notifications/123/read" \
+    "https://mery.alemtayaz.com/api/v1/office/notifications/123/read" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/notifications/123/read"
+    "https://mery.alemtayaz.com/api/v1/office/notifications/123/read"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5073,6 +5144,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-office-notifications--id--read"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5122,17 +5204,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/notifications/read-all" \
+    "https://mery.alemtayaz.com/api/v1/office/notifications/read-all" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/notifications/read-all"
+    "https://mery.alemtayaz.com/api/v1/office/notifications/read-all"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -5194,6 +5278,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-office-notifications-read-all"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -5234,14 +5329,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/office/cvs" \
+    --get "https://mery.alemtayaz.com/api/v1/office/cvs" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/cvs"
+    "https://mery.alemtayaz.com/api/v1/office/cvs"
 );
 
 const headers = {
@@ -5361,14 +5456,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/cvs" \
+    "https://mery.alemtayaz.com/api/v1/office/cvs" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/cvs"
+    "https://mery.alemtayaz.com/api/v1/office/cvs"
 );
 
 const headers = {
@@ -5469,14 +5564,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/office/cvs/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/cvs/consequatur"
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur"
 );
 
 const headers = {
@@ -5589,14 +5684,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/cvs/consequatur/toggle" \
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/cvs/consequatur/toggle"
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle"
 );
 
 const headers = {
@@ -5709,14 +5804,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/office/cvs/consequatur/resubmit" \
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/resubmit" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/cvs/consequatur/resubmit"
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/resubmit"
 );
 
 const headers = {
@@ -5829,14 +5924,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/office/cvs/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/office/cvs/consequatur"
+    "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur"
 );
 
 const headers = {
@@ -5953,14 +6048,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/audit-logs?user_id=17&amp;action=consequatur&amp;model=consequatur&amp;from=consequatur&amp;to=consequatur" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/audit-logs?user_id=17&amp;action=consequatur&amp;model=consequatur&amp;from=consequatur&amp;to=consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/audit-logs"
+    "https://mery.alemtayaz.com/api/v1/admin/system/audit-logs"
 );
 
 const params = {
@@ -6150,14 +6245,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/cvs?office_id=17&amp;category_id=17&amp;nationality=consequatur&amp;gender=consequatur&amp;has_experience=&amp;status=consequatur&amp;from=consequatur&amp;to=consequatur&amp;per_page=17" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/cvs?office_id=17&amp;category_id=17&amp;nationality=consequatur&amp;gender=consequatur&amp;has_experience=&amp;status=consequatur&amp;from=consequatur&amp;to=consequatur&amp;per_page=17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs"
 );
 
 const params = {
@@ -6401,14 +6496,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/cvs-stats" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/cvs-stats" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs-stats"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs-stats"
 );
 
 const headers = {
@@ -6528,14 +6623,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cvs/consequatur/approve" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/approve" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs/consequatur/approve"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/approve"
 );
 
 const headers = {
@@ -6648,14 +6743,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cvs/consequatur/reject" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/reject" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs/consequatur/reject"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/reject"
 );
 
 const headers = {
@@ -6768,14 +6863,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cvs/consequatur/freeze" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/freeze" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs/consequatur/freeze"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/freeze"
 );
 
 const headers = {
@@ -6888,14 +6983,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cvs/consequatur/unfreeze" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/unfreeze" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs/consequatur/unfreeze"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur/unfreeze"
 );
 
 const headers = {
@@ -7008,14 +7103,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/cvs/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cvs/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cvs/consequatur"
 );
 
 const headers = {
@@ -7133,14 +7228,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/categories?q=clean&amp;active=1&amp;parent_id=5&amp;from=consequatur&amp;to=consequatur&amp;per_page=15" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/categories?q=clean&amp;active=1&amp;parent_id=5&amp;from=consequatur&amp;to=consequatur&amp;per_page=15" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/categories"
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories"
 );
 
 const params = {
@@ -7155,6 +7251,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7234,6 +7331,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/categories</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-categories"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -7349,7 +7457,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/categories" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7369,10 +7478,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/categories"
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7447,6 +7557,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/categories</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-categories"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -7584,7 +7705,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/categories/17" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7604,10 +7726,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/categories/17"
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7682,6 +7805,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/categories/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-categories--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -7831,17 +7965,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/categories/17" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/categories/17"
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -7903,6 +8039,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-categories--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -7952,7 +8099,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/categories/17/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -7963,10 +8111,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/categories/17/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8032,6 +8181,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/categories/{id}/toggle</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-categories--id--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -8104,7 +8264,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/categories/17/translations" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17/translations" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8116,10 +8277,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/categories/17/translations"
+    "https://mery.alemtayaz.com/api/v1/admin/system/categories/17/translations"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -8186,6 +8348,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/categories/{id}/translations</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-categories--id--translations"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -8262,14 +8435,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/cities?q=Riy&amp;country=SA&amp;active=1&amp;from=2025-10-01&amp;to=2025-10-15&amp;per_page=15" \
+    --get "https://mery.alemtayaz.com/api/v1/cities?q=Riy&amp;country=SA&amp;active=1&amp;from=2025-10-01&amp;to=2025-10-15&amp;per_page=15" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/cities"
+    "https://mery.alemtayaz.com/api/v1/cities"
 );
 
 const params = {
@@ -8492,7 +8665,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cities" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8509,7 +8682,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities"
 );
 
 const headers = {
@@ -8676,7 +8849,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/cities/1" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8692,7 +8865,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities/1"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities/1"
 );
 
 const headers = {
@@ -8872,14 +9045,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/cities/1" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities/1"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities/1"
 );
 
 const headers = {
@@ -8992,7 +9165,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/cities/1/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities/1/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9003,7 +9176,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/cities/1/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/cities/1/toggle"
 );
 
 const headers = {
@@ -9148,14 +9321,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/coupons?code=WELCOME10&amp;active=1&amp;per_page=20" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/coupons?code=WELCOME10&amp;active=1&amp;per_page=20" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/coupons"
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons"
 );
 
 const params = {
@@ -9167,6 +9341,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -9252,6 +9427,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-coupons"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -9333,7 +9519,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/coupons" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9355,10 +9542,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/coupons"
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -9449,6 +9637,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/coupons</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-coupons"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -9608,7 +9807,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/coupons/5" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons/5" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9629,10 +9829,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/coupons/5"
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons/5"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -9728,6 +9929,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/coupons/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-coupons--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -9888,17 +10100,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/coupons/5" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons/5" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/coupons/5"
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons/5"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -9980,6 +10194,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-coupons--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -10029,7 +10254,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/coupons/5/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons/5/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10040,10 +10266,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/coupons/5/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/coupons/5/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -10130,6 +10357,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-coupons--id--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -10204,14 +10442,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/currencies" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/currencies" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/currencies"
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies"
 );
 
 const headers = {
@@ -10331,7 +10569,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/currencies" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10346,7 +10584,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/currencies"
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies"
 );
 
 const headers = {
@@ -10522,7 +10760,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/currencies/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10536,7 +10774,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/currencies/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies/consequatur"
 );
 
 const headers = {
@@ -10712,14 +10950,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/currencies/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/currencies/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies/consequatur"
 );
 
 const headers = {
@@ -10832,14 +11070,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/currencies/consequatur/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/currencies/consequatur/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/currencies/consequatur/toggle"
 );
 
 const headers = {
@@ -10956,14 +11194,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/exchange-rates" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/exchange-rates" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/exchange-rates"
+    "https://mery.alemtayaz.com/api/v1/admin/system/exchange-rates"
 );
 
 const headers = {
@@ -11083,7 +11321,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/exchange-rates" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/exchange-rates" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -11098,7 +11336,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/exchange-rates"
+    "https://mery.alemtayaz.com/api/v1/admin/system/exchange-rates"
 );
 
 const headers = {
@@ -11274,14 +11512,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/exchange-rates/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/exchange-rates/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/exchange-rates/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/exchange-rates/toggle"
 );
 
 const headers = {
@@ -11386,14 +11624,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/insurance-companies?q=comp&amp;active=1&amp;from=2025-10-01&amp;to=2025-10-15&amp;per_page=15" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies?q=comp&amp;active=1&amp;from=2025-10-01&amp;to=2025-10-15&amp;per_page=15" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/insurance-companies"
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies"
 );
 
 const params = {
@@ -11589,7 +11827,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/insurance-companies" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "name=consequatur"\
@@ -11597,12 +11835,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\phpA5F8.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php9160.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/insurance-companies"
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies"
 );
 
 const headers = {
@@ -11729,7 +11967,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\phpA5F8.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php9160.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -11789,7 +12027,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/insurance-companies/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies/consequatur" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "name=consequatur"\
@@ -11797,12 +12035,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\phpA5F9.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php9170.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/insurance-companies/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies/consequatur"
 );
 
 const headers = {
@@ -11941,7 +12179,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\phpA5F9.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php9170.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -12001,14 +12239,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/insurance-companies/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies/consequatur" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/insurance-companies/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies/consequatur"
 );
 
 const headers = {
@@ -12121,7 +12359,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/insurance-companies/consequatur/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -12132,7 +12370,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/insurance-companies/consequatur/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/insurance-companies/consequatur/toggle"
 );
 
 const headers = {
@@ -12278,14 +12516,14 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/languages?per_page=15&amp;all=1" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/languages?per_page=15&amp;all=1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/languages"
+    "https://mery.alemtayaz.com/api/v1/admin/system/languages"
 );
 
 const params = {
@@ -12445,7 +12683,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/languages" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/languages" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -12460,7 +12698,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/languages"
+    "https://mery.alemtayaz.com/api/v1/admin/system/languages"
 );
 
 const headers = {
@@ -12652,14 +12890,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/nationalities?q=sa&amp;active=1&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/nationalities?q=sa&amp;active=1&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/nationalities"
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities"
 );
 
 const params = {
@@ -12673,6 +12912,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -12752,6 +12992,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/nationalities</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-nationalities"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -12856,7 +13107,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/nationalities" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -12875,10 +13127,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/nationalities"
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -12952,6 +13205,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/nationalities</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-nationalities"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -13078,7 +13342,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/nationalities/3" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13097,10 +13362,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/nationalities/3"
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -13174,6 +13440,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/nationalities/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-nationalities--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -13312,17 +13589,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/nationalities/3" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/nationalities/3"
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -13384,6 +13663,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-nationalities--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -13433,7 +13723,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/nationalities/3/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13444,10 +13735,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/nationalities/3/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -13513,6 +13805,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/nationalities/{id}/toggle</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-nationalities--id--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -13585,7 +13888,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/nationalities/3/translations" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3/translations" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -13597,10 +13901,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/nationalities/3/translations"
+    "https://mery.alemtayaz.com/api/v1/admin/system/nationalities/3/translations"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -13667,6 +13972,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/nationalities/{id}/translations</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-nationalities--id--translations"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -13743,18 +14059,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/offices?q=1010&amp;city_id=17&amp;active=&amp;blocked=&amp;from=consequatur&amp;to=consequatur&amp;per_page=17" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/offices?search=1010&amp;q=consequatur&amp;city_id=17&amp;active=&amp;blocked=&amp;from=consequatur&amp;to=consequatur&amp;per_page=17" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/offices"
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices"
 );
 
 const params = {
-    "q": "1010",
+    "search": "1010",
+    "q": "consequatur",
     "city_id": "17",
     "active": "0",
     "blocked": "0",
@@ -13869,15 +14186,26 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                             <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
                                     <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-v1-admin-system-offices"
+               value="1010"
+               data-component="query">
+    <br>
+<p>بحث بالاسم/السجل/الهاتف/الإيميل. Example: <code>1010</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>q</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="q"                data-endpoint="GETapi-v1-admin-system-offices"
-               value="1010"
+               value="consequatur"
                data-component="query">
     <br>
-<p>Search name/email/CR. Example: <code>1010</code></p>
+<p>(alias of search) Example: <code>consequatur</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>city_id</code></b>&nbsp;&nbsp;
@@ -13967,6 +14295,138 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                 </form>
 
+                    <h2 id="system-offices-GETapi-v1-admin-system-offices-stats">إحصائيات سريعة للمكاتب وملفات السير الذاتية</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-offices-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/offices-stats" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/offices-stats"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-offices-stats">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [],
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;http://localhost/api/v1/admin/system/coupons?page=1&quot;,
+        &quot;last&quot;: &quot;http://localhost/api/v1/admin/system/coupons?page=1&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: null
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;from&quot;: null,
+        &quot;last_page&quot;: 1,
+        &quot;path&quot;: &quot;http://localhost/api/v1/admin/system/coupons&quot;,
+        &quot;per_page&quot;: 15,
+        &quot;to&quot;: null,
+        &quot;total&quot;: 0
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-offices-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-offices-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-offices-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-offices-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-offices-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-offices-stats" data-method="GET"
+      data-path="api/v1/admin/system/offices-stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-offices-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-offices-stats"
+                    onclick="tryItOut('GETapi-v1-admin-system-offices-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-offices-stats"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-offices-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-offices-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/offices-stats</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-system-offices-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-system-offices-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                 <h1 id="system-plans">System / Plans</h1>
 
     
@@ -13985,14 +14445,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/plans?q=pro&amp;active=1&amp;billing=monthly&amp;per_page=20" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/plans?q=pro&amp;active=1&amp;billing=monthly&amp;per_page=20" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans"
 );
 
 const params = {
@@ -14005,6 +14466,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -14092,6 +14554,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/plans</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-plans"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -14185,7 +14658,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/plans" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14208,10 +14682,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -14303,6 +14778,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/plans</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-plans"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -14505,7 +14991,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/plans/pro" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14527,10 +15014,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans/pro"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -14627,6 +15115,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/plans/{code}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-plans--code-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -14830,17 +15329,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/plans/pro" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans/pro"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -14922,6 +15423,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-plans--code-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -14971,7 +15483,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/plans/pro/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -14982,10 +15495,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans/pro/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -15072,6 +15586,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-plans--code--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -15143,7 +15668,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/plans/pro/translations" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro/translations" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -15156,10 +15682,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans/pro/translations"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro/translations"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -15248,6 +15775,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-plans--code--translations"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -15331,7 +15869,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/plans/pro/features" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro/features" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -15344,10 +15883,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/plans/pro/features"
+    "https://mery.alemtayaz.com/api/v1/admin/system/plans/pro/features"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -15425,6 +15965,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/plans/{code}/features</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-plans--code--features"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -15545,14 +16096,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/promotions?plan_code=pro&amp;active=1&amp;per_page=20" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/promotions?plan_code=pro&amp;active=1&amp;per_page=20" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/promotions"
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions"
 );
 
 const params = {
@@ -15564,6 +16116,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -15651,6 +16204,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-promotions"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -15732,7 +16296,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/promotions" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -15754,10 +16319,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/promotions"
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -15848,6 +16414,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/promotions</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-promotions"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -16017,7 +16594,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/promotions/10" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions/10" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -16039,10 +16617,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/promotions/10"
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions/10"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -16139,6 +16718,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/promotions/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-promotions--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -16320,17 +16910,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/promotions/10" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions/10" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/promotions/10"
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions/10"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -16412,6 +17004,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-promotions--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -16461,7 +17064,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/promotions/10/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions/10/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -16472,10 +17076,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/promotions/10/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/promotions/10/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -16562,6 +17167,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-promotions--id--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -16637,14 +17253,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/roles?name=Admin&amp;slug=admin&amp;guard=api&amp;active=1&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/roles?name=Admin&amp;slug=admin&amp;guard=api&amp;active=1&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles"
 );
 
 const params = {
@@ -16660,6 +17277,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -16739,6 +17357,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/roles</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-roles"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -16865,7 +17494,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/roles" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -16884,10 +17514,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -16961,6 +17592,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/roles</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-roles"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -17067,7 +17709,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/roles/4" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -17085,10 +17728,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles/4"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -17161,6 +17805,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/roles/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-roles--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -17279,17 +17934,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/roles/4" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles/4"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -17351,6 +18008,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-roles--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -17400,7 +18068,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/roles/4/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -17411,10 +18080,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles/4/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -17480,6 +18150,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/roles/{id}/toggle</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-roles--id--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -17552,7 +18233,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/roles/4/sync-permissions" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4/sync-permissions" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -17567,10 +18249,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles/4/sync-permissions"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4/sync-permissions"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -17641,6 +18324,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-roles--id--sync-permissions"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -17704,17 +18398,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/roles/4" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/roles/4" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/roles/4"
+    "https://mery.alemtayaz.com/api/v1/admin/system/roles/4"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -17794,6 +18490,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/roles/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-roles--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -17899,14 +18606,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/admin/system/users?name=Ahmed&amp;email=admin%40example.com&amp;active=1&amp;guard=api&amp;role=admin&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/users?name=Ahmed&amp;email=admin%40example.com&amp;active=1&amp;guard=api&amp;role=admin&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/users"
+    "https://mery.alemtayaz.com/api/v1/admin/system/users"
 );
 
 const params = {
@@ -17923,6 +18631,7 @@ Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -18002,6 +18711,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/users</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-system-users"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -18139,7 +18859,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/users" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/users" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18158,10 +18879,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/users"
+    "https://mery.alemtayaz.com/api/v1/admin/system/users"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -18235,6 +18957,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/users</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-users"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -18363,7 +19096,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/system/users/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18382,10 +19116,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/users/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -18459,6 +19194,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/users/{id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-system-users--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -18599,17 +19345,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/admin/system/users/consequatur" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/users/consequatur"
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -18671,6 +19419,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-system-users--id-"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
  &nbsp;
@@ -18720,7 +19479,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/users/consequatur/toggle" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur/toggle" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18731,10 +19491,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/users/consequatur/toggle"
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur/toggle"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -18800,6 +19561,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/users/{id}/toggle</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-users--id--toggle"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -18872,7 +19644,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/admin/system/users/consequatur/sync-roles" \
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur/sync-roles" \
+    --header "Authorization: Bearer 3V5EgbkvZcDPa166h8fd4ae" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -18886,10 +19659,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/system/users/consequatur/sync-roles"
+    "https://mery.alemtayaz.com/api/v1/admin/system/users/consequatur/sync-roles"
 );
 
 const headers = {
+    "Authorization": "Bearer 3V5EgbkvZcDPa166h8fd4ae",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -18958,6 +19732,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/v1/admin/system/users/{id}/sync-roles</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-system-users--id--sync-roles"
+               value="Bearer 3V5EgbkvZcDPa166h8fd4ae"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 3V5EgbkvZcDPa166h8fd4ae</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;

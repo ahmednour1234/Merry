@@ -18,6 +18,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -115,7 +116,10 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -135,6 +139,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -207,7 +212,10 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -227,6 +235,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -308,7 +317,10 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -328,6 +340,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -350,7 +363,10 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -370,6 +386,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -403,7 +420,10 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -423,6 +443,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -462,7 +483,10 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -482,6 +506,7 @@ endpoints:
       deprecated: false
       custom: []
     headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -583,7 +608,10 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null

@@ -21,14 +21,24 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
-      q:
-        name: q
-        description: 'Search name/email/CR.'
+      search:
+        name: search
+        description: 'بحث بالاسم/السجل/الهاتف/الإيميل.'
         required: false
         example: '1010'
         type: string
         enumValues: []
         exampleWasSpecified: true
+        nullable: false
+        custom: []
+      q:
+        name: q
+        description: '(alias of search)'
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
         nullable: false
         custom: []
       city_id:
@@ -92,7 +102,8 @@ endpoints:
         nullable: false
         custom: []
     cleanQueryParameters:
-      q: '1010'
+      search: '1010'
+      q: consequatur
       city_id: 17
       active: false
       blocked: false
@@ -111,6 +122,43 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: '*'
         description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/system/offices-stats
+    metadata:
+      groupName: 'System / Offices'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'إحصائيات سريعة للمكاتب وملفات السير الذاتية'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: "{\r\n  \"data\": [],\r\n  \"links\": {\r\n    \"first\": \"http://localhost/api/v1/admin/system/coupons?page=1\",\r\n    \"last\": \"http://localhost/api/v1/admin/system/coupons?page=1\",\r\n    \"prev\": null,\r\n    \"next\": null\r\n  },\r\n  \"meta\": {\r\n    \"current_page\": 1,\r\n    \"from\": null,\r\n    \"last_page\": 1,\r\n    \"path\": \"http://localhost/api/v1/admin/system/coupons\",\r\n    \"per_page\": 15,\r\n    \"to\": null,\r\n    \"total\": 0\r\n  }\r\n}\r\n\r\n\r\n"
+        headers: []
+        description: ''
         custom: []
     responseFields: []
     auth: []

@@ -3,7 +3,7 @@
 Auto-generated API docs and Postman collection.
 
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>https://mery.alemtayaz.com/</code>
 </aside>
 
     This documentation aims to provide all the information you need to work with our API.

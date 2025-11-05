@@ -7,20 +7,22 @@ use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
 
 // Only the most common configs are shown. See the https://scribe.knuckles.wtf/laravel/reference/config for all.
 
+// ... existing code ...
+
 return [
     'title' => env('APP_NAME', 'Mery API'),
     'description' => 'Auto-generated API docs and Postman collection.',
     'base_url' => env('SCRIBE_BASE_URL', env('APP_URL', 'http://localhost')),
 
-    // لو عندك توكن أو هيدر ثابت حطه هنا
+    // Enable auth for Postman collection
     'auth' => [
-        'enabled' => false, // true لو عندك Auth
-        'in' => 'bearer',   // bearer|header|query|body
+        'enabled' => true, // Set to true to include auth in generated collection
+        'in' => 'bearer',  // Bearer token
         'name' => 'Authorization',
-        'use_value' => 'Bearer {YOUR_TOKEN}',
+        'use_value' => 'Bearer {{token}}',  // Use Postman variable for token
     ],
 
-    // هيدر افتراضي (مثلاً اللغة)
+    // Postman settings
     'postman' => [
         'enabled' => true,
         'overrides' => [
@@ -28,18 +30,19 @@ return [
                 'name' => env('APP_NAME', 'Mery') . ' – Postman',
             ],
             'variable' => [
-                ['key' => 'baseUrl', 'value' => env('APP_URL', 'http://localhost')],
+                ['key' => 'baseUrl', 'value' => env('SCRIBE_BASE_URL', env('APP_URL', 'http://localhost'))],
+                ['key' => 'token', 'value' => '', 'description' => 'Set your API token here'],  // Add token variable
             ],
             'item' => [],
         ],
         'headers' => [
             ['key' => 'Accept', 'value' => 'application/json'],
-            ['key' => 'X-Locale', 'value' => 'ar'], // اختياري
+            ['key' => 'X-Locale', 'value' => 'ar'],
         ],
     ],
 
-    // مكان الإخراج
+    // Output path remains the same
     'output' => [
-        'path' => 'public/docs', // هتلاقي الملفات هنا
+        'path' => 'public/docs',
     ],
 ];
