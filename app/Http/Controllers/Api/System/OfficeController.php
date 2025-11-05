@@ -6,9 +6,10 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Office\StoreOfficeRequest;
 use App\Http\Requests\Office\UpdateOfficeRequest;
 use App\Http\Resources\Office\OfficeResource;
+use App\Http\Resources\System\OfficeStatsResource;
 use App\Models\Office;
 use App\Models\Cv;
-use App\Http\Resources\System\OfficeStatsResource;
+use App\Support\Uploads\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,15 +21,7 @@ class OfficeController extends ApiController
     }
 
     /**
-     * @group System / Offices
-     * @queryParam search string بحث بالاسم/السجل/الهاتف/الإيميل. Example: 1010
-     * @queryParam q string (alias of search)
-     * @queryParam city_id integer
-     * @queryParam active boolean
-     * @queryParam blocked boolean
-     * @queryParam from date
-     * @queryParam to date
-     * @queryParam per_page integer
+     * عرض قائمة المكاتب مع الفلاتر
      */
     public function index(Request $r)
     {
@@ -44,6 +37,7 @@ class OfficeController extends ApiController
                   ->orWhere('phone','like',$s);
             });
         }
+
         if ($r->filled('city_id')) $q->where('city_id', $r->integer('city_id'));
         if ($r->has('active'))    $q->where('active', (bool)$r->boolean('active'));
         if ($r->has('blocked'))   $q->where('blocked', (bool)$r->boolean('blocked'));
@@ -57,30 +51,35 @@ class OfficeController extends ApiController
     }
 
     /**
-     * @group System / Offices
      * إحصائيات سريعة للمكاتب وملفات السير الذاتية
-     *
-     * @responseFile storage/app/private/scribe/examples/ok.json
      */
     public function stats(Request $r)
     {
-        $total = Office::on('system')->count();
-        $active = Office::on('system')->where('active', true)->count();
+        $total   = Office::on('system')->count();
+        $active  = Office::on('system')->where('active', true)->count();
         $blocked = Office::on('system')->where('blocked', true)->count();
-        $cvs = Cv::on('system')->count();
+        $cvs     = Cv::on('system')->count();
 
         return $this->responder->ok(new OfficeStatsResource([
-            'total_offices' => $total,
+            'total_offices'  => $total,
             'active_offices' => $active,
-            'blocked_offices' => $blocked,
-            'total_cvs' => $cvs,
+            'blocked_offices'=> $blocked,
+            'total_cvs'      => $cvs,
         ]), 'Office stats');
     }
 
+    /**
+     * إنشاء مكتب جديد
+     */
     public function store(StoreOfficeRequest $r)
     {
         $data = $r->validated();
         $data['password'] = Hash::make($data['password']);
+
+        // رفع الصورة إن وجدت
+        if ($r->hasFile('image')) {
+            $data['image'] = ImageUploader::upload($r->file('image'), 'offices');
+        }
 
         $row = Office::on('system')->create($data);
         return $this->responder->created(new OfficeResource($row), 'Office created');
@@ -97,23 +96,37 @@ class OfficeController extends ApiController
         return $this->responder->ok(new OfficeResource($row), 'Office');
     }
 
+    /**
+     * تحديث بيانات المكتب
+     */
     public function update($id, UpdateOfficeRequest $r)
     {
         $row = Office::on('system')->find((int)$id);
         if (!$row) return $this->responder->fail('Office not found', status:404);
 
         $data = $r->validated();
+
+        // تحديث كلمة المرور إن وُجدت
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {
             unset($data['password']);
         }
 
+        // تحديث الصورة
+        if ($r->hasFile('image')) {
+            // حذف الصورة القديمة
+            \App\Support\Uploads\ImageUploader::deleteIfExists($row->image);
+            // رفع الجديدة
+            $data['image'] = ImageUploader::upload($r->file('image'), 'offices');
+        }
+
         $row->fill($data)->save();
+
         return $this->responder->ok(new OfficeResource($row), 'Office updated');
     }
 
-    /** حظر/إلغاء حظر */
+    /** حظر / إلغاء حظر */
     public function block(Request $r, $id)
     {
         $r->validate(['blocked'=>'required|boolean']);
@@ -126,7 +139,7 @@ class OfficeController extends ApiController
         return $this->responder->ok(new OfficeResource($row), 'Office block status updated');
     }
 
-    /** تفعيل/تعطيل */
+    /** تفعيل / تعطيل */
     public function toggle(Request $r, $id)
     {
         $r->validate(['active'=>'required|boolean']);
@@ -139,10 +152,14 @@ class OfficeController extends ApiController
         return $this->responder->ok(new OfficeResource($row), 'Office status updated');
     }
 
+    /** حذف مكتب */
     public function destroy($id)
     {
         $row = Office::on('system')->find((int)$id);
         if (!$row) return $this->responder->fail('Office not found', status:404);
+
+        // حذف الصورة من التخزين
+        \App\Support\Uploads\ImageUploader::deleteIfExists($row->image);
 
         $row->delete();
         return $this->responder->ok(null, 'Office deleted');

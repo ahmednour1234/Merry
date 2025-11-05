@@ -21,6 +21,7 @@ class UpdateOfficeRequest extends FormRequest
             'password' => ['sometimes','nullable','string','min:6'],
             'active' => ['sometimes','boolean'],
             'blocked' => ['sometimes','boolean'],
+            'image' => ['sometimes','nullable','image','mimes:jpg,jpeg,png,webp','max:2048'], // 👈 إضافة الصورة
         ];
     }
 }
