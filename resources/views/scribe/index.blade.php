@@ -113,11 +113,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-offices--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-system-offices--id-">DELETE api/v1/admin/system/offices/{id}</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-register">
-                                <a href="#endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
-يقبل اختيارياً: fcm_token, device, platform
-لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-login">
                                 <a href="#endpoints-POSTapi-v1-office-auth-login">POST /api/v1/office/auth/login</a>
                             </li>
@@ -616,7 +611,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;ok&quot;: true,
-    &quot;ts&quot;: &quot;2025-11-05T10:29:35+00:00&quot;
+    &quot;ts&quot;: &quot;2025-11-05T11:39:21+00:00&quot;
 }</code>
  </pre>
     </span>
@@ -2059,7 +2054,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"email\": \"ablanda@example.org\",
     \"password\": \"\'YAKYLk4&gt;SJIrIV#lz.\",
     \"active\": false,
-    \"blocked\": true
+    \"blocked\": false
 }"
 </code></pre></div>
 
@@ -2083,7 +2078,7 @@ let body = {
     "email": "ablanda@example.org",
     "password": "'YAKYLk4&gt;SJIrIV#lz.",
     "active": false,
-    "blocked": true
+    "blocked": false
 };
 
 fetch(url, {
@@ -2295,7 +2290,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -2658,215 +2653,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>The ID of the office. Example: <code>1</code></p>
             </div>
                     </form>
-
-                    <h2 id="endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
-يقبل اختيارياً: fcm_token, device, platform
-لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-office-auth-register">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://mery.alemtayaz.com/api/v1/office/auth/register" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"مكتب التميز للاستقدام\",
-    \"commercial_reg_no\": \"1010123456\",
-    \"city_id\": 1,
-    \"address\": \"الرياض - حي العليا - شارع xx\",
-    \"phone\": \"+966500000000\",
-    \"email\": \"office@example.com\",
-    \"password\": \"secret123\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://mery.alemtayaz.com/api/v1/office/auth/register"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "name": "مكتب التميز للاستقدام",
-    "commercial_reg_no": "1010123456",
-    "city_id": 1,
-    "address": "الرياض - حي العليا - شارع xx",
-    "phone": "+966500000000",
-    "email": "office@example.com",
-    "password": "secret123"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-office-auth-register">
-</span>
-<span id="execution-results-POSTapi-v1-office-auth-register" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-office-auth-register"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-office-auth-register"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-office-auth-register" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-office-auth-register">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-office-auth-register" data-method="POST"
-      data-path="api/v1/office/auth/register"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-office-auth-register', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-office-auth-register"
-                    onclick="tryItOut('POSTapi-v1-office-auth-register');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-office-auth-register"
-                    onclick="cancelTryOut('POSTapi-v1-office-auth-register');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-office-auth-register"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/office/auth/register</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="مكتب التميز للاستقدام"
-               data-component="body">
-    <br>
-<p>اسم المكتب. Must not be greater than 191 characters. Example: <code>مكتب التميز للاستقدام</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>commercial_reg_no</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="commercial_reg_no"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="1010123456"
-               data-component="body">
-    <br>
-<p>رقم السجل التجاري (فريد). Must not be greater than 191 characters. Example: <code>1010123456</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>city_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="city_id"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="1"
-               data-component="body">
-    <br>
-<p>معرّف المدينة (cities.id). Example: <code>1</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="address"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="الرياض - حي العليا - شارع xx"
-               data-component="body">
-    <br>
-<p>العنوان التفصيلي. Must not be greater than 255 characters. Example: <code>الرياض - حي العليا - شارع xx</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="+966500000000"
-               data-component="body">
-    <br>
-<p>رقم الجوال. Must not be greater than 32 characters. Example: <code>+966500000000</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="office@example.com"
-               data-component="body">
-    <br>
-<p>البريد الإلكتروني (فريد). Must be a valid email address. Must not be greater than 191 characters. Example: <code>office@example.com</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password"                data-endpoint="POSTapi-v1-office-auth-register"
-               value="secret123"
-               data-component="body">
-    <br>
-<p>كلمة المرور. Must be at least 6 characters. Example: <code>secret123</code></p>
-        </div>
-        </form>
 
                     <h2 id="endpoints-POSTapi-v1-office-auth-login">POST /api/v1/office/auth/login</h2>
 
@@ -11835,7 +11621,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php9160.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php71BB.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -11967,7 +11753,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php9160.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php71BB.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -12035,7 +11821,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php9170.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php71CB.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -12179,7 +11965,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php9170.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php71CB.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;

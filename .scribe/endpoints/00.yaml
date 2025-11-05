@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"ok":true,"ts":"2025-11-05T10:29:35+00:00"}'
+        content: '{"ok":true,"ts":"2025-11-05T11:39:21+00:00"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -686,7 +686,7 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -701,7 +701,7 @@ endpoints:
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
       active: false
-      blocked: true
+      blocked: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -828,117 +828,6 @@ endpoints:
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/office/auth/register
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        POST /api/v1/office/auth/register
-        يقبل اختيارياً: fcm_token, device, platform
-        لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'اسم المكتب. Must not be greater than 191 characters.'
-        required: true
-        example: 'مكتب التميز للاستقدام'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      commercial_reg_no:
-        name: commercial_reg_no
-        description: 'رقم السجل التجاري (فريد). Must not be greater than 191 characters.'
-        required: true
-        example: '1010123456'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      city_id:
-        name: city_id
-        description: 'معرّف المدينة (cities.id).'
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      address:
-        name: address
-        description: 'العنوان التفصيلي. Must not be greater than 255 characters.'
-        required: false
-        example: 'الرياض - حي العليا - شارع xx'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      phone:
-        name: phone
-        description: 'رقم الجوال. Must not be greater than 32 characters.'
-        required: false
-        example: '+966500000000'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      email:
-        name: email
-        description: 'البريد الإلكتروني (فريد). Must be a valid email address. Must not be greater than 191 characters.'
-        required: true
-        example: office@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      password:
-        name: password
-        description: 'كلمة المرور. Must be at least 6 characters.'
-        required: true
-        example: secret123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'مكتب التميز للاستقدام'
-      commercial_reg_no: '1010123456'
-      city_id: 1
-      address: 'الرياض - حي العليا - شارع xx'
-      phone: '+966500000000'
-      email: office@example.com
-      password: secret123
     fileParameters: []
     responses: []
     responseFields: []
