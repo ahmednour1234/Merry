@@ -59,7 +59,7 @@ class AuthOfficeController extends ApiController
         }
 
         // إرسال إشعار للإدارة
-        event(new OfficeRegistered($office->id));
+        // event(new OfficeRegistered($office->id));
 
         return $this->responder->created(
             ['office' => new OfficeResource($office)],
