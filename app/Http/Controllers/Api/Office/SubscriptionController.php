@@ -39,7 +39,7 @@ class SubscriptionController extends ApiController
 
         // رجّع Paginated بنفس الشكل
         $p->setCollection(collect($data));
-        return $this->responder->paginatedArray($p, 'Plans priced');
+        return $this->responder->paginated($p, 'Plans priced');
     }
 
     /** GET /api/v1/office/subscription (الحالي) */
