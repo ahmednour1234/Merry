@@ -46,6 +46,7 @@ Route::prefix('v1')->group(function () {
 | Sanctum + general ability `system.manage` + per-endpoint permission `perm:*`
 |--------------------------------------------------------------------------
 */
+Route::get('v1/admin/system/nationalities', [NationalityController::class, 'index']);
 Route::prefix('v1/admin/system')
     ->middleware(['auth:sanctum', 'ability:system.manage'])
     ->group(function () {
@@ -146,7 +147,6 @@ Route::prefix('v1/admin/system')
         Route::post('notifications/broadcast', [NotificationBroadcastController::class, 'store'])->middleware('perm:system.notifications.broadcast');
 
         // Nationalities
-        Route::get('nationalities', [NationalityController::class, 'index']);
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
         Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
         Route::delete('nationalities/{id}', [NationalityController::class, 'destroy'])->middleware('perm:system.nationalities.destroy');
