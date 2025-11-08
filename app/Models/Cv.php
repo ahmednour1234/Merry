@@ -16,6 +16,7 @@ class Cv extends Model
         'office_id','category_id','nationality_code','gender','has_experience',
         'file_path','file_mime','file_size','file_original_name',
         'status','approved_by','approved_at','rejected_by','rejected_at','rejected_reason',
+        'is_muslim',
         'frozen_by','frozen_at','deactivated_by_office_at','meta',
     ];
 
@@ -43,6 +44,7 @@ class Cv extends Model
         if (!empty($f['status']))          $q->where('status', $f['status']);
         if (!empty($f['from']))            $q->where('created_at','>=',$f['from']);
         if (!empty($f['to']))              $q->where('created_at','<=',$f['to']);
+        if (isset($f['is_muslim']))        $q->where('is_muslim', (bool)$f['is_muslim']);
         return $q;
     }
 }

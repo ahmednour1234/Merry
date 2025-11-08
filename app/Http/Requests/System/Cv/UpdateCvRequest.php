@@ -18,6 +18,10 @@ class UpdateCvRequest extends FormRequest
             'nationality_code' => ['sometimes', 'string', 'max:8'],
             'gender'           => ['sometimes', 'nullable', 'in:male,female'],
             'has_experience'   => ['sometimes', 'boolean'],
+
+            // تعديل حالة "مسلمة أو لا" لو محتاج
+            'is_muslim'        => ['sometimes', 'boolean'],
+
             'file'             => ['sometimes', 'file', 'mimetypes:application/pdf', 'max:10240'],
             'meta'             => ['sometimes', 'array'],
         ];
@@ -40,6 +44,10 @@ class UpdateCvRequest extends FormRequest
             ],
             'has_experience' => [
                 'description' => 'Has experience?',
+                'example'     => false,
+            ],
+            'is_muslim' => [
+                'description' => 'Is Muslim? true/false',
                 'example'     => false,
             ],
             'file' => [

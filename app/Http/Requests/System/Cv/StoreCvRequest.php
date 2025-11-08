@@ -14,26 +14,19 @@ class StoreCvRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // اختيارية
             'category_id'      => ['nullable', 'integer', 'exists:system.categories,id'],
-
-            // أساسي (لو عايز تخليه اختياري عدل هنا)
             'nationality_code' => ['required', 'string', 'max:8'],
-
-            // اختياري الآن
             'gender'           => ['nullable', 'in:male,female'],
-
             'has_experience'   => ['required', 'boolean'],
 
-            // PDF إجباري
-            'file'             => ['required', 'file', 'mimetypes:application/pdf', 'max:10240'],
+            // هل هي مسلمة ولا لا (إجباري yes/no)
+            'is_muslim'        => ['required', 'boolean'],
 
-            // JSON إضافي اختياري
+            'file'             => ['required', 'file', 'mimetypes:application/pdf', 'max:10240'],
             'meta'             => ['sometimes', 'array'],
         ];
     }
 
-    // Scribe / Docs
     public function bodyParameters(): array
     {
         return [
@@ -51,6 +44,10 @@ class StoreCvRequest extends FormRequest
             ],
             'has_experience' => [
                 'description' => 'Has previous experience? true/false',
+                'example'     => true,
+            ],
+            'is_muslim' => [
+                'description' => 'Is Muslim? true/false',
                 'example'     => true,
             ],
             'file' => [
