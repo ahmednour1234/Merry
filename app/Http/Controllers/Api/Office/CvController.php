@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Office;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\Cv\StoreCvRequest;
-use App\Http\Requests\Cv\UpdateCvRequest;
+use App\Http\Requests\System\Cv\StoreCvRequest;
+use App\Http\Requests\System\Cv\UpdateCvRequest;
 use App\Http\Resources\System\CvResource;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface as Repo;
 use Illuminate\Http\Request;

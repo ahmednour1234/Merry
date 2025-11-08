@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Cv;
+namespace App\Http\Requests\System\Cv;
 
 use Illuminate\Foundation\Http\FormRequest;
 
