@@ -146,7 +146,7 @@ Route::prefix('v1/admin/system')
         Route::post('notifications/broadcast', [NotificationBroadcastController::class, 'store'])->middleware('perm:system.notifications.broadcast');
 
         // Nationalities
-        Route::get('nationalities', [NationalityController::class, 'index'])->middleware('perm:system.nationalities.index');
+        Route::get('nationalities', [NationalityController::class, 'index']);
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
         Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
         Route::delete('nationalities/{id}', [NationalityController::class, 'destroy'])->middleware('perm:system.nationalities.destroy');
