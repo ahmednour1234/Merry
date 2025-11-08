@@ -19,71 +19,126 @@ class CvController extends ApiController
         parent::__construct(app('api.responder'));
     }
 
-    /** List my CVs */
-    public function index(Request $r)
+    /** GET /api/v1/office/cvs  - List my CVs */
+    public function index(Request $request)
     {
-        $filters = $r->only(['category_id','nationality','gender','has_experience','status','from','to']);
-        $filters['office_id'] = (int)$r->user()->id; // المكتب نفسه (لو id المكتب هو user()->id)
-        $per = max(1, (int)$r->integer('per_page', 15));
-        $p = $this->repo->paginate($filters, $per);
-        return $this->responder->paginated($p, CvResource::class, 'My CVs');
+        $filters = $request->only([
+            'category_id',
+            'nationality_code',
+            'gender',
+            'has_experience',
+            'status',
+            'from',
+            'to',
+        ]);
+
+        // المكتب الحالي
+        $filters['office_id'] = (int) $request->user()->id;
+
+        $perPage = max(1, (int) $request->integer('per_page', 15));
+        $paginator = $this->repo->paginate($filters, $perPage);
+
+        return $this->responder->paginated($paginator, CvResource::class, 'My CVs');
     }
 
-    /** Create CV (PDF required) */
-    public function store(StoreCvRequest $r)
+    /** POST /api/v1/office/cvs  - Create CV (PDF required) */
+    public function store(StoreCvRequest $request)
     {
-        $data = $r->validated();
-        $cv = $this->repo->store($data, (int)$r->user()->id);
-        return $this->responder->created(new CvResource($cv), 'CV submitted (pending review)');
+        $data = $request->validated();
+
+        $cv = $this->repo->store(
+            $data,
+            (int) $request->user()->id
+        );
+
+        return $this->responder->created(
+            new CvResource($cv),
+            'CV submitted (pending review)'
+        );
     }
 
-    /** Update CV (allowed usually if pending or rejected) */
-    public function update(UpdateCvRequest $r, int $id)
+    /** PUT/PATCH /api/v1/office/cvs/{id} - Update CV */
+    public function update(UpdateCvRequest $request, int $id)
     {
         $cv = $this->repo->find($id);
-        if (!$cv || $cv->office_id != $r->user()->id) {
-            return $this->responder->fail('Not found',404);
+
+        if (!$cv || (int)$cv->office_id !== (int)$request->user()->id) {
+            return $this->responder->fail('Not found', 404);
         }
-        if (!in_array($cv->status, ['pending','rejected','deactivated_by_office'])) {
+
+        if (!in_array($cv->status, ['pending', 'rejected', 'deactivated_by_office'], true)) {
             return $this->responder->fail('Cannot update in this status', 422);
         }
-        $row = $this->repo->update($id, $r->validated());
-        return $this->responder->ok(new CvResource($row), 'CV updated');
+
+        $row = $this->repo->update($id, $request->validated());
+
+        return $this->responder->ok(
+            new CvResource($row),
+            'CV updated'
+        );
     }
 
-    /** Office toggle active (deactivate/activate -> pending) */
-    public function toggleActive(Request $r, int $id)
+    /** POST /api/v1/office/cvs/{id}/toggle-active */
+    public function toggleActive(Request $request, int $id)
     {
-        $data = $r->validate(['active'=>'required|boolean']);
-        $row = $this->repo->officeToggleActive($id, (int)$r->user()->id, (bool)$data['active']);
-        if (!$row) return $this->responder->fail('Not found',404);
-        return $this->responder->ok(new CvResource($row), 'CV state changed');
+        $data = $request->validate([
+            'active' => ['required', 'boolean'],
+        ]);
+
+        $row = $this->repo->officeToggleActive(
+            $id,
+            (int)$request->user()->id,
+            (bool)$data['active']
+        );
+
+        if (!$row) {
+            return $this->responder->fail('Not found', 404);
+        }
+
+        return $this->responder->ok(
+            new CvResource($row),
+            'CV state changed'
+        );
     }
 
-    /** Delete my CV */
-    public function destroy(Request $r, int $id)
+    /** DELETE /api/v1/office/cvs/{id} */
+    public function destroy(Request $request, int $id)
     {
         $cv = $this->repo->find($id);
-        if (!$cv || $cv->office_id != $r->user()->id) {
-            return $this->responder->fail('Not found',404);
+
+        if (!$cv || (int)$cv->office_id !== (int)$request->user()->id) {
+            return $this->responder->fail('Not found', 404);
         }
+
         $ok = $this->repo->destroy($id);
-        return $ok ? $this->responder->ok(null, 'Deleted') : $this->responder->fail('Not found',404);
+
+        return $ok
+            ? $this->responder->ok(null, 'Deleted')
+            : $this->responder->fail('Not found', 404);
     }
 
-    /** Resubmit rejected CV to pending */
-    public function resubmit(Request $r, int $id)
+    /** POST /api/v1/office/cvs/{id}/resubmit */
+    public function resubmit(Request $request, int $id)
     {
         $cv = $this->repo->find($id);
-        if (!$cv || $cv->office_id != $r->user()->id) {
-            return $this->responder->fail('Not found',404);
+
+        if (!$cv || (int)$cv->office_id !== (int)$request->user()->id) {
+            return $this->responder->fail('Not found', 404);
         }
+
         if ($cv->status !== 'rejected') {
             return $this->responder->fail('Only rejected CVs can be resubmitted', 422);
         }
+
         $cv->status = 'pending';
-        $cv->rejected_by = null; $cv->rejected_at = null; $cv->rejected_reason = null;
+        $cv->rejected_by = null;
+        $cv->rejected_at = null;
+        $cv->rejected_reason = null;
         $cv->save();
-        return $this->responder->ok(new CvResource($cv), 'Resubmitted (pending)');
+
+        return $this->responder->ok(
+            new CvResource($cv),
+            'Resubmitted (pending)'
+        );
     }
 }
