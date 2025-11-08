@@ -8,7 +8,9 @@ use App\Http\Resources\System\OfficeSubscriptionResource;
 use App\Repositories\System\Subscriptions\Contracts\PlanRepositoryInterface as PlanRepo;
 use App\Repositories\System\Subscriptions\Contracts\SubscriptionRepositoryInterface as SubsRepo;
 use App\Services\SubscriptionService;
+use App\Services\CurrencyConversionService;
 use Illuminate\Http\Request;
+use App\Models\Plan;
 
 class SubscriptionController extends ApiController
 {
@@ -20,70 +22,142 @@ class SubscriptionController extends ApiController
         parent::__construct(app('api.responder'));
     }
 
-    /** GET /api/v1/office/plans  (قائمة خطط + سعر نهائي بالعملة الهيدر) */
-    public function plans(Request $r)
+    /**
+     * GET /api/v1/office/plans
+     * إرجاع قائمة الخطط مع سعر نهائي حسب العملة القادمة من الهيدر
+     */
+    public function plans(Request $request)
     {
-        $per = max(1, (int)$r->integer('per_page', 50));
-        $p = $this->plans->paginate(['active'=>1], $per);
-        $p->getCollection()->load(['translations','features']);
+        $perPage = max(1, (int) $request->integer('per_page', 50));
 
-        // أضف pricing سريع
-        $target = app(\App\Services\CurrencyConversionService::class)->headerTarget();
-        $data = $p->getCollection()->map(function($plan) use ($target){
-            $priced = $this->svc->priced($plan->code, couponCode: null, targetCurrencyFromHeader: $target);
-            return array_merge((new PlanResource($plan))->toArray(request()), [
-                'final_price' => $priced['price'] ?? (float)$plan->base_price,
+        // جلب الخطط المفعلة
+        $paginator = $this->plans->paginate(['active' => 1], $perPage);
+
+        // تحميل العلاقات المطلوبة
+        $paginator->getCollection()->load(['translations', 'features']);
+
+        // تحديد العملة المستهدفة من الهيدر
+        /** @var CurrencyConversionService $currencySvc */
+        $currencySvc = app(CurrencyConversionService::class);
+        $targetCurrency = $currencySvc->headerTarget();
+
+        // تجهيز الداتا مع PlanResource + final_price/final_currency
+        $modifiedCollection = $paginator->getCollection()->map(function (Plan $plan) use ($targetCurrency) {
+            $priced = $this->svc->priced(
+                $plan->code,
+                couponCode: null,
+                targetCurrencyFromHeader: $targetCurrency
+            );
+
+            $base = (new PlanResource($plan))->toArray(request());
+
+            return array_merge($base, [
+                'final_price'    => isset($priced['price'])
+                    ? (float) $priced['price']
+                    : (float) $plan->base_price,
                 'final_currency' => $priced['currency'] ?? $plan->base_currency,
             ]);
         });
 
-        // رجّع Paginated بنفس الشكل
-        $p->setCollection(collect($data));
-        return $this->responder->paginated($p, 'Plans priced');
+        // استبدال الكولكشن داخل الـ paginator
+        $paginator->setCollection($modifiedCollection);
+
+        /**
+         * ملاحظة:
+         * أغلب Implementations لـ paginated تكون مثلاً:
+         * paginated(LengthAwarePaginator $paginator, ?string $resourceClass = null, ?string $message = null)
+         * عشان كده:
+         * - المعامل الثاني = null (مش Resource class لأننا بالفعل رجعنا Arrays جاهزة)
+         * - المعامل الثالث = رسالة
+         */
+        return $this->responder->paginated($paginator, null, 'Plans priced');
     }
 
-    /** GET /api/v1/office/subscription (الحالي) */
-    public function current(Request $r)
+    /**
+     * GET /api/v1/office/subscription
+     * إرجاع الاشتراك الحالي للمكتب
+     */
+    public function current(Request $request)
     {
-        $office = $r->user();
+        $office = $request->user();
         $sub = $this->subs->currentForOffice($office->id);
-        if (!$sub) return $this->responder->ok(null, 'No active subscription');
-        return $this->responder->ok(new OfficeSubscriptionResource($sub->load('plan')), 'Current subscription');
+
+        if (!$sub) {
+            return $this->responder->ok(null, 'No active subscription');
+        }
+
+        return $this->responder->ok(
+            new OfficeSubscriptionResource($sub->load('plan')),
+            'Current subscription'
+        );
     }
 
-    /** POST /api/v1/office/subscribe  (plan_code, coupon?) */
-    public function subscribe(Request $r)
+    /**
+     * POST /api/v1/office/subscribe
+     * body: plan_code, coupon (optional)
+     */
+    public function subscribe(Request $request)
     {
-        $office = $r->user();
-        $data = $r->validate([
+        $office = $request->user();
+
+        $data = $request->validate([
             'plan_code' => 'required|string|exists:system.plans,code',
-            'coupon' => 'nullable|string|max:64',
+            'coupon'    => 'nullable|string|max:64',
         ]);
 
-        $priced = $this->svc->priced($data['plan_code'], $data['coupon']);
-        if (!$priced) return $this->responder->fail('Plan not available', 422);
+        $priced = $this->svc->priced(
+            $data['plan_code'],
+            $data['coupon'] ?? null
+        );
 
-        // NOTE: هنا الدفع الحقيقي/التحقّق… نحن ننشئ الاشتراك مباشرةً
+        if (!$priced) {
+            return $this->responder->fail('Plan not available', 422);
+        }
+
+        // TODO: مكان تنفيذ الدفع الفعلي/التحقق
         $row = $this->subs->createForOffice(
             $office->id,
             $data['plan_code'],
             $priced['currency'],
             $priced['price'],
-            ['features'=>$priced['features'],'coupon'=>$data['coupon']]
+            [
+                'features' => $priced['features'] ?? [],
+                'coupon'   => $data['coupon'] ?? null,
+            ]
         );
 
-        return $this->responder->created(new OfficeSubscriptionResource($row->load('plan')), 'Subscribed');
+        return $this->responder->created(
+            new OfficeSubscriptionResource($row->load('plan')),
+            'Subscribed'
+        );
     }
 
-    /** POST /api/v1/office/subscription/auto-renew {auto_renew:bool} */
-    public function autoRenew(Request $r)
+    /**
+     * POST /api/v1/office/subscription/auto-renew
+     * body: { auto_renew: bool }
+     */
+    public function autoRenew(Request $request)
     {
-        $office = $r->user();
-        $r->validate(['auto_renew'=>'required|boolean']);
-        $sub = $this->subs->currentForOffice($office->id);
-        if (!$sub) return $this->responder->fail('No active subscription', 404);
+        $office = $request->user();
 
-        $updated = $this->subs->setAutoRenew($sub->id, (bool)$r->boolean('auto_renew'));
-        return $this->responder->ok(new OfficeSubscriptionResource($updated->load('plan')), 'Auto-renew updated');
+        $request->validate([
+            'auto_renew' => 'required|boolean',
+        ]);
+
+        $sub = $this->subs->currentForOffice($office->id);
+
+        if (!$sub) {
+            return $this->responder->fail('No active subscription', 404);
+        }
+
+        $updated = $this->subs->setAutoRenew(
+            $sub->id,
+            (bool) $request->boolean('auto_renew')
+        );
+
+        return $this->responder->ok(
+            new OfficeSubscriptionResource($updated->load('plan')),
+            'Auto-renew updated'
+        );
     }
 }
