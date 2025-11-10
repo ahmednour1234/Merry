@@ -14,12 +14,14 @@ class CvResource extends JsonResource
             'office_id'        => $this->office_id,
             'category_id'      => $this->category_id,
 
-            // الجنسية مع Resource منفصل
-            'nationality' => new NationalityResource($this->whenLoaded('nationality')),
+            // الجنسية (مبنية على Accept-Language + translations)
+            'nationality'      => NationalityResource::make(
+                $this->whenLoaded('nationality')
+            ),
 
             'gender'           => $this->gender,
-            'has_experience'   => (bool)$this->has_experience,
-            'is_muslim'        => (bool)$this->is_muslim,
+            'has_experience'   => (bool) $this->has_experience,
+            'is_muslim'        => (bool) $this->is_muslim,
 
             'file' => [
                 'path'      => $this->file_path,
@@ -28,7 +30,7 @@ class CvResource extends JsonResource
                 'original'  => $this->file_original_name,
                 'url'       => $this->when(
                     $this->file_path,
-                    fn() => Storage::disk('public')->url($this->file_path)
+                    fn () => Storage::disk('public')->url($this->file_path)
                 ),
             ],
 
