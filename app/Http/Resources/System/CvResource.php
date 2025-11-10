@@ -17,8 +17,7 @@ class CvResource extends JsonResource
             // عرض بيانات الدولة بدل الكود فقط
             'nationality' => [
                 'code'      => $this->nationality_code,
-                'name_en'   => $this->whenLoaded('nationality', fn() => $this->nationality->name_en ?? null),
-                'name_ar'   => $this->whenLoaded('nationality', fn() => $this->nationality->name_ar ?? null),
+                'name'   => $this->whenLoaded('nationality', fn() => $this->nationality->name ?? null),
                 'flag'      => $this->whenLoaded('nationality', fn() => $this->nationality->flag_url ?? null),
             ],
 
