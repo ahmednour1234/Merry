@@ -21,8 +21,8 @@ class StoreCvRequest extends FormRequest
                 'cvs.*.category_id'        => ['nullable', 'integer', 'exists:system.categories,id'],
                 'cvs.*.nationality_code'   => ['required', 'string', 'max:8'],
                 'cvs.*.gender'             => ['nullable', 'in:male,female'],
-                'cvs.*.has_experience'     => ['required', 'boolean'],
-                'cvs.*.is_muslim'          => ['required', 'boolean'],
+                'cvs.*.has_experience'     => ['nullable', 'boolean'],
+                'cvs.*.is_muslim'          => ['nullable', 'boolean'],
                 'cvs.*.file'               => ['required', 'file', 'mimetypes:application/pdf', 'max:10240'],
                 'cvs.*.meta'               => ['sometimes', 'array'],
             ];
