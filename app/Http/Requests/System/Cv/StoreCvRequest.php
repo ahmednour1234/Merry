@@ -13,15 +13,28 @@ class StoreCvRequest extends FormRequest
 
     public function rules(): array
     {
+        // مود Bulk: في حالة وجود "cvs"
+        if ($this->has('cvs')) {
+            return [
+                'cvs'                       => ['required', 'array', 'min:1'],
+
+                'cvs.*.category_id'        => ['nullable', 'integer', 'exists:system.categories,id'],
+                'cvs.*.nationality_code'   => ['required', 'string', 'max:8'],
+                'cvs.*.gender'             => ['nullable', 'in:male,female'],
+                'cvs.*.has_experience'     => ['required', 'boolean'],
+                'cvs.*.is_muslim'          => ['required', 'boolean'],
+                'cvs.*.file'               => ['required', 'file', 'mimetypes:application/pdf', 'max:10240'],
+                'cvs.*.meta'               => ['sometimes', 'array'],
+            ];
+        }
+
+        // مود Single: نفس القديم
         return [
             'category_id'      => ['nullable', 'integer', 'exists:system.categories,id'],
             'nationality_code' => ['required', 'string', 'max:8'],
             'gender'           => ['nullable', 'in:male,female'],
             'has_experience'   => ['required', 'boolean'],
-
-            // هل هي مسلمة ولا لا (إجباري yes/no)
             'is_muslim'        => ['required', 'boolean'],
-
             'file'             => ['required', 'file', 'mimetypes:application/pdf', 'max:10240'],
             'meta'             => ['sometimes', 'array'],
         ];
@@ -30,6 +43,7 @@ class StoreCvRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
+            // Single mode
             'category_id' => [
                 'description' => 'Optional category id',
                 'example'     => 1,
@@ -57,6 +71,31 @@ class StoreCvRequest extends FormRequest
             'meta' => [
                 'description' => 'Optional JSON metadata',
                 'example'     => ['age' => 28, 'notes' => 'live-in'],
+            ],
+
+            // Bulk mode
+            'cvs' => [
+                'description' => 'Array of CVs for bulk create. Each item uses the same fields as single mode.',
+                'example' => [
+                    [
+                        'category_id'      => 1,
+                        'nationality_code' => 'PH',
+                        'gender'           => 'female',
+                        'has_experience'   => true,
+                        'is_muslim'        => true,
+                        'file'             => '(binary)',
+                        'meta'             => ['age' => 28],
+                    ],
+                    [
+                        'category_id'      => 2,
+                        'nationality_code' => 'NP',
+                        'gender'           => 'female',
+                        'has_experience'   => false,
+                        'is_muslim'        => false,
+                        'file'             => '(binary)',
+                        'meta'             => ['age' => 25],
+                    ],
+                ],
             ],
         ];
     }

@@ -19,7 +19,7 @@ class CvController extends ApiController
         parent::__construct(app('api.responder'));
     }
 
-    /** GET /api/v1/office/cvs  - List my CVs */
+    /** GET /api/v1/office/cvs - List my CVs */
     public function index(Request $request)
     {
         $filters = $request->only([
@@ -32,49 +32,39 @@ class CvController extends ApiController
             'to',
         ]);
 
-        // المكتب الحالي
+        // المكتب الحالي من التوكن
         $filters['office_id'] = (int) $request->user()->id;
 
         $perPage   = max(1, (int) $request->integer('per_page', 15));
         $paginator = $this->repo->paginate($filters, $perPage);
 
-        return $this->responder->paginated($paginator, CvResource::class, 'My CVs');
+        return $this->responder->paginated(
+            $paginator,
+            CvResource::class,
+            'My CVs'
+        );
     }
 
     /**
      * POST /api/v1/office/cvs
      *
      * يدعم:
-     * - CV واحد: body عادي حسب StoreCvRequest
-     * - أكثر من CV: cvs[] كـ Array من العناصر، كل عنصر نفس هيكلة StoreCvRequest
+     * - Single:
+     *   fields: category_id, nationality_code, gender, has_experience, is_muslim, file, meta
      *
-     * أمثلة:
-     * 1) واحد:
-     * {
-     *   "name": "...",
-     *   "nationality_code": "...",
-     *   "cv_pdf": (file)
-     * }
-     *
-     * 2) لستة:
-     * {
-     *   "cvs": [
-     *     { "name": "...", "nationality_code": "...", "cv_pdf": (file) },
-     *     { "name": "...", "nationality_code": "...", "cv_pdf": (file) }
-     *   ]
-     * }
+     * - Bulk:
+     *   cvs[]: نفس الحقول لكل عنصر
      */
     public function store(StoreCvRequest $request)
     {
-        $officeId = (int) $request->user()->id;
+        $officeId  = (int) $request->user()->id;
         $validated = $request->validated();
 
-        // === Mode 1: Bulk (cvs: [...]) ===
+        // Bulk mode
         if (isset($validated['cvs']) && is_array($validated['cvs'])) {
             $items = [];
 
             foreach ($validated['cvs'] as $cvData) {
-                // تأمين office_id من التوكن مش من الريكوست
                 $items[] = new CvResource(
                     $this->repo->store($cvData, $officeId)
                 );
@@ -86,7 +76,7 @@ class CvController extends ApiController
             );
         }
 
-        // === Mode 2: Single CV (السلوك القديم) ===
+        // Single mode
         $cv = $this->repo->store($validated, $officeId);
 
         return $this->responder->created(
