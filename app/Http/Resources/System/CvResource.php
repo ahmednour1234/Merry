@@ -9,33 +9,17 @@ class CvResource extends JsonResource
 {
     public function toArray($request): array
     {
-        // قراءة اللغة من الهيدر
-        $lang = strtolower($request->header('Accept-Language', 'en'));
-
-        // استخراج الترجمة الصحيحة إن وُجدت
-        $nationalityName = null;
-        if ($this->relationLoaded('nationality') && $this->nationality) {
-            $translation = $this->nationality->translations
-                ->firstWhere('lang_code', $lang);
-
-            $nationalityName = $translation->name
-                ?? $this->nationality->name
-                ?? null;
-        }
-
         return [
             'id'               => $this->id,
             'office_id'        => $this->office_id,
             'category_id'      => $this->category_id,
 
-            'nationality' => [
-                'code' => $this->nationality_code,
-                'name' => $nationalityName,
-            ],
+            // الجنسية مع Resource منفصل
+            'nationality' => new NationalityResource($this->whenLoaded('nationality')),
 
             'gender'           => $this->gender,
-            'has_experience'   => (bool) $this->has_experience,
-            'is_muslim'        => (bool) $this->is_muslim,
+            'has_experience'   => (bool)$this->has_experience,
+            'is_muslim'        => (bool)$this->is_muslim,
 
             'file' => [
                 'path'      => $this->file_path,

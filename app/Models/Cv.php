@@ -32,7 +32,10 @@ class Cv extends Model
     // علاقات
     public function office()   { return $this->belongsTo(\App\Models\Office::class, 'office_id'); }
     public function category() { return $this->belongsTo(\App\Models\Category::class, 'category_id'); }
-
+    public function nationality()
+    {
+        return $this->belongsTo(\App\Models\Nationality::class, 'nationality_code', 'code');
+    }
     // Scopes للفلاتر
     public function scopeFilter($q, array $f)
     {
