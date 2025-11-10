@@ -9,14 +9,7 @@ class NationalityResource extends JsonResource
     public function toArray($request): array
     {
         // اختيار اللغة من Accept-Language أو من system_settings(app.locale) (اختياري)
-        $accept = $request->header('Accept-Language');
-        $lang = $accept ? explode(',', $accept)[0] : null;
 
-        $name = $this->name;
-        if ($lang && $this->relationLoaded('translations')) {
-            $tr = $this->translations->firstWhere('lang_code', $lang);
-            if ($tr) $name = $tr->name;
-        }
 
         return [
             'id'     => $this->id,
