@@ -35,21 +35,59 @@ class CvController extends ApiController
         // المكتب الحالي
         $filters['office_id'] = (int) $request->user()->id;
 
-        $perPage = max(1, (int) $request->integer('per_page', 15));
+        $perPage   = max(1, (int) $request->integer('per_page', 15));
         $paginator = $this->repo->paginate($filters, $perPage);
 
         return $this->responder->paginated($paginator, CvResource::class, 'My CVs');
     }
 
-    /** POST /api/v1/office/cvs  - Create CV (PDF required) */
+    /**
+     * POST /api/v1/office/cvs
+     *
+     * يدعم:
+     * - CV واحد: body عادي حسب StoreCvRequest
+     * - أكثر من CV: cvs[] كـ Array من العناصر، كل عنصر نفس هيكلة StoreCvRequest
+     *
+     * أمثلة:
+     * 1) واحد:
+     * {
+     *   "name": "...",
+     *   "nationality_code": "...",
+     *   "cv_pdf": (file)
+     * }
+     *
+     * 2) لستة:
+     * {
+     *   "cvs": [
+     *     { "name": "...", "nationality_code": "...", "cv_pdf": (file) },
+     *     { "name": "...", "nationality_code": "...", "cv_pdf": (file) }
+     *   ]
+     * }
+     */
     public function store(StoreCvRequest $request)
     {
-        $data = $request->validated();
+        $officeId = (int) $request->user()->id;
+        $validated = $request->validated();
 
-        $cv = $this->repo->store(
-            $data,
-            (int) $request->user()->id
-        );
+        // === Mode 1: Bulk (cvs: [...]) ===
+        if (isset($validated['cvs']) && is_array($validated['cvs'])) {
+            $items = [];
+
+            foreach ($validated['cvs'] as $cvData) {
+                // تأمين office_id من التوكن مش من الريكوست
+                $items[] = new CvResource(
+                    $this->repo->store($cvData, $officeId)
+                );
+            }
+
+            return $this->responder->created(
+                $items,
+                'CVs submitted (pending review)'
+            );
+        }
+
+        // === Mode 2: Single CV (السلوك القديم) ===
+        $cv = $this->repo->store($validated, $officeId);
 
         return $this->responder->created(
             new CvResource($cv),
@@ -62,7 +100,7 @@ class CvController extends ApiController
     {
         $cv = $this->repo->find($id);
 
-        if (!$cv || (int)$cv->office_id !== (int)$request->user()->id) {
+        if (!$cv || (int) $cv->office_id !== (int) $request->user()->id) {
             return $this->responder->fail('Not found', 404);
         }
 
@@ -87,8 +125,8 @@ class CvController extends ApiController
 
         $row = $this->repo->officeToggleActive(
             $id,
-            (int)$request->user()->id,
-            (bool)$data['active']
+            (int) $request->user()->id,
+            (bool) $data['active']
         );
 
         if (!$row) {
@@ -106,7 +144,7 @@ class CvController extends ApiController
     {
         $cv = $this->repo->find($id);
 
-        if (!$cv || (int)$cv->office_id !== (int)$request->user()->id) {
+        if (!$cv || (int) $cv->office_id !== (int) $request->user()->id) {
             return $this->responder->fail('Not found', 404);
         }
 
@@ -122,7 +160,7 @@ class CvController extends ApiController
     {
         $cv = $this->repo->find($id);
 
-        if (!$cv || (int)$cv->office_id !== (int)$request->user()->id) {
+        if (!$cv || (int) $cv->office_id !== (int) $request->user()->id) {
             return $this->responder->fail('Not found', 404);
         }
 
@@ -130,9 +168,9 @@ class CvController extends ApiController
             return $this->responder->fail('Only rejected CVs can be resubmitted', 422);
         }
 
-        $cv->status = 'pending';
-        $cv->rejected_by = null;
-        $cv->rejected_at = null;
+        $cv->status          = 'pending';
+        $cv->rejected_by     = null;
+        $cv->rejected_at     = null;
         $cv->rejected_reason = null;
         $cv->save();
 
