@@ -17,6 +17,7 @@ class Nationality extends Model
 
     public function translations()
     {
-        return $this->hasMany(NationalityTranslation::class, 'nationality_id');
+        return $this->hasMany(\App\Models\NationalityTranslation::class, 'nationality_id');
     }
+
 }

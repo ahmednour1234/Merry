@@ -18,4 +18,5 @@ class NationalityTranslation extends Model
     {
         return $this->belongsTo(Nationality::class, 'nationality_id');
     }
+
 }
