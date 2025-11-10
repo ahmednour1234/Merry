@@ -12,13 +12,18 @@ class CvRepository implements CvRepositoryInterface
 {
     public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator
     {
-        $q = Cv::on('system')->with(['office','category'])->orderByDesc('created_at')->filter($filters);
+        $q = Cv::on('system')
+            ->with(['office','category','nationality.translations'])
+            ->orderByDesc('created_at')
+            ->filter($filters);
         return $q->paginate($perPage)->appends(request()->query());
     }
 
     public function find(int $id): ?Cv
     {
-        return Cv::on('system')->find($id);
+        return Cv::on('system')
+            ->with(['office','category','nationality.translations'])
+            ->find($id);
     }
 
     public function store(array $data, ?int $officeId = null): Cv
@@ -36,7 +41,8 @@ class CvRepository implements CvRepositoryInterface
             }
             $data['office_id'] = $officeId ?? ($data['office_id'] ?? null);
             $data['status'] = $data['status'] ?? 'pending';
-            return Cv::on('system')->create($data);
+            $cv = Cv::on('system')->create($data);
+            return $cv->load(['office','category','nationality.translations']);
         });
     }
 
@@ -58,7 +64,7 @@ class CvRepository implements CvRepositoryInterface
             }
 
             $cv->fill($data)->save();
-            return $cv;
+            return $cv->load(['office','category','nationality.translations']);
         });
     }
 
@@ -78,7 +84,7 @@ class CvRepository implements CvRepositoryInterface
         $cv->rejected_by = null; $cv->rejected_at = null; $cv->rejected_reason = null;
         $cv->frozen_by = null; $cv->frozen_at = null;
         $cv->save();
-        return $cv;
+        return $cv->load(['office','category','nationality.translations']);
     }
 
     public function reject(int $id, int $adminId, string $reason): ?Cv
@@ -91,7 +97,7 @@ class CvRepository implements CvRepositoryInterface
         $cv->rejected_reason = $reason;
         $cv->approved_by = null; $cv->approved_at = null;
         $cv->save();
-        return $cv;
+        return $cv->load(['office','category','nationality.translations']);
     }
 
     public function freeze(int $id, int $adminId): ?Cv
@@ -102,7 +108,7 @@ class CvRepository implements CvRepositoryInterface
         $cv->frozen_by = $adminId;
         $cv->frozen_at = now();
         $cv->save();
-        return $cv;
+        return $cv->load(['office','category','nationality.translations']);
     }
 
     public function unfreeze(int $id, int $adminId): ?Cv
@@ -114,7 +120,7 @@ class CvRepository implements CvRepositoryInterface
         $cv->frozen_by = null;
         $cv->frozen_at = null;
         $cv->save();
-        return $cv;
+        return $cv->load(['office','category','nationality.translations']);
     }
 
     public function officeToggleActive(int $id, int $officeId, bool $active): ?Cv
@@ -131,7 +137,7 @@ class CvRepository implements CvRepositoryInterface
             $cv->deactivated_by_office_at = now();
         }
         $cv->save();
-        return $cv;
+        return $cv->load(['office','category','nationality.translations']);
     }
 
     public function stats(array $filters = []): array
