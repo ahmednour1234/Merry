@@ -23,7 +23,7 @@ class StoreCvRequest extends FormRequest
                 'cvs.*.gender'             => ['nullable', 'in:male,female'],
                 'cvs.*.has_experience'     => ['nullable', 'boolean'],
                 'cvs.*.is_muslim'          => ['nullable', 'boolean'],
-                'cvs.*.file'               => ['required', 'file', 'mimetypes:application/pdf', 'max:10240'],
+                'cvs.*.file'               => ['nullable', 'file', 'mimetypes:application/pdf', 'max:10240'],
                 'cvs.*.meta'               => ['sometimes', 'array'],
             ];
         }
