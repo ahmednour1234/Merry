@@ -18,7 +18,6 @@ class CvResource extends JsonResource
             'nationality' => [
                 'code'      => $this->nationality_code,
                 'name'   => $this->whenLoaded('nationality', fn() => $this->nationality->name ?? null),
-                'flag'      => $this->whenLoaded('nationality', fn() => $this->nationality->flag_url ?? null),
             ],
 
             'gender'           => $this->gender,
