@@ -3,6 +3,7 @@
 namespace App\Http\Resources\System;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class CvResource extends JsonResource
 {
@@ -12,16 +13,28 @@ class CvResource extends JsonResource
             'id'               => $this->id,
             'office_id'        => $this->office_id,
             'category_id'      => $this->category_id,
-            'nationality_code' => $this->nationality_code,
+
+            // عرض بيانات الدولة بدل الكود فقط
+            'nationality' => [
+                'code'      => $this->nationality_code,
+                'name_en'   => $this->whenLoaded('nationality', fn() => $this->nationality->name_en ?? null),
+                'name_ar'   => $this->whenLoaded('nationality', fn() => $this->nationality->name_ar ?? null),
+                'flag'      => $this->whenLoaded('nationality', fn() => $this->nationality->flag_url ?? null),
+            ],
+
             'gender'           => $this->gender,
             'has_experience'   => (bool)$this->has_experience,
+            'is_muslim'        => (bool)$this->is_muslim,
 
             'file' => [
                 'path'      => $this->file_path,
                 'mime'      => $this->file_mime,
                 'size'      => $this->file_size,
                 'original'  => $this->file_original_name,
-                'url'       => $this->when($this->file_path, fn() => \Illuminate\Support\Facades\Storage::disk('public')->url($this->file_path)),
+                'url'       => $this->when(
+                    $this->file_path,
+                    fn() => Storage::disk('public')->url($this->file_path)
+                ),
             ],
 
             'status'           => $this->status,
