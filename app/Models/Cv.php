@@ -28,6 +28,10 @@ class Cv extends Model
         'deactivated_by_office_at' => 'datetime',
         'meta' => 'array',
     ];
+    public function nationality()
+    {
+        return $this->belongsTo(\App\Models\Nationality::class, 'nationality_code', 'code');
+    }
 
     // علاقات
     public function office()   { return $this->belongsTo(\App\Models\Office::class, 'office_id'); }
