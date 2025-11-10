@@ -21,7 +21,6 @@ class NationalityResource extends JsonResource
         return [
             'id'     => $this->id,
             'code'   => $this->code,
-            'name'   => $name,
             'active' => (bool)$this->active,
             'translations' => $this->whenLoaded('translations', function () {
                 return $this->translations->mapWithKeys(fn($t) => [$t->lang_code => $t->name]);
