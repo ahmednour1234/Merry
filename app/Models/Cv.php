@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Cv extends Model
 {
@@ -40,15 +41,91 @@ class Cv extends Model
     // Scopes للفلاتر
     public function scopeFilter($q, array $f)
     {
-        if (!empty($f['office_id']))       $q->where('office_id', $f['office_id']);
-        if (!empty($f['category_id']))     $q->where('category_id', $f['category_id']);
-        if (!empty($f['nationality']))     $q->where('nationality_code', $f['nationality']);
-        if (!empty($f['gender']))          $q->where('gender', $f['gender']);
-        if (isset($f['has_experience']))   $q->where('has_experience', (bool)$f['has_experience']);
-        if (!empty($f['status']))          $q->where('status', $f['status']);
-        if (!empty($f['from']))            $q->where('created_at','>=',$f['from']);
-        if (!empty($f['to']))              $q->where('created_at','<=',$f['to']);
-        if (isset($f['is_muslim']))        $q->where('is_muslim', (bool)$f['is_muslim']);
+        if (filled($f['office_id'] ?? null)) {
+            $q->where('office_id', $f['office_id']);
+        }
+
+        if (filled($f['category_id'] ?? null)) {
+            $q->where('category_id', $f['category_id']);
+        }
+
+        $nationality = $f['nationality_code'] ?? $f['nationality'] ?? null;
+        if (filled($nationality)) {
+            $q->where('nationality_code', $nationality);
+        }
+
+        if (filled($f['gender'] ?? null)) {
+            $q->where('gender', $f['gender']);
+        }
+
+        if (array_key_exists('has_experience', $f)) {
+            $bool = self::normalizeBoolean($f['has_experience']);
+            if (!is_null($bool)) {
+                $q->where('has_experience', $bool);
+            }
+        }
+
+        if (filled($f['status'] ?? null)) {
+            $q->where('status', $f['status']);
+        }
+
+        if ($from = self::normalizeDate($f['from'] ?? null, true)) {
+            $q->where('created_at', '>=', $from);
+        }
+
+        if ($to = self::normalizeDate($f['to'] ?? null, false)) {
+            $q->where('created_at', '<=', $to);
+        }
+
+        if (array_key_exists('is_muslim', $f)) {
+            $bool = self::normalizeBoolean($f['is_muslim']);
+            if (!is_null($bool)) {
+                $q->where('is_muslim', $bool);
+            }
+        }
+
         return $q;
+    }
+
+    protected static function normalizeBoolean(mixed $value): ?bool
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_numeric($value)) {
+            return (bool) $value;
+        }
+
+        if (is_string($value)) {
+            $value = strtolower(trim($value));
+
+            if (in_array($value, ['1', 'true', 'yes', 'on'], true)) {
+                return true;
+            }
+
+            if (in_array($value, ['0', 'false', 'no', 'off'], true)) {
+                return false;
+            }
+        }
+
+        return null;
+    }
+
+    protected static function normalizeDate(mixed $value, bool $isStart): ?string
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        try {
+            $date = Carbon::parse($value);
+        } catch (\Throwable) {
+            return null;
+        }
+
+        return $isStart
+            ? $date->startOfDay()->toDateTimeString()
+            : $date->endOfDay()->toDateTimeString();
     }
 }
