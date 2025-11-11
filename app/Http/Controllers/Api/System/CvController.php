@@ -26,6 +26,7 @@ class CvController extends ApiController
      * @queryParam nationality string
      * @queryParam gender string male|female
      * @queryParam has_experience boolean
+     * @queryParam is_muslim boolean
      * @queryParam status string pending|approved|rejected|frozen|deactivated_by_office
      * @queryParam from date
      * @queryParam to date
@@ -33,7 +34,7 @@ class CvController extends ApiController
      */
     public function index(Request $r)
     {
-        $filters = $r->only(['id','name','office_id','category_id','nationality','gender','has_experience','status','from','to']);
+        $filters = $r->only(['id','name','office_id','category_id','nationality','gender','has_experience','is_muslim','status','from','to']);
         $per = max(1, (int)$r->integer('per_page', 15));
         $p = $this->repo->paginate($filters, $per);
         return $this->responder->paginated($p, CvResource::class, 'CVs');
@@ -86,7 +87,7 @@ class CvController extends ApiController
     /** Stats */
     public function stats(Request $r)
     {
-        $filters = $r->only(['id','name','office_id','category_id','nationality','gender','has_experience','status','from','to']);
+        $filters = $r->only(['id','name','office_id','category_id','nationality','gender','has_experience','is_muslim','status','from','to']);
         $data = $this->repo->stats($filters);
         return $this->responder->ok($data, 'CVs stats');
     }

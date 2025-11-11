@@ -29,6 +29,7 @@ class CvController extends ApiController
             'nationality_code',
             'gender',
             'has_experience',
+            'is_muslim',
             'status',
             'from',
             'to',
