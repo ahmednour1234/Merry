@@ -23,6 +23,8 @@ class CvController extends ApiController
     public function index(Request $request)
     {
         $filters = $request->only([
+            'id',
+            'name',
             'category_id',
             'nationality_code',
             'gender',

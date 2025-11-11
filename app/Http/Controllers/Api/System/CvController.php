@@ -19,6 +19,8 @@ class CvController extends ApiController
 
     /**
      * List CVs (filters supported)
+     * @queryParam id int
+     * @queryParam name string
      * @queryParam office_id int
      * @queryParam category_id int
      * @queryParam nationality string
@@ -31,7 +33,7 @@ class CvController extends ApiController
      */
     public function index(Request $r)
     {
-        $filters = $r->only(['office_id','category_id','nationality','gender','has_experience','status','from','to']);
+        $filters = $r->only(['id','name','office_id','category_id','nationality','gender','has_experience','status','from','to']);
         $per = max(1, (int)$r->integer('per_page', 15));
         $p = $this->repo->paginate($filters, $per);
         return $this->responder->paginated($p, CvResource::class, 'CVs');
@@ -84,7 +86,7 @@ class CvController extends ApiController
     /** Stats */
     public function stats(Request $r)
     {
-        $filters = $r->only(['office_id','category_id','nationality','gender','has_experience','status','from','to']);
+        $filters = $r->only(['id','name','office_id','category_id','nationality','gender','has_experience','status','from','to']);
         $data = $this->repo->stats($filters);
         return $this->responder->ok($data, 'CVs stats');
     }

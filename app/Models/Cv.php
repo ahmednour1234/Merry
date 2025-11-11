@@ -41,12 +41,39 @@ class Cv extends Model
     // Scopes للفلاتر
     public function scopeFilter($q, array $f)
     {
+        if (filled($f['id'] ?? null)) {
+            $ids = $f['id'];
+
+            if (!is_array($ids)) {
+                $ids = preg_split('/[,\s]+/', (string) $ids, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+            }
+
+            $ids = array_values(array_filter(array_map(fn ($id) => (int) $id, $ids)));
+
+            if (!empty($ids)) {
+                count($ids) === 1
+                    ? $q->whereKey(reset($ids))
+                    : $q->whereIn('id', $ids);
+            }
+        }
+
         if (filled($f['office_id'] ?? null)) {
             $q->where('office_id', $f['office_id']);
         }
 
         if (filled($f['category_id'] ?? null)) {
             $q->where('category_id', $f['category_id']);
+        }
+
+        if (filled($f['name'] ?? null)) {
+            $name = trim((string) $f['name']);
+
+            $q->where(function ($query) use ($name) {
+                $like = '%' . $name . '%';
+
+                $query->where('meta->name', 'like', $like)
+                    ->orWhere('meta->full_name', 'like', $like);
+            });
         }
 
         $nationality = $f['nationality_code'] ?? $f['nationality'] ?? null;
