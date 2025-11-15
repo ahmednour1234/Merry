@@ -21,8 +21,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
@@ -41,16 +39,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth:
       - headers
@@ -78,8 +67,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters:
       id:
         name: id
@@ -126,8 +113,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -164,7 +149,6 @@ endpoints:
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -265,8 +249,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
@@ -285,16 +267,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth:
       - headers
@@ -322,8 +295,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters:
       id:
         name: id
@@ -370,8 +341,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []

@@ -1,250 +1,50 @@
-name: 'System / Currencies'
+name: 'System / Languages'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/currencies
+    uri: api/v1/admin/system/languages
     metadata:
-      groupName: 'System / Currencies'
+      groupName: 'System / Languages'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List currencies (paginated). Use ?all=1 to return all.'
+      title: |-
+        List system languages
+
+        Paginated list. Use ?per_page=0 or ?all=1 to fetch all.
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/system/currencies
-    metadata:
-      groupName: 'System / Currencies'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Upsert a currency.'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      code:
-        name: code
-        description: 'ISO code. Must not be greater than 8 characters.'
-        required: true
-        example: SAR
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      name:
-        name: name
-        description: 'Display name. Must not be greater than 64 characters.'
-        required: true
-        example: 'Saudi Riyal'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      symbol:
-        name: symbol
-        description: 'Symbol. Must not be greater than 16 characters.'
+    queryParameters:
+      per_page:
+        name: per_page
+        description: 'Number per page.'
         required: false
-        example: ﷼
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      decimal:
-        name: decimal
-        description: 'Fraction digits. Must be at least 0. Must not be greater than 6.'
-        required: false
-        example: 2
+        example: 15
         type: integer
         enumValues: []
-        exampleWasSpecified: false
-        nullable: true
+        exampleWasSpecified: true
+        nullable: false
         custom: []
-      active:
-        name: active
-        description: Enabled.
+      all:
+        name: all
+        description: 'Return all records (no pagination).'
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-    cleanBodyParameters:
-      code: SAR
-      name: 'Saudi Riyal'
-      symbol: ﷼
-      decimal: 2
-      active: false
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/admin/system/currencies/{code}'
-    metadata:
-      groupName: 'System / Currencies'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update a currency.'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      code:
-        name: code
-        description: ''
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
-    cleanUrlParameters:
-      code: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Display name. Must not be greater than 64 characters.'
-        required: false
-        example: 'Saudi Riyal'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      symbol:
-        name: symbol
-        description: 'Symbol. Must not be greater than 16 characters.'
-        required: false
-        example: ﷼
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      decimal:
-        name: decimal
-        description: 'Fraction digits. Must be at least 0. Must not be greater than 6.'
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      active:
-        name: active
-        description: Enabled.
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Saudi Riyal'
-      symbol: ﷼
-      decimal: 2
-      active: false
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/admin/system/currencies/{code}'
-    metadata:
-      groupName: 'System / Currencies'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Soft-delete a currency.'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      code:
-        name: code
-        description: ''
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      code: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
+    cleanQueryParameters:
+      per_page: 15
+      all: true
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -258,37 +58,90 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/v1/admin/system/currencies/{code}/toggle'
+    uri: api/v1/admin/system/languages
     metadata:
-      groupName: 'System / Currencies'
+      groupName: 'System / Languages'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Toggle active flag.'
+      title: 'Store or update a system language'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      code:
-        name: code
-        description: ''
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      code: consequatur
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      code:
+        name: code
+        description: 'Two-letter (or en-US).'
+        required: true
+        example: ar
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      name:
+        name: name
+        description: 'Localized name.'
+        required: true
+        example: Arabic
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      native_name:
+        name: native_name
+        description: 'Native name.'
+        required: false
+        example: العربية
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      rtl:
+        name: rtl
+        description: 'RTL language.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      status:
+        name: status
+        description: active|inactive.
+        required: false
+        example: active
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      meta:
+        name: meta
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      code: ar
+      name: Arabic
+      native_name: العربية
+      rtl: true
+      status: active
     fileParameters: []
     responses: []
     responseFields: []

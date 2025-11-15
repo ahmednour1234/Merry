@@ -33,7 +33,7 @@ class OfficeRegisterRequest extends FormRequest
             'email' => ['description' => 'البريد الإلكتروني.', 'example' => 'office@example.com'],
             'password' => ['description' => 'كلمة المرور.', 'example' => 'secret123'],
             'password_confirmation' => ['description' => 'تأكيد كلمة المرور.', 'example' => 'secret123'],
-            'image' => ['description' => 'صورة المكتب (اختيارية).', 'example' => 'office.jpg'],
+            'image' => ['description' => 'صورة المكتب (اختيارية).', 'example' => 'resources/scribe/examples/office.jpg'],
         ];
     }
 }

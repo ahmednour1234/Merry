@@ -36,7 +36,7 @@ class StoreOfficeRequest extends FormRequest
             'password'=>['description'=>'كلمة المرور','example'=>'secret123'],
             'active'=>['description'=>'نشط','example'=>true],
             'blocked'=>['description'=>'محظور','example'=>false],
-            'image'=>['description'=>'صورة المكتب (اختيارية)','example'=>'office.jpg'],
+            'image'=>['description'=>'صورة المكتب (اختيارية)','example'=>'resources/scribe/examples/office.jpg'],
         ];
     }
 }

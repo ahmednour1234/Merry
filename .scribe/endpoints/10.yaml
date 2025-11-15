@@ -17,8 +17,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
@@ -103,7 +101,6 @@ endpoints:
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -287,7 +284,6 @@ endpoints:
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
-      Accept: application/json
     urlParameters:
       code:
         name: code
@@ -476,8 +472,6 @@ endpoints:
       custom: []
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-      Accept: application/json
     urlParameters:
       code:
         name: code
@@ -535,7 +529,6 @@ endpoints:
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
-      Accept: application/json
     urlParameters:
       code:
         name: code
@@ -604,7 +597,6 @@ endpoints:
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
-      Accept: application/json
     urlParameters:
       code:
         name: code
@@ -695,7 +687,6 @@ endpoints:
     headers:
       Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
       Content-Type: application/json
-      Accept: application/json
     urlParameters:
       code:
         name: code

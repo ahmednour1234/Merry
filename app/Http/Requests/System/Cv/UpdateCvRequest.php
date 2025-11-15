@@ -49,7 +49,7 @@ class UpdateCvRequest extends FormRequest
             ],
             'file' => [
                 'description' => 'PDF CV file (replace existing)',
-                'example'     => '(binary)',
+                'example'     => 'resources/scribe/examples/cv-sample.pdf',
             ],
             'meta' => [
                 'description' => 'Optional JSON metadata',

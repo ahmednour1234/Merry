@@ -15,9 +15,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -25,16 +23,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 200
-        content: '{"ok":true,"ts":"2025-11-05T11:39:21+00:00"}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -55,9 +44,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -86,9 +73,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -117,9 +102,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -127,16 +110,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -159,7 +133,6 @@ endpoints:
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -234,7 +207,6 @@ endpoints:
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
     urlParameters:
       id:
         name: id
@@ -318,9 +290,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters:
       id:
         name: id
@@ -360,9 +330,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters:
       id:
         name: id
@@ -391,6 +359,64 @@ endpoints:
   -
     httpMethods:
       - GET
+    uri: api/v1/admin/system/offices
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'عرض قائمة المكاتب مع الفلاتر'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/system/offices-stats
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'إحصائيات سريعة للمكاتب وملفات السير الذاتية'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
     uri: 'api/v1/admin/system/offices/{id}'
     metadata:
       groupName: Endpoints
@@ -402,37 +428,26 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters:
       id:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -448,14 +463,13 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'إنشاء مكتب جديد'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
     headers:
-      Content-Type: application/json
-      Accept: application/json
+      Content-Type: multipart/form-data
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -495,7 +509,7 @@ endpoints:
         name: address
         description: 'العنوان التفصيلي. Must not be greater than 255 characters.'
         required: false
-        example: 'الرياض - حي ...'
+        example: 'الرياض - حي العليا'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -551,17 +565,28 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         custom: []
+      image:
+        name: image
+        description: 'صورة المكتب (اختيارية). Must be an image. Must not be greater than 2048 kilobytes.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
     cleanBodyParameters:
       name: 'مكتب التميّز'
       commercial_reg_no: '1010123456'
       city_id: 1
-      address: 'الرياض - حي ...'
+      address: 'الرياض - حي العليا'
       phone: '+966500000000'
       email: office@example.com
       password: secret123
       active: false
       blocked: false
-    fileParameters: []
+    fileParameters:
+      image: null
     responses: []
     responseFields: []
     auth: []
@@ -578,27 +603,26 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'تحديث بيانات المكتب'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
     headers:
-      Content-Type: application/json
-      Accept: application/json
+      Content-Type: multipart/form-data
     urlParameters:
       id:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -676,7 +700,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -686,11 +710,21 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: false
+        custom: []
+      image:
+        name: image
+        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
         custom: []
     cleanBodyParameters:
       name: vmqeopfuudtdsufvyvddq
@@ -700,9 +734,10 @@ endpoints:
       phone: mniihfqcoynlazghdtqtq
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
-      active: false
-      blocked: false
-    fileParameters: []
+      active: true
+      blocked: true
+    fileParameters:
+      image: null
     responses: []
     responseFields: []
     auth: []
@@ -719,27 +754,25 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'حظر/إلغاء حظر'
+      title: 'حظر / إلغاء حظر'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters:
       id:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -761,27 +794,25 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: تفعيل/تعطيل
+      title: 'تفعيل / تعطيل'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters:
       id:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -803,32 +834,151 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'حذف مكتب'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters:
       id:
         name: id
         description: 'The ID of the office.'
         required: true
-        example: 1
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/office/auth/register
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        POST /api/v1/office/auth/register
+        يقبل اختيارياً: fcm_token, device, platform
+        لا يصدر توكن عند التسجيل — الحساب يبقى قيد المراجعة.
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'اسم المكتب. Must not be greater than 191 characters.'
+        required: true
+        example: 'مكتب التميز للاستقدام'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      commercial_reg_no:
+        name: commercial_reg_no
+        description: 'رقم السجل التجاري (فريد). Must not be greater than 191 characters.'
+        required: true
+        example: '1010123456'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      city_id:
+        name: city_id
+        description: 'معرّف المدينة.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      address:
+        name: address
+        description: 'العنوان. Must not be greater than 255 characters.'
+        required: false
+        example: 'الرياض - حي العليا'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      phone:
+        name: phone
+        description: 'رقم الجوال. Must not be greater than 32 characters.'
+        required: false
+        example: '+966500000000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      email:
+        name: email
+        description: 'البريد الإلكتروني. Must be a valid email address. Must not be greater than 191 characters.'
+        required: true
+        example: office@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'كلمة المرور. Must be at least 6 characters.'
+        required: true
+        example: secret123
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      image:
+        name: image
+        description: 'صورة المكتب (اختيارية). Must be an image. Must not be greater than 2048 kilobytes.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: 'مكتب التميز للاستقدام'
+      commercial_reg_no: '1010123456'
+      city_id: 1
+      address: 'الرياض - حي العليا'
+      phone: '+966500000000'
+      email: office@example.com
+      password: secret123
+    fileParameters:
+      image: null
     responses: []
     responseFields: []
     auth: []
@@ -852,7 +1002,6 @@ endpoints:
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -907,7 +1056,6 @@ endpoints:
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -951,7 +1099,6 @@ endpoints:
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1013,9 +1160,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1023,16 +1168,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -1055,9 +1191,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1088,7 +1222,6 @@ endpoints:
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1150,9 +1283,7 @@ endpoints:
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1176,14 +1307,14 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/office/plans  (قائمة خطط + سعر نهائي بالعملة الهيدر)'
+      title: |-
+        GET /api/v1/office/plans
+        إرجاع قائمة الخطط مع سعر نهائي حسب العملة القادمة من الهيدر
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1191,16 +1322,7 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -1216,54 +1338,14 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/office/subscription (الحالي)'
+      title: |-
+        GET /api/v1/office/subscription
+        إرجاع الاشتراك الحالي للمكتب
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 500
-        content: '{"status":"error","message":"Server Error","errors":{},"meta":{}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/office/subscribe
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'POST /api/v1/office/subscribe  (plan_code, coupon?)'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
@@ -1281,20 +1363,672 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/office/subscription/auto-renew
+    uri: api/v1/office/subscribe
     metadata:
       groupName: Endpoints
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'POST /api/v1/office/subscription/auto-renew {auto_renew:bool}'
+      title: |-
+        POST /api/v1/office/subscribe
+        body: plan_code, coupon (optional)
       description: ''
       authenticated: false
       deprecated: false
       custom: []
     headers:
       Content-Type: application/json
-      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      plan_code:
+        name: plan_code
+        description: 'The <code>code</code> of an existing record in the system.plans table.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      coupon:
+        name: coupon
+        description: 'Must not be greater than 64 characters.'
+        required: false
+        example: mqeopfuudtdsufvyvddqa
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      plan_code: consequatur
+      coupon: mqeopfuudtdsufvyvddqa
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/office/subscription/auto-renew
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        POST /api/v1/office/subscription/auto-renew
+        body: { auto_renew: bool }
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      auto_renew:
+        name: auto_renew
+        description: ''
+        required: true
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      auto_renew: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/auth/register
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST /api/v1/enduser/auth/register'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Full name of the end user. Must not be greater than 191 characters.'
+        required: true
+        example: 'John Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Unique email address. Must be a valid email address. Must not be greater than 191 characters.'
+        required: true
+        example: john@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'Phone number (optional). Must not be greater than 32 characters.'
+        required: false
+        example: '+966500000000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      password:
+        name: password
+        description: 'Account password (min 6 characters). Must be at least 6 characters.'
+        required: true
+        example: secret123
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      country_id:
+        name: country_id
+        description: 'Related nationality identifier from the system database. The <code>id</code> of an existing record in the system.nationalities table.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      city_id:
+        name: city_id
+        description: 'Related city identifier from the system database. The <code>id</code> of an existing record in the system.cities table.'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      bio:
+        name: bio
+        description: 'Short bio or about text.'
+        required: false
+        example: 'Travel enthusiast and blogger.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      avatar:
+        name: avatar
+        description: 'Profile photo file (JPEG/PNG/WEBP). Must be an image. Must not be greater than 2048 kilobytes.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: 'John Doe'
+      email: john@example.com
+      phone: '+966500000000'
+      password: secret123
+      country_id: 1
+      city_id: 5
+      bio: 'Travel enthusiast and blogger.'
+    fileParameters:
+      avatar: null
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/auth/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST /api/v1/enduser/auth/login'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Registered email address. Must be a valid email address.'
+        required: true
+        example: john@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'Account password.'
+        required: true
+        example: secret123
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: john@example.com
+      password: secret123
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/auth/forgot-password
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        POST /api/v1/enduser/auth/forgot-password
+        Sends a 6-digit code to the provided email if it exists.
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Email address associated with the account. Must be a valid email address.'
+        required: true
+        example: john@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: john@example.com
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/auth/reset-password
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST /api/v1/enduser/auth/reset-password'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Email address used during registration. Must be a valid email address.'
+        required: true
+        example: john@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      code:
+        name: code
+        description: 'Six-digit verification code sent to the email. Must be 6 digits.'
+        required: true
+        example: '123456'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'New password. Must be at least 6 characters.'
+        required: true
+        example: newsecret123
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: john@example.com
+      code: '123456'
+      password: newsecret123
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/cities
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/currencies
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/categories
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/offices
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/cvs
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/me
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'GET /api/v1/enduser/me'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: api/v1/enduser/profile
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'PUT /api/v1/enduser/profile'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Updated full name. Must not be greater than 191 characters.'
+        required: true
+        example: 'Johnathan Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Updated email address. Must be a valid email address. Must not be greater than 191 characters.'
+        required: true
+        example: johnathan@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'Updated phone number. Must not be greater than 32 characters.'
+        required: false
+        example: '+966511111111'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      country_id:
+        name: country_id
+        description: 'Updated nationality identifier. The <code>id</code> of an existing record in the system.nationalities table.'
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      city_id:
+        name: city_id
+        description: 'Updated city identifier. The <code>id</code> of an existing record in the system.cities table.'
+        required: false
+        example: 8
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      bio:
+        name: bio
+        description: 'Updated bio text.'
+        required: false
+        example: 'Photographer and traveler.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      avatar:
+        name: avatar
+        description: 'New profile photo. Must be an image. Must not be greater than 2048 kilobytes.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: 'Johnathan Doe'
+      email: johnathan@example.com
+      phone: '+966511111111'
+      country_id: 2
+      city_id: 8
+      bio: 'Photographer and traveler.'
+    fileParameters:
+      avatar: null
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/auth/logout
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST /api/v1/enduser/auth/logout'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []

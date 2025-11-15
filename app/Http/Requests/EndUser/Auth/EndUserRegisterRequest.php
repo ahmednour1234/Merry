@@ -62,7 +62,7 @@ class EndUserRegisterRequest extends FormRequest
             ],
             'avatar' => [
                 'description' => 'Profile photo file (JPEG/PNG/WEBP).',
-                'example' => 'avatar.jpg',
+                'example' => 'resources/scribe/examples/avatar.png',
             ],
         ];
     }

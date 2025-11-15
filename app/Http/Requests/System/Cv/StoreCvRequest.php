@@ -66,7 +66,7 @@ class StoreCvRequest extends FormRequest
             ],
             'file' => [
                 'description' => 'Required PDF CV file',
-                'example'     => '(binary)',
+                'example'     => 'resources/scribe/examples/cv-sample.pdf',
             ],
             'meta' => [
                 'description' => 'Optional JSON metadata',
@@ -83,7 +83,7 @@ class StoreCvRequest extends FormRequest
                         'gender'           => 'female',
                         'has_experience'   => true,
                         'is_muslim'        => true,
-                        'file'             => '(binary)',
+                        'file'             => 'resources/scribe/examples/cv-sample.pdf',
                         'meta'             => ['age' => 28],
                     ],
                     [
@@ -92,7 +92,7 @@ class StoreCvRequest extends FormRequest
                         'gender'           => 'female',
                         'has_experience'   => false,
                         'is_muslim'        => false,
-                        'file'             => '(binary)',
+                        'file'             => 'resources/scribe/examples/cv-sample.pdf',
                         'meta'             => ['age' => 25],
                     ],
                 ],

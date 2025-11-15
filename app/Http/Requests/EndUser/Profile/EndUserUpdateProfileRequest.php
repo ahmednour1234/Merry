@@ -68,7 +68,7 @@ class EndUserUpdateProfileRequest extends FormRequest
             ],
             'avatar' => [
                 'description' => 'New profile photo.',
-                'example' => 'new-avatar.png',
+                'example' => 'resources/scribe/examples/avatar.png',
             ],
         ];
     }
