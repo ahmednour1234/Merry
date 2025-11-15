@@ -31,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
      */
      public function boot(): void
     {
+        $this->loadMigrationsFrom([
+            database_path('migrations/system'),
+            database_path('migrations/identity'),
+        ]);
+
         Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
         Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
         Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
