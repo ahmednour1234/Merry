@@ -17,7 +17,7 @@ class EndUserRegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:191'],
             'email' => ['required', 'email', 'max:191', 'unique:identity.end_users,email'],
             'phone' => ['nullable', 'string', 'max:32', 'unique:identity.end_users,phone'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['required', 'string', 'min:6'],
             'country_id' => ['nullable', 'integer', 'exists:system.nationalities,id'],
             'city_id' => ['nullable', 'integer', 'exists:system.cities,id'],
             'bio' => ['nullable', 'string'],
