@@ -27,6 +27,8 @@ use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
 use App\Http\Controllers\Api\Office\SubscriptionController;
 use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
+use App\Http\Controllers\Api\EndUser\AuthEndUserController;
+use App\Http\Controllers\Api\EndUser\CatalogController;
 
 Route::get('/health', fn() => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
@@ -210,5 +212,28 @@ Route::prefix('v1/office')->group(function () {
         Route::get('notifications',       [SystemNotificationController::class, 'index']);
         Route::post('notifications/{id}/read', [SystemNotificationController::class, 'markRead']);
         Route::post('notifications/read-all', [SystemNotificationController::class, 'markAllRead']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| End User Auth
+|--------------------------------------------------------------------------
+*/
+Route::prefix('v1/enduser')->group(function () {
+    Route::post('auth/register',        [AuthEndUserController::class, 'register']);
+    Route::post('auth/login',           [AuthEndUserController::class, 'login']);
+    Route::post('auth/forgot-password', [AuthEndUserController::class, 'forgot']);
+    Route::post('auth/reset-password',  [AuthEndUserController::class, 'reset']);
+    Route::get('cities',                [CatalogController::class, 'cities']);
+    Route::get('currencies',            [CatalogController::class, 'currencies']);
+    Route::get('categories',            [CatalogController::class, 'categories']);
+    Route::get('offices',               [CatalogController::class, 'offices']);
+    Route::get('cvs',                   [CatalogController::class, 'cvs']);
+
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('me',            [AuthEndUserController::class, 'me']);
+        Route::put('profile',       [AuthEndUserController::class, 'updateProfile']);
+        Route::post('auth/logout',  [AuthEndUserController::class, 'logout']);
     });
 });

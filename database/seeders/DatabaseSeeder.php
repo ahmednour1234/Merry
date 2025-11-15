@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-    $this->call(\Database\Seeders\System\SystemDatabaseSeeder::class);
+        $this->call([
+            \Database\Seeders\System\SystemDatabaseSeeder::class,
+            \Database\Seeders\Identity\IdentityDatabaseSeeder::class,
+        ]);
     }
 }

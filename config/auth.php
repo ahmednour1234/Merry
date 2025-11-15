@@ -40,10 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-            'office' => [
-        'driver' => 'sanctum',
-        'provider' => 'offices',
-    ],
+        'office' => [
+            'driver' => 'sanctum',
+            'provider' => 'offices',
+        ],
+        'enduser' => [
+            'driver' => 'sanctum',
+            'provider' => 'endusers',
+        ],
     ],
 
     /*
@@ -68,12 +72,14 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
-    'offices' => ['driver' => 'eloquent','model' => App\Models\Office::class],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'offices' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Office::class,
+        ],
+        'endusers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Identity\EndUser::class,
+        ],
     ],
 
     /*
@@ -98,6 +104,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'endusers' => [
+            'provider' => 'endusers',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
