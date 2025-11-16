@@ -20,6 +20,7 @@ class EndUser extends Authenticatable
     protected $guard = 'enduser';
 
     protected $fillable = [
+        'national_id',
         'name',
         'email',
         'phone',

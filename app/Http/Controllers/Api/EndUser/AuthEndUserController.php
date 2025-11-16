@@ -7,15 +7,15 @@ use App\Http\Requests\EndUser\Auth\EndUserForgotPasswordRequest;
 use App\Http\Requests\EndUser\Auth\EndUserLoginRequest;
 use App\Http\Requests\EndUser\Auth\EndUserRegisterRequest;
 use App\Http\Requests\EndUser\Auth\EndUserResetPasswordRequest;
+use App\Http\Requests\EndUser\Auth\EndUserVerifyPhoneRequest;
 use App\Http\Requests\EndUser\Profile\EndUserUpdateProfileRequest;
 use App\Http\Resources\EndUser\EndUserResource;
-use App\Mail\EndUserResetCodeMail;
 use App\Models\Identity\EndUser;
 use App\Support\Uploads\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 
 class AuthEndUserController extends ApiController
 {
@@ -30,18 +30,14 @@ class AuthEndUserController extends ApiController
     public function register(EndUserRegisterRequest $request)
     {
         $data = $request->validated();
-
-        if ($request->hasFile('avatar')) {
-            $data['avatar_path'] = ImageUploader::upload($request->file('avatar'), 'end-users');
-        }
-
-        $data['password'] = Hash::make((string) $data['password']);
-        $data['active'] = true;
-
-        unset($data['avatar']);
-
-        /** @var EndUser $user */
-        $user = EndUser::create($data);
+        $user = new EndUser();
+        $user->national_id = (string) $data['national_id'];
+        $user->name = (string) $data['name'];
+        $user->email = $data['email'] ?? null;
+        $user->phone = (string) $data['phone'];
+        $user->password = Hash::make((string) $data['password']);
+        $user->active = true;
+        $user->save();
 
         $token = $user->createToken('enduser', ['enduser'])->plainTextToken;
 
@@ -57,11 +53,11 @@ class AuthEndUserController extends ApiController
      */
     public function login(EndUserLoginRequest $request)
     {
-        $email = (string) $request->input('email');
+        $nationalId = (string) $request->input('national_id');
         $password = (string) $request->input('password');
 
         /** @var EndUser|null $user */
-        $user = EndUser::where('email', $email)
+        $user = EndUser::where('national_id', $nationalId)
             ->where('active', true)
             ->first();
 
@@ -97,89 +93,83 @@ class AuthEndUserController extends ApiController
     }
 
     /**
-     * POST /api/v1/enduser/auth/forgot-password
-     * Sends a 6-digit code to the provided email if it exists.
+     * POST /api/v1/enduser/auth/forgot-password/start
+     * Step 1: Accept national_id only, return a short-lived token.
      */
     public function forgot(EndUserForgotPasswordRequest $request)
     {
-        $email = (string) $request->input('email');
+        $nationalId = (string) $request->input('national_id');
 
-        $exists = EndUser::where('email', $email)->exists();
-        if (!$exists) {
-            return $this->responder->ok(null, 'If the email exists, a reset code has been sent.');
-        }
-
-        $code = (string) random_int(100000, 999999);
-        $hash = Hash::make($code);
-        $expiresAt = now()->addMinutes(15);
-
-        DB::connection('identity')->table('password_reset_tokens')->updateOrInsert(
-            ['email' => $email],
-            [
-                'token' => null,
-                'code_hash' => $hash,
-                'expires_at' => $expiresAt,
-                'attempts' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
-
-        Mail::to($email)->send(new EndUserResetCodeMail($code));
-
-        return $this->responder->ok(null, 'A reset code has been sent to your email.');
-    }
-
-    /**
-     * POST /api/v1/enduser/auth/reset-password
-     */
-    public function reset(EndUserResetPasswordRequest $request)
-    {
-        $email = (string) $request->input('email');
-        $code = (string) $request->input('code');
-        $password = (string) $request->input('password');
-
-        $user = EndUser::where('email', $email)->first();
+        $user = EndUser::where('national_id', $nationalId)->first();
         if (!$user) {
             return $this->responder->fail('User not found.', status: 404);
         }
 
-        $devBypassCode = (string) config('auth.reset_dev_code', '1234');
-        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
-        $useBypass = $isDevEnv && $code === $devBypassCode;
+        $token = 'fp_' . bin2hex(random_bytes(16));
+        Cache::put($token, ['national_id' => $nationalId], now()->addMinutes(10));
 
-        if (!$useBypass) {
-            $row = DB::connection('identity')->table('password_reset_tokens')->where('email', $email)->first();
+        return $this->responder->ok(['token' => $token], 'Proceed to phone verification.');
+    }
 
-            if (!$row || empty($row->code_hash)) {
-                return $this->responder->fail('The reset code is invalid or expired.', status: 422);
-            }
+    /**
+     * POST /api/v1/enduser/auth/forgot-password/verify-phone
+     * Step 2: Verify phone matches stored phone, return reset token if valid.
+     */
+    public function verifyPhone(EndUserVerifyPhoneRequest $request)
+    {
+        $token = (string) $request->input('token');
+        $phone = (string) $request->input('phone');
 
-            if (!empty($row->expires_at) && now()->greaterThan($row->expires_at)) {
-                DB::connection('identity')->table('password_reset_tokens')->where('email', $email)->delete();
-                return $this->responder->fail('The reset code has expired.', status: 422);
-            }
+        $payload = Cache::get($token);
+        if (!$payload || empty($payload['national_id'])) {
+            return $this->responder->fail('Invalid or expired token.', status: 422);
+        }
 
-            $attempts = (int) ($row->attempts ?? 0);
-            if ($attempts >= 5) {
-                return $this->responder->fail('Too many attempts. Please request a new code.', status: 429);
-            }
+        $user = EndUser::where('national_id', (string) $payload['national_id'])->first();
+        if (!$user) {
+            return $this->responder->fail('User not found.', status: 404);
+        }
 
-            if (!Hash::check($code, (string) $row->code_hash)) {
-                DB::connection('identity')->table('password_reset_tokens')
-                    ->where('email', $email)
-                    ->update(['attempts' => $attempts + 1, 'updated_at' => now()]);
+        if ((string) $user->phone !== $phone) {
+            return $this->responder->fail('Phone number does not match our records.', status: 422);
+        }
 
-                return $this->responder->fail('The provided code is incorrect.', status: 422);
-            }
+        // Issue reset token and invalidate previous token
+        Cache::forget($token);
+        $resetToken = 'rp_' . bin2hex(random_bytes(16));
+        Cache::put($resetToken, ['user_id' => $user->id], now()->addMinutes(10));
+
+        return $this->responder->ok(['reset_token' => $resetToken], 'Phone verified. You may now reset your password.');
+    }
+
+    /**
+     * POST /api/v1/enduser/auth/reset-password
+     * Step 3: Direct password reset using reset_token, no email/SMS.
+     */
+    public function reset(EndUserResetPasswordRequest $request)
+    {
+        $resetToken = (string) $request->input('reset_token');
+        $password = (string) $request->input('password');
+
+        $payload = Cache::get($resetToken);
+        if (!$payload || empty($payload['user_id'])) {
+            return $this->responder->fail('Invalid or expired reset token.', status: 422);
+        }
+
+        /** @var EndUser|null $user */
+        $user = EndUser::find((int) $payload['user_id']);
+        if (!$user) {
+            return $this->responder->fail('User not found.', status: 404);
         }
 
         $user->password = Hash::make($password);
         $user->save();
 
-        DB::connection('identity')->table('password_reset_tokens')->where('email', $email)->delete();
+        // Invalidate reset token and revoke all existing tokens (logout everywhere)
+        Cache::forget($resetToken);
+        $user->tokens()->delete();
 
-        return $this->responder->ok(new EndUserResource($user), 'Password updated successfully.');
+        return $this->responder->ok(null, 'Password has been reset successfully, please login with your National ID and new password.');
     }
 
     /**

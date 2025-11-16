@@ -14,17 +14,17 @@ class EndUserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
+            'national_id' => ['required', 'string', 'exists:identity.end_users,national_id'],
+            'password' => ['required', 'string']
         ];
     }
 
     public function bodyParameters(): array
     {
         return [
-            'email' => [
-                'description' => 'Registered email address.',
-                'example' => 'john@example.com',
+            'national_id' => [
+                'description' => 'Registered national ID.',
+                'example' => '1234567890',
             ],
             'password' => [
                 'description' => 'Account password.',

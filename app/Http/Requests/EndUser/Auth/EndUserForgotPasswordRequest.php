@@ -14,16 +14,16 @@ class EndUserForgotPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
+            'national_id' => ['required', 'string', 'exists:identity.end_users,national_id'],
         ];
     }
 
     public function bodyParameters(): array
     {
         return [
-            'email' => [
-                'description' => 'Email address associated with the account.',
-                'example' => 'john@example.com',
+            'national_id' => [
+                'description' => 'National ID to locate the account.',
+                'example' => '1234567890',
             ],
         ];
     }

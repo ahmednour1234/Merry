@@ -14,30 +14,25 @@ class EndUserResetPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
-            'code' => ['required', 'digits:6'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'reset_token' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 
     public function bodyParameters(): array
     {
         return [
-            'email' => [
-                'description' => 'Email address used during registration.',
-                'example' => 'john@example.com',
-            ],
-            'code' => [
-                'description' => 'Six-digit verification code sent to the email.',
-                'example' => '123456',
+            'reset_token' => [
+                'description' => 'Token received after phone verification.',
+                'example' => 'rp_abcdef123456',
             ],
             'password' => [
                 'description' => 'New password.',
-                'example' => 'newsecret123',
+                'example' => 'newsecret1234',
             ],
             'password_confirmation' => [
                 'description' => 'Must match the password field.',
-                'example' => 'newsecret123',
+                'example' => 'newsecret1234',
             ],
         ];
     }

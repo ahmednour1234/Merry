@@ -14,58 +14,42 @@ class EndUserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:191'],
-            'email' => ['required', 'email', 'max:191', 'unique:identity.end_users,email'],
-            'phone' => ['nullable', 'string', 'max:32', 'unique:identity.end_users,phone'],
-            'password' => ['required', 'string', 'min:6'],
-            'country_id' => ['nullable', 'integer', 'exists:system.nationalities,id'],
-            'city_id' => ['nullable', 'integer', 'exists:system.cities,id'],
-            'bio' => ['nullable', 'string'],
-            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'national_id' => ['required', 'string', 'unique:identity.end_users,national_id'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['sometimes', 'nullable', 'email', 'unique:identity.end_users,email'],
+            'phone' => ['required', 'string', 'max:20'],
+            'password' => ['required', 'confirmed', 'min:8'],
         ];
     }
 
     public function bodyParameters(): array
     {
         return [
+            'national_id' => [
+                'description' => 'Unique national identifier used for login.',
+                'example' => '1234567890',
+            ],
             'name' => [
-                'description' => 'Full name of the end user.',
+                'description' => 'Full name.',
                 'example' => 'John Doe',
             ],
             'email' => [
-                'description' => 'Unique email address.',
+                'description' => 'Email address (optional, not used for login).',
                 'example' => 'john@example.com',
             ],
             'phone' => [
-                'description' => 'Phone number (optional).',
-                'example' => '+966500000000',
+                'description' => 'Phone number.',
+                'example' => '+966500000001',
             ],
             'password' => [
-                'description' => 'Account password (min 6 characters).',
-                'example' => 'secret123',
+                'description' => 'Password (min 8 characters).',
+                'example' => 'secret1234',
             ],
             'password_confirmation' => [
                 'description' => 'Must match the password field.',
-                'example' => 'secret123',
-            ],
-            'country_id' => [
-                'description' => 'Related nationality identifier from the system database.',
-                'example' => 1,
-            ],
-            'city_id' => [
-                'description' => 'Related city identifier from the system database.',
-                'example' => 5,
-            ],
-            'bio' => [
-                'description' => 'Short bio or about text.',
-                'example' => 'Travel enthusiast and blogger.',
-            ],
-            'avatar' => [
-                'description' => 'Profile photo file (JPEG/PNG/WEBP).',
-                'example' => 'resources/scribe/examples/avatar.png',
+                'example' => 'secret1234',
             ],
         ];
     }
 }
-
 

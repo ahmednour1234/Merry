@@ -223,7 +223,8 @@ Route::prefix('v1/office')->group(function () {
 Route::prefix('v1/enduser')->group(function () {
     Route::post('auth/register',        [AuthEndUserController::class, 'register']);
     Route::post('auth/login',           [AuthEndUserController::class, 'login']);
-    Route::post('auth/forgot-password', [AuthEndUserController::class, 'forgot']);
+    Route::post('auth/forgot-password/start', [AuthEndUserController::class, 'forgot']);
+    Route::post('auth/forgot-password/verify-phone', [AuthEndUserController::class, 'verifyPhone']);
     Route::post('auth/reset-password',  [AuthEndUserController::class, 'reset']);
     Route::get('cities',                [CatalogController::class, 'cities']);
     Route::get('currencies',            [CatalogController::class, 'currencies']);
