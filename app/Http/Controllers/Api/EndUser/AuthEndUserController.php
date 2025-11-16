@@ -33,7 +33,6 @@ class AuthEndUserController extends ApiController
         $user = new EndUser();
         $user->national_id = (string) $data['national_id'];
         $user->name = (string) $data['name'];
-        $user->email = $data['email'] ?? null;
         $user->phone = (string) $data['phone'];
         $user->password = Hash::make((string) $data['password']);
         $user->active = true;

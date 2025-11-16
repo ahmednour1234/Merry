@@ -18,13 +18,6 @@ class EndUserUpdateProfileRequest extends FormRequest
 
         return [
             'name' => ['sometimes', 'required', 'string', 'max:191'],
-            'email' => [
-                'sometimes',
-                'required',
-                'email',
-                'max:191',
-                Rule::unique('identity.end_users', 'email')->ignore($userId),
-            ],
             'phone' => [
                 'sometimes',
                 'nullable',
@@ -45,10 +38,6 @@ class EndUserUpdateProfileRequest extends FormRequest
             'name' => [
                 'description' => 'Updated full name.',
                 'example' => 'Johnathan Doe',
-            ],
-            'email' => [
-                'description' => 'Updated email address.',
-                'example' => 'johnathan@example.com',
             ],
             'phone' => [
                 'description' => 'Updated phone number.',

@@ -22,7 +22,6 @@ class EndUser extends Authenticatable
     protected $fillable = [
         'national_id',
         'name',
-        'email',
         'phone',
         'password',
         'country_id',
@@ -42,7 +41,6 @@ class EndUser extends Authenticatable
     protected $casts = [
         'active' => 'boolean',
         'last_login_at' => 'datetime',
-        'email_verified_at' => 'datetime',
     ];
 
     protected $appends = [

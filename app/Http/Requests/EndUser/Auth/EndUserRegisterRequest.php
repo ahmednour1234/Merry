@@ -16,7 +16,6 @@ class EndUserRegisterRequest extends FormRequest
         return [
             'national_id' => ['required', 'string', 'unique:identity.end_users,national_id'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['sometimes', 'nullable', 'email', 'unique:identity.end_users,email'],
             'phone' => ['required', 'string', 'max:20'],
             'password' => ['required', 'confirmed', 'min:8'],
         ];
@@ -32,10 +31,6 @@ class EndUserRegisterRequest extends FormRequest
             'name' => [
                 'description' => 'Full name.',
                 'example' => 'John Doe',
-            ],
-            'email' => [
-                'description' => 'Email address (optional, not used for login).',
-                'example' => 'john@example.com',
             ],
             'phone' => [
                 'description' => 'Phone number.',
