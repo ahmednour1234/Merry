@@ -1443,14 +1443,14 @@ endpoints:
         name: auto_renew
         description: ''
         required: true
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      auto_renew: false
+      auto_renew: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -1474,15 +1474,25 @@ endpoints:
       deprecated: false
       custom: []
     headers:
-      Content-Type: multipart/form-data
+      Content-Type: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
+      national_id:
+        name: national_id
+        description: 'Unique national identifier used for login.'
+        required: true
+        example: '1234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
       name:
         name: name
-        description: 'Full name of the end user. Must not be greater than 191 characters.'
+        description: 'Full name. Must not be greater than 255 characters.'
         required: true
         example: 'John Doe'
         type: string
@@ -1492,84 +1502,41 @@ endpoints:
         custom: []
       email:
         name: email
-        description: 'Unique email address. Must be a valid email address. Must not be greater than 191 characters.'
-        required: true
+        description: 'Email address (optional, not used for login). Must be a valid email address.'
+        required: false
         example: john@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: false
+        nullable: true
         custom: []
       phone:
         name: phone
-        description: 'Phone number (optional). Must not be greater than 32 characters.'
-        required: false
-        example: '+966500000000'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      password:
-        name: password
-        description: 'Account password (min 6 characters). Must be at least 6 characters.'
+        description: 'Phone number. Must not be greater than 20 characters.'
         required: true
-        example: secret123
+        example: '+966500000001'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      country_id:
-        name: country_id
-        description: 'Related nationality identifier from the system database. The <code>id</code> of an existing record in the system.nationalities table.'
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      city_id:
-        name: city_id
-        description: 'Related city identifier from the system database. The <code>id</code> of an existing record in the system.cities table.'
-        required: false
-        example: 5
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      bio:
-        name: bio
-        description: 'Short bio or about text.'
-        required: false
-        example: 'Travel enthusiast and blogger.'
+      password:
+        name: password
+        description: 'Password (min 8 characters). Must be at least 8 characters.'
+        required: true
+        example: secret1234
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: true
-        custom: []
-      avatar:
-        name: avatar
-        description: 'Profile photo file (JPEG/PNG/WEBP). Must be an image. Must not be greater than 2048 kilobytes.'
-        required: false
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
+        nullable: false
         custom: []
     cleanBodyParameters:
+      national_id: '1234567890'
       name: 'John Doe'
       email: john@example.com
-      phone: '+966500000000'
-      password: secret123
-      country_id: 1
-      city_id: 5
-      bio: 'Travel enthusiast and blogger.'
-    fileParameters:
-      avatar: null
+      phone: '+966500000001'
+      password: secret1234
+    fileParameters: []
     responses: []
     responseFields: []
     auth: []
@@ -1598,11 +1565,11 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      email:
-        name: email
-        description: 'Registered email address. Must be a valid email address.'
+      national_id:
+        name: national_id
+        description: 'Registered national ID. The <code>national_id</code> of an existing record in the identity.end_users table.'
         required: true
-        example: john@example.com
+        example: '1234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1619,7 +1586,7 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      email: john@example.com
+      national_id: '1234567890'
       password: secret123
     fileParameters: []
     responses: []
@@ -1632,15 +1599,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/enduser/auth/forgot-password
+    uri: api/v1/enduser/auth/forgot-password/start
     metadata:
       groupName: Endpoints
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
-        POST /api/v1/enduser/auth/forgot-password
-        Sends a 6-digit code to the provided email if it exists.
+        POST /api/v1/enduser/auth/forgot-password/start
+        Step 1: Accept national_id only, return a short-lived token.
       description: ''
       authenticated: false
       deprecated: false
@@ -1652,18 +1619,72 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      email:
-        name: email
-        description: 'Email address associated with the account. Must be a valid email address.'
+      national_id:
+        name: national_id
+        description: 'National ID to locate the account. The <code>national_id</code> of an existing record in the identity.end_users table.'
         required: true
-        example: john@example.com
+        example: '1234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      email: john@example.com
+      national_id: '1234567890'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/auth/forgot-password/verify-phone
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        POST /api/v1/enduser/auth/forgot-password/verify-phone
+        Step 2: Verify phone matches stored phone, return reset token if valid.
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      token:
+        name: token
+        description: 'Token received from the start step.'
+        required: true
+        example: fp_abcd1234
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'Phone number associated with the account. Must not be greater than 20 characters.'
+        required: true
+        example: '+966500000001'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      token: fp_abcd1234
+      phone: '+966500000001'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1681,7 +1702,9 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'POST /api/v1/enduser/auth/reset-password'
+      title: |-
+        POST /api/v1/enduser/auth/reset-password
+        Step 3: Direct password reset using reset_token, no email/SMS.
       description: ''
       authenticated: false
       deprecated: false
@@ -1693,21 +1716,11 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      email:
-        name: email
-        description: 'Email address used during registration. Must be a valid email address.'
+      reset_token:
+        name: reset_token
+        description: 'Token received after phone verification.'
         required: true
-        example: john@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      code:
-        name: code
-        description: 'Six-digit verification code sent to the email. Must be 6 digits.'
-        required: true
-        example: '123456'
+        example: rp_abcdef123456
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1715,18 +1728,17 @@ endpoints:
         custom: []
       password:
         name: password
-        description: 'New password. Must be at least 6 characters.'
+        description: 'New password. Must be at least 8 characters.'
         required: true
-        example: newsecret123
+        example: newsecret1234
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      email: john@example.com
-      code: '123456'
-      password: newsecret123
+      reset_token: rp_abcdef123456
+      password: newsecret1234
     fileParameters: []
     responses: []
     responseFields: []

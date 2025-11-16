@@ -170,12 +170,17 @@ body: { auto_renew: bool }</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-login">
                                 <a href="#endpoints-POSTapi-v1-enduser-auth-login">POST /api/v1/enduser/auth/login</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-forgot-password">
-                                <a href="#endpoints-POSTapi-v1-enduser-auth-forgot-password">POST /api/v1/enduser/auth/forgot-password
-Sends a 6-digit code to the provided email if it exists.</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-forgot-password-start">
+                                <a href="#endpoints-POSTapi-v1-enduser-auth-forgot-password-start">POST /api/v1/enduser/auth/forgot-password/start
+Step 1: Accept national_id only, return a short-lived token.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-forgot-password-verify-phone">
+                                <a href="#endpoints-POSTapi-v1-enduser-auth-forgot-password-verify-phone">POST /api/v1/enduser/auth/forgot-password/verify-phone
+Step 2: Verify phone matches stored phone, return reset token if valid.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-reset-password">
-                                <a href="#endpoints-POSTapi-v1-enduser-auth-reset-password">POST /api/v1/enduser/auth/reset-password</a>
+                                <a href="#endpoints-POSTapi-v1-enduser-auth-reset-password">POST /api/v1/enduser/auth/reset-password
+Step 3: Direct password reset using reset_token, no email/SMS.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-cities">
                                 <a href="#endpoints-GETapi-v1-enduser-cities">GET api/v1/enduser/cities</a>
@@ -575,7 +580,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 15, 2025</li>
+        <li>Last updated: November 16, 2025</li>
     </ul>
 </div>
 
@@ -1947,7 +1952,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
     --form "active=1"\
     --form "blocked=1"\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Temp\php7A9C.tmp" </code></pre></div>
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1C3E.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -2181,7 +2186,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php7A9C.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1C3E.tmp</code></p>
         </div>
         </form>
 
@@ -3729,7 +3734,7 @@ body: { auto_renew: bool }</h2>
     "https://mery.alemtayaz.com/api/v1/office/subscription/auto-renew" \
     --header "Content-Type: application/json" \
     --data "{
-    \"auto_renew\": false
+    \"auto_renew\": true
 }"
 </code></pre></div>
 
@@ -3745,7 +3750,7 @@ const headers = {
 };
 
 let body = {
-    "auto_renew": false
+    "auto_renew": true
 };
 
 fetch(url, {
@@ -3836,7 +3841,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -3854,15 +3859,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "https://mery.alemtayaz.com/api/v1/enduser/auth/register" \
-    --header "Content-Type: multipart/form-data" \
-    --form "name=John Doe"\
-    --form "email=john@example.com"\
-    --form "phone=+966500000000"\
-    --form "password=secret123"\
-    --form "country_id=1"\
-    --form "city_id=5"\
-    --form "bio=Travel enthusiast and blogger."\
-    --form "avatar=@E:\xampp\htdocs\xampp\mery\resources\scribe\examples\avatar.png" </code></pre></div>
+    --header "Content-Type: application/json" \
+    --data "{
+    \"national_id\": \"1234567890\",
+    \"name\": \"John Doe\",
+    \"email\": \"john@example.com\",
+    \"phone\": \"+966500000001\",
+    \"password\": \"secret1234\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -3871,24 +3876,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
 );
 
 const headers = {
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
-const body = new FormData();
-body.append('name', 'John Doe');
-body.append('email', 'john@example.com');
-body.append('phone', '+966500000000');
-body.append('password', 'secret123');
-body.append('country_id', '1');
-body.append('city_id', '5');
-body.append('bio', 'Travel enthusiast and blogger.');
-body.append('avatar', document.querySelector('input[name="avatar"]').files[0]);
+let body = {
+    "national_id": "1234567890",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "+966500000001",
+    "password": "secret1234"
+};
 
 fetch(url, {
     method: "POST",
     headers,
-    body,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -3913,7 +3916,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <form id="form-POSTapi-v1-enduser-auth-register" data-method="POST"
       data-path="api/v1/enduser/auth/register"
       data-authed="0"
-      data-hasfiles="1"
+      data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
       onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-auth-register', this);">
@@ -3948,13 +3951,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="Content-Type"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="multipart/form-data"
+               value="application/json"
                data-component="header">
     <br>
-<p>Example: <code>multipart/form-data</code></p>
+<p>Example: <code>application/json</code></p>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-enduser-auth-register"
+               value="1234567890"
+               data-component="body">
+    <br>
+<p>Unique national identifier used for login. Example: <code>1234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
@@ -3963,29 +3977,29 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="John Doe"
                data-component="body">
     <br>
-<p>Full name of the end user. Must not be greater than 191 characters. Example: <code>John Doe</code></p>
+<p>Full name. Must not be greater than 255 characters. Example: <code>John Doe</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-enduser-auth-register"
                value="john@example.com"
                data-component="body">
     <br>
-<p>Unique email address. Must be a valid email address. Must not be greater than 191 characters. Example: <code>john@example.com</code></p>
+<p>Email address (optional, not used for login). Must be a valid email address. Example: <code>john@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="text" style="display: none"
                               name="phone"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="+966500000000"
+               value="+966500000001"
                data-component="body">
     <br>
-<p>Phone number (optional). Must not be greater than 32 characters. Example: <code>+966500000000</code></p>
+<p>Phone number. Must not be greater than 20 characters. Example: <code>+966500000001</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -3993,54 +4007,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="secret123"
+               value="secret1234"
                data-component="body">
     <br>
-<p>Account password (min 6 characters). Must be at least 6 characters. Example: <code>secret123</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>country_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="country_id"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="1"
-               data-component="body">
-    <br>
-<p>Related nationality identifier from the system database. The <code>id</code> of an existing record in the system.nationalities table. Example: <code>1</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>city_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="city_id"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="5"
-               data-component="body">
-    <br>
-<p>Related city identifier from the system database. The <code>id</code> of an existing record in the system.cities table. Example: <code>5</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>bio</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="bio"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="Travel enthusiast and blogger."
-               data-component="body">
-    <br>
-<p>Short bio or about text. Example: <code>Travel enthusiast and blogger.</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>avatar</code></b>&nbsp;&nbsp;
-<small>file</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="file" style="display: none"
-                              name="avatar"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value=""
-               data-component="body">
-    <br>
-<p>Profile photo file (JPEG/PNG/WEBP). Must be an image. Must not be greater than 2048 kilobytes. Example: <code>resources/scribe/examples/avatar.png</code></p>
+<p>Password (min 8 characters). Must be at least 8 characters. Example: <code>secret1234</code></p>
         </div>
         </form>
 
@@ -4060,7 +4030,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://mery.alemtayaz.com/api/v1/enduser/auth/login" \
     --header "Content-Type: application/json" \
     --data "{
-    \"email\": \"john@example.com\",
+    \"national_id\": \"1234567890\",
     \"password\": \"secret123\"
 }"
 </code></pre></div>
@@ -4077,7 +4047,7 @@ const headers = {
 };
 
 let body = {
-    "email": "john@example.com",
+    "national_id": "1234567890",
     "password": "secret123"
 };
 
@@ -4151,15 +4121,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-enduser-auth-login"
-               value="john@example.com"
+                              name="national_id"                data-endpoint="POSTapi-v1-enduser-auth-login"
+               value="1234567890"
                data-component="body">
     <br>
-<p>Registered email address. Must be a valid email address. Example: <code>john@example.com</code></p>
+<p>Registered national ID. The <code>national_id</code> of an existing record in the identity.end_users table. Example: <code>1234567890</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -4174,31 +4144,31 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-v1-enduser-auth-forgot-password">POST /api/v1/enduser/auth/forgot-password
-Sends a 6-digit code to the provided email if it exists.</h2>
+                    <h2 id="endpoints-POSTapi-v1-enduser-auth-forgot-password-start">POST /api/v1/enduser/auth/forgot-password/start
+Step 1: Accept national_id only, return a short-lived token.</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-POSTapi-v1-enduser-auth-forgot-password">
+<span id="example-requests-POSTapi-v1-enduser-auth-forgot-password-start">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://mery.alemtayaz.com/api/v1/enduser/auth/forgot-password" \
+    "https://mery.alemtayaz.com/api/v1/enduser/auth/forgot-password/start" \
     --header "Content-Type: application/json" \
     --data "{
-    \"email\": \"john@example.com\"
+    \"national_id\": \"1234567890\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://mery.alemtayaz.com/api/v1/enduser/auth/forgot-password"
+    "https://mery.alemtayaz.com/api/v1/enduser/auth/forgot-password/start"
 );
 
 const headers = {
@@ -4207,7 +4177,7 @@ const headers = {
 };
 
 let body = {
-    "email": "john@example.com"
+    "national_id": "1234567890"
 };
 
 fetch(url, {
@@ -4218,45 +4188,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-POSTapi-v1-enduser-auth-forgot-password">
+<span id="example-responses-POSTapi-v1-enduser-auth-forgot-password-start">
 </span>
-<span id="execution-results-POSTapi-v1-enduser-auth-forgot-password" hidden>
+<span id="execution-results-POSTapi-v1-enduser-auth-forgot-password-start" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-enduser-auth-forgot-password"></span>:
+                id="execution-response-status-POSTapi-v1-enduser-auth-forgot-password-start"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-auth-forgot-password"
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-auth-forgot-password-start"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-v1-enduser-auth-forgot-password" hidden>
+<span id="execution-error-POSTapi-v1-enduser-auth-forgot-password-start" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-enduser-auth-forgot-password">
+    <pre><code id="execution-error-message-POSTapi-v1-enduser-auth-forgot-password-start">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-v1-enduser-auth-forgot-password" data-method="POST"
-      data-path="api/v1/enduser/auth/forgot-password"
+<form id="form-POSTapi-v1-enduser-auth-forgot-password-start" data-method="POST"
+      data-path="api/v1/enduser/auth/forgot-password/start"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-auth-forgot-password', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-auth-forgot-password-start', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-enduser-auth-forgot-password"
-                    onclick="tryItOut('POSTapi-v1-enduser-auth-forgot-password');">Try it out ⚡
+                    id="btn-tryout-POSTapi-v1-enduser-auth-forgot-password-start"
+                    onclick="tryItOut('POSTapi-v1-enduser-auth-forgot-password-start');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-enduser-auth-forgot-password"
-                    onclick="cancelTryOut('POSTapi-v1-enduser-auth-forgot-password');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-v1-enduser-auth-forgot-password-start"
+                    onclick="cancelTryOut('POSTapi-v1-enduser-auth-forgot-password-start');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-enduser-auth-forgot-password"
+                    id="btn-executetryout-POSTapi-v1-enduser-auth-forgot-password-start"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -4264,7 +4234,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/v1/enduser/auth/forgot-password</code></b>
+            <b><code>api/v1/enduser/auth/forgot-password/start</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -4272,7 +4242,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password-start"
                value="application/json"
                data-component="header">
     <br>
@@ -4280,19 +4250,151 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password"
-               value="john@example.com"
+                              name="national_id"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password-start"
+               value="1234567890"
                data-component="body">
     <br>
-<p>Email address associated with the account. Must be a valid email address. Example: <code>john@example.com</code></p>
+<p>National ID to locate the account. The <code>national_id</code> of an existing record in the identity.end_users table. Example: <code>1234567890</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-v1-enduser-auth-reset-password">POST /api/v1/enduser/auth/reset-password</h2>
+                    <h2 id="endpoints-POSTapi-v1-enduser-auth-forgot-password-verify-phone">POST /api/v1/enduser/auth/forgot-password/verify-phone
+Step 2: Verify phone matches stored phone, return reset token if valid.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-enduser-auth-forgot-password-verify-phone">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/enduser/auth/forgot-password/verify-phone" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"token\": \"fp_abcd1234\",
+    \"phone\": \"+966500000001\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/auth/forgot-password/verify-phone"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "token": "fp_abcd1234",
+    "phone": "+966500000001"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-enduser-auth-forgot-password-verify-phone">
+</span>
+<span id="execution-results-POSTapi-v1-enduser-auth-forgot-password-verify-phone" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-enduser-auth-forgot-password-verify-phone"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-enduser-auth-forgot-password-verify-phone" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-enduser-auth-forgot-password-verify-phone">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-enduser-auth-forgot-password-verify-phone" data-method="POST"
+      data-path="api/v1/enduser/auth/forgot-password/verify-phone"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-auth-forgot-password-verify-phone', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+                    onclick="tryItOut('POSTapi-v1-enduser-auth-forgot-password-verify-phone');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+                    onclick="cancelTryOut('POSTapi-v1-enduser-auth-forgot-password-verify-phone');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/enduser/auth/forgot-password/verify-phone</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>token</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="token"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+               value="fp_abcd1234"
+               data-component="body">
+    <br>
+<p>Token received from the start step. Example: <code>fp_abcd1234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-enduser-auth-forgot-password-verify-phone"
+               value="+966500000001"
+               data-component="body">
+    <br>
+<p>Phone number associated with the account. Must not be greater than 20 characters. Example: <code>+966500000001</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-enduser-auth-reset-password">POST /api/v1/enduser/auth/reset-password
+Step 3: Direct password reset using reset_token, no email/SMS.</h2>
 
 <p>
 </p>
@@ -4308,9 +4410,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://mery.alemtayaz.com/api/v1/enduser/auth/reset-password" \
     --header "Content-Type: application/json" \
     --data "{
-    \"email\": \"john@example.com\",
-    \"code\": \"123456\",
-    \"password\": \"newsecret123\"
+    \"reset_token\": \"rp_abcdef123456\",
+    \"password\": \"newsecret1234\"
 }"
 </code></pre></div>
 
@@ -4326,9 +4427,8 @@ const headers = {
 };
 
 let body = {
-    "email": "john@example.com",
-    "code": "123456",
-    "password": "newsecret123"
+    "reset_token": "rp_abcdef123456",
+    "password": "newsecret1234"
 };
 
 fetch(url, {
@@ -4401,26 +4501,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>reset_token</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-enduser-auth-reset-password"
-               value="john@example.com"
+                              name="reset_token"                data-endpoint="POSTapi-v1-enduser-auth-reset-password"
+               value="rp_abcdef123456"
                data-component="body">
     <br>
-<p>Email address used during registration. Must be a valid email address. Example: <code>john@example.com</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="code"                data-endpoint="POSTapi-v1-enduser-auth-reset-password"
-               value="123456"
-               data-component="body">
-    <br>
-<p>Six-digit verification code sent to the email. Must be 6 digits. Example: <code>123456</code></p>
+<p>Token received after phone verification. Example: <code>rp_abcdef123456</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -4428,10 +4517,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-enduser-auth-reset-password"
-               value="newsecret123"
+               value="newsecret1234"
                data-component="body">
     <br>
-<p>New password. Must be at least 6 characters. Example: <code>newsecret123</code></p>
+<p>New password. Must be at least 8 characters. Example: <code>newsecret1234</code></p>
         </div>
         </form>
 
@@ -6559,7 +6648,7 @@ Must be one of:
     "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --data "{
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
@@ -6575,7 +6664,7 @@ const headers = {
 };
 
 let body = {
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -6678,7 +6767,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -11790,7 +11879,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php3A74.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC45.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -11911,7 +12000,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php3A74.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC45.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -11978,7 +12067,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Temp\php3A75.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC55.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -12111,7 +12200,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Temp\php3A75.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC55.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
