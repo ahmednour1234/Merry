@@ -36,6 +36,16 @@ class AppServiceProvider extends ServiceProvider
             database_path('migrations/identity'),
         ]);
 
+        $guards = config('auth.guards', []);
+
+        if (! is_array($guards) || ! array_key_exists('api', $guards)) {
+            // Ensure the legacy Sanctum guard name resolves even if cached config is stale
+            config(['auth.guards.api' => [
+                'driver' => 'sanctum',
+                'provider' => 'users',
+            ]]);
+        }
+
         Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
         Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
         Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
