@@ -20,11 +20,16 @@ class SystemSettings
         $cacheKey = "settings:{$scope}:{$key}";
 
         return Cache::remember($cacheKey, $this->ttl, function () use ($key, $scope, $default) {
-            $row = DB::connection($this->conn)
-                ->table($this->table)
-                ->where('scope', $scope)
-                ->where('key', $key)
-                ->first();
+            try {
+                $row = DB::connection($this->conn)
+                    ->table($this->table)
+                    ->where('scope', $scope)
+                    ->where('key', $key)
+                    ->first();
+            } catch (\Throwable $e) {
+                // Graceful fallback if DB is unavailable during boot or maintenance
+                return $default;
+            }
 
             if (!$row) {
                 return $default;
