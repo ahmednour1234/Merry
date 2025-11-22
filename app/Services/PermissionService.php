@@ -51,15 +51,28 @@ class PermissionService
         $cacheKey = "user:{$user->id}:perms";
 
         return $this->remember($cacheKey, 300, function () use ($user) {
-            // Admin permissions are resolved strictly via roles → permission_role → permissions
-            $viaRoles = Permission::on('system')
-                ->where('active', true)
-                ->whereIn('id', function ($q) use ($user) {
-                    $q->select('permission_id')->from('permission_role')
-                      ->whereIn('role_id', $user->roles()->pluck('roles.id'));
-                })->pluck('slug');
+            // Resolve the user's latest role from role_user (by highest id as a reliable proxy)
+            $latestRoleId = \Illuminate\Support\Facades\DB::connection('system')
+                ->table('role_user')
+                ->where('user_id', $user->id)
+                ->orderByDesc('id') // latest assignment
+                ->value('role_id');
 
-            return $viaRoles->unique()->values();
+            if (!$latestRoleId) {
+                return collect();
+            }
+
+            // Fetch permissions for that single role via permission_role → permissions
+            $permissionSlugs = Permission::on('system')
+                ->where('active', true)
+                ->whereIn('id', function ($q) use ($latestRoleId) {
+                    $q->select('permission_id')
+                      ->from('permission_role')
+                      ->where('role_id', $latestRoleId);
+                })
+                ->pluck('slug');
+
+            return $permissionSlugs->unique()->values();
         });
     }
 
