@@ -51,7 +51,7 @@ class PermissionService
         $cacheKey = "user:{$user->id}:perms";
 
         return $this->remember($cacheKey, 300, function () use ($user) {
-            $direct = $user->permissions()->where('active', true)->pluck('slug');
+            // Admin permissions are resolved strictly via roles → permission_role → permissions
             $viaRoles = Permission::on('system')
                 ->where('active', true)
                 ->whereIn('id', function ($q) use ($user) {
@@ -59,7 +59,7 @@ class PermissionService
                       ->whereIn('role_id', $user->roles()->pluck('roles.id'));
                 })->pluck('slug');
 
-            return $direct->merge($viaRoles)->unique()->values();
+            return $viaRoles->unique()->values();
         });
     }
 
