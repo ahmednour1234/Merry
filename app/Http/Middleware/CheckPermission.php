@@ -23,27 +23,51 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next, string ...$required)
     {
-        $user = $request->user();
-        if (!$user) {
-            return response()->json(['message' => 'Unauthenticated'], 401);
-        }
-
-        $token = $user->currentAccessToken();
-        if ($token && ($token->can('*') || $token->can('system.manage'))) {
-            return $next($request);
-        }
-
-        // لو اتحطت الصلاحية على الراوت كـ action attribute
-        $routePerm = $request->route()->action['permission'] ?? null;
-        $need = $routePerm ? [$routePerm] : $required;
-
-        // لازم يمتلك كل الـ permissions المطلوبة
-        foreach ($need as $p) {
-            if (!$this->perms->userHas($user, $p)) {
-                return response()->json(['message' => 'Forbidden: missing permission ' . $p], 403);
+        try {
+            $user = $request->user();
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthenticated'
+                ], 401);
             }
-        }
 
-        return $next($request);
+            $token = $user->currentAccessToken();
+            if ($token && ($token->can('*') || $token->can('system.manage'))) {
+                return $next($request);
+            }
+
+            // لو اتحطت الصلاحية على الراوت كـ action attribute
+            $routePerm = $request->route()->action['permission'] ?? null;
+            $need = $routePerm ? [$routePerm] : $required;
+
+            // لازم يمتلك كل الـ permissions المطلوبة
+            foreach ($need as $p) {
+                if (!$this->perms->userHas($user, $p)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Forbidden: missing permission ' . $p
+                    ], 403);
+                }
+            }
+
+            return $next($request);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('CheckPermission Middleware Error', [
+                'message' => $e->getMessage(),
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
+            $debug = app()->hasDebugModeEnabled();
+            return response()->json([
+                'success' => false,
+                'message' => $debug ? $e->getMessage() : 'Permission check failed',
+                'exception' => $debug ? get_class($e) : null,
+                'file' => $debug ? $e->getFile() : null,
+                'line' => $debug ? $e->getLine() : null,
+            ], 500);
+        }
     }
 }

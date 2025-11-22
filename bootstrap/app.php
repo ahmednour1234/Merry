@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 // Middlewares
 use App\Http\Middleware\CheckPermission;
 use App\Http\Middleware\ForceJsonResponse;
+use App\Http\Middleware\CheckAbility;
 
 // Sanctum ability middlewares
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
@@ -32,7 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'perm'      => CheckPermission::class,
             'abilities' => CheckAbilities::class,
-            'ability'   => CheckForAnyAbility::class,
+            'ability'   => CheckAbility::class, // Custom wrapper with error handling
         ]);
 
         // إجبار كل ريكوست API يرجّع JSON (حتى في الأخطاء)
@@ -69,9 +70,24 @@ return Application::configure(basePath: dirname(__DIR__))
 
                 $debug = app()->hasDebugModeEnabled();
 
+                // Handle specific exception types
+                $message = $e->getMessage();
+                if ($e instanceof \Illuminate\Database\QueryException) {
+                    $message = $debug
+                        ? "Database Error: " . $e->getMessage()
+                        : "Database connection error. Please check your database configuration.";
+                } elseif ($e instanceof \PDOException) {
+                    $message = $debug
+                        ? "PDO Error: " . $e->getMessage()
+                        : "Database connection failed. Please check your database server.";
+                } elseif ($e instanceof \Illuminate\Auth\AuthenticationException) {
+                    $message = "Authentication failed: " . ($debug ? $e->getMessage() : "Invalid credentials or token.");
+                    $status = 401;
+                }
+
                 $payload = [
                     'success' => false,
-                    'message' => $debug ? $e->getMessage() : 'Server Error',
+                    'message' => $debug ? $message : ($status === 500 ? 'Server Error' : $message),
                 ];
 
                 // في وضع الـ debug رجّع معلومات مكان الخطأ بالتفصيل
