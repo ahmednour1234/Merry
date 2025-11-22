@@ -50,6 +50,22 @@ Route::get('v1/debug/token', function (Request $request) {
         ] : null,
     ];
 });
+
+// Debug route to test middleware chain
+Route::get('v1/debug/middleware-test', function (Request $request) {
+    return [
+        'success' => true,
+        'message' => 'Middleware test passed',
+        'user' => $request->user() ? [
+            'id' => $request->user()->id,
+            'email' => $request->user()->email,
+            'token' => $request->user()->currentAccessToken() ? [
+                'id' => $request->user()->currentAccessToken()->id,
+                'abilities' => $request->user()->currentAccessToken()->abilities,
+            ] : null,
+        ] : null,
+    ];
+})->middleware(['auth:sanctum', 'ability:system.manage']);
 /*
 |--------------------------------------------------------------------------
 | Public Auth (system users)

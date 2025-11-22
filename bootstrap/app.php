@@ -47,13 +47,20 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         // Log all exceptions with full details
         $exceptions->report(function (\Throwable $e) {
-            Log::error('API Exception', [
+            $context = [
                 'message' => $e->getMessage(),
                 'exception' => get_class($e),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
-                'trace' => $e->getTraceAsString(),
-            ]);
+            ];
+
+            // Add more context for database errors
+            if ($e instanceof \Illuminate\Database\QueryException) {
+                $context['sql'] = $e->getSql();
+                $context['bindings'] = $e->getBindings();
+            }
+
+            Log::error('API Exception', $context);
         });
 
         $exceptions->render(function (\Throwable $e, $request) {

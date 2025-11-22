@@ -41,13 +41,41 @@ class CheckPermission
             $routePerm = $request->route()->action['permission'] ?? null;
             $need = $routePerm ? [$routePerm] : $required;
 
+            // لو مفيش permissions مطلوبة، خلاص مرر الطلب
+            if (empty($need)) {
+                return $next($request);
+            }
+
             // لازم يمتلك كل الـ permissions المطلوبة
             foreach ($need as $p) {
-                if (!$this->perms->userHas($user, $p)) {
+                try {
+                    if (!$this->perms->userHas($user, $p)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Forbidden: missing permission ' . $p,
+                            'required_permission' => $p,
+                        ], 403);
+                    }
+                } catch (\Throwable $permError) {
+                    \Illuminate\Support\Facades\Log::error('CheckPermission: Permission check exception', [
+                        'permission' => $p,
+                        'user_id' => $user->id,
+                        'error' => $permError->getMessage(),
+                        'exception' => get_class($permError),
+                        'file' => $permError->getFile(),
+                        'line' => $permError->getLine(),
+                    ]);
+                    
+                    $debug = app()->hasDebugModeEnabled();
                     return response()->json([
                         'success' => false,
-                        'message' => 'Forbidden: missing permission ' . $p
-                    ], 403);
+                        'message' => $debug 
+                            ? "Permission check failed: {$permError->getMessage()}" 
+                            : 'Permission check failed',
+                        'exception' => $debug ? get_class($permError) : null,
+                        'file' => $debug ? $permError->getFile() : null,
+                        'line' => $debug ? $permError->getLine() : null,
+                    ], 500);
                 }
             }
 

@@ -50,22 +50,68 @@ class PermissionService
     {
         $cacheKey = "user:{$user->id}:perms";
 
-        return $this->remember($cacheKey, 300, function () use ($user) {
-            $direct = $user->permissions()->where('active', true)->pluck('slug');
-            $viaRoles = Permission::on('system')
-                ->where('active', true)
-                ->whereIn('id', function ($q) use ($user) {
-                    $q->select('permission_id')->from('permission_role')
-                      ->whereIn('role_id', $user->roles()->pluck('roles.id'));
-                })->pluck('slug');
+        try {
+            return $this->remember($cacheKey, 300, function () use ($user) {
+                try {
+                    $direct = $user->permissions()->where('active', true)->pluck('slug');
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('PermissionService: Failed to get direct permissions', [
+                        'user_id' => $user->id,
+                        'error' => $e->getMessage(),
+                        'file' => $e->getFile(),
+                        'line' => $e->getLine(),
+                    ]);
+                    $direct = collect([]);
+                }
 
-            return $direct->merge($viaRoles)->unique()->values();
-        });
+                try {
+                    $viaRoles = Permission::on('system')
+                        ->where('active', true)
+                        ->whereIn('id', function ($q) use ($user) {
+                            $q->select('permission_id')->from('permission_role')
+                              ->whereIn('role_id', $user->roles()->pluck('roles.id'));
+                        })->pluck('slug');
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('PermissionService: Failed to get role permissions', [
+                        'user_id' => $user->id,
+                        'error' => $e->getMessage(),
+                        'file' => $e->getFile(),
+                        'line' => $e->getLine(),
+                    ]);
+                    $viaRoles = collect([]);
+                }
+
+                return $direct->merge($viaRoles)->unique()->values();
+            });
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('PermissionService: Cache or query failed', [
+                'user_id' => $user->id,
+                'error' => $e->getMessage(),
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+            // Return empty collection on error instead of throwing
+            return collect([]);
+        }
     }
 
     public function userHas(User $user, string $permission): bool
     {
-        return $this->userPermissions($user)->contains($permission);
+        try {
+            return $this->userPermissions($user)->contains($permission);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('PermissionService: userHas check failed', [
+                'user_id' => $user->id,
+                'permission' => $permission,
+                'error' => $e->getMessage(),
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+            // Return false on error instead of throwing
+            return false;
+        }
     }
 
     public function forgetUserCache(int $userId): void
