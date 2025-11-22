@@ -1,11 +1,8 @@
 <?php
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 // Middlewares
 use App\Http\Middleware\CheckPermission;
@@ -49,19 +46,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Throwable $e, $request) {
             // أي طلب API أو طلب يتوقع JSON
             if ($request->is('api/*') || $request->expectsJson()) {
-                $status = 500;
-
-                if ($e instanceof HttpExceptionInterface) {
-                    $status = $e->getStatusCode();
-                } elseif (method_exists($e, 'getStatusCode')) {
-                    $status = $e->getStatusCode();
-                } elseif (method_exists($e, 'status')) {
-                    $status = $e->status();
-                } elseif ($e instanceof AuthenticationException) {
-                    $status = 401;
-                } elseif ($e instanceof AuthorizationException) {
-                    $status = 403;
-                }
+                $status = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
 
                 // لو عندك ApiResponder مقيّد في الحاوية، استخدمه
                 if (app()->bound('api.responder')) {
