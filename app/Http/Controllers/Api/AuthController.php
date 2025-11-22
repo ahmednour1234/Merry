@@ -32,10 +32,10 @@ class AuthController extends ApiController
 
         // اصدر توكين بقدرات/Abilities
         $abilities = ['system.manage']; // عدلها حسب احتياجك
-        $token = $user->createToken('admin-token', $abilities);
+    $token = $user->createToken('system-api', ['system.manage'])->plainTextToken;
 
         return $this->responder->ok([
-            'token' => $token->plainTextToken,
+            'token' => $token,
             'type'  => 'Bearer',
             'user'  => [
                 'id'    => $user->id,
