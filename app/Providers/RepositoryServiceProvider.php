@@ -65,6 +65,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\System\Cv\Contracts\CvRepositoryInterface::class,
             \App\Repositories\System\Cv\CvRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\System\Contracts\PageRepositoryInterface::class,
+            \App\Repositories\System\PageRepository::class
+        );
     }
 
     public function boot(): void

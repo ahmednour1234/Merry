@@ -128,6 +128,13 @@ class PermissionsSeeder extends Seeder
             ['slug'=>'system.categories.toggle',       'name'=>'Toggle Category',                  'guard'=>'api','active'=>1],
             ['slug'=>'system.categories.translations', 'name'=>'Upsert Category Translations',     'guard'=>'api','active'=>1],
 
+            // ------- pages -------
+            ['slug'=>'system.pages.index',             'name'=>'List Pages',                        'guard'=>'api','active'=>1],
+            ['slug'=>'system.pages.store',             'name'=>'Store Page',                        'guard'=>'api','active'=>1],
+            ['slug'=>'system.pages.update',            'name'=>'Update Page',                       'guard'=>'api','active'=>1],
+            ['slug'=>'system.pages.destroy',           'name'=>'Delete Page',                       'guard'=>'api','active'=>1],
+            ['slug'=>'system.pages.toggle',            'name'=>'Toggle Page',                       'guard'=>'api','active'=>1],
+
             // ------- CVs -------
             ['slug'=>'system.cvs.index',               'name'=>'List CVs',                         'guard'=>'api','active'=>1],
             ['slug'=>'system.cvs.destroy',             'name'=>'Delete CV',                        'guard'=>'api','active'=>1],

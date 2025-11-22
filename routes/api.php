@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\System\CategoryController;
 use App\Http\Controllers\Api\System\CvController as AdminCvController;
 use App\Http\Controllers\Api\System\NotificationController as SystemNotificationController;
 use App\Http\Controllers\Api\System\NotificationBroadcastController;
+use App\Http\Controllers\Api\System\PageController as SystemPageController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Api\Office\SubscriptionController;
 use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
+use App\Http\Controllers\Api\EndUser\PageController as PublicPageController;
 
 Route::get('/health', fn() => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
@@ -41,6 +43,8 @@ Route::prefix('v1')->group(function () {
     Route::post('auth/login',  [AuthController::class, 'login']);
     Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
             Route::get('cities', [CityController::class, 'index']);
+    // Public pages (no auth)
+    Route::get('pages/{slug}', [PublicPageController::class, 'show']);
 });
 /*
 |--------------------------------------------------------------------------
@@ -171,6 +175,13 @@ Route::prefix('v1/admin/system')
         Route::post('cvs/{id}/freeze',    [AdminCvController::class, 'freeze'])->middleware('perm:system.cvs.freeze');
         Route::post('cvs/{id}/unfreeze',  [AdminCvController::class, 'unfreeze'])->middleware('perm:system.cvs.freeze');
         Route::delete('cvs/{id}',         [AdminCvController::class, 'destroy'])->middleware('perm:system.cvs.destroy');
+
+        // Pages (Admin)
+        Route::get('pages', [SystemPageController::class, 'index'])->middleware('perm:system.pages.index');
+        Route::post('pages', [SystemPageController::class, 'store'])->middleware('perm:system.pages.store');
+        Route::put('pages/{id}', [SystemPageController::class, 'update'])->middleware('perm:system.pages.update');
+        Route::delete('pages/{id}', [SystemPageController::class, 'destroy'])->middleware('perm:system.pages.destroy');
+        Route::post('pages/{id}/toggle', [SystemPageController::class, 'toggle'])->middleware('perm:system.pages.toggle');
     });
 
 /*
