@@ -43,28 +43,51 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->append(App\Http\Middleware\ResolveTenant::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        // توحيد مخرجات الأخطاء كـ JSON
         $exceptions->render(function (\Throwable $e, $request) {
-            // أي طلب API أو طلب يتوقع JSON
+            // أي طلب API أو أي طلب يتوقع JSON
             if ($request->is('api/*') || $request->expectsJson()) {
                 $status = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
 
-                // لو عندك ApiResponder مقيّد في الحاوية، استخدمه
+                // لو الحالة 503 خَلّيها 500 عشان ما يبانش 503 للـ API
+                if ($status === 503) {
+                    $status = 500;
+                }
+
+                $debug = app()->hasDebugModeEnabled();
+
+                $payload = [
+                    'success' => false,
+                    'message' => $debug ? $e->getMessage() : 'Server Error',
+                ];
+
+                // في وضع الـ debug رجّع معلومات مكان الخطأ
+                if ($debug) {
+                    $payload['exception'] = get_class($e);
+                    $payload['file']      = $e->getFile();
+                    $payload['line']      = $e->getLine();
+                    // لو حابب تضيف الـ trace كمان:
+                    // $payload['trace'] = $e->getTraceAsString();
+                }
+
+                // لو عندك ApiResponder مقيّد في الحاوية
                 if (app()->bound('api.responder')) {
                     /** @var \App\Support\Api\ApiResponder $responder */
                     $responder = app('api.responder');
+
                     return $responder->fail(
-                        app()->hasDebugModeEnabled() ? $e->getMessage() : 'Server Error',
+                        $payload['message'],
                         status: $status,
-                        meta: app()->hasDebugModeEnabled() ? ['exception' => get_class($e)] : []
+                        meta: $debug ? [
+                            'exception' => $payload['exception'] ?? null,
+                            'file'      => $payload['file'] ?? null,
+                            'line'      => $payload['line'] ?? null,
+                            // 'trace'   => $payload['trace'] ?? null,
+                        ] : []
                     );
                 }
 
-                // fallback JSON
-                return response()->json([
-                    'success' => false,
-                    'message' => app()->hasDebugModeEnabled() ? $e->getMessage() : 'Server Error',
-                ], $status);
+                // Fallback JSON لو مفيش responder
+                return response()->json($payload, $status);
             }
         });
     })
