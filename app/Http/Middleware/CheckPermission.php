@@ -28,6 +28,11 @@ class CheckPermission
             return response()->json(['message' => 'Unauthenticated'], 401);
         }
 
+        $token = $user->currentAccessToken();
+        if ($token && ($token->can('*') || $token->can('system.manage'))) {
+            return $next($request);
+        }
+
         // لو اتحطت الصلاحية على الراوت كـ action attribute
         $routePerm = $request->route()->action['permission'] ?? null;
         $need = $routePerm ? [$routePerm] : $required;
