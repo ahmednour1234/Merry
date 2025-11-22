@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     // سجل مزوّداتك هنا (وليس داخل config/app.php في Laravel 12)
     ->withProviders([
+        App\Providers\AppServiceProvider::class,
         App\Providers\ApiFormattingServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ModulesServiceProvider::class,
