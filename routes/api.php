@@ -30,37 +30,26 @@ use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
 use Illuminate\Http\Request;
-use Laravel\Sanctum\Sanctum;
+use Laravel\Sanctum\PersonalAccessToken;
 
 Route::get('/health', fn() => ['ok' => true, 'ts' => now()->toIso8601String()]);
 
-// Temporary debug endpoint to inspect Sanctum token resolution (development only).
-Route::get('/debug/sanctum-token', function (Request $request) {
-    $bearer = $request->bearerToken();
+Route::get('v1/debug/token', function (Request $request) {
+    $raw = $request->bearerToken();
 
-    if (! $bearer) {
-        return response()->json([
-            'bearer' => null,
-            'found' => false,
-            'reason' => 'No bearer token on request.',
-        ]);
-    }
+    $token = PersonalAccessToken::findToken($raw);
 
-    $modelClass = Sanctum::$personalAccessTokenModel;
-    /** @var \Laravel\Sanctum\PersonalAccessToken|null $token */
-    $token = \Laravel\Sanctum\PersonalAccessToken::findToken($bearer);
-
-    return response()->json([
-        'bearer' => $bearer,
-        'model' => $modelClass,
-        'found' => (bool) $token,
-        'token_id' => optional($token)->id,
-        'tokenable_type' => optional($token)->tokenable_type,
-        'tokenable_id' => optional($token)->tokenable_id,
-        'abilities' => optional($token)->abilities,
-    ]);
+    return [
+        'raw'          => $raw,
+        'token_row_id' => optional($token)->id,
+        'abilities'    => optional($token)->abilities,
+        'tokenable'    => $token?->tokenable ? [
+            'class' => get_class($token->tokenable),
+            'id'    => $token->tokenable->id,
+            'email' => $token->tokenable->email ?? null,
+        ] : null,
+    ];
 });
-
 /*
 |--------------------------------------------------------------------------
 | Public Auth (system users)
