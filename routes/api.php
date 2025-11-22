@@ -54,7 +54,6 @@ Route::prefix('v1')->group(function () {
 */
 Route::get('v1/admin/system/nationalities', [NationalityController::class, 'index']);
 Route::prefix('v1/admin/system')
-    ->middleware(['auth:sanctum', 'ability:system.manage'])
     ->group(function () {
         // Languages
         Route::get('languages',  [SystemLanguageController::class, 'index'])->middleware('perm:system.languages.index');
