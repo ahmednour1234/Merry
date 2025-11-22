@@ -177,11 +177,11 @@ Route::prefix('v1/admin/system')
         Route::delete('cvs/{id}',         [AdminCvController::class, 'destroy'])->middleware('perm:system.cvs.destroy');
 
         // Pages (Admin)
-        Route::get('pages', [SystemPageController::class, 'index'])->middleware('perm:system.pages.index');
-        Route::post('pages', [SystemPageController::class, 'store'])->middleware('perm:system.pages.store');
-        Route::put('pages/{id}', [SystemPageController::class, 'update'])->middleware('perm:system.pages.update');
-        Route::delete('pages/{id}', [SystemPageController::class, 'destroy'])->middleware('perm:system.pages.destroy');
-        Route::post('pages/{id}/toggle', [SystemPageController::class, 'toggle'])->middleware('perm:system.pages.toggle');
+        Route::get('pages', [SystemPageController::class, 'index']);
+        Route::post('pages', [SystemPageController::class, 'store']);
+        Route::put('pages/{id}', [SystemPageController::class, 'update']);
+        Route::delete('pages/{id}', [SystemPageController::class, 'destroy']);
+        Route::post('pages/{id}/toggle', [SystemPageController::class, 'toggle']);
     });
 
 /*

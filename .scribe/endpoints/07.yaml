@@ -1,520 +1,86 @@
-name: 'System / Users'
+name: 'System / Audit Logs'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/users
+    uri: api/v1/admin/system/audit-logs
     metadata:
-      groupName: 'System / Users'
+      groupName: 'System / Audit Logs'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'List audit logs (read-only).'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    headers: []
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
-      name:
-        name: name
+      user_id:
+        name: user_id
         description: ''
         required: false
-        example: Ahmed
-        type: string
+        example: 17
+        type: integer
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         custom: []
-      email:
-        name: email
+      action:
+        name: action
         description: ''
         required: false
-        example: admin@example.com
+        example: consequatur
         type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         custom: []
-      active:
-        name: active
+      model:
+        name: model
         description: ''
         required: false
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      guard:
-        name: guard
-        description: ''
-        required: false
-        example: api
+        example: consequatur
         type: string
         enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      role:
-        name: role
-        description: 'Role slug/name/id.'
-        required: false
-        example: admin
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         custom: []
       from:
         name: from
         description: date
         required: false
-        example: '2025-01-01'
+        example: consequatur
         type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         custom: []
       to:
         name: to
         description: date
         required: false
-        example: '2025-12-31'
+        example: consequatur
         type: string
         enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      per_page:
-        name: per_page
-        description: ''
-        required: false
-        example: 15
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         custom: []
     cleanQueryParameters:
-      name: Ahmed
-      email: admin@example.com
-      active: true
-      guard: api
-      role: admin
-      from: '2025-01-01'
-      to: '2025-12-31'
-      per_page: 15
+      user_id: 17
+      action: consequatur
+      model: consequatur
+      from: consequatur
+      to: consequatur
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {{token}}'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/admin/system/users
-    metadata:
-      groupName: 'System / Users'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Full name. Must not be greater than 191 characters.'
-        required: true
-        example: 'Ahmed Ali'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      email:
-        name: email
-        description: 'Unique email. Must be a valid email address. Must not be greater than 191 characters.'
-        required: true
-        example: admin@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      phone:
-        name: phone
-        description: 'Optional phone. Must not be greater than 30 characters.'
-        required: false
-        example: '+201001234567'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      password:
-        name: password
-        description: 'Password (min 6). Must be at least 6 characters. Must not be greater than 191 characters.'
-        required: true
-        example: secret123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      guard:
-        name: guard
-        description: 'Auth guard. Must not be greater than 32 characters.'
-        required: false
-        example: api
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      active:
-        name: active
-        description: 'Active flag.'
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      roles:
-        name: roles
-        description: 'The <code>id</code> of an existing record in the system.roles table.'
-        required: false
-        example:
-          - 17
-        type: 'integer[]'
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Ahmed Ali'
-      email: admin@example.com
-      phone: '+201001234567'
-      password: secret123
-      guard: api
-      active: false
-      roles:
-        - 17
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {{token}}'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/admin/system/users/{id}'
-    metadata:
-      groupName: 'System / Users'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Full name. Must not be greater than 191 characters.'
-        required: false
-        example: 'Ahmed Updated'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      email:
-        name: email
-        description: 'Unique email. Must be a valid email address. Must not be greater than 191 characters.'
-        required: false
-        example: admin2@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      phone:
-        name: phone
-        description: 'Phone. Must not be greater than 30 characters.'
-        required: false
-        example: '+201111111111'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      password:
-        name: password
-        description: 'New password (optional). Must be at least 6 characters. Must not be greater than 191 characters.'
-        required: false
-        example: newpass123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      guard:
-        name: guard
-        description: 'Auth guard. Must not be greater than 32 characters.'
-        required: false
-        example: api
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      active:
-        name: active
-        description: 'Active flag.'
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      roles:
-        name: roles
-        description: 'The <code>id</code> of an existing record in the system.roles table.'
-        required: false
-        example:
-          - 17
-        type: 'integer[]'
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      name: 'Ahmed Updated'
-      email: admin2@example.com
-      phone: '+201111111111'
-      password: newpass123
-      guard: api
-      active: false
-      roles:
-        - 17
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {{token}}'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/admin/system/users/{id}'
-    metadata:
-      groupName: 'System / Users'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {{token}}'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: 'api/v1/admin/system/users/{id}/toggle'
-    metadata:
-      groupName: 'System / Users'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      active:
-        name: active
-        description: ''
-        required: true
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      active: true
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {{token}}'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: 'api/v1/admin/system/users/{id}/sync-roles'
-    metadata:
-      groupName: 'System / Users'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      roles:
-        name: roles
-        description: 'List of role IDs.'
-        required: true
-        example:
-          - 1
-          - 2
-        type: 'string[]'
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      roles:
-        - 1
-        - 2
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {{token}}'
+    auth: []
     controller: null
     method: null
     route: null

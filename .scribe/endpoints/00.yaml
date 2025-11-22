@@ -700,7 +700,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -734,7 +734,7 @@ endpoints:
       phone: mniihfqcoynlazghdtqtq
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
-      active: true
+      active: false
       blocked: true
     fileParameters:
       image: null
@@ -1441,14 +1441,14 @@ endpoints:
         name: auto_renew
         description: ''
         required: true
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      auto_renew: true
+      auto_renew: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -1498,16 +1498,6 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-      email:
-        name: email
-        description: 'Email address (optional, not used for login). Must be a valid email address.'
-        required: false
-        example: john@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
       phone:
         name: phone
         description: 'Phone number. Must not be greater than 20 characters.'
@@ -1531,7 +1521,6 @@ endpoints:
     cleanBodyParameters:
       national_id: '1234567890'
       name: 'John Doe'
-      email: john@example.com
       phone: '+966500000001'
       password: secret1234
     fileParameters: []
@@ -1950,16 +1939,6 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-      email:
-        name: email
-        description: 'Updated email address. Must be a valid email address. Must not be greater than 191 characters.'
-        required: true
-        example: johnathan@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
       phone:
         name: phone
         description: 'Updated phone number. Must not be greater than 32 characters.'
@@ -2012,7 +1991,6 @@ endpoints:
         custom: []
     cleanBodyParameters:
       name: 'Johnathan Doe'
-      email: johnathan@example.com
       phone: '+966511111111'
       country_id: 2
       city_id: 8
