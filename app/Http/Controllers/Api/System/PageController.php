@@ -121,6 +121,24 @@ class PageController extends ApiController
                     'meta_description' => $translation['meta_description'] ?? null,
                 ]);
             }
+		} else {
+			// If no translations provided, create one using system default locale
+			try {
+				/** @var \App\Services\SystemSettings $settings */
+				$settings = app(\App\Services\SystemSettings::class);
+				$defaultLocale = $settings->defaultLocale('en');
+			} catch (\Throwable $e) {
+				$defaultLocale = 'en';
+			}
+
+			PageTranslation::on('system')->create([
+				'page_id' => $page->id,
+				'lang_code' => $defaultLocale,
+				'title' => $data['title'],
+				'content' => $data['content'] ?? null,
+				'meta_title' => $data['meta_title'] ?? null,
+				'meta_description' => $data['meta_description'] ?? null,
+			]);
         }
 
         $page->load('translations');
