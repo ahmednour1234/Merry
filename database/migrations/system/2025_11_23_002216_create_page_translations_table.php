@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::connection($this->connection)->create('page_translations', function (Blueprint $table) {
+        $schema = Schema::connection($this->connection);
+        
+        // Check if table already exists
+        if ($schema->hasTable('page_translations')) {
+            return;
+        }
+
+        $schema->create('page_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('page_id');
             $table->string('lang_code', 12); // Matches system_languages.code

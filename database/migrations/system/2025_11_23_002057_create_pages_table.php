@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::connection($this->connection)->create('pages', function (Blueprint $table) {
+        $schema = Schema::connection($this->connection);
+        
+        // Check if table already exists
+        if ($schema->hasTable('pages')) {
+            return;
+        }
+
+        $schema->create('pages', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique()->index();
