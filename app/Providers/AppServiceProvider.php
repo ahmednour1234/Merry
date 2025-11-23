@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
                 database_path('migrations/identity'),
             ]);
 
-            Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
+            // Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
             Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
             Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
             

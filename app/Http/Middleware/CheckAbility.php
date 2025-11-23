@@ -5,123 +5,82 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class CheckAbility
 {
     /**
-     * Handle the incoming request.
+     * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  mixed  ...$abilities
-     * @return mixed
+     * usage: ->middleware('ability:system.manage,users.view')
      */
-    public function handle($request, Closure $next, ...$abilities)
+    public function handle(Request $request, Closure $next, ...$abilities): Response
     {
-        try {
-            Log::debug('CheckAbility: Starting', [
-                'abilities' => $abilities,
-                'has_bearer_token' => !empty($request->bearerToken()),
-            ]);
+        Log::debug('CheckAbility: start', [
+            'abilities'        => $abilities,
+            'has_bearer_token' => !empty($request->bearerToken()),
+        ]);
 
-            // Check if user is authenticated first
-            $user = $request->user();
-            if (!$user) {
-                Log::warning('CheckAbility: User not authenticated');
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Unauthenticated. Please provide a valid token.',
-                ], 401);
-            }
+        // 1) جِب اليوزر من sanctum guard
+        $user = $request->user('sanctum');
 
-            Log::debug('CheckAbility: User authenticated', ['user_id' => $user->id]);
-
-            // Get the current access token
-            try {
-                $token = $user->currentAccessToken();
-            } catch (\Throwable $tokenError) {
-                Log::error('CheckAbility: Failed to get currentAccessToken', [
-                    'user_id' => $user->id,
-                    'error' => $tokenError->getMessage(),
-                    'exception' => get_class($tokenError),
-                    'file' => $tokenError->getFile(),
-                    'line' => $tokenError->getLine(),
-                ]);
-                throw $tokenError;
-            }
-            
-            if (!$token) {
-                Log::warning('CheckAbility: No access token found', ['user_id' => $user->id]);
-                return response()->json([
-                    'success' => false,
-                    'message' => 'No access token found.',
-                ], 401);
-            }
-
-            Log::debug('CheckAbility: Token found', [
-                'token_id' => $token->id,
-                'token_abilities' => $token->abilities ?? [],
-            ]);
-
-            // Check if token has any of the required abilities
-            $hasAbility = false;
-            foreach ($abilities as $ability) {
-                try {
-                    if ($token->can($ability) || $token->can('*')) {
-                        $hasAbility = true;
-                        Log::debug('CheckAbility: Ability check passed', ['ability' => $ability]);
-                        break;
-                    }
-                } catch (\Throwable $abilityError) {
-                    Log::error('CheckAbility: Ability check failed', [
-                        'ability' => $ability,
-                        'error' => $abilityError->getMessage(),
-                        'exception' => get_class($abilityError),
-                    ]);
-                    throw $abilityError;
-                }
-            }
-
-            if (!$hasAbility) {
-                Log::warning('CheckAbility: Token does not have required abilities', [
-                    'required' => $abilities,
-                    'token_abilities' => $token->abilities ?? [],
-                ]);
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Forbidden: Token does not have required ability. Required: ' . implode(', ', $abilities),
-                    'required_abilities' => $abilities,
-                    'token_abilities' => $token->abilities ?? [],
-                ], 403);
-            }
-
-            Log::debug('CheckAbility: All checks passed, proceeding');
-            // All checks passed, proceed to next middleware
-            return $next($request);
-            
-        } catch (\Throwable $e) {
-            // Log the error with full details
-            Log::error('CheckAbility Middleware Error', [
-                'message' => $e->getMessage(),
-                'exception' => get_class($e),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                'trace' => $e->getTraceAsString(),
-                'abilities' => $abilities ?? [],
-                'user_id' => $request->user()?->id,
-            ]);
-
-            // Return detailed error in debug mode
-            $debug = app()->hasDebugModeEnabled();
-            
+        if (! $user) {
+            Log::warning('CheckAbility: no user (unauthenticated)');
             return response()->json([
                 'success' => false,
-                'message' => $debug ? $e->getMessage() : 'Authentication error occurred',
-                'exception' => $debug ? get_class($e) : null,
-                'file' => $debug ? $e->getFile() : null,
-                'line' => $debug ? $e->getLine() : null,
-            ], 500);
+                'message' => 'Unauthenticated. Please provide a valid token.',
+            ], 401);
         }
+
+        // 2) جِب التوكن الحالي
+        $token = $user->currentAccessToken();
+
+        if (! $token) {
+            Log::warning('CheckAbility: user has no current token', [
+                'user_id' => $user->id,
+            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'No access token found for this user.',
+            ], 401);
+        }
+
+        $tokenAbilities = $token->abilities ?? [];
+
+        Log::debug('CheckAbility: token info', [
+            'user_id'         => $user->id,
+            'token_id'        => $token->id,
+            'token_abilities' => $tokenAbilities,
+        ]);
+
+        // 3) لو معاه * يبقى سوبر
+        if (in_array('*', $tokenAbilities, true)) {
+            return $next($request);
+        }
+
+        // 4) لو مفيش abilities في الراوت أصلاً → نعدّي
+        if (empty($abilities)) {
+            return $next($request);
+        }
+
+        // 5) استخدم tokenCan الرسمي من Sanctum
+        foreach ($abilities as $ability) {
+            if ($user->tokenCan($ability)) {
+                Log::debug('CheckAbility: passed', ['ability' => $ability]);
+                return $next($request);
+            }
+        }
+
+        Log::warning('CheckAbility: missing required abilities', [
+            'required_abilities' => $abilities,
+            'token_abilities'    => $tokenAbilities,
+        ]);
+
+        return response()->json([
+            'success'            => false,
+            'message'            => 'Forbidden: Missing required ability.',
+            'required_abilities' => $abilities,
+            'token_abilities'    => $tokenAbilities,
+        ], 403);
     }
 }
-

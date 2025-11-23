@@ -50,22 +50,29 @@ Route::get('v1/debug/token', function (Request $request) {
         ] : null,
     ];
 });
+Route::get('v1/ping', function (Request $request) {
+    return [
+        'ok'     => true,
+        'time'   => now()->toDateTimeString(),
+        'auth'   => $request->header('Authorization'),
+    ];
+});
 
 // Debug route to test middleware chain
-Route::get('v1/debug/middleware-test', function (Request $request) {
+Route::get('v1/test-auth', function (Request $request) {
+    $user = $request->user();
+
     return [
-        'success' => true,
-        'message' => 'Middleware test passed',
-        'user' => $request->user() ? [
-            'id' => $request->user()->id,
-            'email' => $request->user()->email,
-            'token' => $request->user()->currentAccessToken() ? [
-                'id' => $request->user()->currentAccessToken()->id,
-                'abilities' => $request->user()->currentAccessToken()->abilities,
-            ] : null,
+        'ok'   => true,
+        'user' => $user ? [
+            'id'    => $user->id,
+            'type'  => get_class($user),
+            'email' => $user->email ?? null,
         ] : null,
+        'token_abilities' => $user?->currentAccessToken()?->abilities ?? [],
     ];
-})->middleware(['auth:sanctum', 'ability:system.manage']);
+})->middleware('token_auth');
+
 /*
 |--------------------------------------------------------------------------
 | Public Auth (system users)
@@ -84,7 +91,7 @@ Route::prefix('v1')->group(function () {
 */
 Route::get('v1/admin/system/nationalities', [NationalityController::class, 'index']);
 Route::prefix('v1/admin/system')
-    ->middleware(['auth:sanctum', 'ability:system.manage'])
+    ->middleware(['token_auth', 'check_ability:system.manage'])
     ->group(function () {
         // Languages
         Route::get('languages',  [SystemLanguageController::class, 'index'])->middleware('perm:system.languages.index');
