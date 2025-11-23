@@ -7,6 +7,7 @@ use App\Http\Resources\System\PageResource;
 use App\Models\Page;
 use App\Models\PageTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class PageController extends ApiController
 {
@@ -112,14 +113,20 @@ class PageController extends ApiController
         // Handle translations if provided
         if (isset($data['translations']) && is_array($data['translations'])) {
             foreach ($data['translations'] as $translation) {
-                PageTranslation::on('system')->create([
-                    'page_id' => $page->id,
-                    'lang_code' => $translation['lang_code'],
-                    'title' => $translation['title'],
-                    'content' => $translation['content'] ?? null,
-                    'meta_title' => $translation['meta_title'] ?? null,
-                    'meta_description' => $translation['meta_description'] ?? null,
-                ]);
+				$attrs = [
+					'page_id' => $page->id,
+					'lang_code' => $translation['lang_code'],
+					'title' => $translation['title'],
+					'content' => $translation['content'] ?? null,
+				];
+				$schema = Schema::connection('system');
+				if ($schema->hasColumn('page_translations', 'meta_title')) {
+					$attrs['meta_title'] = $translation['meta_title'] ?? null;
+				}
+				if ($schema->hasColumn('page_translations', 'meta_description')) {
+					$attrs['meta_description'] = $translation['meta_description'] ?? null;
+				}
+				PageTranslation::on('system')->create($attrs);
             }
 		} else {
 			// If no translations provided, create one using system default locale
@@ -131,14 +138,20 @@ class PageController extends ApiController
 				$defaultLocale = 'en';
 			}
 
-			PageTranslation::on('system')->create([
+			$attrs = [
 				'page_id' => $page->id,
 				'lang_code' => $defaultLocale,
 				'title' => $data['title'],
 				'content' => $data['content'] ?? null,
-				'meta_title' => $data['meta_title'] ?? null,
-				'meta_description' => $data['meta_description'] ?? null,
-			]);
+			];
+			$schema = Schema::connection('system');
+			if ($schema->hasColumn('page_translations', 'meta_title')) {
+				$attrs['meta_title'] = $data['meta_title'] ?? null;
+			}
+			if ($schema->hasColumn('page_translations', 'meta_description')) {
+				$attrs['meta_description'] = $data['meta_description'] ?? null;
+			}
+			PageTranslation::on('system')->create($attrs);
         }
 
         $page->load('translations');
@@ -182,18 +195,25 @@ class PageController extends ApiController
         // Handle translations if provided
         if (isset($data['translations']) && is_array($data['translations'])) {
             foreach ($data['translations'] as $translation) {
-                PageTranslation::on('system')->updateOrCreate(
-                    [
-                        'page_id' => $page->id,
-                        'lang_code' => $translation['lang_code'],
-                    ],
-                    [
-                        'title' => $translation['title'],
-                        'content' => $translation['content'] ?? null,
-                        'meta_title' => $translation['meta_title'] ?? null,
-                        'meta_description' => $translation['meta_description'] ?? null,
-                    ]
-                );
+				$values = [
+					'title' => $translation['title'],
+					'content' => $translation['content'] ?? null,
+				];
+				$schema = Schema::connection('system');
+				if ($schema->hasColumn('page_translations', 'meta_title')) {
+					$values['meta_title'] = $translation['meta_title'] ?? null;
+				}
+				if ($schema->hasColumn('page_translations', 'meta_description')) {
+					$values['meta_description'] = $translation['meta_description'] ?? null;
+				}
+
+				PageTranslation::on('system')->updateOrCreate(
+					[
+						'page_id' => $page->id,
+						'lang_code' => $translation['lang_code'],
+					],
+					$values
+				);
             }
         }
 
