@@ -110,6 +110,14 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-pages--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-system-pages--id-">Delete page</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-settings">
+                                <a href="#endpoints-GETapi-v1-admin-system-settings">GET /v1/admin/system/settings?scope=global|null
+يعرض الإعدادات حسب الـ scope (أو الكل لو scope=null)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-system-settings--key-">
+                                <a href="#endpoints-PUTapi-v1-admin-system-settings--key-">PUT /v1/admin/system/settings/{key}
+body: { value: mixed, scope?: string, type?: "string"|"json" }</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-permissions">
                                 <a href="#endpoints-GETapi-v1-admin-system-permissions">GET api/v1/admin/system/permissions</a>
                             </li>
@@ -2156,6 +2164,174 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="endpoints-GETapi-v1-admin-system-settings">GET /v1/admin/system/settings?scope=global|null
+يعرض الإعدادات حسب الـ scope (أو الكل لو scope=null)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-settings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/settings"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/settings"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-settings">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-settings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-settings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-settings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-settings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-settings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-settings" data-method="GET"
+      data-path="api/v1/admin/system/settings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-settings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-settings"
+                    onclick="tryItOut('GETapi-v1-admin-system-settings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-settings"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-settings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-settings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/settings</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-system-settings--key-">PUT /v1/admin/system/settings/{key}
+body: { value: mixed, scope?: string, type?: &quot;string&quot;|&quot;json&quot; }</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-system-settings--key-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://mery.alemtayaz.com/api/v1/admin/system/settings/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/settings/consequatur"
+);
+
+fetch(url, {
+    method: "PUT",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-system-settings--key-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-system-settings--key-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-system-settings--key-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-system-settings--key-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-system-settings--key-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-system-settings--key-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-system-settings--key-" data-method="PUT"
+      data-path="api/v1/admin/system/settings/{key}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-system-settings--key-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-system-settings--key-"
+                    onclick="tryItOut('PUTapi-v1-admin-system-settings--key-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-system-settings--key-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-system-settings--key-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-system-settings--key-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/system/settings/{key}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>key</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="key"                data-endpoint="PUTapi-v1-admin-system-settings--key-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
                     <h2 id="endpoints-GETapi-v1-admin-system-permissions">GET api/v1/admin/system/permissions</h2>
 
 <p>
@@ -3271,8 +3447,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "email=ablanda@example.org"\
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
     --form "active="\
-    --form "blocked=1"\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php6AD4.tmp" </code></pre></div>
+    --form "blocked="\
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2ACF.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3294,7 +3470,7 @@ body.append('phone', 'mniihfqcoynlazghdtqtq');
 body.append('email', 'ablanda@example.org');
 body.append('password', ''YAKYLk4&gt;SJIrIV#lz.');
 body.append('active', '');
-body.append('blocked', '1');
+body.append('blocked', '');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -3495,7 +3671,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
@@ -3506,7 +3682,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php6AD4.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2ACF.tmp</code></p>
         </div>
         </form>
 
@@ -13173,7 +13349,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2B39.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEAF6.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -13294,7 +13470,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2B39.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEAF6.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -13361,7 +13537,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2B49.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEB06.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -13494,7 +13670,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2B49.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEB06.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;

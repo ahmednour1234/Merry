@@ -704,6 +704,79 @@ endpoints:
   -
     httpMethods:
       - GET
+    uri: api/v1/admin/system/settings
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        GET /v1/admin/system/settings?scope=global|null
+        يعرض الإعدادات حسب الـ scope (أو الكل لو scope=null)
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/v1/admin/system/settings/{key}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        PUT /v1/admin/system/settings/{key}
+        body: { value: mixed, scope?: string, type?: "string"|"json" }
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters:
+      key:
+        name: key
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      key: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
     uri: api/v1/admin/system/permissions
     metadata:
       groupName: Endpoints
@@ -1323,7 +1396,7 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1348,7 +1421,7 @@ endpoints:
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
       active: false
-      blocked: true
+      blocked: false
     fileParameters:
       image: null
     responses: []

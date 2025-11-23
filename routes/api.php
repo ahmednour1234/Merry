@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\System\CvController as AdminCvController;
 use App\Http\Controllers\Api\System\NotificationController as SystemNotificationController;
 use App\Http\Controllers\Api\System\NotificationBroadcastController;
 use App\Http\Controllers\Api\System\PageController;
+use App\Http\Controllers\Api\System\SystemSettingsController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -106,6 +107,10 @@ Route::prefix('v1/admin/system/pages')->group(function () {
 Route::prefix('v1/admin/system')
     ->middleware(['token_auth', 'check_ability:system.manage'])
     ->group(function () {
+		// System Settings
+		Route::get('settings',  [SystemSettingsController::class, 'index'])->middleware('perm:system.settings.index');
+		Route::put('settings/{key}', [SystemSettingsController::class, 'update'])->middleware('perm:system.settings.update');
+
         // Languages
         Route::get('languages',  [SystemLanguageController::class, 'index'])->middleware('perm:system.languages.index');
         Route::post('languages', [SystemLanguageController::class, 'store'])->middleware('perm:system.languages.store');

@@ -21,6 +21,7 @@ use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\CheckPermission;
 use App\Http\Middleware\ForceJsonResponse;
 use App\Http\Middleware\CheckAbility;
+use App\Http\Middleware\SetLocale;
 
 // ===== Sanctum ability middlewares =====
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
@@ -54,6 +55,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ValidatePostSize::class,
             TrimStrings::class,
             ConvertEmptyStringsToNull::class,
+            SetLocale::class,
         ]);
 
         /*

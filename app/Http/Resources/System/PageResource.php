@@ -14,13 +14,10 @@ class PageResource extends JsonResource
             return [];
         }
 
-        // Read language from Accept-Language header (e.g., ar, ar-SA, en-US)
-        $accept = $request->header('Accept-Language');
-        $lang = $accept ? explode(',', $accept)[0] : null;   // First language
-        if ($lang && str_contains($lang, '-')) {
-            $lang = explode('-', $lang)[0];                  // Convert en-US -> en
-        }
-        $lang = $lang ? strtolower($lang) : null;
+		/** @var \App\Services\LocaleService $localeService */
+		$localeService = app(\App\Services\LocaleService::class);
+		$preferred = $localeService->preferred($request); // e.g., ar, ar-SA
+		$preferredShort = strtolower(explode('-', $preferred)[0]);
 
         // Default values from page table
         $title = $this->title;
@@ -28,15 +25,37 @@ class PageResource extends JsonResource
         $metaTitle = $this->meta_title;
         $metaDescription = $this->meta_description;
 
-        // If translations are loaded, try to get by lang_code
-        if ($lang && $this->relationLoaded('translations')) {
-            $tr = $this->translations->firstWhere('lang_code', $lang);
-            if ($tr) {
-                $title = $tr->title;
-                $content = $tr->content;
-                $metaTitle = $tr->meta_title;
-                $metaDescription = $tr->meta_description;
-            }
+		// If translations are loaded, try to pick best match:
+		// 1) Full match (ar-SA), 2) Short match (ar), otherwise keep defaults
+		if ($this->relationLoaded('translations')) {
+			$full = $this->translations->first(function ($t) use ($preferred) {
+				$code = $t->lang_code;
+				// normalize both
+				$norm = str_replace('_', '-', $code);
+				if (str_contains($norm, '-')) {
+					[$l, $r] = explode('-', $norm, 2);
+					$norm = strtolower($l) . '-' . strtoupper($r);
+				} else {
+					$norm = strtolower($norm);
+				}
+				return $norm === $preferred;
+			});
+
+			$short = null;
+			if (!$full) {
+				$short = $this->translations->first(function ($t) use ($preferredShort) {
+					$codeShort = strtolower(explode('-', str_replace('_', '-', $t->lang_code))[0]);
+					return $codeShort === $preferredShort;
+				});
+			}
+
+			$tr = $full ?: $short;
+			if ($tr) {
+				$title = $tr->title ?? $title;
+				$content = $tr->content ?? $content;
+				$metaTitle = $tr->meta_title ?? $metaTitle;
+				$metaDescription = $tr->meta_description ?? $metaDescription;
+			}
         }
 
         return [
