@@ -104,9 +104,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-pages--id--toggle">
                                 <a href="#endpoints-POSTapi-v1-admin-system-pages--id--toggle">Toggle page active status</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-pages--id--translations">
-                                <a href="#endpoints-POSTapi-v1-admin-system-pages--id--translations">Upsert translation for a page</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-pages--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-system-pages--id-">Delete page</a>
                             </li>
@@ -1894,187 +1891,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-POSTapi-v1-admin-system-pages--id--translations">Upsert translation for a page</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-admin-system-pages--id--translations">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17/translations" \
-    --header "Content-Type: application/json" \
-    --data "{
-    \"lang_code\": \"ar\",
-    \"title\": \"عنوان الصفحة\",
-    \"content\": \"محتوى الصفحة\",
-    \"meta_title\": \"عنوان Meta\",
-    \"meta_description\": \"وصف Meta\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17/translations"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "lang_code": "ar",
-    "title": "عنوان الصفحة",
-    "content": "محتوى الصفحة",
-    "meta_title": "عنوان Meta",
-    "meta_description": "وصف Meta"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-admin-system-pages--id--translations">
-</span>
-<span id="execution-results-POSTapi-v1-admin-system-pages--id--translations" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-admin-system-pages--id--translations"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-pages--id--translations"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-admin-system-pages--id--translations" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-admin-system-pages--id--translations">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-admin-system-pages--id--translations" data-method="POST"
-      data-path="api/v1/admin/system/pages/{id}/translations"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-pages--id--translations', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-admin-system-pages--id--translations"
-                    onclick="tryItOut('POSTapi-v1-admin-system-pages--id--translations');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-admin-system-pages--id--translations"
-                    onclick="cancelTryOut('POSTapi-v1-admin-system-pages--id--translations');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-admin-system-pages--id--translations"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/admin/system/pages/{id}/translations</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="17"
-               data-component="url">
-    <br>
-<p>Page ID Example: <code>17</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>lang_code</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="lang_code"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="ar"
-               data-component="body">
-    <br>
-<p>Language code. Example: <code>ar</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="title"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="عنوان الصفحة"
-               data-component="body">
-    <br>
-<p>Translated title. Example: <code>عنوان الصفحة</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>content</code></b>&nbsp;&nbsp;
-<small>text</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="content"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="محتوى الصفحة"
-               data-component="body">
-    <br>
-<p>Translated content. Example: <code>محتوى الصفحة</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>meta_title</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="meta_title"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="عنوان Meta"
-               data-component="body">
-    <br>
-<p>Translated meta title. Example: <code>عنوان Meta</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>meta_description</code></b>&nbsp;&nbsp;
-<small>text</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="meta_description"                data-endpoint="POSTapi-v1-admin-system-pages--id--translations"
-               value="وصف Meta"
-               data-component="body">
-    <br>
-<p>Translated meta description. Example: <code>وصف Meta</code></p>
-        </div>
-        </form>
-
                     <h2 id="endpoints-DELETEapi-v1-admin-system-pages--id-">Delete page</h2>
 
 <p>
@@ -3447,8 +3263,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "email=ablanda@example.org"\
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
     --form "active="\
-    --form "blocked="\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2ACF.tmp" </code></pre></div>
+    --form "blocked=1"\
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php14B5.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3470,7 +3286,7 @@ body.append('phone', 'mniihfqcoynlazghdtqtq');
 body.append('email', 'ablanda@example.org');
 body.append('password', ''YAKYLk4&gt;SJIrIV#lz.');
 body.append('active', '');
-body.append('blocked', '');
+body.append('blocked', '1');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -3671,7 +3487,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
@@ -3682,7 +3498,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2ACF.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php14B5.tmp</code></p>
         </div>
         </form>
 
@@ -5230,7 +5046,7 @@ body: { auto_renew: bool }</h2>
     "https://mery.alemtayaz.com/api/v1/office/subscription/auto-renew" \
     --header "Content-Type: application/json" \
     --data "{
-    \"auto_renew\": false
+    \"auto_renew\": true
 }"
 </code></pre></div>
 
@@ -5246,7 +5062,7 @@ const headers = {
 };
 
 let body = {
-    "auto_renew": false
+    "auto_renew": true
 };
 
 fetch(url, {
@@ -5337,7 +5153,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -8118,7 +7934,7 @@ Must be one of:
     "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --data "{
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -8134,7 +7950,7 @@ const headers = {
 };
 
 let body = {
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -8237,7 +8053,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -13349,7 +13165,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEAF6.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpD4BC.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -13470,7 +13286,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEAF6.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpD4BC.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -13537,7 +13353,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEB06.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpD4CD.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -13670,7 +13486,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpEB06.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpD4CD.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;

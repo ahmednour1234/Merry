@@ -569,102 +569,6 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - POST
-    uri: 'api/v1/admin/system/pages/{id}/translations'
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Upsert translation for a page'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'Page ID'
-        required: true
-        example: 17
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: 17
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      lang_code:
-        name: lang_code
-        description: 'Language code.'
-        required: true
-        example: ar
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      title:
-        name: title
-        description: 'Translated title.'
-        required: true
-        example: 'عنوان الصفحة'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      content:
-        name: content
-        description: 'Translated content.'
-        required: false
-        example: 'محتوى الصفحة'
-        type: text
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      meta_title:
-        name: meta_title
-        description: 'Translated meta title.'
-        required: false
-        example: 'عنوان Meta'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      meta_description:
-        name: meta_description
-        description: 'Translated meta description.'
-        required: false
-        example: 'وصف Meta'
-        type: text
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-    cleanBodyParameters:
-      lang_code: ar
-      title: 'عنوان الصفحة'
-      content: 'محتوى الصفحة'
-      meta_title: 'عنوان Meta'
-      meta_description: 'وصف Meta'
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
       - DELETE
     uri: 'api/v1/admin/system/pages/{id}'
     metadata:
@@ -1398,7 +1302,7 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1423,7 +1327,7 @@ endpoints:
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
       active: false
-      blocked: false
+      blocked: true
     fileParameters:
       image: null
     responses: []
@@ -2129,14 +2033,14 @@ endpoints:
         name: auto_renew
         description: ''
         required: true
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      auto_renew: false
+      auto_renew: true
     fileParameters: []
     responses: []
     responseFields: []

@@ -100,7 +100,6 @@ Route::prefix('v1/admin/system/pages')->group(function () {
     Route::post('/', [PageController::class, 'store']);
     Route::put('{id}', [PageController::class, 'update']);
     Route::post('{id}/toggle', [PageController::class, 'toggle']);
-    Route::post('{id}/translations', [PageController::class, 'upsertTranslation']);
     Route::delete('{id}', [PageController::class, 'destroy']);
 });
 

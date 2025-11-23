@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\System;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\System\Page\UpsertPageTranslationRequest;
 use App\Http\Resources\System\PageResource;
 use App\Models\Page;
 use App\Models\PageTranslation;
@@ -203,50 +202,17 @@ class PageController extends ApiController
     }
 
     /**
-     * Delete page
-     * @urlParam id integer required
+	 * Delete page
+	 * @urlParam id integer required
      */
-    public function destroy($id)
+	public function destroy($id)
     {
         $page = Page::on('system')->find($id);
         if (!$page) {
             return $this->responder->fail('Page not found', status: 404);
         }
-        $page->delete();
+		$page->delete();
 
-        return $this->responder->ok(null, 'Page deleted');
-    }
-
-    /**
-     * Upsert translation for a page
-     * @urlParam id integer required Page ID
-     * @bodyParam lang_code string required Language code. Example: ar
-     * @bodyParam title string required Translated title. Example: عنوان الصفحة
-     * @bodyParam content text Translated content. Example: محتوى الصفحة
-     * @bodyParam meta_title string Translated meta title. Example: عنوان Meta
-     * @bodyParam meta_description text Translated meta description. Example: وصف Meta
-     */
-    public function upsertTranslation(UpsertPageTranslationRequest $r, $id)
-    {
-        $page = Page::on('system')->find($id);
-        if (!$page) {
-            return $this->responder->fail('Page not found', status: 404);
-        }
-
-        $data = $r->validated();
-        PageTranslation::on('system')->updateOrCreate(
-            [
-                'page_id' => $page->id,
-                'lang_code' => $data['lang_code'],
-            ],
-            [
-                'title' => $data['title'],
-                'content' => $data['content'] ?? null,
-                'meta_title' => $data['meta_title'] ?? null,
-                'meta_description' => $data['meta_description'] ?? null,
-            ]
-        );
-
-        return $this->responder->ok(null, 'Translation saved');
+		return $this->responder->ok(null, 'Page deleted');
     }
 }
