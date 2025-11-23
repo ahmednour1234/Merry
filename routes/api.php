@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\System\CategoryController;
 use App\Http\Controllers\Api\System\CvController as AdminCvController;
 use App\Http\Controllers\Api\System\NotificationController as SystemNotificationController;
 use App\Http\Controllers\Api\System\NotificationBroadcastController;
+use App\Http\Controllers\Api\System\PageController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -90,6 +91,18 @@ Route::prefix('v1')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::get('v1/admin/system/nationalities', [NationalityController::class, 'index']);
+
+// Pages - Public API (no authentication required)
+Route::prefix('v1/admin/system/pages')->group(function () {
+    Route::get('/', [PageController::class, 'index']);
+    Route::get('{id}', [PageController::class, 'show']);
+    Route::post('/', [PageController::class, 'store']);
+    Route::put('{id}', [PageController::class, 'update']);
+    Route::post('{id}/toggle', [PageController::class, 'toggle']);
+    Route::post('{id}/translations', [PageController::class, 'upsertTranslation']);
+    Route::delete('{id}', [PageController::class, 'destroy']);
+});
+
 Route::prefix('v1/admin/system')
     ->middleware(['token_auth', 'check_ability:system.manage'])
     ->group(function () {
