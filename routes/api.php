@@ -24,6 +24,7 @@ use App\Http\Controllers\Api\System\NotificationController as SystemNotification
 use App\Http\Controllers\Api\System\NotificationBroadcastController;
 use App\Http\Controllers\Api\System\PageController;
 use App\Http\Controllers\Api\System\SystemSettingsController;
+use App\Http\Controllers\Api\System\FavouriteCvAdminController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Api\Office\SubscriptionController;
 use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
+use App\Http\Controllers\Api\EndUser\FavouriteController;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -206,6 +208,10 @@ Route::prefix('v1/admin/system')
         Route::post('notifications/read-all', [SystemNotificationController::class, 'markAllRead']);
         Route::post('notifications/broadcast', [NotificationBroadcastController::class, 'store'])->middleware('perm:system.notifications.broadcast');
 
+        // Favourites CV (admin)
+        Route::get('favorites/cv', [FavouriteCvAdminController::class, 'index'])->middleware('perm:system.favorites_cv.index');
+        Route::get('favorites/cv/stats', [FavouriteCvAdminController::class, 'stats'])->middleware('perm:system.favorites_cv.stats');
+
         // Nationalities
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
         Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
@@ -288,11 +294,17 @@ Route::prefix('v1/enduser')->group(function () {
     Route::get('currencies',            [CatalogController::class, 'currencies']);
     Route::get('categories',            [CatalogController::class, 'categories']);
     Route::get('offices',               [CatalogController::class, 'offices']);
+	Route::get('top-offices',          [CatalogController::class, 'topOffices']);
     Route::get('cvs',                   [CatalogController::class, 'cvs']);
 
     Route::middleware(['token_auth'])->group(function () {
         Route::get('me',            [AuthEndUserController::class, 'me']);
         Route::put('profile',       [AuthEndUserController::class, 'updateProfile']);
         Route::post('auth/logout',  [AuthEndUserController::class, 'logout']);
+
+		// Favourites (EndUser)
+		Route::get('favorites/cvs',             [FavouriteController::class, 'index']);
+		Route::post('favorites/cvs',            [FavouriteController::class, 'store']);
+		Route::delete('favorites/cvs/{cvId}',   [FavouriteController::class, 'destroy']);
     });
 });

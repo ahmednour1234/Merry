@@ -13,6 +13,7 @@ use App\Models\City;
 use App\Models\Currency;
 use App\Models\Cv;
 use App\Models\Office;
+use App\Models\Identity\FavouriteCv;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -218,6 +219,62 @@ class CatalogController extends ApiController
 
         return $this->responder->paginated($paginator, CvResource::class, 'CVs list');
     }
+
+	/**
+	 * GET /api/v1/enduser/top-offices
+	 * Returns top offices by number of favourites on their CVs
+	 */
+	public function topOffices(Request $request)
+	{
+		$limit = max(1, (int) $request->integer('limit', 10));
+
+		// Count favourites per office by mapping favourites -> CV -> office_id
+		$topCv = FavouriteCv::on('identity')
+			->selectRaw('cv_id, COUNT(*) as favs')
+			->groupBy('cv_id')
+			->orderByDesc('favs')
+			->limit(200) // cap to reduce load then aggregate by office
+			->get();
+
+		if ($topCv->isEmpty()) {
+			return $this->responder->ok([], 'Top offices');
+		}
+
+		$cvIds = $topCv->pluck('cv_id')->all();
+		$cvs   = \App\Models\Cv::on('system')->whereIn('id', $cvIds)->get(['id','office_id']);
+		$cvToOffice = [];
+		foreach ($cvs as $cv) {
+			$cvToOffice[$cv->id] = (int) $cv->office_id;
+		}
+
+		$officeCounts = [];
+		foreach ($topCv as $row) {
+			$officeId = $cvToOffice[$row->cv_id] ?? null;
+			if ($officeId) {
+				$officeCounts[$officeId] = ($officeCounts[$officeId] ?? 0) + (int) $row->favs;
+			}
+		}
+
+		arsort($officeCounts);
+		$officeIds = array_slice(array_keys($officeCounts), 0, $limit);
+
+		if (empty($officeIds)) {
+			return $this->responder->ok([], 'Top offices');
+		}
+
+		$offices = Office::on('system')
+			->whereIn('id', $officeIds)
+			->where('active', true)
+			->where('blocked', false)
+			->get();
+
+		// Preserve ranking order
+		$offices = $offices->sortBy(function ($o) use ($officeCounts) {
+			return -($officeCounts[$o->id] ?? 0);
+		})->values();
+
+		return $this->responder->ok(OfficeResource::collection($offices), 'Top offices');
+	}
 }
 
 
