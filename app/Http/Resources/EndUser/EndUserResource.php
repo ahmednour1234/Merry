@@ -36,6 +36,7 @@ class EndUserResource extends JsonResource
             'phone' => $this->phone,
             'country_id' => $this->country_id,
             'city_id' => $this->city_id,
+            'national_id' => $this->national_id,
             'city' => $city,
 			'nationality' => $nationality,
             'bio' => $this->bio,
