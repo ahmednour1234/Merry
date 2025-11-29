@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\System\NotificationBroadcastController;
 use App\Http\Controllers\Api\System\PageController;
 use App\Http\Controllers\Api\System\SystemSettingsController;
 use App\Http\Controllers\Api\System\FavouriteCvAdminController;
+use App\Http\Controllers\Api\System\SliderController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -212,6 +213,14 @@ Route::prefix('v1/admin/system')
         Route::get('favorites/cv', [FavouriteCvAdminController::class, 'index'])->middleware('perm:system.favorites_cv.index');
         Route::get('favorites/cv/stats', [FavouriteCvAdminController::class, 'stats'])->middleware('perm:system.favorites_cv.stats');
 
+        // Sliders (admin)
+        Route::get('sliders',               [SliderController::class, 'index'])->middleware('perm:system.sliders.index');
+        Route::post('sliders',              [SliderController::class, 'store'])->middleware('perm:system.sliders.store');
+        Route::put('sliders/{id}',          [SliderController::class, 'update'])->middleware('perm:system.sliders.update');
+        Route::delete('sliders/{id}',       [SliderController::class, 'destroy'])->middleware('perm:system.sliders.destroy');
+        Route::post('sliders/{id}/toggle',  [SliderController::class, 'toggle'])->middleware('perm:system.sliders.toggle');
+        Route::post('sliders/{id}/translations', [SliderController::class, 'upsertTranslation'])->middleware('perm:system.sliders.translations');
+
         // Nationalities
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
         Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
@@ -296,6 +305,8 @@ Route::prefix('v1/enduser')->group(function () {
     Route::get('offices',               [CatalogController::class, 'offices']);
 	Route::get('top-offices',          [CatalogController::class, 'topOffices']);
     Route::get('cvs',                   [CatalogController::class, 'cvs']);
+	Route::get('cvs/{id}',              [CatalogController::class, 'cv']);
+	Route::get('sliders',               [CatalogController::class, 'sliders']);
 
     Route::middleware(['token_auth'])->group(function () {
         Route::get('me',            [AuthEndUserController::class, 'me']);

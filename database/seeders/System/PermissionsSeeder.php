@@ -138,6 +138,14 @@ class PermissionsSeeder extends Seeder
             // ------- favourites cv (admin) -------
             ['slug'=>'system.favorites_cv.index',      'name'=>'List Favourites CV',               'guard'=>'api','active'=>1],
             ['slug'=>'system.favorites_cv.stats',      'name'=>'Favourites CV Stats',              'guard'=>'api','active'=>1],
+
+            // ------- sliders -------
+            ['slug'=>'system.sliders.index',           'name'=>'List Sliders',                     'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.store',           'name'=>'Create Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.update',          'name'=>'Update Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.destroy',         'name'=>'Delete Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.toggle',          'name'=>'Toggle Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.translations',    'name'=>'Upsert Slider Translations',       'guard'=>'api','active'=>1],
         ];
 
         foreach ($perms as $p) {

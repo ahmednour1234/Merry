@@ -154,6 +154,12 @@ body: { value: mixed, scope?: string, type?: "string"|"json" }</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-offices--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-system-offices--id-">حذف مكتب</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-favorites-cv">
+                                <a href="#endpoints-GETapi-v1-admin-system-favorites-cv">GET /api/v1/admin/system/favorites/cv</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-favorites-cv-stats">
+                                <a href="#endpoints-GETapi-v1-admin-system-favorites-cv-stats">GET /api/v1/admin/system/favorites/cv/stats</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-register">
                                 <a href="#endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
 يقبل اختيارياً: fcm_token, device, platform
@@ -229,6 +235,10 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-offices">
                                 <a href="#endpoints-GETapi-v1-enduser-offices">GET api/v1/enduser/offices</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-top-offices">
+                                <a href="#endpoints-GETapi-v1-enduser-top-offices">GET /api/v1/enduser/top-offices
+Returns top offices by number of favourites on their CVs</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-cvs">
                                 <a href="#endpoints-GETapi-v1-enduser-cvs">GET api/v1/enduser/cvs</a>
                             </li>
@@ -240,6 +250,15 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-logout">
                                 <a href="#endpoints-POSTapi-v1-enduser-auth-logout">POST /api/v1/enduser/auth/logout</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-favorites-cvs">
+                                <a href="#endpoints-GETapi-v1-enduser-favorites-cvs">GET /api/v1/enduser/favorites/cvs</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-favorites-cvs">
+                                <a href="#endpoints-POSTapi-v1-enduser-favorites-cvs">POST /api/v1/enduser/favorites/cvs</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+                                <a href="#endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">DELETE /api/v1/enduser/favorites/cvs/{cvId}</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -615,7 +634,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 23, 2025</li>
+        <li>Last updated: November 24, 2025</li>
     </ul>
 </div>
 
@@ -3263,8 +3282,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "email=ablanda@example.org"\
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
     --form "active=1"\
-    --form "blocked="\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php984F.tmp" </code></pre></div>
+    --form "blocked=1"\
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php6C46.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3286,7 +3305,7 @@ body.append('phone', 'mniihfqcoynlazghdtqtq');
 body.append('email', 'ablanda@example.org');
 body.append('password', ''YAKYLk4&gt;SJIrIV#lz.');
 body.append('active', '1');
-body.append('blocked', '');
+body.append('blocked', '1');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -3487,7 +3506,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
@@ -3498,7 +3517,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php984F.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php6C46.tmp</code></p>
         </div>
         </form>
 
@@ -3767,6 +3786,160 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the office. Example: <code>17</code></p>
             </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-favorites-cv">GET /api/v1/admin/system/favorites/cv</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-favorites-cv">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-favorites-cv">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-favorites-cv" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-favorites-cv"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-favorites-cv"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-favorites-cv" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-favorites-cv">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-favorites-cv" data-method="GET"
+      data-path="api/v1/admin/system/favorites/cv"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-favorites-cv', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-favorites-cv"
+                    onclick="tryItOut('GETapi-v1-admin-system-favorites-cv');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-favorites-cv"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-favorites-cv');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-favorites-cv"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/favorites/cv</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-favorites-cv-stats">GET /api/v1/admin/system/favorites/cv/stats</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-favorites-cv-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv/stats"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv/stats"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-favorites-cv-stats">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-favorites-cv-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-favorites-cv-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-favorites-cv-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-favorites-cv-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-favorites-cv-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-favorites-cv-stats" data-method="GET"
+      data-path="api/v1/admin/system/favorites/cv/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-favorites-cv-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-favorites-cv-stats"
+                    onclick="tryItOut('GETapi-v1-admin-system-favorites-cv-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-favorites-cv-stats"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-favorites-cv-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-favorites-cv-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/favorites/cv/stats</code></b>
+        </p>
                     </form>
 
                     <h2 id="endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
@@ -6131,6 +6304,84 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                     </form>
 
+                    <h2 id="endpoints-GETapi-v1-enduser-top-offices">GET /api/v1/enduser/top-offices
+Returns top offices by number of favourites on their CVs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-top-offices">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/top-offices"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/top-offices"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-top-offices">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-top-offices" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-top-offices"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-top-offices"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-top-offices" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-top-offices">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-top-offices" data-method="GET"
+      data-path="api/v1/enduser/top-offices"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-top-offices', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-top-offices"
+                    onclick="tryItOut('GETapi-v1-enduser-top-offices');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-top-offices"
+                    onclick="cancelTryOut('GETapi-v1-enduser-top-offices');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-top-offices"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/top-offices</code></b>
+        </p>
+                    </form>
+
                     <h2 id="endpoints-GETapi-v1-enduser-cvs">GET api/v1/enduser/cvs</h2>
 
 <p>
@@ -6538,6 +6789,289 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <small class="badge badge-black">POST</small>
             <b><code>api/v1/enduser/auth/logout</code></b>
         </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-enduser-favorites-cvs">GET /api/v1/enduser/favorites/cvs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-favorites-cvs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-favorites-cvs">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-favorites-cvs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-favorites-cvs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-favorites-cvs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-favorites-cvs" data-method="GET"
+      data-path="api/v1/enduser/favorites/cvs"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-favorites-cvs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-favorites-cvs"
+                    onclick="tryItOut('GETapi-v1-enduser-favorites-cvs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-favorites-cvs"
+                    onclick="cancelTryOut('GETapi-v1-enduser-favorites-cvs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-favorites-cvs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/favorites/cvs</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-enduser-favorites-cvs">POST /api/v1/enduser/favorites/cvs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-enduser-favorites-cvs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"cv_id\": 17
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "cv_id": 17
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-enduser-favorites-cvs">
+</span>
+<span id="execution-results-POSTapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-enduser-favorites-cvs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-favorites-cvs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-enduser-favorites-cvs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-enduser-favorites-cvs" data-method="POST"
+      data-path="api/v1/enduser/favorites/cvs"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-favorites-cvs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-enduser-favorites-cvs"
+                    onclick="tryItOut('POSTapi-v1-enduser-favorites-cvs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-enduser-favorites-cvs"
+                    onclick="cancelTryOut('POSTapi-v1-enduser-favorites-cvs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-enduser-favorites-cvs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/enduser/favorites/cvs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-enduser-favorites-cvs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="POSTapi-v1-enduser-favorites-cvs"
+               value="17"
+               data-component="body">
+    <br>
+<p>Example: <code>17</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">DELETE /api/v1/enduser/favorites/cvs/{cvId}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs/consequatur"
+);
+
+fetch(url, {
+    method: "DELETE",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+</span>
+<span id="execution-results-DELETEapi-v1-enduser-favorites-cvs--cvId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-enduser-favorites-cvs--cvId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-enduser-favorites-cvs--cvId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-enduser-favorites-cvs--cvId-" data-method="DELETE"
+      data-path="api/v1/enduser/favorites/cvs/{cvId}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-enduser-favorites-cvs--cvId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+                    onclick="tryItOut('DELETEapi-v1-enduser-favorites-cvs--cvId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+                    onclick="cancelTryOut('DELETEapi-v1-enduser-favorites-cvs--cvId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/enduser/favorites/cvs/{cvId}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cvId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cvId"                data-endpoint="DELETEapi-v1-enduser-favorites-cvs--cvId-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>Example: <code>consequatur</code></p>
+            </div>
                     </form>
 
                 <h1 id="notifications">Notifications</h1>
@@ -13165,7 +13699,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5818.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2C3E.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -13286,7 +13820,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5818.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2C3E.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -13353,7 +13887,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5828.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2C4E.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -13486,7 +14020,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5828.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php2C4E.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;

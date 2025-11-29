@@ -22,6 +22,27 @@ class NationalityResource extends JsonResource
         }
         $lang = $lang ? strtolower($lang) : null;
 
+		// صورة العلم: مبدئياً من مكتبة أعلام (FlagCDN) حسب كود الجنسية، مع fallback من الداتابيس لو متاح
+		$code = strtolower((string) $this->code);
+		$libraryPng = $code !== '' ? "https://flagcdn.com/w80/{$code}.png" : null; // حجم صغير مناسب لـ FE
+		$librarySvg = $code !== '' ? "https://flagcdn.com/{$code}.svg" : null;
+
+		$dbImage = null;
+		$meta = is_array($this->meta ?? null) ? $this->meta : [];
+		if (!empty($meta)) {
+			// جرّب مفاتيح شائعة داخل meta
+			if (!empty($meta['image_url'])) {
+				$dbImage = (string) $meta['image_url'];
+			} elseif (!empty($meta['image'])) {
+				$dbImage = (string) $meta['image'];
+			} elseif (!empty($meta['image_path'])) {
+				$dbImage = asset('storage/' . ltrim((string)$meta['image_path'], '/'));
+			}
+		}
+
+		$image = $libraryPng ?: $dbImage;
+		$imageSvg = $librarySvg; // لو حاب الـ FE يستخدم SVG
+
         // الاسم الافتراضي من عمود name في nationalities
         $name = $this->name;
 
@@ -37,6 +58,8 @@ class NationalityResource extends JsonResource
             'id'     => $this->id,
             'code'   => $this->code,
             'name'   => $name,
+			'image'  => $image,
+			'image_svg' => $imageSvg,
             'active' => (bool) $this->active,
 
             // نرجّع كل الترجمات لو محمّلة (للاستخدام في البانل مثلاً)

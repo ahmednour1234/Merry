@@ -7,12 +7,14 @@ use App\Http\Resources\System\CategoryResource;
 use App\Http\Resources\System\CityResource;
 use App\Http\Resources\System\CurrencyResource;
 use App\Http\Resources\System\CvResource;
+use App\Http\Resources\System\SliderResource;
 use App\Http\Resources\Office\OfficeResource;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Currency;
 use App\Models\Cv;
 use App\Models\Office;
+use App\Models\Slider;
 use App\Models\Identity\FavouriteCv;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -220,6 +222,51 @@ class CatalogController extends ApiController
         return $this->responder->paginated($paginator, CvResource::class, 'CVs list');
     }
 
+	/**
+	 * GET /api/v1/enduser/cvs/{id}
+	 * Public CV details (approved and active only)
+	 */
+	public function cv(Request $request, int $id)
+	{
+		$row = Cv::on('system')
+			->with(['office', 'category', 'nationality.translations'])
+			->where('id', $id)
+			->where('status', 'approved')
+			->whereNull('deactivated_by_office_at')
+			->first();
+
+		if (!$row) {
+			return $this->responder->fail('CV not found', 404);
+		}
+
+		return $this->responder->ok(new CvResource($row), 'CV details');
+	}
+
+	/**
+	 * GET /api/v1/enduser/sliders
+	 * Public sliders list (active only), ordered by position asc, created_at desc
+	 */
+	public function sliders(Request $request)
+	{
+		$q = Slider::on('system')
+			->with('translations')
+			->where('active', true)
+			->orderBy('position')
+			->orderByDesc('created_at');
+
+		$perPage = (int) $request->integer('per_page', 50);
+		if ($request->boolean('all') || $perPage <= 0) {
+			$collection = $q->get();
+			return $this->responder->ok(
+				SliderResource::collection($collection),
+				'Sliders list',
+				['pagination' => null]
+			);
+		}
+
+		$paginator = $q->paginate(max(1, $perPage))->appends($request->query());
+		return $this->responder->paginated($paginator, SliderResource::class, 'Sliders list');
+	}
 	/**
 	 * GET /api/v1/enduser/top-offices
 	 * Returns top offices by number of favourites on their CVs
