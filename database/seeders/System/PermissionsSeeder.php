@@ -150,6 +150,9 @@ class PermissionsSeeder extends Seeder
             // ------- bookings -------
             ['slug'=>'system.bookings.index',          'name'=>'List Bookings',                    'guard'=>'api','active'=>1],
             ['slug'=>'system.bookings.stats',          'name'=>'Booking Stats',                    'guard'=>'api','active'=>1],
+
+            // ------- analytics -------
+            ['slug'=>'system.analytics.index',         'name'=>'System Analytics',                 'guard'=>'api','active'=>1],
         ];
 
         foreach ($perms as $p) {

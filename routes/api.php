@@ -29,6 +29,9 @@ use App\Http\Controllers\Api\System\SliderController;
 use App\Http\Controllers\Api\System\BookingController as AdminBookingController;
 use App\Http\Controllers\Api\Office\BookingController as OfficeBookingController;
 use App\Http\Controllers\Api\EndUser\BookingController as EndUserBookingController;
+use App\Http\Controllers\Api\EndUser\AnalyticsController as EndUserAnalyticsController;
+use App\Http\Controllers\Api\Office\AnalyticsController as OfficeAnalyticsController;
+use App\Http\Controllers\Api\System\AnalyticsController as SystemAnalyticsController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -227,6 +230,8 @@ Route::prefix('v1/admin/system')
         // Bookings (admin)
         Route::get('bookings', [AdminBookingController::class, 'index'])->middleware('perm:system.bookings.index');
         Route::get('bookings/stats', [AdminBookingController::class, 'stats'])->middleware('perm:system.bookings.stats');
+        // Analytics (admin)
+        Route::get('analytics', [SystemAnalyticsController::class, 'index'])->middleware('perm:system.analytics.index');
 
         // Nationalities
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
@@ -293,6 +298,8 @@ Route::prefix('v1/office')->group(function () {
         Route::post('bookings/{id}/accept',    [OfficeBookingController::class, 'accept']);
         Route::post('bookings/{id}/reject',    [OfficeBookingController::class, 'reject']);
         Route::get('bookings/stats',           [OfficeBookingController::class, 'stats']);
+        // Analytics (Office)
+        Route::get('analytics',                [OfficeAnalyticsController::class, 'index']);
 
         // Notifications (offices)
         Route::get('notifications',       [SystemNotificationController::class, 'index']);
@@ -325,6 +332,8 @@ Route::prefix('v1/enduser')->group(function () {
         Route::get('me',            [AuthEndUserController::class, 'me']);
         Route::put('profile',       [AuthEndUserController::class, 'updateProfile']);
         Route::post('auth/logout',  [AuthEndUserController::class, 'logout']);
+        // Analytics (EndUser)
+        Route::get('analytics',     [EndUserAnalyticsController::class, 'index']);
 
 		// Favourites (EndUser)
 		Route::get('favorites/cvs',             [FavouriteController::class, 'index']);

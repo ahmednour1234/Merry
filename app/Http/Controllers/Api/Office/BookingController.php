@@ -16,7 +16,16 @@ class BookingController extends ApiController
 		parent::__construct(app('api.responder'));
 	}
 
-	/** GET /api/v1/office/bookings */
+	/**
+	 * GET /api/v1/office/bookings
+	 * @group Office / Bookings
+	 * @queryParam status string Filter by status. Example: accepted
+	 * @queryParam cv_id integer Filter by CV ID. Example: 10
+	 * @queryParam nationality_code string Filter by CV nationality code. Example: IN
+	 * @queryParam from date Filter by created_at from (inclusive). Example: 2025-11-01
+	 * @queryParam to date Filter by created_at to (inclusive). Example: 2025-11-30
+	 * @queryParam per_page integer Results per page. Example: 15
+	 */
 	public function index(Request $r)
 	{
 		$officeId = (int) $r->user()->id;
@@ -30,6 +39,8 @@ class BookingController extends ApiController
 				$sub->from('cvs')->select('id')->where('nationality_code', $code);
 			});
 		}
+		if ($r->filled('from')) $q->where('created_at', '>=', $r->date('from'));
+		if ($r->filled('to'))   $q->where('created_at', '<=', $r->date('to'));
 
 		$per = max(1, (int) $r->integer('per_page', 15));
 		$p = $q->paginate($per)->appends($r->query());
