@@ -32,6 +32,7 @@ use App\Http\Controllers\Api\EndUser\BookingController as EndUserBookingControll
 use App\Http\Controllers\Api\EndUser\AnalyticsController as EndUserAnalyticsController;
 use App\Http\Controllers\Api\Office\AnalyticsController as OfficeAnalyticsController;
 use App\Http\Controllers\Api\System\AnalyticsController as SystemAnalyticsController;
+use App\Http\Controllers\Api\PublicSettingsController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -93,6 +94,8 @@ Route::prefix('v1')->group(function () {
     Route::post('auth/login',  [AuthController::class, 'login']);
     Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
             Route::get('cities', [CityController::class, 'index']);
+	// Public settings (no auth)
+	Route::get('settings', [PublicSettingsController::class, 'index']);
 });
 /*
 |--------------------------------------------------------------------------

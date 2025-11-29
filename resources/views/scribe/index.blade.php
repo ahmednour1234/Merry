@@ -375,6 +375,9 @@ Public sliders list (active only), ordered by position asc, created_at desc</a>
                                                     <li class="tocify-item level-2" data-unique="office-bookings-GETapi-v1-office-bookings">
                                 <a href="#office-bookings-GETapi-v1-office-bookings">GET /api/v1/office/bookings</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="office-bookings-POSTapi-v1-office-bookings-reset-all">
+                                <a href="#office-bookings-POSTapi-v1-office-bookings-reset-all">POST /api/v1/office/bookings/reset-all</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-office-cvs" class="tocify-header">
@@ -3659,8 +3662,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "email=ablanda@example.org"\
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
     --form "active="\
-    --form "blocked=1"\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5597.tmp" </code></pre></div>
+    --form "blocked="\
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php877.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3682,7 +3685,7 @@ body.append('phone', 'mniihfqcoynlazghdtqtq');
 body.append('email', 'ablanda@example.org');
 body.append('password', ''YAKYLk4&gt;SJIrIV#lz.');
 body.append('active', '');
-body.append('blocked', '1');
+body.append('blocked', '');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -3883,7 +3886,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
@@ -3894,7 +3897,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5597.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php877.tmp</code></p>
         </div>
         </form>
 
@@ -9664,7 +9667,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
                 <h1 id="office-bookings">Office / Bookings</h1>
 
-    
+    <p>Reject all active bookings for this office.</p>
 
                                 <h2 id="office-bookings-GETapi-v1-office-bookings">GET /api/v1/office/bookings</h2>
 
@@ -9818,6 +9821,101 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="query">
     <br>
 <p>Results per page. Example: <code>15</code></p>
+            </div>
+                </form>
+
+                    <h2 id="office-bookings-POSTapi-v1-office-bookings-reset-all">POST /api/v1/office/bookings/reset-all</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-office-bookings-reset-all">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/office/bookings/reset-all?cv_id=12"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings/reset-all"
+);
+
+const params = {
+    "cv_id": "12",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-office-bookings-reset-all">
+</span>
+<span id="execution-results-POSTapi-v1-office-bookings-reset-all" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-office-bookings-reset-all"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-office-bookings-reset-all"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-office-bookings-reset-all" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-office-bookings-reset-all">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-office-bookings-reset-all" data-method="POST"
+      data-path="api/v1/office/bookings/reset-all"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-office-bookings-reset-all', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-office-bookings-reset-all"
+                    onclick="tryItOut('POSTapi-v1-office-bookings-reset-all');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-office-bookings-reset-all"
+                    onclick="cancelTryOut('POSTapi-v1-office-bookings-reset-all');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-office-bookings-reset-all"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/office/bookings/reset-all</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="POSTapi-v1-office-bookings-reset-all"
+               value="12"
+               data-component="query">
+    <br>
+<p>Optional: restrict reset to a single CV ID. Example: <code>12</code></p>
             </div>
                 </form>
 
@@ -10368,7 +10466,7 @@ Must be one of:
     "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --data "{
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -10384,7 +10482,7 @@ const headers = {
 };
 
 let body = {
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -10487,7 +10585,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -15893,7 +15991,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1560.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC830.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -16014,7 +16112,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1560.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC830.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -16081,7 +16179,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1561.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC841.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -16214,7 +16312,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1561.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC841.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
