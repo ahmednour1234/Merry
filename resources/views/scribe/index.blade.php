@@ -66,6 +66,26 @@
                     <a href="#authenticating-requests">Authenticating requests</a>
                 </li>
                             </ul>
+                    <ul id="tocify-header-enduser-analytics" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="enduser-analytics">
+                    <a href="#enduser-analytics">EndUser / Analytics</a>
+                </li>
+                                    <ul id="tocify-subheader-enduser-analytics" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="enduser-analytics-GETapi-v1-enduser-analytics">
+                                <a href="#enduser-analytics-GETapi-v1-enduser-analytics">GET /api/v1/enduser/analytics</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-enduser-bookings" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="enduser-bookings">
+                    <a href="#enduser-bookings">EndUser / Bookings</a>
+                </li>
+                                    <ul id="tocify-subheader-enduser-bookings" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="enduser-bookings-GETapi-v1-enduser-bookings">
+                                <a href="#enduser-bookings-GETapi-v1-enduser-bookings">GET /api/v1/enduser/bookings</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-endpoints" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="endpoints">
                     <a href="#endpoints">Endpoints</a>
@@ -178,9 +198,6 @@ body: { value: mixed, scope?: string, type?: "string"|"json" }</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-sliders--id--translations">
                                 <a href="#endpoints-POSTapi-v1-admin-system-sliders--id--translations">Upsert translation</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-bookings">
-                                <a href="#endpoints-GETapi-v1-admin-system-bookings">GET /api/v1/admin/system/bookings</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-bookings-stats">
                                 <a href="#endpoints-GETapi-v1-admin-system-bookings-stats">GET /api/v1/admin/system/bookings/stats</a>
                             </li>
@@ -228,9 +245,6 @@ body: plan_code, coupon (optional)</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-subscription-auto-renew">
                                 <a href="#endpoints-POSTapi-v1-office-subscription-auto-renew">POST /api/v1/office/subscription/auto-renew
 body: { auto_renew: bool }</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-office-bookings">
-                                <a href="#endpoints-GETapi-v1-office-bookings">GET /api/v1/office/bookings</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-bookings--id--accept">
                                 <a href="#endpoints-POSTapi-v1-office-bookings--id--accept">POST /api/v1/office/bookings/{id}/accept</a>
@@ -304,9 +318,6 @@ Public sliders list (active only), ordered by position asc, created_at desc</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">
                                 <a href="#endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">DELETE /api/v1/enduser/favorites/cvs/{cvId}</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-bookings">
-                                <a href="#endpoints-GETapi-v1-enduser-bookings">GET /api/v1/enduser/bookings</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-bookings">
                                 <a href="#endpoints-POSTapi-v1-enduser-bookings">POST /api/v1/enduser/bookings</a>
                             </li>
@@ -346,6 +357,26 @@ Public sliders list (active only), ordered by position asc, created_at desc</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-office-analytics" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="office-analytics">
+                    <a href="#office-analytics">Office / Analytics</a>
+                </li>
+                                    <ul id="tocify-subheader-office-analytics" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="office-analytics-GETapi-v1-office-analytics">
+                                <a href="#office-analytics-GETapi-v1-office-analytics">GET /api/v1/office/analytics</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-office-bookings" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="office-bookings">
+                    <a href="#office-bookings">Office / Bookings</a>
+                </li>
+                                    <ul id="tocify-subheader-office-bookings" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="office-bookings-GETapi-v1-office-bookings">
+                                <a href="#office-bookings-GETapi-v1-office-bookings">GET /api/v1/office/bookings</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-office-cvs" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="office-cvs">
                     <a href="#office-cvs">Office / CVs</a>
@@ -371,6 +402,16 @@ Public sliders list (active only), ordered by position asc, created_at desc</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-system-analytics" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="system-analytics">
+                    <a href="#system-analytics">System / Analytics</a>
+                </li>
+                                    <ul id="tocify-subheader-system-analytics" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="system-analytics-GETapi-v1-admin-system-analytics">
+                                <a href="#system-analytics-GETapi-v1-admin-system-analytics">GET /api/v1/admin/system/analytics</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-system-audit-logs" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="system-audit-logs">
                     <a href="#system-audit-logs">System / Audit Logs</a>
@@ -378,6 +419,16 @@ Public sliders list (active only), ordered by position asc, created_at desc</a>
                                     <ul id="tocify-subheader-system-audit-logs" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="system-audit-logs-GETapi-v1-admin-system-audit-logs">
                                 <a href="#system-audit-logs-GETapi-v1-admin-system-audit-logs">List audit logs (read-only).</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-system-bookings" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="system-bookings">
+                    <a href="#system-bookings">System / Bookings</a>
+                </li>
+                                    <ul id="tocify-subheader-system-bookings" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="system-bookings-GETapi-v1-admin-system-bookings">
+                                <a href="#system-bookings-GETapi-v1-admin-system-bookings">GET /api/v1/admin/system/bookings</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -711,7 +762,277 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer your-token"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="enduser-analytics">EndUser / Analytics</h1>
+
+    
+
+                                <h2 id="enduser-analytics-GETapi-v1-enduser-analytics">GET /api/v1/enduser/analytics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-analytics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/analytics?from=2025-11-01&amp;to=2025-11-30"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/analytics"
+);
+
+const params = {
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-analytics">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-analytics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-analytics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-analytics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-analytics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-analytics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-analytics" data-method="GET"
+      data-path="api/v1/enduser/analytics"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-analytics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-analytics"
+                    onclick="tryItOut('GETapi-v1-enduser-analytics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-analytics"
+                    onclick="cancelTryOut('GETapi-v1-enduser-analytics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-analytics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/analytics</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-enduser-analytics"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter range start (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-enduser-analytics"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter range end (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                </form>
+
+                <h1 id="enduser-bookings">EndUser / Bookings</h1>
+
+    
+
+                                <h2 id="enduser-bookings-GETapi-v1-enduser-bookings">GET /api/v1/enduser/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/bookings?status=pending&amp;cv_id=12&amp;nationality_code=PH&amp;from=2025-11-01&amp;to=2025-11-30&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings"
+);
+
+const params = {
+    "status": "pending",
+    "cv_id": "12",
+    "nationality_code": "PH",
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-bookings">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-bookings" data-method="GET"
+      data-path="api/v1/enduser/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-bookings"
+                    onclick="tryItOut('GETapi-v1-enduser-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-bookings"
+                    onclick="cancelTryOut('GETapi-v1-enduser-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/bookings</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter by status. Example: <code>pending</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="12"
+               data-component="query">
+    <br>
+<p>Filter by CV ID. Example: <code>12</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>nationality_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="nationality_code"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="PH"
+               data-component="query">
+    <br>
+<p>Filter by CV nationality code. Example: <code>PH</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter by created_at from (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter by created_at to (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="15"
+               data-component="query">
+    <br>
+<p>Results per page. Example: <code>15</code></p>
+            </div>
+                </form>
+
+                <h1 id="endpoints">Endpoints</h1>
 
     
 
@@ -3337,9 +3658,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "phone=mniihfqcoynlazghdtqtq"\
     --form "email=ablanda@example.org"\
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
-    --form "active=1"\
+    --form "active="\
     --form "blocked=1"\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php27A0.tmp" </code></pre></div>
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5597.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3360,7 +3681,7 @@ body.append('address', 'mqeopfuudtdsufvyvddqa');
 body.append('phone', 'mniihfqcoynlazghdtqtq');
 body.append('email', 'ablanda@example.org');
 body.append('password', ''YAKYLk4&gt;SJIrIV#lz.');
-body.append('active', '1');
+body.append('active', '');
 body.append('blocked', '1');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
@@ -3541,7 +3862,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>blocked</code></b>&nbsp;&nbsp;
@@ -3573,7 +3894,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php27A0.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php5597.tmp</code></p>
         </div>
         </form>
 
@@ -4506,83 +4827,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the slider. Example: <code>consequatur</code></p>
             </div>
-                    </form>
-
-                    <h2 id="endpoints-GETapi-v1-admin-system-bookings">GET /api/v1/admin/system/bookings</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-admin-system-bookings">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://mery.alemtayaz.com/api/v1/admin/system/bookings"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://mery.alemtayaz.com/api/v1/admin/system/bookings"
-);
-
-fetch(url, {
-    method: "GET",
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-admin-system-bookings">
-    </span>
-<span id="execution-results-GETapi-v1-admin-system-bookings" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-admin-system-bookings"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-bookings"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-admin-system-bookings" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-admin-system-bookings">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-admin-system-bookings" data-method="GET"
-      data-path="api/v1/admin/system/bookings"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-bookings', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-admin-system-bookings"
-                    onclick="tryItOut('GETapi-v1-admin-system-bookings');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-admin-system-bookings"
-                    onclick="cancelTryOut('GETapi-v1-admin-system-bookings');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-admin-system-bookings"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/admin/system/bookings</code></b>
-        </p>
                     </form>
 
                     <h2 id="endpoints-GETapi-v1-admin-system-bookings-stats">GET /api/v1/admin/system/bookings/stats</h2>
@@ -5939,7 +6183,7 @@ body: { auto_renew: bool }</h2>
     "https://mery.alemtayaz.com/api/v1/office/subscription/auto-renew" \
     --header "Content-Type: application/json" \
     --data "{
-    \"auto_renew\": true
+    \"auto_renew\": false
 }"
 </code></pre></div>
 
@@ -5955,7 +6199,7 @@ const headers = {
 };
 
 let body = {
-    "auto_renew": true
+    "auto_renew": false
 };
 
 fetch(url, {
@@ -6046,86 +6290,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
-
-                    <h2 id="endpoints-GETapi-v1-office-bookings">GET /api/v1/office/bookings</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-office-bookings">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://mery.alemtayaz.com/api/v1/office/bookings"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://mery.alemtayaz.com/api/v1/office/bookings"
-);
-
-fetch(url, {
-    method: "GET",
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-office-bookings">
-    </span>
-<span id="execution-results-GETapi-v1-office-bookings" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-office-bookings"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-office-bookings"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-office-bookings" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-office-bookings">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-office-bookings" data-method="GET"
-      data-path="api/v1/office/bookings"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-office-bookings', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-office-bookings"
-                    onclick="tryItOut('GETapi-v1-office-bookings');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-office-bookings"
-                    onclick="cancelTryOut('GETapi-v1-office-bookings');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-office-bookings"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/office/bookings</code></b>
-        </p>
-                    </form>
 
                     <h2 id="endpoints-POSTapi-v1-office-bookings--id--accept">POST /api/v1/office/bookings/{id}/accept</h2>
 
@@ -8294,83 +8461,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-GETapi-v1-enduser-bookings">GET /api/v1/enduser/bookings</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-enduser-bookings">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "https://mery.alemtayaz.com/api/v1/enduser/bookings"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "https://mery.alemtayaz.com/api/v1/enduser/bookings"
-);
-
-fetch(url, {
-    method: "GET",
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-enduser-bookings">
-    </span>
-<span id="execution-results-GETapi-v1-enduser-bookings" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-enduser-bookings"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-bookings"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-enduser-bookings" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-enduser-bookings">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-enduser-bookings" data-method="GET"
-      data-path="api/v1/enduser/bookings"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-bookings', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-enduser-bookings"
-                    onclick="tryItOut('GETapi-v1-enduser-bookings');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-enduser-bookings"
-                    onclick="cancelTryOut('GETapi-v1-enduser-bookings');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-enduser-bookings"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/enduser/bookings</code></b>
-        </p>
-                    </form>
-
                     <h2 id="endpoints-POSTapi-v1-enduser-bookings">POST /api/v1/enduser/bookings</h2>
 
 <p>
@@ -9461,6 +9551,276 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="office-analytics">Office / Analytics</h1>
+
+    
+
+                                <h2 id="office-analytics-GETapi-v1-office-analytics">GET /api/v1/office/analytics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-office-analytics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/office/analytics?from=2025-11-01&amp;to=2025-11-30"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/analytics"
+);
+
+const params = {
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-office-analytics">
+    </span>
+<span id="execution-results-GETapi-v1-office-analytics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-office-analytics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-office-analytics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-office-analytics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-office-analytics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-office-analytics" data-method="GET"
+      data-path="api/v1/office/analytics"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-office-analytics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-office-analytics"
+                    onclick="tryItOut('GETapi-v1-office-analytics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-office-analytics"
+                    onclick="cancelTryOut('GETapi-v1-office-analytics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-office-analytics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/office/analytics</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-office-analytics"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter range start (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-office-analytics"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter range end (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                </form>
+
+                <h1 id="office-bookings">Office / Bookings</h1>
+
+    
+
+                                <h2 id="office-bookings-GETapi-v1-office-bookings">GET /api/v1/office/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-office-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/office/bookings?status=accepted&amp;cv_id=10&amp;nationality_code=IN&amp;from=2025-11-01&amp;to=2025-11-30&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings"
+);
+
+const params = {
+    "status": "accepted",
+    "cv_id": "10",
+    "nationality_code": "IN",
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-office-bookings">
+    </span>
+<span id="execution-results-GETapi-v1-office-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-office-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-office-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-office-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-office-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-office-bookings" data-method="GET"
+      data-path="api/v1/office/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-office-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-office-bookings"
+                    onclick="tryItOut('GETapi-v1-office-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-office-bookings"
+                    onclick="cancelTryOut('GETapi-v1-office-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-office-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/office/bookings</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-office-bookings"
+               value="accepted"
+               data-component="query">
+    <br>
+<p>Filter by status. Example: <code>accepted</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="GETapi-v1-office-bookings"
+               value="10"
+               data-component="query">
+    <br>
+<p>Filter by CV ID. Example: <code>10</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>nationality_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="nationality_code"                data-endpoint="GETapi-v1-office-bookings"
+               value="IN"
+               data-component="query">
+    <br>
+<p>Filter by CV nationality code. Example: <code>IN</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-office-bookings"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter by created_at from (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-office-bookings"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter by created_at to (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-office-bookings"
+               value="15"
+               data-component="query">
+    <br>
+<p>Results per page. Example: <code>15</code></p>
+            </div>
+                </form>
+
                 <h1 id="office-cvs">Office / CVs</h1>
 
     
@@ -10008,7 +10368,7 @@ Must be one of:
     "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --data "{
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
@@ -10024,7 +10384,7 @@ const headers = {
 };
 
 let body = {
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -10127,7 +10487,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -10309,6 +10669,129 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                <h1 id="system-analytics">System / Analytics</h1>
+
+    
+
+                                <h2 id="system-analytics-GETapi-v1-admin-system-analytics">GET /api/v1/admin/system/analytics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-analytics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/analytics?from=2025-11-01&amp;to=2025-11-30&amp;office_id=5"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/analytics"
+);
+
+const params = {
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "office_id": "5",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-analytics">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-analytics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-analytics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-analytics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-analytics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-analytics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-analytics" data-method="GET"
+      data-path="api/v1/admin/system/analytics"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-analytics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-analytics"
+                    onclick="tryItOut('GETapi-v1-admin-system-analytics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-analytics"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-analytics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-analytics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/analytics</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-analytics"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter range start (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-analytics"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter range end (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>office_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="office_id"                data-endpoint="GETapi-v1-admin-system-analytics"
+               value="5"
+               data-component="query">
+    <br>
+<p>Optional filter for office-specific bookings. Example: <code>5</code></p>
+            </div>
+                </form>
+
                 <h1 id="system-audit-logs">System / Audit Logs</h1>
 
     
@@ -10453,6 +10936,177 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="query">
     <br>
 <p>date Example: <code>consequatur</code></p>
+            </div>
+                </form>
+
+                <h1 id="system-bookings">System / Bookings</h1>
+
+    
+
+                                <h2 id="system-bookings-GETapi-v1-admin-system-bookings">GET /api/v1/admin/system/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/bookings?status=pending&amp;cv_id=22&amp;office_id=5&amp;nationality_code=BD&amp;from=2025-11-01&amp;to=2025-11-30&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/bookings"
+);
+
+const params = {
+    "status": "pending",
+    "cv_id": "22",
+    "office_id": "5",
+    "nationality_code": "BD",
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-bookings">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-bookings" data-method="GET"
+      data-path="api/v1/admin/system/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-bookings"
+                    onclick="tryItOut('GETapi-v1-admin-system-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-bookings"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/bookings</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter by status. Example: <code>pending</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="22"
+               data-component="query">
+    <br>
+<p>Filter by CV ID. Example: <code>22</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>office_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="office_id"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="5"
+               data-component="query">
+    <br>
+<p>Filter by office ID. Example: <code>5</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>nationality_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="nationality_code"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="BD"
+               data-component="query">
+    <br>
+<p>Filter by CV nationality code. Example: <code>BD</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter by created_at from (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter by created_at to (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="15"
+               data-component="query">
+    <br>
+<p>Results per page. Example: <code>15</code></p>
             </div>
                 </form>
 
@@ -15239,7 +15893,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpE71A.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1560.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -15360,7 +16014,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpE71A.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1560.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -15427,7 +16081,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpE74A.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1561.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -15560,7 +16214,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpE74A.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1561.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;

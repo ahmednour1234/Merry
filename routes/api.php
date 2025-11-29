@@ -298,6 +298,7 @@ Route::prefix('v1/office')->group(function () {
         Route::post('bookings/{id}/accept',    [OfficeBookingController::class, 'accept']);
         Route::post('bookings/{id}/reject',    [OfficeBookingController::class, 'reject']);
         Route::get('bookings/stats',           [OfficeBookingController::class, 'stats']);
+        Route::post('bookings/reset-all',      [OfficeBookingController::class, 'resetAll']);
         // Analytics (Office)
         Route::get('analytics',                [OfficeAnalyticsController::class, 'index']);
 

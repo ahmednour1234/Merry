@@ -122,6 +122,33 @@ class BookingController extends ApiController
 		];
 		return $this->responder->ok($data, 'Office booking stats');
 	}
+
+	/**
+	 * POST /api/v1/office/bookings/reset-all
+	 * @group Office / Bookings
+	 * Reject all active bookings for this office.
+	 * @queryParam cv_id integer Optional: restrict reset to a single CV ID. Example: 12
+	 */
+	public function resetAll(Request $r)
+	{
+		$officeId = (int) $r->user()->id;
+		$cvId = $r->filled('cv_id') ? (int) $r->integer('cv_id') : null;
+
+		$q = CvBooking::on('system')
+			->where('office_id', $officeId)
+			->whereIn('status', BookingStatus::activeStatuses());
+
+		if ($cvId) {
+			$q->where('cv_id', $cvId);
+		}
+
+		$affected = $q->update([
+			'status' => BookingStatus::REJECTED->value,
+			'updated_at' => now(),
+		]);
+
+		return $this->responder->ok(['updated' => (int) $affected], 'All active bookings rejected');
+	}
 }
 
 

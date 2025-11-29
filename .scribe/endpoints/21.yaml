@@ -1,16 +1,16 @@
-name: 'System / Analytics'
+name: 'EndUser / Analytics'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/analytics
+    uri: api/v1/enduser/analytics
     metadata:
-      groupName: 'System / Analytics'
+      groupName: 'EndUser / Analytics'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/admin/system/analytics'
+      title: 'GET /api/v1/enduser/analytics'
       description: ''
       authenticated: false
       deprecated: false
@@ -39,20 +39,9 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
-      office_id:
-        name: office_id
-        description: 'Optional filter for office-specific bookings.'
-        required: false
-        example: 5
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
     cleanQueryParameters:
       from: '2025-11-01'
       to: '2025-11-30'
-      office_id: 5
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
