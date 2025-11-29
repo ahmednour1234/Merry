@@ -146,6 +146,10 @@ class PermissionsSeeder extends Seeder
             ['slug'=>'system.sliders.destroy',         'name'=>'Delete Slider',                    'guard'=>'api','active'=>1],
             ['slug'=>'system.sliders.toggle',          'name'=>'Toggle Slider',                    'guard'=>'api','active'=>1],
             ['slug'=>'system.sliders.translations',    'name'=>'Upsert Slider Translations',       'guard'=>'api','active'=>1],
+
+            // ------- bookings -------
+            ['slug'=>'system.bookings.index',          'name'=>'List Bookings',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.bookings.stats',          'name'=>'Booking Stats',                    'guard'=>'api','active'=>1],
         ];
 
         foreach ($perms as $p) {

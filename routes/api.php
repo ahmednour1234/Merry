@@ -26,6 +26,9 @@ use App\Http\Controllers\Api\System\PageController;
 use App\Http\Controllers\Api\System\SystemSettingsController;
 use App\Http\Controllers\Api\System\FavouriteCvAdminController;
 use App\Http\Controllers\Api\System\SliderController;
+use App\Http\Controllers\Api\System\BookingController as AdminBookingController;
+use App\Http\Controllers\Api\Office\BookingController as OfficeBookingController;
+use App\Http\Controllers\Api\EndUser\BookingController as EndUserBookingController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -221,6 +224,10 @@ Route::prefix('v1/admin/system')
         Route::post('sliders/{id}/toggle',  [SliderController::class, 'toggle'])->middleware('perm:system.sliders.toggle');
         Route::post('sliders/{id}/translations', [SliderController::class, 'upsertTranslation'])->middleware('perm:system.sliders.translations');
 
+        // Bookings (admin)
+        Route::get('bookings', [AdminBookingController::class, 'index'])->middleware('perm:system.bookings.index');
+        Route::get('bookings/stats', [AdminBookingController::class, 'stats'])->middleware('perm:system.bookings.stats');
+
         // Nationalities
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
         Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
@@ -281,6 +288,12 @@ Route::prefix('v1/office')->group(function () {
         Route::post('cvs/{id}/resubmit',  [OfficeCvController::class, 'resubmit']);
         Route::delete('cvs/{id}',         [OfficeCvController::class, 'destroy']);
 
+        // Bookings (Office)
+        Route::get('bookings',                 [OfficeBookingController::class, 'index']);
+        Route::post('bookings/{id}/accept',    [OfficeBookingController::class, 'accept']);
+        Route::post('bookings/{id}/reject',    [OfficeBookingController::class, 'reject']);
+        Route::get('bookings/stats',           [OfficeBookingController::class, 'stats']);
+
         // Notifications (offices)
         Route::get('notifications',       [SystemNotificationController::class, 'index']);
         Route::post('notifications/{id}/read', [SystemNotificationController::class, 'markRead']);
@@ -317,5 +330,11 @@ Route::prefix('v1/enduser')->group(function () {
 		Route::get('favorites/cvs',             [FavouriteController::class, 'index']);
 		Route::post('favorites/cvs',            [FavouriteController::class, 'store']);
 		Route::delete('favorites/cvs/{cvId}',   [FavouriteController::class, 'destroy']);
+
+        // Bookings (EndUser)
+        Route::get('bookings',               [EndUserBookingController::class, 'index']);
+        Route::post('bookings',              [EndUserBookingController::class, 'store']);
+        Route::post('bookings/{id}/cancel',  [EndUserBookingController::class, 'cancel']);
+        Route::get('bookings/stats',         [EndUserBookingController::class, 'stats']);
     });
 });
