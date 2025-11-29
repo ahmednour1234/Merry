@@ -16,10 +16,11 @@ class SystemSettingsSeeder extends Seeder
 
 		$now = now();
 		$rows = [
-			['scope'=>'global','key'=>'app.contact.email','value'=>'support@example.com','type'=>'string'],
-			['scope'=>'global','key'=>'app.contact.phone','value'=>'+1 555-0100','type'=>'string'],
-			['scope'=>'global','key'=>'app.brand.logo','value'=>'/branding/logo.png','type'=>'string'],
-			['scope'=>'global','key'=>'app.links.website','value'=>'https://example.com','type'=>'string'],
+			// Store everything as JSON (table likely enforces JSON_VALID(value))
+			['scope'=>'global','key'=>'app.contact.email','value'=>json_encode('support@example.com', JSON_UNESCAPED_UNICODE),'type'=>'json'],
+			['scope'=>'global','key'=>'app.contact.phone','value'=>json_encode('+1 555-0100', JSON_UNESCAPED_UNICODE),'type'=>'json'],
+			['scope'=>'global','key'=>'app.brand.logo','value'=>json_encode('/branding/logo.png', JSON_UNESCAPED_UNICODE),'type'=>'json'],
+			['scope'=>'global','key'=>'app.links.website','value'=>json_encode('https://example.com', JSON_UNESCAPED_UNICODE),'type'=>'json'],
 			['scope'=>'global','key'=>'app.links.social','value'=>json_encode([
 				'facebook' => 'https://facebook.com/example',
 				'instagram'=> 'https://instagram.com/example',
@@ -33,10 +34,13 @@ class SystemSettingsSeeder extends Seeder
 		];
 
 		$db = DB::connection('system');
+		$hasActive = Schema::connection('system')->hasColumn('system_settings', 'active');
 		foreach ($rows as $r) {
 			$db->table('system_settings')->updateOrInsert(
 				['scope'=>$r['scope'],'key'=>$r['key']],
-				['value'=>$r['value'],'type'=>$r['type'],'created_at'=>$now,'updated_at'=>$now]
+				$hasActive
+					? ['value'=>$r['value'],'type'=>$r['type'],'active'=>1,'created_at'=>$now,'updated_at'=>$now]
+					: ['value'=>$r['value'],'type'=>$r['type'],'created_at'=>$now,'updated_at'=>$now]
 			);
 		}
 	}
