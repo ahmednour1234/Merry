@@ -36,7 +36,10 @@ class FavouriteController extends ApiController
 			);
 		}
 
-		$q = Cv::on('system')->whereIn('id', $ids)->orderByDesc('id');
+		$q = Cv::on('system')
+			->with(['nationality.translations'])
+			->whereIn('id', $ids)
+			->orderByDesc('id');
 		$p = $q->paginate($per)->appends($request->query());
 		return $this->responder->paginated($p, CvResource::class, 'Favorites');
 	}
