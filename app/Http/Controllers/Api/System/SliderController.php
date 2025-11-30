@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\System\SliderResource;
 use App\Models\Slider;
 use App\Models\SliderTranslation;
+use App\Support\Uploads\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -30,7 +31,9 @@ class SliderController extends ApiController
 	public function store(Request $r)
 	{
 		$data = $r->validate([
-			'image'    => ['nullable','string','max:2048'],
+			// Prefer file uploads; fallback to image_url string
+			'image'    => ['sometimes','file','image','max:10240'],
+			'image_url'=> ['sometimes','string','max:2048'],
 			'link_url' => ['nullable','string','max:2048'],
 			'position' => ['nullable','integer','min:0'],
 			'active'   => ['nullable','boolean'],
@@ -40,8 +43,15 @@ class SliderController extends ApiController
 			'translations.*.text'      => ['nullable','string'],
 		]);
 
+		$imagePath = null;
+		if ($r->hasFile('image')) {
+			$imagePath = ImageUploader::upload($r->file('image'), 'sliders');
+		} elseif (!empty($data['image_url'])) {
+			$imagePath = $data['image_url'];
+		}
+
 		$row = Slider::on('system')->create([
-			'image'    => $data['image'] ?? null,
+			'image'    => $imagePath,
 			'link_url' => $data['link_url'] ?? null,
 			'position' => (int) ($data['position'] ?? 0),
 			'active'   => (bool) ($data['active'] ?? true),
@@ -69,7 +79,8 @@ class SliderController extends ApiController
 		if (!$row) return $this->responder->fail('Slider not found', 404);
 
 		$data = $r->validate([
-			'image'    => ['sometimes','nullable','string','max:2048'],
+			'image'    => ['sometimes','file','image','max:10240'],
+			'image_url'=> ['sometimes','nullable','string','max:2048'],
 			'link_url' => ['sometimes','nullable','string','max:2048'],
 			'position' => ['sometimes','integer','min:0'],
 			'active'   => ['sometimes','boolean'],
@@ -79,7 +90,19 @@ class SliderController extends ApiController
 			'translations.*.text'      => ['nullable','string'],
 		]);
 
-		$row->fill($data)->save();
+		// Handle image updates first
+		if ($r->hasFile('image')) {
+			ImageUploader::deleteIfExists($row->image);
+			$row->image = ImageUploader::upload($r->file('image'), 'sliders');
+		} elseif (array_key_exists('image_url', $data)) {
+			$row->image = $data['image_url'];
+		}
+
+		$row->fill([
+			'link_url' => $data['link_url'] ?? $row->link_url,
+			'position' => array_key_exists('position',$data) ? (int)$data['position'] : $row->position,
+			'active'   => array_key_exists('active',$data) ? (bool)$data['active'] : $row->active,
+		])->save();
 
 		if (!empty($data['translations']) && is_array($data['translations'])) {
 			foreach ($data['translations'] as $t) {
