@@ -9,6 +9,9 @@ use App\Models\SliderTranslation;
 use App\Support\Uploads\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SliderController extends ApiController
 {
@@ -47,7 +50,24 @@ class SliderController extends ApiController
 		if ($r->hasFile('image')) {
 			$imagePath = ImageUploader::upload($r->file('image'), 'sliders');
 		} elseif (!empty($data['image_url'])) {
-			$imagePath = $data['image_url'];
+			// Fetch external image and store locally to avoid hotlink 403 issues
+			try {
+				$response = Http::withHeaders([
+					'User-Agent' => 'MeryBot/1.0',
+					'Accept' => 'image/*,*/*;q=0.8',
+				])->timeout(10)->get($data['image_url']);
+				if ($response->successful()) {
+					$ext = pathinfo(parse_url($data['image_url'], PHP_URL_PATH) ?? '', PATHINFO_EXTENSION) ?: 'jpg';
+					$name = Str::uuid()->toString().'.'.strtolower($ext);
+					$path = 'sliders/'.$name;
+					Storage::disk('public')->put($path, $response->body());
+					$imagePath = $path;
+				} else {
+					$imagePath = $data['image_url']; // fallback keep URL
+				}
+			} catch (\Throwable $e) {
+				$imagePath = $data['image_url'];
+			}
 		}
 
 		$row = Slider::on('system')->create([
@@ -95,7 +115,29 @@ class SliderController extends ApiController
 			ImageUploader::deleteIfExists($row->image);
 			$row->image = ImageUploader::upload($r->file('image'), 'sliders');
 		} elseif (array_key_exists('image_url', $data)) {
-			$row->image = $data['image_url'];
+			// Replace with locally cached copy of remote image when possible
+			if (!empty($data['image_url'])) {
+				try {
+					$response = Http::withHeaders([
+						'User-Agent' => 'MeryBot/1.0',
+						'Accept' => 'image/*,*/*;q=0.8',
+					])->timeout(10)->get($data['image_url']);
+					if ($response->successful()) {
+						ImageUploader::deleteIfExists($row->image);
+						$ext = pathinfo(parse_url($data['image_url'], PHP_URL_PATH) ?? '', PATHINFO_EXTENSION) ?: 'jpg';
+						$name = Str::uuid()->toString().'.'.strtolower($ext);
+						$path = 'sliders/'.$name;
+						Storage::disk('public')->put($path, $response->body());
+						$row->image = $path;
+					} else {
+						$row->image = $data['image_url'];
+					}
+				} catch (\Throwable $e) {
+					$row->image = $data['image_url'];
+				}
+			} else {
+				$row->image = null;
+			}
 		}
 
 		$row->fill([
