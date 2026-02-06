@@ -134,6 +134,25 @@ class PermissionsSeeder extends Seeder
             ['slug'=>'system.cvs.approve',             'name'=>'Approve CV',                       'guard'=>'api','active'=>1],
             ['slug'=>'system.cvs.reject',              'name'=>'Reject CV',                        'guard'=>'api','active'=>1],
             ['slug'=>'system.cvs.freeze',              'name'=>'Freeze/Unfreeze CV',               'guard'=>'api','active'=>1],
+
+            // ------- favourites cv (admin) -------
+            ['slug'=>'system.favorites_cv.index',      'name'=>'List Favourites CV',               'guard'=>'api','active'=>1],
+            ['slug'=>'system.favorites_cv.stats',      'name'=>'Favourites CV Stats',              'guard'=>'api','active'=>1],
+
+            // ------- sliders -------
+            ['slug'=>'system.sliders.index',           'name'=>'List Sliders',                     'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.store',           'name'=>'Create Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.update',          'name'=>'Update Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.destroy',         'name'=>'Delete Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.toggle',          'name'=>'Toggle Slider',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.sliders.translations',    'name'=>'Upsert Slider Translations',       'guard'=>'api','active'=>1],
+
+            // ------- bookings -------
+            ['slug'=>'system.bookings.index',          'name'=>'List Bookings',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.bookings.stats',          'name'=>'Booking Stats',                    'guard'=>'api','active'=>1],
+
+            // ------- analytics -------
+            ['slug'=>'system.analytics.index',         'name'=>'System Analytics',                 'guard'=>'api','active'=>1],
         ];
 
         foreach ($perms as $p) {

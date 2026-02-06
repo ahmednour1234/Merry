@@ -3,6 +3,7 @@
 namespace App\Models\Identity;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,6 +47,11 @@ class EndUser extends Authenticatable
     protected $appends = [
         'avatar_url',
     ];
+
+    public function tokens(): MorphMany
+    {
+        return $this->morphMany(IdentityPersonalAccessToken::class, 'tokenable');
+    }
 
     public function getAvatarUrlAttribute(): ?string
     {

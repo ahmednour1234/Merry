@@ -66,6 +66,26 @@
                     <a href="#authenticating-requests">Authenticating requests</a>
                 </li>
                             </ul>
+                    <ul id="tocify-header-enduser-analytics" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="enduser-analytics">
+                    <a href="#enduser-analytics">EndUser / Analytics</a>
+                </li>
+                                    <ul id="tocify-subheader-enduser-analytics" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="enduser-analytics-GETapi-v1-enduser-analytics">
+                                <a href="#enduser-analytics-GETapi-v1-enduser-analytics">GET /api/v1/enduser/analytics</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-enduser-bookings" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="enduser-bookings">
+                    <a href="#enduser-bookings">EndUser / Bookings</a>
+                </li>
+                                    <ul id="tocify-subheader-enduser-bookings" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="enduser-bookings-GETapi-v1-enduser-bookings">
+                                <a href="#enduser-bookings-GETapi-v1-enduser-bookings">GET /api/v1/enduser/bookings</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-endpoints" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="endpoints">
                     <a href="#endpoints">Endpoints</a>
@@ -74,11 +94,46 @@
                                                     <li class="tocify-item level-2" data-unique="endpoints-GETapi-health">
                                 <a href="#endpoints-GETapi-health">GET api/health</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-debug-token">
+                                <a href="#endpoints-GETapi-v1-debug-token">GET api/v1/debug/token</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-ping">
+                                <a href="#endpoints-GETapi-v1-ping">GET api/v1/ping</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-test-auth">
+                                <a href="#endpoints-GETapi-v1-test-auth">GET api/v1/test-auth</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-auth-login">
                                 <a href="#endpoints-POSTapi-v1-auth-login">POST api/v1/auth/login</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-auth-logout">
                                 <a href="#endpoints-POSTapi-v1-auth-logout">POST api/v1/auth/logout</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-pages">
+                                <a href="#endpoints-GETapi-v1-admin-system-pages">List pages</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-pages--id-">
+                                <a href="#endpoints-GETapi-v1-admin-system-pages--id-">Show single page by ID or slug</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-pages">
+                                <a href="#endpoints-POSTapi-v1-admin-system-pages">Create page</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-system-pages--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-system-pages--id-">Update page</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-pages--id--toggle">
+                                <a href="#endpoints-POSTapi-v1-admin-system-pages--id--toggle">Toggle page active status</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-pages--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-system-pages--id-">Delete page</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-settings">
+                                <a href="#endpoints-GETapi-v1-admin-system-settings">GET /v1/admin/system/settings?scope=global|null
+يعرض الإعدادات حسب الـ scope (أو الكل لو scope=null)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-system-settings--key-">
+                                <a href="#endpoints-PUTapi-v1-admin-system-settings--key-">PUT /v1/admin/system/settings/{key}
+body: { value: mixed, scope?: string, type?: "string"|"json" }</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-permissions">
                                 <a href="#endpoints-GETapi-v1-admin-system-permissions">GET api/v1/admin/system/permissions</a>
@@ -118,6 +173,33 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-offices--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-system-offices--id-">حذف مكتب</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-favorites-cv">
+                                <a href="#endpoints-GETapi-v1-admin-system-favorites-cv">GET /api/v1/admin/system/favorites/cv</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-favorites-cv-stats">
+                                <a href="#endpoints-GETapi-v1-admin-system-favorites-cv-stats">GET /api/v1/admin/system/favorites/cv/stats</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-sliders">
+                                <a href="#endpoints-GETapi-v1-admin-system-sliders">List sliders</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-sliders">
+                                <a href="#endpoints-POSTapi-v1-admin-system-sliders">Create slider</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-system-sliders--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-system-sliders--id-">Update slider</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-system-sliders--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-system-sliders--id-">Delete slider</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-sliders--id--toggle">
+                                <a href="#endpoints-POSTapi-v1-admin-system-sliders--id--toggle">Toggle active</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-system-sliders--id--translations">
+                                <a href="#endpoints-POSTapi-v1-admin-system-sliders--id--translations">Upsert translation</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-system-bookings-stats">
+                                <a href="#endpoints-GETapi-v1-admin-system-bookings-stats">GET /api/v1/admin/system/bookings/stats</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-auth-register">
                                 <a href="#endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
@@ -164,6 +246,15 @@ body: plan_code, coupon (optional)</a>
                                 <a href="#endpoints-POSTapi-v1-office-subscription-auto-renew">POST /api/v1/office/subscription/auto-renew
 body: { auto_renew: bool }</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-bookings--id--accept">
+                                <a href="#endpoints-POSTapi-v1-office-bookings--id--accept">POST /api/v1/office/bookings/{id}/accept</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-office-bookings--id--reject">
+                                <a href="#endpoints-POSTapi-v1-office-bookings--id--reject">POST /api/v1/office/bookings/{id}/reject</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-office-bookings-stats">
+                                <a href="#endpoints-GETapi-v1-office-bookings-stats">GET /api/v1/office/bookings/stats</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-register">
                                 <a href="#endpoints-POSTapi-v1-enduser-auth-register">POST /api/v1/enduser/auth/register</a>
                             </li>
@@ -194,8 +285,20 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-offices">
                                 <a href="#endpoints-GETapi-v1-enduser-offices">GET api/v1/enduser/offices</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-top-offices">
+                                <a href="#endpoints-GETapi-v1-enduser-top-offices">GET /api/v1/enduser/top-offices
+Returns top offices by number of favourites on their CVs</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-cvs">
                                 <a href="#endpoints-GETapi-v1-enduser-cvs">GET api/v1/enduser/cvs</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-cvs--id-">
+                                <a href="#endpoints-GETapi-v1-enduser-cvs--id-">GET /api/v1/enduser/cvs/{id}
+Public CV details (approved and active only)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-sliders">
+                                <a href="#endpoints-GETapi-v1-enduser-sliders">GET /api/v1/enduser/sliders
+Public sliders list (active only), ordered by position asc, created_at desc</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-me">
                                 <a href="#endpoints-GETapi-v1-enduser-me">GET /api/v1/enduser/me</a>
@@ -205,6 +308,24 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-auth-logout">
                                 <a href="#endpoints-POSTapi-v1-enduser-auth-logout">POST /api/v1/enduser/auth/logout</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-favorites-cvs">
+                                <a href="#endpoints-GETapi-v1-enduser-favorites-cvs">GET /api/v1/enduser/favorites/cvs</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-favorites-cvs">
+                                <a href="#endpoints-POSTapi-v1-enduser-favorites-cvs">POST /api/v1/enduser/favorites/cvs</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+                                <a href="#endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">DELETE /api/v1/enduser/favorites/cvs/{cvId}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-bookings">
+                                <a href="#endpoints-POSTapi-v1-enduser-bookings">POST /api/v1/enduser/bookings</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-enduser-bookings--id--cancel">
+                                <a href="#endpoints-POSTapi-v1-enduser-bookings--id--cancel">POST /api/v1/enduser/bookings/{id}/cancel</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-enduser-bookings-stats">
+                                <a href="#endpoints-GETapi-v1-enduser-bookings-stats">GET /api/v1/enduser/bookings/stats</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -236,6 +357,29 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-office-analytics" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="office-analytics">
+                    <a href="#office-analytics">Office / Analytics</a>
+                </li>
+                                    <ul id="tocify-subheader-office-analytics" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="office-analytics-GETapi-v1-office-analytics">
+                                <a href="#office-analytics-GETapi-v1-office-analytics">GET /api/v1/office/analytics</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-office-bookings" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="office-bookings">
+                    <a href="#office-bookings">Office / Bookings</a>
+                </li>
+                                    <ul id="tocify-subheader-office-bookings" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="office-bookings-GETapi-v1-office-bookings">
+                                <a href="#office-bookings-GETapi-v1-office-bookings">GET /api/v1/office/bookings</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="office-bookings-POSTapi-v1-office-bookings-reset-all">
+                                <a href="#office-bookings-POSTapi-v1-office-bookings-reset-all">POST /api/v1/office/bookings/reset-all</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-office-cvs" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="office-cvs">
                     <a href="#office-cvs">Office / CVs</a>
@@ -261,6 +405,16 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-system-analytics" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="system-analytics">
+                    <a href="#system-analytics">System / Analytics</a>
+                </li>
+                                    <ul id="tocify-subheader-system-analytics" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="system-analytics-GETapi-v1-admin-system-analytics">
+                                <a href="#system-analytics-GETapi-v1-admin-system-analytics">GET /api/v1/admin/system/analytics</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-system-audit-logs" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="system-audit-logs">
                     <a href="#system-audit-logs">System / Audit Logs</a>
@@ -268,6 +422,16 @@ Step 3: Direct password reset using reset_token, no email/SMS.</a>
                                     <ul id="tocify-subheader-system-audit-logs" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="system-audit-logs-GETapi-v1-admin-system-audit-logs">
                                 <a href="#system-audit-logs-GETapi-v1-admin-system-audit-logs">List audit logs (read-only).</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-system-bookings" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="system-bookings">
+                    <a href="#system-bookings">System / Bookings</a>
+                </li>
+                                    <ul id="tocify-subheader-system-bookings" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="system-bookings-GETapi-v1-admin-system-bookings">
+                                <a href="#system-bookings-GETapi-v1-admin-system-bookings">GET /api/v1/admin/system/bookings</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -580,7 +744,7 @@ Paginated list. Use ?per_page=0 or ?all=1 to fetch all.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 16, 2025</li>
+        <li>Last updated: November 29, 2025</li>
     </ul>
 </div>
 
@@ -601,7 +765,277 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer your-token"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="enduser-analytics">EndUser / Analytics</h1>
+
+    
+
+                                <h2 id="enduser-analytics-GETapi-v1-enduser-analytics">GET /api/v1/enduser/analytics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-analytics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/analytics?from=2025-11-01&amp;to=2025-11-30"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/analytics"
+);
+
+const params = {
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-analytics">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-analytics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-analytics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-analytics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-analytics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-analytics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-analytics" data-method="GET"
+      data-path="api/v1/enduser/analytics"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-analytics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-analytics"
+                    onclick="tryItOut('GETapi-v1-enduser-analytics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-analytics"
+                    onclick="cancelTryOut('GETapi-v1-enduser-analytics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-analytics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/analytics</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-enduser-analytics"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter range start (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-enduser-analytics"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter range end (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                </form>
+
+                <h1 id="enduser-bookings">EndUser / Bookings</h1>
+
+    
+
+                                <h2 id="enduser-bookings-GETapi-v1-enduser-bookings">GET /api/v1/enduser/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/bookings?status=pending&amp;cv_id=12&amp;nationality_code=PH&amp;from=2025-11-01&amp;to=2025-11-30&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings"
+);
+
+const params = {
+    "status": "pending",
+    "cv_id": "12",
+    "nationality_code": "PH",
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-bookings">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-bookings" data-method="GET"
+      data-path="api/v1/enduser/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-bookings"
+                    onclick="tryItOut('GETapi-v1-enduser-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-bookings"
+                    onclick="cancelTryOut('GETapi-v1-enduser-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/bookings</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter by status. Example: <code>pending</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="12"
+               data-component="query">
+    <br>
+<p>Filter by CV ID. Example: <code>12</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>nationality_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="nationality_code"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="PH"
+               data-component="query">
+    <br>
+<p>Filter by CV nationality code. Example: <code>PH</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter by created_at from (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter by created_at to (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-enduser-bookings"
+               value="15"
+               data-component="query">
+    <br>
+<p>Results per page. Example: <code>15</code></p>
+            </div>
+                </form>
+
+                <h1 id="endpoints">Endpoints</h1>
 
     
 
@@ -679,6 +1113,237 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <p>
             <small class="badge badge-green">GET</small>
             <b><code>api/health</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-debug-token">GET api/v1/debug/token</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-debug-token">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/debug/token"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/debug/token"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-debug-token">
+    </span>
+<span id="execution-results-GETapi-v1-debug-token" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-debug-token"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-debug-token"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-debug-token" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-debug-token">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-debug-token" data-method="GET"
+      data-path="api/v1/debug/token"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-debug-token', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-debug-token"
+                    onclick="tryItOut('GETapi-v1-debug-token');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-debug-token"
+                    onclick="cancelTryOut('GETapi-v1-debug-token');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-debug-token"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/debug/token</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-ping">GET api/v1/ping</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-ping">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/ping"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/ping"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-ping">
+    </span>
+<span id="execution-results-GETapi-v1-ping" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-ping"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-ping"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-ping" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-ping">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-ping" data-method="GET"
+      data-path="api/v1/ping"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-ping', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-ping"
+                    onclick="tryItOut('GETapi-v1-ping');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-ping"
+                    onclick="cancelTryOut('GETapi-v1-ping');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-ping"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/ping</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-test-auth">GET api/v1/test-auth</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-test-auth">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/test-auth"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/test-auth"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-test-auth">
+    </span>
+<span id="execution-results-GETapi-v1-test-auth" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-test-auth"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-test-auth"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-test-auth" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-test-auth">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-test-auth" data-method="GET"
+      data-path="api/v1/test-auth"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-test-auth', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-test-auth"
+                    onclick="tryItOut('GETapi-v1-test-auth');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-test-auth"
+                    onclick="cancelTryOut('GETapi-v1-test-auth');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-test-auth"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/test-auth</code></b>
         </p>
                     </form>
 
@@ -834,6 +1499,1052 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <small class="badge badge-black">POST</small>
             <b><code>api/v1/auth/logout</code></b>
         </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-pages">List pages</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-pages">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/pages?title=About&amp;slug=about-us&amp;active=1&amp;from=2025-01-01&amp;to=2025-12-31&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages"
+);
+
+const params = {
+    "title": "About",
+    "slug": "about-us",
+    "active": "1",
+    "from": "2025-01-01",
+    "to": "2025-12-31",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-pages">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-pages" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-pages"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-pages"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-pages" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-pages">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-pages" data-method="GET"
+      data-path="api/v1/admin/system/pages"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-pages', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-pages"
+                    onclick="tryItOut('GETapi-v1-admin-system-pages');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-pages"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-pages');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-pages"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/pages</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="GETapi-v1-admin-system-pages"
+               value="About"
+               data-component="query">
+    <br>
+<p>Search by title. Example: <code>About</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-admin-system-pages"
+               value="about-us"
+               data-component="query">
+    <br>
+<p>Filter by slug. Example: <code>about-us</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="GETapi-v1-admin-system-pages" style="display: none">
+            <input type="radio" name="active"
+                   value="1"
+                   data-endpoint="GETapi-v1-admin-system-pages"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-v1-admin-system-pages" style="display: none">
+            <input type="radio" name="active"
+                   value="0"
+                   data-endpoint="GETapi-v1-admin-system-pages"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Filter by active. Example: <code>true</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-pages"
+               value="2025-01-01"
+               data-component="query">
+    <br>
+<p>date Example: <code>2025-01-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-pages"
+               value="2025-12-31"
+               data-component="query">
+    <br>
+<p>date Example: <code>2025-12-31</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-admin-system-pages"
+               value="15"
+               data-component="query">
+    <br>
+<p>Example: <code>15</code></p>
+            </div>
+                </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-pages--id-">Show single page by ID or slug</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-pages--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/pages/17"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-pages--id-">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-pages--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-pages--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-pages--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-pages--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-pages--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-pages--id-" data-method="GET"
+      data-path="api/v1/admin/system/pages/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-pages--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-pages--id-"
+                    onclick="tryItOut('GETapi-v1-admin-system-pages--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-pages--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-pages--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-pages--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/pages/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-v1-admin-system-pages--id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>The page ID or slug Example: <code>17</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-system-pages">Create page</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-pages">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"title\": \"About Us\",
+    \"slug\": \"about-us\",
+    \"content\": \"Page content here\",
+    \"meta_title\": \"About Us - Meta Title\",
+    \"meta_description\": \"Meta description\",
+    \"active\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "About Us",
+    "slug": "about-us",
+    "content": "Page content here",
+    "meta_title": "About Us - Meta Title",
+    "meta_description": "Meta description",
+    "active": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-pages">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-pages" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-pages"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-pages"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-pages" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-pages">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-pages" data-method="POST"
+      data-path="api/v1/admin/system/pages"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-pages', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-pages"
+                    onclick="tryItOut('POSTapi-v1-admin-system-pages');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-pages"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-pages');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-pages"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/pages</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-pages"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="POSTapi-v1-admin-system-pages"
+               value="About Us"
+               data-component="body">
+    <br>
+<p>Example: <code>About Us</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="POSTapi-v1-admin-system-pages"
+               value="about-us"
+               data-component="body">
+    <br>
+<p>Example: <code>about-us</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>content</code></b>&nbsp;&nbsp;
+<small>text</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="content"                data-endpoint="POSTapi-v1-admin-system-pages"
+               value="Page content here"
+               data-component="body">
+    <br>
+<p>Example: <code>Page content here</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta_title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta_title"                data-endpoint="POSTapi-v1-admin-system-pages"
+               value="About Us - Meta Title"
+               data-component="body">
+    <br>
+<p>Example: <code>About Us - Meta Title</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta_description</code></b>&nbsp;&nbsp;
+<small>text</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta_description"                data-endpoint="POSTapi-v1-admin-system-pages"
+               value="Meta description"
+               data-component="body">
+    <br>
+<p>Example: <code>Meta description</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-pages" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-pages"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-pages" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-pages"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-system-pages--id-">Update page</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-system-pages--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"title\": \"About Us\",
+    \"slug\": \"about-us\",
+    \"content\": \"Page content here\",
+    \"meta_title\": \"About Us - Meta Title\",
+    \"meta_description\": \"Meta description\",
+    \"active\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "About Us",
+    "slug": "about-us",
+    "content": "Page content here",
+    "meta_title": "About Us - Meta Title",
+    "meta_description": "Meta description",
+    "active": true
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-system-pages--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-system-pages--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-system-pages--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-system-pages--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-system-pages--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-system-pages--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-system-pages--id-" data-method="PUT"
+      data-path="api/v1/admin/system/pages/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-system-pages--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-system-pages--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-system-pages--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-system-pages--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-system-pages--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-system-pages--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/system/pages/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="About Us"
+               data-component="body">
+    <br>
+<p>Example: <code>About Us</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="about-us"
+               data-component="body">
+    <br>
+<p>Example: <code>about-us</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>content</code></b>&nbsp;&nbsp;
+<small>text</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="content"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="Page content here"
+               data-component="body">
+    <br>
+<p>Example: <code>Page content here</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta_title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta_title"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="About Us - Meta Title"
+               data-component="body">
+    <br>
+<p>Example: <code>About Us - Meta Title</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>meta_description</code></b>&nbsp;&nbsp;
+<small>text</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="meta_description"                data-endpoint="PUTapi-v1-admin-system-pages--id-"
+               value="Meta description"
+               data-component="body">
+    <br>
+<p>Example: <code>Meta description</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-system-pages--id-" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-system-pages--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-system-pages--id-" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-system-pages--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-system-pages--id--toggle">Toggle page active status</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-pages--id--toggle">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17/toggle" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"active\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17/toggle"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "active": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-pages--id--toggle">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-pages--id--toggle" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-pages--id--toggle"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-pages--id--toggle"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-pages--id--toggle" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-pages--id--toggle">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-pages--id--toggle" data-method="POST"
+      data-path="api/v1/admin/system/pages/{id}/toggle"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-pages--id--toggle', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-pages--id--toggle"
+                    onclick="tryItOut('POSTapi-v1-admin-system-pages--id--toggle');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-pages--id--toggle"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-pages--id--toggle');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-pages--id--toggle"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/pages/{id}/toggle</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-system-pages--id--toggle"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="POSTapi-v1-admin-system-pages--id--toggle"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-system-pages--id--toggle" style="display: none">
+            <input type="radio" name="active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-system-pages--id--toggle"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-system-pages--id--toggle" style="display: none">
+            <input type="radio" name="active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-system-pages--id--toggle"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-system-pages--id-">Delete page</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-system-pages--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/pages/17"
+);
+
+fetch(url, {
+    method: "DELETE",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-system-pages--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-system-pages--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-system-pages--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-system-pages--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-system-pages--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-system-pages--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-system-pages--id-" data-method="DELETE"
+      data-path="api/v1/admin/system/pages/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-system-pages--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-system-pages--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-system-pages--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-system-pages--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-system-pages--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-system-pages--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/system/pages/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-v1-admin-system-pages--id-"
+               value="17"
+               data-component="url">
+    <br>
+<p>Example: <code>17</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-settings">GET /v1/admin/system/settings?scope=global|null
+يعرض الإعدادات حسب الـ scope (أو الكل لو scope=null)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-settings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/settings"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/settings"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-settings">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-settings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-settings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-settings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-settings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-settings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-settings" data-method="GET"
+      data-path="api/v1/admin/system/settings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-settings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-settings"
+                    onclick="tryItOut('GETapi-v1-admin-system-settings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-settings"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-settings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-settings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/settings</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-system-settings--key-">PUT /v1/admin/system/settings/{key}
+body: { value: mixed, scope?: string, type?: &quot;string&quot;|&quot;json&quot; }</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-system-settings--key-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://mery.alemtayaz.com/api/v1/admin/system/settings/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/settings/consequatur"
+);
+
+fetch(url, {
+    method: "PUT",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-system-settings--key-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-system-settings--key-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-system-settings--key-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-system-settings--key-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-system-settings--key-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-system-settings--key-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-system-settings--key-" data-method="PUT"
+      data-path="api/v1/admin/system/settings/{key}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-system-settings--key-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-system-settings--key-"
+                    onclick="tryItOut('PUTapi-v1-admin-system-settings--key-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-system-settings--key-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-system-settings--key-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-system-settings--key-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/system/settings/{key}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>key</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="key"                data-endpoint="PUTapi-v1-admin-system-settings--key-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>Example: <code>consequatur</code></p>
+            </div>
                     </form>
 
                     <h2 id="endpoints-GETapi-v1-admin-system-permissions">GET api/v1/admin/system/permissions</h2>
@@ -1950,9 +3661,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "phone=mniihfqcoynlazghdtqtq"\
     --form "email=ablanda@example.org"\
     --form "password='YAKYLk4&gt;SJIrIV#lz."\
-    --form "active=1"\
-    --form "blocked=1"\
-    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1C3E.tmp" </code></pre></div>
+    --form "active="\
+    --form "blocked="\
+    --form "image=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php877.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1973,8 +3684,8 @@ body.append('address', 'mqeopfuudtdsufvyvddqa');
 body.append('phone', 'mniihfqcoynlazghdtqtq');
 body.append('email', 'ablanda@example.org');
 body.append('password', ''YAKYLk4&gt;SJIrIV#lz.');
-body.append('active', '1');
-body.append('blocked', '1');
+body.append('active', '');
+body.append('blocked', '');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -2154,7 +3865,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>blocked</code></b>&nbsp;&nbsp;
@@ -2175,7 +3886,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
@@ -2186,7 +3897,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php1C3E.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\php877.tmp</code></p>
         </div>
         </form>
 
@@ -2455,6 +4166,747 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the office. Example: <code>17</code></p>
             </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-favorites-cv">GET /api/v1/admin/system/favorites/cv</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-favorites-cv">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-favorites-cv">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-favorites-cv" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-favorites-cv"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-favorites-cv"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-favorites-cv" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-favorites-cv">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-favorites-cv" data-method="GET"
+      data-path="api/v1/admin/system/favorites/cv"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-favorites-cv', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-favorites-cv"
+                    onclick="tryItOut('GETapi-v1-admin-system-favorites-cv');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-favorites-cv"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-favorites-cv');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-favorites-cv"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/favorites/cv</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-favorites-cv-stats">GET /api/v1/admin/system/favorites/cv/stats</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-favorites-cv-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv/stats"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/favorites/cv/stats"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-favorites-cv-stats">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-favorites-cv-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-favorites-cv-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-favorites-cv-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-favorites-cv-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-favorites-cv-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-favorites-cv-stats" data-method="GET"
+      data-path="api/v1/admin/system/favorites/cv/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-favorites-cv-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-favorites-cv-stats"
+                    onclick="tryItOut('GETapi-v1-admin-system-favorites-cv-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-favorites-cv-stats"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-favorites-cv-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-favorites-cv-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/favorites/cv/stats</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-sliders">List sliders</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-sliders">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/sliders"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-sliders">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-sliders" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-sliders"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-sliders"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-sliders" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-sliders">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-sliders" data-method="GET"
+      data-path="api/v1/admin/system/sliders"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-sliders', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-sliders"
+                    onclick="tryItOut('GETapi-v1-admin-system-sliders');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-sliders"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-sliders');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-sliders"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/sliders</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-system-sliders">Create slider</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-sliders">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-sliders">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-sliders" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-sliders"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-sliders"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-sliders" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-sliders">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-sliders" data-method="POST"
+      data-path="api/v1/admin/system/sliders"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-sliders', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-sliders"
+                    onclick="tryItOut('POSTapi-v1-admin-system-sliders');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-sliders"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-sliders');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-sliders"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/sliders</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-system-sliders--id-">Update slider</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-system-sliders--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur"
+);
+
+fetch(url, {
+    method: "PUT",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-system-sliders--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-system-sliders--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-system-sliders--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-system-sliders--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-system-sliders--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-system-sliders--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-system-sliders--id-" data-method="PUT"
+      data-path="api/v1/admin/system/sliders/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-system-sliders--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-system-sliders--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-system-sliders--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-system-sliders--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-system-sliders--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-system-sliders--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/system/sliders/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-system-sliders--id-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the slider. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-system-sliders--id-">Delete slider</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-system-sliders--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur"
+);
+
+fetch(url, {
+    method: "DELETE",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-system-sliders--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-system-sliders--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-system-sliders--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-system-sliders--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-system-sliders--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-system-sliders--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-system-sliders--id-" data-method="DELETE"
+      data-path="api/v1/admin/system/sliders/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-system-sliders--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-system-sliders--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-system-sliders--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-system-sliders--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-system-sliders--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-system-sliders--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/system/sliders/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-system-sliders--id-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the slider. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-system-sliders--id--toggle">Toggle active</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-sliders--id--toggle">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur/toggle"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur/toggle"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-sliders--id--toggle">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-sliders--id--toggle" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-sliders--id--toggle"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-sliders--id--toggle"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-sliders--id--toggle" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-sliders--id--toggle">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-sliders--id--toggle" data-method="POST"
+      data-path="api/v1/admin/system/sliders/{id}/toggle"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-sliders--id--toggle', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-sliders--id--toggle"
+                    onclick="tryItOut('POSTapi-v1-admin-system-sliders--id--toggle');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-sliders--id--toggle"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-sliders--id--toggle');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-sliders--id--toggle"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/sliders/{id}/toggle</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-admin-system-sliders--id--toggle"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the slider. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-system-sliders--id--translations">Upsert translation</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-system-sliders--id--translations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur/translations"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/sliders/consequatur/translations"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-system-sliders--id--translations">
+</span>
+<span id="execution-results-POSTapi-v1-admin-system-sliders--id--translations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-system-sliders--id--translations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-system-sliders--id--translations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-system-sliders--id--translations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-system-sliders--id--translations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-system-sliders--id--translations" data-method="POST"
+      data-path="api/v1/admin/system/sliders/{id}/translations"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-system-sliders--id--translations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-system-sliders--id--translations"
+                    onclick="tryItOut('POSTapi-v1-admin-system-sliders--id--translations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-system-sliders--id--translations"
+                    onclick="cancelTryOut('POSTapi-v1-admin-system-sliders--id--translations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-system-sliders--id--translations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/system/sliders/{id}/translations</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-admin-system-sliders--id--translations"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the slider. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-system-bookings-stats">GET /api/v1/admin/system/bookings/stats</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-bookings-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/bookings/stats"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/bookings/stats"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-bookings-stats">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-bookings-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-bookings-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-bookings-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-bookings-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-bookings-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-bookings-stats" data-method="GET"
+      data-path="api/v1/admin/system/bookings/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-bookings-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-bookings-stats"
+                    onclick="tryItOut('GETapi-v1-admin-system-bookings-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-bookings-stats"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-bookings-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-bookings-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/bookings/stats</code></b>
+        </p>
                     </form>
 
                     <h2 id="endpoints-POSTapi-v1-office-auth-register">POST /api/v1/office/auth/register
@@ -3734,7 +6186,7 @@ body: { auto_renew: bool }</h2>
     "https://mery.alemtayaz.com/api/v1/office/subscription/auto-renew" \
     --header "Content-Type: application/json" \
     --data "{
-    \"auto_renew\": true
+    \"auto_renew\": false
 }"
 </code></pre></div>
 
@@ -3750,7 +6202,7 @@ const headers = {
 };
 
 let body = {
-    "auto_renew": true
+    "auto_renew": false
 };
 
 fetch(url, {
@@ -3841,9 +6293,264 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
+
+                    <h2 id="endpoints-POSTapi-v1-office-bookings--id--accept">POST /api/v1/office/bookings/{id}/accept</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-office-bookings--id--accept">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/office/bookings/consequatur/accept"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings/consequatur/accept"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-office-bookings--id--accept">
+</span>
+<span id="execution-results-POSTapi-v1-office-bookings--id--accept" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-office-bookings--id--accept"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-office-bookings--id--accept"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-office-bookings--id--accept" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-office-bookings--id--accept">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-office-bookings--id--accept" data-method="POST"
+      data-path="api/v1/office/bookings/{id}/accept"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-office-bookings--id--accept', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-office-bookings--id--accept"
+                    onclick="tryItOut('POSTapi-v1-office-bookings--id--accept');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-office-bookings--id--accept"
+                    onclick="cancelTryOut('POSTapi-v1-office-bookings--id--accept');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-office-bookings--id--accept"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/office/bookings/{id}/accept</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-office-bookings--id--accept"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the booking. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-office-bookings--id--reject">POST /api/v1/office/bookings/{id}/reject</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-office-bookings--id--reject">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/office/bookings/consequatur/reject"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings/consequatur/reject"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-office-bookings--id--reject">
+</span>
+<span id="execution-results-POSTapi-v1-office-bookings--id--reject" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-office-bookings--id--reject"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-office-bookings--id--reject"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-office-bookings--id--reject" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-office-bookings--id--reject">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-office-bookings--id--reject" data-method="POST"
+      data-path="api/v1/office/bookings/{id}/reject"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-office-bookings--id--reject', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-office-bookings--id--reject"
+                    onclick="tryItOut('POSTapi-v1-office-bookings--id--reject');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-office-bookings--id--reject"
+                    onclick="cancelTryOut('POSTapi-v1-office-bookings--id--reject');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-office-bookings--id--reject"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/office/bookings/{id}/reject</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-office-bookings--id--reject"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the booking. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-office-bookings-stats">GET /api/v1/office/bookings/stats</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-office-bookings-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/office/bookings/stats"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings/stats"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-office-bookings-stats">
+    </span>
+<span id="execution-results-GETapi-v1-office-bookings-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-office-bookings-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-office-bookings-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-office-bookings-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-office-bookings-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-office-bookings-stats" data-method="GET"
+      data-path="api/v1/office/bookings/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-office-bookings-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-office-bookings-stats"
+                    onclick="tryItOut('GETapi-v1-office-bookings-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-office-bookings-stats"
+                    onclick="cancelTryOut('GETapi-v1-office-bookings-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-office-bookings-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/office/bookings/stats</code></b>
+        </p>
+                    </form>
 
                     <h2 id="endpoints-POSTapi-v1-enduser-auth-register">POST /api/v1/enduser/auth/register</h2>
 
@@ -3863,7 +6570,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"national_id\": \"1234567890\",
     \"name\": \"John Doe\",
-    \"email\": \"john@example.com\",
     \"phone\": \"+966500000001\",
     \"password\": \"secret1234\"
 }"
@@ -3883,7 +6589,6 @@ const headers = {
 let body = {
     "national_id": "1234567890",
     "name": "John Doe",
-    "email": "john@example.com",
     "phone": "+966500000001",
     "password": "secret1234"
 };
@@ -3978,17 +6683,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Full name. Must not be greater than 255 characters. Example: <code>John Doe</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-enduser-auth-register"
-               value="john@example.com"
-               data-component="body">
-    <br>
-<p>Email address (optional, not used for login). Must be a valid email address. Example: <code>john@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -4832,6 +7526,84 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </p>
                     </form>
 
+                    <h2 id="endpoints-GETapi-v1-enduser-top-offices">GET /api/v1/enduser/top-offices
+Returns top offices by number of favourites on their CVs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-top-offices">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/top-offices"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/top-offices"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-top-offices">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-top-offices" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-top-offices"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-top-offices"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-top-offices" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-top-offices">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-top-offices" data-method="GET"
+      data-path="api/v1/enduser/top-offices"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-top-offices', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-top-offices"
+                    onclick="tryItOut('GETapi-v1-enduser-top-offices');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-top-offices"
+                    onclick="cancelTryOut('GETapi-v1-enduser-top-offices');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-top-offices"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/top-offices</code></b>
+        </p>
+                    </form>
+
                     <h2 id="endpoints-GETapi-v1-enduser-cvs">GET api/v1/enduser/cvs</h2>
 
 <p>
@@ -4906,6 +7678,174 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <p>
             <small class="badge badge-green">GET</small>
             <b><code>api/v1/enduser/cvs</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-enduser-cvs--id-">GET /api/v1/enduser/cvs/{id}
+Public CV details (approved and active only)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-cvs--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/cvs/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/cvs/consequatur"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-cvs--id-">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-cvs--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-cvs--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-cvs--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-cvs--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-cvs--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-cvs--id-" data-method="GET"
+      data-path="api/v1/enduser/cvs/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-cvs--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-cvs--id-"
+                    onclick="tryItOut('GETapi-v1-enduser-cvs--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-cvs--id-"
+                    onclick="cancelTryOut('GETapi-v1-enduser-cvs--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-cvs--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/cvs/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-enduser-cvs--id-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the cv. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-enduser-sliders">GET /api/v1/enduser/sliders
+Public sliders list (active only), ordered by position asc, created_at desc</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-sliders">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/sliders"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/sliders"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-sliders">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-sliders" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-sliders"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-sliders"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-sliders" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-sliders">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-sliders" data-method="GET"
+      data-path="api/v1/enduser/sliders"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-sliders', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-sliders"
+                    onclick="tryItOut('GETapi-v1-enduser-sliders');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-sliders"
+                    onclick="cancelTryOut('GETapi-v1-enduser-sliders');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-sliders"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/sliders</code></b>
         </p>
                     </form>
 
@@ -5002,7 +7942,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://mery.alemtayaz.com/api/v1/enduser/profile" \
     --header "Content-Type: multipart/form-data" \
     --form "name=Johnathan Doe"\
-    --form "email=johnathan@example.com"\
     --form "phone=+966511111111"\
     --form "country_id=2"\
     --form "city_id=8"\
@@ -5022,7 +7961,6 @@ const headers = {
 
 const body = new FormData();
 body.append('name', 'Johnathan Doe');
-body.append('email', 'johnathan@example.com');
 body.append('phone', '+966511111111');
 body.append('country_id', '2');
 body.append('city_id', '8');
@@ -5108,17 +8046,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Updated full name. Must not be greater than 191 characters. Example: <code>Johnathan Doe</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="PUTapi-v1-enduser-profile"
-               value="johnathan@example.com"
-               data-component="body">
-    <br>
-<p>Updated email address. Must be a valid email address. Must not be greater than 191 characters. Example: <code>johnathan@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
@@ -5251,6 +8178,532 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <p>
             <small class="badge badge-black">POST</small>
             <b><code>api/v1/enduser/auth/logout</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-enduser-favorites-cvs">GET /api/v1/enduser/favorites/cvs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-favorites-cvs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-favorites-cvs">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-favorites-cvs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-favorites-cvs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-favorites-cvs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-favorites-cvs" data-method="GET"
+      data-path="api/v1/enduser/favorites/cvs"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-favorites-cvs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-favorites-cvs"
+                    onclick="tryItOut('GETapi-v1-enduser-favorites-cvs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-favorites-cvs"
+                    onclick="cancelTryOut('GETapi-v1-enduser-favorites-cvs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-favorites-cvs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/favorites/cvs</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-enduser-favorites-cvs">POST /api/v1/enduser/favorites/cvs</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-enduser-favorites-cvs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs" \
+    --header "Content-Type: application/json" \
+    --data "{
+    \"cv_id\": 17
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "cv_id": 17
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-enduser-favorites-cvs">
+</span>
+<span id="execution-results-POSTapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-enduser-favorites-cvs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-favorites-cvs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-enduser-favorites-cvs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-enduser-favorites-cvs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-enduser-favorites-cvs" data-method="POST"
+      data-path="api/v1/enduser/favorites/cvs"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-favorites-cvs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-enduser-favorites-cvs"
+                    onclick="tryItOut('POSTapi-v1-enduser-favorites-cvs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-enduser-favorites-cvs"
+                    onclick="cancelTryOut('POSTapi-v1-enduser-favorites-cvs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-enduser-favorites-cvs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/enduser/favorites/cvs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-enduser-favorites-cvs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="POSTapi-v1-enduser-favorites-cvs"
+               value="17"
+               data-component="body">
+    <br>
+<p>Example: <code>17</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-enduser-favorites-cvs--cvId-">DELETE /api/v1/enduser/favorites/cvs/{cvId}</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs/consequatur"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/favorites/cvs/consequatur"
+);
+
+fetch(url, {
+    method: "DELETE",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+</span>
+<span id="execution-results-DELETEapi-v1-enduser-favorites-cvs--cvId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-enduser-favorites-cvs--cvId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-enduser-favorites-cvs--cvId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-enduser-favorites-cvs--cvId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-enduser-favorites-cvs--cvId-" data-method="DELETE"
+      data-path="api/v1/enduser/favorites/cvs/{cvId}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-enduser-favorites-cvs--cvId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+                    onclick="tryItOut('DELETEapi-v1-enduser-favorites-cvs--cvId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+                    onclick="cancelTryOut('DELETEapi-v1-enduser-favorites-cvs--cvId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-enduser-favorites-cvs--cvId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/enduser/favorites/cvs/{cvId}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cvId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cvId"                data-endpoint="DELETEapi-v1-enduser-favorites-cvs--cvId-"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-enduser-bookings">POST /api/v1/enduser/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-enduser-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-enduser-bookings">
+</span>
+<span id="execution-results-POSTapi-v1-enduser-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-enduser-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-enduser-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-enduser-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-enduser-bookings" data-method="POST"
+      data-path="api/v1/enduser/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-enduser-bookings"
+                    onclick="tryItOut('POSTapi-v1-enduser-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-enduser-bookings"
+                    onclick="cancelTryOut('POSTapi-v1-enduser-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-enduser-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/enduser/bookings</code></b>
+        </p>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-enduser-bookings--id--cancel">POST /api/v1/enduser/bookings/{id}/cancel</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-enduser-bookings--id--cancel">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings/consequatur/cancel"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings/consequatur/cancel"
+);
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-enduser-bookings--id--cancel">
+</span>
+<span id="execution-results-POSTapi-v1-enduser-bookings--id--cancel" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-enduser-bookings--id--cancel"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-enduser-bookings--id--cancel"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-enduser-bookings--id--cancel" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-enduser-bookings--id--cancel">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-enduser-bookings--id--cancel" data-method="POST"
+      data-path="api/v1/enduser/bookings/{id}/cancel"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-enduser-bookings--id--cancel', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-enduser-bookings--id--cancel"
+                    onclick="tryItOut('POSTapi-v1-enduser-bookings--id--cancel');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-enduser-bookings--id--cancel"
+                    onclick="cancelTryOut('POSTapi-v1-enduser-bookings--id--cancel');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-enduser-bookings--id--cancel"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/enduser/bookings/{id}/cancel</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-enduser-bookings--id--cancel"
+               value="consequatur"
+               data-component="url">
+    <br>
+<p>The ID of the booking. Example: <code>consequatur</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-enduser-bookings-stats">GET /api/v1/enduser/bookings/stats</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-enduser-bookings-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/enduser/bookings/stats"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/enduser/bookings/stats"
+);
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-enduser-bookings-stats">
+    </span>
+<span id="execution-results-GETapi-v1-enduser-bookings-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-enduser-bookings-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-enduser-bookings-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-enduser-bookings-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-enduser-bookings-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-enduser-bookings-stats" data-method="GET"
+      data-path="api/v1/enduser/bookings/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-enduser-bookings-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-enduser-bookings-stats"
+                    onclick="tryItOut('GETapi-v1-enduser-bookings-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-enduser-bookings-stats"
+                    onclick="cancelTryOut('GETapi-v1-enduser-bookings-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-enduser-bookings-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/enduser/bookings/stats</code></b>
         </p>
                     </form>
 
@@ -6101,6 +9554,371 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="office-analytics">Office / Analytics</h1>
+
+    
+
+                                <h2 id="office-analytics-GETapi-v1-office-analytics">GET /api/v1/office/analytics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-office-analytics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/office/analytics?from=2025-11-01&amp;to=2025-11-30"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/analytics"
+);
+
+const params = {
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-office-analytics">
+    </span>
+<span id="execution-results-GETapi-v1-office-analytics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-office-analytics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-office-analytics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-office-analytics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-office-analytics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-office-analytics" data-method="GET"
+      data-path="api/v1/office/analytics"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-office-analytics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-office-analytics"
+                    onclick="tryItOut('GETapi-v1-office-analytics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-office-analytics"
+                    onclick="cancelTryOut('GETapi-v1-office-analytics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-office-analytics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/office/analytics</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-office-analytics"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter range start (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-office-analytics"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter range end (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                </form>
+
+                <h1 id="office-bookings">Office / Bookings</h1>
+
+    <p>Reject all active bookings for this office.</p>
+
+                                <h2 id="office-bookings-GETapi-v1-office-bookings">GET /api/v1/office/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-office-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/office/bookings?status=accepted&amp;cv_id=10&amp;nationality_code=IN&amp;from=2025-11-01&amp;to=2025-11-30&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings"
+);
+
+const params = {
+    "status": "accepted",
+    "cv_id": "10",
+    "nationality_code": "IN",
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-office-bookings">
+    </span>
+<span id="execution-results-GETapi-v1-office-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-office-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-office-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-office-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-office-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-office-bookings" data-method="GET"
+      data-path="api/v1/office/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-office-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-office-bookings"
+                    onclick="tryItOut('GETapi-v1-office-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-office-bookings"
+                    onclick="cancelTryOut('GETapi-v1-office-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-office-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/office/bookings</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-office-bookings"
+               value="accepted"
+               data-component="query">
+    <br>
+<p>Filter by status. Example: <code>accepted</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="GETapi-v1-office-bookings"
+               value="10"
+               data-component="query">
+    <br>
+<p>Filter by CV ID. Example: <code>10</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>nationality_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="nationality_code"                data-endpoint="GETapi-v1-office-bookings"
+               value="IN"
+               data-component="query">
+    <br>
+<p>Filter by CV nationality code. Example: <code>IN</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-office-bookings"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter by created_at from (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-office-bookings"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter by created_at to (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-office-bookings"
+               value="15"
+               data-component="query">
+    <br>
+<p>Results per page. Example: <code>15</code></p>
+            </div>
+                </form>
+
+                    <h2 id="office-bookings-POSTapi-v1-office-bookings-reset-all">POST /api/v1/office/bookings/reset-all</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-office-bookings-reset-all">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://mery.alemtayaz.com/api/v1/office/bookings/reset-all?cv_id=12"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/office/bookings/reset-all"
+);
+
+const params = {
+    "cv_id": "12",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "POST",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-office-bookings-reset-all">
+</span>
+<span id="execution-results-POSTapi-v1-office-bookings-reset-all" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-office-bookings-reset-all"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-office-bookings-reset-all"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-office-bookings-reset-all" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-office-bookings-reset-all">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-office-bookings-reset-all" data-method="POST"
+      data-path="api/v1/office/bookings/reset-all"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-office-bookings-reset-all', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-office-bookings-reset-all"
+                    onclick="tryItOut('POSTapi-v1-office-bookings-reset-all');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-office-bookings-reset-all"
+                    onclick="cancelTryOut('POSTapi-v1-office-bookings-reset-all');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-office-bookings-reset-all"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/office/bookings/reset-all</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="POSTapi-v1-office-bookings-reset-all"
+               value="12"
+               data-component="query">
+    <br>
+<p>Optional: restrict reset to a single CV ID. Example: <code>12</code></p>
+            </div>
+                </form>
+
                 <h1 id="office-cvs">Office / CVs</h1>
 
     
@@ -6648,7 +10466,7 @@ Must be one of:
     "https://mery.alemtayaz.com/api/v1/office/cvs/consequatur/toggle" \
     --header "Content-Type: application/json" \
     --data "{
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -6664,7 +10482,7 @@ const headers = {
 };
 
 let body = {
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -6767,7 +10585,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -6949,6 +10767,129 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                <h1 id="system-analytics">System / Analytics</h1>
+
+    
+
+                                <h2 id="system-analytics-GETapi-v1-admin-system-analytics">GET /api/v1/admin/system/analytics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-analytics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/analytics?from=2025-11-01&amp;to=2025-11-30&amp;office_id=5"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/analytics"
+);
+
+const params = {
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "office_id": "5",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-analytics">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-analytics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-analytics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-analytics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-analytics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-analytics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-analytics" data-method="GET"
+      data-path="api/v1/admin/system/analytics"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-analytics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-analytics"
+                    onclick="tryItOut('GETapi-v1-admin-system-analytics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-analytics"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-analytics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-analytics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/analytics</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-analytics"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter range start (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-analytics"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter range end (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>office_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="office_id"                data-endpoint="GETapi-v1-admin-system-analytics"
+               value="5"
+               data-component="query">
+    <br>
+<p>Optional filter for office-specific bookings. Example: <code>5</code></p>
+            </div>
+                </form>
+
                 <h1 id="system-audit-logs">System / Audit Logs</h1>
 
     
@@ -7093,6 +11034,177 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="query">
     <br>
 <p>date Example: <code>consequatur</code></p>
+            </div>
+                </form>
+
+                <h1 id="system-bookings">System / Bookings</h1>
+
+    
+
+                                <h2 id="system-bookings-GETapi-v1-admin-system-bookings">GET /api/v1/admin/system/bookings</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-system-bookings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://mery.alemtayaz.com/api/v1/admin/system/bookings?status=pending&amp;cv_id=22&amp;office_id=5&amp;nationality_code=BD&amp;from=2025-11-01&amp;to=2025-11-30&amp;per_page=15"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://mery.alemtayaz.com/api/v1/admin/system/bookings"
+);
+
+const params = {
+    "status": "pending",
+    "cv_id": "22",
+    "office_id": "5",
+    "nationality_code": "BD",
+    "from": "2025-11-01",
+    "to": "2025-11-30",
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-system-bookings">
+    </span>
+<span id="execution-results-GETapi-v1-admin-system-bookings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-system-bookings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-system-bookings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-system-bookings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-system-bookings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-system-bookings" data-method="GET"
+      data-path="api/v1/admin/system/bookings"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-system-bookings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-system-bookings"
+                    onclick="tryItOut('GETapi-v1-admin-system-bookings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-system-bookings"
+                    onclick="cancelTryOut('GETapi-v1-admin-system-bookings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-system-bookings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/system/bookings</code></b>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter by status. Example: <code>pending</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cv_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cv_id"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="22"
+               data-component="query">
+    <br>
+<p>Filter by CV ID. Example: <code>22</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>office_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="office_id"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="5"
+               data-component="query">
+    <br>
+<p>Filter by office ID. Example: <code>5</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>nationality_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="nationality_code"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="BD"
+               data-component="query">
+    <br>
+<p>Filter by CV nationality code. Example: <code>BD</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>from</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="from"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="2025-11-01"
+               data-component="query">
+    <br>
+<p>date Filter by created_at from (inclusive). Example: <code>2025-11-01</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>to</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="to"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="2025-11-30"
+               data-component="query">
+    <br>
+<p>date Filter by created_at to (inclusive). Example: <code>2025-11-30</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-admin-system-bookings"
+               value="15"
+               data-component="query">
+    <br>
+<p>Results per page. Example: <code>15</code></p>
             </div>
                 </form>
 
@@ -11879,7 +15991,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC45.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC830.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -12000,7 +16112,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC45.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC830.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -12067,7 +16179,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "active="\
     --form "insurance_amount=10000"\
     --form "currency_code=EGP"\
-    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC55.tmp" </code></pre></div>
+    --form "logo=@C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC841.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -12200,7 +16312,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpDC55.tmp</code></p>
+<p>image Example: <code>C:\Users\ahmednour\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe\phpC841.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;

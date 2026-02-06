@@ -1,31 +1,101 @@
-name: 'Office / CVs'
+name: 'System / Categories'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/office/cvs
+    uri: api/v1/admin/system/categories
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / Categories'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/office/cvs - List my CVs'
+      title: 'List categories'
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
-    headers: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      q:
+        name: q
+        description: 'Search slug/name.'
+        required: false
+        example: clean
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      active:
+        name: active
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      parent_id:
+        name: parent_id
+        description: ''
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      from:
+        name: from
+        description: date
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      to:
+        name: to
+        description: date
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      per_page:
+        name: per_page
+        description: ''
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      q: clean
+      active: true
+      parent_id: 5
+      from: consequatur
+      to: consequatur
+      per_page: 15
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -33,118 +103,124 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/office/cvs
+    uri: api/v1/admin/system/categories
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / Categories'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'POST /api/v1/office/cvs'
-      description: |-
-        يدعم:
-        - Single:
-          fields: category_id, nationality_code, gender, has_experience, is_muslim, file, meta
-
-        - Bulk:
-          cvs[]: نفس الحقول لكل عنصر
-      authenticated: false
+      title: 'Create category'
+      description: ''
+      authenticated: true
       deprecated: false
       custom: []
     headers:
-      Content-Type: multipart/form-data
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+      Content-Type: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      category_id:
-        name: category_id
-        description: 'Optional category id. The <code>id</code> of an existing record in the system.categories table.'
+      parent_id:
+        name: parent_id
+        description: nullable
         required: false
         example: 1
         type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         custom: []
-      nationality_code:
-        name: nationality_code
-        description: 'Nationality code (ISO-2 or your custom code). Must not be greater than 8 characters.'
-        required: true
-        example: PH
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      gender:
-        name: gender
-        description: 'Optional gender (male|female).'
+      slug:
+        name: slug
+        description: nullable
         required: false
-        example: female
+        example: home-cleaning
         type: string
-        enumValues:
-          - male
-          - female
-        exampleWasSpecified: false
+        enumValues: []
+        exampleWasSpecified: true
         nullable: true
         custom: []
-      has_experience:
-        name: has_experience
-        description: 'Has previous experience? true/false.'
+      name:
+        name: name
+        description: ''
         required: true
-        example: false
-        type: boolean
+        example: 'Home Cleaning'
+        type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
-      is_muslim:
-        name: is_muslim
-        description: 'Is Muslim? true/false.'
-        required: true
-        example: false
+      active:
+        name: active
+        description: ''
+        required: false
+        example: true
         type: boolean
         enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      file:
-        name: file
-        description: 'Required PDF CV file. Must be a file. Must not be greater than 10240 kilobytes.'
-        required: true
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
+        exampleWasSpecified: true
+        nullable: true
         custom: []
       meta:
         name: meta
-        description: 'Optional JSON metadata.'
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      translations:
+        name: translations
+        description: ''
         required: false
         example:
-          age: 28
-          notes: live-in
-        type: object
+          -
+            lang_code: ar
+            name: 'تنظيف منزلي'
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      'translations[].lang_code':
+        name: 'translations[].lang_code'
+        description: 'This field is required when <code>translations</code> is present. Must not be greater than 12 characters.'
+        required: false
+        example: vmqeopfuud
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'translations[].name':
+        name: 'translations[].name'
+        description: 'This field is required when <code>translations</code> is present. Must not be greater than 191 characters.'
+        required: false
+        example: tdsufvyvddqamniihfqco
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      category_id: 1
-      nationality_code: PH
-      gender: female
-      has_experience: false
-      is_muslim: false
-      meta:
-        age: 28
-        notes: live-in
-    fileParameters:
-      file: null
+      parent_id: 1
+      slug: home-cleaning
+      name: 'Home Cleaning'
+      active: true
+      translations:
+        -
+          lang_code: ar
+          name: 'تنظيف منزلي'
+    fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -152,217 +228,135 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/v1/office/cvs/{id}'
+    uri: 'api/v1/admin/system/categories/{id}'
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / Categories'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'PUT/PATCH /api/v1/office/cvs/{id} - Update CV'
+      title: 'Update category'
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
-      Content-Type: multipart/form-data
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+      Content-Type: application/json
     urlParameters:
       id:
         name: id
-        description: 'The ID of the cv.'
+        description: ''
         required: true
-        example: consequatur
-        type: string
+        example: 17
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      category_id:
-        name: category_id
-        description: 'Optional category id. The <code>id</code> of an existing record in the system.categories table.'
+      parent_id:
+        name: parent_id
+        description: 'Parent category ID. The <code>id</code> of an existing record in the system.categories table. Must not be one of <code>0</code>.'
         required: false
-        example: 2
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
-      nationality_code:
-        name: nationality_code
-        description: 'Nationality code. Must not be greater than 8 characters.'
+      slug:
+        name: slug
+        description: 'Unique slug. Must not be greater than 191 characters.'
         required: false
-        example: NP
+        example: deep-cleaning
         type: string
         enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      gender:
-        name: gender
-        description: 'Optional gender (male|female).'
-        required: false
-        example: male
-        type: string
-        enumValues:
-          - male
-          - female
         exampleWasSpecified: false
         nullable: true
         custom: []
-      has_experience:
-        name: has_experience
-        description: 'Has experience?.'
+      name:
+        name: name
+        description: 'Default name. Must not be greater than 191 characters.'
         required: false
-        example: false
-        type: boolean
+        example: 'Deep Cleaning'
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      is_muslim:
-        name: is_muslim
-        description: 'Is Muslim? true/false.'
+      active:
+        name: active
+        description: 'Active flag.'
         required: false
         example: false
         type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      file:
-        name: file
-        description: 'PDF CV file (replace existing). Must be a file. Must not be greater than 10240 kilobytes.'
-        required: false
-        example: null
-        type: file
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
       meta:
         name: meta
-        description: 'Optional JSON metadata.'
+        description: ''
         required: false
-        example:
-          languages:
-            - ar
-            - en
+        example: null
         type: object
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-    cleanBodyParameters:
-      category_id: 2
-      nationality_code: NP
-      gender: male
-      has_experience: false
-      is_muslim: false
-      meta:
-        languages:
-          - ar
-          - en
-    fileParameters:
-      file: null
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: 'api/v1/office/cvs/{id}/toggle'
-    metadata:
-      groupName: 'Office / CVs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'POST /api/v1/office/cvs/{id}/toggle-active'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the cv.'
-        required: true
-        example: consequatur
+      translations:
+        name: translations
+        description: 'Replace/upsert translations.'
+        required: false
+        example:
+          -
+            lang_code: ar
+            name: 'تنظيف عميق'
+        type: 'object[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      'translations[].lang_code':
+        name: 'translations[].lang_code'
+        description: 'This field is required when <code>translations</code> is present. Must not be greater than 12 characters.'
+        required: false
+        example: vmqeopfuud
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      active:
-        name: active
-        description: ''
-        required: true
-        example: false
-        type: boolean
+      'translations[].name':
+        name: 'translations[].name'
+        description: 'This field is required when <code>translations</code> is present. Must not be greater than 191 characters.'
+        required: false
+        example: tdsufvyvddqamniihfqco
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
+      parent_id: 1
+      slug: deep-cleaning
+      name: 'Deep Cleaning'
       active: false
+      translations:
+        -
+          lang_code: ar
+          name: 'تنظيف عميق'
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: 'api/v1/office/cvs/{id}/resubmit'
-    metadata:
-      groupName: 'Office / CVs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'POST /api/v1/office/cvs/{id}/resubmit'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers: []
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the cv.'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null
@@ -370,31 +364,32 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/office/cvs/{id}'
+    uri: 'api/v1/admin/system/categories/{id}'
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / Categories'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'DELETE /api/v1/office/cvs/{id}'
+      title: 'Delete category (soft)'
       description: ''
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
-    headers: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     urlParameters:
       id:
         name: id
-        description: 'The ID of the cv.'
+        description: ''
         required: true
-        example: consequatur
-        type: string
+        example: 17
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: consequatur
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -402,7 +397,133 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/system/categories/{id}/toggle'
+    metadata:
+      groupName: 'System / Categories'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Toggle active'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+      Content-Type: application/json
+    urlParameters:
+      id:
+        name: id
+        description: ''
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      active:
+        name: active
+        description: ''
+        required: true
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      active: true
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/system/categories/{id}/translations'
+    metadata:
+      groupName: 'System / Categories'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Upsert translation'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+      Content-Type: application/json
+    urlParameters:
+      id:
+        name: id
+        description: ''
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 17
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      lang_code:
+        name: lang_code
+        description: ''
+        required: true
+        example: ar
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: true
+        example: تنظيف
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      lang_code: ar
+      name: تنظيف
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null

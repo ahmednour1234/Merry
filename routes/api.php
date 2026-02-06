@@ -22,6 +22,17 @@ use App\Http\Controllers\Api\System\CategoryController;
 use App\Http\Controllers\Api\System\CvController as AdminCvController;
 use App\Http\Controllers\Api\System\NotificationController as SystemNotificationController;
 use App\Http\Controllers\Api\System\NotificationBroadcastController;
+use App\Http\Controllers\Api\System\PageController;
+use App\Http\Controllers\Api\System\SystemSettingsController;
+use App\Http\Controllers\Api\System\FavouriteCvAdminController;
+use App\Http\Controllers\Api\System\SliderController;
+use App\Http\Controllers\Api\System\BookingController as AdminBookingController;
+use App\Http\Controllers\Api\Office\BookingController as OfficeBookingController;
+use App\Http\Controllers\Api\EndUser\BookingController as EndUserBookingController;
+use App\Http\Controllers\Api\EndUser\AnalyticsController as EndUserAnalyticsController;
+use App\Http\Controllers\Api\Office\AnalyticsController as OfficeAnalyticsController;
+use App\Http\Controllers\Api\System\AnalyticsController as SystemAnalyticsController;
+use App\Http\Controllers\Api\PublicSettingsController;
 
 use App\Http\Controllers\Api\Office\AuthOfficeController;
 use App\Http\Controllers\Api\Office\FcmTokenController;
@@ -29,8 +40,50 @@ use App\Http\Controllers\Api\Office\SubscriptionController;
 use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
+use App\Http\Controllers\Api\EndUser\FavouriteController;
+use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 Route::get('/health', fn() => ['ok' => true, 'ts' => now()->toIso8601String()]);
+
+Route::get('v1/debug/token', function (Request $request) {
+    $raw = $request->bearerToken();
+
+    $token = PersonalAccessToken::findToken($raw);
+
+    return [
+        'raw'          => $raw,
+        'token_row_id' => optional($token)->id,
+        'abilities'    => optional($token)->abilities,
+        'tokenable'    => $token?->tokenable ? [
+            'class' => get_class($token->tokenable),
+            'id'    => $token->tokenable->id,
+            'email' => $token->tokenable->email ?? null,
+        ] : null,
+    ];
+});
+Route::get('v1/ping', function (Request $request) {
+    return [
+        'ok'     => true,
+        'time'   => now()->toDateTimeString(),
+        'auth'   => $request->header('Authorization'),
+    ];
+});
+
+// Debug route to test middleware chain
+Route::get('v1/test-auth', function (Request $request) {
+    $user = $request->user();
+
+    return [
+        'ok'   => true,
+        'user' => $user ? [
+            'id'    => $user->id,
+            'type'  => get_class($user),
+            'email' => $user->email ?? null,
+        ] : null,
+        'token_abilities' => $user?->currentAccessToken()?->abilities ?? [],
+    ];
+})->middleware('token_auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +94,8 @@ Route::prefix('v1')->group(function () {
     Route::post('auth/login',  [AuthController::class, 'login']);
     Route::post('auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
             Route::get('cities', [CityController::class, 'index']);
+	// Public settings (no auth)
+	Route::get('settings', [PublicSettingsController::class, 'index']);
 });
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +104,24 @@ Route::prefix('v1')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::get('v1/admin/system/nationalities', [NationalityController::class, 'index']);
+
+// Pages - Public API (no authentication required)
+Route::prefix('v1/admin/system/pages')->group(function () {
+    Route::get('/', [PageController::class, 'index']);
+    Route::get('{id}', [PageController::class, 'show']);
+    Route::post('/', [PageController::class, 'store']);
+    Route::put('{id}', [PageController::class, 'update']);
+    Route::post('{id}/toggle', [PageController::class, 'toggle']);
+    Route::delete('{id}', [PageController::class, 'destroy']);
+});
+
 Route::prefix('v1/admin/system')
-    ->middleware(['auth:sanctum', 'ability:system.manage'])
+    ->middleware(['token_auth', 'check_ability:system.manage'])
     ->group(function () {
+		// System Settings
+		Route::get('settings',  [SystemSettingsController::class, 'index'])->middleware('perm:system.settings.index');
+		Route::put('settings/{key}', [SystemSettingsController::class, 'update'])->middleware('perm:system.settings.update');
+
         // Languages
         Route::get('languages',  [SystemLanguageController::class, 'index'])->middleware('perm:system.languages.index');
         Route::post('languages', [SystemLanguageController::class, 'store'])->middleware('perm:system.languages.store');
@@ -148,6 +218,24 @@ Route::prefix('v1/admin/system')
         Route::post('notifications/read-all', [SystemNotificationController::class, 'markAllRead']);
         Route::post('notifications/broadcast', [NotificationBroadcastController::class, 'store'])->middleware('perm:system.notifications.broadcast');
 
+        // Favourites CV (admin)
+        Route::get('favorites/cv', [FavouriteCvAdminController::class, 'index'])->middleware('perm:system.favorites_cv.index');
+        Route::get('favorites/cv/stats', [FavouriteCvAdminController::class, 'stats'])->middleware('perm:system.favorites_cv.stats');
+
+        // Sliders (admin)
+        Route::get('sliders',               [SliderController::class, 'index'])->middleware('perm:system.sliders.index');
+        Route::post('sliders',              [SliderController::class, 'store'])->middleware('perm:system.sliders.store');
+        Route::put('sliders/{id}',          [SliderController::class, 'update'])->middleware('perm:system.sliders.update');
+        Route::delete('sliders/{id}',       [SliderController::class, 'destroy'])->middleware('perm:system.sliders.destroy');
+        Route::post('sliders/{id}/toggle',  [SliderController::class, 'toggle'])->middleware('perm:system.sliders.toggle');
+        Route::post('sliders/{id}/translations', [SliderController::class, 'upsertTranslation'])->middleware('perm:system.sliders.translations');
+
+        // Bookings (admin)
+        Route::get('bookings', [AdminBookingController::class, 'index'])->middleware('perm:system.bookings.index');
+        Route::get('bookings/stats', [AdminBookingController::class, 'stats'])->middleware('perm:system.bookings.stats');
+        // Analytics (admin)
+        Route::get('analytics', [SystemAnalyticsController::class, 'index'])->middleware('perm:system.analytics.index');
+
         // Nationalities
         Route::post('nationalities', [NationalityController::class, 'store'])->middleware('perm:system.nationalities.store');
         Route::put('nationalities/{id}', [NationalityController::class, 'update'])->middleware('perm:system.nationalities.update');
@@ -186,7 +274,7 @@ Route::prefix('v1/office')->group(function () {
     Route::post('auth/reset-password',  [AuthOfficeController::class, 'reset']);
 
     // protected
-    Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['token_auth'])->group(function () {
         Route::get('me',                 [AuthOfficeController::class, 'me']);
         Route::post('auth/logout',       [AuthOfficeController::class, 'logout']);
 
@@ -207,6 +295,15 @@ Route::prefix('v1/office')->group(function () {
         Route::post('cvs/{id}/toggle',    [OfficeCvController::class, 'toggleActive']);
         Route::post('cvs/{id}/resubmit',  [OfficeCvController::class, 'resubmit']);
         Route::delete('cvs/{id}',         [OfficeCvController::class, 'destroy']);
+
+        // Bookings (Office)
+        Route::get('bookings',                 [OfficeBookingController::class, 'index']);
+        Route::post('bookings/{id}/accept',    [OfficeBookingController::class, 'accept']);
+        Route::post('bookings/{id}/reject',    [OfficeBookingController::class, 'reject']);
+        Route::get('bookings/stats',           [OfficeBookingController::class, 'stats']);
+        Route::post('bookings/reset-all',      [OfficeBookingController::class, 'resetAll']);
+        // Analytics (Office)
+        Route::get('analytics',                [OfficeAnalyticsController::class, 'index']);
 
         // Notifications (offices)
         Route::get('notifications',       [SystemNotificationController::class, 'index']);
@@ -230,11 +327,27 @@ Route::prefix('v1/enduser')->group(function () {
     Route::get('currencies',            [CatalogController::class, 'currencies']);
     Route::get('categories',            [CatalogController::class, 'categories']);
     Route::get('offices',               [CatalogController::class, 'offices']);
+	Route::get('top-offices',          [CatalogController::class, 'topOffices']);
     Route::get('cvs',                   [CatalogController::class, 'cvs']);
+	Route::get('cvs/{id}',              [CatalogController::class, 'cv']);
+	Route::get('sliders',               [CatalogController::class, 'sliders']);
 
-    Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['token_auth'])->group(function () {
         Route::get('me',            [AuthEndUserController::class, 'me']);
         Route::put('profile',       [AuthEndUserController::class, 'updateProfile']);
         Route::post('auth/logout',  [AuthEndUserController::class, 'logout']);
+        // Analytics (EndUser)
+        Route::get('analytics',     [EndUserAnalyticsController::class, 'index']);
+
+		// Favourites (EndUser)
+		Route::get('favorites/cvs',             [FavouriteController::class, 'index']);
+		Route::post('favorites/cvs',            [FavouriteController::class, 'store']);
+		Route::delete('favorites/cvs/{cvId}',   [FavouriteController::class, 'destroy']);
+
+        // Bookings (EndUser)
+        Route::get('bookings',               [EndUserBookingController::class, 'index']);
+        Route::post('bookings',              [EndUserBookingController::class, 'store']);
+        Route::post('bookings/{id}/cancel',  [EndUserBookingController::class, 'cancel']);
+        Route::get('bookings/stats',         [EndUserBookingController::class, 'stats']);
     });
 });

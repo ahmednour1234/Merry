@@ -9,10 +9,25 @@ class CvResource extends JsonResource
 {
     public function toArray($request): array
     {
+		$isBooked = false;
+		try {
+			$user = $request->user();
+			if ($user && $user instanceof \App\Models\Identity\EndUser) {
+				$isBooked = \App\Models\CvBooking::on('system')
+					->where('cv_id', $this->id)
+					->where('end_user_id', (int) $user->id)
+					->whereIn('status', \App\Enums\BookingStatus::activeStatuses())
+					->exists();
+			}
+		} catch (\Throwable $e) {
+			$isBooked = false;
+		}
+
         return [
             'id'               => $this->id,
             'office_id'        => $this->office_id,
             'category_id'      => $this->category_id,
+			'is_booked'        => $isBooked,
 
             // الجنسية (مبنية على Accept-Language + translations)
             'nationality'      => NationalityResource::make(
@@ -23,14 +38,14 @@ class CvResource extends JsonResource
             'has_experience'   => (bool) $this->has_experience,
             'is_muslim'        => (bool) $this->is_muslim,
 
-            'file' => [
+			'file' => [
                 'path'      => $this->file_path,
                 'mime'      => $this->file_mime,
                 'size'      => $this->file_size,
                 'original'  => $this->file_original_name,
                 'url'       => $this->when(
                     $this->file_path,
-                    fn () => Storage::disk('public')->url($this->file_path)
+					fn () => asset('storage/' . ltrim($this->file_path, '/'))
                 ),
             ],
 

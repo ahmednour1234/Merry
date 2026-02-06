@@ -31,14 +31,33 @@ class AppServiceProvider extends ServiceProvider
      */
      public function boot(): void
     {
-        $this->loadMigrationsFrom([
-            database_path('migrations/system'),
-            database_path('migrations/identity'),
-        ]);
+        try {
+            $this->loadMigrationsFrom([
+                database_path('migrations/system'),
+                database_path('migrations/identity'),
+            ]);
 
-        Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
-        Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
-        Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
-        Office::observe($this->app->make(OfficeObserver::class));
+            // Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
+            Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
+            Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
+            
+            // Only register observer if Office model exists and database is available
+            try {
+                Office::observe($this->app->make(OfficeObserver::class));
+            } catch (\Throwable $e) {
+                // Silently fail if Office model or observer has issues
+                \Illuminate\Support\Facades\Log::warning('Failed to register Office observer', [
+                    'error' => $e->getMessage()
+                ]);
+            }
+        } catch (\Throwable $e) {
+            // Log but don't crash the application
+            \Illuminate\Support\Facades\Log::error('AppServiceProvider boot error', [
+                'message' => $e->getMessage(),
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+        }
     }
 }

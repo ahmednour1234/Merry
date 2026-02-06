@@ -55,16 +55,25 @@ class OfficeController extends ApiController
      */
     public function stats(Request $r)
     {
-        $total   = Office::on('system')->count();
-        $active  = Office::on('system')->where('active', true)->count();
-        $blocked = Office::on('system')->where('blocked', true)->count();
-        $cvs     = Cv::on('system')->count();
+		$total   = Office::on('system')->count();
+		$active  = Office::on('system')->where('active', true)->count();
+		$blocked = Office::on('system')->where('blocked', true)->count();
+		$cvs     = Cv::on('system')->count();
+
+		// Total favourites (identity DB)
+		$totalFavourites = 0;
+		try {
+			$totalFavourites = \App\Models\Identity\FavouriteCv::on('identity')->count();
+		} catch (\Throwable $e) {
+			$totalFavourites = 0;
+		}
 
         return $this->responder->ok(new OfficeStatsResource([
             'total_offices'  => $total,
             'active_offices' => $active,
             'blocked_offices'=> $blocked,
-            'total_cvs'      => $cvs,
+			'total_cvs'      => $cvs,
+			'total_favourites' => $totalFavourites,
         ]), 'Office stats');
     }
 
