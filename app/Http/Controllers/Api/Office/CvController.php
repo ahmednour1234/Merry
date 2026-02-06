@@ -7,6 +7,7 @@ use App\Http\Requests\System\Cv\StoreCvRequest;
 use App\Http\Requests\System\Cv\UpdateCvRequest;
 use App\Http\Resources\System\CvResource;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface as Repo;
+use App\Services\Notifications\NotificationService;
 use Illuminate\Http\Request;
 
 /**
@@ -14,7 +15,7 @@ use Illuminate\Http\Request;
  */
 class CvController extends ApiController
 {
-    public function __construct(protected Repo $repo)
+    public function __construct(protected Repo $repo, protected NotificationService $notificationService)
     {
         parent::__construct(app('api.responder'));
     }
@@ -166,6 +167,15 @@ class CvController extends ApiController
         $cv->rejected_at     = null;
         $cv->rejected_reason = null;
         $cv->save();
+
+        $notification = $this->notificationService->createNotification([
+            'type' => 'cv.resubmitted',
+            'title' => 'CV Resubmitted',
+            'body' => "A rejected CV has been resubmitted and is pending review.",
+            'data' => ['cv_id' => $cv->id, 'office_id' => $cv->office_id],
+            'priority' => 'normal',
+        ]);
+        $this->notificationService->notifyAdmins($notification, ['inapp']);
 
         return $this->responder->ok(
             new CvResource($cv),
