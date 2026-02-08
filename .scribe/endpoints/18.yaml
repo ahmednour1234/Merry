@@ -1,16 +1,177 @@
-name: 'Office / CVs'
+name: 'System / CVs'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/office/cvs
+    uri: api/v1/admin/system/cvs
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / CVs'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/office/cvs - List my CVs'
+      title: 'List CVs (filters supported)'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      id:
+        name: id
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      office_id:
+        name: office_id
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      category_id:
+        name: category_id
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      nationality:
+        name: nationality
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      gender:
+        name: gender
+        description: male|female
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      has_experience:
+        name: has_experience
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      is_muslim:
+        name: is_muslim
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      status:
+        name: status
+        description: pending|approved|rejected|frozen|deactivated_by_office
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      from:
+        name: from
+        description: date
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      to:
+        name: to
+        description: date
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      per_page:
+        name: per_page
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      id: 17
+      name: consequatur
+      office_id: 17
+      category_id: 17
+      nationality: consequatur
+      gender: consequatur
+      has_experience: false
+      is_muslim: false
+      status: consequatur
+      from: consequatur
+      to: consequatur
+      per_page: 17
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/system/cvs-stats
+    metadata:
+      groupName: 'System / CVs'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: Stats
       description: ''
       authenticated: false
       deprecated: false
@@ -33,138 +194,18 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/office/cvs
+    uri: 'api/v1/admin/system/cvs/{id}/approve'
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / CVs'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'POST /api/v1/office/cvs'
-      description: |-
-        يدعم:
-        - Single:
-          fields: category_id, nationality_code, gender, has_experience, is_muslim, file, meta
-
-        - Bulk:
-          cvs[]: نفس الحقول لكل عنصر
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: multipart/form-data
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      category_id:
-        name: category_id
-        description: 'Optional category id. The <code>id</code> of an existing record in the system.categories table.'
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      nationality_code:
-        name: nationality_code
-        description: 'Nationality code (ISO-2 or your custom code). Must not be greater than 8 characters.'
-        required: true
-        example: PH
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      gender:
-        name: gender
-        description: 'Optional gender (male|female).'
-        required: false
-        example: female
-        type: string
-        enumValues:
-          - male
-          - female
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      has_experience:
-        name: has_experience
-        description: 'Has previous experience? true/false.'
-        required: true
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      is_muslim:
-        name: is_muslim
-        description: 'Is Muslim? true/false.'
-        required: true
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      file:
-        name: file
-        description: 'Required PDF CV file. Must be a file. Must not be greater than 10240 kilobytes.'
-        required: true
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      meta:
-        name: meta
-        description: 'Optional JSON metadata.'
-        required: false
-        example:
-          age: 28
-          notes: live-in
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      category_id: 1
-      nationality_code: PH
-      gender: female
-      has_experience: false
-      is_muslim: false
-      meta:
-        age: 28
-        notes: live-in
-    fileParameters:
-      file: null
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - PUT
-    uri: 'api/v1/office/cvs/{id}'
-    metadata:
-      groupName: 'Office / CVs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'PUT/PATCH /api/v1/office/cvs/{id} - Update CV'
+      title: 'Approve CV'
       description: ''
       authenticated: false
       deprecated: false
       custom: []
-    headers:
-      Content-Type: multipart/form-data
+    headers: []
     urlParameters:
       id:
         name: id
@@ -180,145 +221,8 @@ endpoints:
       id: consequatur
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      category_id:
-        name: category_id
-        description: 'Optional category id. The <code>id</code> of an existing record in the system.categories table.'
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      nationality_code:
-        name: nationality_code
-        description: 'Nationality code. Must not be greater than 8 characters.'
-        required: false
-        example: NP
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      gender:
-        name: gender
-        description: 'Optional gender (male|female).'
-        required: false
-        example: male
-        type: string
-        enumValues:
-          - male
-          - female
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      has_experience:
-        name: has_experience
-        description: 'Has experience?.'
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      is_muslim:
-        name: is_muslim
-        description: 'Is Muslim? true/false.'
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      file:
-        name: file
-        description: 'PDF CV file (replace existing). Must be a file. Must not be greater than 10240 kilobytes.'
-        required: false
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      meta:
-        name: meta
-        description: 'Optional JSON metadata.'
-        required: false
-        example:
-          languages:
-            - ar
-            - en
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      category_id: 2
-      nationality_code: NP
-      gender: male
-      has_experience: false
-      is_muslim: false
-      meta:
-        languages:
-          - ar
-          - en
-    fileParameters:
-      file: null
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: 'api/v1/office/cvs/{id}/toggle'
-    metadata:
-      groupName: 'Office / CVs'
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'POST /api/v1/office/cvs/{id}/toggle-active'
-      description: ''
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the cv.'
-        required: true
-        example: consequatur
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: consequatur
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      active:
-        name: active
-        description: ''
-        required: true
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      active: true
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
@@ -330,13 +234,93 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: 'api/v1/office/cvs/{id}/resubmit'
+    uri: 'api/v1/admin/system/cvs/{id}/reject'
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / CVs'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'POST /api/v1/office/cvs/{id}/resubmit'
+      title: 'Reject CV (reason required)'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the cv.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/system/cvs/{id}/freeze'
+    metadata:
+      groupName: 'System / CVs'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Freeze CV'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the cv.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/system/cvs/{id}/unfreeze'
+    metadata:
+      groupName: 'System / CVs'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Unfreeze CV (back to pending)'
       description: ''
       authenticated: false
       deprecated: false
@@ -370,13 +354,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/office/cvs/{id}'
+    uri: 'api/v1/admin/system/cvs/{id}'
     metadata:
-      groupName: 'Office / CVs'
+      groupName: 'System / CVs'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'DELETE /api/v1/office/cvs/{id}'
+      title: 'Delete CV'
       description: ''
       authenticated: false
       deprecated: false

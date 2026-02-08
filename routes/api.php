@@ -339,6 +339,11 @@ Route::prefix('v1/enduser')->group(function () {
         // Analytics (EndUser)
         Route::get('analytics',     [EndUserAnalyticsController::class, 'index']);
 
+        // Notifications (EndUser)
+        Route::get('notifications',       [SystemNotificationController::class, 'index']);
+        Route::post('notifications/{id}/read', [SystemNotificationController::class, 'markRead']);
+        Route::post('notifications/read-all', [SystemNotificationController::class, 'markAllRead']);
+
 		// Favourites (EndUser)
 		Route::get('favorites/cvs',             [FavouriteController::class, 'index']);
 		Route::post('favorites/cvs',            [FavouriteController::class, 'store']);

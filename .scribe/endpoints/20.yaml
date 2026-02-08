@@ -1,16 +1,16 @@
-name: 'Office / Analytics'
-description: ''
+name: 'Office / Bookings'
+description: 'Reject all active bookings for this office.'
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/office/analytics
+    uri: api/v1/office/bookings
     metadata:
-      groupName: 'Office / Analytics'
+      groupName: 'Office / Bookings'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/office/analytics'
+      title: 'GET /api/v1/office/bookings'
       description: ''
       authenticated: false
       deprecated: false
@@ -19,9 +19,39 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
+      status:
+        name: status
+        description: 'Filter by status.'
+        required: false
+        example: accepted
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      cv_id:
+        name: cv_id
+        description: 'Filter by CV ID.'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      nationality_code:
+        name: nationality_code
+        description: 'Filter by CV nationality code.'
+        required: false
+        example: IN
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
       from:
         name: from
-        description: 'date Filter range start (inclusive).'
+        description: 'date Filter by created_at from (inclusive).'
         required: false
         example: '2025-11-01'
         type: string
@@ -31,7 +61,7 @@ endpoints:
         custom: []
       to:
         name: to
-        description: 'date Filter range end (inclusive).'
+        description: 'date Filter by created_at to (inclusive).'
         required: false
         example: '2025-11-30'
         type: string
@@ -39,9 +69,63 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
+      per_page:
+        name: per_page
+        description: 'Results per page.'
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
     cleanQueryParameters:
+      status: accepted
+      cv_id: 10
+      nationality_code: IN
       from: '2025-11-01'
       to: '2025-11-30'
+      per_page: 15
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/office/bookings/reset-all
+    metadata:
+      groupName: 'Office / Bookings'
+      groupDescription: 'Reject all active bookings for this office.'
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'POST /api/v1/office/bookings/reset-all'
+      description: ''
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers: []
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      cv_id:
+        name: cv_id
+        description: 'Optional: restrict reset to a single CV ID.'
+        required: false
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      cv_id: 12
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
