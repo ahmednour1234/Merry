@@ -4,12 +4,16 @@ namespace App\Repositories\System\Cv;
 
 use App\Models\Cv;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
+use App\Services\Notifications\NotificationService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Support\Files\PdfUpload;
 
 class CvRepository implements CvRepositoryInterface
 {
+    public function __construct(protected NotificationService $notificationService)
+    {
+    }
     public function paginate(array $filters = [], int $perPage = 15): LengthAwarePaginator
     {
         $q = Cv::on('system')
@@ -42,7 +46,20 @@ class CvRepository implements CvRepositoryInterface
             $data['office_id'] = $officeId ?? ($data['office_id'] ?? null);
             $data['status'] = $data['status'] ?? 'pending';
             $cv = Cv::on('system')->create($data);
-            return $cv->load(['office','category','nationality.translations']);
+            $cv->load(['office','category','nationality.translations']);
+
+            if ($cv->office_id) {
+                $notification = $this->notificationService->createNotification([
+                    'type' => 'cv.submitted',
+                    'title' => 'New CV Submitted',
+                    'body' => "A new CV has been submitted and is pending review.",
+                    'data' => ['cv_id' => $cv->id, 'office_id' => $cv->office_id],
+                    'priority' => 'normal',
+                ]);
+                $this->notificationService->notifyAdmins($notification, ['inapp']);
+            }
+
+            return $cv;
         });
     }
 
@@ -84,7 +101,21 @@ class CvRepository implements CvRepositoryInterface
         $cv->rejected_by = null; $cv->rejected_at = null; $cv->rejected_reason = null;
         $cv->frozen_by = null; $cv->frozen_at = null;
         $cv->save();
-        return $cv->load(['office','category','nationality.translations']);
+        $cv->load(['office','category','nationality.translations']);
+
+        if ($cv->office_id) {
+            $notification = $this->notificationService->createNotification([
+                'type' => 'cv.approved',
+                'title' => 'CV Approved',
+                'body' => "Your CV has been approved.",
+                'data' => ['cv_id' => $cv->id],
+                'priority' => 'normal',
+                'created_by' => $adminId,
+            ]);
+            $this->notificationService->notifyOffices($notification, [$cv->office_id], ['inapp']);
+        }
+
+        return $cv;
     }
 
     public function reject(int $id, int $adminId, string $reason): ?Cv
@@ -97,7 +128,21 @@ class CvRepository implements CvRepositoryInterface
         $cv->rejected_reason = $reason;
         $cv->approved_by = null; $cv->approved_at = null;
         $cv->save();
-        return $cv->load(['office','category','nationality.translations']);
+        $cv->load(['office','category','nationality.translations']);
+
+        if ($cv->office_id) {
+            $notification = $this->notificationService->createNotification([
+                'type' => 'cv.rejected',
+                'title' => 'CV Rejected',
+                'body' => "Your CV has been rejected. Reason: {$reason}",
+                'data' => ['cv_id' => $cv->id, 'reason' => $reason],
+                'priority' => 'normal',
+                'created_by' => $adminId,
+            ]);
+            $this->notificationService->notifyOffices($notification, [$cv->office_id], ['inapp']);
+        }
+
+        return $cv;
     }
 
     public function freeze(int $id, int $adminId): ?Cv
@@ -108,7 +153,21 @@ class CvRepository implements CvRepositoryInterface
         $cv->frozen_by = $adminId;
         $cv->frozen_at = now();
         $cv->save();
-        return $cv->load(['office','category','nationality.translations']);
+        $cv->load(['office','category','nationality.translations']);
+
+        if ($cv->office_id) {
+            $notification = $this->notificationService->createNotification([
+                'type' => 'cv.frozen',
+                'title' => 'CV Frozen',
+                'body' => "Your CV has been frozen.",
+                'data' => ['cv_id' => $cv->id],
+                'priority' => 'normal',
+                'created_by' => $adminId,
+            ]);
+            $this->notificationService->notifyOffices($notification, [$cv->office_id], ['inapp']);
+        }
+
+        return $cv;
     }
 
     public function unfreeze(int $id, int $adminId): ?Cv
@@ -120,7 +179,21 @@ class CvRepository implements CvRepositoryInterface
         $cv->frozen_by = null;
         $cv->frozen_at = null;
         $cv->save();
-        return $cv->load(['office','category','nationality.translations']);
+        $cv->load(['office','category','nationality.translations']);
+
+        if ($cv->office_id) {
+            $notification = $this->notificationService->createNotification([
+                'type' => 'cv.unfrozen',
+                'title' => 'CV Unfrozen',
+                'body' => "Your CV has been unfrozen and is pending review.",
+                'data' => ['cv_id' => $cv->id],
+                'priority' => 'normal',
+                'created_by' => $adminId,
+            ]);
+            $this->notificationService->notifyOffices($notification, [$cv->office_id], ['inapp']);
+        }
+
+        return $cv;
     }
 
     public function officeToggleActive(int $id, int $officeId, bool $active): ?Cv
