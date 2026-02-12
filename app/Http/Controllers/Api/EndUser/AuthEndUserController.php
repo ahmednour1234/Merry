@@ -11,6 +11,7 @@ use App\Http\Requests\EndUser\Auth\EndUserVerifyPhoneRequest;
 use App\Http\Requests\EndUser\Profile\EndUserUpdateProfileRequest;
 use App\Http\Resources\EndUser\EndUserResource;
 use App\Models\Identity\EndUser;
+use App\Services\Notifications\NotificationService;
 use App\Support\Uploads\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Cache;
 
 class AuthEndUserController extends ApiController
 {
-    public function __construct()
+    public function __construct(protected NotificationService $notificationService)
     {
         parent::__construct(app('api.responder'));
     }
@@ -39,6 +40,15 @@ class AuthEndUserController extends ApiController
         $user->password = Hash::make((string) $data['password']);
         $user->active = true;
         $user->save();
+
+        $notification = $this->notificationService->createNotification([
+            'type' => 'enduser.registered',
+            'title' => 'Welcome!',
+            'body' => 'Your account has been created successfully.',
+            'data' => ['user_id' => $user->id],
+            'priority' => 'normal',
+        ]);
+        $this->notificationService->notifyEndUsers($notification, [$user->id], ['inapp']);
 
         $token = $user->createToken('enduser', ['enduser'])->plainTextToken;
 
@@ -68,6 +78,15 @@ class AuthEndUserController extends ApiController
 
         $user->last_login_at = now();
         $user->save();
+
+        $notification = $this->notificationService->createNotification([
+            'type' => 'enduser.logged_in',
+            'title' => 'Login Successful',
+            'body' => 'You have successfully logged in.',
+            'data' => ['user_id' => $user->id],
+            'priority' => 'normal',
+        ]);
+        $this->notificationService->notifyEndUsers($notification, [$user->id], ['inapp']);
 
         $token = $user->createToken('enduser', ['enduser'])->plainTextToken;
 
