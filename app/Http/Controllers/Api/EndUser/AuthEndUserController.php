@@ -31,7 +31,9 @@ class AuthEndUserController extends ApiController
     {
         $data = $request->validated();
         $user = new EndUser();
-        $user->national_id = (string) $data['national_id'];
+        if (!empty($data['national_id'])) {
+            $user->national_id = (string) $data['national_id'];
+        }
         $user->name = (string) $data['name'];
         $user->phone = (string) $data['phone'];
         $user->password = Hash::make((string) $data['password']);
@@ -52,11 +54,11 @@ class AuthEndUserController extends ApiController
      */
     public function login(EndUserLoginRequest $request)
     {
-        $nationalId = (string) $request->input('national_id');
+        $phone = (string) $request->input('phone');
         $password = (string) $request->input('password');
 
         /** @var EndUser|null $user */
-        $user = EndUser::where('national_id', $nationalId)
+        $user = EndUser::where('phone', $phone)
             ->where('active', true)
             ->first();
 

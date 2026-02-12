@@ -14,7 +14,7 @@ class EndUserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'national_id' => ['required', 'string', 'unique:identity.end_users,national_id'],
+            'national_id' => ['nullable', 'string', 'unique:identity.end_users,national_id'],
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],
             'password' => ['required', 'confirmed', 'min:8'],
@@ -25,7 +25,7 @@ class EndUserRegisterRequest extends FormRequest
     {
         return [
             'national_id' => [
-                'description' => 'Unique national identifier used for login.',
+                'description' => 'Unique national identifier (optional).',
                 'example' => '1234567890',
             ],
             'name' => [
