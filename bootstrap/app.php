@@ -40,6 +40,7 @@ return Application::configure(basePath: dirname(__DIR__))
         App\Providers\ApiFormattingServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ModulesServiceProvider::class,
+        App\Providers\Filament\AdminPanelProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
 
