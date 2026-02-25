@@ -8,6 +8,7 @@ use App\Models\NotificationTemplate;
 use App\Models\Office;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Identity\EndUser;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -102,6 +103,29 @@ class NotificationService
                 if ($channel === 'email' && $user->email) {
                     $this->queueEmail($user->email, $notification);
                 }
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+    public function notifyEndUsers(Notification $notification, ?array $endUserIds = null, array $channels = ['inapp']): int
+    {
+        $endUsers = $endUserIds 
+            ? EndUser::whereIn('id', $endUserIds)->where('active', true)->get(['id', 'phone'])
+            : EndUser::where('active', true)->get(['id', 'phone']);
+
+        $count = 0;
+        foreach ($endUsers as $endUser) {
+            foreach ($channels as $channel) {
+                NotificationRecipient::create([
+                    'notification_id' => $notification->id,
+                    'recipient_type' => 'enduser',
+                    'recipient_id' => $endUser->id,
+                    'resolved_user_id' => null,
+                    'channel' => $channel,
+                    'status' => $channel === 'inapp' ? 'sent' : 'queued',
+                ]);
                 $count++;
             }
         }

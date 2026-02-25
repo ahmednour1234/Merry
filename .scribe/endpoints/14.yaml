@@ -1,108 +1,486 @@
-name: 'System / Bookings'
-description: ''
+name: Notifications
+description: |-
+
+  Endpoints for listing and marking in-app notifications as read.
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/bookings
+    uri: api/v1/admin/system/notifications
     metadata:
-      groupName: 'System / Bookings'
-      groupDescription: ''
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/admin/system/bookings'
-      description: ''
-      authenticated: false
+      title: 'List notifications'
+      description: 'Paginated list of in-app notifications for the current principal (system user or office).'
+      authenticated: true
       deprecated: false
       custom: []
-    headers: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
-      status:
-        name: status
-        description: 'Filter by status.'
+      page:
+        name: page
+        description: 'The page number.'
         required: false
-        example: pending
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      cv_id:
-        name: cv_id
-        description: 'Filter by CV ID.'
-        required: false
-        example: 22
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      office_id:
-        name: office_id
-        description: 'Filter by office ID.'
-        required: false
-        example: 5
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      nationality_code:
-        name: nationality_code
-        description: 'Filter by CV nationality code.'
-        required: false
-        example: BD
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      from:
-        name: from
-        description: 'date Filter by created_at from (inclusive).'
-        required: false
-        example: '2025-11-01'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      to:
-        name: to
-        description: 'date Filter by created_at to (inclusive).'
-        required: false
-        example: '2025-11-30'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      per_page:
-        name: per_page
-        description: 'Results per page.'
-        required: false
-        example: 15
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanQueryParameters:
-      status: pending
-      cv_id: 22
-      office_id: 5
-      nationality_code: BD
-      from: '2025-11-01'
-      to: '2025-11-30'
-      per_page: 15
+      page: 1
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/admin/system/notifications/{id}/read'
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mark a notification as read'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters:
+      id:
+        name: id
+        description: 'The notification recipient ID.'
+        required: true
+        example: 123
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 123
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/system/notifications/read-all
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mark all as read'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/system/notifications/broadcast
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Broadcast notifications to admins or selected offices.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Broadcast a notification'
+      description: 'Create and send a notification to admins or a list of office IDs.'
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+      Content-Type: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'The notification title.'
+        required: true
+        example: 'System update tonight'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      body:
+        name: body
+        description: 'The body text.'
+        required: false
+        example: 'We will update the system at 1 AM UTC.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+      target:
+        name: target
+        description: 'Target audience. One of: admins, offices.'
+        required: true
+        example: admins
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      office_ids:
+        name: office_ids
+        description: 'Office IDs when target=offices.'
+        required: false
+        example:
+          - 1
+          - 2
+          - 3
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      channels:
+        name: channels
+        description: 'Channels to send on.'
+        required: false
+        example:
+          - inapp
+          - email
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      title: 'System update tonight'
+      body: 'We will update the system at 1 AM UTC.'
+      target: admins
+      office_ids:
+        - 1
+        - 2
+        - 3
+      channels:
+        - inapp
+        - email
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/office/notifications
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List notifications'
+      description: 'Paginated list of in-app notifications for the current principal (system user or office).'
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      page:
+        name: page
+        description: 'The page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      page: 1
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/office/notifications/{id}/read'
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mark a notification as read'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters:
+      id:
+        name: id
+        description: 'The notification recipient ID.'
+        required: true
+        example: 123
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 123
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/office/notifications/read-all
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mark all as read'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/enduser/notifications
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List notifications'
+      description: 'Paginated list of in-app notifications for the current principal (system user or office).'
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      page:
+        name: page
+        description: 'The page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      page: 1
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/enduser/notifications/{id}/read'
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mark a notification as read'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters:
+      id:
+        name: id
+        description: 'The notification recipient ID.'
+        required: true
+        example: 123
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 123
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/enduser/notifications/read-all
+    metadata:
+      groupName: Notifications
+      groupDescription: |-
+
+        Endpoints for listing and marking in-app notifications as read.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Mark all as read'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {{token}}'
     controller: null
     method: null
     route: null

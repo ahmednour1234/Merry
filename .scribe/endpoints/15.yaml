@@ -1,16 +1,16 @@
-name: 'System / Analytics'
+name: 'System / Bookings'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/admin/system/analytics
+    uri: api/v1/admin/system/bookings
     metadata:
-      groupName: 'System / Analytics'
+      groupName: 'System / Bookings'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/admin/system/analytics'
+      title: 'GET /api/v1/admin/system/bookings'
       description: ''
       authenticated: false
       deprecated: false
@@ -19,9 +19,49 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
+      status:
+        name: status
+        description: 'Filter by status.'
+        required: false
+        example: pending
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      cv_id:
+        name: cv_id
+        description: 'Filter by CV ID.'
+        required: false
+        example: 22
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      office_id:
+        name: office_id
+        description: 'Filter by office ID.'
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      nationality_code:
+        name: nationality_code
+        description: 'Filter by CV nationality code.'
+        required: false
+        example: BD
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
       from:
         name: from
-        description: 'date Filter range start (inclusive).'
+        description: 'date Filter by created_at from (inclusive).'
         required: false
         example: '2025-11-01'
         type: string
@@ -31,7 +71,7 @@ endpoints:
         custom: []
       to:
         name: to
-        description: 'date Filter range end (inclusive).'
+        description: 'date Filter by created_at to (inclusive).'
         required: false
         example: '2025-11-30'
         type: string
@@ -39,20 +79,24 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
-      office_id:
-        name: office_id
-        description: 'Optional filter for office-specific bookings.'
+      per_page:
+        name: per_page
+        description: 'Results per page.'
         required: false
-        example: 5
+        example: 15
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanQueryParameters:
+      status: pending
+      cv_id: 22
+      office_id: 5
+      nationality_code: BD
       from: '2025-11-01'
       to: '2025-11-30'
-      office_id: 5
+      per_page: 15
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []

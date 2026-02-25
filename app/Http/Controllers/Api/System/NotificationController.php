@@ -30,7 +30,9 @@ class NotificationController extends Controller
             ->with('notification')
             ->where('channel', 'inapp');
 
-        if ($type === 'user') {
+        if ($type === 'enduser') {
+            $query->where('recipient_type', 'enduser')->where('recipient_id', $id);
+        } elseif ($type === 'user') {
             $query->where('resolved_user_id', $id);
         } else {
             $query->where('recipient_type', 'office')->where('recipient_id', $id);
@@ -51,6 +53,9 @@ class NotificationController extends Controller
 
         $rec = NotificationRecipient::query()->findOrFail($id);
 
+        if ($type === 'enduser' && !($rec->recipient_type === 'enduser' && (int)$rec->recipient_id === (int)$principalId)) {
+            abort(403);
+        }
         if ($type === 'user' && $rec->resolved_user_id !== $principalId) {
             abort(403);
         }
@@ -70,7 +75,9 @@ class NotificationController extends Controller
         [$type, $id] = $this->currentPrincipal();
 
         $query = NotificationRecipient::query()->where('channel', 'inapp');
-        if ($type === 'user') {
+        if ($type === 'enduser') {
+            $query->where('recipient_type', 'enduser')->where('recipient_id', $id);
+        } elseif ($type === 'user') {
             $query->where('resolved_user_id', $id);
         } else {
             $query->where('recipient_type', 'office')->where('recipient_id', $id);
@@ -81,6 +88,9 @@ class NotificationController extends Controller
 
     private function currentPrincipal(): array
     {
+        if (Auth::guard('enduser')->check()) {
+            return ['enduser', Auth::guard('enduser')->id()];
+        }
         if (Auth::guard('office')->check()) {
             return ['office', Auth::guard('office')->id()];
         }

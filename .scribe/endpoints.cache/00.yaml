@@ -1302,7 +1302,7 @@ endpoints:
         name: blocked
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1327,7 +1327,7 @@ endpoints:
       email: ablanda@example.org
       password: "'YAKYLk4>SJIrIV#lz."
       active: false
-      blocked: false
+      blocked: true
     fileParameters:
       image: null
     responses: []
@@ -2338,14 +2338,14 @@ endpoints:
         name: auto_renew
         description: ''
         required: true
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      auto_renew: false
+      auto_renew: true
     fileParameters: []
     responses: []
     responseFields: []

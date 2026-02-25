@@ -1,16 +1,16 @@
-name: 'EndUser / Bookings'
+name: 'EndUser / Analytics'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/enduser/bookings
+    uri: api/v1/enduser/analytics
     metadata:
-      groupName: 'EndUser / Bookings'
+      groupName: 'EndUser / Analytics'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'GET /api/v1/enduser/bookings'
+      title: 'GET /api/v1/enduser/analytics'
       description: ''
       authenticated: false
       deprecated: false
@@ -19,39 +19,9 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
-      status:
-        name: status
-        description: 'Filter by status.'
-        required: false
-        example: pending
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      cv_id:
-        name: cv_id
-        description: 'Filter by CV ID.'
-        required: false
-        example: 12
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      nationality_code:
-        name: nationality_code
-        description: 'Filter by CV nationality code.'
-        required: false
-        example: PH
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
       from:
         name: from
-        description: 'date Filter by created_at from (inclusive).'
+        description: 'date Filter range start (inclusive).'
         required: false
         example: '2025-11-01'
         type: string
@@ -61,7 +31,7 @@ endpoints:
         custom: []
       to:
         name: to
-        description: 'date Filter by created_at to (inclusive).'
+        description: 'date Filter range end (inclusive).'
         required: false
         example: '2025-11-30'
         type: string
@@ -69,23 +39,9 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
-      per_page:
-        name: per_page
-        description: 'Results per page.'
-        required: false
-        example: 15
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
     cleanQueryParameters:
-      status: pending
-      cv_id: 12
-      nationality_code: PH
       from: '2025-11-01'
       to: '2025-11-30'
-      per_page: 15
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []

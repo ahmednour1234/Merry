@@ -30,6 +30,12 @@ return [
             'provider' => 'users',
         ],
 
+        // Filament admin panel guard
+        'filament' => [
+            'driver'   => 'session',
+            'provider' => 'filament-users',
+        ],
+
         // ✅ Guard عام باسم sanctum عشان middleware `auth:sanctum`
         'sanctum' => [
             'driver'   => 'sanctum',
@@ -59,6 +65,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model'  => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        'filament-users' => [
+            'driver' => 'filament-users',
+            'model'  => App\Models\User::class,
         ],
 
         'offices' => [

@@ -14,7 +14,7 @@ class EndUserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'national_id' => ['required', 'string', 'exists:identity.end_users,national_id'],
+            'phone' => ['required', 'string', 'exists:identity.end_users,phone'],
             'password' => ['required', 'string']
         ];
     }
@@ -22,9 +22,9 @@ class EndUserLoginRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'national_id' => [
-                'description' => 'Registered national ID.',
-                'example' => '1234567890',
+            'phone' => [
+                'description' => 'Registered phone number.',
+                'example' => '+966500000001',
             ],
             'password' => [
                 'description' => 'Account password.',

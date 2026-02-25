@@ -57,6 +57,7 @@ class CvRepository implements CvRepositoryInterface
                     'priority' => 'normal',
                 ]);
                 $this->notificationService->notifyAdmins($notification, ['inapp']);
+                $this->notificationService->notifyEndUsers($notification, null, ['inapp']);
             }
 
             return $cv;
