@@ -7,7 +7,7 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Services\PermissionService;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -28,9 +28,9 @@ class RoleResource extends Resource
         return 'System';
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
