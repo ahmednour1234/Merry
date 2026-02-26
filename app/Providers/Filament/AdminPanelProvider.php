@@ -5,6 +5,14 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use App\Filament\Widgets\BookingsChartWidget;
+use App\Filament\Widgets\BookingsStatsWidget;
+use App\Filament\Widgets\CvsChartWidget;
+use App\Filament\Widgets\CvsStatsWidget;
+use App\Filament\Widgets\EndUsersStatsWidget;
+use App\Filament\Widgets\OfficesStatsWidget;
+use App\Filament\Widgets\OverallStatsWidget;
+use App\Filament\Widgets\PlansStatsWidget;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -43,8 +51,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                OverallStatsWidget::class,
+                OfficesStatsWidget::class,
+                PlansStatsWidget::class,
+                CvsStatsWidget::class,
+                BookingsStatsWidget::class,
+                EndUsersStatsWidget::class,
+                BookingsChartWidget::class,
+                CvsChartWidget::class,
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
