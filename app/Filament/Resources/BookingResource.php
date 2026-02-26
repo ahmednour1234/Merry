@@ -14,7 +14,7 @@ class BookingResource extends Resource
 {
     protected static ?string $model = CvBooking::class;
 
-    protected static $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function getNavigationGroup(): ?string
     {
