@@ -8,9 +8,12 @@ use Filament\Widgets\ChartWidget;
 
 class BookingsChartWidget extends ChartWidget
 {
-    protected static ?string $heading = 'إحصائيات الحجوزات';
-
     protected static ?int $sort = 2;
+
+    public function getHeading(): string
+    {
+        return 'إحصائيات الحجوزات';
+    }
 
     protected function getData(): array
     {

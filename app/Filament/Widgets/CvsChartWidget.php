@@ -7,9 +7,12 @@ use Filament\Widgets\ChartWidget;
 
 class CvsChartWidget extends ChartWidget
 {
-    protected static ?string $heading = 'إحصائيات السير الذاتية';
-
     protected static ?int $sort = 3;
+
+    public function getHeading(): string
+    {
+        return 'إحصائيات السير الذاتية';
+    }
 
     protected function getData(): array
     {
