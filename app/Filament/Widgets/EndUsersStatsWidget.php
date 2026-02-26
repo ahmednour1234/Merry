@@ -10,13 +10,11 @@ class EndUsersStatsWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $total = EndUser::on('identity')->count();
-        $thisMonth = EndUser::on('identity')
-            ->whereMonth('created_at', now()->month)
+        $total = EndUser::count();
+        $thisMonth = EndUser::whereMonth('created_at', now()->month)
             ->whereYear('created_at', now()->year)
             ->count();
-        $lastMonth = EndUser::on('identity')
-            ->whereMonth('created_at', now()->subMonth()->month)
+        $lastMonth = EndUser::whereMonth('created_at', now()->subMonth()->month)
             ->whereYear('created_at', now()->subMonth()->year)
             ->count();
 

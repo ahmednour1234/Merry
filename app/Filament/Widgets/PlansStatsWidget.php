@@ -10,8 +10,8 @@ class PlansStatsWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $total = Plan::on('system')->count();
-        $active = Plan::on('system')->where('active', true)->count();
+        $total = Plan::count();
+        $active = Plan::where('active', true)->count();
         $inactive = $total - $active;
 
         return [

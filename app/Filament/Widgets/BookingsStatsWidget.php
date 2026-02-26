@@ -11,11 +11,11 @@ class BookingsStatsWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $total = CvBooking::on('system')->count();
-        $pending = CvBooking::on('system')->where('status', BookingStatus::PENDING->value)->count();
-        $accepted = CvBooking::on('system')->where('status', BookingStatus::ACCEPTED->value)->count();
-        $rejected = CvBooking::on('system')->where('status', BookingStatus::REJECTED->value)->count();
-        $cancelled = CvBooking::on('system')->where('status', BookingStatus::CANCELLED->value)->count();
+        $total = CvBooking::count();
+        $pending = CvBooking::where('status', BookingStatus::PENDING->value)->count();
+        $accepted = CvBooking::where('status', BookingStatus::ACCEPTED->value)->count();
+        $rejected = CvBooking::where('status', BookingStatus::REJECTED->value)->count();
+        $cancelled = CvBooking::where('status', BookingStatus::CANCELLED->value)->count();
 
         return [
             Stat::make('إجمالي الحجوزات', $total)

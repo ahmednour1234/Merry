@@ -16,12 +16,12 @@ class OverallStatsWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $offices = Office::on('system')->count();
-        $cvs = Cv::on('system')->count();
-        $bookings = CvBooking::on('system')->count();
-        $endUsers = EndUser::on('identity')->count();
-        $plans = Plan::on('system')->where('active', true)->count();
-        $favourites = FavouriteCv::on('identity')->count();
+        $offices = Office::count();
+        $cvs = Cv::count();
+        $bookings = CvBooking::count();
+        $endUsers = EndUser::count();
+        $plans = Plan::where('active', true)->count();
+        $favourites = FavouriteCv::count();
 
         return [
             Stat::make('المكاتب', $offices)

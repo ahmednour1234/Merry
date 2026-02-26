@@ -202,7 +202,7 @@ class CvResource extends Resource
                     ->visible(fn (Cv $record) => $record->status !== 'rejected' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.reject')),
                 FilamentAction::make('freeze')
                     ->label('تجمد')
-                    ->icon('heroicon-o-snowflake')
+                    ->icon('heroicon-o-lock-closed')
                     ->color('info')
                     ->requiresConfirmation()
                     ->action(function (Cv $record) {

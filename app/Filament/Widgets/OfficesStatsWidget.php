@@ -10,9 +10,9 @@ class OfficesStatsWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $total = Office::on('system')->count();
-        $active = Office::on('system')->where('active', true)->count();
-        $blocked = Office::on('system')->where('blocked', true)->count();
+        $total = Office::count();
+        $active = Office::where('active', true)->count();
+        $blocked = Office::where('blocked', true)->count();
         $inactive = $total - $active - $blocked;
 
         return [

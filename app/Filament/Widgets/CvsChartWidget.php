@@ -21,16 +21,13 @@ class CvsChartWidget extends ChartWidget
             return [
                 'date' => $date->format('Y-m-d'),
                 'label' => $date->format('d/m'),
-                'pending' => Cv::on('system')
-                    ->where('status', 'pending')
+                'pending' => Cv::where('status', 'pending')
                     ->whereDate('created_at', $date)
                     ->count(),
-                'approved' => Cv::on('system')
-                    ->where('status', 'approved')
+                'approved' => Cv::where('status', 'approved')
                     ->whereDate('created_at', $date)
                     ->count(),
-                'rejected' => Cv::on('system')
-                    ->where('status', 'rejected')
+                'rejected' => Cv::where('status', 'rejected')
                     ->whereDate('created_at', $date)
                     ->count(),
             ];

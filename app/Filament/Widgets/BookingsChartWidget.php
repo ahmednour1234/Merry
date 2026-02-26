@@ -22,16 +22,13 @@ class BookingsChartWidget extends ChartWidget
             return [
                 'date' => $date->format('Y-m-d'),
                 'label' => $date->format('d/m'),
-                'pending' => CvBooking::on('system')
-                    ->where('status', BookingStatus::PENDING->value)
+                'pending' => CvBooking::where('status', BookingStatus::PENDING->value)
                     ->whereDate('created_at', $date)
                     ->count(),
-                'accepted' => CvBooking::on('system')
-                    ->where('status', BookingStatus::ACCEPTED->value)
+                'accepted' => CvBooking::where('status', BookingStatus::ACCEPTED->value)
                     ->whereDate('created_at', $date)
                     ->count(),
-                'rejected' => CvBooking::on('system')
-                    ->where('status', BookingStatus::REJECTED->value)
+                'rejected' => CvBooking::where('status', BookingStatus::REJECTED->value)
                     ->whereDate('created_at', $date)
                     ->count(),
             ];

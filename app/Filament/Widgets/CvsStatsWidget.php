@@ -10,11 +10,11 @@ class CvsStatsWidget extends BaseWidget
 {
     protected function getStats(): array
     {
-        $total = Cv::on('system')->count();
-        $pending = Cv::on('system')->where('status', 'pending')->count();
-        $approved = Cv::on('system')->where('status', 'approved')->count();
-        $rejected = Cv::on('system')->where('status', 'rejected')->count();
-        $frozen = Cv::on('system')->where('status', 'frozen')->count();
+        $total = Cv::count();
+        $pending = Cv::where('status', 'pending')->count();
+        $approved = Cv::where('status', 'approved')->count();
+        $rejected = Cv::where('status', 'rejected')->count();
+        $frozen = Cv::where('status', 'frozen')->count();
 
         return [
             Stat::make('إجمالي السير الذاتية', $total)
@@ -36,7 +36,7 @@ class CvsStatsWidget extends BaseWidget
                 ->color('danger'),
             Stat::make('مجمدة', $frozen)
                 ->description('سير ذاتية مجمدة')
-                ->descriptionIcon('heroicon-o-snowflake')
+                ->descriptionIcon('heroicon-o-lock-closed')
                 ->color('info'),
         ];
     }
