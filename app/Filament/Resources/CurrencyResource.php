@@ -16,7 +16,7 @@ class CurrencyResource extends Resource
 {
     protected static ?string $model = Currency::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static $navigationIcon = 'heroicon-o-banknotes';
 
     public static function getNavigationGroup(): ?string
     {

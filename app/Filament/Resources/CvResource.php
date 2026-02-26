@@ -20,7 +20,7 @@ class CvResource extends Resource
 {
     protected static ?string $model = Cv::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static $navigationIcon = 'heroicon-o-document-text';
 
     public static function getNavigationGroup(): ?string
     {

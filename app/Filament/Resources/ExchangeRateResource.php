@@ -16,7 +16,7 @@ class ExchangeRateResource extends Resource
 {
     protected static ?string $model = ExchangeRate::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-arrow-path';
+    protected static $navigationIcon = 'heroicon-o-arrow-path';
 
     public static function getNavigationGroup(): ?string
     {

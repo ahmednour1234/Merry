@@ -18,7 +18,7 @@ class NationalityResource extends Resource
 {
     protected static ?string $model = Nationality::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
+    protected static $navigationIcon = 'heroicon-o-globe-alt';
 
     public static function getNavigationGroup(): ?string
     {
