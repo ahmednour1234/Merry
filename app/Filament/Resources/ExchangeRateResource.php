@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ExchangeRateResource\Pages;
 use App\Models\ExchangeRate;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -16,7 +17,7 @@ class ExchangeRateResource extends Resource
 {
     protected static ?string $model = ExchangeRate::class;
 
-    protected static $navigationIcon = 'heroicon-o-arrow-path';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-arrow-path';
 
     public static function getNavigationGroup(): ?string
     {

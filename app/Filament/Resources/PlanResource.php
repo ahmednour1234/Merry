@@ -9,6 +9,7 @@ use App\Models\PlanFeature;
 use App\Models\SystemLanguage;
 use App\Models\Currency;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -20,7 +21,7 @@ class PlanResource extends Resource
 {
     protected static ?string $model = Plan::class;
 
-    protected static $navigationIcon = 'heroicon-o-credit-card';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-credit-card';
 
     public static function getNavigationGroup(): ?string
     {

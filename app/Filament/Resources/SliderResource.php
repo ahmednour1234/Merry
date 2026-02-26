@@ -7,6 +7,7 @@ use App\Models\Slider;
 use App\Models\SliderTranslation;
 use App\Models\SystemLanguage;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class SliderResource extends Resource
 {
     protected static ?string $model = Slider::class;
 
-    protected static $navigationIcon = 'heroicon-o-photo';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-photo';
 
     public static function getNavigationGroup(): ?string
     {

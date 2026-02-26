@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CurrencyResource\Pages;
 use App\Models\Currency;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -16,7 +17,7 @@ class CurrencyResource extends Resource
 {
     protected static ?string $model = Currency::class;
 
-    protected static $navigationIcon = 'heroicon-o-banknotes';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
 
     public static function getNavigationGroup(): ?string
     {

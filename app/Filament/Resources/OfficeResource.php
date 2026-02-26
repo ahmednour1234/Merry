@@ -6,6 +6,7 @@ use App\Filament\Resources\OfficeResource\Pages;
 use App\Models\Office;
 use App\Models\City;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class OfficeResource extends Resource
 {
     protected static ?string $model = Office::class;
 
-    protected static $navigationIcon = 'heroicon-o-building-office';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
 
     public static function getNavigationGroup(): ?string
     {

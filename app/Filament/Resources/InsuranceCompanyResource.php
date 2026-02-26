@@ -6,6 +6,7 @@ use App\Filament\Resources\InsuranceCompanyResource\Pages;
 use App\Models\InsuranceCompany;
 use App\Models\Currency;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -17,7 +18,7 @@ class InsuranceCompanyResource extends Resource
 {
     protected static ?string $model = InsuranceCompany::class;
 
-    protected static $navigationIcon = 'heroicon-o-shield-check';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-shield-check';
 
     public static function getNavigationGroup(): ?string
     {

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\CategoryTranslation;
 use App\Models\SystemLanguage;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static $navigationIcon = 'heroicon-o-tag';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-tag';
 
     public static function getNavigationGroup(): ?string
     {

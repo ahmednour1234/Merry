@@ -7,6 +7,7 @@ use App\Models\Promotion;
 use App\Models\Plan;
 use App\Models\Currency;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class PromotionResource extends Resource
 {
     protected static ?string $model = Promotion::class;
 
-    protected static $navigationIcon = 'heroicon-o-megaphone';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-megaphone';
 
     public static function getNavigationGroup(): ?string
     {

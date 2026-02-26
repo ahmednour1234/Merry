@@ -7,6 +7,7 @@ use App\Models\Nationality;
 use App\Models\NationalityTranslation;
 use App\Models\SystemLanguage;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class NationalityResource extends Resource
 {
     protected static ?string $model = Nationality::class;
 
-    protected static $navigationIcon = 'heroicon-o-globe-alt';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-globe-alt';
 
     public static function getNavigationGroup(): ?string
     {

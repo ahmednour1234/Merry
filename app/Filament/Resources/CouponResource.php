@@ -6,6 +6,7 @@ use App\Filament\Resources\CouponResource\Pages;
 use App\Models\Coupon;
 use App\Models\Currency;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -17,7 +18,7 @@ class CouponResource extends Resource
 {
     protected static ?string $model = Coupon::class;
 
-    protected static $navigationIcon = 'heroicon-o-ticket';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-ticket';
 
     public static function getNavigationGroup(): ?string
     {

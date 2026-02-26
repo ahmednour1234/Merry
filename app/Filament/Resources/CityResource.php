@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\CityTranslation;
 use App\Models\SystemLanguage;
 use App\Services\PermissionService;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -19,7 +20,7 @@ class CityResource extends Resource
 {
     protected static ?string $model = City::class;
 
-    protected static $navigationIcon = 'heroicon-o-map-pin';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-map-pin';
 
     public static function getNavigationGroup(): ?string
     {
