@@ -23,11 +23,16 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        // Set locale to Arabic
+        app()->setLocale('ar');
+        config(['app.locale' => 'ar']);
+
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Merry')
             ->colors([
                 'primary' => Color::hex('#054F31'),
             ])

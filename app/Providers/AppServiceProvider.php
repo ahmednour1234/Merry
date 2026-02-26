@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
      public function boot(): void
     {
         try {
+            // Set default locale to Arabic
+            app()->setLocale('ar');
+            config(['app.locale' => 'ar']);
+
             $this->loadMigrationsFrom([
                 database_path('migrations/system'),
                 database_path('migrations/identity'),
