@@ -146,7 +146,7 @@ class RoleResource extends Resource
                     }),
             ])
             ->actions([
-                \Filament\Tables\Actions\Action::make('toggle')
+                Tables\Actions\Action::make('toggle')
                     ->label('Toggle Active')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
@@ -160,7 +160,7 @@ class RoleResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.roles.toggle')),
-                \Filament\Tables\Actions\Action::make('syncPermissions')
+                Tables\Actions\Action::make('syncPermissions')
                     ->label('Sync Permissions')
                     ->icon('heroicon-o-key')
                     ->requiresConfirmation()

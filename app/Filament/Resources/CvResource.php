@@ -172,7 +172,7 @@ class CvResource extends Resource
                     ->label('مسلم'),
             ])
             ->actions([
-                \Filament\Tables\Actions\Action::make('approve')
+                Tables\Actions\Action::make('approve')
                     ->label('موافقة')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
@@ -182,7 +182,7 @@ class CvResource extends Resource
                         $repo->approve($record->id, auth()->id());
                     })
                     ->visible(fn (Cv $record) => $record->status !== 'approved' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.approve')),
-                \Filament\Tables\Actions\Action::make('reject')
+                Tables\Actions\Action::make('reject')
                     ->label('رفض')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
@@ -198,7 +198,7 @@ class CvResource extends Resource
                         $repo->reject($record->id, auth()->id(), $data['reason']);
                     })
                     ->visible(fn (Cv $record) => $record->status !== 'rejected' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.reject')),
-                \Filament\Tables\Actions\Action::make('freeze')
+                Tables\Actions\Action::make('freeze')
                     ->label('تجمد')
                     ->icon('heroicon-o-snowflake')
                     ->color('info')
@@ -208,7 +208,7 @@ class CvResource extends Resource
                         $repo->freeze($record->id, auth()->id());
                     })
                     ->visible(fn (Cv $record) => $record->status !== 'frozen' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.freeze')),
-                \Filament\Tables\Actions\Action::make('unfreeze')
+                Tables\Actions\Action::make('unfreeze')
                     ->label('إلغاء التجمد')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')

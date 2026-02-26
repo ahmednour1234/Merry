@@ -123,7 +123,7 @@ class NationalityResource extends Resource
                     ->label('نشط'),
             ])
             ->actions([
-                \Filament\Tables\Actions\Action::make('toggle')
+                Tables\Actions\Action::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

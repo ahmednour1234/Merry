@@ -155,7 +155,7 @@ class OfficeResource extends Resource
                     ->label('محظور'),
             ])
             ->actions([
-                \Filament\Tables\Actions\Action::make('block')
+                Tables\Actions\Action::make('block')
                     ->label('حظر/إلغاء حظر')
                     ->icon('heroicon-o-lock-closed')
                     ->color('danger')
@@ -170,7 +170,7 @@ class OfficeResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.block')),
-                \Filament\Tables\Actions\Action::make('toggle')
+                Tables\Actions\Action::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

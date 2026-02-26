@@ -129,7 +129,7 @@ class PermissionResource extends Resource
                     }),
             ])
             ->actions([
-                \Filament\Tables\Actions\Action::make('toggle')
+                Tables\Actions\Action::make('toggle')
                     ->label('Toggle Active')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
