@@ -122,7 +122,7 @@ class SystemSettingsResource extends Resource
                     ->label('نشط'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
+                \Filament\Tables\Actions\EditAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.settings.update')),
             ])
             ->defaultSort('scope')

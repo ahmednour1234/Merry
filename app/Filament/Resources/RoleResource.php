@@ -178,12 +178,12 @@ class RoleResource extends Resource
                         $permissionService->syncRolePermissions($record, $data['permissions'] ?? []);
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.roles.sync_permissions')),
-                Tables\Actions\DeleteAction::make()
+                \Filament\Tables\Actions\DeleteAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.roles.destroy')),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+                \Filament\Tables\Actions\BulkActionGroup::make([
+                    \Filament\Tables\Actions\DeleteBulkAction::make()
                         ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.roles.destroy')),
                 ]),
             ])

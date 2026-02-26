@@ -219,14 +219,14 @@ class CvResource extends Resource
                         $repo->unfreeze($record->id, auth()->id());
                     })
                     ->visible(fn (Cv $record) => $record->status === 'frozen' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.freeze')),
-                Tables\Actions\EditAction::make()
+                \Filament\Tables\Actions\EditAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.update')),
-                Tables\Actions\DeleteAction::make()
+                \Filament\Tables\Actions\DeleteAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.destroy')),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+                \Filament\Tables\Actions\BulkActionGroup::make([
+                    \Filament\Tables\Actions\DeleteBulkAction::make()
                         ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.destroy')),
                 ]),
             ])

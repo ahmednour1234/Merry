@@ -138,14 +138,14 @@ class CityResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cities.toggle')),
-                Tables\Actions\EditAction::make()
+                \Filament\Tables\Actions\EditAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cities.update')),
-                Tables\Actions\DeleteAction::make()
+                \Filament\Tables\Actions\DeleteAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cities.destroy')),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
+                \Filament\Tables\Actions\BulkActionGroup::make([
+                    \Filament\Tables\Actions\DeleteBulkAction::make()
                         ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cities.destroy')),
                 ]),
             ])
