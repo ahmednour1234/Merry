@@ -89,6 +89,8 @@ return [
         'groups' => [
             'settings' => 'الإعدادات',
             'system' => 'النظام',
+            'المحتوى' => 'المحتوى',
+            'الإدارة' => 'الإدارة',
         ],
         'label' => 'القائمة',
         'single' => 'الصفحة',
@@ -258,6 +260,68 @@ return [
                     'label' => 'فتح GitHub',
                 ],
             ],
+        ],
+    ],
+    'resources' => [
+        'system_settings' => [
+            'label' => 'إعدادات النظام',
+            'plural_label' => 'إعدادات النظام',
+        ],
+        'currency' => [
+            'label' => 'عملة',
+            'plural_label' => 'العملات',
+        ],
+        'exchange_rate' => [
+            'label' => 'سعر صرف',
+            'plural_label' => 'أسعار الصرف',
+        ],
+        'audit_log' => [
+            'label' => 'سجل تدقيق',
+            'plural_label' => 'سجلات التدقيق',
+        ],
+        'insurance_company' => [
+            'label' => 'شركة تأمين',
+            'plural_label' => 'شركات التأمين',
+        ],
+        'city' => [
+            'label' => 'مدينة',
+            'plural_label' => 'المدن',
+        ],
+        'office' => [
+            'label' => 'مكتب',
+            'plural_label' => 'المكاتب',
+        ],
+        'plan' => [
+            'label' => 'خطة',
+            'plural_label' => 'الخطط',
+        ],
+        'coupon' => [
+            'label' => 'كوبون',
+            'plural_label' => 'كوبونات الخصم',
+        ],
+        'promotion' => [
+            'label' => 'عرض ترويجي',
+            'plural_label' => 'العروض الترويجية',
+        ],
+        'slider' => [
+            'label' => 'شريحة',
+            'plural_label' => 'الشرائح',
+        ],
+        'booking' => [
+            'label' => 'حجز',
+            'plural_label' => 'الحجوزات',
+        ],
+        'nationality' => [
+            'label' => 'جنسية',
+            'plural_label' => 'الجنسيات',
+        ],
+        'category' => [
+            'label' => 'فئة',
+            'plural_label' => 'الفئات',
+        ],
+        'cv' => [
+            'label' => 'سيرة ذاتية',
+            'plural_label' => 'السير الذاتية',
         ],
     ],
 ];
