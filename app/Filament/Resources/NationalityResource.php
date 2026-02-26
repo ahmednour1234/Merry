@@ -20,10 +20,7 @@ class NationalityResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'المحتوى';
-    }
+    protected static ?string $navigationGroup = 'المحتوى';
 
     protected static ?string $navigationLabel = 'الجنسيات';
 

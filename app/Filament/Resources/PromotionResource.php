@@ -20,10 +20,7 @@ class PromotionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'المحتوى';
-    }
+    protected static ?string $navigationGroup = 'المحتوى';
 
     protected static ?string $navigationLabel = 'العروض الترويجية';
 

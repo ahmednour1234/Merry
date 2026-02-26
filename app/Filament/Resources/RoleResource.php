@@ -23,10 +23,7 @@ class RoleResource extends Resource
         return 'heroicon-o-shield-check';
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'System';
-    }
+    protected static ?string $navigationGroup = 'System';
 
     public static function form(Schema $schema): Schema
     {

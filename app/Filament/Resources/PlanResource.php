@@ -22,10 +22,7 @@ class PlanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'المحتوى';
-    }
+    protected static ?string $navigationGroup = 'المحتوى';
 
     protected static ?string $navigationLabel = 'الخطط';
 

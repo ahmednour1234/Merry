@@ -18,10 +18,7 @@ class CurrencyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'النظام';
-    }
+    protected static ?string $navigationGroup = 'النظام';
 
     protected static ?string $navigationLabel = 'العملات';
 
