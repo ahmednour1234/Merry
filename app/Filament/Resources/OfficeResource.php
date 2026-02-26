@@ -127,10 +127,28 @@ class OfficeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('name')
-                    ->label('الاسم'),
-                Tables\Filters\TextInput::make('email')
-                    ->label('البريد الإلكتروني'),
+                Tables\Filters\Filter::make('name')
+                    ->form([
+                        Forms\Components\TextInput::make('name')
+                            ->label('الاسم'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['name'] ?? null,
+                            fn ($query, $name) => $query->where('name', 'like', "%{$name}%")
+                        );
+                    }),
+                Tables\Filters\Filter::make('email')
+                    ->form([
+                        Forms\Components\TextInput::make('email')
+                            ->label('البريد الإلكتروني'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['email'] ?? null,
+                            fn ($query, $email) => $query->where('email', 'like', "%{$email}%")
+                        );
+                    }),
                 Tables\Filters\TernaryFilter::make('active')
                     ->label('نشط'),
                 Tables\Filters\TernaryFilter::make('blocked')

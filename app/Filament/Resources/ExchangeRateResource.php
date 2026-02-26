@@ -98,10 +98,28 @@ class ExchangeRateResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('base')
-                    ->label('العملة الأساسية'),
-                Tables\Filters\TextInput::make('quote')
-                    ->label('العملة المقابلة'),
+                Tables\Filters\Filter::make('base')
+                    ->form([
+                        Forms\Components\TextInput::make('base')
+                            ->label('العملة الأساسية'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['base'] ?? null,
+                            fn ($query, $base) => $query->where('base', 'like', "%{$base}%")
+                        );
+                    }),
+                Tables\Filters\Filter::make('quote')
+                    ->form([
+                        Forms\Components\TextInput::make('quote')
+                            ->label('العملة المقابلة'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['quote'] ?? null,
+                            fn ($query, $quote) => $query->where('quote', 'like', "%{$quote}%")
+                        );
+                    }),
                 Tables\Filters\TernaryFilter::make('active')
                     ->label('نشط'),
             ])

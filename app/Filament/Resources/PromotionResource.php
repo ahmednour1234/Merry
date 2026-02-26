@@ -127,8 +127,17 @@ class PromotionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('name')
-                    ->label('الاسم'),
+                Tables\Filters\Filter::make('name')
+                    ->form([
+                        Forms\Components\TextInput::make('name')
+                            ->label('الاسم'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['name'] ?? null,
+                            fn ($query, $name) => $query->where('name', 'like', "%{$name}%")
+                        );
+                    }),
                 Tables\Filters\SelectFilter::make('type')
                     ->options([
                         'fixed' => 'مبلغ ثابت',

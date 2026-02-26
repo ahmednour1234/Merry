@@ -97,10 +97,28 @@ class CityResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('slug')
-                    ->label('المعرف'),
-                Tables\Filters\TextInput::make('country_code')
-                    ->label('رمز الدولة'),
+                Tables\Filters\Filter::make('slug')
+                    ->form([
+                        Forms\Components\TextInput::make('slug')
+                            ->label('المعرف'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['slug'] ?? null,
+                            fn ($query, $slug) => $query->where('slug', 'like', "%{$slug}%")
+                        );
+                    }),
+                Tables\Filters\Filter::make('country_code')
+                    ->form([
+                        Forms\Components\TextInput::make('country_code')
+                            ->label('رمز الدولة'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['country_code'] ?? null,
+                            fn ($query, $code) => $query->where('country_code', 'like', "%{$code}%")
+                        );
+                    }),
                 Tables\Filters\TernaryFilter::make('active')
                     ->label('نشط'),
             ])

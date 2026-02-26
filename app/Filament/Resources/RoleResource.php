@@ -96,10 +96,28 @@ class RoleResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('name')
-                    ->label('Name'),
-                Tables\Filters\TextInput::make('slug')
-                    ->label('Slug'),
+                Tables\Filters\Filter::make('name')
+                    ->form([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Name'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['name'] ?? null,
+                            fn ($query, $name) => $query->where('name', 'like', "%{$name}%")
+                        );
+                    }),
+                Tables\Filters\Filter::make('slug')
+                    ->form([
+                        Forms\Components\TextInput::make('slug')
+                            ->label('Slug'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['slug'] ?? null,
+                            fn ($query, $slug) => $query->where('slug', 'like', "%{$slug}%")
+                        );
+                    }),
                 Tables\Filters\SelectFilter::make('guard')
                     ->options([
                         'api' => 'API',

@@ -127,8 +127,17 @@ class CouponResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('code')
-                    ->label('الرمز'),
+                Tables\Filters\Filter::make('code')
+                    ->form([
+                        Forms\Components\TextInput::make('code')
+                            ->label('الرمز'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['code'] ?? null,
+                            fn ($query, $code) => $query->where('code', 'like', "%{$code}%")
+                        );
+                    }),
                 Tables\Filters\SelectFilter::make('type')
                     ->options([
                         'fixed' => 'مبلغ ثابت',

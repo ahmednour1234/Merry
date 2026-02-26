@@ -99,10 +99,28 @@ class CurrencyResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TextInput::make('code')
-                    ->label('رمز العملة'),
-                Tables\Filters\TextInput::make('name')
-                    ->label('الاسم'),
+                Tables\Filters\Filter::make('code')
+                    ->form([
+                        Forms\Components\TextInput::make('code')
+                            ->label('رمز العملة'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['code'] ?? null,
+                            fn ($query, $code) => $query->where('code', 'like', "%{$code}%")
+                        );
+                    }),
+                Tables\Filters\Filter::make('name')
+                    ->form([
+                        Forms\Components\TextInput::make('name')
+                            ->label('الاسم'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['name'] ?? null,
+                            fn ($query, $name) => $query->where('name', 'like', "%{$name}%")
+                        );
+                    }),
                 Tables\Filters\TernaryFilter::make('active')
                     ->label('نشط'),
             ])
