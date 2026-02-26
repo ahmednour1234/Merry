@@ -22,7 +22,10 @@ class CvResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $navigationGroup = 'الإدارة';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'الإدارة';
+    }
 
     protected static ?string $navigationLabel = 'السير الذاتية';
 
