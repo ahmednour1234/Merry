@@ -18,7 +18,10 @@ class SystemSettingsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static ?string $navigationGroup = 'النظام';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'النظام';
+    }
 
     protected static ?string $navigationLabel = 'إعدادات النظام';
 

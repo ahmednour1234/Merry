@@ -21,7 +21,10 @@ class PermissionResource extends Resource
         return 'heroicon-o-key';
     }
 
-    protected static ?string $navigationGroup = 'System';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'System';
+    }
 
     public static function form(Schema $schema): Schema
     {

@@ -18,7 +18,10 @@ class ExchangeRateResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-path';
 
-    protected static ?string $navigationGroup = 'النظام';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'النظام';
+    }
 
     protected static ?string $navigationLabel = 'أسعار الصرف';
 

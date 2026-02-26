@@ -20,7 +20,10 @@ class OfficeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
-    protected static ?string $navigationGroup = 'النظام';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'النظام';
+    }
 
     protected static ?string $navigationLabel = 'المكاتب';
 

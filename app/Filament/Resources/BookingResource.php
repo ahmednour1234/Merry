@@ -16,7 +16,10 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
-    protected static ?string $navigationGroup = 'الإدارة';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'الإدارة';
+    }
 
     protected static ?string $navigationLabel = 'الحجوزات';
 
