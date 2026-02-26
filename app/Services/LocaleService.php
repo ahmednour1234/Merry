@@ -34,7 +34,7 @@ class LocaleService
         }
 
         // 3) fallback من الإعدادات (app.locale) أو الممرر
-        $def = $fallback ?: $this->settings->defaultLocale('en');
+        $def = $fallback ?: $this->settings->defaultLocale('ar');
         return $this->normalize($def);
     }
 

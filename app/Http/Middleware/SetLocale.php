@@ -14,8 +14,8 @@ class SetLocale
 			$localeService = app(\App\Services\LocaleService::class);
 			$locale = $localeService->preferred($request);
 
-			app()->setLocale($locale ?: 'en');
-			config(['app.locale' => $locale ?: 'en']);
+			app()->setLocale($locale ?: 'ar');
+			config(['app.locale' => $locale ?: 'ar']);
 		} catch (\Throwable $e) {
 			// لو حصل خطأ، سيب اللغة الافتراضية من config
 		}
