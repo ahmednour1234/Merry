@@ -71,10 +71,11 @@ class CityResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->on('system')->with('translations'))
+            ->modifyQueryUsing(fn (Builder $query) => $query->with('translations'))
             ->columns([
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()

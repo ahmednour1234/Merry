@@ -32,10 +32,6 @@ class BookingResource extends Resource
      * ✅ Better place to force connection/query.
      * If "system" is a DB connection name, this is correct.
      */
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->on('system');
-    }
 
     public static function table(Table $table): Table
     {

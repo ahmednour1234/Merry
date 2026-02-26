@@ -76,10 +76,11 @@ class CategoryResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->on('system')->with(['translations', 'parent']))
+            ->modifyQueryUsing(fn (Builder $query) => $query->with(['translations', 'parent']))
             ->columns([
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()

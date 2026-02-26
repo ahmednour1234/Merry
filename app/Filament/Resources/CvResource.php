@@ -83,10 +83,11 @@ class CvResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->on('system')->with(['office', 'category', 'nationality']))
+            ->modifyQueryUsing(fn (Builder $query) => $query->with(['office', 'category', 'nationality']))
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->sortable()

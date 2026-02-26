@@ -62,10 +62,10 @@ class InsuranceCompanyResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->on('system'))
             ->columns([
                 Tables\Columns\ImageColumn::make('logo_path')
                     ->label('الشعار')
