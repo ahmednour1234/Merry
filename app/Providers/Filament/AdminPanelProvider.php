@@ -41,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Merry')
+            ->rtl()
             ->colors([
                 'primary' => Color::hex('#054F31'),
             ])
