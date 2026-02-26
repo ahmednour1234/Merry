@@ -10,7 +10,7 @@ use function Knuckles\Scribe\Config\removeStrategies;
 // ... existing code ...
 
 return [
-    'title' => env('APP_NAME', 'Mery API'),
+    'title' => env('APP_NAME', 'Merry API'),
     'description' => 'Auto-generated API docs and Postman collection.',
     'base_url' => env('SCRIBE_BASE_URL', env('APP_URL', 'http://localhost')),
 
@@ -27,7 +27,7 @@ return [
         'enabled' => true,
         'overrides' => [
             'info' => [
-                'name' => env('APP_NAME', 'Mery') . ' – Postman',
+                'name' => env('APP_NAME', 'Merry') . ' – Postman',
             ],
             'variable' => [
                 ['key' => 'baseUrl', 'value' => env('SCRIBE_BASE_URL', env('APP_URL', 'http://localhost'))],

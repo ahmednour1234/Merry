@@ -15,7 +15,7 @@ class SystemSettingsSeeder extends Seeder
             [
                 'scope' => 'global',
                 'key'   => 'app.name',
-                'value' => json_encode('Mery'),
+                'value' => json_encode('Merry'),
                 'type'  => 'string',
                 'active'=> 1,
             ],
