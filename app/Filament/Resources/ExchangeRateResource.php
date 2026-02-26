@@ -6,6 +6,7 @@ use App\Filament\Resources\ExchangeRateResource\Pages;
 use App\Models\ExchangeRate;
 use App\Services\PermissionService;
 use BackedEnum;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -124,7 +125,7 @@ class ExchangeRateResource extends Resource
                     ->label('نشط'),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle')
+                FilamentAction::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

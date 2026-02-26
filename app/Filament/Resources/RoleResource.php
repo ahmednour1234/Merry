@@ -6,6 +6,7 @@ use App\Filament\Resources\RoleResource\Pages;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Services\PermissionService;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -146,7 +147,7 @@ class RoleResource extends Resource
                     }),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle')
+                FilamentAction::make('toggle')
                     ->label('Toggle Active')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
@@ -160,7 +161,7 @@ class RoleResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.roles.toggle')),
-                Tables\Actions\Action::make('syncPermissions')
+                FilamentAction::make('syncPermissions')
                     ->label('Sync Permissions')
                     ->icon('heroicon-o-key')
                     ->requiresConfirmation()

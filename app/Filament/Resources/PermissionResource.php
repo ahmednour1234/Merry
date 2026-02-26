@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PermissionResource\Pages;
 use App\Models\Permission;
 use App\Services\PermissionService;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -129,7 +130,7 @@ class PermissionResource extends Resource
                     }),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle')
+                FilamentAction::make('toggle')
                     ->label('Toggle Active')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

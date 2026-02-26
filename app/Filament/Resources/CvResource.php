@@ -10,6 +10,7 @@ use App\Models\Nationality;
 use App\Services\PermissionService;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
 use BackedEnum;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -172,7 +173,7 @@ class CvResource extends Resource
                     ->label('مسلم'),
             ])
             ->actions([
-                Tables\Actions\Action::make('approve')
+                FilamentAction::make('approve')
                     ->label('موافقة')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
@@ -182,7 +183,7 @@ class CvResource extends Resource
                         $repo->approve($record->id, auth()->id());
                     })
                     ->visible(fn (Cv $record) => $record->status !== 'approved' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.approve')),
-                Tables\Actions\Action::make('reject')
+                FilamentAction::make('reject')
                     ->label('رفض')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
@@ -198,7 +199,7 @@ class CvResource extends Resource
                         $repo->reject($record->id, auth()->id(), $data['reason']);
                     })
                     ->visible(fn (Cv $record) => $record->status !== 'rejected' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.reject')),
-                Tables\Actions\Action::make('freeze')
+                FilamentAction::make('freeze')
                     ->label('تجمد')
                     ->icon('heroicon-o-snowflake')
                     ->color('info')
@@ -208,7 +209,7 @@ class CvResource extends Resource
                         $repo->freeze($record->id, auth()->id());
                     })
                     ->visible(fn (Cv $record) => $record->status !== 'frozen' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.freeze')),
-                Tables\Actions\Action::make('unfreeze')
+                FilamentAction::make('unfreeze')
                     ->label('إلغاء التجمد')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')

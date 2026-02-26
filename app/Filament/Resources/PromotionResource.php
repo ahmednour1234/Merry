@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Currency;
 use App\Services\PermissionService;
 use BackedEnum;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -148,7 +149,7 @@ class PromotionResource extends Resource
                     ->label('نشط'),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle')
+                FilamentAction::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

@@ -7,6 +7,7 @@ use App\Models\Office;
 use App\Models\City;
 use App\Services\PermissionService;
 use BackedEnum;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -155,7 +156,7 @@ class OfficeResource extends Resource
                     ->label('محظور'),
             ])
             ->actions([
-                Tables\Actions\Action::make('block')
+                FilamentAction::make('block')
                     ->label('حظر/إلغاء حظر')
                     ->icon('heroicon-o-lock-closed')
                     ->color('danger')
@@ -170,7 +171,7 @@ class OfficeResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.block')),
-                Tables\Actions\Action::make('toggle')
+                FilamentAction::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
