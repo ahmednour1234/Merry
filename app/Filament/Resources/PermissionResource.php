@@ -9,7 +9,6 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -130,7 +129,7 @@ class PermissionResource extends Resource
                     }),
             ])
             ->actions([
-                Action::make('toggle')
+                \Filament\Tables\Actions\Action::make('toggle')
                     ->label('Toggle Active')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

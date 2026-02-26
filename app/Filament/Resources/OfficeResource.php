@@ -11,7 +11,6 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
@@ -156,7 +155,7 @@ class OfficeResource extends Resource
                     ->label('محظور'),
             ])
             ->actions([
-                Action::make('block')
+                \Filament\Tables\Actions\Action::make('block')
                     ->label('حظر/إلغاء حظر')
                     ->icon('heroicon-o-lock-closed')
                     ->color('danger')
@@ -171,7 +170,7 @@ class OfficeResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.block')),
-                Action::make('toggle')
+                \Filament\Tables\Actions\Action::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()

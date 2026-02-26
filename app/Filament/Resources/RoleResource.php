@@ -10,7 +10,6 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -147,7 +146,7 @@ class RoleResource extends Resource
                     }),
             ])
             ->actions([
-                Action::make('toggle')
+                \Filament\Tables\Actions\Action::make('toggle')
                     ->label('Toggle Active')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
@@ -161,7 +160,7 @@ class RoleResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.roles.toggle')),
-                Action::make('syncPermissions')
+                \Filament\Tables\Actions\Action::make('syncPermissions')
                     ->label('Sync Permissions')
                     ->icon('heroicon-o-key')
                     ->requiresConfirmation()

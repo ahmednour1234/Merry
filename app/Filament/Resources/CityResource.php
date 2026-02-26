@@ -12,7 +12,6 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
@@ -124,7 +123,7 @@ class CityResource extends Resource
                     ->label('نشط'),
             ])
             ->actions([
-                Action::make('toggle')
+                \Filament\Tables\Actions\Action::make('toggle')
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
