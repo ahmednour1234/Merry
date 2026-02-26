@@ -139,14 +139,14 @@ class ExchangeRateResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.exchange_rates.toggle')),
-                \Filament\Tables\Actions\EditAction::make()
+                \Filament\Actions\EditAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.exchange_rates.store')),
-                \Filament\Tables\Actions\DeleteAction::make()
+                \Filament\Actions\DeleteAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.exchange_rates.store')),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\BulkActionGroup::make([
-                    \Filament\Tables\Actions\DeleteBulkAction::make(),
+                \Filament\Actions\BulkActionGroup::make([
+                    \Filament\Actions\DeleteBulkAction::make(),
                 ]),
             ])
             ->defaultSort('base')

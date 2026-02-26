@@ -125,14 +125,14 @@ class InsuranceCompanyResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.toggle')),
-                \Filament\Tables\Actions\EditAction::make()
+                \Filament\Actions\EditAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.update')),
-                \Filament\Tables\Actions\DeleteAction::make()
+                \Filament\Actions\DeleteAction::make()
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.destroy')),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\BulkActionGroup::make([
-                    \Filament\Tables\Actions\DeleteBulkAction::make()
+                \Filament\Actions\BulkActionGroup::make([
+                    \Filament\Actions\DeleteBulkAction::make()
                         ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.destroy')),
                 ]),
             ])
