@@ -41,10 +41,14 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Merry')
+            ->brandName('تطبيق ميري')
             ->colors([
                 'primary' => Color::hex('#054F31'),
+                'success' => Color::hex('#10b981'),
+                'warning' => Color::hex('#f59e0b'),
+                'danger' => Color::hex('#ef4444'),
             ])
+            ->font('Cairo')
             ->renderHook(
                 'panels::head.start',
                 fn () => view('filament.rtl-styles')
