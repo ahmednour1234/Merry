@@ -27,6 +27,8 @@ class RolePermissionPivotSeeder extends Seeder
                 'system.roles.index','system.roles.store','system.roles.update','system.roles.destroy','system.roles.toggle','system.roles.sync_permissions',
                 'system.permissions.index','system.permissions.store','system.permissions.update','system.permissions.destroy','system.permissions.toggle',
                 'system.audit_logs.index',
+                // end users
+                'system.endusers.index','system.endusers.view','system.endusers.block',
             ],
             'manager' => [
                 'system.read',
@@ -37,6 +39,8 @@ class RolePermissionPivotSeeder extends Seeder
                 'system.roles.index',
                 'system.permissions.index',
                 'system.audit_logs.index',
+                // end users
+                'system.endusers.index','system.endusers.view',
             ],
             'viewer' => [
                 'system.read',
@@ -47,6 +51,8 @@ class RolePermissionPivotSeeder extends Seeder
                 'system.roles.index',
                 'system.permissions.index',
                 'system.audit_logs.index',
+                // end users
+                'system.endusers.index',
             ],
         ];
 

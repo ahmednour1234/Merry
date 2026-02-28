@@ -151,6 +151,11 @@ class PermissionsSeeder extends Seeder
             ['slug'=>'system.bookings.index',          'name'=>'List Bookings',                    'guard'=>'api','active'=>1],
             ['slug'=>'system.bookings.stats',          'name'=>'Booking Stats',                    'guard'=>'api','active'=>1],
 
+            // ------- end users -------
+            ['slug'=>'system.endusers.index',           'name'=>'List End Users',                  'guard'=>'api','active'=>1],
+            ['slug'=>'system.endusers.view',           'name'=>'View End User',                    'guard'=>'api','active'=>1],
+            ['slug'=>'system.endusers.block',          'name'=>'Block/Unblock End User',           'guard'=>'api','active'=>1],
+
             // ------- analytics -------
             ['slug'=>'system.analytics.index',         'name'=>'System Analytics',                 'guard'=>'api','active'=>1],
         ];
