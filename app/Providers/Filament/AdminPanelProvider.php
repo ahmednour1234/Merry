@@ -31,18 +31,6 @@ use Illuminate\Support\Facades\Route;
 
 class AdminPanelProvider extends PanelProvider
 {
-    public function boot(): void
-    {
-        parent::boot();
-        
-        Route::middleware(['web', Authenticate::class])
-            ->prefix('admin')
-            ->name('filament.admin.')
-            ->group(function () {
-                Route::get('/api/search', [\App\Http\Controllers\Filament\SearchController::class, '__invoke'])->name('search');
-            });
-    }
-
     public function panel(Panel $panel): Panel
     {
         // Set locale to Arabic

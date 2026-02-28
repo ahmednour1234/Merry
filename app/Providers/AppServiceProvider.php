@@ -14,6 +14,9 @@ use Laravel\Sanctum\Sanctum;
 use App\Models\SystemPersonalAccessToken;
 use App\Services\SystemSettings;
 use App\Services\LocaleService;
+use Illuminate\Support\Facades\Route;
+use Filament\Http\Middleware\Authenticate;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,6 +34,13 @@ class AppServiceProvider extends ServiceProvider
      */
      public function boot(): void
     {
+        // Register Filament search route
+        Route::middleware(['web', Authenticate::class])
+            ->prefix('admin')
+            ->name('filament.admin.')
+            ->group(function () {
+                Route::get('/api/search', [\App\Http\Controllers\Filament\SearchController::class, '__invoke'])->name('search');
+            });
         try {
             // Set default locale to Arabic
             app()->setLocale('ar');
