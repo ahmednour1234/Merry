@@ -58,10 +58,6 @@ class AdminPanelProvider extends PanelProvider
                 'panels::user-menu.start',
                 fn () => view('filament.components.notification-bell')
             )
-            ->renderHook(
-                'panels::topbar.start',
-                fn () => view('filament.components.global-search')
-            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
