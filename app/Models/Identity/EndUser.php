@@ -30,6 +30,7 @@ class EndUser extends Authenticatable
         'avatar_path',
         'bio',
         'active',
+        'blocked',
         'last_login_at',
         'email_verified_at',
     ];
@@ -41,6 +42,7 @@ class EndUser extends Authenticatable
 
     protected $casts = [
         'active' => 'boolean',
+        'blocked' => 'boolean',
         'last_login_at' => 'datetime',
     ];
 
@@ -60,6 +62,30 @@ class EndUser extends Authenticatable
         }
 
         return asset('storage/' . ltrim($this->avatar_path, '/'));
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(\App\Models\CvBooking::class, 'end_user_id', 'id');
+    }
+
+    public function favouriteCvs()
+    {
+        return $this->hasMany(FavouriteCv::class, 'end_user_id', 'id');
+    }
+
+    public function getBookingsCountAttribute(): int
+    {
+        return \App\Models\CvBooking::on('system')
+            ->where('end_user_id', $this->id)
+            ->count();
+    }
+
+    public function getFavouritesCountAttribute(): int
+    {
+        return FavouriteCv::on('identity')
+            ->where('end_user_id', $this->id)
+            ->count();
     }
 }
 
