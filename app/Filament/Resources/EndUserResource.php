@@ -20,11 +20,11 @@ class EndUserResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationLabel = 'المستخدمون النهائيون';
+    protected static ?string $navigationLabel = 'المستخدمين';
 
-    protected static ?string $modelLabel = 'مستخدم نهائي';
+    protected static ?string $modelLabel = 'مستخدم';
 
-    protected static ?string $pluralModelLabel = 'المستخدمون النهائيون';
+    protected static ?string $pluralModelLabel = 'المستخدمين';
 
     public static function getNavigationGroup(): ?string
     {
