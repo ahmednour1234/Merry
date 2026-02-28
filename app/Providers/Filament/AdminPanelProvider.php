@@ -27,9 +27,22 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Route;
 
 class AdminPanelProvider extends PanelProvider
 {
+    public function boot(): void
+    {
+        parent::boot();
+        
+        Route::middleware(['web', Authenticate::class])
+            ->prefix('admin')
+            ->name('filament.admin.')
+            ->group(function () {
+                Route::get('/api/search', [\App\Http\Controllers\Filament\SearchController::class, '__invoke'])->name('search');
+            });
+    }
+
     public function panel(Panel $panel): Panel
     {
         // Set locale to Arabic
@@ -53,10 +66,19 @@ class AdminPanelProvider extends PanelProvider
                 'panels::head.start',
                 fn () => view('filament.rtl-styles')
             )
+            ->renderHook(
+                'panels::user-menu.start',
+                fn () => view('filament.components.notification-bell')
+            )
+            ->renderHook(
+                'panels::topbar.start',
+                fn () => view('filament.components.global-search')
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,
+                \App\Filament\Pages\NotificationsPage::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -83,6 +105,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->navigationGroups([
+                'الإدارة',
+                'النظام',
+            ])
+            ->discoverRoutes(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages');
     }
 }
