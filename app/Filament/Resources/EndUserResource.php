@@ -211,14 +211,14 @@ class EndUserResource extends Resource
 
     public static function canDelete($record): bool
     {
-        return false;
+        return true;
     }
 
     public static function canView($record): bool
     {
         $user = auth()->user();
         if (! $user) {
-            return false;
+            return true;
         }
 
         return app(PermissionService::class)->userHas($user, 'system.endusers.view');
