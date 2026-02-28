@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\EndUserResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -15,9 +15,9 @@ class FavouriteCvsRelationManager extends RelationManager
 
     protected static ?string $title = 'CVs المفضلة';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\TextInput::make('id')
                     ->disabled()
