@@ -47,7 +47,7 @@ class CityResource extends Resource
                 Forms\Components\TextInput::make('country_code')
                     ->required()
                     ->maxLength(2)
-                    ->transform(fn ($value) => strtoupper($value ?? ''))
+                    ->mutateDehydratedStateUsing(fn ($state) => strtoupper($state ?? ''))
                     ->default('SA')
                     ->label('رمز الدولة'),
                 Forms\Components\Repeater::make('translations')
