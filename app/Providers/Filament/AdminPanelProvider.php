@@ -109,7 +109,6 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 'الإدارة',
                 'النظام',
-            ])
-            ->discoverRoutes(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages');
+            ]);
     }
 }
