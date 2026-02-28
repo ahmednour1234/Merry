@@ -13,7 +13,7 @@ use App\Filament\Widgets\EndUsersStatsWidget;
 use App\Filament\Widgets\OfficesStatsWidget;
 use App\Filament\Widgets\OverallStatsWidget;
 use App\Filament\Widgets\PlansStatsWidget;
-use Filament\Pages\Dashboard;
+use App\Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;

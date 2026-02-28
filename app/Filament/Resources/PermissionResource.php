@@ -24,7 +24,12 @@ class PermissionResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'System';
+        return 'النظام';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'الصلاحيات';
     }
 
     public static function form(Schema $schema): Schema

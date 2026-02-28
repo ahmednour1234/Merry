@@ -38,13 +38,13 @@ class ExchangeRateResource extends Resource
                 Forms\Components\TextInput::make('base')
                     ->required()
                     ->maxLength(3)
-                    ->uppercase()
+                    ->transform(fn ($value) => strtoupper($value ?? ''))
                     ->label('العملة الأساسية')
                     ->helperText('مثل: USD'),
                 Forms\Components\TextInput::make('quote')
                     ->required()
                     ->maxLength(3)
-                    ->uppercase()
+                    ->transform(fn ($value) => strtoupper($value ?? ''))
                     ->label('العملة المقابلة')
                     ->helperText('مثل: SAR'),
                 Forms\Components\TextInput::make('rate')

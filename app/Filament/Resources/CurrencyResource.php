@@ -38,7 +38,7 @@ class CurrencyResource extends Resource
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(3)
-                    ->uppercase()
+                    ->transform(fn ($value) => strtoupper($value ?? ''))
                     ->unique(ignoreRecord: true)
                     ->label('رمز العملة')
                     ->helperText('مثل: USD, SAR, EUR'),

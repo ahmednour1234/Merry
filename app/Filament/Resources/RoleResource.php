@@ -26,7 +26,12 @@ class RoleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'System';
+        return 'النظام';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'الأدوار';
     }
 
     public static function form(Schema $schema): Schema

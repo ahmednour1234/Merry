@@ -40,7 +40,7 @@ class NationalityResource extends Resource
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(3)
-                    ->uppercase()
+                    ->transform(fn ($value) => strtoupper($value ?? ''))
                     ->unique(ignoreRecord: true)
                     ->label('رمز الجنسية')
                     ->helperText('مثل: SA, US, EG'),
