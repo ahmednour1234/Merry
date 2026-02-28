@@ -4,71 +4,73 @@ namespace App\Filament\Resources\EndUserResource\Pages;
 
 use App\Filament\Resources\EndUserResource;
 use Filament\Resources\Pages\ViewRecord;
-use Filament\Infolists;
-use Filament\Infolists\Infolist;
+use Filament\Schemas\Schema;
+use Filament\Forms;
 
 class ViewEndUser extends ViewRecord
 {
     protected static string $resource = EndUserResource::class;
 
-    public function infolist(Infolist $infolist): Infolist
+    public function infolist(Schema $schema): Schema
     {
-        return $infolist
+        return $schema
             ->schema([
-                Infolists\Components\Section::make('المعلومات الأساسية')
+                Forms\Components\Section::make('المعلومات الأساسية')
                     ->schema([
-                        Infolists\Components\ImageEntry::make('avatar_path')
-                            ->label('الصورة')
-                            ->circular()
-                            ->defaultImageUrl(url('/images/default-avatar.png')),
-
-                        Infolists\Components\TextEntry::make('id')
+                        Forms\Components\TextInput::make('id')
+                            ->disabled()
                             ->label('ID'),
 
-                        Infolists\Components\TextEntry::make('name')
+                        Forms\Components\TextInput::make('name')
+                            ->disabled()
                             ->label('الاسم'),
 
-                        Infolists\Components\TextEntry::make('phone')
+                        Forms\Components\TextInput::make('phone')
+                            ->disabled()
                             ->label('الهاتف'),
 
-                        Infolists\Components\TextEntry::make('national_id')
+                        Forms\Components\TextInput::make('national_id')
+                            ->disabled()
                             ->label('الهوية الوطنية'),
 
-                        Infolists\Components\IconEntry::make('active')
-                            ->boolean()
+                        Forms\Components\Toggle::make('active')
+                            ->disabled()
                             ->label('نشط'),
 
-                        Infolists\Components\IconEntry::make('blocked')
-                            ->boolean()
+                        Forms\Components\Toggle::make('blocked')
+                            ->disabled()
                             ->label('محظور'),
 
-                        Infolists\Components\TextEntry::make('bio')
+                        Forms\Components\Textarea::make('bio')
+                            ->disabled()
                             ->label('السيرة الذاتية')
                             ->columnSpanFull(),
 
-                        Infolists\Components\TextEntry::make('last_login_at')
-                            ->dateTime()
+                        Forms\Components\DateTimePicker::make('last_login_at')
+                            ->disabled()
                             ->label('آخر تسجيل دخول'),
 
-                        Infolists\Components\TextEntry::make('created_at')
-                            ->dateTime()
+                        Forms\Components\DateTimePicker::make('created_at')
+                            ->disabled()
                             ->label('تاريخ الإنشاء'),
                     ])
                     ->columns(2),
 
-                Infolists\Components\Section::make('الإحصائيات')
+                Forms\Components\Section::make('الإحصائيات')
                     ->schema([
-                        Infolists\Components\TextEntry::make('bookings_count')
+                        Forms\Components\TextInput::make('bookings_count')
+                            ->disabled()
                             ->label('عدد الحجوزات')
-                            ->getStateUsing(function ($record): int {
+                            ->default(function ($record): int {
                                 return \App\Models\CvBooking::on('system')
                                     ->where('end_user_id', $record->id)
                                     ->count();
                             }),
 
-                        Infolists\Components\TextEntry::make('favourites_count')
+                        Forms\Components\TextInput::make('favourites_count')
+                            ->disabled()
                             ->label('عدد CVs المفضلة')
-                            ->getStateUsing(function ($record): int {
+                            ->default(function ($record): int {
                                 return \App\Models\Identity\FavouriteCv::on('identity')
                                     ->where('end_user_id', $record->id)
                                     ->count();
