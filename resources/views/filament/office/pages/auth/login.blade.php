@@ -1,9 +1,5 @@
-<div>
+<div dir="rtl">
     <div class="auth-container">
-        <div class="auth-header">
-
-        </div>
-
         <div class="auth-card">
             <h1 class="app-name">تطبيق ميري</h1>
             <p class="app-subtitle">للعمالة المنزلية</p>
@@ -81,12 +77,17 @@
         min-height: 100vh;
         padding: 20px;
         font-family: 'Cairo', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .auth-container {
         max-width: 500px;
-        margin: 0 auto;
-        padding-top: 40px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .auth-header {
@@ -113,6 +114,15 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         padding: 40px;
         width: 100%;
+        text-align: right;
+    }
+
+    .app-name {
+        text-align: center;
+    }
+
+    .app-subtitle {
+        text-align: center;
     }
 
     .auth-title {
@@ -133,6 +143,7 @@
         font-weight: 600;
         color: #333;
         font-size: 14px;
+        text-align: right;
     }
 
     .form-label.required::after {
@@ -148,6 +159,8 @@
         font-size: 14px;
         transition: all 0.3s;
         font-family: 'Cairo', sans-serif;
+        text-align: right;
+        direction: rtl;
     }
 
     .form-input:focus {
@@ -162,7 +175,8 @@
 
     .password-toggle {
         position: absolute;
-        left: 12px;
+        right: 12px;
+        left: auto;
         top: 50%;
         transform: translateY(-50%);
         background: none;
@@ -180,7 +194,8 @@
     }
 
     .password-input-wrapper .form-input {
-        padding-left: 44px;
+        padding-right: 44px;
+        padding-left: 16px;
     }
 
     .form-options {
@@ -188,6 +203,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 24px;
+        flex-direction: row-reverse;
     }
 
     .forgot-password-link {
