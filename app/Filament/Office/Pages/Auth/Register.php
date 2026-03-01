@@ -26,7 +26,6 @@ class Register extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected string $view = 'filament.office.pages.auth.register';
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -119,7 +118,10 @@ class Register extends Page implements HasForms
             ->success()
             ->send();
 
-        $this->redirect(Filament::getPanel('office')->getLoginUrl());
+        Auth::guard('office-panel')->login($office, false);
+        session()->regenerate();
+
+        $this->redirect(\App\Filament\Office\Pages\Subscriptions::getUrl());
     }
 
     public function getTitle(): string | Htmlable

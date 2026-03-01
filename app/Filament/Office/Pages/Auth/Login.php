@@ -19,7 +19,6 @@ class Login extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected string $view = 'filament.office.pages.auth.login';
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -99,7 +98,19 @@ class Login extends Page implements HasForms
 
     protected function getRedirectUrl(): string
     {
-        return Filament::getPanel('office')->getUrl();
+        $office = Auth::guard('office-panel')->user();
+        
+        $hasActiveSubscription = \App\Models\OfficeSubscription::on('system')
+            ->where('office_id', $office->id)
+            ->where('active', true)
+            ->where('ends_at', '>=', now())
+            ->exists();
+        
+        if ($hasActiveSubscription) {
+            return Filament::getPanel('office')->getUrl();
+        }
+        
+        return \App\Filament\Office\Pages\Subscriptions::getUrl();
     }
 
     public function hasLogo(): bool
