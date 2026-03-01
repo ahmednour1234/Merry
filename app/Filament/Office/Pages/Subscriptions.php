@@ -18,7 +18,7 @@ class Subscriptions extends Page
 {
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-credit-card';
 
-    protected static string $view = 'filament.office.pages.subscriptions';
+    protected string $view = 'filament.office.pages.subscriptions';
 
     protected static ?string $navigationLabel = 'الاشتراكات';
 

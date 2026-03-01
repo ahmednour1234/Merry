@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OfficeStatusWidget extends Widget
 {
-    protected static string $view = 'filament.office.widgets.office-status-widget';
+    protected string $view = 'filament.office.widgets.office-status-widget';
 
     protected int | string | array $columnSpan = 'full';
 

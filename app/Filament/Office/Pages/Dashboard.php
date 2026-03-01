@@ -17,7 +17,7 @@ class Dashboard extends BaseDashboard
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-home';
 
-    protected static string $view = 'filament.office.pages.dashboard';
+    protected string $view = 'filament.office.pages.dashboard';
 
     public function getWidgets(): array
     {
