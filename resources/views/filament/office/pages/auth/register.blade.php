@@ -110,7 +110,7 @@
         padding: 40px;
         width: 100%;
         max-width: 600px;
-        margin: 0 auto;
+        margin: 85px auto;
     }
     .auth-header {
         text-align: center;
