@@ -93,7 +93,6 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 'الإدارة',
                 'النظام',
-            ])
-            ->databaseNotifications();
+            ]);
     }
 }
