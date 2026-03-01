@@ -25,12 +25,6 @@ class OfficePanelProvider extends PanelProvider
         return $panel
             ->id('office')
             ->path('office')
-            ->login(\App\Filament\Office\Pages\Auth\Login::class)
-            ->registration(\App\Filament\Office\Pages\Auth\Register::class)
-            ->pages([
-                \App\Filament\Office\Pages\Auth\ForgotPassword::class,
-                \App\Filament\Office\Pages\Auth\ResetPassword::class,
-            ])
             ->brandName('تطبيق ميري - المكتب')
             ->colors([
                 'primary' => Color::hex('#054F31'),
