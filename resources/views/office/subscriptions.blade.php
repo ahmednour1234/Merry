@@ -521,6 +521,229 @@
             box-shadow: 0 0 0 3px rgba(5, 79, 49, 0.1);
         }
 
+        .welcome-section {
+            background: linear-gradient(135deg, #054F31 0%, #10b981 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(5, 79, 49, 0.3);
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-greeting {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .welcome-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f0fdf4;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(5, 79, 49, 0.15);
+            border-color: #054F31;
+        }
+
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: #054F31;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .features-section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .features-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #054F31;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: #f0fdf4;
+            transform: translateX(-4px);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            color: #10b981;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .feature-content p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .faq-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #054F31;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #054F31;
+            box-shadow: 0 4px 12px rgba(5, 79, 49, 0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: #f8fafc;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f0fdf4;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: #054F31;
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
         @media (max-width: 1024px) {
             .plans-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -549,9 +772,40 @@
 </head>
 <body>
     <div class="container">
+        <div class="welcome-section">
+            <div class="welcome-content">
+                <div class="welcome-greeting">مرحباً بك 👋</div>
+                <div class="welcome-name">{{ Auth::guard('office-panel')->user()->name ?? 'مكتب الاستقدام' }}</div>
+                <div class="welcome-message">نحن هنا لمساعدتك في إدارة اشتراكاتك والحصول على أفضل الخدمات</div>
+            </div>
+        </div>
+
         <div class="header">
             <h1 class="app-name">نظام ميري للاستقدام</h1>
             <h2 class="page-title">الاشتراكات</h2>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value">{{ $plans->count() }}</div>
+                <div class="stat-label">خطط متاحة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value">{{ $currentSubscription ? '1' : '0' }}</div>
+                <div class="stat-label">اشتراك نشط</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value">{{ $subscriptions->total() }}</div>
+                <div class="stat-label">إجمالي الاشتراكات</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💎</div>
+                <div class="stat-value">{{ $currentSubscription ? number_format($currentSubscription->price, 0) : '0' }}</div>
+                <div class="stat-label">قيمة الاشتراك الحالي</div>
+            </div>
         </div>
 
         @if(session('success'))
@@ -711,6 +965,78 @@
                 </div>
             </div>
         @endif
+
+        <div class="features-section">
+            <h3>مميزات نظام ميري</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-content">
+                        <h4>أداء عالي</h4>
+                        <p>نظام سريع وموثوق لإدارة عمليات الاستقدام بكفاءة عالية</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-content">
+                        <h4>أمان متقدم</h4>
+                        <p>حماية كاملة لبياناتك مع تشفير متقدم ومعايير أمان عالية</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-content">
+                        <h4>متوافق مع جميع الأجهزة</h4>
+                        <p>يعمل بسلاسة على الكمبيوتر والهاتف والتابلت</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-content">
+                        <h4>دعم فني 24/7</h4>
+                        <p>فريق دعم متاح على مدار الساعة لمساعدتك في أي وقت</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h4>تقارير شاملة</h4>
+                        <p>إحصائيات وتقارير مفصلة لمتابعة أداء مكتبك</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-content">
+                        <h4>تحديثات مستمرة</h4>
+                        <p>نضيف ميزات جديدة باستمرار لتحسين تجربتك</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h3>أسئلة شائعة</h3>
+            <div class="faq-item">
+                <div class="faq-question">كيف يمكنني تغيير خطتي الحالية؟</div>
+                <div class="faq-answer">يمكنك الاشتراك في أي خطة متاحة من خلال الضغط على زر "اشترك الآن" في البطاقة الخاصة بالخطة المطلوبة. سيتم تفعيل الخطة الجديدة فوراً.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">ماذا يحدث عند انتهاء الاشتراك؟</div>
+                <div class="faq-answer">عند انتهاء الاشتراك، سيتم إيقاف الخدمات تلقائياً. يمكنك تجديد الاشتراك في أي وقت للحفاظ على استمرارية الخدمة.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">هل يمكنني إلغاء الاشتراك في أي وقت؟</div>
+                <div class="faq-answer">نعم، يمكنك إلغاء الاشتراك في أي وقت من خلال قسم "الاشتراك الحالي". لن يتم خصم أي مبالغ إضافية بعد الإلغاء.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">ما هو التجديد التلقائي؟</div>
+                <div class="faq-answer">التجديد التلقائي يضمن استمرار اشتراكك دون الحاجة لتجديده يدوياً. يمكنك تفعيله أو إلغاؤه في أي وقت.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">كيف يمكنني التواصل مع الدعم الفني؟</div>
+                <div class="faq-answer">يمكنك التواصل مع فريق الدعم الفني على مدار 24 ساعة من خلال البريد الإلكتروني أو الهاتف. نحن هنا لمساعدتك دائماً.</div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -745,6 +1071,24 @@
                         spaceBetween: 24,
                     },
                 },
+            });
+
+            // FAQ Accordion
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
             });
         });
     </script>
