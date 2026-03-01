@@ -13,6 +13,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Filament\Panel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Support\Uploads\ImageUploader;
@@ -29,10 +30,10 @@ class Register extends Page implements HasForms
 
     protected string $view = 'filament.office.pages.auth.register';
 
-    public static function getRouteName(?string $panel = null): string
+    public static function getRouteName(?Panel $panel = null): string
     {
-        $panel = $panel ?? \Filament\Facades\Filament::getCurrentPanel()?->getId() ?? 'office';
-        return "filament.{$panel}.auth.register";
+        $panelId = $panel?->getId() ?? \Filament\Facades\Filament::getCurrentPanel()?->getId() ?? 'office';
+        return "filament.{$panelId}.auth.register";
     }
 
     public ?array $data = [];
