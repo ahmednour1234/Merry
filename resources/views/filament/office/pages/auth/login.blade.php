@@ -130,7 +130,7 @@
 
     .auth-container{
         width:100%;
-        max-width: 760px; /* similar to screenshot */
+        max-width: 420px;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -343,7 +343,7 @@
     /* ✅ خلي الكارد أنحف */
 .auth-container{
     width: 100%;
-    max-width: 460px; /* كان 760 - خليناه أنحف */
+    max-width: 420px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -351,8 +351,8 @@
 
 .auth-card{
     width: 100%;
-    max-width: 460px; /* تأكيد */
-    padding: 42px 34px 32px; /* أقل شوية */
+    max-width: 420px;
+    padding: 42px 34px 32px;
     border-radius: 18px;
 }
 
@@ -381,10 +381,10 @@
 /* ✅ موبايل */
 @media (max-width: 640px){
     .auth-container, .auth-card{
-        max-width: 380px;
+        max-width: 100%;
     }
     .auth-card{
-        padding: 34px 18px 24px;
+        padding: 34px 24px 24px;
     }
 }
 </style>
