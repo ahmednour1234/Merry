@@ -110,7 +110,6 @@
         width: 100%;
         max-width: 600px;
         margin: 0px auto;
-        margin-top: 90px;
         margin-bottom: 90px;
     }
     .auth-header {
