@@ -5,7 +5,7 @@
             <h2 class="auth-title">إعادة تعيين كلمة المرور</h2>
         </div>
 
-        <form wire:submit="reset">
+        <form wire:submit="resetPassword">
             <div class="form-group">
                 <label class="form-label required">عنوان البريد الإلكتروني</label>
                 <input

@@ -38,7 +38,7 @@ class ResetPassword extends Page
         $this->showPassword = !$this->showPassword;
     }
 
-    public function reset(): void
+    public function resetPassword(): void
     {
         $this->validate([
             'email' => 'required|email',
