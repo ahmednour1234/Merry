@@ -26,6 +26,7 @@ class OfficePanelProvider extends PanelProvider
             ->id('office')
             ->path('office')
             ->login()
+            ->registration(\App\Filament\Office\Pages\Auth\Register::class)
             ->brandName('تطبيق ميري - المكتب')
             ->colors([
                 'primary' => Color::hex('#054F31'),
@@ -48,6 +49,7 @@ class OfficePanelProvider extends PanelProvider
                 \App\Filament\Office\Pages\Dashboard::class,
                 \App\Filament\Office\Pages\Subscriptions::class,
                 \App\Filament\Office\Pages\NotificationsPage::class,
+                \App\Filament\Office\Pages\Auth\Register::class,
                 \App\Filament\Office\Pages\Auth\VerifyOtp::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Office/Widgets'), for: 'App\\Filament\\Office\\Widgets')
