@@ -8,7 +8,7 @@ use App\Models\Cv;
 use App\Models\CvBooking;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,9 +27,9 @@ class BookingResource extends Resource
 
     protected static ?string $pluralModelLabel = 'الحجوزات';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Select::make('cv_id')
                     ->relationship('cv', 'id', fn ($query) => $query->where('office_id', Auth::guard('office-panel')->id()))

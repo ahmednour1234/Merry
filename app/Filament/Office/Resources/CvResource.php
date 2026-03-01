@@ -12,7 +12,7 @@ use App\Models\Nationality;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -32,9 +32,9 @@ class CvResource extends Resource
 
     protected static ?string $pluralModelLabel = 'السير الذاتية';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Select::make('category_id')
                     ->options(fn () => Category::on('system')->with('translations')->where('active', true)->get()->mapWithKeys(function ($cat) {
