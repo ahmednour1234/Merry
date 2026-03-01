@@ -20,4 +20,26 @@
     .fi-simple-layout {
         font-family: 'Cairo', sans-serif;
     }
+
+    /* Hide sidebar and header on auth pages */
+    [data-panel-id="office"] body:has([data-page*="login"]) .fi-sidebar,
+    [data-panel-id="office"] body:has([data-page*="register"]) .fi-sidebar,
+    [data-panel-id="office"] body:has([data-page*="password"]) .fi-sidebar {
+        display: none !important;
+    }
+
+    [data-panel-id="office"] body:has([data-page*="login"]) .fi-main,
+    [data-panel-id="office"] body:has([data-page*="register"]) .fi-main,
+    [data-panel-id="office"] body:has([data-page*="password"]) .fi-main {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    [data-panel-id="office"] body:has([data-page*="login"]) .fi-header,
+    [data-panel-id="office"] body:has([data-page*="register"]) .fi-header,
+    [data-panel-id="office"] body:has([data-page*="password"]) .fi-header {
+        display: none !important;
+    }
 </style>

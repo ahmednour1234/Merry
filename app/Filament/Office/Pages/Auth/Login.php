@@ -19,6 +19,11 @@ class Login extends Page implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
 
+    public function shouldShowSidebar(): bool
+    {
+        return false;
+    }
+
     public ?array $data = [];
 
     public function mount(): void
