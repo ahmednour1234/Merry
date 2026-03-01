@@ -10,16 +10,18 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::connection($this->connection)->create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->string('type')->nullable();
-            $table->string('title');
-            $table->text('body')->nullable();
-            $table->json('data')->nullable();
-            $table->string('priority')->default('normal');
-            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamps();
-        });
+        if (!Schema::connection($this->connection)->hasTable('custom_notifications')) {
+            Schema::connection($this->connection)->create('custom_notifications', function (Blueprint $table) {
+                $table->id();
+                $table->string('type')->nullable();
+                $table->string('title');
+                $table->text('body')->nullable();
+                $table->json('data')->nullable();
+                $table->string('priority')->default('normal');
+                $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+                $table->timestamps();
+            });
+        }
 
         Schema::connection($this->connection)->create('notification_templates', function (Blueprint $table) {
             $table->id();
@@ -33,7 +35,7 @@ return new class extends Migration
 
         Schema::connection($this->connection)->create('notification_recipients', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('notification_id')->constrained('notifications')->cascadeOnDelete();
+            $table->foreignId('notification_id')->constrained('custom_notifications')->cascadeOnDelete();
             $table->string('recipient_type'); // user|office|role
             $table->unsignedBigInteger('recipient_id')->nullable();
             $table->foreignId('resolved_user_id')->nullable()->constrained('users')->nullOnDelete();
@@ -54,7 +56,7 @@ return new class extends Migration
     {
         Schema::connection($this->connection)->dropIfExists('notification_recipients');
         Schema::connection($this->connection)->dropIfExists('notification_templates');
-        Schema::connection($this->connection)->dropIfExists('notifications');
+        Schema::connection($this->connection)->dropIfExists('custom_notifications');
     }
 };
 

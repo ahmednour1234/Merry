@@ -12,6 +12,7 @@ class Notification extends Model
     use HasFactory;
 
     protected $connection = 'system';
+    protected $table = 'custom_notifications';
     protected $fillable = [
         'type',
         'title',
