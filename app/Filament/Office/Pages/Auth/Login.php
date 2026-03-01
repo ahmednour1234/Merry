@@ -19,8 +19,6 @@ class Login extends Page implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected string $view = 'filament-panels::page.simple';
-
     public ?array $data = [];
 
     public function mount(): void

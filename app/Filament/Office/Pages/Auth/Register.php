@@ -27,8 +27,6 @@ class Register extends Page implements HasForms
     use InteractsWithForms;
 
     protected static bool $shouldRegisterNavigation = false;
-    
-    protected string $view = 'filament-panels::page.simple';
 
     public ?array $data = [];
 
