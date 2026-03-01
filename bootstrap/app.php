@@ -41,6 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ModulesServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
+        App\Providers\Filament\OfficePanelProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
 

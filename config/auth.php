@@ -42,9 +42,15 @@ return [
             'provider' => 'users',
         ],
 
-        // مكتب / موظفين (لو عندك موديل Office)
+        // مكتب / موظفين (API - Sanctum)
         'office' => [
             'driver'   => 'sanctum',
+            'provider' => 'offices',
+        ],
+
+        // مكتب / موظفين (Filament Panel - Session)
+        'office-panel' => [
+            'driver'   => 'session',
             'provider' => 'offices',
         ],
 
@@ -99,6 +105,13 @@ return [
 
         'endusers' => [
             'provider' => 'endusers',
+            'table'    => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire'   => 60,
+            'throttle' => 60,
+        ],
+
+        'offices' => [
+            'provider' => 'offices',
             'table'    => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire'   => 60,
             'throttle' => 60,
