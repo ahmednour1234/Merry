@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Filament\Office\Resources\BookingResource\Pages;
 use App\Models\Cv;
 use App\Models\CvBooking;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ class BookingResource extends Resource
 {
     protected static ?string $model = CvBooking::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
 
     protected static ?string $navigationLabel = 'الحجوزات';
 

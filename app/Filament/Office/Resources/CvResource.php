@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Identity\FavouriteCv;
 use App\Models\Nationality;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,7 +24,7 @@ class CvResource extends Resource
 {
     protected static ?string $model = Cv::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
     protected static ?string $navigationLabel = 'السير الذاتية';
 
