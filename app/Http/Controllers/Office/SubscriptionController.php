@@ -22,7 +22,7 @@ class SubscriptionController extends Controller
     public function index()
     {
         $office = Auth::guard('office-panel')->user();
-        
+
         $plans = $this->planRepo->paginate(['active' => 1], 50);
         $plans->getCollection()->load(['translations', 'features']);
 
@@ -53,10 +53,13 @@ class SubscriptionController extends Controller
         $priced = $this->svc->priced($request->plan_code, $request->coupon);
 
         if (!$priced) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'الخطة غير متاحة'], 422);
+            }
             return back()->with('error', 'الخطة غير متاحة');
         }
 
-        $this->subsRepo->createForOffice(
+        $subscription = $this->subsRepo->createForOffice(
             $office->id,
             $request->plan_code,
             $priced['currency'],
@@ -66,6 +69,15 @@ class SubscriptionController extends Controller
                 'coupon' => $request->coupon,
             ]
         );
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status' => $subscription->status,
+                'message' => $subscription->status === 'pending'
+                    ? 'جاري المراجعة من الدعم'
+                    : 'تم الاشتراك بنجاح'
+            ]);
+        }
 
         return back()->with('success', 'تم الاشتراك بنجاح');
     }

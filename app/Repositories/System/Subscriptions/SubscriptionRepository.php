@@ -42,14 +42,14 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
         return OfficeSubscription::on('system')->create([
             'office_id' => $officeId,
             'plan_code' => $planCode,
-            'status' => 'active',
+            'status' => 'pending',
             'auto_renew' => false,
             'starts_at' => $starts,
             'ends_at' => $ends,
             'currency_code' => strtoupper($currency),
             'price' => $price,
             'meta' => $meta,
-            'active' => 1,
+            'active' => 0,
         ]);
     }
 

@@ -149,4 +149,9 @@ class Subscriptions extends Page
             ->orderByDesc('ends_at')
             ->first();
     }
+
+    protected function getWidgets(): array
+    {
+        return [];
+    }
 }

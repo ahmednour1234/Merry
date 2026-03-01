@@ -449,6 +449,11 @@
             color: #92400e;
         }
 
+        .status-pending {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -890,6 +895,168 @@
             }
         }
 
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #054F31;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .modal-body {
+            margin-bottom: 30px;
+        }
+
+        .modal-plan-info {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-plan-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .modal-plan-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-plan-info-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .modal-plan-info-value {
+            color: #1e293b;
+            font-weight: 700;
+        }
+
+        .modal-plan-info-value.price {
+            font-size: 24px;
+            color: #054F31;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .toast {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.3s ease;
+            border-right: 4px solid;
+        }
+
+        .toast.success {
+            border-color: #10b981;
+        }
+
+        .toast.warning {
+            border-color: #f59e0b;
+        }
+
+        .toast.error {
+            border-color: #ef4444;
+        }
+
+        .toast-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-message {
+            flex: 1;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 1024px) {
             .plans-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -981,7 +1148,7 @@
                     <div class="info-item">
                         <div class="info-label">الحالة</div>
                         <div class="info-value">
-                            <span class="status-badge status-{{ $currentSubscription->status }}">{{ $currentSubscription->status === 'active' ? 'نشط' : ($currentSubscription->status === 'cancelled' ? 'ملغي' : 'منتهي') }}</span>
+                            <span class="status-badge status-{{ $currentSubscription->status }}">{{ $currentSubscription->status === 'active' ? 'نشط' : ($currentSubscription->status === 'cancelled' ? 'ملغي' : ($currentSubscription->status === 'pending' ? 'قيد المراجعة' : 'منتهي')) }}</span>
                         </div>
                     </div>
                 </div>
@@ -1044,11 +1211,14 @@
                                 </ul>
                                 <div class="plan-card-footer">
                                     @if(!$isCurrent)
-                                        <form action="{{ route('office.subscriptions.subscribe') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="plan_code" value="{{ $plan->code }}">
-                                            <button type="submit" class="btn btn-primary">اشترك الآن</button>
-                                        </form>
+                                        <button type="button" class="btn btn-primary subscribe-btn"
+                                                data-plan-code="{{ $plan->code }}"
+                                                data-plan-name="{{ $planName }}"
+                                                data-plan-price="{{ number_format($priced['price'] ?? $plan->base_price, 2) }}"
+                                                data-plan-currency="{{ $priced['currency'] ?? $plan->base_currency }}"
+                                                data-plan-cycle="{{ $plan->billing_cycle === 'monthly' ? 'شهري' : 'سنوي' }}">
+                                            اشترك الآن
+                                        </button>
                                     @else
                                         <button class="btn btn-secondary" disabled>مشترك حالياً</button>
                                     @endif
@@ -1185,6 +1355,46 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="subscribeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تأكيد الاشتراك</h3>
+                <p>يرجى مراجعة تفاصيل الاشتراك قبل التأكيد</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-plan-info">
+                    <div class="modal-plan-info-item">
+                        <span class="modal-plan-info-label">الخطة:</span>
+                        <span class="modal-plan-info-value" id="modalPlanName">-</span>
+                    </div>
+                    <div class="modal-plan-info-item">
+                        <span class="modal-plan-info-label">المدة:</span>
+                        <span class="modal-plan-info-value" id="modalPlanCycle">-</span>
+                    </div>
+                    <div class="modal-plan-info-item">
+                        <span class="modal-plan-info-label">السعر:</span>
+                        <span class="modal-plan-info-value price" id="modalPlanPrice">-</span>
+                    </div>
+                </div>
+                <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px; padding: 16px; margin-top: 20px;">
+                    <p style="color: #92400e; font-size: 14px; margin: 0; line-height: 1.6;">
+                        <strong>ملاحظة:</strong> بعد تأكيد الاشتراك، سيتم مراجعة طلبك من قبل فريق الدعم. سيتم تفعيل الاشتراك بعد الموافقة.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                <form id="subscribeForm" method="POST" action="{{ route('office.subscriptions.subscribe') }}">
+                    @csrf
+                    <input type="hidden" name="plan_code" id="formPlanCode">
+                    <button type="submit" class="btn btn-primary">تأكيد والدفع</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
     <div class="floating-buttons left">
         <a href="mailto:support@mery.com" class="floating-btn floating-btn-email" aria-label="البريد الإلكتروني">
             <span>✉️</span>
@@ -1238,19 +1448,110 @@
                 question.addEventListener('click', function() {
                     const faqItem = this.parentElement;
                     const isActive = faqItem.classList.contains('active');
-                    
+
                     // Close all FAQ items
                     document.querySelectorAll('.faq-item').forEach(item => {
                         item.classList.remove('active');
                     });
-                    
+
                     // Open clicked item if it wasn't active
                     if (!isActive) {
                         faqItem.classList.add('active');
                     }
                 });
             });
+
+            // Subscribe button click
+            document.querySelectorAll('.subscribe-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const planCode = this.dataset.planCode;
+                    const planName = this.dataset.planName;
+                    const planPrice = this.dataset.planPrice;
+                    const planCurrency = this.dataset.planCurrency;
+                    const planCycle = this.dataset.planCycle;
+
+                    document.getElementById('modalPlanName').textContent = planName;
+                    document.getElementById('modalPlanCycle').textContent = planCycle;
+                    document.getElementById('modalPlanPrice').textContent = planPrice + ' ' + planCurrency;
+                    document.getElementById('formPlanCode').value = planCode;
+
+                    document.getElementById('subscribeModal').classList.add('active');
+                });
+            });
+
+            // Close modal on overlay click
+            document.getElementById('subscribeModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Handle form submission
+            document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const form = this;
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    closeModal();
+
+                    if (data.status === 'pending') {
+                        showToast('warning', 'جاري المراجعة من الدعم', 'سيتم مراجعة طلبك والموافقة عليه من قبل فريق الدعم الفني');
+                    } else {
+                        showToast('success', 'تم الاشتراك بنجاح', 'تم تفعيل الاشتراك بنجاح');
+                    }
+
+                    setTimeout(() => {
+                        window.location.href = '{{ \Filament\Facades\Filament::getPanel("office")->getUrl() }}';
+                    }, 2000);
+                })
+                .catch(error => {
+                    closeModal();
+                    showToast('error', 'حدث خطأ', 'حدث خطأ أثناء معالجة طلبك. يرجى المحاولة مرة أخرى.');
+                });
+            });
         });
+
+        function closeModal() {
+            document.getElementById('subscribeModal').classList.remove('active');
+        }
+
+        function showToast(type, title, message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const icons = {
+                success: '✅',
+                warning: '⚠️',
+                error: '❌'
+            };
+
+            toast.innerHTML = `
+                <span class="toast-icon">${icons[type] || 'ℹ️'}</span>
+                <div class="toast-message">
+                    <strong>${title}</strong><br>
+                    <span style="font-size: 13px; color: #64748b; font-weight: normal;">${message}</span>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideDown 0.3s ease reverse';
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 5000);
+        }
     </script>
 </body>
 </html>
