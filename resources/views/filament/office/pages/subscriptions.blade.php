@@ -1,9 +1,8 @@
-<x-filament-panels::page :widgets="[]">
-    <div class="space-y-6">
-        @php
-            $currentSubscription = $this->getCurrentSubscription();
-            $plans = $this->getPlans();
-        @endphp
+<div class="space-y-6">
+    @php
+        $currentSubscription = $this->getCurrentSubscription();
+        $plans = $this->getPlans();
+    @endphp
 
         @if($currentSubscription)
             <x-filament::section>
@@ -99,5 +98,4 @@
                 @endforeach
             </div>
         </x-filament::section>
-    </div>
-</x-filament-panels::page>
+</div>
