@@ -109,7 +109,7 @@
         padding: 40px;
         width: 100%;
         max-width: 600px;
-        margin: 85px auto;
+        margin: 0px auto;
         margin-top: 90px;
         margin-bottom: 90px;
     }
