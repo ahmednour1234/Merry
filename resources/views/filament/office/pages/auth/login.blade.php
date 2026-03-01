@@ -16,7 +16,7 @@
                             <a href="{{ \Filament\Facades\Filament::getPanel('office')->getUrl() }}/auth/forgot-password" class="text-primary-600 hover:text-primary-700">
                                 نسيت كلمة المرور؟
                             </a>
-                            <a href="{{ \Filament\Facades\Filament::getPanel('office')->getRegistrationUrl() }}" class="text-primary-600 hover:text-primary-700">
+                            <a href="{{ \Filament\Facades\Filament::getPanel('office')->getUrl() }}/auth/register" class="text-primary-600 hover:text-primary-700">
                                 إنشاء حساب جديد
                             </a>
                         </div>
