@@ -130,7 +130,8 @@ class VerifyOtp extends Page implements HasForms
             ->success()
             ->send();
 
-        $this->redirect(\App\Filament\Office\Pages\Subscriptions::getUrl());
+        $panel = \Filament\Facades\Filament::getPanel('office');
+        $this->redirect($panel->getUrl() . '/subscriptions');
     }
 
     protected function sendOtp(Office $office): void
