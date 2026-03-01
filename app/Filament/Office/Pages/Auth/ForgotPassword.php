@@ -80,4 +80,9 @@ class ForgotPassword extends Page implements HasForms
 
         $this->redirect(\App\Filament\Office\Pages\Auth\ResetPassword::getUrl(['email' => $email]));
     }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
 }

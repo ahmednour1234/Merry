@@ -117,4 +117,9 @@ class ResetPassword extends Page implements HasForms
 
         $this->redirect(Filament::getPanel('office')->getLoginUrl());
     }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
 }

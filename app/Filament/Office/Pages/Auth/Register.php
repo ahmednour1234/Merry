@@ -131,4 +131,9 @@ class Register extends Page implements HasForms
     {
         return 'إنشاء حساب جديد';
     }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
 }
