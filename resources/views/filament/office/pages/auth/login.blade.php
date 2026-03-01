@@ -163,7 +163,7 @@
 
     .auth-container{
         width:100%;
-        max-width: 420px;
+        max-width: 520px;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -196,7 +196,7 @@
 
     /* ✅ HERE: padding for the content inside the card */
     .auth-card-inner{
-        padding: 48px 38px 36px;
+        padding: 64px 56px 48px;
         text-align: center;
         position: relative;
     }
