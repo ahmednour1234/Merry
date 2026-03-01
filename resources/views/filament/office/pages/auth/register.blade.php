@@ -124,6 +124,11 @@
 
 @push('styles')
 <style>
+    html, body {
+        overflow-y: hidden;
+        height: 100%;
+        direction: rtl;
+    }
     .auth-card {
         background: white;
         border-radius: 12px;
