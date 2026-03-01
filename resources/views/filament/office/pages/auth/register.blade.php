@@ -38,16 +38,6 @@
                 @error('city_id') <span class="error-message">{{ $message }}</span> @enderror
             </div>
 
-            <div class="form-group">
-                <label class="form-label">العنوان</label>
-                <textarea
-                    wire:model="address"
-                    class="form-textarea"
-                    rows="3"
-                    maxlength="255"
-                ></textarea>
-                @error('address') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
 
             <div class="form-group">
                 <label class="form-label">رقم الجوال</label>
