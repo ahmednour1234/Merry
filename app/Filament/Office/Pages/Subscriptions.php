@@ -50,9 +50,9 @@ class Subscriptions extends Page
 
         return $plans->getCollection()->map(function (Plan $plan) use ($svc, $currentSubscription) {
             $priced = $svc->priced($plan->code, $this->couponCode);
-            
-            $planName = $plan->translations->where('lang_code', 'ar')->first()?->name 
-                ?? $plan->translations->first()?->name 
+
+            $planName = $plan->translations->where('lang_code', 'ar')->first()?->name
+                ?? $plan->translations->first()?->name
                 ?? $plan->name;
 
             $isCurrent = $currentSubscription && $currentSubscription->plan_code === $plan->code;
@@ -60,8 +60,8 @@ class Subscriptions extends Page
             return [
                 'code' => $plan->code,
                 'name' => $planName,
-                'description' => $plan->translations->where('lang_code', 'ar')->first()?->description 
-                    ?? $plan->translations->first()?->description 
+                'description' => $plan->translations->where('lang_code', 'ar')->first()?->description
+                    ?? $plan->translations->first()?->description
                     ?? $plan->description,
                 'base_price' => $plan->base_price,
                 'final_price' => $priced['price'] ?? $plan->base_price,
@@ -165,5 +165,11 @@ class Subscriptions extends Page
     public function getWidgets(): array
     {
         return [];
+    }
+
+    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
+    {
+        $panel = $panel ?? \Filament\Facades\Filament::getPanel('office');
+        return $panel->getUrl() . '/subscriptions';
     }
 }
