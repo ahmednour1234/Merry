@@ -25,8 +25,8 @@ class OfficePanelProvider extends PanelProvider
         return $panel
             ->id('office')
             ->path('office')
-            ->login(\App\Filament\Office\Pages\Auth\Login::class)
-            ->registration(\App\Filament\Office\Pages\Auth\Register::class)
+            ->login()
+            ->registration()
             ->brandName('تطبيق ميري - المكتب')
             ->colors([
                 'primary' => Color::hex('#054F31'),
@@ -35,6 +35,7 @@ class OfficePanelProvider extends PanelProvider
                 'danger' => Color::hex('#ef4444'),
             ])
             ->font('Cairo')
+            ->rtl()
             ->renderHook(
                 'panels::head.start',
                 fn () => view('filament.rtl-styles')
