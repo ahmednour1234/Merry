@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 class NotificationsPage extends Page
 {
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bell';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bell-alert';
 
     protected string $view = 'filament.pages.notifications';
 
