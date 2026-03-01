@@ -4,7 +4,6 @@ namespace App\Filament\Office\Pages\Auth;
 
 use App\Models\City;
 use App\Models\Office;
-use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -147,22 +146,4 @@ class Register extends Page implements HasForms
         ];
     }
 
-    protected function getFormActions(): array
-    {
-        return [
-            Action::make('register')
-                ->label('إنشاء حساب')
-                ->submit('register'),
-        ];
-    }
-
-    public function getCachedFormActions(): array
-    {
-        return $this->getFormActions();
-    }
-
-    public function hasFullWidthFormActions(): bool
-    {
-        return true;
-    }
 }

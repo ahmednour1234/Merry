@@ -2,10 +2,12 @@
     <x-filament-panels::form wire:submit="authenticate">
         {{ $this->form }}
 
-        <x-filament-panels::form.actions
-            :actions="$this->getCachedFormActions()"
-            :full-width="$this->hasFullWidthFormActions()"
-        />
+        <x-filament::button
+            type="submit"
+            class="w-full"
+        >
+            تسجيل الدخول
+        </x-filament::button>
     </x-filament-panels::form>
 
     <x-slot name="subheading">
