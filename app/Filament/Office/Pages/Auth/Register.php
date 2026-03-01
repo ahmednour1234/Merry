@@ -12,6 +12,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class Register extends Page implements HasForms
     public function mount(): void
     {
         if (Auth::guard('office-panel')->check()) {
-            redirect()->intended(route('filament.office.pages.dashboard'));
+            redirect()->intended(Filament::getPanel('office')->getUrl());
         }
 
         $this->form->fill();
@@ -117,7 +118,7 @@ class Register extends Page implements HasForms
             ->success()
             ->send();
 
-        $this->redirect(Login::getUrl());
+        $this->redirect(Filament::getPanel('office')->getLoginUrl());
     }
 
     public function getTitle(): string | Htmlable

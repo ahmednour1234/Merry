@@ -13,7 +13,7 @@
                         </x-filament::button>
 
                         <div class="text-center">
-                            <a href="{{ \App\Filament\Office\Pages\Auth\Login::getUrl() }}" class="text-sm text-primary-600 hover:text-primary-700">
+                            <a href="{{ \Filament\Facades\Filament::getPanel('office')->getLoginUrl() }}" class="text-sm text-primary-600 hover:text-primary-700">
                                 العودة لتسجيل الدخول
                             </a>
                         </div>

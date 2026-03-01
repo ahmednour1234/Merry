@@ -7,6 +7,7 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
@@ -97,6 +98,6 @@ class Login extends Page implements HasForms
 
     protected function getRedirectUrl(): string
     {
-        return route('filament.office.pages.dashboard');
+        return Filament::getPanel('office')->getUrl();
     }
 }

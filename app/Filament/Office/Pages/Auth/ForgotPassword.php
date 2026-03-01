@@ -6,6 +6,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OfficeResetCodeMail;
@@ -77,6 +78,6 @@ class ForgotPassword extends Page implements HasForms
             ->success()
             ->send();
 
-        $this->redirect(ResetPassword::getUrl(['email' => $email]));
+        $this->redirect(\App\Filament\Office\Pages\Auth\ResetPassword::getUrl(['email' => $email]));
     }
 }

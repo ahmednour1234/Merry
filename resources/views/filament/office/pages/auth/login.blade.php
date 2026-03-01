@@ -13,10 +13,10 @@
                         </x-filament::button>
 
                         <div class="flex items-center justify-between text-sm">
-                            <a href="{{ \App\Filament\Office\Pages\Auth\ForgotPassword::getUrl() }}" class="text-primary-600 hover:text-primary-700">
+                            <a href="{{ \Filament\Facades\Filament::getPanel('office')->getUrl() }}/auth/forgot-password" class="text-primary-600 hover:text-primary-700">
                                 نسيت كلمة المرور؟
                             </a>
-                            <a href="{{ \App\Filament\Office\Pages\Auth\Register::getUrl() }}" class="text-primary-600 hover:text-primary-700">
+                            <a href="{{ \Filament\Facades\Filament::getPanel('office')->getRegistrationUrl() }}" class="text-primary-600 hover:text-primary-700">
                                 إنشاء حساب جديد
                             </a>
                         </div>

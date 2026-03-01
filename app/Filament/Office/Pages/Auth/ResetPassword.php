@@ -6,6 +6,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -114,6 +115,6 @@ class ResetPassword extends Page implements HasForms
             ->success()
             ->send();
 
-        $this->redirect(Login::getUrl());
+        $this->redirect(Filament::getPanel('office')->getLoginUrl());
     }
 }
