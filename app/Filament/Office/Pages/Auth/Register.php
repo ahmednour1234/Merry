@@ -29,6 +29,12 @@ class Register extends Page implements HasForms
 
     protected string $view = 'filament.office.pages.auth.register';
 
+    public static function getRouteName(?string $panel = null): string
+    {
+        $panel = $panel ?? \Filament\Facades\Filament::getCurrentPanel()?->getId() ?? 'office';
+        return "filament.{$panel}.auth.register";
+    }
+
     public ?array $data = [];
 
     public function mount(): void
