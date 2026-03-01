@@ -1,13 +1,12 @@
 <div>
     <div class="auth-container">
         <div class="auth-header">
-            <h1 class="app-name">تطبيق ميري</h1>
-            <p class="app-subtitle">للعمالة المنزلية</p>
+
         </div>
 
         <div class="auth-card">
-            <h2 class="auth-title">تسجيل الدخول</h2>
-
+            <h1 class="app-name">تطبيق ميري</h1>
+            <p class="app-subtitle">للعمالة المنزلية</p>
             <form wire:submit="authenticate">
                 <div class="form-group">
                     <label class="form-label required">عنوان البريد الالكتروني</label>
