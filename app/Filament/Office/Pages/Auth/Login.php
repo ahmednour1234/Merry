@@ -4,54 +4,39 @@ namespace App\Filament\Office\Pages\Auth;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
-use Filament\Schemas\Schema;
+use Filament\Pages\Auth\Login as BaseLogin;
 use Filament\Facades\Filament;
-use Filament\Pages\Page;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Filament\Notifications\Notification;
 
-class Login extends Page implements HasForms
+class Login extends BaseLogin
 {
-    use InteractsWithForms;
-
-
-    protected static bool $shouldRegisterNavigation = false;
 
     public ?array $data = [];
 
-    public function mount(): void
+    protected function getForms(): array
     {
-        if (Auth::guard('office-panel')->check()) {
-            redirect()->intended($this->getRedirectUrl());
-        }
-
-        $this->form->fill();
-    }
-
-    public function form(Schema $form): Schema
-    {
-        return $form
-            ->schema([
-                TextInput::make('email')
-                    ->label('البريد الإلكتروني')
-                    ->email()
-                    ->required()
-                    ->autocomplete()
-                    ->autofocus(),
-                TextInput::make('password')
-                    ->label('كلمة المرور')
-                    ->password()
-                    ->required(),
-                Checkbox::make('remember')
-                    ->label('تذكرني')
-                    ->default(false),
-            ])
-            ->statePath('data');
+        return [
+            'form' => $this->form(
+                $this->makeForm()
+                    ->schema([
+                        TextInput::make('email')
+                            ->label('البريد الإلكتروني')
+                            ->email()
+                            ->required()
+                            ->autocomplete()
+                            ->autofocus(),
+                        TextInput::make('password')
+                            ->label('كلمة المرور')
+                            ->password()
+                            ->required(),
+                        Checkbox::make('remember')
+                            ->label('تذكرني'),
+                    ])
+                    ->statePath('data'),
+            ),
+        ];
     }
 
     public function authenticate(): void
@@ -86,16 +71,6 @@ class Login extends Page implements HasForms
         $this->redirect($this->getRedirectUrl());
     }
 
-    public function getTitle(): string | Htmlable
-    {
-        return 'تسجيل الدخول';
-    }
-
-    public function getHeading(): string | Htmlable
-    {
-        return 'تسجيل الدخول';
-    }
-
     protected function getRedirectUrl(): string
     {
         $office = Auth::guard('office-panel')->user();
@@ -111,10 +86,5 @@ class Login extends Page implements HasForms
         }
         
         return \App\Filament\Office\Pages\Subscriptions::getUrl();
-    }
-
-    public function hasLogo(): bool
-    {
-        return false;
     }
 }
