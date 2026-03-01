@@ -71,6 +71,10 @@
 
 @push('styles')
 <style>
+    html, body {
+        overflow-y: hidden;
+        height: 100%;
+    }
     .auth-card {
         background: white;
         border-radius: 12px;
