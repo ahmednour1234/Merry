@@ -8,7 +8,6 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Schemas\Schema;
 use Filament\Pages\Page;
-use Filament\Panel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -19,13 +18,6 @@ class Login extends Page implements HasForms
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $slug = 'login';
-
-    public static function getRouteName(?Panel $panel = null): string
-    {
-        $panel = $panel ?? \Filament\Facades\Filament::getCurrentPanel();
-        $panelId = $panel?->getId() ?? 'office';
-        return "filament.{$panelId}.auth.login";
-    }
 
     protected string $view = 'filament.office.pages.auth.login';
 

@@ -11,7 +11,7 @@
 
         <div class="mt-4 text-center">
             <a
-                href="{{ \Filament\Facades\Filament::getPanel('office')->getRegistrationUrl() }}"
+                href="{{ \App\Filament\Office\Pages\Auth\Register::getUrl() }}"
                 class="text-sm text-primary-600 hover:text-primary-700"
             >
                 ليس لديك حساب؟ إنشاء حساب جديد

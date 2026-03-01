@@ -11,7 +11,7 @@
 
         <div class="mt-4 text-center">
             <a
-                href="{{ \Filament\Facades\Filament::getPanel('office')->getLoginUrl() }}"
+                href="{{ \App\Filament\Office\Pages\Auth\Login::getUrl() }}"
                 class="text-sm text-primary-600 hover:text-primary-700"
             >
                 لديك حساب بالفعل؟ تسجيل الدخول
