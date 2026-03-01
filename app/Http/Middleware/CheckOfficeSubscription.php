@@ -32,7 +32,8 @@ class CheckOfficeSubscription
                 ->exists();
             
             if (!$hasActiveSubscription) {
-                return redirect()->to(\App\Filament\Office\Pages\Subscriptions::getUrl());
+                $panel = Filament::getPanel('office');
+                return redirect()->to($panel->getUrl() . '/subscriptions');
             }
         }
 
