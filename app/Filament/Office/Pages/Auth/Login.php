@@ -19,6 +19,12 @@ class Login extends Page
     public $email = '';
     public $password = '';
     public $remember = false;
+    public $showPassword = false;
+
+    public function togglePassword()
+    {
+        $this->showPassword = !$this->showPassword;
+    }
 
     public function mount(): void
     {
