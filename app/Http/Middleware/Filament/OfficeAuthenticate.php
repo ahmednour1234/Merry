@@ -14,10 +14,11 @@ class OfficeAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $panel = Filament::getPanel('office');
-
         if (!auth()->guard('office-panel')->check()) {
-            return redirect()->to($panel->getLoginUrl());
+            // Construct the login URL manually to avoid route name issues
+            $panel = Filament::getPanel('office');
+            $loginUrl = url($panel->getPath() . '/login');
+            return redirect()->to($loginUrl);
         }
 
         return $next($request);
