@@ -20,7 +20,7 @@ class VerifyOtp extends Page implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static string $view = 'filament.office.pages.auth.verify-otp';
+    protected string $view = 'filament.office.pages.auth.verify-otp';
 
     public ?array $data = [];
 
