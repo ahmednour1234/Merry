@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Filament\Notifications\Concerns\HasDatabaseNotifications;
-use Filament\Notifications\Contracts\HasNotifications;
+use Illuminate\Notifications\Notifiable;
 
-class Office extends Authenticatable implements HasNotifications
+class Office extends Authenticatable
 {
-    use HasApiTokens, SoftDeletes, HasDatabaseNotifications;
+    use HasApiTokens, SoftDeletes, Notifiable;
 
     protected $connection = 'system';
     protected $table = 'offices';
