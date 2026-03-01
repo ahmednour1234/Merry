@@ -74,6 +74,7 @@
     html, body {
         overflow-y: hidden;
         height: 100%;
+        direction: rtl;
     }
     .auth-card {
         background: white;
