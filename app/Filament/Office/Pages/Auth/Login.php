@@ -44,18 +44,18 @@ class Login extends Page
             'password.required' => 'كلمة المرور مطلوبة',
         ]);
 
-        if (!Auth::guard('office-panel')->attempt([
-            'email' => $this->email,
-            'password' => $this->password,
-        ], $this->remember)) {
+        $office = \App\Models\Office::on('system')->where('email', $this->email)->first();
+
+        if (!$office || !\Illuminate\Support\Facades\Hash::check($this->password, $office->password)) {
             throw ValidationException::withMessages([
                 'email' => 'بيانات الدخول غير صحيحة',
             ]);
         }
 
+        session()->put('login_office_id', $office->id);
         session()->regenerate();
 
-        redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
+        redirect()->to(LoginOtp::getUrl());
     }
 
 }

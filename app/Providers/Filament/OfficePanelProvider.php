@@ -52,6 +52,9 @@ class OfficePanelProvider extends PanelProvider
                 \App\Filament\Office\Pages\Auth\Login::class,
                 \App\Filament\Office\Pages\Auth\Register::class,
                 \App\Filament\Office\Pages\Auth\VerifyOtp::class,
+                \App\Filament\Office\Pages\Auth\ForgetPassword::class,
+                \App\Filament\Office\Pages\Auth\ResetPassword::class,
+                \App\Filament\Office\Pages\Auth\LoginOtp::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Office/Widgets'), for: 'App\\Filament\\Office\\Widgets')
             ->middleware([

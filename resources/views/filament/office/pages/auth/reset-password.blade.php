@@ -1,8 +1,11 @@
 <div>
     <div class="auth-card">
-        <h1 class="auth-title">تسجيل الدخول</h1>
+        <div class="auth-header">
+            <h1 class="app-name">نظام ميري للاستقدام</h1>
+            <h2 class="auth-title">إعادة تعيين كلمة المرور</h2>
+        </div>
 
-        <form wire:submit="authenticate">
+        <form wire:submit="reset">
             <div class="form-group">
                 <label class="form-label required">عنوان البريد الإلكتروني</label>
                 <input
@@ -17,14 +20,27 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label required">كلمة المرور</label>
+                <label class="form-label required">رمز التحقق</label>
+                <input
+                    type="text"
+                    wire:model="code"
+                    class="form-input"
+                    required
+                    maxlength="6"
+                    placeholder="000000"
+                >
+                @error('code') <span class="error-message">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label required">كلمة المرور الجديدة</label>
                 <div class="password-input-wrapper">
                     <input
                         type="{{ $showPassword ? 'text' : 'password' }}"
                         wire:model="password"
                         class="form-input"
                         required
-                        autocomplete="current-password"
+                        minlength="6"
                     >
                     <button
                         type="button"
@@ -48,22 +64,25 @@
                 @error('password') <span class="error-message">{{ $message }}</span> @enderror
             </div>
 
-            <div class="form-options">
-                <label class="remember-wrap" for="remember">
-                    <input type="checkbox" wire:model="remember" id="remember">
-                    <span>تذكرني</span>
-                </label>
-                <a href="{{ \App\Filament\Office\Pages\Auth\ForgetPassword::getUrl() }}" class="forgot-password-link">نسيت كلمة المرور ؟</a>
+            <div class="form-group">
+                <label class="form-label required">تأكيد كلمة المرور</label>
+                <input
+                    type="{{ $showPassword ? 'text' : 'password' }}"
+                    wire:model="password_confirmation"
+                    class="form-input"
+                    required
+                >
+                @error('password_confirmation') <span class="error-message">{{ $message }}</span> @enderror
             </div>
 
             <button type="submit" class="btn-submit">
-                تسجيل الدخول
+                إعادة تعيين كلمة المرور
             </button>
         </form>
 
         <div class="auth-link">
-            <a href="{{ \App\Filament\Office\Pages\Auth\Register::getUrl() }}">
-                ليس لديك حساب؟ إنشاء حساب جديد
+            <a href="{{ \App\Filament\Office\Pages\Auth\Login::getUrl() }}">
+                تذكرت كلمة المرور؟ تسجيل الدخول
             </a>
         </div>
     </div>
@@ -72,7 +91,6 @@
 @push('styles')
 <style>
     html, body {
-        overflow-y: hidden;
         height: 100%;
         direction: rtl;
     }
@@ -83,21 +101,31 @@
         padding: 40px;
         width: 100%;
         max-width: 600px;
-        margin: 90px auto;
+        margin: 85px auto;
+    }
+    .auth-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .app-name {
+        font-size: 28px;
+        font-weight: 800;
+        color: #054F31;
+        margin: 0 0 8px 0;
     }
     .auth-title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #054F31;
+        font-size: 20px;
+        font-weight: 600;
+        color: #666;
         text-align: center;
-        margin-bottom: 30px;
+        margin: 0 0 20px 0;
     }
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 12px;
     }
     .form-label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         font-weight: 600;
         color: #333;
         font-size: 14px;
@@ -146,37 +174,6 @@
         padding-right: 50px;
         padding-left: 16px;
     }
-    .form-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        flex-direction: row-reverse;
-        gap: 15px;
-    }
-    .remember-wrap {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        color: #333;
-        cursor: pointer;
-    }
-    .remember-wrap input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-        accent-color: #054F31;
-    }
-    .forgot-password-link {
-        color: #054F31;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-    }
-    .forgot-password-link:hover {
-        text-decoration: underline;
-    }
     .btn-submit {
         width: 100%;
         padding: 14px;
@@ -188,15 +185,15 @@
         font-weight: 600;
         cursor: pointer;
         transition: background 0.3s;
-        margin-top: 10px;
+        margin-top: 8px;
     }
     .btn-submit:hover {
         background: #043a25;
     }
     .auth-link {
         text-align: center;
-        margin-top: 20px;
-        padding-top: 20px;
+        margin-top: 15px;
+        padding-top: 15px;
         border-top: 1px solid #eee;
     }
     .auth-link a {
