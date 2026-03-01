@@ -26,7 +26,7 @@ class OfficePanelProvider extends PanelProvider
             ->id('office')
             ->path('office')
             ->login()
-            ->registration()
+            ->registration(\App\Filament\Office\Pages\Auth\Register::class)
             ->brandName('تطبيق ميري - المكتب')
             ->colors([
                 'primary' => Color::hex('#054F31'),
