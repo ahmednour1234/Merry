@@ -340,5 +340,52 @@
         .app-name{ font-size: 28px; }
         .app-subtitle{ font-size: 14px; }
     }
+    /* ✅ خلي الكارد أنحف */
+.auth-container{
+    width: 100%;
+    max-width: 460px; /* كان 760 - خليناه أنحف */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.auth-card{
+    width: 100%;
+    max-width: 460px; /* تأكيد */
+    padding: 42px 34px 32px; /* أقل شوية */
+    border-radius: 18px;
+}
+
+/* ✅ صغّر شوية الـ inputs والزر عشان الشكل يبقى متوازن */
+.form-input{
+    height: 44px;
+    font-size: 13.5px;
+    padding: 0 14px;
+    border-radius: 10px;
+}
+
+.password-input-wrapper .form-input{
+    padding-left: 48px; /* مساحة للأيقونة */
+}
+
+.btn-submit{
+    height: 48px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+/* ✅ مسافات أقل زي الصورة */
+.form-group{ margin-bottom: 18px; }
+.auth-link{ margin-top: 18px; padding-top: 14px; }
+
+/* ✅ موبايل */
+@media (max-width: 640px){
+    .auth-container, .auth-card{
+        max-width: 380px;
+    }
+    .auth-card{
+        padding: 34px 18px 24px;
+    }
+}
 </style>
 @endpush
