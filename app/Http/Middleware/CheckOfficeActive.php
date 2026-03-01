@@ -12,10 +12,19 @@ class CheckOfficeActive
 {
     public function handle(Request $request, Closure $next): Response
     {
+        $panel = Filament::getPanel('office');
+        $path = $request->path();
+        
+        if (str_starts_with($path, $panel->getPath() . '/login') ||
+            str_starts_with($path, $panel->getPath() . '/register') ||
+            str_starts_with($path, $panel->getPath() . '/password')) {
+            return $next($request);
+        }
+
         $office = Auth::guard('office-panel')->user();
 
         if (!$office) {
-            return redirect()->to(Filament::getPanel('office')->getLoginUrl());
+            return redirect()->to($panel->getLoginUrl());
         }
 
         if ($office->blocked) {
