@@ -8,6 +8,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Hash;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class VerifyOtp extends Page implements HasForms
     public function mount(): void
     {
         if (!session()->has('office_registration_id')) {
-            $this->redirect(Register::getUrl());
+            $this->redirect(Filament::getPanel('office')->getRegistrationUrl());
             return;
         }
 
@@ -61,7 +62,7 @@ class VerifyOtp extends Page implements HasForms
                 ->title('جلسة غير صالحة')
                 ->danger()
                 ->send();
-            $this->redirect(Register::getUrl());
+            $this->redirect(Filament::getPanel('office')->getRegistrationUrl());
             return;
         }
 
@@ -71,7 +72,7 @@ class VerifyOtp extends Page implements HasForms
                 ->title('المكتب غير موجود')
                 ->danger()
                 ->send();
-            $this->redirect(Register::getUrl());
+            $this->redirect(Filament::getPanel('office')->getRegistrationUrl());
             return;
         }
 
