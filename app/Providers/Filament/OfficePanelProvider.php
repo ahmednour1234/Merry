@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
@@ -68,7 +67,7 @@ class OfficePanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
+                \App\Http\Middleware\Filament\OfficeAuthenticate::class,
                 \App\Http\Middleware\CheckOfficeActive::class,
             ])
             ->authGuard('office-panel')
