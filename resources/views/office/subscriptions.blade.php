@@ -744,6 +744,152 @@
             max-height: 500px;
         }
 
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .floating-buttons.left {
+            left: 30px;
+        }
+
+        .floating-buttons.right {
+            right: 30px;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        .floating-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .floating-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+        }
+
+        .floating-btn:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .floating-btn-email {
+            background: linear-gradient(135deg, #ea4335 0%, #c5221f 100%);
+            color: white;
+        }
+
+        .floating-btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+        }
+
+        .floating-btn-tooltip {
+            position: absolute;
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .floating-btn-email .floating-btn-tooltip {
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .floating-btn-email .floating-btn-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-right-color: #1e293b;
+        }
+
+        .floating-btn-whatsapp .floating-btn-tooltip {
+            left: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .floating-btn-whatsapp .floating-btn-tooltip::after {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: #1e293b;
+        }
+
+        .floating-btn:hover .floating-btn-tooltip {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .floating-buttons {
+                bottom: 20px;
+            }
+
+            .floating-buttons.left {
+                left: 15px;
+            }
+
+            .floating-buttons.right {
+                right: 15px;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .floating-btn-tooltip {
+                display: none;
+            }
+        }
+
         @media (max-width: 1024px) {
             .plans-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1037,6 +1183,20 @@
                 <div class="faq-answer">يمكنك التواصل مع فريق الدعم الفني على مدار 24 ساعة من خلال البريد الإلكتروني أو الهاتف. نحن هنا لمساعدتك دائماً.</div>
             </div>
         </div>
+    </div>
+
+    <div class="floating-buttons left">
+        <a href="mailto:support@mery.com" class="floating-btn floating-btn-email" aria-label="البريد الإلكتروني">
+            <span>✉️</span>
+            <span class="floating-btn-tooltip">راسلنا عبر البريد</span>
+        </a>
+    </div>
+
+    <div class="floating-buttons right">
+        <a href="https://wa.me/966500000000" target="_blank" class="floating-btn floating-btn-whatsapp" aria-label="واتساب">
+            <span>💬</span>
+            <span class="floating-btn-tooltip">تواصل معنا عبر واتساب</span>
+        </a>
     </div>
 
     <script>
