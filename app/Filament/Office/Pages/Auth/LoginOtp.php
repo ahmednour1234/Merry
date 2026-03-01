@@ -175,8 +175,8 @@ class LoginOtp extends Page
         Mail::to($office->email)->send(new OfficeResetCodeMail($code));
     }
 
-    public static function getUrl(): string
+    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
     {
-        return '/office/login-otp';
+        return parent::getUrl($parameters, $isAbsolute, $panel, $tenant);
     }
 }
