@@ -1,6 +1,9 @@
 <div>
     <div class="auth-card">
-        <h1 class="auth-title">إنشاء حساب جديد</h1>
+        <div class="auth-header">
+            <h1 class="app-name">نظام ميري للاستقدام</h1>
+            <h2 class="auth-title">إنشاء حساب جديد</h2>
+        </div>
 
         <form wire:submit="register" enctype="multipart/form-data">
             <div class="form-group">
@@ -128,19 +131,29 @@
         max-width: 600px;
         margin: 0 auto;
     }
-    .auth-title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #054F31;
+    .auth-header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
+    }
+    .app-name {
+        font-size: 28px;
+        font-weight: 800;
+        color: #054F31;
+        margin: 0 0 8px 0;
+    }
+    .auth-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #666;
+        text-align: center;
+        margin: 0 0 20px 0;
     }
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 12px;
     }
     .form-label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         font-weight: 600;
         color: #333;
         font-size: 14px;
@@ -170,7 +183,8 @@
     .form-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        gap: 12px;
+        margin-bottom: 12px;
     }
     @media (max-width: 640px) {
         .form-row {
@@ -188,15 +202,15 @@
         font-weight: 600;
         cursor: pointer;
         transition: background 0.3s;
-        margin-top: 10px;
+        margin-top: 8px;
     }
     .btn-submit:hover {
         background: #043a25;
     }
     .auth-link {
         text-align: center;
-        margin-top: 20px;
-        padding-top: 20px;
+        margin-top: 15px;
+        padding-top: 15px;
         border-top: 1px solid #eee;
     }
     .auth-link a {
