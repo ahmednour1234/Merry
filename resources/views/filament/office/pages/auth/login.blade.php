@@ -78,7 +78,7 @@
         padding: 40px;
         width: 100%;
         max-width: 600px;
-        margin: 0 auto;
+        margin: 90px auto;
     }
     .auth-title {
         font-size: 24px;
