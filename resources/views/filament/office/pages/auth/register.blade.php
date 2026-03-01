@@ -1,8 +1,4 @@
-@php
-    $panel = \Filament\Facades\Filament::getPanel('office');
-@endphp
-
-<x-filament-panels::page.simple>
+<div>
     <div class="auth-card">
         <h1 class="auth-title">إنشاء حساب جديد</h1>
 
@@ -124,7 +120,7 @@
             </a>
         </div>
     </div>
-</x-filament-panels::page.simple>
+</div>
 
 @push('styles')
 <style>
@@ -135,6 +131,7 @@
         padding: 40px;
         width: 100%;
         max-width: 600px;
+        margin: 0 auto;
     }
     .auth-title {
         font-size: 24px;

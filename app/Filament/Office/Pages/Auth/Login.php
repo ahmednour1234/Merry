@@ -14,6 +14,8 @@ class Login extends Page
 
     protected string $view = 'filament.office.pages.auth.login';
 
+    protected static string $layout = 'filament-panels::components.layout.base';
+
     public $email = '';
     public $password = '';
     public $remember = false;

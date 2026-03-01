@@ -21,6 +21,8 @@ class Register extends Page
 
     protected string $view = 'filament.office.pages.auth.register';
 
+    protected static string $layout = 'filament-panels::components.layout.base';
+
     public $name = '';
     public $commercial_reg_no = '';
     public $city_id = null;
