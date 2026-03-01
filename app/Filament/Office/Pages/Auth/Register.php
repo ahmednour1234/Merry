@@ -8,13 +8,35 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Auth\Register as BaseRegister;
+use Filament\Pages\Page;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
-class Register extends BaseRegister
+class Register extends Page implements HasForms
 {
+    use InteractsWithForms;
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?string $slug = 'register';
+
+    protected string $view = 'filament.office.pages.auth.register';
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        if (Auth::guard('office-panel')->check()) {
+            redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
+        }
+
+        $this->form->fill();
+    }
+
     public function form(Form $form): Form
     {
         return $form
@@ -71,11 +93,14 @@ class Register extends BaseRegister
                     ->maxSize(2048)
                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
                     ->nullable(),
-            ]);
+            ])
+            ->statePath('data');
     }
 
-    protected function handleRegistration(array $data): Office
+    public function register(): void
     {
+        $data = $this->form->getState();
+
         if (isset($data['image'])) {
             if (is_array($data['image']) && !empty($data['image'])) {
                 $data['image'] = $data['image'][0] ?? null;
@@ -97,7 +122,13 @@ class Register extends BaseRegister
 
         unset($data['password_confirmation']);
 
-        return Office::on('system')->create($data);
+        $office = Office::on('system')->create($data);
+
+        Auth::guard('office-panel')->login($office);
+
+        session()->regenerate();
+
+        redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
     }
 
     public function getFormValidationAttributes(): array
