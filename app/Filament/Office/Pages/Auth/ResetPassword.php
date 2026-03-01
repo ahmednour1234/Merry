@@ -15,7 +15,7 @@ class ResetPassword extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static string $view = 'filament.office.pages.auth.reset-password';
+    protected string $view = 'filament.office.pages.auth.reset-password';
 
     protected static bool $shouldRegisterNavigation = false;
 
