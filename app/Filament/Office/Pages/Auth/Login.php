@@ -34,7 +34,7 @@ class Login extends Page implements HasForms
         $this->form->fill();
     }
 
-    public function form(Schema $form): Form
+    public function form(Schema $form): Schema
     {
         return $form
             ->schema([
