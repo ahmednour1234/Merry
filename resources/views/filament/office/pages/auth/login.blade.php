@@ -5,95 +5,99 @@
         <div class="auth-container">
             <div class="auth-card">
 
-                {{-- Header --}}
-                <div class="auth-header">
-                    <h1 class="app-name">تطبيق ميري</h1>
-                    <p class="app-subtitle">للعمالة المنزلية</p>
-                </div>
+                {{-- ✅ Inner padding wrapper (controls padding of everything inside the card) --}}
+                <div class="auth-card-inner">
 
-                {{-- Title --}}
-                <h2 class="auth-title">تسجيل الدخول</h2>
-
-                <form wire:submit="authenticate" class="auth-form">
-                    {{-- Email --}}
-                    <div class="form-group">
-                        <label class="form-label required">عنوان البريد الإلكتروني</label>
-                        <input
-                            type="email"
-                            wire:model="email"
-                            class="form-input"
-                            required
-                            autofocus
-                            autocomplete="email"
-                            placeholder="admin@example.com"
-                        >
-                        @error('email') <span class="error-message">{{ $message }}</span> @enderror
+                    {{-- Header --}}
+                    <div class="auth-header">
+                        <h1 class="app-name">تطبيق ميري</h1>
+                        <p class="app-subtitle">للعمالة المنزلية</p>
                     </div>
 
-                    {{-- Password --}}
-                    <div class="form-group">
-                        <label class="form-label required">كلمة المرور</label>
+                    {{-- Title --}}
+                    <h2 class="auth-title">تسجيل الدخول</h2>
 
-                        <div class="password-input-wrapper">
+                    <form wire:submit="authenticate" class="auth-form">
+                        {{-- Email --}}
+                        <div class="form-group">
+                            <label class="form-label required">عنوان البريد الإلكتروني</label>
                             <input
-                                type="{{ $showPassword ? 'text' : 'password' }}"
-                                wire:model="password"
+                                type="email"
+                                wire:model="email"
                                 class="form-input"
                                 required
-                                autocomplete="current-password"
-                                placeholder="••••••••"
+                                autofocus
+                                autocomplete="email"
+                                placeholder="admin@example.com"
                             >
-
-                            {{-- Toggle (LEFT like screenshot) --}}
-                            <button
-                                type="button"
-                                wire:click="togglePassword"
-                                class="password-toggle"
-                                aria-label="Toggle password"
-                            >
-                                <svg wire:ignore xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                     stroke-linecap="round" stroke-linejoin="round">
-                                    @if($showPassword)
-                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    @else
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    @endif
-                                </svg>
-                            </button>
+                            @error('email') <span class="error-message">{{ $message }}</span> @enderror
                         </div>
 
-                        @error('password') <span class="error-message">{{ $message }}</span> @enderror
+                        {{-- Password --}}
+                        <div class="form-group">
+                            <label class="form-label required">كلمة المرور</label>
+
+                            <div class="password-input-wrapper">
+                                <input
+                                    type="{{ $showPassword ? 'text' : 'password' }}"
+                                    wire:model="password"
+                                    class="form-input"
+                                    required
+                                    autocomplete="current-password"
+                                    placeholder="••••••••"
+                                >
+
+                                {{-- Toggle (LEFT like screenshot) --}}
+                                <button
+                                    type="button"
+                                    wire:click="togglePassword"
+                                    class="password-toggle"
+                                    aria-label="Toggle password"
+                                >
+                                    <svg wire:ignore xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        @if($showPassword)
+                                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        @else
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        @endif
+                                    </svg>
+                                </button>
+                            </div>
+
+                            @error('password') <span class="error-message">{{ $message }}</span> @enderror
+                        </div>
+
+                        {{-- Options row (Remember LEFT, Forgot RIGHT) --}}
+                        <div class="form-options">
+                            <label class="remember-wrap" for="remember">
+                                <input type="checkbox" wire:model="remember" id="remember">
+                                <span>تذكرني</span>
+                            </label>
+
+                            <a href="#" class="forgot-password-link">نسيت كلمة المرور ؟</a>
+                        </div>
+
+                        {{-- Submit --}}
+                        <button type="submit" class="btn-submit">
+                            تسجيل الدخول
+                        </button>
+                    </form>
+
+                    {{-- Divider --}}
+                    <div class="divider"></div>
+
+                    {{-- Register link --}}
+                    <div class="auth-link">
+                        <a href="{{ \App\Filament\Office\Pages\Auth\Register::getUrl() }}">
+                            ليس لديك حساب؟ إنشاء حساب جديد
+                        </a>
                     </div>
 
-                    {{-- Options row (Remember LEFT, Forgot RIGHT like screenshot) --}}
-                    <div class="form-options">
-                        <label class="remember-wrap" for="remember">
-                            <input type="checkbox" wire:model="remember" id="remember">
-                            <span>تذكرني</span>
-                        </label>
-
-                        <a href="#" class="forgot-password-link">نسيت كلمة المرور ؟</a>
-                    </div>
-
-                    {{-- Submit --}}
-                    <button type="submit" class="btn-submit">
-                        تسجيل الدخول
-                    </button>
-                </form>
-
-                {{-- Divider --}}
-                <div class="divider"></div>
-
-                {{-- Register link --}}
-                <div class="auth-link">
-                    <a href="{{ \App\Filament\Office\Pages\Auth\Register::getUrl() }}">
-                        ليس لديك حساب؟ إنشاء حساب جديد
-                    </a>
-                </div>
-
+                </div>{{-- /auth-card-inner --}}
             </div>
         </div>
     </div>
@@ -108,7 +112,7 @@
         --card: #ffffff;
         --muted: #6b7280;
         --border: #d3dbe0;
-        --field-bg: #eaf2ff;   /* ✅ نفس اللون الأزرق الفاتح */
+        --field-bg: #eaf2ff;
         --danger: #ef4444;
         --focus: rgba(5, 79, 49, 0.16);
     }
@@ -133,7 +137,6 @@
         justify-content:center;
     }
 
-    /* ✅ Card أنحف زي الصورة */
     .auth-container{
         width:100%;
         max-width: 420px;
@@ -142,12 +145,19 @@
         justify-content:center;
     }
 
+    /* ✅ Card itself (outer shell) */
     .auth-card{
         width:100%;
         background: var(--card);
         border-radius: 18px;
         box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-        padding: 44px 34px 30px;
+        padding: 0; /* ✅ مهم: padding بقى جوّا inner */
+        overflow: hidden;
+    }
+
+    /* ✅ HERE: padding for the content inside the card */
+    .auth-card-inner{
+        padding: 46px 34px 34px; /* غير الأرقام دي براحتك */
         text-align: center;
     }
 
@@ -183,7 +193,7 @@
 
     .auth-form{
         margin-top: 6px;
-        text-align: right; /* labels right */
+        text-align: right;
     }
 
     .form-group{
@@ -204,7 +214,6 @@
         font-weight: 900;
     }
 
-    /* ✅ Inputs أصغر + لون أزرق فاتح + نص بالوسط زي الصورة */
     .form-input{
         width: 100%;
         height: 52px;
@@ -217,7 +226,7 @@
         transition: .2s ease;
         font-family: 'Cairo', sans-serif;
         direction: rtl;
-        text-align: center; /* ✅ زي الصورة */
+        text-align: center;
         color: #111827;
     }
 
@@ -231,7 +240,6 @@
         position: relative;
     }
 
-    /* ✅ أيقونة العين على الشمال داخل الحقل */
     .password-toggle{
         position:absolute;
         left: 14px;
@@ -248,24 +256,17 @@
         opacity: .95;
     }
 
-    .password-toggle:hover{
-        opacity: 1;
-    }
-
-    /* مساحة للأيقونة */
     .password-input-wrapper .form-input{
         padding-left: 52px;
         padding-right: 16px;
     }
 
-    /* ✅ Row: checkbox LEFT, forgot RIGHT */
     .form-options{
         margin-top: 6px;
         display:flex;
         align-items:center;
         justify-content:space-between;
         gap: 14px;
-        text-align: right;
     }
 
     .remember-wrap{
@@ -298,7 +299,6 @@
         text-decoration: underline;
     }
 
-    /* ✅ زر بحواف دائرية كبير زي الصورة */
     .btn-submit{
         margin-top: 18px;
         width: 100%;
@@ -352,7 +352,7 @@
     @media (max-width: 480px){
         body{ padding: 14px; }
         .auth-container{ max-width: 360px; }
-        .auth-card{ padding: 34px 18px 24px; }
+        .auth-card-inner{ padding: 34px 18px 24px; }
         .app-name{ font-size: 34px; }
     }
 </style>
