@@ -105,110 +105,138 @@
 
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-bottom: 40px;
         }
 
         .plan-card {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px 30px;
+            transition: all 0.3s ease;
             position: relative;
             border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            min-height: 550px;
         }
 
         .plan-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(5, 79, 49, 0.2);
         }
 
         .plan-card.current {
             border-color: #054F31;
             background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            box-shadow: 0 15px 40px rgba(5, 79, 49, 0.25);
         }
 
         .plan-badge {
             position: absolute;
             top: 20px;
             left: 20px;
-            background: #054F31;
+            background: linear-gradient(135deg, #054F31 0%, #10b981 100%);
             color: white;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
+            box-shadow: 0 4px 10px rgba(5, 79, 49, 0.3);
         }
 
         .plan-name {
-            font-size: 24px;
-            font-weight: 800;
+            font-size: 26px;
+            font-weight: 900;
             color: #054F31;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            text-align: center;
         }
 
         .plan-description {
             color: #64748b;
-            margin-bottom: 20px;
-            font-size: 14px;
+            margin-bottom: 30px;
+            font-size: 15px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .plan-price-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px 0;
+            border-top: 2px solid #e2e8f0;
+            border-bottom: 2px solid #e2e8f0;
         }
 
         .plan-price {
-            font-size: 36px;
+            font-size: 48px;
             font-weight: 900;
-            color: #1e293b;
-            margin-bottom: 5px;
+            color: #054F31;
+            margin-bottom: 8px;
+            line-height: 1;
         }
 
         .plan-currency {
-            font-size: 18px;
+            font-size: 16px;
             color: #64748b;
-            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .plan-features {
             list-style: none;
-            margin-bottom: 24px;
+            margin: 0 0 auto 0;
+            flex-grow: 1;
+            padding: 0;
         }
 
         .plan-features li {
-            padding: 10px 0;
+            padding: 12px 0;
             color: #475569;
-            font-size: 14px;
+            font-size: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-align: right;
         }
 
         .plan-features li::before {
             content: '✓';
             color: #10b981;
             font-weight: 900;
-            font-size: 18px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .plan-card-footer {
+            margin-top: auto;
+            padding-top: 24px;
         }
 
         .btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             font-family: 'Cairo', sans-serif;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .btn-primary {
-            background: #054F31;
+            background: linear-gradient(135deg, #054F31 0%, #10b981 100%);
             color: white;
         }
 
         .btn-primary:hover {
-            background: #043a25;
+            background: linear-gradient(135deg, #043a25 0%, #054F31 100%);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5, 79, 49, 0.3);
         }
 
         .btn-secondary {
@@ -362,6 +390,12 @@
             box-shadow: 0 0 0 3px rgba(5, 79, 49, 0.1);
         }
 
+        @media (max-width: 1024px) {
+            .plans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .plans-grid {
                 grid-template-columns: 1fr;
@@ -369,6 +403,10 @@
 
             .subscription-info {
                 grid-template-columns: 1fr;
+            }
+
+            .plan-card {
+                min-height: auto;
             }
         }
     </style>
@@ -440,22 +478,26 @@
                     @endif
                     <h3 class="plan-name">{{ $planName }}</h3>
                     <p class="plan-description">{{ $planDesc }}</p>
-                    <div class="plan-price">{{ number_format($priced['price'] ?? $plan->base_price, 2) }}</div>
-                    <div class="plan-currency">{{ $priced['currency'] ?? $plan->base_currency }} / {{ $plan->billing_cycle === 'monthly' ? 'شهري' : 'سنوي' }}</div>
+                    <div class="plan-price-section">
+                        <div class="plan-price">{{ number_format($priced['price'] ?? $plan->base_price, 2) }}</div>
+                        <div class="plan-currency">{{ $priced['currency'] ?? $plan->base_currency }} / {{ $plan->billing_cycle === 'monthly' ? 'شهري' : 'سنوي' }}</div>
+                    </div>
                     <ul class="plan-features">
                         @foreach($plan->features->where('active', true) as $feature)
                             <li>{{ $feature->feature_key }}: {{ $feature->limit ?? $feature->value }}</li>
                         @endforeach
                     </ul>
-                    @if(!$isCurrent)
-                        <form action="{{ route('office.subscriptions.subscribe') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="plan_code" value="{{ $plan->code }}">
-                            <button type="submit" class="btn btn-primary">اشترك الآن</button>
-                        </form>
-                    @else
-                        <button class="btn btn-secondary" disabled>مشترك حالياً</button>
-                    @endif
+                    <div class="plan-card-footer">
+                        @if(!$isCurrent)
+                            <form action="{{ route('office.subscriptions.subscribe') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="plan_code" value="{{ $plan->code }}">
+                                <button type="submit" class="btn btn-primary">اشترك الآن</button>
+                            </form>
+                        @else
+                            <button class="btn btn-secondary" disabled>مشترك حالياً</button>
+                        @endif
+                    </div>
                 </div>
             @endforeach
         </div>
