@@ -3,36 +3,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    html[dir="rtl"],
-    [dir="rtl"] {
-        direction: rtl;
-    }
-    
-    body {
-        direction: rtl;
+    /* Scoped to office panel only - does not affect auth layout */
+    [data-panel-id="office"]:not(.fi-simple-layout) {
         font-family: 'Cairo', sans-serif;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        min-height: 100vh;
     }
     
-    .fi-sidebar {
-        direction: rtl;
+    [data-panel-id="office"]:not(.fi-simple-layout) .fi-sidebar {
         background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
     }
     
-    .fi-sidebar-nav {
-        direction: rtl;
-    }
-    
-    .fi-main {
+    [data-panel-id="office"]:not(.fi-simple-layout) .fi-main {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
     
-    * {
+    /* Ensure auth layout is not affected */
+    .fi-simple-layout {
         font-family: 'Cairo', sans-serif;
     }
 </style>
-<script>
-    document.documentElement.setAttribute('dir', 'rtl');
-    document.documentElement.setAttribute('lang', 'ar');
-</script>
