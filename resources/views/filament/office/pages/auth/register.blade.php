@@ -30,16 +30,7 @@
                 @error('commercial_reg_no') <span class="error-message">{{ $message }}</span> @enderror
             </div>
 
-            <div class="form-group">
-                <label class="form-label">المدينة</label>
-                <select wire:model="city_id" class="form-select">
-                    <option value="">اختر المدينة</option>
-                    @foreach($cities as $city)
-                        <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
-                    @endforeach
-                </select>
-                @error('city_id') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
+
 
 
             <div class="form-group">
@@ -91,16 +82,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">صورة المكتب</label>
-                <input
-                    type="file"
-                    wire:model="image"
-                    accept="image/jpeg,image/jpg,image/png,image/webp"
-                    class="form-input"
-                >
-                @error('image') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
 
             <button type="submit" class="btn-submit">
                 إنشاء حساب
