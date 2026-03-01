@@ -2,17 +2,31 @@
 
 namespace App\Filament\Office\Pages\Auth;
 
-use App\Http\Controllers\Api\Office\AuthOfficeController;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Auth\PasswordReset\RequestPasswordReset;
+use Filament\Pages\Page;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OfficeResetCodeMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class ForgotPassword extends RequestPasswordReset
+class ForgotPassword extends Page implements HasForms
 {
+    use InteractsWithForms;
+
+    protected static string $view = 'filament.office.pages.auth.forgot-password';
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        $this->form->fill();
+    }
+
     public function form(Form $form): Form
     {
         return $form
@@ -22,7 +36,8 @@ class ForgotPassword extends RequestPasswordReset
                     ->email()
                     ->required()
                     ->exists('system.offices', 'email'),
-            ]);
+            ])
+            ->statePath('data');
     }
 
     public function submit(): void

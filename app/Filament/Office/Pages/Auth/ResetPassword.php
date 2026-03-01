@@ -3,20 +3,29 @@
 namespace App\Filament\Office\Pages\Auth;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Auth\PasswordReset\ResetPassword as BaseResetPassword;
+use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
-class ResetPassword extends BaseResetPassword
+class ResetPassword extends Page implements HasForms
 {
+    use InteractsWithForms;
+
+    protected static string $view = 'filament.office.pages.auth.reset-password';
+
+    protected static bool $shouldRegisterNavigation = false;
+
     public ?string $email = null;
-    public ?string $code = null;
+    public ?array $data = [];
 
     public function mount(?string $email = null): void
     {
         $this->email = $email ?? request()->query('email');
+        $this->form->fill(['email' => $this->email]);
     }
 
     public function form(Form $form): Form
@@ -45,7 +54,8 @@ class ResetPassword extends BaseResetPassword
                     ->password()
                     ->required()
                     ->same('password'),
-            ]);
+            ])
+            ->statePath('data');
     }
 
     public function submit(): void

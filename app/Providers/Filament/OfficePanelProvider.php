@@ -28,7 +28,6 @@ class OfficePanelProvider extends PanelProvider
             ->path('office')
             ->login(\App\Filament\Office\Pages\Auth\Login::class)
             ->registration(\App\Filament\Office\Pages\Auth\Register::class)
-            ->passwordReset()
             ->pages([
                 \App\Filament\Office\Pages\Auth\ForgotPassword::class,
                 \App\Filament\Office\Pages\Auth\ResetPassword::class,
