@@ -150,7 +150,12 @@ class Subscriptions extends Page
             ->first();
     }
 
-    protected function getWidgets(): array
+    protected function getHeaderWidgets(): array
+    {
+        return [];
+    }
+
+    protected function getFooterWidgets(): array
     {
         return [];
     }
