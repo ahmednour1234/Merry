@@ -48,7 +48,8 @@ class ForgetPassword extends Page
             return;
         }
 
-        $code = (string) random_int(100000, 999999);
+        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $code = $isDevEnv ? '111111' : (string) random_int(100000, 999999);
         $hash = Hash::make($code);
         $expiresAt = now()->addMinutes(15);
 
@@ -64,7 +65,9 @@ class ForgetPassword extends Page
             ]
         );
 
-        Mail::to($this->email)->send(new OfficeResetCodeMail($code));
+        if (!$isDevEnv) {
+            Mail::to($this->email)->send(new OfficeResetCodeMail($code));
+        }
 
         session()->put('reset_password_email', $this->email);
 

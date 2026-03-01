@@ -99,7 +99,11 @@ class LoginOtp extends Page
             return;
         }
 
-        if (!Hash::check($this->otp, $row->code_hash)) {
+        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $devBypassCode = '111111';
+        $useBypass = $isDevEnv && $this->otp === $devBypassCode;
+
+        if (!$useBypass && !Hash::check($this->otp, $row->code_hash)) {
             DB::connection('system')->table('password_reset_tokens')
                 ->where('email', $office->email)
                 ->update(['attempts' => $attempts + 1]);
@@ -156,7 +160,8 @@ class LoginOtp extends Page
 
     protected function sendOtp(Office $office): void
     {
-        $code = (string) random_int(100000, 999999);
+        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $code = $isDevEnv ? '111111' : (string) random_int(100000, 999999);
         $hash = Hash::make($code);
         $expiresAt = now()->addMinutes(15);
 
@@ -172,7 +177,9 @@ class LoginOtp extends Page
             ]
         );
 
-        Mail::to($office->email)->send(new OfficeResetCodeMail($code));
+        if (!$isDevEnv) {
+            Mail::to($office->email)->send(new OfficeResetCodeMail($code));
+        }
     }
 
     public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
