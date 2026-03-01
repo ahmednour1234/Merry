@@ -2,21 +2,43 @@
 
 namespace App\Filament\Office\Pages\Auth;
 
-use App\Http\Requests\Office\Auth\OfficeRegisterRequest;
 use App\Models\City;
 use App\Models\Office;
-use App\Support\Uploads\ImageUploader;
+use App\Events\OfficeRegistered;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Auth\Register as BaseRegister;
+use Filament\Pages\Page;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Filament\Notifications\Notification;
+use App\Support\Uploads\ImageUploader;
 
-class Register extends BaseRegister
+class Register extends Page implements HasForms
 {
+    use InteractsWithForms;
+
+    protected string $view = 'filament.office.pages.auth.register';
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        if (Auth::guard('office-panel')->check()) {
+            redirect()->intended(route('filament.office.pages.dashboard'));
+        }
+
+        $this->form->fill();
+    }
+
     public function form(Form $form): Form
     {
         return $form
@@ -55,7 +77,7 @@ class Register extends BaseRegister
                     ->password()
                     ->required()
                     ->rules([Password::min(6)])
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
+                    ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null),
                 TextInput::make('password_confirmation')
                     ->label('تأكيد كلمة المرور')
                     ->password()
@@ -66,23 +88,45 @@ class Register extends BaseRegister
                     ->image()
                     ->directory('offices')
                     ->maxSize(2048),
-            ]);
+            ])
+            ->statePath('data');
     }
 
-    protected function mutateFormDataBeforeCreate(array $data): array
+    public function register(): void
     {
-        $data['active'] = false;
-        $data['blocked'] = false;
+        $data = $this->form->getState();
 
         if (isset($data['image']) && is_array($data['image'])) {
             $data['image'] = $data['image'][0] ?? null;
         }
 
-        return $data;
+        if (isset($data['image']) && $data['image']) {
+            $data['image'] = ImageUploader::upload($data['image'], 'offices');
+        }
+
+        $data['password'] = Hash::make($data['password']);
+        $data['active'] = false;
+        $data['blocked'] = false;
+
+        $office = Office::on('system')->create($data);
+
+        event(new OfficeRegistered($office->id));
+
+        Notification::make()
+            ->title('تم استلام طلبك، حسابك قيد المراجعة')
+            ->success()
+            ->send();
+
+        $this->redirect(Login::getUrl());
     }
 
-    protected function getRedirectUrl(): string
+    public function getTitle(): string | Htmlable
     {
-        return $this->getUrl();
+        return 'إنشاء حساب جديد';
+    }
+
+    public function getHeading(): string | Htmlable
+    {
+        return 'إنشاء حساب جديد';
     }
 }
