@@ -25,6 +25,8 @@ class Register extends Page implements HasForms
 
     protected static bool $shouldRegisterNavigation = false;
 
+    protected static ?string $slug = 'register';
+
     protected string $view = 'filament.office.pages.auth.register';
 
     public ?array $data = [];
