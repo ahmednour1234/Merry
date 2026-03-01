@@ -101,4 +101,9 @@ class Login extends Page implements HasForms
     {
         return Filament::getPanel('office')->getUrl();
     }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
 }
