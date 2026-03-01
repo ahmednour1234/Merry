@@ -72,6 +72,16 @@
 
 @push('styles')
 <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
     body {
         background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f5 100%);
         min-height: 100vh;
@@ -80,14 +90,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
     }
 
     .auth-container {
-        max-width: 500px;
+        max-width: 600px;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
     }
 
     .auth-header {
@@ -96,25 +108,27 @@
     }
 
     .app-name {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: 700;
         color: #054F31;
-        margin: 0 0 8px 0;
+        margin: 0 0 12px 0;
     }
 
     .app-subtitle {
-        font-size: 16px;
+        font-size: 18px;
         color: #666;
-        margin: 0;
+        margin: 0 0 30px 0;
     }
 
     .auth-card {
         background: white;
-        border-radius: 16px;
+        border-radius: 24px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        padding: 40px;
+        padding: 50px;
         width: 100%;
         text-align: right;
+        overflow: hidden;
+        max-width: 100%;
     }
 
     .app-name {
@@ -134,15 +148,15 @@
     }
 
     .form-group {
-        margin-bottom: 24px;
+        margin-bottom: 28px;
     }
 
     .form-label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         font-weight: 600;
         color: #333;
-        font-size: 14px;
+        font-size: 15px;
         text-align: right;
     }
 
@@ -153,14 +167,15 @@
 
     .form-input {
         width: 100%;
-        padding: 14px 16px;
+        padding: 16px 18px;
         border: 1px solid #d1d5db;
-        border-radius: 8px;
-        font-size: 14px;
+        border-radius: 10px;
+        font-size: 15px;
         transition: all 0.3s;
         font-family: 'Cairo', sans-serif;
         text-align: right;
         direction: rtl;
+        box-sizing: border-box;
     }
 
     .form-input:focus {
@@ -175,7 +190,7 @@
 
     .password-toggle {
         position: absolute;
-        right: 12px;
+        right: 14px;
         left: auto;
         top: 50%;
         transform: translateY(-50%);
@@ -187,6 +202,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 10;
     }
 
     .password-toggle:hover {
@@ -194,16 +210,17 @@
     }
 
     .password-input-wrapper .form-input {
-        padding-right: 44px;
-        padding-left: 16px;
+        padding-right: 50px;
+        padding-left: 18px;
     }
 
     .form-options {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 24px;
+        margin-bottom: 28px;
         flex-direction: row-reverse;
+        gap: 15px;
     }
 
     .forgot-password-link {
@@ -239,16 +256,17 @@
 
     .btn-submit {
         width: 100%;
-        padding: 16px;
+        padding: 18px;
         background: #10b981;
         color: white;
         border: none;
-        border-radius: 8px;
-        font-size: 16px;
+        border-radius: 10px;
+        font-size: 17px;
         font-weight: 600;
         cursor: pointer;
         transition: background 0.3s;
         font-family: 'Cairo', sans-serif;
+        box-sizing: border-box;
     }
 
     .btn-submit:hover {
@@ -257,8 +275,8 @@
 
     .auth-link {
         text-align: center;
-        margin-top: 24px;
-        padding-top: 24px;
+        margin-top: 28px;
+        padding-top: 28px;
         border-top: 1px solid #e5e7eb;
     }
 
