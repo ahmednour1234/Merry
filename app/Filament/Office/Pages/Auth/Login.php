@@ -2,6 +2,7 @@
 
 namespace App\Filament\Office\Pages\Auth;
 
+use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -19,7 +20,7 @@ class Login extends Page implements HasForms
 
     protected static ?string $slug = 'login';
 
-    protected string $view = 'filament.office.pages.auth.login';
+    protected static string $layout = 'filament-panels::components.layout.simple';
 
     public ?array $data = [];
 
@@ -71,5 +72,24 @@ class Login extends Page implements HasForms
         session()->regenerate();
 
         redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            Action::make('authenticate')
+                ->label('تسجيل الدخول')
+                ->submit('authenticate'),
+        ];
+    }
+
+    public function getCachedFormActions(): array
+    {
+        return $this->getFormActions();
+    }
+
+    public function hasFullWidthFormActions(): bool
+    {
+        return true;
     }
 }

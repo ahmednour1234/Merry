@@ -4,6 +4,7 @@ namespace App\Filament\Office\Pages\Auth;
 
 use App\Models\City;
 use App\Models\Office;
+use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -24,7 +25,7 @@ class Register extends Page implements HasForms
 
     protected static ?string $slug = 'register';
 
-    protected string $view = 'filament.office.pages.auth.register';
+    protected static string $layout = 'filament-panels::components.layout.simple';
 
     public ?array $data = [];
 
@@ -144,5 +145,24 @@ class Register extends Page implements HasForms
             'password_confirmation' => 'تأكيد كلمة المرور',
             'image' => 'صورة المكتب',
         ];
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            Action::make('register')
+                ->label('إنشاء حساب')
+                ->submit('register'),
+        ];
+    }
+
+    public function getCachedFormActions(): array
+    {
+        return $this->getFormActions();
+    }
+
+    public function hasFullWidthFormActions(): bool
+    {
+        return true;
     }
 }
