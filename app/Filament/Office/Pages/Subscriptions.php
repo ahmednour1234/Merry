@@ -7,6 +7,7 @@ use App\Models\Plan;
 use App\Repositories\System\Subscriptions\Contracts\PlanRepositoryInterface;
 use App\Repositories\System\Subscriptions\Contracts\SubscriptionRepositoryInterface;
 use App\Services\SubscriptionService;
+use BackedEnum;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Subscriptions extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-credit-card';
 
     protected static string $view = 'filament.office.pages.subscriptions';
 

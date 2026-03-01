@@ -3,6 +3,7 @@
 namespace App\Filament\Office\Pages;
 
 use App\Models\NotificationRecipient;
+use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 class NotificationsPage extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-bell-alert';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bell-alert';
 
     protected string $view = 'filament.office.pages.notifications';
 
