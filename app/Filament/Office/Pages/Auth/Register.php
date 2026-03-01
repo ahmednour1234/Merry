@@ -9,15 +9,35 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\Auth\Register as BaseRegister;
+use Filament\Pages\Page;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Support\Uploads\ImageUploader;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
-class Register extends BaseRegister
+class Register extends Page implements HasForms
 {
+    use InteractsWithForms;
+
+    protected static bool $shouldRegisterNavigation = false;
+
+    protected static string $view = 'filament.office.pages.auth.register';
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        if (Auth::guard('office-panel')->check()) {
+            redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
+        }
+
+        $this->form->fill();
+    }
+
     public function form(Form $form): Form
     {
         return $form
@@ -68,7 +88,8 @@ class Register extends BaseRegister
                     ->image()
                     ->directory('offices')
                     ->maxSize(2048),
-            ]);
+            ])
+            ->statePath('data');
     }
 
     public function register(): void
