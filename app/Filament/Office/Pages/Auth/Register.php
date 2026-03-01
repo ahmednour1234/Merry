@@ -4,29 +4,34 @@ namespace App\Filament\Office\Pages\Auth;
 
 use App\Models\City;
 use App\Models\Office;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Schemas\Schema;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use App\Support\Uploads\ImageUploader;
+use Livewire\WithFileUploads;
 
-class Register extends Page implements HasForms
+class Register extends Page
 {
-    use InteractsWithForms;
+    use WithFileUploads;
 
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $slug = 'register';
 
-    protected static string $layout = 'filament-panels::components.layout.simple';
+    protected string $view = 'filament.office.pages.auth.register';
 
-    public ?array $data = [];
+    public $name = '';
+    public $commercial_reg_no = '';
+    public $city_id = null;
+    public $address = '';
+    public $phone = '';
+    public $email = '';
+    public $password = '';
+    public $password_confirmation = '';
+    public $image;
+
+    public $cities = [];
 
     public function mount(): void
     {
@@ -34,93 +39,67 @@ class Register extends Page implements HasForms
             redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
         }
 
-        $this->form->fill();
+        $this->loadCities();
     }
 
-    public function form(Schema $form): Schema
+    protected function loadCities(): void
     {
-        return $form
-            ->schema([
-                TextInput::make('name')
-                    ->label('اسم المكتب')
-                    ->required()
-                    ->maxLength(191),
-                TextInput::make('commercial_reg_no')
-                    ->label('رقم السجل التجاري')
-                    ->required()
-                    ->maxLength(191)
-                    ->unique(Office::class, 'commercial_reg_no', ignoreRecord: true),
-                Select::make('city_id')
-                    ->label('المدينة')
-                    ->options(fn () => City::on('system')->with('translations')->active()->get()->mapWithKeys(function ($city) {
-                        $name = $city->translations->where('lang_code', 'ar')->first()?->name ?? $city->translations->first()?->name ?? $city->slug;
-                        return [$city->id => $name];
-                    })->toArray())
-                    ->searchable()
-                    ->nullable(),
-                Textarea::make('address')
-                    ->label('العنوان')
-                    ->rows(3)
-                    ->maxLength(255)
-                    ->nullable(),
-                TextInput::make('phone')
-                    ->label('رقم الجوال')
-                    ->tel()
-                    ->maxLength(32)
-                    ->nullable(),
-                TextInput::make('email')
-                    ->label('البريد الإلكتروني')
-                    ->email()
-                    ->required()
-                    ->maxLength(191)
-                    ->unique(Office::class, 'email', ignoreRecord: true),
-                TextInput::make('password')
-                    ->label('كلمة المرور')
-                    ->password()
-                    ->required()
-                    ->rules([Password::min(6)])
-                    ->same('password_confirmation')
-                    ->dehydrated(fn ($state) => filled($state)),
-                TextInput::make('password_confirmation')
-                    ->label('تأكيد كلمة المرور')
-                    ->password()
-                    ->required()
-                    ->dehydrated(false),
-                FileUpload::make('image')
-                    ->label('صورة المكتب')
-                    ->image()
-                    ->directory('offices')
-                    ->maxSize(2048)
-                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
-                    ->nullable(),
-            ])
-            ->statePath('data');
+        $this->cities = City::on('system')->with('translations')->active()->get()->map(function ($city) {
+            $name = $city->translations->where('lang_code', 'ar')->first()?->name ?? $city->translations->first()?->name ?? $city->slug;
+            return [
+                'id' => $city->id,
+                'name' => $name,
+            ];
+        })->toArray();
     }
 
     public function register(): void
     {
-        $data = $this->form->getState();
+        $this->validate([
+            'name' => 'required|string|max:191',
+            'commercial_reg_no' => 'required|string|max:191|unique:system.offices,commercial_reg_no',
+            'city_id' => 'nullable|integer',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:32',
+            'email' => 'required|email|max:191|unique:system.offices,email',
+            'password' => ['required', 'string', Password::min(6), 'confirmed'],
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'name.required' => 'اسم المكتب مطلوب',
+            'commercial_reg_no.required' => 'رقم السجل التجاري مطلوب',
+            'commercial_reg_no.unique' => 'رقم السجل التجاري مستخدم بالفعل',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'البريد الإلكتروني غير صحيح',
+            'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
+            'password.required' => 'كلمة المرور مطلوبة',
+            'password.min' => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
+            'password.confirmed' => 'تأكيد كلمة المرور غير متطابق',
+            'image.image' => 'يجب أن تكون الملف صورة',
+            'image.mimes' => 'نوع الصورة يجب أن يكون: jpg, jpeg, png, webp',
+            'image.max' => 'حجم الصورة يجب أن يكون أقل من 2MB',
+        ]);
 
-        if (isset($data['image'])) {
-            if (is_array($data['image']) && !empty($data['image'])) {
-                $data['image'] = $data['image'][0] ?? null;
-            }
-            if (empty($data['image'])) {
-                $data['image'] = null;
-            }
+        $data = [
+            'name' => $this->name,
+            'commercial_reg_no' => $this->commercial_reg_no,
+            'city_id' => $this->city_id,
+            'address' => $this->address,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
+            'active' => false,
+            'blocked' => false,
+        ];
+
+        if ($this->phone && !str_starts_with($this->phone, '+966')) {
+            $data['phone'] = '+966' . ltrim($this->phone, '0');
+        }
+
+        if ($this->image) {
+            $data['image'] = ImageUploader::upload($this->image, 'offices');
         } else {
             $data['image'] = null;
         }
-
-        if (isset($data['phone']) && !empty($data['phone']) && !str_starts_with($data['phone'], '+966')) {
-            $data['phone'] = '+966' . ltrim($data['phone'], '0');
-        }
-
-        $data['password'] = Hash::make($data['password']);
-        $data['active'] = false;
-        $data['blocked'] = false;
-
-        unset($data['password_confirmation']);
 
         $office = Office::on('system')->create($data);
 
@@ -129,21 +108,6 @@ class Register extends Page implements HasForms
         session()->regenerate();
 
         redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
-    }
-
-    public function getFormValidationAttributes(): array
-    {
-        return [
-            'name' => 'اسم المكتب',
-            'commercial_reg_no' => 'رقم السجل التجاري',
-            'city_id' => 'المدينة',
-            'address' => 'العنوان',
-            'phone' => 'رقم الجوال',
-            'email' => 'البريد الإلكتروني',
-            'password' => 'كلمة المرور',
-            'password_confirmation' => 'تأكيد كلمة المرور',
-            'image' => 'صورة المكتب',
-        ];
     }
 
 }
