@@ -99,7 +99,6 @@
 @push('styles')
 <style>
     html, body {
-        overflow-y: hidden;
         height: 100%;
         direction: rtl;
     }
