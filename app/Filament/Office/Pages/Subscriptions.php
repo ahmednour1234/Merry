@@ -24,6 +24,8 @@ class Subscriptions extends Page
 
     protected static ?string $title = 'الاشتراكات';
 
+    protected static string $layout = 'filament-panels::components.layout.base';
+
     public ?string $couponCode = null;
 
     public function mount(): void
@@ -156,6 +158,11 @@ class Subscriptions extends Page
     }
 
     protected function getFooterWidgets(): array
+    {
+        return [];
+    }
+
+    public function getWidgets(): array
     {
         return [];
     }

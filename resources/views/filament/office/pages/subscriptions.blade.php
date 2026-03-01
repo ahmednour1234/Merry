@@ -1,4 +1,4 @@
-<x-filament-panels::page>
+<x-filament-panels::page :widgets="[]">
     <div class="space-y-6">
         @php
             $currentSubscription = $this->getCurrentSubscription();
@@ -13,8 +13,8 @@
 
                 <div class="space-y-4">
                     @php
-                        $planName = $currentSubscription->plan->translations->where('lang_code', 'ar')->first()?->name 
-                            ?? $currentSubscription->plan->translations->first()?->name 
+                        $planName = $currentSubscription->plan->translations->where('lang_code', 'ar')->first()?->name
+                            ?? $currentSubscription->plan->translations->first()?->name
                             ?? $currentSubscription->plan->name;
                         $daysLeft = now()->diffInDays($currentSubscription->ends_at, false);
                     @endphp
