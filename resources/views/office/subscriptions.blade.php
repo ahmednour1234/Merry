@@ -484,7 +484,23 @@
                     </div>
                     <ul class="plan-features">
                         @foreach($plan->features->where('active', true) as $feature)
-                            <li>{{ $feature->feature_key }}: {{ $feature->limit ?? $feature->value }}</li>
+                            @php
+                                $translations = [
+                                    'cv.limit' => 'عدد CV المسموح',
+                                    'request.limit' => 'عدد الطلبات المسموح',
+                                    'orders.limit' => 'عدد الطلبات المسموح',
+                                    'office.users.limit' => 'عدد المستخدمين المسموح',
+                                    'media.storage.gb' => 'مساحة التخزين (GB)',
+                                    'support.priority' => 'دعم ذو أولوية',
+                                    'cv.freeze.allowed' => 'تجميد CV مسموح',
+                                    'exports.per_month' => 'عدد مرات التصدير شهرياً',
+                                    'office.multi_branch' => 'دعم تعدد الفروع',
+                                    'upload.allowed' => 'الرفع المسموح',
+                                ];
+                                $featureName = $translations[$feature->feature_key] ?? $feature->feature_key;
+                                $featureValue = $feature->limit ?? ($feature->value === 1 ? 'نعم' : ($feature->value ?? '-'));
+                            @endphp
+                            <li>{{ $featureName }}: {{ $featureValue }}</li>
                         @endforeach
                     </ul>
                     <div class="plan-card-footer">
