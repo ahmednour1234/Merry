@@ -209,8 +209,8 @@ class CvResource extends Resource
                             ->send();
                     })
                     ->visible(fn ($record) => $record->status === 'rejected'),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->defaultSort('created_at', 'desc');
     }
