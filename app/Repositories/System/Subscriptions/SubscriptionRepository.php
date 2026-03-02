@@ -4,6 +4,7 @@ namespace App\Repositories\System\Subscriptions;
 
 use App\Models\OfficeSubscription;
 use App\Repositories\System\Subscriptions\Contracts\SubscriptionRepositoryInterface;
+use App\Services\Notifications\NotificationService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SubscriptionRepository implements SubscriptionRepositoryInterface
@@ -34,12 +35,12 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
 
     public function createForOffice(int $officeId, string $planCode, string $currency, float $price, array $meta = []): OfficeSubscription
     {
-        // دورة حسب الخطة (monthly/annual) – تقدر تحسبها من خطة أو تمررها من الخدمة
-        $plan = \App\Models\Plan::on('system')->findOrFail($planCode);
+        $plan = \App\Models\Plan::on('system')->with('translations')->findOrFail($planCode);
+        $office = \App\Models\Office::findOrFail($officeId);
         $starts = now();
         $ends   = $plan->billing_cycle === 'annual' ? now()->addYear() : now()->addMonth();
 
-        return OfficeSubscription::on('system')->create([
+        $subscription = OfficeSubscription::on('system')->create([
             'office_id' => $officeId,
             'plan_code' => $planCode,
             'status' => 'pending',
@@ -51,6 +52,42 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
             'meta' => $meta,
             'active' => 0,
         ]);
+
+        $planName = $plan->translations->where('lang_code', 'ar')->first()?->name
+            ?? $plan->translations->first()?->name
+            ?? $plan->name;
+
+        $notificationService = app(NotificationService::class);
+
+        $adminNotification = $notificationService->createNotification([
+            'type' => 'subscription_created',
+            'title' => 'اشتراك جديد',
+            'body' => "تم إنشاء اشتراك جديد للمكتب: {$office->name} - الخطة: {$planName}",
+            'data' => [
+                'subscription_id' => $subscription->id,
+                'office_id' => $officeId,
+                'plan_code' => $planCode,
+            ],
+            'priority' => 'normal',
+        ]);
+
+        $notificationService->notifyAdmins($adminNotification, ['inapp']);
+
+        $officeNotification = $notificationService->createNotification([
+            'type' => 'subscription_created',
+            'title' => 'تم إنشاء اشتراك جديد',
+            'body' => "تم إنشاء اشتراكك في الخطة: {$planName} بنجاح",
+            'data' => [
+                'subscription_id' => $subscription->id,
+                'office_id' => $officeId,
+                'plan_code' => $planCode,
+            ],
+            'priority' => 'normal',
+        ]);
+
+        $notificationService->notifyOffices($officeNotification, [$officeId], ['inapp']);
+
+        return $subscription;
     }
 
     public function setAutoRenew(int $subscriptionId, bool $auto): ?OfficeSubscription

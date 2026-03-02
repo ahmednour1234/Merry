@@ -1,0 +1,168 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\OfficeSubscriptionResource\Pages;
+use App\Models\OfficeSubscription;
+use BackedEnum;
+use Filament\Forms;
+use Filament\Schemas\Schema;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+
+class OfficeSubscriptionResource extends Resource
+{
+    protected static ?string $model = OfficeSubscription::class;
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-credit-card';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'النظام';
+    }
+
+    protected static ?string $navigationLabel = 'الاشتراكات';
+
+    protected static ?string $modelLabel = 'اشتراك';
+
+    protected static ?string $pluralModelLabel = 'الاشتراكات';
+
+    public static function form(Schema $schema): Schema
+    {
+        return $schema
+            ->schema([
+                Forms\Components\Select::make('office_id')
+                    ->relationship('office', 'name')
+                    ->required()
+                    ->label('المكتب')
+                    ->searchable(),
+                Forms\Components\Select::make('plan_code')
+                    ->relationship('plan', 'code')
+                    ->required()
+                    ->label('الخطة')
+                    ->searchable(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'قيد الانتظار',
+                        'active' => 'نشط',
+                        'cancelled' => 'ملغي',
+                        'expired' => 'منتهي',
+                    ])
+                    ->required()
+                    ->label('الحالة'),
+                Forms\Components\Toggle::make('auto_renew')
+                    ->label('التجديد التلقائي'),
+                Forms\Components\Toggle::make('active')
+                    ->label('نشط'),
+                Forms\Components\DateTimePicker::make('starts_at')
+                    ->required()
+                    ->label('تاريخ البدء'),
+                Forms\Components\DateTimePicker::make('ends_at')
+                    ->required()
+                    ->label('تاريخ الانتهاء'),
+                Forms\Components\TextInput::make('currency_code')
+                    ->maxLength(8)
+                    ->default('USD')
+                    ->label('العملة'),
+                Forms\Components\TextInput::make('price')
+                    ->numeric()
+                    ->label('السعر'),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable()
+                    ->label('ID'),
+                Tables\Columns\TextColumn::make('office.name')
+                    ->sortable()
+                    ->label('المكتب')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('plan.name')
+                    ->formatStateUsing(fn ($record) => $record->plan?->translations->where('lang_code', 'ar')->first()?->name ?? $record->plan?->name ?? '-')
+                    ->label('الخطة')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('الحالة')
+                    ->formatStateUsing(fn ($state) => match($state) {
+                        'pending' => 'قيد الانتظار',
+                        'active' => 'نشط',
+                        'cancelled' => 'ملغي',
+                        'expired' => 'منتهي',
+                        default => $state,
+                    })
+                    ->badge()
+                    ->color(fn ($state) => match($state) {
+                        'pending' => 'warning',
+                        'active' => 'success',
+                        'cancelled' => 'gray',
+                        'expired' => 'danger',
+                        default => 'gray',
+                    })
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('auto_renew')
+                    ->label('تجديد تلقائي')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('active')
+                    ->label('نشط')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('price')
+                    ->money(fn ($record) => $record->currency_code ?? 'USD')
+                    ->label('السعر')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('starts_at')
+                    ->dateTime()
+                    ->label('تاريخ البدء')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('ends_at')
+                    ->dateTime()
+                    ->label('تاريخ الانتهاء')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->label('تاريخ الإنشاء')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'قيد الانتظار',
+                        'active' => 'نشط',
+                        'cancelled' => 'ملغي',
+                        'expired' => 'منتهي',
+                    ])
+                    ->label('الحالة'),
+                Tables\Filters\TernaryFilter::make('active')
+                    ->label('نشط'),
+                Tables\Filters\TernaryFilter::make('auto_renew')
+                    ->label('تجديد تلقائي'),
+            ])
+            ->actions([
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
+            ])
+            ->defaultSort('created_at', 'desc');
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListOfficeSubscriptions::route('/'),
+            'create' => Pages\CreateOfficeSubscription::route('/create'),
+            'edit' => Pages\EditOfficeSubscription::route('/{record}/edit'),
+        ];
+    }
+}
