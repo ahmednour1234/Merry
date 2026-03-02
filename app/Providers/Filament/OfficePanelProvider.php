@@ -37,7 +37,7 @@ class OfficePanelProvider extends PanelProvider
             ->font('Cairo')
             ->renderHook(
                 'panels::head.start',
-                fn () => view('filament.rtl-styles')
+                fn () => view('filament.office.ltr-styles')
             )
             ->discoverResources(in: app_path('Filament/Office/Resources'), for: 'App\\Filament\\Office\\Resources')
             ->discoverPages(in: app_path('Filament/Office/Pages'), for: 'App\\Filament\\Office\\Pages')
