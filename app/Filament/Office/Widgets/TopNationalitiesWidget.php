@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TopNationalitiesWidget extends Widget
 {
-    protected static string $view = 'filament.office.widgets.top-nationalities-widget';
+    protected string $view = 'filament.office.widgets.top-nationalities-widget';
     protected static ?int $sort = 3;
 
     public function getViewData(): array
