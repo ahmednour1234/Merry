@@ -43,7 +43,6 @@ class NotificationsPage extends Page implements HasTable
 
         $recipient = NotificationRecipient::on('system')
             ->where('id', $id)
-            ->where('recipient_type', 'office')
             ->where('recipient_id', $office->id)
             ->firstOrFail();
 
