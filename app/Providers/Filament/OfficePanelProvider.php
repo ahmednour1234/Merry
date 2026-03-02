@@ -35,7 +35,6 @@ class OfficePanelProvider extends PanelProvider
                 'danger' => Color::hex('#ef4444'),
             ])
             ->font('Cairo')
-            ->viteTheme('resources/css/office-rtl.css')
             ->renderHook(
                 'panels::head.start',
                 fn () => view('filament.rtl-styles')
