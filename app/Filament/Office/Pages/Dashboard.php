@@ -17,7 +17,12 @@ class Dashboard extends BaseDashboard
 
     public function getWidgets(): array
     {
-        return [];
+        return [
+            \App\Filament\Office\Widgets\SubscriptionInfoWidget::class,
+            \App\Filament\Office\Widgets\OfficeStatsWidget::class,
+            \App\Filament\Office\Widgets\FavoriteUsersWidget::class,
+            \App\Filament\Office\Widgets\TopNationalitiesWidget::class,
+        ];
     }
 
     public function getColumns(): int | array
