@@ -1,15 +1,15 @@
 <script>
-    // Set dir="ltr" on HTML element for Office panel - Run immediately
+    // Set dir="rtl" on HTML element for Office panel - Run immediately
     (function() {
-        // Set LTR immediately
+        // Set RTL immediately
         document.documentElement.setAttribute('dir', 'rtl');
-        document.documentElement.setAttribute('lang', 'en');
+        document.documentElement.setAttribute('lang', 'ar');
 
         // Watch for any changes and override them
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'dir') {
-                    if (document.documentElement.getAttribute('dir') !== 'ltr') {
+                    if (document.documentElement.getAttribute('dir') !== 'rtl') {
                         document.documentElement.setAttribute('dir', 'rtl');
                     }
                 }
