@@ -21,9 +21,13 @@ class FavoriteUsersWidget extends Widget
             ->pluck('id')
             ->toArray();
 
+        if (empty($cvIds)) {
+            return ['users' => []];
+        }
+
         $favorites = FavouriteCv::on('identity')
             ->selectRaw('end_user_id, COUNT(*) as favorites_count')
-            ->whereIn('cv_id', $cvIds)
+            ->whereIn('cv_id', array_values($cvIds))
             ->groupBy('end_user_id')
             ->orderByDesc('favorites_count')
             ->limit(10)

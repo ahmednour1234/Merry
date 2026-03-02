@@ -34,12 +34,13 @@ class OfficeStatsWidget extends BaseWidget
             ->whereIn('status', BookingStatus::activeStatuses())
             ->count();
 
-        $totalFavorites = FavouriteCv::on('identity')
-            ->whereIn('cv_id', function ($query) use ($office) {
-                $query->select('id')
-                    ->from('system.cvs')
-                    ->where('office_id', $office->id);
-            })
+        $cvIds = Cv::on('system')
+            ->where('office_id', $office->id)
+            ->pluck('id')
+            ->toArray();
+
+        $totalFavorites = empty($cvIds) ? 0 : FavouriteCv::on('identity')
+            ->whereIn('cv_id', array_values($cvIds))
             ->count();
 
         return [
