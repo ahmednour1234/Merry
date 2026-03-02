@@ -39,7 +39,6 @@ class AdminPanelProvider extends PanelProvider
         config(['filament.locale' => 'ar']);
 
         return $panel
-            ->locale('ar')
             ->default()
             ->id('admin')
             ->path('admin')
