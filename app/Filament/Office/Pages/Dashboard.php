@@ -2,10 +2,6 @@
 
 namespace App\Filament\Office\Pages;
 
-use App\Filament\Office\Widgets\BookingStatsWidget;
-use App\Filament\Office\Widgets\CvStatsWidget;
-use App\Filament\Office\Widgets\OfficeStatusWidget;
-use App\Filament\Office\Widgets\SubscriptionWidget;
 use BackedEnum;
 use Filament\Pages\Dashboard as BaseDashboard;
 
@@ -21,12 +17,7 @@ class Dashboard extends BaseDashboard
 
     public function getWidgets(): array
     {
-        return [
-            OfficeStatusWidget::class,
-            SubscriptionWidget::class,
-            CvStatsWidget::class,
-            BookingStatsWidget::class,
-        ];
+        return [];
     }
 
     public function getColumns(): int | array

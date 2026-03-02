@@ -39,16 +39,11 @@ class OfficePanelProvider extends PanelProvider
                 'panels::head.start',
                 fn () => view('filament.rtl-styles')
             )
-            ->renderHook(
-                'panels::user-menu.start',
-                fn () => view('filament.office.components.notification-bell')
-            )
             ->discoverResources(in: app_path('Filament/Office/Resources'), for: 'App\\Filament\\Office\\Resources')
             ->discoverPages(in: app_path('Filament/Office/Pages'), for: 'App\\Filament\\Office\\Pages')
             ->pages([
                 \App\Filament\Office\Pages\Dashboard::class,
                 \App\Filament\Office\Pages\Subscriptions::class,
-                \App\Filament\Office\Pages\NotificationsPage::class,
                 \App\Filament\Office\Pages\Auth\Login::class,
                 \App\Filament\Office\Pages\Auth\Register::class,
                 \App\Filament\Office\Pages\Auth\VerifyOtp::class,
