@@ -36,8 +36,10 @@ class AdminPanelProvider extends PanelProvider
         // Set locale to Arabic
         app()->setLocale('ar');
         config(['app.locale' => 'ar']);
+        config(['filament.locale' => 'ar']);
 
         return $panel
+            ->locale('ar')
             ->default()
             ->id('admin')
             ->path('admin')

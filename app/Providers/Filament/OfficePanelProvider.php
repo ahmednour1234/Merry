@@ -21,8 +21,10 @@ class OfficePanelProvider extends PanelProvider
     {
         app()->setLocale('ar');
         config(['app.locale' => 'ar']);
+        config(['filament.locale' => 'ar']);
 
         return $panel
+            ->locale('ar')
             ->id('office')
             ->path('office')
             ->login(\App\Filament\Office\Pages\Auth\Login::class)
