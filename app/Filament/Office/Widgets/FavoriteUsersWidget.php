@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteUsersWidget extends Widget
 {
-    protected static string $view = 'filament.office.widgets.favorite-users-widget';
+    protected string $view = 'filament.office.widgets.favorite-users-widget';
     protected static ?int $sort = 2;
 
     public function getViewData(): array
