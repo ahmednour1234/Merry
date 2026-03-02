@@ -4,6 +4,7 @@ namespace App\Filament\Office\Pages;
 
 use App\Models\NotificationRecipient;
 use BackedEnum;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Pages\Page;
 use Filament\Tables;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -110,7 +111,7 @@ class NotificationsPage extends Page implements HasTable
                     ->label('التاريخ'),
             ])
             ->actions([
-                Tables\Actions\Action::make('mark_read')
+                FilamentAction::make('mark_read')
                     ->label('تحديد كمقروء')
                     ->icon('heroicon-o-check')
                     ->action(function ($record) {
