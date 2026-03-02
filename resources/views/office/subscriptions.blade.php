@@ -1233,54 +1233,7 @@
             </div>
         </div>
 
-        @if($subscriptions->count() > 0)
-            <div class="subscriptions-table">
-                <h3>سجل الاشتراكات</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>الخطة</th>
-                            <th>الحالة</th>
-                            <th>تاريخ البدء</th>
-                            <th>تاريخ الانتهاء</th>
-                            <th>السعر</th>
-                            <th>التجديد التلقائي</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($subscriptions as $sub)
-                            <tr>
-                                <td>{{ $sub->plan->translations->where('lang_code', 'ar')->first()?->name ?? $sub->plan->name }}</td>
-                                <td>
-                                    <span class="status-badge status-{{ $sub->status }}">
-                                        {{ $sub->status === 'active' ? 'نشط' : ($sub->status === 'cancelled' ? 'ملغي' : ($sub->status === 'expired' ? 'منتهي' : 'معلق')) }}
-                                    </span>
-                                </td>
-                                <td>{{ $sub->starts_at->format('Y-m-d') }}</td>
-                                <td>{{ $sub->ends_at->format('Y-m-d') }}</td>
-                                <td>{{ number_format($sub->price, 2) }} {{ $sub->currency_code }}</td>
-                                <td>
-                                    @if($sub->active)
-                                        <form action="{{ route('office.subscriptions.toggle-auto-renew', $sub->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" {{ $sub->auto_renew ? 'checked' : '' }} onchange="this.form.submit()">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </form>
-                                    @else
-                                        -
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div style="margin-top: 20px;">
-                    {{ $subscriptions->links() }}
-                </div>
-            </div>
-        @endif
+
 
         <div class="features-section">
             <h3>مميزات نظام ميري</h3>
