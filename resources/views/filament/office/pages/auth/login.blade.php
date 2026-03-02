@@ -74,7 +74,12 @@
     html, body {
         overflow-y: hidden;
         height: 100%;
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    * {
         direction: rtl;
+        text-align: right;
     }
     .auth-card {
         background: white;
@@ -84,6 +89,8 @@
         width: 100%;
         max-width: 600px;
         margin: 90px auto;
+        direction: rtl;
+        text-align: right;
     }
     .auth-title {
         font-size: 24px;
@@ -91,9 +98,12 @@
         color: #054F31;
         text-align: center;
         margin-bottom: 30px;
+        direction: rtl;
     }
     .form-group {
         margin-bottom: 20px;
+        direction: rtl;
+        text-align: right;
     }
     .form-label {
         display: block;
@@ -101,6 +111,8 @@
         font-weight: 600;
         color: #333;
         font-size: 14px;
+        text-align: right;
+        direction: rtl;
     }
     .form-label.required::after {
         content: ' *';
@@ -108,12 +120,14 @@
     }
     .form-input {
         width: 100%;
-        padding: 12px 16px;
+        padding: 12px 50px 12px 16px;
         border: 1px solid #ddd;
         border-radius: 8px;
         font-size: 14px;
         transition: border-color 0.3s;
         font-family: 'Cairo', sans-serif;
+        direction: rtl;
+        text-align: right;
     }
     .form-input:focus {
         outline: none;
@@ -122,6 +136,7 @@
     }
     .password-input-wrapper {
         position: relative;
+        direction: rtl;
     }
     .password-toggle {
         position: absolute;
@@ -145,14 +160,17 @@
     .password-input-wrapper .form-input {
         padding-right: 50px;
         padding-left: 16px;
+        direction: rtl;
+        text-align: right;
     }
     .form-options {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
-        flex-direction: row-reverse;
+        flex-direction: row;
         gap: 15px;
+        direction: rtl;
     }
     .remember-wrap {
         display: flex;
@@ -161,18 +179,25 @@
         font-size: 14px;
         color: #333;
         cursor: pointer;
+        direction: rtl;
+        flex-direction: row;
     }
     .remember-wrap input[type="checkbox"] {
         width: 18px;
         height: 18px;
         cursor: pointer;
         accent-color: #054F31;
+        order: 2;
+    }
+    .remember-wrap span {
+        order: 1;
     }
     .forgot-password-link {
         color: #054F31;
         text-decoration: none;
         font-size: 14px;
         font-weight: 500;
+        direction: rtl;
     }
     .forgot-password-link:hover {
         text-decoration: underline;
@@ -189,6 +214,8 @@
         cursor: pointer;
         transition: background 0.3s;
         margin-top: 10px;
+        direction: rtl;
+        text-align: center;
     }
     .btn-submit:hover {
         background: #043a25;
@@ -198,11 +225,13 @@
         margin-top: 20px;
         padding-top: 20px;
         border-top: 1px solid #eee;
+        direction: rtl;
     }
     .auth-link a {
         color: #054F31;
         text-decoration: none;
         font-size: 14px;
+        direction: rtl;
     }
     .auth-link a:hover {
         text-decoration: underline;
@@ -211,6 +240,8 @@
         color: #ef4444;
         font-size: 14px;
         margin-top: 5px;
+        text-align: right;
+        direction: rtl;
     }
 </style>
 @endpush
