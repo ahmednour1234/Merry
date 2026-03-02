@@ -15,6 +15,7 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -165,7 +166,7 @@ class CvResource extends Resource
                     ->label('مسلم'),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle_active')
+                Action::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
                     ->icon(fn ($record) => $record->status === 'deactivated_by_office' ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
                     ->color(fn ($record) => $record->status === 'deactivated_by_office' ? 'success' : 'warning')
@@ -182,7 +183,7 @@ class CvResource extends Resource
                             ->send();
                     })
                     ->visible(fn ($record) => in_array($record->status, ['approved', 'deactivated_by_office'])),
-                Tables\Actions\Action::make('resubmit')
+                Action::make('resubmit')
                     ->label('إعادة الإرسال')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')
