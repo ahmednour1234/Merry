@@ -11,6 +11,7 @@ use App\Models\Identity\FavouriteCv;
 use App\Models\Nationality;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
 use BackedEnum;
+use Filament\Actions\Action as BaseAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -165,7 +166,7 @@ class CvResource extends Resource
                     ->label('مسلم'),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle_active')
+                BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
                     ->icon(fn ($record) => $record->status === 'deactivated_by_office' ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
                     ->color(fn ($record) => $record->status === 'deactivated_by_office' ? 'success' : 'warning')
@@ -182,7 +183,7 @@ class CvResource extends Resource
                             ->send();
                     })
                     ->visible(fn ($record) => in_array($record->status, ['approved', 'deactivated_by_office'])),
-                Tables\Actions\Action::make('resubmit')
+                BaseAction::make('resubmit')
                     ->label('إعادة الإرسال')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')
