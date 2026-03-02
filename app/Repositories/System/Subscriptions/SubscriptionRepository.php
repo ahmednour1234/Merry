@@ -40,17 +40,25 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
         $starts = now();
         $ends   = $plan->billing_cycle === 'annual' ? now()->addYear() : now()->addMonth();
 
+        OfficeSubscription::on('system')
+            ->where('office_id', $officeId)
+            ->where('status', 'active')
+            ->update([
+                'status' => 'cancelled',
+                'active' => false,
+            ]);
+
         $subscription = OfficeSubscription::on('system')->create([
             'office_id' => $officeId,
             'plan_code' => $planCode,
-            'status' => 'pending',
+            'status' => 'active',
             'auto_renew' => false,
             'starts_at' => $starts,
             'ends_at' => $ends,
             'currency_code' => strtoupper($currency),
             'price' => $price,
             'meta' => $meta,
-            'active' => 0,
+            'active' => true,
         ]);
 
         $planName = $plan->translations->where('lang_code', 'ar')->first()?->name
