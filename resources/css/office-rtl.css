@@ -1,0 +1,293 @@
+/* Office Panel RTL UI Fixes - Scoped to Office panel only */
+
+/* Enforce RTL direction on HTML element */
+[data-panel-id="office"] {
+    direction: rtl;
+}
+
+[data-panel-id="office"] * {
+    direction: inherit;
+}
+
+/* ============================================
+   SIDEBAR RTL FIXES
+   ============================================ */
+
+/* Sidebar positioning - right side */
+[data-panel-id="office"] .fi-sidebar,
+[data-panel-id="office"] aside[aria-label*="navigation"],
+[data-panel-id="office"] [role="complementary"] {
+    right: 0 !important;
+    left: auto !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-left: none !important;
+}
+
+/* Sidebar navigation container */
+[data-panel-id="office"] .fi-sidebar-nav {
+    padding-right: 1rem;
+    padding-left: 0;
+    direction: rtl;
+}
+
+/* Sidebar navigation items */
+[data-panel-id="office"] .fi-sidebar-nav-item {
+    padding: 0.75rem 1rem 0.75rem 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: right;
+    direction: rtl;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+/* Sidebar item icon - positioned on the right */
+[data-panel-id="office"] .fi-sidebar-nav-item-icon {
+    margin-left: 0.75rem;
+    margin-right: 0;
+    order: 2;
+}
+
+/* Sidebar item label - positioned on the right */
+[data-panel-id="office"] .fi-sidebar-nav-item-label {
+    order: 1;
+    text-align: right;
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+/* Active sidebar item styling */
+[data-panel-id="office"] .fi-sidebar-nav-item.is-active,
+[data-panel-id="office"] .fi-sidebar-nav-item[aria-current="page"] {
+    background: linear-gradient(90deg, rgba(5, 79, 49, 0.08) 0%, rgba(5, 79, 49, 0.04) 100%);
+    border-right: 3px solid #054F31;
+    border-left: none;
+    font-weight: 600;
+}
+
+[data-panel-id="office"] .fi-sidebar-nav-item.is-active .fi-sidebar-nav-item-label,
+[data-panel-id="office"] .fi-sidebar-nav-item[aria-current="page"] .fi-sidebar-nav-item-label {
+    color: #054F31;
+    font-weight: 700;
+}
+
+/* Sidebar scrollable */
+[data-panel-id="office"] .fi-sidebar-nav {
+    overflow-y: auto;
+    max-height: calc(100vh - 4rem);
+}
+
+/* ============================================
+   MAIN CONTENT AREA FIXES
+   ============================================ */
+
+/* Main content positioning - left side with margin for sidebar */
+[data-panel-id="office"] .fi-main,
+[data-panel-id="office"] main,
+[data-panel-id="office"] [role="main"] {
+    margin-right: var(--sidebar-width, 16rem) !important;
+    margin-left: 0 !important;
+    padding: 1.5rem;
+    direction: rtl;
+}
+
+/* Main content wrapper */
+[data-panel-id="office"] .fi-main-content {
+    padding: 1.5rem;
+    direction: rtl;
+}
+
+/* Page container */
+[data-panel-id="office"] .fi-page {
+    padding: 1.5rem;
+    direction: rtl;
+}
+
+/* ============================================
+   PAGE HEADINGS ALIGNMENT
+   ============================================ */
+
+/* Page header/title - right aligned */
+[data-panel-id="office"] .fi-header-heading,
+[data-panel-id="office"] .fi-page-heading,
+[data-panel-id="office"] h1.fi-page-heading,
+[data-panel-id="office"] .fi-section-header-heading {
+    text-align: right !important;
+    direction: rtl;
+    margin-bottom: 1rem;
+}
+
+[data-panel-id="office"] .fi-header-heading {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #054F31;
+}
+
+/* ============================================
+   WIDGETS AND CARDS FIXES
+   ============================================ */
+
+/* Widget container */
+[data-panel-id="office"] .fi-widget,
+[data-panel-id="office"] .fi-widgets-grid > * {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Widget cards - consistent padding and styling */
+[data-panel-id="office"] .fi-widget,
+[data-panel-id="office"] .fi-card,
+[data-panel-id="office"] [class*="widget"],
+[data-panel-id="office"] .fi-section {
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    background: white;
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 1.5rem;
+}
+
+/* Widget content */
+[data-panel-id="office"] .fi-widget-content,
+[data-panel-id="office"] .fi-card-content {
+    padding: 0;
+    direction: rtl;
+    text-align: right;
+}
+
+/* Remove excessive whitespace in cards */
+[data-panel-id="office"] .fi-card > *:first-child {
+    margin-top: 0;
+}
+
+[data-panel-id="office"] .fi-card > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Widget grid spacing */
+[data-panel-id="office"] .fi-widgets-grid {
+    gap: 1.5rem;
+    direction: rtl;
+}
+
+/* ============================================
+   OFFICE STATUS WIDGET SPECIFIC
+   ============================================ */
+
+/* Office Status Widget - compact and aligned */
+[data-panel-id="office"] .fi-section {
+    direction: rtl;
+    text-align: right;
+}
+
+[data-panel-id="office"] .fi-section-header {
+    text-align: right;
+    direction: rtl;
+    margin-bottom: 1rem;
+}
+
+[data-panel-id="office"] .fi-section-content {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ============================================
+   RTL FLEX AND GAP ADJUSTMENTS
+   ============================================ */
+
+/* Flex containers - reverse direction for RTL */
+[data-panel-id="office"] .flex {
+    direction: rtl;
+}
+
+/* Icons in flex rows - swap gaps */
+[data-panel-id="office"] .fi-sidebar-nav-item,
+[data-panel-id="office"] .fi-btn,
+[data-panel-id="office"] button {
+    flex-direction: row-reverse;
+}
+
+/* Buttons with icons */
+[data-panel-id="office"] .fi-btn-icon {
+    margin-left: 0.5rem;
+    margin-right: 0;
+    order: 2;
+}
+
+[data-panel-id="office"] .fi-btn-label {
+    order: 1;
+}
+
+/* ============================================
+   FORMS AND INPUTS RTL
+   ============================================ */
+
+[data-panel-id="office"] .fi-input-wrapper,
+[data-panel-id="office"] .fi-select-wrapper,
+[data-panel-id="office"] .fi-textarea-wrapper {
+    direction: rtl;
+    text-align: right;
+}
+
+[data-panel-id="office"] .fi-input,
+[data-panel-id="office"] .fi-select,
+[data-panel-id="office"] .fi-textarea {
+    text-align: right;
+    padding-right: 0.75rem;
+    padding-left: 2.5rem;
+    direction: rtl;
+}
+
+[data-panel-id="office"] .fi-input-icon,
+[data-panel-id="office"] .fi-select-icon {
+    right: 0.75rem;
+    left: auto !important;
+}
+
+/* ============================================
+   TABLES RTL
+   ============================================ */
+
+[data-panel-id="office"] table {
+    direction: rtl;
+}
+
+[data-panel-id="office"] table th,
+[data-panel-id="office"] table td {
+    text-align: right;
+}
+
+/* ============================================
+   RESPONSIVE FIXES
+   ============================================ */
+
+@media (max-width: 768px) {
+    [data-panel-id="office"] .fi-main,
+    [data-panel-id="office"] main {
+        margin-right: 0 !important;
+        padding: 1rem;
+    }
+
+    [data-panel-id="office"] .fi-widget,
+    [data-panel-id="office"] .fi-card {
+        padding: 1rem;
+    }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    [data-panel-id="office"] .fi-widget,
+    [data-panel-id="office"] .fi-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-panel-id="office"] .fi-sidebar-nav-item.is-active,
+    [data-panel-id="office"] .fi-sidebar-nav-item[aria-current="page"] {
+        background: linear-gradient(90deg, rgba(5, 79, 49, 0.15) 0%, rgba(5, 79, 49, 0.08) 100%);
+    }
+}

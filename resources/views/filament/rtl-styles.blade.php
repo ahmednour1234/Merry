@@ -262,11 +262,11 @@
     [data-panel-id="office"]:not(.fi-simple-layout) .fi-sidebar {
         background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
     }
-    
+
     [data-panel-id="office"]:not(.fi-simple-layout) .fi-main {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
-    
+
     [data-panel-id="office"] .fi-simple-layout {
         font-family: 'Cairo', sans-serif;
         direction: rtl;
@@ -276,11 +276,11 @@
     [data-panel-id="admin"]:not(.fi-simple-layout) .fi-sidebar {
         background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
     }
-    
+
     [data-panel-id="admin"]:not(.fi-simple-layout) .fi-main {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
-    
+
     [data-panel-id="admin"] .fi-simple-layout {
         font-family: 'Cairo', sans-serif;
         direction: rtl;
@@ -492,3 +492,15 @@
         }
     }
 </style>
+
+<script>
+    // Set dir="rtl" on HTML element for Office panel
+    (function() {
+        // Check if we're on the Office panel
+        const panelId = document.querySelector('[data-panel-id]')?.getAttribute('data-panel-id');
+        if (panelId === 'office') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', 'ar');
+        }
+    })();
+</script>
