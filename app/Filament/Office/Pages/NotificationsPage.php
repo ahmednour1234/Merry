@@ -6,13 +6,16 @@ use App\Models\NotificationRecipient;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Tables;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-class NotificationsPage extends Page
+class NotificationsPage extends Page implements HasTable
 {
+    use InteractsWithTable;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bell-alert';
 
     protected string $view = 'filament.office.pages.notifications';
