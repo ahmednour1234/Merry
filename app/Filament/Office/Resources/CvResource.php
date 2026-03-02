@@ -124,7 +124,6 @@ class CvResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('bookings_count')
                     ->label('عدد الحجوزات')
-                    ->counts('bookings')
                     ->formatStateUsing(fn ($record) => CvBooking::on('system')
                         ->where('cv_id', $record->id)
                         ->whereIn('status', BookingStatus::activeStatuses())
