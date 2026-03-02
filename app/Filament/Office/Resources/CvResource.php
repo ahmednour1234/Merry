@@ -8,6 +8,7 @@ use App\Models\Cv;
 use App\Models\CvBooking;
 use App\Models\Category;
 use App\Models\Identity\FavouriteCv;
+use App\Models\Identity\EndUser;
 use App\Models\Nationality;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
 use BackedEnum;
@@ -208,6 +209,28 @@ class CvResource extends Resource
                             ->send();
                     })
                     ->visible(fn ($record) => $record->status === 'rejected'),
+                BaseAction::make('view_favorites')
+                    ->label('المستخدمين المفضلين')
+                    ->icon('heroicon-o-heart')
+                    ->color('pink')
+                    ->modalHeading(fn ($record) => 'المستخدمين الذين أضافوا السيرة الذاتية #' . $record->id . ' للمفضلة')
+                    ->modalContent(function (Cv $record) {
+                        $favorites = FavouriteCv::on('identity')
+                            ->where('cv_id', $record->id)
+                            ->with('endUser')
+                            ->get();
+                        
+                        if ($favorites->isEmpty()) {
+                            return view('filament.office.components.no-favorites');
+                        }
+                        
+                        return view('filament.office.components.favorites-list', [
+                            'favorites' => $favorites,
+                        ]);
+                    })
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel('إغلاق')
+                    ->visible(fn ($record) => FavouriteCv::on('identity')->where('cv_id', $record->id)->exists()),
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
             ])
