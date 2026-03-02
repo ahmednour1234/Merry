@@ -4,32 +4,8 @@
     $notifications = collect();
     
     if ($user) {
-        $unreadCount = \App\Models\NotificationRecipient::on('system')
-            ->where('channel', 'inapp')
-            ->where(function($query) use ($user) {
-                $query->where('resolved_user_id', $user->id)
-                      ->orWhere(function($q) use ($user) {
-                          $q->where('recipient_type', 'role')
-                            ->whereIn('recipient_id', $user->roles->pluck('id')->toArray());
-                      });
-            })
-            ->where('status', 'sent')
-            ->whereNull('read_at')
-            ->count();
-            
-        $notifications = \App\Models\NotificationRecipient::on('system')
-            ->with('notification')
-            ->where('channel', 'inapp')
-            ->where(function($query) use ($user) {
-                $query->where('resolved_user_id', $user->id)
-                      ->orWhere(function($q) use ($user) {
-                          $q->where('recipient_type', 'role')
-                            ->whereIn('recipient_id', $user->roles->pluck('id')->toArray());
-                      });
-            })
-            ->orderByDesc('id')
-            ->limit(5)
-            ->get();
+        $unreadCount = $user->unreadNotifications()->count();
+        $notifications = $user->notifications()->latest()->limit(5)->get();
     }
 @endphp
 
@@ -43,8 +19,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
         </svg>
         @if($unreadCount > 0)
-            <span class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-semibold text-white leading-none">
-                {{ $unreadCount > 9 ? '9+' : $unreadCount }}
+            <span class="absolute -top-1 -right-1 flex min-w-[20px] h-5 items-center justify-center rounded-full bg-red-500 text-[11px] font-bold text-white px-1.5 leading-none shadow-lg">
+                {{ $unreadCount > 99 ? '99+' : $unreadCount }}
             </span>
         @endif
     </button>
@@ -61,24 +37,24 @@
         </div>
         <div class="max-h-96 overflow-y-auto">
             @if($notifications->count() > 0)
-                @foreach($notifications as $recipient)
+                @foreach($notifications as $notification)
                     <a
                         href="{{ \App\Filament\Pages\NotificationsPage::getUrl() }}"
-                        class="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 border-b border-gray-100 dark:border-gray-700 transition-colors {{ !$recipient->read_at ? 'bg-primary-50/50 dark:bg-primary-900/10' : '' }}"
+                        class="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 border-b border-gray-100 dark:border-gray-700 transition-colors {{ !$notification->read_at ? 'bg-primary-50/50 dark:bg-primary-900/10' : '' }}"
                     >
                         <div class="flex items-start gap-3">
                             <div class="flex-1 min-w-0">
-                                <p class="font-medium text-sm text-gray-900 dark:text-white">{{ $recipient->notification->title ?? 'إشعار' }}</p>
-                                @if($recipient->notification->body)
+                                <p class="font-medium text-sm text-gray-900 dark:text-white">{{ $notification->data['title'] ?? 'إشعار' }}</p>
+                                @if(isset($notification->data['body']))
                                     <p class="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
-                                        {{ $recipient->notification->body }}
+                                        {{ $notification->data['body'] }}
                                     </p>
                                 @endif
                                 <p class="text-xs text-gray-500 dark:text-gray-500 mt-1.5">
-                                    {{ $recipient->created_at->diffForHumans() }}
+                                    {{ $notification->created_at->diffForHumans() }}
                                 </p>
                             </div>
-                            @if(!$recipient->read_at)
+                            @if(!$notification->read_at)
                                 <span class="mt-1.5 h-2 w-2 rounded-full bg-primary-500 flex-shrink-0"></span>
                             @endif
                         </div>

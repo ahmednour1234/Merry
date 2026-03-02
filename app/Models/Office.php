@@ -32,4 +32,9 @@ class Office extends Authenticatable
     {
         return $this->image ? asset('storage/' . $this->image) : null;
     }
+
+    public function getNotificationConnection()
+    {
+        return 'system';
+    }
 }

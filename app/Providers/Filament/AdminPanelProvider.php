@@ -54,10 +54,6 @@ class AdminPanelProvider extends PanelProvider
                 'panels::head.start',
                 fn () => view('filament.rtl-styles')
             )
-            ->renderHook(
-                'panels::user-menu.start',
-                fn () => view('filament.components.notification-bell')
-            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

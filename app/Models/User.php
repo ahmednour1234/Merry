@@ -33,4 +33,9 @@ protected $connection = 'system';
     {
         return $this->belongsToMany(Permission::class, 'permission_user')->withTimestamps();
     }
+
+    public function getNotificationConnection()
+    {
+        return 'system';
+    }
 }
