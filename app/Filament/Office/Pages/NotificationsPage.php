@@ -125,4 +125,10 @@ class NotificationsPage extends Page
             ])
             ->defaultSort('created_at', 'desc');
     }
+
+    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
+    {
+        $panel = $panel ?? \Filament\Facades\Filament::getPanel('office');
+        return $panel->getUrl() . '/notifications';
+    }
 }
