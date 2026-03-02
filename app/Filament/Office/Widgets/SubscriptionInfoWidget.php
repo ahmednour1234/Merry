@@ -40,9 +40,9 @@ class SubscriptionInfoWidget extends BaseWidget
             ?? $subscription->plan?->name
             ?? $subscription->plan_code;
 
-        $daysUntilRenewal = now()->diffInDays($subscription->ends_at, false);
-        $renewalText = $daysUntilRenewal > 0 
-            ? "متبقي {$daysUntilRenewal} يوم" 
+        $daysUntilRenewal = (int) round(now()->diffInDays($subscription->ends_at, false));
+        $renewalText = $daysUntilRenewal > 0
+            ? "متبقي {$daysUntilRenewal} يوم"
             : "منتهي";
 
         return [
@@ -56,12 +56,12 @@ class SubscriptionInfoWidget extends BaseWidget
                 })
                 ->icon('heroicon-o-credit-card')
                 ->color($subscription->status === 'active' ? 'success' : 'warning'),
-            
+
             Stat::make('موعد التجديد القادم', $subscription->ends_at->format('Y-m-d'))
                 ->description($renewalText)
                 ->icon('heroicon-o-calendar')
                 ->color($daysUntilRenewal > 7 ? 'success' : ($daysUntilRenewal > 0 ? 'warning' : 'danger')),
-            
+
             Stat::make('التجديد التلقائي', $subscription->auto_renew ? 'مفعل' : 'معطل')
                 ->description($subscription->auto_renew ? 'سيتم التجديد تلقائياً' : 'لن يتم التجديد تلقائياً')
                 ->icon($subscription->auto_renew ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
