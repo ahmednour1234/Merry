@@ -18,38 +18,62 @@
         font-family: 'Cairo', sans-serif !important;
     }
 
-    /* Sidebar RTL */
-    [data-panel-id] .fi-sidebar {
+    /* Sidebar RTL - Force right side */
+    [data-panel-id] .fi-sidebar,
+    [data-panel-id] .fi-sidebar-group,
+    [data-panel-id] [class*="sidebar"] {
         right: 0 !important;
         left: auto !important;
-        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
         border-left: none !important;
+        position: fixed !important;
     }
 
     [data-panel-id] .fi-sidebar-nav {
-        padding-right: 0.75rem;
-        padding-left: 0;
+        padding-right: 0.75rem !important;
+        padding-left: 0 !important;
+        direction: rtl !important;
     }
 
     [data-panel-id] .fi-sidebar-nav-item {
-        padding-right: 0.75rem;
-        padding-left: 0.5rem;
+        padding-right: 0.75rem !important;
+        padding-left: 0.5rem !important;
+        text-align: right !important;
+        direction: rtl !important;
     }
 
     [data-panel-id] .fi-sidebar-nav-item-icon {
-        margin-left: 0.75rem;
-        margin-right: 0;
+        margin-left: 0.75rem !important;
+        margin-right: 0 !important;
+        order: 2;
     }
 
-    /* Main content RTL */
-    [data-panel-id] .fi-main {
-        margin-right: var(--sidebar-width, 16rem);
+    [data-panel-id] .fi-sidebar-nav-item-label {
+        order: 1;
+        text-align: right !important;
+    }
+
+    /* Main content RTL - Force left side */
+    [data-panel-id] .fi-main,
+    [data-panel-id] .fi-main-content,
+    [data-panel-id] [class*="main"] {
+        margin-right: var(--sidebar-width, 16rem) !important;
         margin-left: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 2rem !important;
     }
 
     [data-panel-id] .fi-header {
-        right: var(--sidebar-width, 16rem);
+        right: var(--sidebar-width, 16rem) !important;
         left: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 2rem !important;
+    }
+
+    /* Layout wrapper RTL */
+    [data-panel-id] .fi-layout,
+    [data-panel-id] [class*="layout"] {
+        direction: rtl !important;
     }
 
     /* Navigation items */
@@ -216,6 +240,22 @@
     [data-panel-id] [style*="text-align: left"] {
         direction: rtl !important;
         text-align: right !important;
+    }
+
+    /* Force sidebar to right - Override Filament defaults */
+    [data-panel-id] aside,
+    [data-panel-id] [role="complementary"],
+    [data-panel-id] .fi-sidebar-container {
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    /* Force main content to left */
+    [data-panel-id] main,
+    [data-panel-id] [role="main"],
+    [data-panel-id] .fi-main-container {
+        margin-right: var(--sidebar-width, 16rem) !important;
+        margin-left: 0 !important;
     }
 
     /* Office panel specific styles */
