@@ -7,7 +7,9 @@
     @if(!empty($widgets))
         <div class="fi-widgets-grid grid gap-6 {{ is_array($columns) ? '' : 'grid-cols-1 md:grid-cols-' . $columns }}">
             @foreach($widgets as $widget)
-                @livewire($widget)
+                <div class="fi-widget">
+                    @livewire($widget)
+                </div>
             @endforeach
         </div>
     @endif

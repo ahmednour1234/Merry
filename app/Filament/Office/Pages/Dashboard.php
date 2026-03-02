@@ -13,8 +13,6 @@ class Dashboard extends BaseDashboard
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-home';
 
-    protected string $view = 'filament.office.pages.dashboard';
-
     public function getWidgets(): array
     {
         return [
@@ -27,6 +25,9 @@ class Dashboard extends BaseDashboard
 
     public function getColumns(): int | array
     {
-        return 2;
+        return [
+            'md' => 2,
+            'xl' => 2,
+        ];
     }
 }
