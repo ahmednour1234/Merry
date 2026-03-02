@@ -11,6 +11,11 @@ class SubscriptionInfoWidget extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    protected function getColumns(): int
+    {
+        return 3;
+    }
+
     protected function getStats(): array
     {
         $office = Auth::guard('office-panel')->user();

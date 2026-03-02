@@ -14,6 +14,11 @@ class OfficeStatsWidget extends BaseWidget
 {
     protected static ?int $sort = 4;
 
+    protected function getColumns(): int
+    {
+        return 3;
+    }
+
     protected function getStats(): array
     {
         $office = Auth::guard('office-panel')->user();
