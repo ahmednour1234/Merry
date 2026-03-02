@@ -187,7 +187,7 @@
         }
 
         .plan-card {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border-radius: 24px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             padding: 32px 28px;
@@ -225,9 +225,19 @@
 
         .plan-card.current {
             border-color: #054F31;
-            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 50%, #dcfce7 100%);
             box-shadow: 0 15px 40px rgba(5, 79, 49, 0.25);
             animation: pulse-border 2s ease-in-out infinite;
+        }
+
+        .plan-card.has-offer {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #ffffff 0%, #fef3c7 50%, #fde68a 100%);
+        }
+
+        .plan-card.has-offer:hover {
+            border-color: #dc2626;
+            box-shadow: 0 24px 60px rgba(220, 38, 38, 0.3);
         }
 
         .plan-card.current::before {
@@ -527,7 +537,7 @@
         }
 
         .welcome-section {
-            background: linear-gradient(135deg, #054F31 0%, #10b981 100%);
+            background: linear-gradient(135deg, #054F31 0%, #10b981 50%, #34d399 100%);
             border-radius: 24px;
             padding: 40px;
             margin-bottom: 40px;
@@ -587,13 +597,31 @@
         }
 
         .stat-card {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border-radius: 16px;
             padding: 24px;
             text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #054F31 0%, #10b981 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
         }
 
         .stat-card:hover {
@@ -1063,6 +1091,197 @@
             }
         }
 
+        .offers-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offers-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .offers-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offers-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #92400e;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(146, 64, 14, 0.2);
+        }
+
+        .offers-subtitle {
+            font-size: 18px;
+            color: #78350f;
+            font-weight: 600;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 12px 40px rgba(146, 64, 14, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 3px solid transparent;
+            overflow: hidden;
+        }
+
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(146, 64, 14, 0.3);
+            border-color: #f59e0b;
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 900;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .offer-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .offer-name {
+            font-size: 24px;
+            font-weight: 900;
+            color: #92400e;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .offer-description {
+            color: #78350f;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .offer-discount {
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .offer-discount-value {
+            font-size: 42px;
+            font-weight: 900;
+            color: #dc2626;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .offer-discount-label {
+            font-size: 14px;
+            color: #78350f;
+            font-weight: 700;
+        }
+
+        .plan-offer-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 900;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            z-index: 10;
+            animation: bounce 2s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .plan-offer-badge::before {
+            content: '🎉';
+            font-size: 16px;
+        }
+
+        .plan-price-old {
+            font-size: 24px;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .plan-price-new {
+            font-size: 48px;
+            font-weight: 900;
+            color: #dc2626;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+
+        .plan-savings {
+            font-size: 14px;
+            color: #10b981;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
         @media (max-width: 768px) {
             .plans-grid {
                 grid-template-columns: 1fr;
@@ -1079,6 +1298,14 @@
             .swiper-button-next,
             .swiper-button-prev {
                 display: none;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .offers-title {
+                font-size: 28px;
             }
         }
     </style>
@@ -1167,6 +1394,58 @@
             </div>
         @endif
 
+        @php
+            $activePromotions = \App\Models\Promotion::on('system')
+                ->where('active', true)
+                ->where('auto_apply', true)
+                ->where(function($q) {
+                    $q->whereNull('starts_at')->orWhere('starts_at', '<=', now());
+                })
+                ->where(function($q) {
+                    $q->whereNull('ends_at')->orWhere('ends_at', '>=', now());
+                })
+                ->orderByDesc('created_at')
+                ->get();
+        @endphp
+
+        @if($activePromotions->count() > 0)
+            <div class="offers-section">
+                <div class="offers-header">
+                    <h2 class="offers-title">🔥 عروض حصرية 🔥</h2>
+                    <p class="offers-subtitle">استفد من أفضل العروض والخصومات المتاحة الآن</p>
+                </div>
+                <div class="offers-grid">
+                    @foreach($activePromotions as $promo)
+                        @php
+                            $discountText = $promo->type === 'percent'
+                                ? $promo->amount . '%'
+                                : number_format($promo->amount, 2) . ' ' . ($promo->currency_code ?? 'USD');
+                            $planName = $promo->plan_code
+                                ? (\App\Models\Plan::on('system')->where('code', $promo->plan_code)->first()?->translations->where('lang_code', 'ar')->first()?->name ?? $promo->plan_code)
+                                : 'جميع الخطط';
+                        @endphp
+                        <div class="offer-card">
+                            <span class="offer-badge">عرض محدود</span>
+                            <div class="offer-icon">🎁</div>
+                            <h3 class="offer-name">{{ $promo->name ?? 'عرض خاص' }}</h3>
+                            <p class="offer-description">
+                                {{ $promo->plan_code ? "خصم حصري على خطة {$planName}" : 'خصم على جميع الخطط المتاحة' }}
+                            </p>
+                            <div class="offer-discount">
+                                <div class="offer-discount-value">{{ $discountText }}</div>
+                                <div class="offer-discount-label">خصم</div>
+                            </div>
+                            @if($promo->ends_at)
+                                <div style="text-align: center; color: #78350f; font-size: 13px; font-weight: 600;">
+                                    ينتهي في: {{ \Carbon\Carbon::parse($promo->ends_at)->format('Y-m-d') }}
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         <div class="plans-slider-wrapper">
             <div class="swiper plans-slider">
                 <div class="swiper-wrapper">
@@ -1176,17 +1455,37 @@
                             $planName = $plan->translations->where('lang_code', 'ar')->first()?->name ?? $plan->name;
                             $planDesc = $plan->translations->where('lang_code', 'ar')->first()?->description ?? $plan->description;
                             $isCurrent = $currentSubscription && $currentSubscription->plan_code === $plan->code;
+
+                            $hasOffer = false;
+                            $originalPrice = $plan->base_price;
+                            $finalPrice = $priced['price'] ?? $plan->base_price;
+                            $discountPercent = 0;
+
+                            if ($finalPrice < $originalPrice) {
+                                $hasOffer = true;
+                                $discountPercent = round((($originalPrice - $finalPrice) / $originalPrice) * 100);
+                            }
                         @endphp
                         <div class="swiper-slide">
-                            <div class="plan-card {{ $isCurrent ? 'current' : '' }}">
+                            <div class="plan-card {{ $isCurrent ? 'current' : '' }} {{ $hasOffer ? 'has-offer' : '' }}">
                                 @if($isCurrent)
                                     <span class="plan-badge">الحالية</span>
+                                @endif
+                                @if($hasOffer)
+                                    <span class="plan-offer-badge">خصم {{ $discountPercent }}%</span>
                                 @endif
                                 <h3 class="plan-name">{{ $planName }}</h3>
                                 <p class="plan-description">{{ $planDesc }}</p>
                                 <div class="plan-price-section">
-                                    <div class="plan-price">{{ number_format($priced['price'] ?? $plan->base_price, 2) }}</div>
-                                    <div class="plan-currency">{{ $priced['currency'] ?? $plan->base_currency }} / {{ $plan->billing_cycle === 'monthly' ? 'شهري' : 'سنوي' }}</div>
+                                    @if($hasOffer)
+                                        <div class="plan-price-old">{{ number_format($originalPrice, 2) }} {{ $plan->base_currency }}</div>
+                                        <div class="plan-price-new">{{ number_format($finalPrice, 2) }}</div>
+                                        <div class="plan-currency">{{ $priced['currency'] ?? $plan->base_currency }} / {{ $plan->billing_cycle === 'monthly' ? 'شهري' : 'سنوي' }}</div>
+                                        <div class="plan-savings">وفر {{ number_format($originalPrice - $finalPrice, 2) }} {{ $plan->base_currency }}</div>
+                                    @else
+                                        <div class="plan-price">{{ number_format($finalPrice, 2) }}</div>
+                                        <div class="plan-currency">{{ $priced['currency'] ?? $plan->base_currency }} / {{ $plan->billing_cycle === 'monthly' ? 'شهري' : 'سنوي' }}</div>
+                                    @endif
                                 </div>
                                 <ul class="plan-features">
                                     @foreach($plan->features->where('active', true) as $feature)
