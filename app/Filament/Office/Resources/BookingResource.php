@@ -7,6 +7,7 @@ use App\Filament\Office\Resources\BookingResource\Pages;
 use App\Models\Cv;
 use App\Models\CvBooking;
 use BackedEnum;
+use Filament\Actions\Action as BaseAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -133,7 +134,7 @@ class BookingResource extends Resource
                     ->label('تاريخ الحجز'),
             ])
             ->actions([
-                Tables\Actions\Action::make('accept')
+                BaseAction::make('accept')
                     ->label('قبول')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
@@ -169,7 +170,7 @@ class BookingResource extends Resource
                             ->send();
                     })
                     ->visible(fn (CvBooking $record) => $record->status === BookingStatus::PENDING->value),
-                Tables\Actions\Action::make('reject')
+                BaseAction::make('reject')
                     ->label('رفض')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
