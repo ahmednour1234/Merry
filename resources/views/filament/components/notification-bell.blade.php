@@ -6,7 +6,13 @@
     if ($user) {
         $unreadCount = \App\Models\NotificationRecipient::on('system')
             ->where('channel', 'inapp')
-            ->where('resolved_user_id', $user->id)
+            ->where(function($query) use ($user) {
+                $query->where('resolved_user_id', $user->id)
+                      ->orWhere(function($q) use ($user) {
+                          $q->where('recipient_type', 'role')
+                            ->whereIn('recipient_id', $user->roles->pluck('id')->toArray());
+                      });
+            })
             ->where('status', 'sent')
             ->whereNull('read_at')
             ->count();
@@ -14,7 +20,13 @@
         $notifications = \App\Models\NotificationRecipient::on('system')
             ->with('notification')
             ->where('channel', 'inapp')
-            ->where('resolved_user_id', $user->id)
+            ->where(function($query) use ($user) {
+                $query->where('resolved_user_id', $user->id)
+                      ->orWhere(function($q) use ($user) {
+                          $q->where('recipient_type', 'role')
+                            ->whereIn('recipient_id', $user->roles->pluck('id')->toArray());
+                      });
+            })
             ->orderByDesc('id')
             ->limit(5)
             ->get();

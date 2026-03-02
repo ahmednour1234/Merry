@@ -87,6 +87,26 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
 
         $notificationService->notifyOffices($officeNotification, [$officeId], ['inapp']);
 
+        $adminUsers = \App\Models\User::query()
+            ->whereHas('roles', function ($q) {
+                $q->where('slug', 'admin');
+            })
+            ->where('active', true)
+            ->get();
+
+        foreach ($adminUsers as $adminUser) {
+            $adminUser->notify(new \App\Notifications\SubscriptionCreatedNotification(
+                $office->name,
+                $planName,
+                $subscription->id
+            ));
+        }
+
+        $office->notify(new \App\Notifications\OfficeSubscriptionCreatedNotification(
+            $planName,
+            $subscription->id
+        ));
+
         return $subscription;
     }
 
