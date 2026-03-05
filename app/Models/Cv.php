@@ -46,14 +46,18 @@ class Cv extends Model
             return null;
         }
 
-        // Build URL with /public in path
-        $baseUrl = rtrim(config('app.url'), '/');
-
-        // Build the file path with /public
-        $filePath = 'public/storage/' . ltrim($this->file_path, '/');
-
-        // Return complete URL
-        return $baseUrl . '/' . ltrim($filePath, '/');
+        // Use Storage temporaryUrl (signed URL) like Filament does
+        try {
+            return Storage::disk('public')->temporaryUrl(
+                $this->file_path,
+                now()->addHours(24)
+            );
+        } catch (\Exception $e) {
+            // Fallback to regular URL if temporaryUrl fails
+            $baseUrl = rtrim(config('app.url'), '/');
+            $filePath = 'public/storage/' . ltrim($this->file_path, '/');
+            return $baseUrl . '/' . ltrim($filePath, '/');
+        }
     }
 
     // Check if file exists - simplified since download works
