@@ -91,11 +91,11 @@
                 </p>
             </div>
 
-            @if($cv->file_path)
+            @if($cv->fileExists())
                 <div>
                     <label class="text-sm font-semibold text-gray-700 dark:text-gray-300">الملف</label>
                     <p class="text-gray-900 dark:text-white">
-                        <a href="{{ asset('storage/' . ltrim($cv->file_path, '/')) }}"
+                        <a href="{{ $cv->file_url }}"
                            target="_blank"
                            class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 dark:text-primary-400">
                             <x-filament::icon icon="heroicon-o-document-arrow-down" class="h-4 w-4" />
@@ -107,6 +107,16 @@
                             الحجم: {{ number_format($cv->file_size / 1024, 2) }} KB
                         </p>
                     @endif
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        المسار: {{ $cv->file_path }}
+                    </p>
+                </div>
+            @elseif($cv->file_path)
+                <div>
+                    <label class="text-sm font-semibold text-gray-700 dark:text-gray-300">الملف</label>
+                    <p class="text-yellow-600 dark:text-yellow-400">
+                        ⚠️ الملف غير موجود في المسار: {{ $cv->file_path }}
+                    </p>
                 </div>
             @endif
 

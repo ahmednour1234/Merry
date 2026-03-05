@@ -182,9 +182,9 @@ class CvResource extends Resource
                     ->label('عرض PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->url(fn ($record) => $record->file_path ? asset('storage/' . ltrim($record->file_path, '/')) : null)
+                    ->url(fn ($record) => $record->file_url)
                     ->openUrlInNewTab()
-                    ->visible(fn ($record) => !empty($record->file_path)),
+                    ->visible(fn ($record) => $record->fileExists()),
                 BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
                     ->icon(fn ($record) => $record->status === 'deactivated_by_office' ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')

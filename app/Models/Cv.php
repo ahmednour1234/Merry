@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Cv extends Model
 {
@@ -37,6 +38,26 @@ class Cv extends Model
     // علاقات
     public function office()   { return $this->belongsTo(\App\Models\Office::class, 'office_id'); }
     public function category() { return $this->belongsTo(\App\Models\Category::class, 'category_id'); }
+
+    // Accessor for file URL
+    public function getFileUrlAttribute(): ?string
+    {
+        if (empty($this->file_path)) {
+            return null;
+        }
+
+        return Storage::disk('public')->url($this->file_path);
+    }
+
+    // Check if file exists
+    public function fileExists(): bool
+    {
+        if (empty($this->file_path)) {
+            return false;
+        }
+
+        return Storage::disk('public')->exists($this->file_path);
+    }
 
     // Scopes للفلاتر
     public function scopeFilter($q, array $f)
