@@ -75,19 +75,17 @@ class OfficePanelProvider extends PanelProvider
             ->databaseNotifications()
             ->userMenuItems([
                 MenuItem::make()
-                    ->label('السير الذاتية')
+                    ->label(fn () => 'السير الذاتية (' . \App\Models\Cv::on('system')
+                        ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
+                        ->count() . ')')
                     ->icon('heroicon-o-document-text')
-                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/cvs')
-                    ->badge(fn () => \App\Models\Cv::on('system')
-                        ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
-                        ->count()),
+                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/cvs'),
                 MenuItem::make()
-                    ->label('الحجوزات')
-                    ->icon('heroicon-o-calendar')
-                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/bookings')
-                    ->badge(fn () => \App\Models\CvBooking::on('system')
+                    ->label(fn () => 'الحجوزات (' . \App\Models\CvBooking::on('system')
                         ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
-                        ->count()),
+                        ->count() . ')')
+                    ->icon('heroicon-o-calendar')
+                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/bookings'),
             ]);
     }
 }
