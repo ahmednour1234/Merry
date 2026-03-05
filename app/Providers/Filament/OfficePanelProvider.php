@@ -46,6 +46,7 @@ class OfficePanelProvider extends PanelProvider
             ->pages([
                 \App\Filament\Office\Pages\Dashboard::class,
                 \App\Filament\Office\Pages\Subscriptions::class,
+                \App\Filament\Office\Pages\Profile::class,
                 \App\Filament\Office\Pages\Auth\Login::class,
                 \App\Filament\Office\Pages\Auth\Register::class,
                 \App\Filament\Office\Pages\Auth\VerifyOtp::class,
@@ -75,17 +76,9 @@ class OfficePanelProvider extends PanelProvider
             ->databaseNotifications()
             ->userMenuItems([
                 MenuItem::make()
-                    ->label(fn () => 'السير الذاتية (' . \App\Models\Cv::on('system')
-                        ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
-                        ->count() . ')')
-                    ->icon('heroicon-o-document-text')
-                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/cvs'),
-                MenuItem::make()
-                    ->label(fn () => 'الحجوزات (' . \App\Models\CvBooking::on('system')
-                        ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
-                        ->count() . ')')
-                    ->icon('heroicon-o-calendar')
-                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/bookings'),
+                    ->label('الملف الشخصي')
+                    ->icon('heroicon-o-user-circle')
+                    ->url(fn () => \App\Filament\Office\Pages\Profile::getUrl()),
             ]);
     }
 }
