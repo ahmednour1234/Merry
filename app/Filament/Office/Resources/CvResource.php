@@ -172,13 +172,26 @@ class CvResource extends Resource
                     ->color('success')
                     ->action(function (Cv $record) {
                         if (empty($record->file_path)) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('الملف غير موجود')
+                                ->danger()
+                                ->send();
                             return;
                         }
 
-                        $filePath = Storage::disk('public')->path($record->file_path);
-                        $fileName = $record->file_original_name ?? basename($record->file_path);
+                        // Check if file exists using Storage
+                        if (!Storage::disk('public')->exists($record->file_path)) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('الملف غير موجود')
+                                ->body('المسار: ' . $record->file_path)
+                                ->danger()
+                                ->send();
+                            return;
+                        }
 
-                        return response()->download($filePath, $fileName);
+                        // Use Storage response for download
+                        $fileName = $record->file_original_name ?? basename($record->file_path);
+                        return Storage::disk('public')->download($record->file_path, $fileName);
                     })
                     ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
