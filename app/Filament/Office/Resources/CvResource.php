@@ -176,7 +176,7 @@ class CvResource extends Resource
                         $repo = app(CvRepositoryInterface::class);
                         $active = $record->status !== 'deactivated_by_office';
                         $repo->officeToggleActive($record->id, $office->id, !$active);
-                        
+
                         \Filament\Notifications\Notification::make()
                             ->title('تم تحديث الحالة بنجاح')
                             ->success()
@@ -219,11 +219,11 @@ class CvResource extends Resource
                             ->where('cv_id', $record->id)
                             ->with('endUser')
                             ->get();
-                        
+
                         if ($favorites->isEmpty()) {
                             return view('filament.office.components.no-favorites');
                         }
-                        
+
                         return view('filament.office.components.favorites-list', [
                             'favorites' => $favorites,
                         ]);

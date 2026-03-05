@@ -22,7 +22,7 @@
                                 <p class="text-xs text-gray-500 dark:text-gray-400">ID: {{ $user->id }}</p>
                             </div>
                         </div>
-                        
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
                             @if($user->phone)
                                 <div class="flex items-center gap-2 text-sm">
@@ -32,21 +32,21 @@
                                     </a>
                                 </div>
                             @endif
-                            
+
                             @if($user->national_id)
                                 <div class="flex items-center gap-2 text-sm">
                                     <x-filament::icon icon="heroicon-o-identification" class="h-4 w-4 text-gray-400" />
                                     <span class="text-gray-700 dark:text-gray-300">{{ $user->national_id }}</span>
                                 </div>
                             @endif
-                            
+
                             @if($user->city_id)
                                 <div class="flex items-center gap-2 text-sm">
                                     <x-filament::icon icon="heroicon-o-map-pin" class="h-4 w-4 text-gray-400" />
                                     <span class="text-gray-700 dark:text-gray-300">المدينة: {{ $user->city_id }}</span>
                                 </div>
                             @endif
-                            
+
                             <div class="flex items-center gap-2 text-sm">
                                 <x-filament::icon icon="heroicon-o-calendar" class="h-4 w-4 text-gray-400" />
                                 <span class="text-gray-700 dark:text-gray-300">
@@ -54,23 +54,23 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         @if($user->bio)
                             <p class="mt-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{{ $user->bio }}</p>
                         @endif
                     </div>
-                    
+
                     <div class="flex flex-col gap-2">
                         @if($user->phone)
-                            <a href="tel:{{ $user->phone }}" 
+                            <a href="tel:{{ $user->phone }}"
                                class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition">
                                 <x-filament::icon icon="heroicon-o-phone" class="h-4 w-4" />
                                 اتصال
                             </a>
                         @endif
-                        
+
                         @if($user->phone)
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $user->phone) }}" 
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $user->phone) }}"
                                target="_blank"
                                class="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition">
                                 <x-filament::icon icon="heroicon-o-chat-bubble-left-right" class="h-4 w-4" />
