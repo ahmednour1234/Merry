@@ -5,13 +5,16 @@ namespace App\Filament\Office\Pages;
 use App\Models\City;
 use BackedEnum;
 use Filament\Forms;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class Profile extends Page
+class Profile extends Page implements HasForms
 {
+    use InteractsWithForms;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';
 
     protected string $view = 'filament.office.pages.profile';
