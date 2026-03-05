@@ -170,29 +170,11 @@ class CvResource extends Resource
                     ->label('عرض PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->action(function (Cv $record) {
-                        if (empty($record->file_path)) {
-                            \Filament\Notifications\Notification::make()
-                                ->title('الملف غير موجود')
-                                ->danger()
-                                ->send();
-                            return;
-                        }
-
-                        // Check if file exists using Storage
-                        if (!Storage::disk('public')->exists($record->file_path)) {
-                            \Filament\Notifications\Notification::make()
-                                ->title('الملف غير موجود')
-                                ->body('المسار: ' . $record->file_path)
-                                ->danger()
-                                ->send();
-                            return;
-                        }
-
-                        // Use Storage response for download
-                        $fileName = $record->file_original_name ?? basename($record->file_path);
-                        return Storage::disk('public')->download($record->file_path, $fileName);
-                    })
+                    ->url(fn ($record) => $record->file_url)
+                    ->openUrlInNewTab(false)
+                    ->extraAttributes(fn ($record) => [
+                        'download' => $record->file_original_name ?? basename($record->file_path ?? 'file.pdf')
+                    ])
                     ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
