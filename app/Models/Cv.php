@@ -46,18 +46,17 @@ class Cv extends Model
             return null;
         }
 
-        // Use Storage URL if available, otherwise fallback to asset
-        try {
-            $url = Storage::disk('public')->url($this->file_path);
-            // If URL doesn't start with http, it might need asset() instead
-            if (!str_starts_with($url, 'http')) {
-                return asset('storage/' . ltrim($this->file_path, '/'));
-            }
-            return $url;
-        } catch (\Exception $e) {
-            // Fallback to asset if Storage fails
-            return asset('storage/' . ltrim($this->file_path, '/'));
-        }
+        // Build URL manually to avoid /public duplication
+        $baseUrl = rtrim(config('app.url'), '/');
+
+        // Remove /public from base URL if it exists
+        $baseUrl = str_replace('/public', '', $baseUrl);
+
+        // Build the file path
+        $filePath = 'storage/' . ltrim($this->file_path, '/');
+
+        // Return complete URL
+        return $baseUrl . '/' . ltrim($filePath, '/');
     }
 
     // Check if file exists - simplified since download works
