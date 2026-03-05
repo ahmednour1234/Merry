@@ -17,6 +17,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class CvResource extends Resource
 {
@@ -174,6 +175,41 @@ class CvResource extends Resource
                     ->label('مسلم'),
             ])
             ->actions([
+                FilamentAction::make('show_pdf')
+                    ->label('عرض PDF')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('success')
+                    ->url(function (Cv $record): ?string {
+                        if (empty($record->file_path)) {
+                            return null;
+                        }
+
+                        $disk = Storage::disk('private');
+                        $path = ltrim($record->file_path, '/');
+
+                        if (!$disk->exists($path)) {
+                            return null;
+                        }
+
+                        try {
+                            return $disk->temporaryUrl($path, now()->addMinutes(30));
+                        } catch (\Throwable $e) {
+                            return null;
+                        }
+                    })
+                    ->openUrlInNewTab()
+                    ->tooltip('فتح ملف السيرة الذاتية PDF')
+                    ->visible(function (Cv $record): bool {
+                        if (empty($record->file_path)) {
+                            return false;
+                        }
+
+                        try {
+                            return Storage::disk('private')->exists(ltrim($record->file_path, '/'));
+                        } catch (\Throwable $e) {
+                            return false;
+                        }
+                    }),
                 FilamentAction::make('approve')
                     ->label('موافقة')
                     ->icon('heroicon-o-check-circle')
