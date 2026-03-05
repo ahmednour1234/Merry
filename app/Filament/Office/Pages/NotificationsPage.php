@@ -25,6 +25,8 @@ class NotificationsPage extends Page implements HasTable
 
     protected static ?string $title = 'الإشعارات';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function getRoutes(): \Closure
     {
         return function () {
