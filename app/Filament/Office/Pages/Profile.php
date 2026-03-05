@@ -3,6 +3,7 @@
 namespace App\Filament\Office\Pages;
 
 use App\Models\City;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Profile extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';
 
     protected static string $view = 'filament.office.pages.profile';
 
