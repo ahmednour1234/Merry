@@ -166,24 +166,20 @@ class CvResource extends Resource
                     ->label('مسلم'),
             ])
             ->actions([
-                BaseAction::make('show')
-                    ->label('عرض')
-                    ->icon('heroicon-o-eye')
-                    ->color('info')
-                    ->modalHeading(fn ($record) => 'تفاصيل السيرة الذاتية #' . $record->id)
-                    ->modalContent(function (Cv $record) {
-                        return view('filament.office.components.cv-details', [
-                            'cv' => $record,
-                        ]);
-                    })
-                    ->modalSubmitAction(false)
-                    ->modalCancelActionLabel('إغلاق'),
                 BaseAction::make('show_pdf')
                     ->label('عرض PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->url(fn ($record) => $record->file_url)
-                    ->openUrlInNewTab()
+                    ->action(function (Cv $record) {
+                        if (empty($record->file_path)) {
+                            return;
+                        }
+
+                        $filePath = Storage::disk('public')->path($record->file_path);
+                        $fileName = $record->file_original_name ?? basename($record->file_path);
+
+                        return response()->download($filePath, $fileName);
+                    })
                     ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
