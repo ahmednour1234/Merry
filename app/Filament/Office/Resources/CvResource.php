@@ -170,20 +170,8 @@ class CvResource extends Resource
                     ->label('عرض PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->url(function ($record) {
-                        if (empty($record->file_path)) {
-                            return null;
-                        }
-                        // Use temporaryUrl (signed URL) like Filament does
-                        return Storage::disk('public')->temporaryUrl(
-                            $record->file_path,
-                            now()->addHours(24)
-                        );
-                    })
+                    ->url(fn ($record) => route('office.cvs.download', $record->id))
                     ->openUrlInNewTab(false)
-                    ->extraAttributes(fn ($record) => [
-                        'download' => $record->file_original_name ?? basename($record->file_path ?? 'file.pdf')
-                    ])
                     ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
