@@ -170,7 +170,10 @@ class CvResource extends Resource
                     ->label('عرض PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->url(fn ($record) => route('office.cvs.download', $record->id))
+                    ->url(function ($record) {
+                        $panel = \Filament\Facades\Filament::getPanel('office');
+                        return $panel->getUrl() . '/cvs/' . $record->id . '/download';
+                    })
                     ->openUrlInNewTab(false)
                     ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
@@ -258,6 +261,49 @@ class CvResource extends Resource
             'create' => Pages\CreateCv::route('/create'),
             'edit' => Pages\EditCv::route('/{record}/edit'),
         ];
+    }
+
+    public static function getRoutes(): \Closure
+    {
+        return function () {
+            \Illuminate\Support\Facades\Route::get('/cvs/{id}/download', function ($id) {
+                $cv = \App\Models\Cv::on('system')->findOrFail($id);
+                $office = \Illuminate\Support\Facades\Auth::guard('office-panel')->user();
+
+                if (!$office || $cv->office_id !== $office->id) {
+                    abort(403);
+                }
+
+                if (empty($cv->file_path)) {
+                    abort(404, 'File not found');
+                }
+
+                // Try multiple possible paths
+                $possiblePaths = [
+                    Storage::disk('public')->path($cv->file_path),
+                    public_path('storage/' . ltrim($cv->file_path, '/')),
+                    storage_path('app/public/' . ltrim($cv->file_path, '/')),
+                ];
+
+                $filePath = null;
+                foreach ($possiblePaths as $path) {
+                    if (file_exists($path)) {
+                        $filePath = $path;
+                        break;
+                    }
+                }
+
+                if (!$filePath) {
+                    abort(404, 'File not found');
+                }
+
+                $fileName = $cv->file_original_name ?? basename($cv->file_path);
+
+                return response()->download($filePath, $fileName, [
+                    'Content-Type' => 'application/pdf',
+                ]);
+            })->name('office.cvs.download');
+        };
     }
 
     public static function canViewAny(): bool
