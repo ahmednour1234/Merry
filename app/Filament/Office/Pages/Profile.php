@@ -5,6 +5,11 @@ namespace App\Filament\Office\Pages;
 use App\Models\City;
 use BackedEnum;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
@@ -45,34 +50,34 @@ class Profile extends Page implements HasForms
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make('البيانات الأساسية')
+                Section::make('البيانات الأساسية')
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->required()
                             ->maxLength(191)
                             ->label('الاسم'),
-                        Forms\Components\TextInput::make('commercial_reg_no')
+                        TextInput::make('commercial_reg_no')
                             ->maxLength(191)
                             ->label('رقم السجل التجاري'),
-                        Forms\Components\Select::make('city_id')
+                        Select::make('city_id')
                             ->options(fn () => City::on('system')->with('translations')->get()->mapWithKeys(function ($city) {
                                 $name = $city->translations->where('lang_code', 'ar')->first()?->name ?? $city->translations->first()?->name ?? $city->slug;
                                 return [$city->id => $name];
                             })->toArray())
                             ->searchable()
                             ->label('المدينة'),
-                        Forms\Components\Textarea::make('address')
+                        Textarea::make('address')
                             ->rows(3)
                             ->label('العنوان'),
                     ])
                     ->columns(2),
-                Forms\Components\Section::make('معلومات الاتصال')
+                Section::make('معلومات الاتصال')
                     ->schema([
-                        Forms\Components\TextInput::make('phone')
+                        TextInput::make('phone')
                             ->tel()
                             ->maxLength(191)
                             ->label('الهاتف'),
-                        Forms\Components\TextInput::make('email')
+                        TextInput::make('email')
                             ->email()
                             ->required()
                             ->maxLength(191)
@@ -80,9 +85,9 @@ class Profile extends Page implements HasForms
                             ->label('البريد الإلكتروني'),
                     ])
                     ->columns(2),
-                Forms\Components\Section::make('الصورة')
+                Section::make('الصورة')
                     ->schema([
-                        Forms\Components\FileUpload::make('image')
+                        FileUpload::make('image')
                             ->image()
                             ->directory('offices')
                             ->label('الصورة')
@@ -94,9 +99,9 @@ class Profile extends Page implements HasForms
                                 '1:1',
                             ]),
                     ]),
-                Forms\Components\Section::make('كلمة المرور')
+                Section::make('كلمة المرور')
                     ->schema([
-                        Forms\Components\TextInput::make('password')
+                        TextInput::make('password')
                             ->password()
                             ->minLength(8)
                             ->dehydrated(fn ($state) => filled($state))
