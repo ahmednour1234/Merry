@@ -31,6 +31,15 @@ class CvResource extends Resource
     protected static ?string $modelLabel = 'سيرة ذاتية';
     protected static ?string $pluralModelLabel = 'السير الذاتية';
 
+    public static function getNavigationBadge(): ?string
+    {
+        $office = \Illuminate\Support\Facades\Auth::guard('office-panel')->user();
+        if (!$office) {
+            return null;
+        }
+        return (string) static::getModel()::on('system')->where('office_id', $office->id)->count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([
