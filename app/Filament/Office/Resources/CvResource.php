@@ -170,11 +170,44 @@ class CvResource extends Resource
                     ->label('عرض PDF')
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
-                    ->url(function ($record) {
-                        $panel = \Filament\Facades\Filament::getPanel('office');
-                        return $panel->getUrl() . '/cvs/' . $record->id . '/download';
+                    ->action(function (Cv $record) {
+                        if (empty($record->file_path)) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('الملف غير موجود')
+                                ->danger()
+                                ->send();
+                            return;
+                        }
+
+                        // Try multiple possible paths
+                        $possiblePaths = [
+                            Storage::disk('public')->path($record->file_path),
+                            public_path('storage/' . ltrim($record->file_path, '/')),
+                            storage_path('app/public/' . ltrim($record->file_path, '/')),
+                        ];
+
+                        $filePath = null;
+                        foreach ($possiblePaths as $path) {
+                            if (file_exists($path)) {
+                                $filePath = $path;
+                                break;
+                            }
+                        }
+
+                        if (!$filePath) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('الملف غير موجود')
+                                ->body('المسار: ' . $record->file_path)
+                                ->danger()
+                                ->send();
+                            return;
+                        }
+
+                        $fileName = $record->file_original_name ?? basename($record->file_path);
+                        return response()->download($filePath, $fileName, [
+                            'Content-Type' => 'application/pdf',
+                        ]);
                     })
-                    ->openUrlInNewTab(false)
                     ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
@@ -263,48 +296,6 @@ class CvResource extends Resource
         ];
     }
 
-    public static function getRoutes(): \Closure
-    {
-        return function () {
-            \Illuminate\Support\Facades\Route::get('/cvs/{id}/download', function ($id) {
-                $cv = \App\Models\Cv::on('system')->findOrFail($id);
-                $office = \Illuminate\Support\Facades\Auth::guard('office-panel')->user();
-
-                if (!$office || $cv->office_id !== $office->id) {
-                    abort(403);
-                }
-
-                if (empty($cv->file_path)) {
-                    abort(404, 'File not found');
-                }
-
-                // Try multiple possible paths
-                $possiblePaths = [
-                    Storage::disk('public')->path($cv->file_path),
-                    public_path('storage/' . ltrim($cv->file_path, '/')),
-                    storage_path('app/public/' . ltrim($cv->file_path, '/')),
-                ];
-
-                $filePath = null;
-                foreach ($possiblePaths as $path) {
-                    if (file_exists($path)) {
-                        $filePath = $path;
-                        break;
-                    }
-                }
-
-                if (!$filePath) {
-                    abort(404, 'File not found');
-                }
-
-                $fileName = $cv->file_original_name ?? basename($cv->file_path);
-
-                return response()->download($filePath, $fileName, [
-                    'Content-Type' => 'application/pdf',
-                ]);
-            })->name('office.cvs.download');
-        };
-    }
 
     public static function canViewAny(): bool
     {
