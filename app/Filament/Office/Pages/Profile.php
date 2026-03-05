@@ -14,7 +14,7 @@ class Profile extends Page
 {
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';
 
-    protected static string $view = 'filament.office.pages.profile';
+    protected string $view = 'filament.office.pages.profile';
 
     protected static ?string $navigationLabel = 'الملف الشخصي';
 
