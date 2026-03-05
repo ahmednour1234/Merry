@@ -46,14 +46,11 @@ class Cv extends Model
             return null;
         }
 
-        // Build URL manually to avoid /public duplication
+        // Build URL with /public in path
         $baseUrl = rtrim(config('app.url'), '/');
 
-        // Remove /public from base URL if it exists
-        $baseUrl = str_replace('/public', '', $baseUrl);
-
-        // Build the file path
-        $filePath = 'storage/' . ltrim($this->file_path, '/');
+        // Build the file path with /public
+        $filePath = 'public/storage/' . ltrim($this->file_path, '/');
 
         // Return complete URL
         return $baseUrl . '/' . ltrim($filePath, '/');
