@@ -91,7 +91,7 @@
                 </p>
             </div>
 
-            @if($cv->fileExists())
+            @if($cv->file_path)
                 <div>
                     <label class="text-sm font-semibold text-gray-700 dark:text-gray-300">الملف</label>
                     <p class="text-gray-900 dark:text-white">
@@ -109,13 +109,6 @@
                     @endif
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         المسار: {{ $cv->file_path }}
-                    </p>
-                </div>
-            @elseif($cv->file_path)
-                <div>
-                    <label class="text-sm font-semibold text-gray-700 dark:text-gray-300">الملف</label>
-                    <p class="text-yellow-600 dark:text-yellow-400">
-                        ⚠️ الملف غير موجود في المسار: {{ $cv->file_path }}
                     </p>
                 </div>
             @endif

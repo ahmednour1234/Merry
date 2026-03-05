@@ -184,7 +184,7 @@ class CvResource extends Resource
                     ->color('success')
                     ->url(fn ($record) => $record->file_url)
                     ->openUrlInNewTab()
-                    ->visible(fn ($record) => $record->fileExists()),
+                    ->visible(fn ($record) => !empty($record->file_path)),
                 BaseAction::make('toggle_active')
                     ->label(fn ($record) => $record->status === 'deactivated_by_office' ? 'تفعيل' : 'تعطيل')
                     ->icon(fn ($record) => $record->status === 'deactivated_by_office' ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle')
