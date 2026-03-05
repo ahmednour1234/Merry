@@ -34,6 +34,11 @@ class CityResource extends Resource
 
     protected static ?string $pluralModelLabel = 'المدن';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::on('system')->count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

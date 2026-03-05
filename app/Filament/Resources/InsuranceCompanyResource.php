@@ -32,6 +32,11 @@ class InsuranceCompanyResource extends Resource
 
     protected static ?string $pluralModelLabel = 'شركات التأمين';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::on('system')->count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

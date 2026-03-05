@@ -36,6 +36,11 @@ class CvResource extends Resource
 
     protected static ?string $pluralModelLabel = 'السير الذاتية';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::on('system')->count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

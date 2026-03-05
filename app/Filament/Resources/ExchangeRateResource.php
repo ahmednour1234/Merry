@@ -31,6 +31,11 @@ class ExchangeRateResource extends Resource
 
     protected static ?string $pluralModelLabel = 'أسعار الصرف';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::on('system')->count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

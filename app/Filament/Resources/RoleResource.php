@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Filament\Resources;
@@ -32,6 +33,11 @@ class RoleResource extends Resource
     public static function getNavigationLabel(): string
     {
         return 'الأدوار';
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) static::getModel()::on('system')->count();
     }
 
     public static function form(Schema $schema): Schema
