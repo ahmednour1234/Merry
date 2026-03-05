@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -71,6 +72,22 @@ class OfficePanelProvider extends PanelProvider
             ])
             ->authGuard('office-panel')
             ->authPasswordBroker('offices')
-            ->databaseNotifications();
+            ->databaseNotifications()
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('السير الذاتية')
+                    ->icon('heroicon-o-document-text')
+                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/cvs')
+                    ->badge(fn () => \App\Models\Cv::on('system')
+                        ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
+                        ->count()),
+                MenuItem::make()
+                    ->label('الحجوزات')
+                    ->icon('heroicon-o-calendar')
+                    ->url(fn () => \Filament\Facades\Filament::getPanel('office')->getUrl() . '/bookings')
+                    ->badge(fn () => \App\Models\CvBooking::on('system')
+                        ->where('office_id', \Illuminate\Support\Facades\Auth::guard('office-panel')->id())
+                        ->count()),
+            ]);
     }
 }
