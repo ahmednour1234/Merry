@@ -76,7 +76,7 @@ class Profile extends Page implements HasForms
                     ->email()
                     ->required()
                     ->maxLength(191)
-                    ->unique(ignoreRecord: fn () => Auth::guard('office-panel')->user())
+                    ->unique(ignorable: Auth::guard('office-panel')->user())
                     ->label('البريد الإلكتروني'),
                 FileUpload::make('image')
                     ->image()
