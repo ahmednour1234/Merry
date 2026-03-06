@@ -5,11 +5,10 @@ namespace App\Filament\Office\Pages;
 use App\Models\City;
 use BackedEnum;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
@@ -49,66 +48,56 @@ class Profile extends Page implements HasForms
     public function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(2)
             ->schema([
-                Section::make('البيانات الأساسية')
-                    ->schema([
-                        TextInput::make('name')
-                            ->required()
-                            ->maxLength(191)
-                            ->label('الاسم'),
-                        TextInput::make('commercial_reg_no')
-                            ->maxLength(191)
-                            ->label('رقم السجل التجاري'),
-                        Select::make('city_id')
-                            ->options(fn () => City::on('system')->with('translations')->get()->mapWithKeys(function ($city) {
-                                $name = $city->translations->where('lang_code', 'ar')->first()?->name ?? $city->translations->first()?->name ?? $city->slug;
-                                return [$city->id => $name];
-                            })->toArray())
-                            ->searchable()
-                            ->label('المدينة'),
-                        Textarea::make('address')
-                            ->rows(3)
-                            ->label('العنوان'),
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(191)
+                    ->label('الاسم'),
+                TextInput::make('commercial_reg_no')
+                    ->maxLength(191)
+                    ->label('رقم السجل التجاري'),
+                Select::make('city_id')
+                    ->options(fn () => City::on('system')->with('translations')->get()->mapWithKeys(function ($city) {
+                        $name = $city->translations->where('lang_code', 'ar')->first()?->name ?? $city->translations->first()?->name ?? $city->slug;
+                        return [$city->id => $name];
+                    })->toArray())
+                    ->searchable()
+                    ->label('المدينة'),
+                Textarea::make('address')
+                    ->rows(3)
+                    ->label('العنوان')
+                    ->columnSpanFull(),
+                TextInput::make('phone')
+                    ->tel()
+                    ->maxLength(191)
+                    ->label('الهاتف'),
+                TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(191)
+                    ->unique(ignoreRecord: fn () => Auth::guard('office-panel')->user())
+                    ->label('البريد الإلكتروني'),
+                FileUpload::make('image')
+                    ->image()
+                    ->directory('offices')
+                    ->label('الصورة')
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        null,
+                        '16:9',
+                        '4:3',
+                        '1:1',
                     ])
-                    ->columns(2),
-                Section::make('معلومات الاتصال')
-                    ->schema([
-                        TextInput::make('phone')
-                            ->tel()
-                            ->maxLength(191)
-                            ->label('الهاتف'),
-                        TextInput::make('email')
-                            ->email()
-                            ->required()
-                            ->maxLength(191)
-                            ->unique(ignoreRecord: fn () => Auth::guard('office-panel')->user())
-                            ->label('البريد الإلكتروني'),
-                    ])
-                    ->columns(2),
-                Section::make('الصورة')
-                    ->schema([
-                        FileUpload::make('image')
-                            ->image()
-                            ->directory('offices')
-                            ->label('الصورة')
-                            ->imageEditor()
-                            ->imageEditorAspectRatios([
-                                null,
-                                '16:9',
-                                '4:3',
-                                '1:1',
-                            ]),
-                    ]),
-                Section::make('كلمة المرور')
-                    ->schema([
-                        TextInput::make('password')
-                            ->password()
-                            ->minLength(8)
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
-                            ->label('كلمة المرور الجديدة')
-                            ->helperText('اتركه فارغاً إذا لم تريد تغييره'),
-                    ]),
+                    ->columnSpanFull(),
+                TextInput::make('password')
+                    ->password()
+                    ->minLength(8)
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
+                    ->label('كلمة المرور الجديدة')
+                    ->helperText('اتركه فارغاً إذا لم تريد تغييره')
+                    ->columnSpanFull(),
             ])
             ->statePath('data');
     }
