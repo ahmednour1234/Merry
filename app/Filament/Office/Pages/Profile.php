@@ -119,12 +119,4 @@ class Profile extends Page implements HasForms
             ->send();
     }
 
-    protected function getFormActions(): array
-    {
-        return [
-            \Filament\Actions\Action::make('save')
-                ->label('حفظ')
-                ->submit('save'),
-        ];
-    }
 }
