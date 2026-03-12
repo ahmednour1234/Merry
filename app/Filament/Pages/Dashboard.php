@@ -10,7 +10,7 @@ class Dashboard extends BaseDashboard
 
     public static function getNavigationGroup(): ?string
     {
-        return 'الإدارة';
+        return null;
     }
 
     public static function getNavigationSort(): ?int

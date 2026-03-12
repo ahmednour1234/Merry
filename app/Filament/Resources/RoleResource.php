@@ -31,7 +31,7 @@ class RoleResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 5;
+        return 99;
     }
 
     public static function getNavigationLabel(): string
