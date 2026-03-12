@@ -39,9 +39,6 @@ class EndUserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function (Builder $query) {
-                return $query->on('identity');
-            })
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->sortable()
