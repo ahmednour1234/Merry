@@ -156,6 +156,29 @@ class OfficeSubscriptionResource extends Resource
             ])
             ->actions([
                 \Filament\Actions\EditAction::make()->label('تعديل'),
+                FilamentAction::make('renew')
+                    ->label('إعادة تجديد الاشتراك')
+                    ->icon('heroicon-o-arrow-path')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->modalHeading('إعادة تجديد الاشتراك')
+                    ->modalDescription('سيتم تمديد تاريخ الانتهاء حسب دورة الفوترة للخطة. هل تريد المتابعة؟')
+                    ->modalSubmitActionLabel('نعم، جدد')
+                    ->action(function (OfficeSubscription $record) {
+                        $plan = $record->plan;
+                        $endsAt = $record->ends_at;
+                        if ($plan && $plan->billing_cycle === 'annual') {
+                            $endsAt = $endsAt->copy()->addYear();
+                        } else {
+                            $endsAt = $endsAt->copy()->addMonth();
+                        }
+                        $record->update([
+                            'ends_at' => $endsAt,
+                            'status' => 'active',
+                            'active' => true,
+                        ]);
+                        \App\Models\OfficeSubscriptionLog::log($record->id, 'renewed', ['ends_at' => $endsAt->toIso8601String()]);
+                    }),
                 FilamentAction::make('deactivate')
                     ->label('إيقاف تفعيل')
                     ->icon('heroicon-o-no-symbol')
