@@ -20,6 +20,8 @@ class PromotionResource extends Resource
 {
     protected static ?string $model = Promotion::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-megaphone';
 
     public static function getNavigationGroup(): ?string
