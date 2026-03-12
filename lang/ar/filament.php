@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'Filters' => 'المرشحات',
+    'Reset' => 'إعادة تعيين',
+    'Per page' => 'لكل صفحة',
+    'Showing' => 'عرض',
+    'results' => 'نتائج',
+    'to' => 'إلى',
+    'of' => 'من',
     'actions' => [
         'attach' => 'إرفاق',
         'add' => 'إضافة',
@@ -312,6 +319,18 @@ return [
             'placeholder' => 'بحث...',
             'indicator' => 'بحث',
             'clear' => 'مسح البحث',
+        ],
+        'pagination' => [
+            'label' => 'التنقل بين الصفحات',
+            'overview' => 'عرض :first إلى :last من :total نتائج',
+            'fields' => [
+                'records_per_page' => [
+                    'label' => 'لكل صفحة',
+                    'options' => [
+                        'all' => 'الكل',
+                    ],
+                ],
+            ],
         ],
         'columns' => [
             'toggle' => 'إظهار/إخفاء الأعمدة',

@@ -168,6 +168,7 @@ class EndUserResource extends Resource
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.endusers.block')),
 
                 \Filament\Actions\ViewAction::make()
+                    ->label('رؤية')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.endusers.view')),
             ])
             ->defaultSort('created_at', 'desc');
