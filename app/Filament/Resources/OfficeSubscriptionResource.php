@@ -64,9 +64,10 @@ class OfficeSubscriptionResource extends Resource
                             $set('price', (string) $plan->base_price);
                             $set('_billing_cycle', $plan->billing_cycle === 'annual' ? 'سنوي' : 'شهري');
                             $starts = $get('starts_at');
+                            $duration = (int) ($get('_duration') ?? 1) ?: 1;
                             if ($starts) {
                                 $dt = Carbon::parse($starts);
-                                $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYear() : $dt->copy()->addMonth();
+                                $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYears($duration) : $dt->copy()->addMonths($duration);
                                 $set('ends_at', $ends);
                             }
                         }
@@ -76,6 +77,25 @@ class OfficeSubscriptionResource extends Resource
                     ->default('—')
                     ->disabled()
                     ->dehydrated(false),
+                Forms\Components\TextInput::make('_duration')
+                    ->label('المدة (عدد الأشهر أو السنوات حسب الباقة)')
+                    ->numeric()
+                    ->minValue(1)
+                    ->default(1)
+                    ->required()
+                    ->live()
+                    ->dehydrated(false)
+                    ->afterStateUpdated(function ($state, $set, $get): void {
+                        $code = $get('plan_code');
+                        $starts = $get('starts_at');
+                        if (!$code || !$starts || !$state) return;
+                        $plan = Plan::on('system')->find($code);
+                        if (!$plan) return;
+                        $dt = Carbon::parse($starts);
+                        $n = (int) $state ?: 1;
+                        $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYears($n) : $dt->copy()->addMonths($n);
+                        $set('ends_at', $ends);
+                    }),
                 Forms\Components\Select::make('status')
                     ->options([
                         'pending' => 'قيد الانتظار',
@@ -99,8 +119,9 @@ class OfficeSubscriptionResource extends Resource
                         if (!$code) return;
                         $plan = Plan::on('system')->find($code);
                         if (!$plan) return;
+                        $duration = (int) ($get('_duration') ?? 1) ?: 1;
                         $dt = Carbon::parse($state);
-                        $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYear() : $dt->copy()->addMonth();
+                        $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYears($duration) : $dt->copy()->addMonths($duration);
                         $set('ends_at', $ends);
                     }),
                 Forms\Components\DateTimePicker::make('ends_at')
