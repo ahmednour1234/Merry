@@ -18,6 +18,8 @@ class CurrencyResource extends Resource
 {
     protected static ?string $model = Currency::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
 
     public static function getNavigationGroup(): ?string

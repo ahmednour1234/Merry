@@ -18,6 +18,8 @@ class ExchangeRateResource extends Resource
 {
     protected static ?string $model = ExchangeRate::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-arrow-path';
 
     public static function getNavigationGroup(): ?string

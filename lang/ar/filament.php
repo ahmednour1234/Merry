@@ -8,7 +8,7 @@ return [
         'cancel' => 'إلغاء',
         'clone' => 'نسخ',
         'close' => 'إغلاق',
-        'create' => 'إنشاء',
+        'create' => 'إضافة',
         'delete' => 'حذف',
         'detach' => 'فصل',
         'dissociate' => 'إلغاء الارتباط',
@@ -80,7 +80,7 @@ return [
     ],
     'form' => [
         'actions' => [
-            'create' => 'إنشاء',
+            'create' => 'إضافة',
             'create_another' => 'إنشاء وإضافة آخر',
             'save' => 'حفظ',
             'save_another' => 'حفظ وإضافة آخر',
@@ -153,7 +153,7 @@ return [
             'cancel' => 'إلغاء',
             'delete' => 'حذف',
             'edit' => 'تعديل',
-            'create' => 'إنشاء',
+            'create' => 'إضافة',
             'view' => 'رؤية',
             'back' => 'رجوع',
         ],
@@ -207,7 +207,7 @@ return [
     ],
     'resources' => [
         'actions' => [
-            'create' => 'إنشاء :label',
+            'create' => 'إضافة :label',
             'delete' => 'حذف',
             'edit' => 'تعديل :label',
             'force_delete' => 'حذف نهائي',
@@ -237,7 +237,7 @@ return [
             'updated' => 'تم تحديث :label بنجاح',
         ],
         'title' => [
-            'create' => 'إنشاء :label',
+            'create' => 'إضافة :label',
             'edit' => 'تعديل :label',
             'list' => 'قائمة :label',
             'view' => 'رؤية :label',
