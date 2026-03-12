@@ -6,6 +6,7 @@ use App\Filament\Resources\NotificationResource\Pages;
 use App\Models\Notification;
 use BackedEnum;
 use Filament\Forms;
+use Filament\Schemas\Components\Section as SchemaSection;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -102,24 +103,49 @@ class NotificationResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\TextInput::make('type')
-                    ->maxLength(191)
-                    ->label('النوع'),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255)
-                    ->label('العنوان'),
-                Forms\Components\Textarea::make('body')
-                    ->rows(3)
-                    ->label('المحتوى'),
-                Forms\Components\Select::make('priority')
-                    ->options([
-                        'low' => 'منخفض',
-                        'normal' => 'عادي',
-                        'high' => 'عالي',
+                SchemaSection::make('الجمهور المستهدف')
+                    ->description('اختر من سيتلقى هذا الإشعار')
+                    ->icon('heroicon-o-user-group')
+                    ->schema([
+                        Forms\Components\Select::make('target_audience')
+                            ->label('إرسال إلى')
+                            ->required()
+                            ->options([
+                                'all' => 'الكل (المستخدمون النهائيون + المكاتب)',
+                                'end_users' => 'المستخدمون النهائيون فقط',
+                                'offices' => 'المكاتب فقط',
+                            ])
+                            ->default('all')
+                            ->native(false),
                     ])
-                    ->default('normal')
-                    ->label('الأولوية'),
+                    ->columns(1),
+                SchemaSection::make('محتوى الإشعار')
+                    ->description('العنوان والمحتوى والأولوية')
+                    ->icon('heroicon-o-bell-alert')
+                    ->schema([
+                        Forms\Components\TextInput::make('type')
+                            ->maxLength(191)
+                            ->label('النوع')
+                            ->placeholder('مثال: broadcast أو عام'),
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->maxLength(255)
+                            ->label('العنوان'),
+                        Forms\Components\Textarea::make('body')
+                            ->rows(4)
+                            ->label('المحتوى')
+                            ->columnSpanFull(),
+                        Forms\Components\Select::make('priority')
+                            ->options([
+                                'low' => 'منخفض',
+                                'normal' => 'عادي',
+                                'high' => 'عالي',
+                            ])
+                            ->default('normal')
+                            ->label('الأولوية')
+                            ->native(false),
+                    ])
+                    ->columns(2),
             ]);
     }
 
@@ -205,6 +231,7 @@ class NotificationResource extends Resource
     {
         return [
             'index' => Pages\ListNotifications::route('/'),
+            'create' => Pages\CreateNotification::route('/create'),
             'view' => Pages\ViewNotification::route('/{record}'),
         ];
     }

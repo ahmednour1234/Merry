@@ -11,4 +11,13 @@ class ListNotifications extends ListRecords
     protected static string $resource = NotificationResource::class;
 
     protected static ?string $title = 'قائمة الإشعارات';
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make()
+                ->label('إرسال إشعار')
+                ->icon('heroicon-o-paper-airplane'),
+        ];
+    }
 }
