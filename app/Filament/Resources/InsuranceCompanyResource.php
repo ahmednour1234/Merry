@@ -19,6 +19,8 @@ class InsuranceCompanyResource extends Resource
 {
     protected static ?string $model = InsuranceCompany::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-shield-check';
 
     public static function getNavigationGroup(): ?string
