@@ -4,10 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PlanResource\Pages;
 use App\Models\Plan;
-use App\Models\PlanTranslation;
 use App\Models\PlanFeature;
-use App\Models\SystemLanguage;
-use App\Models\Currency;
 use App\Services\PermissionService;
 use BackedEnum;
 use Filament\Actions\Action as FilamentAction;
@@ -57,10 +54,8 @@ class PlanResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->rows(3)
                     ->label('الوصف الافتراضي'),
-                Forms\Components\Select::make('base_currency')
-                    ->options(fn () => Currency::on('system')->where('active', true)->pluck('name', 'code')->toArray())
-                    ->default('USD')
-                    ->label('العملة الأساسية'),
+                Forms\Components\Hidden::make('base_currency')
+                    ->default('SAR'),
                 Forms\Components\TextInput::make('base_price')
                     ->numeric()
                     ->step(0.01)
@@ -73,26 +68,6 @@ class PlanResource extends Resource
                     ])
                     ->default('monthly')
                     ->label('دورة الفوترة'),
-                Forms\Components\Repeater::make('translations')
-                    ->relationship('translations')
-                    ->schema([
-                        Forms\Components\Select::make('lang_code')
-                            ->options(fn () => SystemLanguage::on('system')->pluck('name', 'code')->toArray())
-                            ->required()
-                            ->label('اللغة')
-                            ->placeholder('اختر خياراً'),
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(191)
-                            ->label('الاسم'),
-                        Forms\Components\Textarea::make('description')
-                            ->rows(2)
-                            ->label('الوصف'),
-                    ])
-                    ->defaultItems(1)
-                    ->collapsible()
-                    ->label('الترجمات')
-                    ->addActionLabel('إضافة ترجمة'),
                 Forms\Components\Repeater::make('features')
                     ->relationship('features')
                     ->schema([
