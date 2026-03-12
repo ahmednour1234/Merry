@@ -162,11 +162,21 @@ class OfficeSubscriptionResource extends Resource
                     ->color('success')
                     ->requiresConfirmation()
                     ->modalHeading('إعادة تجديد الاشتراك')
-                    ->modalDescription('سيتم تمديد تاريخ الانتهاء حسب دورة الفوترة للخطة. هل تريد المتابعة؟')
+                    ->modalDescription(fn (OfficeSubscription $record) => $record->ends_at->isFuture()
+                        ? 'لا يمكن التجديد الآن. التجديد يتم في معاده؛ الفترة الجديدة تبدأ من تاريخ الانتهاء المحدد ويتم التجديد في نفس ذلك اليوم.'
+                        : 'سيتم تجديد الاشتراك؛ الفترة الجديدة تبدأ من اليوم حسب دورة الفوترة للخطة. هل تريد المتابعة؟')
                     ->modalSubmitActionLabel('نعم، جدد')
                     ->action(function (OfficeSubscription $record) {
+                        if ($record->ends_at->isFuture()) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('لا، أنت لسة مجدد الاشتراك')
+                                ->body('التجديد يتم في معاده؛ الفترة الجديدة تبدأ من تاريخ الانتهاء المحدد ويتم التجديد في نفس ذلك اليوم.')
+                                ->warning()
+                                ->send();
+                            return;
+                        }
                         $plan = $record->plan;
-                        $startsAt = $record->ends_at->copy();
+                        $startsAt = now();
                         if ($plan && $plan->billing_cycle === 'annual') {
                             $endsAt = $startsAt->copy()->addYear();
                         } else {
