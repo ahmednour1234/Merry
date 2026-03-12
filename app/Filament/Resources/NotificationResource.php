@@ -16,6 +16,57 @@ class NotificationResource extends Resource
 {
     protected static ?string $model = Notification::class;
 
+    protected static function typeLabel(string $type): string
+    {
+        return match ($type) {
+            'cv.approved' => 'موافقة على السيرة الذاتية',
+            'cv.rejected' => 'رفض السيرة الذاتية',
+            'cv.frozen' => 'تجميد السيرة الذاتية',
+            'cv.unfrozen' => 'إلغاء تجميد السيرة الذاتية',
+            'cv.submitted' => 'إرسال سيرة ذاتية جديدة',
+            'enduser.logged_in' => 'تسجيل الدخول',
+            default => $type,
+        };
+    }
+
+    protected static function titleLabel(string $title): string
+    {
+        return match ($title) {
+            'CV Approved' => 'تمت الموافقة على السيرة الذاتية',
+            'CV Rejected' => 'تم رفض السيرة الذاتية',
+            'CV Frozen' => 'تم تجميد السيرة الذاتية',
+            'CV Unfrozen' => 'تم إلغاء تجميد السيرة الذاتية',
+            'New CV Submitted' => 'سيرة ذاتية جديدة للمراجعة',
+            'Login Successful' => 'تم تسجيل الدخول بنجاح',
+            default => $title,
+        };
+    }
+
+    protected static function bodyLabel(string $body): string
+    {
+        $map = [
+            'Your CV has been approved.' => 'تمت الموافقة على سيرتك الذاتية.',
+            'A new CV has been submitted and is pending review.' => 'تم إرسال سيرة ذاتية جديدة وهي قيد المراجعة.',
+            'You have successfully logged in.' => 'تم تسجيل دخولك بنجاح.',
+        ];
+        foreach ($map as $en => $ar) {
+            if (str_starts_with(trim($body), trim($en)) || trim($body) === trim($en)) {
+                return $ar;
+            }
+        }
+        if (str_contains($body, 'has been rejected')) {
+            $reason = preg_match('/Reason:\s*(.+)$/', $body, $m) ? trim($m[1]) : '';
+            return $reason ? 'تم رفض سيرتك الذاتية. السبب: ' . $reason : 'تم رفض سيرتك الذاتية.';
+        }
+        if (str_contains($body, 'has been frozen')) {
+            return 'تم تجميد سيرتك الذاتية.';
+        }
+        if (str_contains($body, 'has been unfrozen')) {
+            return 'تم إلغاء تجميد سيرتك الذاتية وهي قيد المراجعة.';
+        }
+        return $body;
+    }
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bell-alert';
 
     public static function getNavigationGroup(): ?string
@@ -68,13 +119,16 @@ class NotificationResource extends Resource
                     ->label('ID'),
                 Tables\Columns\TextColumn::make('type')
                     ->label('النوع')
+                    ->formatStateUsing(fn ($state) => $state ? static::typeLabel($state) : $state)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('العنوان')
+                    ->formatStateUsing(fn ($state) => $state ? static::titleLabel($state) : $state)
                     ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('body')
                     ->label('المحتوى')
+                    ->formatStateUsing(fn ($state) => $state ? static::bodyLabel($state) : $state)
                     ->limit(50)
                     ->wrap(),
                 Tables\Columns\TextColumn::make('priority')
@@ -117,8 +171,12 @@ class NotificationResource extends Resource
                     ->label('الأولوية'),
             ])
             ->actions([
-                \Filament\Actions\ViewAction::make(),
-                \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\ViewAction::make()->label('رؤية'),
+                \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من حذف هذا الإشعار؟')
+                    ->modalSubmitActionLabel('نعم، احذف'),
             ])
             ->defaultSort('created_at', 'desc');
     }

@@ -13,7 +13,11 @@ class ViewNotification extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->label('حذف')
+                ->modalHeading('تأكيد الحذف')
+                ->modalDescription('هل أنت متأكد من حذف هذا الإشعار؟')
+                ->modalSubmitActionLabel('نعم، احذف'),
         ];
     }
 }
