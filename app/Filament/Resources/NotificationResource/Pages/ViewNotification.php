@@ -15,6 +15,18 @@ class ViewNotification extends ViewRecord
         return 'رؤية إشعار';
     }
 
+    public function getBreadcrumbs(): array
+    {
+        $crumbs = parent::getBreadcrumbs();
+        $keys = array_keys($crumbs);
+        $last = end($keys);
+        if ($last !== false && array_key_exists($last, $crumbs)) {
+            $crumbs['رؤية'] = $crumbs[$last];
+            unset($crumbs[$last]);
+        }
+        return $crumbs;
+    }
+
     protected function mutateFormDataBeforeFill(array $data): array
     {
         if (!empty($data['type'])) {
