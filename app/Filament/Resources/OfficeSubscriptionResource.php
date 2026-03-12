@@ -164,7 +164,10 @@ class OfficeSubscriptionResource extends Resource
                     ->modalHeading('إيقاف تفعيل الاشتراك')
                     ->modalDescription('هل أنت متأكد من إيقاف تفعيل هذا الاشتراك؟')
                     ->modalSubmitActionLabel('نعم، أوقف التفعيل')
-                    ->action(fn (OfficeSubscription $record) => $record->update(['active' => false]))
+                    ->action(function (OfficeSubscription $record) {
+                        $record->update(['active' => false]);
+                        \App\Models\OfficeSubscriptionLog::log($record->id, 'deactivated');
+                    })
                     ->visible(fn (OfficeSubscription $record) => $record->active),
                 FilamentAction::make('cancel')
                     ->label('إلغاء الاشتراك')
@@ -174,7 +177,10 @@ class OfficeSubscriptionResource extends Resource
                     ->modalHeading('إلغاء الاشتراك')
                     ->modalDescription('هل أنت متأكد من إلغاء هذا الاشتراك؟')
                     ->modalSubmitActionLabel('نعم، ألغي الاشتراك')
-                    ->action(fn (OfficeSubscription $record) => $record->update(['status' => 'cancelled', 'active' => false])),
+                    ->action(function (OfficeSubscription $record) {
+                        $record->update(['status' => 'cancelled', 'active' => false]);
+                        \App\Models\OfficeSubscriptionLog::log($record->id, 'cancelled');
+                    }),
             ])
             ->defaultSort('created_at', 'desc');
     }

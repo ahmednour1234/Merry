@@ -8,4 +8,9 @@ use App\Filament\Resources\Pages\BaseCreateRecord;
 class CreateOfficeSubscription extends BaseCreateRecord
 {
     protected static string $resource = OfficeSubscriptionResource::class;
+
+    protected function afterCreate(): void
+    {
+        \App\Models\OfficeSubscriptionLog::log($this->record->id, 'created');
+    }
 }

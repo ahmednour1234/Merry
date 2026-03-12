@@ -28,4 +28,5 @@ class OfficeSubscription extends Model
 
     public function plan(){ return $this->belongsTo(Plan::class, 'plan_code', 'code'); }
     public function office(){ return $this->belongsTo(Office::class); }
+    public function logs(){ return $this->hasMany(OfficeSubscriptionLog::class); }
 }
