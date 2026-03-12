@@ -12,7 +12,7 @@ class Nationality extends Model
     protected $connection = 'system';
     protected $table = 'nationalities';
 
-    protected $fillable = ['code','name','active','meta'];
+    protected $fillable = ['code','name','image','active','meta'];
     protected $casts = ['active'=>'boolean','meta'=>'array'];
 
     public function translations()

@@ -37,17 +37,14 @@ class NationalityResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\TextInput::make('code')
-                    ->required()
-                    ->maxLength(3)
-                    ->mutateDehydratedStateUsing(fn ($state) => strtoupper($state ?? ''))
-                    ->unique(ignoreRecord: true)
-                    ->label('رمز الجنسية')
-                    ->helperText('مثل: SA, US, EG'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191)
                     ->label('الاسم الافتراضي'),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->directory('nationalities')
+                    ->label('الصورة'),
                 Forms\Components\Repeater::make('translations')
                     ->relationship('translations')
                     ->schema([
@@ -78,12 +75,9 @@ class NationalityResource extends Resource
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->with('translations'))
             ->columns([
-                Tables\Columns\TextColumn::make('code')
-                    ->searchable()
-                    ->sortable()
-                    ->label('الرمز')
-                    ->badge()
-                    ->color('primary'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('الصورة')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
