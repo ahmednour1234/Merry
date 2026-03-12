@@ -64,7 +64,8 @@ class NationalityResource extends Resource
                     ->defaultItems(1)
                     ->collapsible()
                     ->label('الترجمات')
-                    ->addActionLabel('إضافة ترجمة'),
+                    ->addActionLabel('إضافة ترجمة')
+                    ->hidden(),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
                     ->label('نشط'),
