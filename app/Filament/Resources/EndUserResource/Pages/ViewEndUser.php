@@ -3,9 +3,12 @@
 namespace App\Filament\Resources\EndUserResource\Pages;
 
 use App\Filament\Resources\EndUserResource;
+use Filament\Infolists\Components\Section as InfolistSection;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\IconEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
-use Filament\Forms;
 
 class ViewEndUser extends ViewRecord
 {
@@ -15,64 +18,55 @@ class ViewEndUser extends ViewRecord
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make('المعلومات الأساسية')
+                InfolistSection::make('المعلومات الأساسية')
                     ->schema([
-                        Forms\Components\TextInput::make('id')
-                            ->disabled()
+                        TextEntry::make('id')
                             ->label('ID'),
 
-                        Forms\Components\TextInput::make('name')
-                            ->disabled()
+                        TextEntry::make('name')
                             ->label('الاسم'),
 
-                        Forms\Components\TextInput::make('phone')
-                            ->disabled()
+                        TextEntry::make('phone')
                             ->label('الهاتف'),
 
-                        Forms\Components\TextInput::make('national_id')
-                            ->disabled()
+                        TextEntry::make('national_id')
                             ->label('الهوية الوطنية'),
 
-                        Forms\Components\Toggle::make('active')
-                            ->disabled()
-                            ->label('نشط'),
+                        IconEntry::make('active')
+                            ->label('نشط')
+                            ->boolean(),
 
-                        Forms\Components\Toggle::make('blocked')
-                            ->disabled()
-                            ->label('محظور'),
+                        IconEntry::make('blocked')
+                            ->label('محظور')
+                            ->boolean(),
 
-                        Forms\Components\Textarea::make('bio')
-                            ->disabled()
+                        TextEntry::make('bio')
                             ->label('السيرة الذاتية')
                             ->columnSpanFull(),
 
-                        Forms\Components\DateTimePicker::make('last_login_at')
-                            ->disabled()
-                            ->label('آخر تسجيل دخول'),
+                        TextEntry::make('last_login_at')
+                            ->label('آخر تسجيل دخول')
+                            ->dateTime(),
 
-                        Forms\Components\DateTimePicker::make('created_at')
-                            ->disabled()
-                            ->label('تاريخ الإنشاء'),
+                        TextEntry::make('created_at')
+                            ->label('تاريخ الإنشاء')
+                            ->dateTime(),
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('الإحصائيات')
+                InfolistSection::make('الإحصائيات')
                     ->schema([
-                        Forms\Components\TextInput::make('bookings_count')
-                            ->disabled()
+                        TextEntry::make('bookings_count')
                             ->label('عدد الحجوزات')
-                            ->default(function ($record): int {
-                                return \App\Models\CvBooking::on('system')
-                                    ->where('end_user_id', $record->id)
+                            ->state(function ($record): int {
+                                return \App\Models\CvBooking::where('end_user_id', $record->id)
                                     ->count();
                             }),
 
-                        Forms\Components\TextInput::make('favourites_count')
-                            ->disabled()
+                        TextEntry::make('favourites_count')
                             ->label('عدد CVs المفضلة')
-                            ->default(function ($record): int {
-                                return \App\Models\Identity\FavouriteCv::on('identity')
-                                    ->where('end_user_id', $record->id)
+                            ->state(function ($record): int {
+                                return \App\Models\Identity\FavouriteCv::where('end_user_id', $record->id)
                                     ->count();
                             }),
                     ])
