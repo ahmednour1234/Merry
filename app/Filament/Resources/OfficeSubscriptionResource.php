@@ -166,18 +166,22 @@ class OfficeSubscriptionResource extends Resource
                     ->modalSubmitActionLabel('نعم، جدد')
                     ->action(function (OfficeSubscription $record) {
                         $plan = $record->plan;
-                        $endsAt = $record->ends_at;
+                        $startsAt = $record->ends_at->copy();
                         if ($plan && $plan->billing_cycle === 'annual') {
-                            $endsAt = $endsAt->copy()->addYear();
+                            $endsAt = $startsAt->copy()->addYear();
                         } else {
-                            $endsAt = $endsAt->copy()->addMonth();
+                            $endsAt = $startsAt->copy()->addMonth();
                         }
                         $record->update([
+                            'starts_at' => $startsAt,
                             'ends_at' => $endsAt,
                             'status' => 'active',
                             'active' => true,
                         ]);
-                        \App\Models\OfficeSubscriptionLog::log($record->id, 'renewed', ['ends_at' => $endsAt->toIso8601String()]);
+                        \App\Models\OfficeSubscriptionLog::log($record->id, 'renewed', [
+                            'starts_at' => $startsAt->toIso8601String(),
+                            'ends_at' => $endsAt->toIso8601String(),
+                        ]);
                     }),
                 FilamentAction::make('deactivate')
                     ->label('إيقاف تفعيل')
