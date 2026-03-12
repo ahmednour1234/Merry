@@ -16,7 +16,7 @@ class NotificationResource extends Resource
 {
     protected static ?string $model = Notification::class;
 
-    protected static function typeLabel(string $type): string
+    public static function typeLabel(string $type): string
     {
         return match ($type) {
             'cv.approved' => 'موافقة على السيرة الذاتية',
@@ -25,11 +25,12 @@ class NotificationResource extends Resource
             'cv.unfrozen' => 'إلغاء تجميد السيرة الذاتية',
             'cv.submitted' => 'إرسال سيرة ذاتية جديدة',
             'enduser.logged_in' => 'تسجيل الدخول',
+            'enduser.registered' => 'إنشاء حساب مستخدم',
             default => $type,
         };
     }
 
-    protected static function titleLabel(string $title): string
+    public static function titleLabel(string $title): string
     {
         return match ($title) {
             'CV Approved' => 'تمت الموافقة على السيرة الذاتية',
@@ -38,21 +39,28 @@ class NotificationResource extends Resource
             'CV Unfrozen' => 'تم إلغاء تجميد السيرة الذاتية',
             'New CV Submitted' => 'سيرة ذاتية جديدة للمراجعة',
             'Login Successful' => 'تم تسجيل الدخول بنجاح',
+            'Welcome!' => 'مرحباً!',
             default => $title,
         };
     }
 
-    protected static function bodyLabel(string $body): string
+    public static function bodyLabel(string $body): string
     {
         $map = [
             'Your CV has been approved.' => 'تمت الموافقة على سيرتك الذاتية.',
             'A new CV has been submitted and is pending review.' => 'تم إرسال سيرة ذاتية جديدة وهي قيد المراجعة.',
             'You have successfully logged in.' => 'تم تسجيل دخولك بنجاح.',
+            'Your account has been created successfully.' => 'تم إنشاء حسابك بنجاح.',
         ];
+        $bodyTrim = trim($body, " \t\n\r.");
         foreach ($map as $en => $ar) {
-            if (str_starts_with(trim($body), trim($en)) || trim($body) === trim($en)) {
+            $enTrim = trim($en, " \t\n\r.");
+            if (str_starts_with($bodyTrim, $enTrim) || $bodyTrim === $enTrim || str_contains($bodyTrim, $enTrim)) {
                 return $ar;
             }
+        }
+        if (str_contains($body, 'CV has been approved') || str_contains($body, 'has been approved.')) {
+            return 'تمت الموافقة على سيرتك الذاتية.';
         }
         if (str_contains($body, 'has been rejected')) {
             $reason = preg_match('/Reason:\s*(.+)$/', $body, $m) ? trim($m[1]) : '';
