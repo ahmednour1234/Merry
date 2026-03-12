@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\PermissionResource\Pages;
 
 use App\Filament\Resources\PermissionResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditPermission extends EditRecord
+class EditPermission extends BaseEditRecord
 {
     protected static string $resource = PermissionResource::class;
 

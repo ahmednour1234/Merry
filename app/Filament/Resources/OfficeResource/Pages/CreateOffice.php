@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\OfficeResource\Pages;
 
 use App\Filament\Resources\OfficeResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\BaseCreateRecord;
 
-class CreateOffice extends CreateRecord
+class CreateOffice extends BaseCreateRecord
 {
     protected static string $resource = OfficeResource::class;
 }

@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\OfficeResource\Pages;
 
 use App\Filament\Resources\OfficeResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditOffice extends EditRecord
+class EditOffice extends BaseEditRecord
 {
     protected static string $resource = OfficeResource::class;
 

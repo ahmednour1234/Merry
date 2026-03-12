@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\CurrencyResource\Pages;
 
 use App\Filament\Resources\CurrencyResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditCurrency extends EditRecord
+class EditCurrency extends BaseEditRecord
 {
     protected static string $resource = CurrencyResource::class;
 

@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\NationalityResource\Pages;
 
 use App\Filament\Resources\NationalityResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditNationality extends EditRecord
+class EditNationality extends BaseEditRecord
 {
     protected static string $resource = NationalityResource::class;
 

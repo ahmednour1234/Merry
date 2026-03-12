@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\CvResource\Pages;
 
 use App\Filament\Resources\CvResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditCv extends EditRecord
+class EditCv extends BaseEditRecord
 {
     protected static string $resource = CvResource::class;
 

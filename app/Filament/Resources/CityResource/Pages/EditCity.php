@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\CityResource\Pages;
 
 use App\Filament\Resources\CityResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditCity extends EditRecord
+class EditCity extends BaseEditRecord
 {
     protected static string $resource = CityResource::class;
 

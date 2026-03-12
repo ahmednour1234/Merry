@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\CategoryResource\Pages;
 
 use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditCategory extends EditRecord
+class EditCategory extends BaseEditRecord
 {
     protected static string $resource = CategoryResource::class;
 

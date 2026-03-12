@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\CategoryResource\Pages;
 
 use App\Filament\Resources\CategoryResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\BaseCreateRecord;
 
-class CreateCategory extends CreateRecord
+class CreateCategory extends BaseCreateRecord
 {
     protected static string $resource = CategoryResource::class;
 }

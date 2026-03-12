@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\CouponResource\Pages;
 
 use App\Filament\Resources\CouponResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditCoupon extends EditRecord
+class EditCoupon extends BaseEditRecord
 {
     protected static string $resource = CouponResource::class;
 

@@ -4,11 +4,11 @@ namespace App\Filament\Office\Resources\CvResource\Pages;
 
 use App\Filament\Office\Resources\CvResource;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Auth;
 
-class EditCv extends EditRecord
+class EditCv extends BaseEditRecord
 {
     protected static string $resource = CvResource::class;
 

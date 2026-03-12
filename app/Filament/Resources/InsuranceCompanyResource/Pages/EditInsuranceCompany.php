@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\InsuranceCompanyResource\Pages;
 
 use App\Filament\Resources\InsuranceCompanyResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditInsuranceCompany extends EditRecord
+class EditInsuranceCompany extends BaseEditRecord
 {
     protected static string $resource = InsuranceCompanyResource::class;
 

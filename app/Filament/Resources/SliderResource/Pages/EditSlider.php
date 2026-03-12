@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\SliderResource\Pages;
 
 use App\Filament\Resources\SliderResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditSlider extends EditRecord
+class EditSlider extends BaseEditRecord
 {
     protected static string $resource = SliderResource::class;
 

@@ -4,6 +4,9 @@ return [
     'Filters' => 'المرشحات',
     'Reset' => 'إعادة تعيين',
     'Apply filters' => 'تطبيق المرشحات',
+    'Create' => 'إنشاء',
+    'Cancel' => 'إلغاء',
+    'Create & create another' => 'إنشاء وإضافة آخر',
     'Per page' => 'لكل صفحة',
     'Search' => 'بحث',
     'All' => 'الكل',
@@ -18,7 +21,7 @@ return [
         'cancel' => 'إلغاء',
         'clone' => 'نسخ',
         'close' => 'إغلاق',
-        'create' => 'إضافة',
+        'create' => 'إنشاء',
         'new' => 'إضافة',
         'delete' => 'حذف',
         'detach' => 'فصل',
@@ -166,7 +169,7 @@ return [
             'cancel' => 'إلغاء',
             'delete' => 'حذف',
             'edit' => 'تعديل',
-            'create' => 'إضافة',
+            'create' => 'إنشاء',
             'view' => 'رؤية',
             'back' => 'رجوع',
         ],
@@ -254,6 +257,21 @@ return [
             'edit' => 'تعديل :label',
             'list' => 'قائمة :label',
             'view' => 'رؤية :label',
+        ],
+        'pages' => [
+            'create' => [
+                'actions' => [
+                    'create' => 'إنشاء',
+                    'create_another' => 'إنشاء وإضافة آخر',
+                    'cancel' => 'إلغاء',
+                ],
+            ],
+            'edit' => [
+                'actions' => [
+                    'save' => 'حفظ',
+                    'cancel' => 'إلغاء',
+                ],
+            ],
         ],
     ],
     'tables' => [

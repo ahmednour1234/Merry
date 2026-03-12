@@ -4,11 +4,11 @@ namespace App\Filament\Resources\SystemSettingsResource\Pages;
 
 use App\Filament\Resources\SystemSettingsResource;
 use App\Services\SystemSettings;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Cache;
 
-class EditSystemSetting extends EditRecord
+class EditSystemSetting extends BaseEditRecord
 {
     protected static string $resource = SystemSettingsResource::class;
 

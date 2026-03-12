@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\SliderResource\Pages;
 
 use App\Filament\Resources\SliderResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\BaseCreateRecord;
 
-class CreateSlider extends CreateRecord
+class CreateSlider extends BaseCreateRecord
 {
     protected static string $resource = SliderResource::class;
 }

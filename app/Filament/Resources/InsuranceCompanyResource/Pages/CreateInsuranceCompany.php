@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\InsuranceCompanyResource\Pages;
 
 use App\Filament\Resources\InsuranceCompanyResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\BaseCreateRecord;
 
-class CreateInsuranceCompany extends CreateRecord
+class CreateInsuranceCompany extends BaseCreateRecord
 {
     protected static string $resource = InsuranceCompanyResource::class;
 }

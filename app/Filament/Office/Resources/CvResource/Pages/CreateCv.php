@@ -4,10 +4,10 @@ namespace App\Filament\Office\Resources\CvResource\Pages;
 
 use App\Filament\Office\Resources\CvResource;
 use App\Repositories\System\Cv\Contracts\CvRepositoryInterface;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Pages\BaseCreateRecord;
 use Illuminate\Support\Facades\Auth;
 
-class CreateCv extends CreateRecord
+class CreateCv extends BaseCreateRecord
 {
     protected static string $resource = CvResource::class;
 

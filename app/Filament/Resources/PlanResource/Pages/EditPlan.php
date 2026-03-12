@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\PlanResource\Pages;
 
 use App\Filament\Resources\PlanResource;
+use App\Filament\Resources\Pages\BaseEditRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditPlan extends EditRecord
+class EditPlan extends BaseEditRecord
 {
     protected static string $resource = PlanResource::class;
 
