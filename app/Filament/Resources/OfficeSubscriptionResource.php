@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OfficeSubscriptionResource\Pages;
 use App\Models\OfficeSubscription;
 use BackedEnum;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -155,11 +156,25 @@ class OfficeSubscriptionResource extends Resource
             ])
             ->actions([
                 \Filament\Actions\EditAction::make()->label('تعديل'),
-                \Filament\Actions\DeleteAction::make()
-                    ->label('حذف')
-                    ->modalHeading('تأكيد الحذف')
-                    ->modalDescription('هل أنت متأكد من الحذف؟')
-                    ->modalSubmitActionLabel('نعم، احذف'),
+                FilamentAction::make('deactivate')
+                    ->label('إيقاف تفعيل')
+                    ->icon('heroicon-o-no-symbol')
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->modalHeading('إيقاف تفعيل الاشتراك')
+                    ->modalDescription('هل أنت متأكد من إيقاف تفعيل هذا الاشتراك؟')
+                    ->modalSubmitActionLabel('نعم، أوقف التفعيل')
+                    ->action(fn (OfficeSubscription $record) => $record->update(['active' => false]))
+                    ->visible(fn (OfficeSubscription $record) => $record->active),
+                FilamentAction::make('cancel')
+                    ->label('إلغاء الاشتراك')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->modalHeading('إلغاء الاشتراك')
+                    ->modalDescription('هل أنت متأكد من إلغاء هذا الاشتراك؟')
+                    ->modalSubmitActionLabel('نعم، ألغي الاشتراك')
+                    ->action(fn (OfficeSubscription $record) => $record->update(['status' => 'cancelled', 'active' => false])),
             ])
             ->defaultSort('created_at', 'desc');
     }
