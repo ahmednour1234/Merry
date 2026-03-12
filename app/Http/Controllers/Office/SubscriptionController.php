@@ -115,4 +115,42 @@ class SubscriptionController extends Controller
 
         return back()->with('success', 'تم إلغاء الاشتراك');
     }
+
+    public function renew($id)
+    {
+        $office = Auth::guard('office-panel')->user();
+        $sub = OfficeSubscription::on('system')
+            ->with('plan')
+            ->where('id', $id)
+            ->where('office_id', $office->id)
+            ->first();
+
+        if (!$sub) {
+            return back()->with('error', 'لا يوجد اشتراك');
+        }
+
+        if ($sub->ends_at->isFuture()) {
+            return back()->with('error', 'لا يمكن التجديد الآن. التجديد يتم عند انتهاء الاشتراك.');
+        }
+
+        $plan = $sub->plan;
+        $startsAt = now();
+        $endsAt = $plan && $plan->billing_cycle === 'annual'
+            ? $startsAt->copy()->addYear()
+            : $startsAt->copy()->addMonth();
+
+        $sub->update([
+            'starts_at' => $startsAt,
+            'ends_at' => $endsAt,
+            'status' => 'active',
+            'active' => true,
+        ]);
+
+        \App\Models\OfficeSubscriptionLog::log($sub->id, 'renewed', [
+            'starts_at' => $startsAt->toIso8601String(),
+            'ends_at' => $endsAt->toIso8601String(),
+        ]);
+
+        return back()->with('success', 'تم تجديد الاشتراك بنجاح');
+    }
 }

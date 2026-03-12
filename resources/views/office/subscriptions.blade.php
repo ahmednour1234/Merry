@@ -1391,6 +1391,12 @@
                     @csrf
                     <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من إلغاء الاشتراك؟')">إلغاء الاشتراك</button>
                 </form>
+                @if($currentSubscription->ends_at->isPast())
+                    <form action="{{ route('office.subscriptions.renew', $currentSubscription->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
+                        @csrf
+                        <button type="submit" class="btn btn-success" onclick="return confirm('هل تريد تجديد الاشتراك؟')">تجديد الاشتراك</button>
+                    </form>
+                @endif
             </div>
         @endif
 

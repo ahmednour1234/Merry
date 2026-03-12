@@ -16,6 +16,7 @@ Route::prefix('office')->middleware(['auth:office-panel'])->group(function () {
     Route::post('/subscriptions/subscribe', [\App\Http\Controllers\Office\SubscriptionController::class, 'subscribe'])->name('office.subscriptions.subscribe');
     Route::post('/subscriptions/{id}/toggle-auto-renew', [\App\Http\Controllers\Office\SubscriptionController::class, 'toggleAutoRenew'])->name('office.subscriptions.toggle-auto-renew');
     Route::post('/subscriptions/{id}/cancel', [\App\Http\Controllers\Office\SubscriptionController::class, 'cancel'])->name('office.subscriptions.cancel');
+    Route::post('/subscriptions/{id}/renew', [\App\Http\Controllers\Office\SubscriptionController::class, 'renew'])->name('office.subscriptions.renew');
 
     Route::get('/cvs/{id}/download', function ($id) {
         $cv = \App\Models\Cv::on('system')->findOrFail($id);
