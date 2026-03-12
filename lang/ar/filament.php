@@ -92,7 +92,7 @@ return [
     ],
     'form' => [
         'actions' => [
-            'create' => 'إضافة',
+            'create' => 'إنشاء',
             'create_another' => 'إنشاء وإضافة آخر',
             'save' => 'حفظ',
             'save_another' => 'حفظ وإضافة آخر',
@@ -110,6 +110,7 @@ return [
         'fields' => [
             'select' => 'اختر',
             'select_placeholder' => 'اختر خياراً',
+            'select_option' => 'اختر خياراً',
             'search' => 'بحث',
             'no_results' => 'لا توجد نتائج',
             'loading' => 'جاري التحميل...',
@@ -219,7 +220,7 @@ return [
     ],
     'resources' => [
         'actions' => [
-            'create' => 'إضافة :label',
+            'create' => 'إنشاء :label',
             'delete' => 'حذف',
             'edit' => 'تعديل :label',
             'force_delete' => 'حذف نهائي',
@@ -249,7 +250,7 @@ return [
             'updated' => 'تم تحديث :label بنجاح',
         ],
         'title' => [
-            'create' => 'إضافة :label',
+            'create' => 'إنشاء :label',
             'edit' => 'تعديل :label',
             'list' => 'قائمة :label',
             'view' => 'رؤية :label',

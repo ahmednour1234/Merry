@@ -56,7 +56,8 @@ class SliderResource extends Resource
                         Forms\Components\Select::make('lang_code')
                             ->options(fn () => SystemLanguage::on('system')->pluck('name', 'code')->toArray())
                             ->required()
-                            ->label('اللغة'),
+                            ->label('اللغة')
+                            ->placeholder('اختر خياراً'),
                         Forms\Components\TextInput::make('title')
                             ->maxLength(191)
                             ->label('العنوان'),
@@ -66,7 +67,8 @@ class SliderResource extends Resource
                     ])
                     ->defaultItems(1)
                     ->collapsible()
-                    ->label('الترجمات'),
+                    ->label('الترجمات')
+                    ->addActionLabel('إضافة ترجمة'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
                     ->label('نشط'),

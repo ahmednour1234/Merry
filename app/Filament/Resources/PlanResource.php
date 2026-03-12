@@ -74,7 +74,8 @@ class PlanResource extends Resource
                         Forms\Components\Select::make('lang_code')
                             ->options(fn () => SystemLanguage::on('system')->pluck('name', 'code')->toArray())
                             ->required()
-                            ->label('اللغة'),
+                            ->label('اللغة')
+                            ->placeholder('اختر خياراً'),
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(191)
@@ -85,7 +86,8 @@ class PlanResource extends Resource
                     ])
                     ->defaultItems(1)
                     ->collapsible()
-                    ->label('الترجمات'),
+                    ->label('الترجمات')
+                    ->addActionLabel('إضافة ترجمة'),
                 Forms\Components\Repeater::make('features')
                     ->relationship('features')
                     ->schema([
@@ -104,7 +106,8 @@ class PlanResource extends Resource
                     ])
                     ->defaultItems(1)
                     ->collapsible()
-                    ->label('الميزات'),
+                    ->label('الميزات')
+                    ->addActionLabel('إضافة ميزة'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
                     ->label('نشط'),

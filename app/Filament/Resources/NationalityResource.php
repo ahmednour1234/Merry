@@ -54,7 +54,8 @@ class NationalityResource extends Resource
                         Forms\Components\Select::make('lang_code')
                             ->options(fn () => SystemLanguage::on('system')->pluck('name', 'code')->toArray())
                             ->required()
-                            ->label('اللغة'),
+                            ->label('اللغة')
+                            ->placeholder('اختر خياراً'),
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(191)
@@ -62,7 +63,8 @@ class NationalityResource extends Resource
                     ])
                     ->defaultItems(1)
                     ->collapsible()
-                    ->label('الترجمات'),
+                    ->label('الترجمات')
+                    ->addActionLabel('إضافة ترجمة'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
                     ->label('نشط'),
