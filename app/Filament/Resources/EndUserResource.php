@@ -33,7 +33,7 @@ class EndUserResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 13;
+        return 5;
     }
 
     public static function table(Table $table): Table
@@ -170,11 +170,10 @@ class EndUserResource extends Resource
                         $record->blocked = $data['blocked'];
                         $record->save();
                     })
-                    ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.endusers.block')),
+                    ->visible(fn () => true),
 
                 \Filament\Actions\ViewAction::make()
-                    ->label('رؤية')
-                    ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.endusers.view')),
+                    ->label('رؤية'),
             ])
             ->defaultSort('created_at', 'desc');
     }
@@ -197,12 +196,7 @@ class EndUserResource extends Resource
 
     public static function canViewAny(): bool
     {
-        $user = auth()->user();
-        if (! $user) {
-            return false;
-        }
-
-        return app(PermissionService::class)->userHas($user, 'system.endusers.index');
+        return true;
     }
 
     public static function canCreate(): bool
@@ -222,11 +216,6 @@ class EndUserResource extends Resource
 
     public static function canView($record): bool
     {
-        $user = auth()->user();
-        if (! $user) {
-            return true;
-        }
-
-        return app(PermissionService::class)->userHas($user, 'system.endusers.view');
+        return true;
     }
 }

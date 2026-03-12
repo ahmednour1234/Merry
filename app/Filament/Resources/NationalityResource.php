@@ -29,7 +29,7 @@ class NationalityResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 7;
+        return 3;
     }
 
     protected static ?string $navigationLabel = 'الجنسيات';

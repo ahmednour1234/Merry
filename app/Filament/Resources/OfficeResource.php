@@ -29,7 +29,7 @@ class OfficeResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 6;
+        return 4;
     }
 
     protected static ?string $navigationLabel = 'المكاتب';

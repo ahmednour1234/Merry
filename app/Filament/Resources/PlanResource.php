@@ -31,7 +31,7 @@ class PlanResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 8;
+        return 7;
     }
 
     protected static ?string $navigationLabel = 'الباقات';

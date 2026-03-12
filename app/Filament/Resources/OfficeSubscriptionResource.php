@@ -25,7 +25,7 @@ class OfficeSubscriptionResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 9;
+        return 8;
     }
 
     protected static ?string $navigationLabel = 'الاشتراكات';

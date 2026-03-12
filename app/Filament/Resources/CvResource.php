@@ -32,7 +32,7 @@ class CvResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 11;
+        return 6;
     }
 
     protected static ?string $navigationLabel = 'السير الذاتية';

@@ -84,7 +84,7 @@ class NotificationResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 10;
+        return 11;
     }
 
     protected static ?string $navigationLabel = 'الإشعارات';
