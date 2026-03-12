@@ -4,7 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OfficeSubscriptionResource\Pages;
 use App\Models\OfficeSubscription;
+use App\Models\Plan;
 use BackedEnum;
+use Carbon\Carbon;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
@@ -53,7 +57,27 @@ class OfficeSubscriptionResource extends Resource
                     ->relationship('plan', 'code')
                     ->required()
                     ->label('الباقة')
-                    ->searchable(),
+                    ->searchable()
+                    ->live()
+                    ->afterStateUpdated(function (?string $state, Set $set, Get $get): void {
+                        if (!$state) return;
+                        $plan = Plan::on('system')->find($state);
+                        if ($plan) {
+                            $set('price', (string) $plan->base_price);
+                            $set('_billing_cycle', $plan->billing_cycle === 'annual' ? 'سنوي' : 'شهري');
+                            $starts = $get('starts_at');
+                            if ($starts) {
+                                $dt = Carbon::parse($starts);
+                                $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYear() : $dt->copy()->addMonth();
+                                $set('ends_at', $ends);
+                            }
+                        }
+                    }),
+                Forms\Components\TextInput::make('_billing_cycle')
+                    ->label('دورة الفوترة')
+                    ->default('—')
+                    ->disabled()
+                    ->dehydrated(false),
                 Forms\Components\Select::make('status')
                     ->options([
                         'pending' => 'قيد الانتظار',
@@ -69,15 +93,36 @@ class OfficeSubscriptionResource extends Resource
                     ->label('نشط'),
                 Forms\Components\DateTimePicker::make('starts_at')
                     ->required()
-                    ->label('تاريخ البدء'),
+                    ->label('تاريخ البدء')
+                    ->live()
+                    ->afterStateUpdated(function ($state, Set $set, Get $get): void {
+                        if (!$state) return;
+                        $code = $get('plan_code');
+                        if (!$code) return;
+                        $plan = Plan::on('system')->find($code);
+                        if (!$plan) return;
+                        $dt = Carbon::parse($state);
+                        $ends = $plan->billing_cycle === 'annual' ? $dt->copy()->addYear() : $dt->copy()->addMonth();
+                        $set('ends_at', $ends);
+                    }),
                 Forms\Components\DateTimePicker::make('ends_at')
                     ->required()
-                    ->label('تاريخ الانتهاء'),
+                    ->label('تاريخ الانتهاء')
+                    ->disabled()
+                    ->dehydrated(),
                 Forms\Components\Hidden::make('currency_code')
                     ->default('SAR'),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
-                    ->label('السعر'),
+                    ->label('السعر')
+                    ->default(fn (Get $get) => (function () use ($get) {
+                        $code = $get('plan_code');
+                        if (!$code) return null;
+                        $plan = Plan::on('system')->find($code);
+                        return $plan ? (string) $plan->base_price : null;
+                    })())
+                    ->disabled()
+                    ->dehydrated(),
             ]);
     }
 
