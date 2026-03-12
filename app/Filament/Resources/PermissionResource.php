@@ -53,7 +53,14 @@ class PermissionResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191)
-                    ->label('الاسم'),
+                    ->label('الاسم')
+                    ->helperText(fn ($get) => (function () use ($get) {
+                        $slug = $get('slug');
+                        if (!$slug) return null;
+                        $key = 'permissions.names_' . str_replace('.', '_', $slug);
+                        $t = __($key);
+                        return $t !== $key ? 'الاسم المعروض: ' . $t : null;
+                    })()),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(191)
@@ -80,7 +87,12 @@ class PermissionResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
-                    ->label('الاسم'),
+                    ->label('الاسم')
+                    ->formatStateUsing(function (string $state, Permission $record): string {
+                        $key = 'permissions.names_' . str_replace('.', '_', $record->slug);
+                        $t = __($key);
+                        return $t === $key ? $state : $t;
+                    }),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()
                     ->sortable()
