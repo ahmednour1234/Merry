@@ -30,6 +30,11 @@ class CvResource extends Resource
         return 'الإدارة';
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return 11;
+    }
+
     protected static ?string $navigationLabel = 'السير الذاتية';
 
     protected static ?string $modelLabel = 'سيرة ذاتية';

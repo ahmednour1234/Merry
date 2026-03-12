@@ -28,6 +28,11 @@ class BookingResource extends Resource
         return 'الإدارة';
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return 12;
+    }
+
     /**
      * ✅ Better place to force connection/query.
      * If "system" is a DB connection name, this is correct.

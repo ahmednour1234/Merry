@@ -15,7 +15,7 @@ class Dashboard extends BaseDashboard
 
     public static function getNavigationSort(): ?int
     {
-        return 1;
+        return 0;
     }
 
     public function getTitle(): string

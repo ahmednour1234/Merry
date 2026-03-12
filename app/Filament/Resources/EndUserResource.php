@@ -31,6 +31,11 @@ class EndUserResource extends Resource
         return 'الإدارة';
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return 13;
+    }
+
     public static function table(Table $table): Table
     {
         return $table
