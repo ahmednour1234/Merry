@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\EndUserResource\Pages;
 
 use App\Filament\Resources\EndUserResource;
-use Filament\Infolists\Components\Section as InfolistSection;
+use Filament\Schemas\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\IconEntry;
@@ -18,7 +18,7 @@ class ViewEndUser extends ViewRecord
     {
         return $schema
             ->schema([
-                InfolistSection::make('المعلومات الأساسية')
+                Section::make('المعلومات الأساسية')
                     ->schema([
                         TextEntry::make('id')
                             ->label('ID'),
@@ -54,7 +54,7 @@ class ViewEndUser extends ViewRecord
                     ])
                     ->columns(2),
 
-                InfolistSection::make('الإحصائيات')
+                Section::make('الإحصائيات')
                     ->schema([
                         TextEntry::make('bookings_count')
                             ->label('عدد الحجوزات')
