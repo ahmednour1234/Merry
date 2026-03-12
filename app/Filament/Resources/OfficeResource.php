@@ -24,7 +24,12 @@ class OfficeResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'النظام';
+        return 'الإدارة';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 6;
     }
 
     protected static ?string $navigationLabel = 'المكاتب';

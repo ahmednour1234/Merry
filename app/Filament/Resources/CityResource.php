@@ -25,7 +25,12 @@ class CityResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'النظام';
+        return 'الإدارة';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 3;
     }
 
     protected static ?string $navigationLabel = 'المدن';

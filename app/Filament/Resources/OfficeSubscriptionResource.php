@@ -20,7 +20,12 @@ class OfficeSubscriptionResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'النظام';
+        return 'الإدارة';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 9;
     }
 
     protected static ?string $navigationLabel = 'الاشتراكات';

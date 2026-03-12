@@ -26,7 +26,12 @@ class RoleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'النظام';
+        return 'الإدارة';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 5;
     }
 
     public static function getNavigationLabel(): string

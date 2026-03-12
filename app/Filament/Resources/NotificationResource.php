@@ -82,6 +82,11 @@ class NotificationResource extends Resource
         return 'الإدارة';
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return 10;
+    }
+
     protected static ?string $navigationLabel = 'الإشعارات';
 
     protected static ?string $modelLabel = 'إشعار';

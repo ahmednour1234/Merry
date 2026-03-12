@@ -24,7 +24,12 @@ class NationalityResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'المحتوى';
+        return 'الإدارة';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 7;
     }
 
     protected static ?string $navigationLabel = 'الجنسيات';

@@ -25,6 +25,11 @@ class NotificationsPage extends Page
         return 'الإدارة';
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }
+
     public static function getRoutes(): \Closure
     {
         return function () {
