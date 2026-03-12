@@ -3,7 +3,10 @@
 return [
     'Filters' => 'المرشحات',
     'Reset' => 'إعادة تعيين',
+    'Apply filters' => 'تطبيق المرشحات',
     'Per page' => 'لكل صفحة',
+    'Search' => 'بحث',
+    'All' => 'الكل',
     'Showing' => 'عرض',
     'results' => 'نتائج',
     'to' => 'إلى',
@@ -69,6 +72,7 @@ return [
     'filters' => [
         'actions' => [
             'apply' => 'تطبيق',
+            'apply_filters' => 'تطبيق المرشحات',
             'reset' => 'إعادة تعيين',
         ],
         'heading' => 'المرشحات',
@@ -286,6 +290,7 @@ return [
         'filters' => [
             'actions' => [
                 'apply' => 'تطبيق',
+                'apply_filters' => 'تطبيق المرشحات',
                 'remove' => 'إزالة',
                 'remove_all' => 'إزالة الكل',
                 'reset' => 'إعادة تعيين',
