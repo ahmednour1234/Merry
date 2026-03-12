@@ -31,4 +31,14 @@ class CreateCv extends CreateRecord
         
         return $repo->store($data, $office->id);
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'تم إنشاء السيرة الذاتية بنجاح';
+    }
+
+    protected function getCreatedNotificationBody(): ?string
+    {
+        return 'تم إضافة السيرة الذاتية وسيتم مراجعتها قريباً.';
+    }
 }

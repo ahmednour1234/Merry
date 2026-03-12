@@ -274,6 +274,7 @@ class CvResource extends Resource
 
                         \Filament\Notifications\Notification::make()
                             ->title('تم تحديث الحالة بنجاح')
+                            ->body('تم تفعيل أو تعطيل السيرة الذاتية كما طلبت.')
                             ->success()
                             ->send();
                     })
@@ -287,7 +288,8 @@ class CvResource extends Resource
                     ->action(function (Cv $record) {
                         if ($record->status !== 'rejected') {
                             \Filament\Notifications\Notification::make()
-                                ->title('يمكن إعادة إرسال السير الذاتية المرفوضة فقط')
+                                ->title('غير مسموح')
+                                ->body('يمكن إعادة إرسال السيرة الذاتية المرفوضة فقط.')
                                 ->danger()
                                 ->send();
                             return;
@@ -301,6 +303,7 @@ class CvResource extends Resource
 
                         \Filament\Notifications\Notification::make()
                             ->title('تم إعادة الإرسال بنجاح')
+                            ->body('تم إرسال السيرة الذاتية للمراجعة مرة أخرى.')
                             ->success()
                             ->send();
                     })
@@ -329,8 +332,13 @@ class CvResource extends Resource
                     ->modalCancelActionLabel('إغلاق')
                     ->visible(fn ($record) => FavouriteCv::on('identity')->where('cv_id', $record->id)->exists()),
 
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make()
+                    ->successNotificationTitle('تم تحديث السيرة الذاتية بنجاح'),
+                \Filament\Actions\DeleteAction::make()
+                    ->successNotificationTitle('تم حذف السيرة الذاتية بنجاح')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من حذف هذه السيرة الذاتية؟ لا يمكن التراجع عن هذا الإجراء.')
+                    ->modalSubmitActionLabel('نعم، احذف'),
             ])
             ->defaultSort('created_at', 'desc');
     }

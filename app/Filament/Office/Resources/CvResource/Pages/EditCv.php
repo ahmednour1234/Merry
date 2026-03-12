@@ -15,7 +15,11 @@ class EditCv extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->successNotificationTitle('تم حذف السيرة الذاتية بنجاح')
+                ->modalHeading('تأكيد الحذف')
+                ->modalDescription('هل أنت متأكد من حذف هذه السيرة الذاتية؟')
+                ->modalSubmitActionLabel('نعم، احذف'),
         ];
     }
 
@@ -50,5 +54,15 @@ class EditCv extends EditRecord
     {
         $repo = app(CvRepositoryInterface::class);
         return $repo->update($record->id, $data) ?? $record;
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'تم حفظ التعديلات بنجاح';
+    }
+
+    protected function getSavedNotificationBody(): ?string
+    {
+        return 'تم تحديث بيانات السيرة الذاتية.';
     }
 }
