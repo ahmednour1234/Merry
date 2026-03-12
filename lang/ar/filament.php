@@ -412,8 +412,8 @@ return [
             'plural_label' => 'المكاتب',
         ],
         'plan' => [
-            'label' => 'خطة',
-            'plural_label' => 'الخطط',
+            'label' => 'باقة',
+            'plural_label' => 'الباقات',
         ],
         'coupon' => [
             'label' => 'كوبون',

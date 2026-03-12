@@ -34,11 +34,11 @@ class PlanResource extends Resource
         return 8;
     }
 
-    protected static ?string $navigationLabel = 'الخطط';
+    protected static ?string $navigationLabel = 'الباقات';
 
-    protected static ?string $modelLabel = 'خطة';
+    protected static ?string $modelLabel = 'باقة';
 
-    protected static ?string $pluralModelLabel = 'الخطط';
+    protected static ?string $pluralModelLabel = 'الباقات';
 
     public static function form(Schema $schema): Schema
     {
