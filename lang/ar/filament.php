@@ -9,6 +9,7 @@ return [
         'clone' => 'نسخ',
         'close' => 'إغلاق',
         'create' => 'إضافة',
+        'new' => 'إضافة',
         'delete' => 'حذف',
         'detach' => 'فصل',
         'dissociate' => 'إلغاء الارتباط',
