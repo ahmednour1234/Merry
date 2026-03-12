@@ -32,6 +32,10 @@ class PermissionResource extends Resource
         return 9;
     }
 
+    protected static ?string $modelLabel = 'صلاحية';
+
+    protected static ?string $pluralModelLabel = 'الصلاحيات';
+
     public static function getNavigationLabel(): string
     {
         return 'الصلاحيات';
@@ -49,22 +53,22 @@ class PermissionResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191)
-                    ->label('Name'),
+                    ->label('الاسم'),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(191)
                     ->unique(ignoreRecord: true, modifyRuleUsing: function ($rule, $get) {
                         return $rule->where('guard', $get('guard') ?? 'api');
                     })
-                    ->label('Slug'),
+                    ->label('المعرف'),
                 Forms\Components\TextInput::make('guard')
                     ->required()
                     ->maxLength(32)
                     ->default('api')
-                    ->label('Guard'),
+                    ->label('الحارس'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
-                    ->label('Active'),
+                    ->label('نشط'),
             ]);
     }
 
@@ -75,31 +79,38 @@ class PermissionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('الاسم'),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('المعرف'),
                 Tables\Columns\TextColumn::make('guard')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('الحارس'),
                 Tables\Columns\IconColumn::make('active')
                     ->boolean()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('نشط'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('تاريخ الإنشاء')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('تاريخ التحديث')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\Filter::make('name')
                     ->form([
                         Forms\Components\TextInput::make('name')
-                            ->label('Name'),
+                            ->label('الاسم'),
                     ])
+                    ->label('الاسم')
                     ->query(function ($query, array $data) {
                         return $query->when(
                             $data['name'] ?? null,
@@ -109,8 +120,9 @@ class PermissionResource extends Resource
                 Tables\Filters\Filter::make('slug')
                     ->form([
                         Forms\Components\TextInput::make('slug')
-                            ->label('Slug'),
+                            ->label('المعرف'),
                     ])
+                    ->label('المعرف')
                     ->query(function ($query, array $data) {
                         return $query->when(
                             $data['slug'] ?? null,
@@ -120,18 +132,20 @@ class PermissionResource extends Resource
                 Tables\Filters\SelectFilter::make('guard')
                     ->options([
                         'api' => 'API',
-                        'web' => 'Web',
+                        'web' => 'ويب',
                         'filament' => 'Filament',
-                    ]),
+                    ])
+                    ->label('الحارس'),
                 Tables\Filters\TernaryFilter::make('active')
-                    ->label('Active'),
+                    ->label('نشط'),
                 Tables\Filters\Filter::make('created_at')
                     ->form([
                         Forms\Components\DatePicker::make('from')
-                            ->label('From'),
+                            ->label('من'),
                         Forms\Components\DatePicker::make('to')
-                            ->label('To'),
+                            ->label('إلى'),
                     ])
+                    ->label('تاريخ الإنشاء')
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(
@@ -146,12 +160,12 @@ class PermissionResource extends Resource
             ])
             ->actions([
                 FilamentAction::make('toggle')
-                    ->label('Toggle Active')
+                    ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
                     ->form([
                         Forms\Components\Toggle::make('active')
-                            ->label('Active')
+                            ->label('نشط')
                             ->default(fn (Permission $record) => $record->active),
                     ])
                     ->action(function (Permission $record, array $data) {
