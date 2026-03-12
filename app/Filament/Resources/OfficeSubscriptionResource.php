@@ -52,7 +52,7 @@ class OfficeSubscriptionResource extends Resource
                 Forms\Components\Select::make('plan_code')
                     ->relationship('plan', 'code')
                     ->required()
-                    ->label('الخطة')
+                    ->label('الباقة')
                     ->searchable(),
                 Forms\Components\Select::make('status')
                     ->options([
@@ -73,10 +73,8 @@ class OfficeSubscriptionResource extends Resource
                 Forms\Components\DateTimePicker::make('ends_at')
                     ->required()
                     ->label('تاريخ الانتهاء'),
-                Forms\Components\TextInput::make('currency_code')
-                    ->maxLength(8)
-                    ->default('USD')
-                    ->label('العملة'),
+                Forms\Components\Hidden::make('currency_code')
+                    ->default('SAR'),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->label('السعر'),
@@ -96,7 +94,7 @@ class OfficeSubscriptionResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('plan.name')
                     ->formatStateUsing(fn ($record) => $record->plan?->translations->where('lang_code', 'ar')->first()?->name ?? $record->plan?->name ?? '-')
-                    ->label('الخطة')
+                    ->label('الباقة')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label('الحالة')
