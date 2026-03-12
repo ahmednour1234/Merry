@@ -333,8 +333,10 @@ class CvResource extends Resource
                     ->visible(fn ($record) => FavouriteCv::on('identity')->where('cv_id', $record->id)->exists()),
 
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->successNotificationTitle('تم تحديث السيرة الذاتية بنجاح'),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
                     ->successNotificationTitle('تم حذف السيرة الذاتية بنجاح')
                     ->modalHeading('تأكيد الحذف')
                     ->modalDescription('هل أنت متأكد من حذف هذه السيرة الذاتية؟ لا يمكن التراجع عن هذا الإجراء.')

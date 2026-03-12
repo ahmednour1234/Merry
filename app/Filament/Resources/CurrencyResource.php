@@ -148,8 +148,13 @@ class CurrencyResource extends Resource
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.currencies.toggle')),
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.currencies.update')),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.currencies.destroy')),
             ])
             ->bulkActions([

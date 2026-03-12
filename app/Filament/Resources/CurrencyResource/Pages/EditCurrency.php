@@ -13,7 +13,11 @@ class EditCurrency extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->label('حذف')
+                ->modalHeading('تأكيد الحذف')
+                ->modalDescription('هل أنت متأكد من الحذف؟')
+                ->modalSubmitActionLabel('نعم، احذف'),
         ];
     }
 }

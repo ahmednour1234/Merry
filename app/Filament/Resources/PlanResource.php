@@ -191,8 +191,13 @@ class PlanResource extends Resource
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.plans.toggle')),
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.plans.update')),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.plans.destroy')),
             ])
             ->bulkActions([

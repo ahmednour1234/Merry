@@ -148,8 +148,13 @@ class CategoryResource extends Resource
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.categories.toggle')),
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.categories.update')),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.categories.destroy')),
             ])
             ->bulkActions([

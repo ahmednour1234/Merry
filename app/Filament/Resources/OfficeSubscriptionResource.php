@@ -149,8 +149,12 @@ class OfficeSubscriptionResource extends Resource
                     ->label('تجديد تلقائي'),
             ])
             ->actions([
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make()->label('تعديل'),
+                \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف'),
             ])
             ->defaultSort('created_at', 'desc');
     }

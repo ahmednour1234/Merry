@@ -262,8 +262,13 @@ class CvResource extends Resource
                     })
                     ->visible(fn (Cv $record) => $record->status === 'frozen' && app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.freeze')),
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.update')),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cvs.destroy')),
             ])
             ->bulkActions([

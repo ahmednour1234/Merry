@@ -16,6 +16,7 @@ class EditCv extends EditRecord
     {
         return [
             Actions\DeleteAction::make()
+                ->label('حذف')
                 ->successNotificationTitle('تم حذف السيرة الذاتية بنجاح')
                 ->modalHeading('تأكيد الحذف')
                 ->modalDescription('هل أنت متأكد من حذف هذه السيرة الذاتية؟')

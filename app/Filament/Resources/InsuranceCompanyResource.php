@@ -131,8 +131,13 @@ class InsuranceCompanyResource extends Resource
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.toggle')),
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.update')),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.insurance_companies.destroy')),
             ])
             ->bulkActions([

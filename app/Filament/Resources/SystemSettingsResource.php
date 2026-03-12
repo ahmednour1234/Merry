@@ -123,6 +123,7 @@ class SystemSettingsResource extends Resource
             ])
             ->actions([
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.settings.update')),
             ])
             ->defaultSort('scope')

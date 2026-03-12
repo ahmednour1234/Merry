@@ -164,8 +164,13 @@ class CouponResource extends Resource
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.coupons.toggle')),
                 \Filament\Actions\EditAction::make()
+                    ->label('تعديل')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.coupons.update')),
                 \Filament\Actions\DeleteAction::make()
+                    ->label('حذف')
+                    ->modalHeading('تأكيد الحذف')
+                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalSubmitActionLabel('نعم، احذف')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.coupons.destroy')),
             ])
             ->bulkActions([
