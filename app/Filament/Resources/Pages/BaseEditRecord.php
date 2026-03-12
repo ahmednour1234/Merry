@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use Filament\Resources\Pages\EditRecord as BaseEditRecord;
+use Filament\Resources\Pages\EditRecord as FilamentEditRecord;
 
-abstract class BaseEditRecord extends BaseEditRecord
+abstract class BaseEditRecord extends FilamentEditRecord
 {
     protected function getSaveFormAction(): \Filament\Actions\Action
     {

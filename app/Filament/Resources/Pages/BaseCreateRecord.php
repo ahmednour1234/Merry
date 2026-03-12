@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Pages;
 
-use Filament\Resources\Pages\CreateRecord as BaseCreateRecord;
+use Filament\Resources\Pages\CreateRecord as FilamentCreateRecord;
 
-abstract class BaseCreateRecord extends BaseCreateRecord
+abstract class BaseCreateRecord extends FilamentCreateRecord
 {
     protected function getCreateFormAction(): \Filament\Actions\Action
     {
