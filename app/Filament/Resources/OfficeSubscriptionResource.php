@@ -222,13 +222,20 @@ class OfficeSubscriptionResource extends Resource
                     ->label('إعادة تجديد الاشتراك')
                     ->icon('heroicon-o-arrow-path')
                     ->color('success')
-                    ->requiresConfirmation()
-                    ->modalHeading('إعادة تجديد الاشتراك')
+                    ->modalHeading(fn (OfficeSubscription $record) => $record->ends_at->isFuture() ? 'لا يمكن التجديد الآن' : 'إعادة تجديد الاشتراك')
                     ->modalDescription(fn (OfficeSubscription $record) => $record->ends_at->isFuture()
-                        ? 'لا يمكن التجديد الآن. التجديد يتم في معاده؛ الفترة الجديدة تبدأ من تاريخ الانتهاء المحدد ويتم التجديد في نفس ذلك اليوم.'
-                        : 'سيتم تجديد الاشتراك؛ الفترة الجديدة تبدأ من اليوم حسب دورة الفوترة للخطة. هل تريد المتابعة؟')
+                        ? 'التجديد يتم في معاده؛ الفترة الجديدة تبدأ من تاريخ الانتهاء المحدد ويتم التجديد في نفس ذلك اليوم.'
+                        : 'الفترة الجديدة تبدأ من اليوم. حدد مدة التجديد حسب الباقة (عدد الأشهر أو السنوات).')
+                    ->form(fn (OfficeSubscription $record) => $record->ends_at->isFuture() ? [] : [
+                        Forms\Components\TextInput::make('duration')
+                            ->label(fn () => ($record->plan && $record->plan->billing_cycle === 'annual') ? 'عدد السنوات' : 'عدد الأشهر')
+                            ->numeric()
+                            ->minValue(1)
+                            ->default(1)
+                            ->required(),
+                    ])
                     ->modalSubmitActionLabel('نعم، جدد')
-                    ->action(function (OfficeSubscription $record) {
+                    ->action(function (OfficeSubscription $record, array $data) {
                         if ($record->ends_at->isFuture()) {
                             \Filament\Notifications\Notification::make()
                                 ->title('لا، أنت لسة مجدد الاشتراك')
@@ -239,10 +246,11 @@ class OfficeSubscriptionResource extends Resource
                         }
                         $plan = $record->plan;
                         $startsAt = now();
+                        $n = (int) ($data['duration'] ?? 1) ?: 1;
                         if ($plan && $plan->billing_cycle === 'annual') {
-                            $endsAt = $startsAt->copy()->addYear();
+                            $endsAt = $startsAt->copy()->addYears($n);
                         } else {
-                            $endsAt = $startsAt->copy()->addMonth();
+                            $endsAt = $startsAt->copy()->addMonths($n);
                         }
                         $record->update([
                             'starts_at' => $startsAt,
