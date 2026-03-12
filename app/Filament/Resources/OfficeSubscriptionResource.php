@@ -7,8 +7,6 @@ use App\Models\OfficeSubscription;
 use App\Models\Plan;
 use BackedEnum;
 use Carbon\Carbon;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Actions\Action as FilamentAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
@@ -59,7 +57,7 @@ class OfficeSubscriptionResource extends Resource
                     ->label('الباقة')
                     ->searchable()
                     ->live()
-                    ->afterStateUpdated(function (?string $state, Set $set, Get $get): void {
+                    ->afterStateUpdated(function (?string $state, $set, $get): void {
                         if (!$state) return;
                         $plan = Plan::on('system')->find($state);
                         if ($plan) {
@@ -95,7 +93,7 @@ class OfficeSubscriptionResource extends Resource
                     ->required()
                     ->label('تاريخ البدء')
                     ->live()
-                    ->afterStateUpdated(function ($state, Set $set, Get $get): void {
+                    ->afterStateUpdated(function ($state, $set, $get): void {
                         if (!$state) return;
                         $code = $get('plan_code');
                         if (!$code) return;
@@ -115,7 +113,7 @@ class OfficeSubscriptionResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->label('السعر')
-                    ->default(fn (Get $get) => (function () use ($get) {
+                    ->default(fn ($get) => (function () use ($get) {
                         $code = $get('plan_code');
                         if (!$code) return null;
                         $plan = Plan::on('system')->find($code);
