@@ -29,7 +29,7 @@ class BookingResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 12;
+        return 7;
     }
 
     /**
