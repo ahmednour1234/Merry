@@ -13,8 +13,8 @@ use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 
-// ===== Auth middlewares (من لارفيل نفسه) =====
-use Illuminate\Auth\Middleware\Authenticate;
+// ===== Auth middlewares =====
+use App\Http\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 
 // ===== Custom middlewares =====
