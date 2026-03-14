@@ -8,6 +8,7 @@
         'deactivated' => 'إيقاف تفعيل',
         'auto_renew_toggled' => 'تجديد تلقائي',
         'renewed' => 'تجديد',
+        'cv_created' => 'رفع سيرة ذاتية',
     ];
     $actionBadges = [
         'created' => 'success',
@@ -16,6 +17,7 @@
         'deactivated' => 'warning',
         'auto_renew_toggled' => 'primary',
         'renewed' => 'success',
+        'cv_created' => 'info',
     ];
 @endphp
 

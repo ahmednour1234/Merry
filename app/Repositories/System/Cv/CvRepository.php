@@ -32,7 +32,17 @@ class CvRepository implements CvRepositoryInterface
 
     public function store(array $data, ?int $officeId = null): Cv
     {
-        return DB::connection('system')->transaction(function () use ($data, $officeId) {
+        $officeId = $officeId ?? ($data['office_id'] ?? null);
+        if (!$officeId) {
+            throw \Illuminate\Validation\ValidationException::withMessages(['office_id' => 'المكتب مطلوب.']);
+        }
+        $limitSvc = app(\App\Services\SubscriptionLimitService::class);
+        $result = $limitSvc->canOfficeAddCv($officeId);
+        if (!$result['allowed']) {
+            throw \Illuminate\Validation\ValidationException::withMessages(['file_path' => $result['message']]);
+        }
+
+        return DB::connection('system')->transaction(function () use ($data, $officeId, $result) {
             if (!empty($data['file']) && $data['file'] instanceof \Illuminate\Http\UploadedFile) {
                 $up = PdfUpload::store($data['file'], 'cvs');
                 $data = array_merge($data, [
@@ -43,10 +53,14 @@ class CvRepository implements CvRepositoryInterface
                 ]);
                 unset($data['file']);
             }
-            $data['office_id'] = $officeId ?? ($data['office_id'] ?? null);
+            $data['office_id'] = $officeId;
             $data['status'] = $data['status'] ?? 'pending';
             $cv = Cv::on('system')->create($data);
             $cv->load(['office','category','nationality.translations']);
+
+            if (isset($result['subscription'])) {
+                \App\Models\OfficeSubscriptionLog::log($result['subscription']->id, 'cv_created', ['cv_id' => $cv->id]);
+            }
 
             if ($cv->office_id) {
                 $notification = $this->notificationService->createNotification([

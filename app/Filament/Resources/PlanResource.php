@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PlanResource\Pages;
+use App\Enums\PlanFeatureKey;
 use App\Models\Plan;
 use App\Models\PlanFeature;
 use App\Services\PermissionService;
@@ -71,10 +72,15 @@ class PlanResource extends Resource
                 Forms\Components\Repeater::make('features')
                     ->relationship('features')
                     ->schema([
-                        Forms\Components\TextInput::make('feature_key')
+                        Forms\Components\Select::make('feature_key')
                             ->required()
-                            ->maxLength(191)
-                            ->label('مفتاح الميزة'),
+                            ->label('الميزة')
+                            ->options([
+                                PlanFeatureKey::CV_LIMIT->value => 'عدد السير الذاتية (CV)',
+                                PlanFeatureKey::BOOKINGS_LIMIT->value => 'عدد الحجوزات المسموح به',
+                                PlanFeatureKey::PRIORITY_SUPPORT->value => 'أولوية في الدعم',
+                            ])
+                            ->native(false),
                         Forms\Components\TextInput::make('limit')
                             ->numeric()
                             ->label('الحد'),

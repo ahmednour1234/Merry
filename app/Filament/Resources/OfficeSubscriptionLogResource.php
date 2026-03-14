@@ -40,6 +40,7 @@ class OfficeSubscriptionLogResource extends Resource
             'deactivated' => 'إيقاف تفعيل',
             'auto_renew_toggled' => 'تجديد تلقائي',
             'renewed' => 'تجديد',
+            'cv_created' => 'رفع سيرة ذاتية',
         ];
 
         return $table
@@ -58,6 +59,7 @@ class OfficeSubscriptionLogResource extends Resource
                         'deactivated' => 'warning',
                         'auto_renew_toggled' => 'primary',
                         'renewed' => 'success',
+                        'cv_created' => 'info',
                         default => 'gray',
                     })
                     ->sortable(),
@@ -75,6 +77,7 @@ class OfficeSubscriptionLogResource extends Resource
                         'deactivated' => 'إيقاف تفعيل',
                         'auto_renew_toggled' => 'تجديد تلقائي',
                         'renewed' => 'تجديد',
+                        'cv_created' => 'رفع سيرة ذاتية',
                     ]),
             ]);
     }

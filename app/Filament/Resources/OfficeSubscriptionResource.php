@@ -222,11 +222,9 @@ class OfficeSubscriptionResource extends Resource
                     ->label('إعادة تجديد الاشتراك')
                     ->icon('heroicon-o-arrow-path')
                     ->color('success')
-                    ->modalHeading(fn (OfficeSubscription $record) => $record->ends_at->isFuture() ? 'لا يمكن التجديد الآن' : 'إعادة تجديد الاشتراك')
-                    ->modalDescription(fn (OfficeSubscription $record) => $record->ends_at->isFuture()
-                        ? 'التجديد يتم في معاده؛ الفترة الجديدة تبدأ من تاريخ الانتهاء المحدد ويتم التجديد في نفس ذلك اليوم.'
-                        : 'الفترة الجديدة تبدأ من اليوم. حدد مدة التجديد حسب الباقة (عدد الأشهر أو السنوات).')
-                    ->form(fn (OfficeSubscription $record) => $record->ends_at->isFuture() ? [] : [
+                    ->modalHeading('إعادة تجديد الاشتراك')
+                    ->modalDescription('الفترة الجديدة تبدأ من اليوم. حدد مدة التجديد حسب الباقة (عدد الأشهر أو السنوات).')
+                    ->form(fn (OfficeSubscription $record) => [
                         Forms\Components\TextInput::make('duration')
                             ->label(fn () => ($record->plan && $record->plan->billing_cycle === 'annual') ? 'عدد السنوات' : 'عدد الأشهر')
                             ->numeric()
@@ -236,14 +234,6 @@ class OfficeSubscriptionResource extends Resource
                     ])
                     ->modalSubmitActionLabel('نعم، جدد')
                     ->action(function (OfficeSubscription $record, array $data) {
-                        if ($record->ends_at->isFuture()) {
-                            \Filament\Notifications\Notification::make()
-                                ->title('لا، أنت لسة مجدد الاشتراك')
-                                ->body('التجديد يتم في معاده؛ الفترة الجديدة تبدأ من تاريخ الانتهاء المحدد ويتم التجديد في نفس ذلك اليوم.')
-                                ->warning()
-                                ->send();
-                            return;
-                        }
                         $plan = $record->plan;
                         $startsAt = now();
                         $n = (int) ($data['duration'] ?? 1) ?: 1;

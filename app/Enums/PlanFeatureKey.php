@@ -5,6 +5,7 @@ namespace App\Enums;
 enum PlanFeatureKey: string
 {
     case CV_LIMIT              = 'cv.limit';              // أقصى عدد CVs نشطة
+    case BOOKINGS_LIMIT        = 'bookings.limit';        // أقصى عدد الحجوزات المسموح به
     case REQUEST_LIMIT         = 'request.limit';         // أقصى عدد طلبات شهريًا
     case OFFICE_USERS_LIMIT    = 'office.users.limit';    // أقصى عدد مستخدمين للمكتب
     case MEDIA_STORAGE_GB      = 'media.storage.gb';      // مساحة التخزين بالـ GB

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\System\CvResource;
 use App\Models\Cv;
 use App\Models\CvBooking;
+use App\Services\SubscriptionLimitService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -104,6 +105,12 @@ class BookingController extends ApiController
 			->count();
 		if ($activeCount >= 3) {
 			return $this->responder->fail('Booking limit reached for this CV', 422);
+		}
+
+		$limitSvc = app(SubscriptionLimitService::class);
+		$canBook = $limitSvc->canOfficeAddBooking((int) $cv->office_id);
+		if (!$canBook['allowed']) {
+			return $this->responder->fail($canBook['message'], 422);
 		}
 
 		$row = CvBooking::on('system')->create([
