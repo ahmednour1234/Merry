@@ -23,9 +23,9 @@ class ViewOffice extends ViewRecord
     {
         return [
             Actions\Action::make('createLog')
-                ->label('إضافة Log')
+                ->label('إرسال رسالة للمكتب')
                 ->icon('heroicon-o-document-plus')
-                ->color('warning')
+                ->color('danger')
                 ->modalHeading('إضافة سجل رسالة')
                 ->modalDescription('أدخل تفاصيل السجل الذي تريد إضافته لهذا المكتب.')
                 ->modalSubmitActionLabel('حفظ السجل')
