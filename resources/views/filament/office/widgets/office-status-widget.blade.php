@@ -10,9 +10,13 @@
              * - Active => success
              */
 
-            $state = 'success';
+            $isActive = (bool) ($isActive ?? false);
+            $isBlocked = (bool) ($isBlocked ?? false);
+            $state = in_array(($statusColor ?? null), ['success', 'warning', 'danger'], true)
+                ? $statusColor
+                : 'success';
 
-            if (!$isActive) {
+            if (!$isActive && $state === 'success') {
                 $state = 'warning';
             }
 
@@ -56,7 +60,7 @@
                 ],
             ];
 
-            $s = $styles[$state];
+            $s = $styles[$state] ?? $styles['success'];
 
             $headline = match ($state) {
                 'success' => 'حسابك نشط',
