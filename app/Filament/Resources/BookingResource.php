@@ -43,6 +43,13 @@ class BookingResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->label('ID'),
                 Tables\Columns\TextColumn::make('cv.id')->label('رقم السيرة')->sortable(),
+                Tables\Columns\TextColumn::make('cv_requests_count')
+                    ->label('عدد طالبي السيرة')
+                    ->badge()
+                    ->state(fn (CvBooking $record): int => CvBooking::query()
+                        ->where('cv_id', $record->cv_id)
+                        ->distinct('end_user_id')
+                        ->count('end_user_id')),
                 Tables\Columns\TextColumn::make('office.name')->label('المكتب')->searchable(),
                 Tables\Columns\TextColumn::make('endUser.name')->label('المستخدم')->placeholder('—'),
                 Tables\Columns\TextColumn::make('status')
