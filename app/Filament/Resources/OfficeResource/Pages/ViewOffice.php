@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\OfficeResource\Pages;
 
 use App\Filament\Resources\OfficeResource;
+use App\Models\AuditLog;
+use App\Models\Office;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Infolists\Components\IconEntry;
@@ -56,6 +58,46 @@ class ViewOffice extends ViewRecord
                         TextEntry::make('created_at')
                             ->label('تاريخ الإنشاء')
                             ->dateTime(),
+                    ])
+                    ->columns(2),
+
+                Section::make('سجل الرسائل')
+                    ->schema([
+                        TextEntry::make('message_logs')
+                            ->label('الرسائل المرسلة للمكتب')
+                            ->state(function (Office $record): string {
+                                $logs = AuditLog::query()
+                                    ->where('model', Office::class)
+                                    ->where('model_id', $record->id)
+                                    ->whereIn('action', [
+                                        'office_stopped_with_reason',
+                                        'office_reactivated_with_reason',
+                                    ])
+                                    ->orderByDesc('created_at')
+                                    ->limit(20)
+                                    ->get(['action', 'request', 'created_at']);
+
+                                if ($logs->isEmpty()) {
+                                    return 'لا توجد رسائل مسجلة.';
+                                }
+
+                                return $logs->map(function ($log): string {
+                                    $request = (array) ($log->request ?? []);
+                                    $reason = trim((string) ($request['reason'] ?? ''));
+                                    $message = trim((string) ($request['message'] ?? ''));
+                                    $at = $log->created_at ? $log->created_at->format('Y-m-d H:i') : '-';
+                                    $action = $log->action === 'office_reactivated_with_reason' ? 'إعادة تفعيل' : 'إيقاف';
+
+                                    return sprintf(
+                                        '[%s] %s | السبب: %s | الرسالة: %s',
+                                        $at,
+                                        $action,
+                                        $reason !== '' ? $reason : '-',
+                                        $message !== '' ? $message : '-'
+                                    );
+                                })->implode("\n");
+                            })
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
             ]);
