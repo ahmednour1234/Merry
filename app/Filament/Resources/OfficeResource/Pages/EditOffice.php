@@ -28,8 +28,8 @@ class EditOffice extends BaseEditRecord
                 ->color('danger')
                 ->requiresConfirmation()
                 ->modalHeading('إيقاف المكتب')
-                ->modalDescription('سيتم إيقاف المكتب وإرسال رسالة توضيحية إلى البريد الإلكتروني الخاص به.')
-                ->modalSubmitActionLabel('نعم، إيقاف')
+                ->modalDescription('سيتم إرسال الرسالة إلى بريد المكتب. يمكنك إرسال رسالة جديدة حتى لو تم الإرسال سابقاً.')
+                ->modalSubmitActionLabel('إرسال الرسالة وإيقاف المكتب')
                 ->modalCancelActionLabel('إلغاء')
                 ->form([
                     Forms\Components\Textarea::make('reason')
@@ -88,8 +88,7 @@ class EditOffice extends BaseEditRecord
                         'active' => true,
                         'created_at' => now(),
                     ]);
-                })
-                ->visible(fn (Office $record): bool => $record->active || ! $record->blocked),
+                }),
             Actions\DeleteAction::make()
                 ->label('حذف مكتب')
                 ->modalHeading('تأكيد الحذف')
