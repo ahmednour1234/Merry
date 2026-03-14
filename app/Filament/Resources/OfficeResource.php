@@ -203,6 +203,9 @@ class OfficeResource extends Resource
                         $record->save();
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.toggle')),
+                \Filament\Actions\ViewAction::make()
+                    ->label('عرض مكتب')
+                    ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.index')),
                 \Filament\Actions\EditAction::make()
                     ->label('تعديل مكتب')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.update')),
@@ -235,6 +238,7 @@ class OfficeResource extends Resource
         return [
             'index' => Pages\ListOffices::route('/'),
             'create' => Pages\CreateOffice::route('/create'),
+            'view' => Pages\ViewOffice::route('/{record}'),
             'edit' => Pages\EditOffice::route('/{record}/edit'),
         ];
     }
@@ -252,6 +256,11 @@ class OfficeResource extends Resource
     public static function canEdit($record): bool
     {
         return app(PermissionService::class)->userHas(auth()->user(), 'system.offices.update');
+    }
+
+    public static function canView($record): bool
+    {
+        return app(PermissionService::class)->userHas(auth()->user(), 'system.offices.index');
     }
 
     public static function canDelete($record): bool
