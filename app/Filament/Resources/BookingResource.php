@@ -42,69 +42,48 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->sortable()
-                    ->label('ID'),
-
-                Tables\Columns\TextColumn::make('cv_id')
-                    ->sortable()
-                    ->label('السيرة الذاتية'),
-
-                Tables\Columns\TextColumn::make('office_id')
-                    ->sortable()
-                    ->label('المكتب'),
-
-                Tables\Columns\TextColumn::make('end_user_id')
-                    ->sortable()
-                    ->label('المستخدم'),
-
+                Tables\Columns\TextColumn::make('id')->sortable()->label('ID'),
+                Tables\Columns\TextColumn::make('cv.id')->label('رقم السيرة')->sortable(),
+                Tables\Columns\TextColumn::make('office.name')->label('المكتب')->searchable(),
+                Tables\Columns\TextColumn::make('endUser.name')->label('المستخدم')->placeholder('—'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
+                    ->formatStateUsing(fn (?string $state): string => match ($state) {
+                        'pending' => 'قيد الانتظار',
+                        'accepted' => 'مقبول',
+                        'rejected' => 'مرفوض',
+                        'cancelled' => 'ملغي',
+                        default => $state ?? '—',
+                    })
                     ->color(fn (?string $state): string => match ($state) {
-                        'pending'   => 'warning',
-                        'confirmed' => 'success',
-                        'cancelled' => 'danger',
-                        'completed' => 'info',
-                        default     => 'gray',
+                        'pending' => 'warning',
+                        'accepted' => 'success',
+                        'rejected' => 'danger',
+                        'cancelled' => 'gray',
+                        default => 'gray',
                     })
                     ->label('الحالة'),
-
-                Tables\Columns\TextColumn::make('booked_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->label('تاريخ الحجز'),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->label('تاريخ الإنشاء')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('note')->label('ملاحظة')->placeholder('—')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable()->label('التاريخ'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options([
-                        'pending'   => 'قيد الانتظار',
-                        'confirmed' => 'مؤكد',
+                        'pending' => 'قيد الانتظار',
+                        'accepted' => 'مقبول',
+                        'rejected' => 'مرفوض',
                         'cancelled' => 'ملغي',
-                        'completed' => 'مكتمل',
                     ])
                     ->label('الحالة'),
-
-                Tables\Filters\Filter::make('booked_at')
+                Tables\Filters\Filter::make('created_at')
                     ->form([
                         Forms\Components\DatePicker::make('from')->label('من'),
                         Forms\Components\DatePicker::make('to')->label('إلى'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
-                            ->when(
-                                $data['from'] ?? null,
-                                fn (Builder $query, $date): Builder => $query->whereDate('booked_at', '>=', $date),
-                            )
-                            ->when(
-                                $data['to'] ?? null,
-                                fn (Builder $query, $date): Builder => $query->whereDate('booked_at', '<=', $date),
-                            );
+                            ->when($data['from'] ?? null, fn (Builder $q, $d): Builder => $q->whereDate('created_at', '>=', $d))
+                            ->when($data['to'] ?? null, fn (Builder $q, $d): Builder => $q->whereDate('created_at', '<=', $d));
                     }),
             ])
             ->defaultSort('created_at', 'desc');

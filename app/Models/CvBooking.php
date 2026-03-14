@@ -20,6 +20,11 @@ class CvBooking extends Model
 	{
 		return $this->belongsTo(Cv::class, 'cv_id', 'id');
 	}
+
+	public function office()
+	{
+		return $this->belongsTo(\App\Models\Office::class, 'office_id', 'id');
+	}
 }
 
 
