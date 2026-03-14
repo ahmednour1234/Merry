@@ -101,6 +101,12 @@ class SubscriptionResource extends Resource
                     ->color('warning')
                     ->visible(fn (OfficeSubscription $record): bool => static::isCurrentSubscription($record))
                     ->requiresConfirmation()
+                    ->modalHeading(fn (OfficeSubscription $record): string => $record->auto_renew ? 'إيقاف التجديد التلقائي' : 'تفعيل التجديد التلقائي')
+                    ->modalDescription(fn (OfficeSubscription $record): string => $record->auto_renew
+                        ? 'هل أنت متأكد من إيقاف التجديد التلقائي لهذه الباقة الحالية؟'
+                        : 'هل أنت متأكد من تفعيل التجديد التلقائي لهذه الباقة الحالية؟')
+                    ->modalSubmitActionLabel(fn (OfficeSubscription $record): string => $record->auto_renew ? 'نعم، إيقاف' : 'نعم، تفعيل')
+                    ->modalCancelActionLabel('إلغاء')
                     ->action(function (OfficeSubscription $record): void {
                         if ($record->office_id !== Auth::guard('office-panel')->id()) {
                             Notification::make()
