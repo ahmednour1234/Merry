@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -63,9 +64,9 @@ class ViewOffice extends ViewRecord
 
                 Section::make('سجل الرسائل')
                     ->schema([
-                        TextEntry::make('message_logs')
+                        RepeatableEntry::make('message_logs')
                             ->label('الرسائل المرسلة للمكتب')
-                            ->state(function (Office $record): string {
+                            ->state(function (Office $record): array {
                                 $logs = AuditLog::query()
                                     ->where('model', Office::class)
                                     ->where('model_id', $record->id)
@@ -78,25 +79,36 @@ class ViewOffice extends ViewRecord
                                     ->get(['action', 'request', 'created_at']);
 
                                 if ($logs->isEmpty()) {
-                                    return 'لا توجد رسائل مسجلة.';
+                                    return [[
+                                        'created_at' => '-',
+                                        'action' => 'لا توجد رسائل مسجلة',
+                                        'reason' => '-',
+                                        'message' => '-',
+                                    ]];
                                 }
 
-                                return $logs->map(function ($log): string {
+                                return $logs->map(function ($log): array {
                                     $request = (array) ($log->request ?? []);
                                     $reason = trim((string) ($request['reason'] ?? ''));
                                     $message = trim((string) ($request['message'] ?? ''));
                                     $at = $log->created_at ? $log->created_at->format('Y-m-d H:i') : '-';
                                     $action = $log->action === 'office_reactivated_with_reason' ? 'إعادة تفعيل' : 'إيقاف';
 
-                                    return sprintf(
-                                        '[%s] %s | السبب: %s | الرسالة: %s',
-                                        $at,
-                                        $action,
-                                        $reason !== '' ? $reason : '-',
-                                        $message !== '' ? $message : '-'
-                                    );
-                                })->implode("\n");
+                                    return [
+                                        'created_at' => $at,
+                                        'action' => $action,
+                                        'reason' => $reason !== '' ? $reason : '-',
+                                        'message' => $message !== '' ? $message : '-',
+                                    ];
+                                })->values()->all();
                             })
+                            ->schema([
+                                TextEntry::make('created_at')->label('التاريخ'),
+                                TextEntry::make('action')->label('العملية'),
+                                TextEntry::make('reason')->label('السبب'),
+                                TextEntry::make('message')->label('الرسالة'),
+                            ])
+                            ->columns(4)
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
