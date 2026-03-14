@@ -123,8 +123,4 @@ class ResetPassword extends Page
         $this->redirect(Login::getUrl());
     }
 
-    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
-    {
-        return parent::getUrl($parameters, $isAbsolute, $panel, $tenant);
-    }
 }

@@ -14,7 +14,7 @@ class CheckOfficeActive
     {
         $panel = Filament::getPanel('office');
         $path = $request->path();
-        
+
         if (str_starts_with($path, $panel->getPath() . '/login') ||
             str_starts_with($path, $panel->getPath() . '/register') ||
             str_starts_with($path, $panel->getPath() . '/password')) {
@@ -23,8 +23,10 @@ class CheckOfficeActive
 
         $office = Auth::guard('office-panel')->user();
 
+        $loginUrl = url(trim($panel->getPath(), '/') . '/login');
+
         if (!$office) {
-            return redirect()->to($panel->getLoginUrl());
+            return redirect()->to($loginUrl);
         }
 
         if ($office->blocked) {
@@ -33,7 +35,7 @@ class CheckOfficeActive
             $request->session()->regenerateToken();
 
             return redirect()
-                ->to(Filament::getPanel('office')->getLoginUrl())
+                ->to($loginUrl)
                 ->with('error', 'تم حظر حسابك. يرجى التواصل مع الإدارة.');
         }
 

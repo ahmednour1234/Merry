@@ -58,4 +58,11 @@ class Login extends Page
         redirect()->to(LoginOtp::getUrl());
     }
 
+    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
+    {
+        $officePanel = \Filament\Facades\Filament::getPanel($panel ?? 'office');
+
+        return url(trim($officePanel->getPath(), '/') . '/login');
+    }
+
 }

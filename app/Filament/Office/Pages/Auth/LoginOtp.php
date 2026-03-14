@@ -182,8 +182,4 @@ class LoginOtp extends Page
         }
     }
 
-    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
-    {
-        return parent::getUrl($parameters, $isAbsolute, $panel, $tenant);
-    }
 }
