@@ -171,6 +171,10 @@ class OfficeResource extends Resource
                     ->icon('heroicon-o-lock-closed')
                     ->color('danger')
                     ->requiresConfirmation()
+                    ->modalHeading('تأكيد تحديث الحظر')
+                    ->modalDescription('هل أنت متأكد من تحديث حالة الحظر لهذا المكتب؟')
+                    ->modalSubmitActionLabel('نعم، تأكيد')
+                    ->modalCancelActionLabel('إلغاء')
                     ->form([
                         Forms\Components\Toggle::make('blocked')
                             ->label('محظور')
@@ -185,6 +189,10 @@ class OfficeResource extends Resource
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
+                    ->modalHeading('تأكيد تغيير الحالة')
+                    ->modalDescription('هل أنت متأكد من تغيير حالة هذا المكتب؟')
+                    ->modalSubmitActionLabel('نعم، تأكيد')
+                    ->modalCancelActionLabel('إلغاء')
                     ->form([
                         Forms\Components\Toggle::make('active')
                             ->label('نشط')
@@ -196,13 +204,14 @@ class OfficeResource extends Resource
                     })
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.toggle')),
                 \Filament\Actions\EditAction::make()
-                    ->label('تعديل')
+                    ->label('تعديل مكتب')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.update')),
                 \Filament\Actions\DeleteAction::make()
-                    ->label('حذف')
+                    ->label('حذف مكتب')
                     ->modalHeading('تأكيد الحذف')
-                    ->modalDescription('هل أنت متأكد من الحذف؟')
+                    ->modalDescription('هل أنت متأكد من حذف هذا المكتب؟')
                     ->modalSubmitActionLabel('نعم، احذف')
+                    ->modalCancelActionLabel('إلغاء')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.offices.destroy')),
             ])
             ->bulkActions([
