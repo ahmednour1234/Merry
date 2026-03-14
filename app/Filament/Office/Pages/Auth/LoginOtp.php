@@ -37,6 +37,18 @@ class LoginOtp extends Page
             return;
         }
 
+        if ($office->blocked || ! $office->active) {
+            session()->forget('login_office_id');
+
+            Notification::make()
+                ->title('لا يمكن تسجيل الدخول قبل تفعيل الحساب')
+                ->danger()
+                ->send();
+
+            $this->redirect(Login::getUrl());
+            return;
+        }
+
         $this->sendOtp($office);
     }
 
@@ -65,6 +77,18 @@ class LoginOtp extends Page
                 ->title('المكتب غير موجود')
                 ->danger()
                 ->send();
+            $this->redirect(Login::getUrl());
+            return;
+        }
+
+        if ($office->blocked || ! $office->active) {
+            session()->forget('login_office_id');
+
+            Notification::make()
+                ->title('لا يمكن تسجيل الدخول قبل تفعيل الحساب')
+                ->danger()
+                ->send();
+
             $this->redirect(Login::getUrl());
             return;
         }

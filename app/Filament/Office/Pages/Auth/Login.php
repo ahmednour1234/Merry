@@ -52,6 +52,18 @@ class Login extends Page
             ]);
         }
 
+        if ($office->blocked) {
+            throw ValidationException::withMessages([
+                'email' => 'تم حظر حسابك. يرجى التواصل مع الإدارة.',
+            ]);
+        }
+
+        if (! $office->active) {
+            throw ValidationException::withMessages([
+                'email' => 'حسابك قيد المراجعة. سيتم تفعيله من الإدارة أولاً قبل تسجيل الدخول.',
+            ]);
+        }
+
         session()->put('login_office_id', $office->id);
         session()->regenerate();
 

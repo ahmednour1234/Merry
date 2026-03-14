@@ -76,6 +76,19 @@ class VerifyOtp extends Page implements HasForms
             return;
         }
 
+        if ($office->blocked || ! $office->active) {
+            session()->forget('office_registration_id');
+
+            Notification::make()
+                ->title('تم إنشاء الحساب بنجاح وهو الآن قيد المراجعة')
+                ->body('سيتم تفعيل الحساب من الإدارة أولاً قبل تسجيل الدخول.')
+                ->warning()
+                ->send();
+
+            $this->redirect(Login::getUrl());
+            return;
+        }
+
         $row = DB::connection('system')->table('password_reset_tokens')->where('email', $office->email)->first();
 
         if (!$row || empty($row->code_hash)) {

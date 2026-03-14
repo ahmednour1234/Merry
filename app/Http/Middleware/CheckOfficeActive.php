@@ -40,10 +40,12 @@ class CheckOfficeActive
                 ->with('error', 'تم حظر حسابك. يرجى التواصل مع الإدارة.');
         }
 
-        // Inactive accounts can browse all office panel pages in read-only mode,
-        // but any write action is blocked centrally.
-        if (! $office->active && ! in_array($request->method(), ['GET', 'HEAD', 'OPTIONS'], true)) {
-            $message = 'حسابك غير مفعل حاليا. يمكنك التصفح فقط ولا يمكنك تنفيذ أي إجراء.';
+        if (! $office->active) {
+            Auth::guard('office-panel')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            $message = 'حسابك قيد المراجعة. سيتم تفعيله من الإدارة أولاً قبل تسجيل الدخول.';
 
             if ($request->expectsJson()) {
                 return response()->json([
@@ -51,10 +53,8 @@ class CheckOfficeActive
                 ], 403);
             }
 
-            $referer = $request->headers->get('referer');
-
             return redirect()
-                ->to($referer ?: url($panelPath))
+                ->to($loginUrl)
                 ->with('warning', $message);
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Office\Pages\Auth;
 
+use App\Events\OfficeRegistered;
 use App\Models\City;
 use App\Models\Office;
 use Filament\Pages\Page;
@@ -105,11 +106,11 @@ class Register extends Page
 
         $office = Office::on('system')->create($data);
 
-        Auth::guard('office-panel')->login($office);
+        event(new OfficeRegistered($office->id));
 
-        session()->regenerate();
-
-        redirect()->intended(\Filament\Facades\Filament::getPanel('office')->getUrl());
+        redirect()
+            ->to(Login::getUrl())
+            ->with('success', 'تم إنشاء الحساب بنجاح. حسابك قيد المراجعة وسيتم تفعيله من الإدارة أولاً.');
     }
 
 }
