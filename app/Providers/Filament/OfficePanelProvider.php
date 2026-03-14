@@ -74,10 +74,14 @@ class OfficePanelProvider extends PanelProvider
             ->authPasswordBroker('offices')
             ->databaseNotifications()
             ->userMenuItems([
-                MenuItem::make()
+                'profile' => MenuItem::make()
                     ->label('الملف الشخصي')
                     ->icon('heroicon-o-user-circle')
                     ->url(fn () => \App\Filament\Office\Pages\Profile::getUrl()),
+                'logout' => MenuItem::make()
+                    ->label('تسجيل الخروج')
+                    ->icon('heroicon-o-arrow-right-on-rectangle')
+                    ->url(fn () => route('office.logout')),
             ]);
     }
 }

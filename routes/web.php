@@ -12,6 +12,15 @@ Route::get('/docs/postman.json', function () {
 });
 
 Route::prefix('office')->middleware(['auth:office-panel'])->group(function () {
+    Route::get('/logout', function () {
+        auth()->guard('office-panel')->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/office/login');
+    })->name('office.logout');
+
     Route::post('/subscriptions/subscribe', [\App\Http\Controllers\Office\SubscriptionController::class, 'subscribe'])->name('office.subscriptions.subscribe');
     Route::post('/subscriptions/{id}/toggle-auto-renew', [\App\Http\Controllers\Office\SubscriptionController::class, 'toggleAutoRenew'])->name('office.subscriptions.toggle-auto-renew');
     Route::post('/subscriptions/{id}/cancel', [\App\Http\Controllers\Office\SubscriptionController::class, 'cancel'])->name('office.subscriptions.cancel');
