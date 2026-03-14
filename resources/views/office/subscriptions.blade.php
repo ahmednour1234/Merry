@@ -16,12 +16,13 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
+            background: #ffffff;
             min-height: 100vh;
-            padding: 20px;
+            padding: 24px;
             direction: rtl;
             position: relative;
             overflow-x: hidden;
+            color: #0f172a;
         }
 
         body::before {
@@ -31,14 +32,19 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(5, 79, 49, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background:
+                radial-gradient(circle at 12% 18%, rgba(5, 79, 49, 0.06) 0%, transparent 28%),
+                radial-gradient(circle at 88% 10%, rgba(16, 185, 129, 0.05) 0%, transparent 24%),
+                linear-gradient(180deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0) 22%),
+                linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+            background-size: auto, auto, auto, 32px 32px, 32px 32px;
             pointer-events: none;
             z-index: 0;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -46,20 +52,21 @@
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 44px;
         }
 
         .app-name {
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 900;
             color: #054F31;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
         }
 
         .page-title {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
-            color: #1e293b;
+            color: #1f2937;
             margin-bottom: 30px;
         }
 
@@ -84,8 +91,9 @@
 
         .current-subscription {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(5, 79, 49, 0.08);
             padding: 30px;
             margin-bottom: 40px;
         }
@@ -106,8 +114,9 @@
 
         .info-item {
             padding: 16px;
-            background: #f8fafc;
-            border-radius: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
         }
 
         .info-label {
@@ -187,9 +196,9 @@
         }
 
         .plan-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             border-radius: 24px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
             padding: 32px 28px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -219,7 +228,7 @@
 
         .plan-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 24px 60px rgba(5, 79, 49, 0.25);
+            box-shadow: 0 28px 60px rgba(5, 79, 49, 0.18);
             border-color: rgba(5, 79, 49, 0.2);
         }
 
@@ -400,8 +409,9 @@
 
         .subscriptions-table {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(5, 79, 49, 0.08);
             padding: 30px;
             overflow-x: auto;
         }
@@ -537,26 +547,37 @@
         }
 
         .welcome-section {
-            background: linear-gradient(135deg, #054F31 0%, #10b981 50%, #34d399 100%);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 40px;
+            background: linear-gradient(135deg, #065f46 0%, #059669 48%, #34d399 100%);
+            border-radius: 32px;
+            padding: 52px 40px;
+            margin-bottom: 48px;
             color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(5, 79, 49, 0.3);
+            box-shadow: 0 28px 70px rgba(5, 79, 49, 0.22);
+            isolation: isolate;
         }
 
         .welcome-section::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            inset: 0;
+            background:
+                linear-gradient(140deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 38%),
+                linear-gradient(320deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 30%);
+            clip-path: polygon(0 0, 38% 0, 0 68%);
+            animation: none;
+        }
+
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, transparent 0 62%, rgba(255, 255, 255, 0.1) 62% 78%, transparent 78%),
+                radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.16) 0%, transparent 22%);
+            z-index: -1;
         }
 
         @keyframes rotate {
@@ -570,40 +591,42 @@
         }
 
         .welcome-greeting {
-            font-size: 32px;
+            font-size: 40px;
             font-weight: 800;
-            margin-bottom: 12px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 14px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.12);
         }
 
         .welcome-name {
-            font-size: 28px;
+            font-size: 34px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: #f0fdf4;
         }
 
         .welcome-message {
-            font-size: 18px;
-            opacity: 0.95;
-            line-height: 1.6;
+            font-size: 20px;
+            opacity: 0.92;
+            line-height: 1.8;
+            max-width: 760px;
+            margin: 0 auto;
         }
 
         .stats-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 24px;
+            margin-bottom: 48px;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 16px;
-            padding: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 24px;
+            padding: 28px 24px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 1px solid rgba(15, 23, 42, 0.06);
             position: relative;
             overflow: hidden;
         }
@@ -625,9 +648,9 @@
         }
 
         .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(5, 79, 49, 0.15);
-            border-color: #054F31;
+            transform: translateY(-6px);
+            box-shadow: 0 24px 44px rgba(5, 79, 49, 0.14);
+            border-color: rgba(5, 79, 49, 0.2);
         }
 
         .stat-icon {
@@ -650,10 +673,11 @@
 
         .features-section {
             background: white;
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 40px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(5, 79, 49, 0.08);
         }
 
         .features-section h3 {
