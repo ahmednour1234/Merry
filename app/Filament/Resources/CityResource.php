@@ -121,6 +121,7 @@ class CityResource extends Resource
                     ->modalHeading('تأكيد تبديل الحالة')
                     ->modalDescription('هل أنت متأكد من تبديل حالة المدينة؟')
                     ->modalSubmitActionLabel('نعم، قم بالتبديل')
+                    ->modalCancelActionLabel('إلغاء')
                     ->form([
                         Forms\Components\Toggle::make('active')
                             ->label('نشط')
@@ -139,6 +140,7 @@ class CityResource extends Resource
                     ->modalHeading('تأكيد الحذف')
                     ->modalDescription('هل أنت متأكد من الحذف؟')
                     ->modalSubmitActionLabel('نعم، احذف')
+                    ->modalCancelActionLabel('إلغاء')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.cities.destroy')),
             ])
             ->bulkActions([

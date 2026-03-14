@@ -131,6 +131,10 @@ class NationalityResource extends Resource
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
+                    ->modalHeading('تأكيد تبديل الحالة')
+                    ->modalDescription('هل أنت متأكد من تبديل حالة الجنسية؟')
+                    ->modalSubmitActionLabel('نعم، قم بالتبديل')
+                    ->modalCancelActionLabel('إلغاء')
                     ->form([
                         Forms\Components\Toggle::make('active')
                             ->label('نشط')
@@ -149,6 +153,7 @@ class NationalityResource extends Resource
                     ->modalHeading('تأكيد الحذف')
                     ->modalDescription('هل أنت متأكد من الحذف؟')
                     ->modalSubmitActionLabel('نعم، احذف')
+                    ->modalCancelActionLabel('إلغاء')
                     ->visible(fn () => app(PermissionService::class)->userHas(auth()->user(), 'system.nationalities.destroy')),
             ])
             ->bulkActions([
