@@ -99,6 +99,7 @@ class SubscriptionResource extends Resource
                     ->label(fn (OfficeSubscription $record): string => $record->auto_renew ? 'إيقاف التجديد التلقائي' : 'تفعيل التجديد التلقائي')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')
+                    ->visible(fn (OfficeSubscription $record): bool => static::isCurrentSubscription($record))
                     ->requiresConfirmation()
                     ->action(function (OfficeSubscription $record): void {
                         if ($record->office_id !== Auth::guard('office-panel')->id()) {
@@ -141,10 +142,27 @@ class SubscriptionResource extends Resource
             ->defaultSort('ends_at', 'desc');
     }
 
+    protected static function isCurrentSubscription(OfficeSubscription $record): bool
+    {
+        return $record->id === static::getCurrentSubscriptionIdForOffice($record->office_id);
+    }
+
+    protected static function getCurrentSubscriptionIdForOffice(int $officeId): ?int
+    {
+        return OfficeSubscription::on('system')
+            ->where('office_id', $officeId)
+            ->where('status', 'active')
+            ->where('active', true)
+            ->where('ends_at', '>=', now())
+            ->orderByDesc('ends_at')
+            ->value('id');
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListSubscriptions::route('/'),
+            'plans' => Pages\ChooseSubscriptionPlan::route('/plans'),
         ];
     }
 }
