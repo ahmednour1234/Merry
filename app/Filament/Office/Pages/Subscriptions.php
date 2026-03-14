@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Auth;
 
 class Subscriptions extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?string $slug = 'subscriptions-legacy';
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-credit-card';
 
     protected string $view = 'filament.office.pages.subscriptions';
@@ -167,9 +171,4 @@ class Subscriptions extends Page
         return [];
     }
 
-    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?\Illuminate\Database\Eloquent\Model $tenant = null): string
-    {
-        $panel = $panel ?? \Filament\Facades\Filament::getPanel('office');
-        return $panel->getUrl() . '/subscriptions';
-    }
 }

@@ -45,7 +45,6 @@ class OfficePanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Office/Pages'), for: 'App\\Filament\\Office\\Pages')
             ->pages([
                 \App\Filament\Office\Pages\Dashboard::class,
-                \App\Filament\Office\Pages\Subscriptions::class,
                 \App\Filament\Office\Pages\Profile::class,
                 \App\Filament\Office\Pages\Auth\Login::class,
                 \App\Filament\Office\Pages\Auth\Register::class,
