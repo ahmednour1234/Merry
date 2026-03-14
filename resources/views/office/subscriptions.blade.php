@@ -50,6 +50,54 @@
             z-index: 1;
         }
 
+        .page-shell {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 20px;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar {
+            width: 220px;
+            position: sticky;
+            top: 20px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            padding: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            text-decoration: none;
+            color: #054F31;
+            font-weight: 700;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 12px;
+            padding: 12px 14px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-link:hover {
+            background: #d1fae5;
+            border-color: #6ee7b7;
+            transform: translateY(-1px);
+        }
+
         .header {
             text-align: center;
             margin-bottom: 44px;
@@ -1307,6 +1355,15 @@
         }
 
         @media (max-width: 768px) {
+            .page-shell {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+
             .plans-grid {
                 grid-template-columns: 1fr;
             }
@@ -1335,6 +1392,15 @@
     </style>
 </head>
 <body>
+    <div class="page-shell">
+        <aside class="sidebar">
+            <div class="sidebar-title">القائمة</div>
+            <a class="sidebar-link" href="{{ \App\Filament\Office\Pages\Dashboard::getUrl() }}">
+                <span>🏠</span>
+                <span>لوحة التحكم</span>
+            </a>
+        </aside>
+
     <div class="container">
         <div class="welcome-section">
             <div class="welcome-content">
@@ -1689,6 +1755,7 @@
             <span>💬</span>
             <span class="floating-btn-tooltip">تواصل معنا عبر واتساب</span>
         </a>
+    </div>
     </div>
 
     <script>
