@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Welcome' => 'مرحبا',
     'Filters' => 'المرشحات',
     'Reset' => 'إعادة تعيين',
     'Apply filters' => 'تطبيق المرشحات',
