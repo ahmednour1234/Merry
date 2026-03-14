@@ -5,15 +5,22 @@ namespace App\Filament\Office\Resources\SubscriptionResource\Pages;
 use App\Filament\Office\Resources\SubscriptionResource;
 use App\Models\OfficeSubscription;
 use App\Models\Plan;
-use App\Repositories\System\Subscriptions\Contracts\PlanRepositoryInterface;
 use App\Repositories\System\Subscriptions\Contracts\SubscriptionRepositoryInterface;
 use App\Services\SubscriptionService;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Page;
+use Filament\Tables;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class ChooseSubscriptionPlan extends Page
+class ChooseSubscriptionPlan extends Page implements HasTable
 {
+    use InteractsWithTable;
+
     protected static string $resource = SubscriptionResource::class;
 
     protected string $view = 'filament.office.pages.choose-subscription-plan';
@@ -30,56 +37,81 @@ class ChooseSubscriptionPlan extends Page
         return 'اختيار الباقة';
     }
 
-    public function getPlans()
+    public function table(Table $table): Table
     {
-        $repo = app(PlanRepositoryInterface::class);
-        $plans = $repo->paginate(['active' => 1], 50);
-        $plans->getCollection()->load(['translations', 'features']);
-
-        $svc = app(SubscriptionService::class);
         $office = Auth::guard('office-panel')->user();
-        $currentSubscription = OfficeSubscription::on('system')
-            ->with(['plan.translations'])
-            ->where('office_id', $office->id)
-            ->where('status', 'active')
-            ->where('active', true)
-            ->where('ends_at', '>=', now())
-            ->orderByDesc('ends_at')
-            ->first();
 
-        return $plans->getCollection()->map(function (Plan $plan) use ($svc, $currentSubscription) {
-            $priced = $svc->priced($plan->code, $this->couponCode);
+        return $table
+            ->query(
+                Plan::on('system')
+                    ->with(['translations', 'features'])
+                    ->where('active', true)
+                    ->orderBy('base_price')
+            )
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label('الباقة')
+                    ->getStateUsing(fn (Plan $record): string => $record->translations->firstWhere('lang_code', 'ar')?->name
+                        ?? $record->translations->first()?->name
+                        ?? $record->name)
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query->where(function (Builder $innerQuery) use ($search): Builder {
+                            return $innerQuery
+                                ->where('name', 'like', "%{$search}%")
+                                ->orWhereHas('translations', fn (Builder $translationsQuery): Builder => $translationsQuery->where('name', 'like', "%{$search}%"));
+                        });
+                    }),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('الوصف')
+                    ->getStateUsing(fn (Plan $record): string => $record->translations->firstWhere('lang_code', 'ar')?->description
+                        ?? $record->translations->first()?->description
+                        ?? $record->description
+                        ?? 'لا يوجد وصف')
+                    ->wrap()
+                    ->limit(60),
+                Tables\Columns\TextColumn::make('final_price')
+                    ->label('السعر')
+                    ->getStateUsing(function (Plan $record): string {
+                        $priced = app(SubscriptionService::class)->priced($record->code, $this->couponCode);
+                        $amount = number_format((float) ($priced['price'] ?? $record->base_price), 2);
+                        $currency = $priced['currency'] ?? $record->base_currency;
 
-            $planName = $plan->translations->where('lang_code', 'ar')->first()?->name
-                ?? $plan->translations->first()?->name
-                ?? $plan->name;
-
-            $isCurrent = $currentSubscription && $currentSubscription->plan_code === $plan->code;
-
-            return [
-                'code' => $plan->code,
-                'name' => $planName,
-                'description' => $plan->translations->where('lang_code', 'ar')->first()?->description
-                    ?? $plan->translations->first()?->description
-                    ?? $plan->description,
-                'base_price' => $plan->base_price,
-                'final_price' => $priced['price'] ?? $plan->base_price,
-                'currency' => $priced['currency'] ?? $plan->base_currency,
-                'billing_cycle' => $plan->billing_cycle,
-                'features' => $plan->features->where('active', true)->map(function ($feature) {
-                    return [
-                        'key' => $feature->feature_key,
-                        'limit' => $feature->limit,
-                        'value' => $feature->value,
-                    ];
-                }),
-                'is_current' => $isCurrent,
-                'current_subscription' => $isCurrent ? [
-                    'ends_at' => $currentSubscription->ends_at->format('Y-m-d'),
-                    'auto_renew' => $currentSubscription->auto_renew,
-                ] : null,
-            ];
-        });
+                        return "{$amount} {$currency}";
+                    }),
+                Tables\Columns\TextColumn::make('billing_cycle')
+                    ->label('الدورة')
+                    ->formatStateUsing(fn (string $state): string => $state === 'annual' ? 'سنوي' : 'شهري'),
+                Tables\Columns\IconColumn::make('is_current')
+                    ->label('الحالية')
+                    ->boolean()
+                    ->getStateUsing(fn (Plan $record): bool => $this->isCurrentPlan($record->code)),
+            ])
+            ->actions([
+                FilamentAction::make('show_features')
+                    ->label('عرض المميزات')
+                    ->icon('heroicon-o-eye')
+                    ->color('gray')
+                    ->modalHeading(fn (Plan $record): string => 'مميزات باقة ' . ($record->translations->firstWhere('lang_code', 'ar')?->name ?? $record->translations->first()?->name ?? $record->name))
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel('إغلاق')
+                    ->modalContent(function (Plan $record) {
+                        return view('filament.office.pages.partials.plan-features-modal', [
+                            'features' => $record->features->where('active', true),
+                        ]);
+                    }),
+                FilamentAction::make('subscribe')
+                    ->label('اشتراك')
+                    ->icon('heroicon-o-plus-circle')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->modalHeading('تأكيد الاشتراك')
+                    ->modalDescription('هل تريد الاشتراك في هذه الباقة؟ سيتم استبدال الاشتراك الحالي إذا وجد.')
+                    ->modalSubmitActionLabel('تأكيد الاشتراك')
+                    ->modalCancelActionLabel('إلغاء')
+                    ->action(fn (Plan $record): void => $this->subscribe($record->code))
+                    ->visible(fn (Plan $record): bool => ! $this->isCurrentPlan($record->code)),
+            ])
+            ->defaultSort('base_price');
     }
 
     public function subscribe(string $planCode): void
@@ -116,6 +148,11 @@ class ChooseSubscriptionPlan extends Page
             ->send();
 
         $this->redirect(SubscriptionResource::getUrl());
+    }
+
+    protected function isCurrentPlan(string $planCode): bool
+    {
+        return $this->getCurrentSubscription()?->plan_code === $planCode;
     }
 
     public function toggleAutoRenew($subscriptionId): void
