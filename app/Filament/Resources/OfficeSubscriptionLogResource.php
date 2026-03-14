@@ -28,7 +28,7 @@ class OfficeSubscriptionLogResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return 13;
+        return 9;
     }
 
     public static function table(Table $table): Table
