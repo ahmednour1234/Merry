@@ -5,6 +5,7 @@ namespace App\Filament\Office\Resources;
 use App\Filament\Office\Resources\SubscriptionResource\Pages;
 use App\Models\OfficeSubscription;
 use BackedEnum;
+use Filament\Actions\Action as BaseAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -94,7 +95,7 @@ class SubscriptionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle_auto_renew')
+                BaseAction::make('toggle_auto_renew')
                     ->label(fn (OfficeSubscription $record): string => $record->auto_renew ? 'إيقاف التجديد التلقائي' : 'تفعيل التجديد التلقائي')
                     ->icon('heroicon-o-arrow-path')
                     ->color('warning')
