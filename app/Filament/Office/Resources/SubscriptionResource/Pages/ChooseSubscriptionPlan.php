@@ -108,7 +108,9 @@ class ChooseSubscriptionPlan extends Page implements HasTable
                     ->modalDescription('هل تريد الاشتراك في هذه الباقة؟ سيتم استبدال الاشتراك الحالي إذا وجد.')
                     ->modalSubmitActionLabel('تأكيد الاشتراك')
                     ->modalCancelActionLabel('إلغاء')
-                    ->action(fn (Plan $record): void => $this->subscribe($record->code))
+                    ->action(function (Plan $record): void {
+                        $this->subscribe($record->code);
+                    })
                     ->visible(fn (Plan $record): bool => ! $this->isCurrentPlan($record->code)),
             ])
             ->defaultSort('base_price');
