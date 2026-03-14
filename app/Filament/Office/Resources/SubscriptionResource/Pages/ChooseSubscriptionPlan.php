@@ -92,6 +92,8 @@ class ChooseSubscriptionPlan extends Page implements HasTable
                     ->icon('heroicon-o-eye')
                     ->color('gray')
                     ->modalHeading(fn (Plan $record): string => 'مميزات باقة ' . ($record->translations->firstWhere('lang_code', 'ar')?->name ?? $record->translations->first()?->name ?? $record->name))
+                    ->modalDescription('تفاصيل المميزات المتاحة داخل هذه الباقة')
+                    ->modalWidth('md')
                     ->modalSubmitAction(false)
                     ->modalCancelActionLabel('إغلاق')
                     ->modalContent(function (Plan $record) {
