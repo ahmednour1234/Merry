@@ -16,7 +16,7 @@ class ChooseSubscriptionPlan extends Page
 {
     protected static string $resource = SubscriptionResource::class;
 
-    protected string $view = 'filament.office.pages.subscriptions';
+    protected string $view = 'filament.office.pages.choose-subscription-plan';
 
     public ?string $couponCode = null;
 
