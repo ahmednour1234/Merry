@@ -12,16 +12,16 @@
 
             $isActive = (bool) ($isActive ?? false);
             $isBlocked = (bool) ($isBlocked ?? false);
-            $state = in_array(($statusColor ?? null), ['success', 'warning', 'danger'], true)
+            $statusKey = in_array(($statusColor ?? null), ['success', 'warning', 'danger'], true)
                 ? $statusColor
                 : 'success';
 
-            if (!$isActive && $state === 'success') {
-                $state = 'warning';
+            if (!$isActive && $statusKey === 'success') {
+                $statusKey = 'warning';
             }
 
             if ($isBlocked) {
-                $state = 'danger';
+                $statusKey = 'danger';
             }
 
             $styles = [
@@ -60,9 +60,9 @@
                 ],
             ];
 
-            $s = $styles[$state] ?? $styles['success'];
+            $s = $styles[$statusKey] ?? $styles['success'];
 
-            $headline = match ($state) {
+            $headline = match ($statusKey) {
                 'success' => 'حسابك نشط',
                 'warning' => 'حسابك قيد المراجعة',
                 'danger'  => 'تم حظر حسابك',
@@ -71,16 +71,16 @@
 
             $subText = '';
 
-            if ($state === 'warning') {
+            if ($statusKey === 'warning') {
                 $subText = 'حسابك قيد المراجعة. سيتم إشعارك عند تفعيل الحساب.';
-            } elseif ($state === 'danger') {
+            } elseif ($statusKey === 'danger') {
                 $subText = 'تم حظر حسابك. يرجى التواصل مع الإدارة لحل المشكلة.';
             } else {
                 $subText = 'يمكنك الآن استخدام جميع الميزات المتاحة.';
             }
 
             // اختيار أيقونة مناسبة للحالة
-            $icon = match ($state) {
+            $icon = match ($statusKey) {
                 'success' => 'heroicon-o-check-circle',
                 'warning' => 'heroicon-o-clock',
                 'danger'  => 'heroicon-o-x-circle',
@@ -88,7 +88,7 @@
             };
 
             // شارة صغيرة مثل اللي في الصورة
-            $badge = match ($state) {
+            $badge = match ($statusKey) {
                 'success' => 'نشط',
                 'warning' => 'قيد المراجعة',
                 'danger'  => 'محظور',
@@ -152,14 +152,14 @@
 
                             {{-- Actions --}}
                             <div class="mt-4 flex flex-wrap gap-2">
-                                @if($state === 'danger')
+                                @if($statusKey === 'danger')
                                     <a
                                         href="#"
                                         class="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-gray-200 dark:ring-white/10 hover:shadow-sm transition"
                                     >
                                         تواصل مع الإدارة
                                     </a>
-                                @elseif($state === 'warning')
+                                @elseif($statusKey === 'warning')
                                     <a
                                         href="#"
                                         class="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-gray-200 dark:ring-white/10 hover:shadow-sm transition"
@@ -191,7 +191,7 @@
                         <div class="rounded-2xl bg-white/70 dark:bg-white/10 ring-1 ring-gray-200/60 dark:ring-white/10 p-4">
                             <div class="text-xs text-gray-500 dark:text-gray-400">ملاحظات</div>
                             <div class="mt-1 text-sm font-bold text-gray-900 dark:text-white">
-                                {{ $state === 'success' ? 'لا توجد' : 'تحتاج إجراء' }}
+                                {{ $statusKey === 'success' ? 'لا توجد' : 'تحتاج إجراء' }}
                             </div>
                         </div>
                     </div>
