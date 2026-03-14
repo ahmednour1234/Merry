@@ -15,6 +15,7 @@ use App\Models\SystemPersonalAccessToken;
 use App\Services\SystemSettings;
 use App\Services\LocaleService;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Filament\Http\Middleware\Authenticate;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
      */
      public function boot(): void
     {
+        // Safety fallback for stale compiled blades that still reference $state.
+        View::share('state', 'success');
+
         // Register Filament search route
         Route::middleware(['web', Authenticate::class])
             ->prefix('admin')
@@ -54,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
             // Sanctum::usePersonalAccessTokenModel(SystemPersonalAccessToken::class);
             Event::listen(ExportCompleted::class, [SendExportCompletedNotification::class, 'handle']);
             Event::listen(OfficeRegistered::class, [NotifyAdminsOfNewOfficeRegistration::class, 'handle']);
-            
+
             // Only register observer if Office model exists and database is available
             try {
                 Office::observe($this->app->make(OfficeObserver::class));
