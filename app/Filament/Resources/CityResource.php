@@ -118,6 +118,9 @@ class CityResource extends Resource
                     ->label('تبديل الحالة')
                     ->icon('heroicon-o-power')
                     ->requiresConfirmation()
+                    ->modalHeading('تأكيد تبديل الحالة')
+                    ->modalDescription('هل أنت متأكد من تبديل حالة المدينة؟')
+                    ->modalSubmitActionLabel('نعم، قم بالتبديل')
                     ->form([
                         Forms\Components\Toggle::make('active')
                             ->label('نشط')

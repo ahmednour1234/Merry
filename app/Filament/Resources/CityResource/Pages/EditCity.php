@@ -9,6 +9,7 @@ use Filament\Actions;
 class EditCity extends BaseEditRecord
 {
     protected static string $resource = CityResource::class;
+    protected static ?string $title = 'تعديل مدينة';
 
     protected function getHeaderActions(): array
     {

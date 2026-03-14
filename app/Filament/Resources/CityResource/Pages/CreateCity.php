@@ -8,4 +8,5 @@ use App\Filament\Resources\Pages\BaseCreateRecord;
 class CreateCity extends BaseCreateRecord
 {
     protected static string $resource = CityResource::class;
+    protected static ?string $title = 'إضافة مدينة';
 }
