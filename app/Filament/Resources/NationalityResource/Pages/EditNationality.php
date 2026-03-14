@@ -9,6 +9,7 @@ use Filament\Actions;
 class EditNationality extends BaseEditRecord
 {
     protected static string $resource = NationalityResource::class;
+    protected static ?string $title = 'تعديل جنسية';
 
     protected function getHeaderActions(): array
     {

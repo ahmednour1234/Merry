@@ -8,4 +8,5 @@ use App\Filament\Resources\Pages\BaseCreateRecord;
 class CreateNationality extends BaseCreateRecord
 {
     protected static string $resource = NationalityResource::class;
+    protected static ?string $title = 'إضافة جنسية';
 }
