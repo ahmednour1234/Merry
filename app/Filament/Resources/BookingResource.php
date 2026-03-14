@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
 use App\Models\CvBooking;
-use App\Services\PermissionService;
 use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -103,12 +102,7 @@ class BookingResource extends Resource
 
     public static function canViewAny(): bool
     {
-        $user = auth()->user();
-        if (! $user) {
-            return false;
-        }
-
-        return app(PermissionService::class)->userHas($user, 'system.bookings.index');
+        return (bool) auth()->user();
     }
 
     public static function canCreate(): bool
