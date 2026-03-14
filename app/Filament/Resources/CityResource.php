@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CityResource\Pages;
 use App\Models\City;
-use App\Models\CityTranslation;
-use App\Models\SystemLanguage;
 use App\Services\PermissionService;
 use BackedEnum;
 use Filament\Actions\Action as FilamentAction;
@@ -60,23 +58,6 @@ class CityResource extends Resource
                     ->mutateDehydratedStateUsing(fn ($state) => strtoupper($state ?? ''))
                     ->default('SA')
                     ->label('رمز الدولة'),
-                Forms\Components\Repeater::make('translations')
-                    ->relationship('translations')
-                    ->schema([
-                        Forms\Components\Select::make('lang_code')
-                            ->options(fn () => SystemLanguage::on('system')->pluck('name', 'code')->toArray())
-                            ->required()
-                            ->label('اللغة')
-                            ->placeholder('اختر خياراً'),
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(191)
-                            ->label('الاسم'),
-                    ])
-                    ->defaultItems(1)
-                    ->collapsible()
-                    ->label('الترجمات')
-                    ->addActionLabel('إضافة ترجمة'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
                     ->label('نشط'),
@@ -87,7 +68,6 @@ class CityResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->with('translations'))
             ->columns([
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()
@@ -97,9 +77,6 @@ class CityResource extends Resource
                     ->badge()
                     ->sortable()
                     ->label('رمز الدولة'),
-                Tables\Columns\TextColumn::make('translations.name')
-                    ->label('الاسم')
-                    ->formatStateUsing(fn ($record) => $record->translations->where('lang_code', 'ar')->first()?->name ?? $record->translations->first()?->name ?? '-'),
                 Tables\Columns\IconColumn::make('active')
                     ->boolean()
                     ->sortable()
