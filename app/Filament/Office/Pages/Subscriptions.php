@@ -137,6 +137,23 @@ class Subscriptions extends Page
             return;
         }
 
+        $currentSubscriptionId = OfficeSubscription::on('system')
+            ->where('office_id', $office->id)
+            ->where('status', 'active')
+            ->where('active', true)
+            ->where('ends_at', '>=', now())
+            ->orderByDesc('ends_at')
+            ->value('id');
+
+        if (! $sub->auto_renew && $sub->id !== $currentSubscriptionId) {
+            Notification::make()
+                ->title('يمكن تفعيل التجديد التلقائي للباقة الحالية فقط')
+                ->danger()
+                ->send();
+
+            return;
+        }
+
         $updated = $subsRepo->setAutoRenew($sub->id, !$sub->auto_renew);
 
         Notification::make()

@@ -94,6 +94,18 @@ class SubscriptionController extends Controller
             return back()->with('error', 'لا يوجد اشتراك نشط');
         }
 
+        $currentSubscriptionId = OfficeSubscription::on('system')
+            ->where('office_id', $office->id)
+            ->where('status', 'active')
+            ->where('active', true)
+            ->where('ends_at', '>=', now())
+            ->orderByDesc('ends_at')
+            ->value('id');
+
+        if (! $sub->auto_renew && $sub->id !== $currentSubscriptionId) {
+            return back()->with('error', 'يمكن تفعيل التجديد التلقائي للباقة الحالية فقط');
+        }
+
         $this->subsRepo->setAutoRenew($sub->id, !$sub->auto_renew);
 
         return back()->with('success', $sub->auto_renew ? 'تم إلغاء التجديد التلقائي' : 'تم تفعيل التجديد التلقائي');

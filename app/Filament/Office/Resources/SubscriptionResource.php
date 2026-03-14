@@ -110,6 +110,24 @@ class SubscriptionResource extends Resource
                             return;
                         }
 
+                        $currentSubscriptionId = OfficeSubscription::on('system')
+                            ->where('office_id', $record->office_id)
+                            ->where('status', 'active')
+                            ->where('active', true)
+                            ->where('ends_at', '>=', now())
+                            ->orderByDesc('ends_at')
+                            ->value('id');
+
+                        // Enable auto-renew only for the current active subscription.
+                        if (! $record->auto_renew && $record->id !== $currentSubscriptionId) {
+                            Notification::make()
+                                ->title('يمكن تفعيل التجديد التلقائي للباقة الحالية فقط')
+                                ->danger()
+                                ->send();
+
+                            return;
+                        }
+
                         $record->update([
                             'auto_renew' => ! $record->auto_renew,
                         ]);
