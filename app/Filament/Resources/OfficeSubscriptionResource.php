@@ -224,6 +224,7 @@ class OfficeSubscriptionResource extends Resource
                     ->color('success')
                     ->modalHeading('إعادة تجديد الاشتراك')
                     ->modalDescription('الفترة الجديدة تبدأ من اليوم. حدد مدة التجديد حسب الباقة (عدد الأشهر أو السنوات).')
+                    ->modalCancelActionLabel('إلغاء')
                     ->form(fn (OfficeSubscription $record) => [
                         Forms\Components\TextInput::make('duration')
                             ->label(fn () => ($record->plan && $record->plan->billing_cycle === 'annual') ? 'عدد السنوات' : 'عدد الأشهر')
@@ -260,6 +261,7 @@ class OfficeSubscriptionResource extends Resource
                     ->requiresConfirmation()
                     ->modalHeading('إيقاف تفعيل الاشتراك')
                     ->modalDescription('هل أنت متأكد من إيقاف تفعيل هذا الاشتراك؟')
+                    ->modalCancelActionLabel('إلغاء')
                     ->modalSubmitActionLabel('نعم، أوقف التفعيل')
                     ->action(function (OfficeSubscription $record) {
                         $record->update(['active' => false]);
@@ -273,6 +275,7 @@ class OfficeSubscriptionResource extends Resource
                     ->requiresConfirmation()
                     ->modalHeading('إلغاء الاشتراك')
                     ->modalDescription('هل أنت متأكد من إلغاء هذا الاشتراك؟')
+                    ->modalCancelActionLabel('إلغاء')
                     ->modalSubmitActionLabel('نعم، ألغي الاشتراك')
                     ->action(function (OfficeSubscription $record) {
                         $record->update(['status' => 'cancelled', 'active' => false]);
