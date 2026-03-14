@@ -5,6 +5,8 @@ namespace App\Filament\Resources\OfficeResource\Pages;
 use App\Filament\Resources\OfficeResource;
 use App\Models\AuditLog;
 use App\Models\Office;
+use Filament\Actions;
+use Filament\Forms;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Infolists\Components\IconEntry;
@@ -16,6 +18,63 @@ use Filament\Schemas\Schema;
 class ViewOffice extends ViewRecord
 {
     protected static string $resource = OfficeResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\Action::make('createLog')
+                ->label('إضافة Log')
+                ->icon('heroicon-o-document-plus')
+                ->color('warning')
+                ->modalHeading('إضافة سجل رسالة')
+                ->modalDescription('أدخل تفاصيل السجل الذي تريد إضافته لهذا المكتب.')
+                ->modalSubmitActionLabel('حفظ السجل')
+                ->modalCancelActionLabel('إلغاء')
+                ->form([
+                    Forms\Components\Select::make('action')
+                        ->label('نوع العملية')
+                        ->options([
+                            'office_stopped_with_reason' => 'إيقاف',
+                            'office_reactivated_with_reason' => 'إعادة تفعيل',
+                            'office_message_logged' => 'رسالة فقط',
+                        ])
+                        ->default('office_message_logged')
+                        ->required(),
+                    Forms\Components\Textarea::make('reason')
+                        ->label('السبب')
+                        ->rows(3)
+                        ->required()
+                        ->maxLength(1000),
+                    Forms\Components\Textarea::make('message')
+                        ->label('الرسالة')
+                        ->rows(4)
+                        ->required()
+                        ->maxLength(2000),
+                ])
+                ->action(function (array $data): void {
+                    /** @var Office $record */
+                    $record = $this->getRecord();
+
+                    AuditLog::create([
+                        'tenant_id' => null,
+                        'user_id' => auth()->id(),
+                        'action' => (string) ($data['action'] ?? 'office_message_logged'),
+                        'model' => Office::class,
+                        'model_id' => $record->id,
+                        'request' => [
+                            'reason' => trim((string) ($data['reason'] ?? '')),
+                            'message' => trim((string) ($data['message'] ?? '')),
+                        ],
+                        'changes' => null,
+                        'ip' => request()->ip(),
+                        'ua' => (string) request()->userAgent(),
+                        'active' => true,
+                        'created_at' => now(),
+                    ]);
+                })
+                ->successNotificationTitle('تم حفظ السجل بنجاح'),
+        ];
+    }
 
     public function getTitle(): string
     {
@@ -73,6 +132,7 @@ class ViewOffice extends ViewRecord
                                     ->whereIn('action', [
                                         'office_stopped_with_reason',
                                         'office_reactivated_with_reason',
+                                        'office_message_logged',
                                     ])
                                     ->orderByDesc('created_at')
                                     ->limit(20)
@@ -92,7 +152,11 @@ class ViewOffice extends ViewRecord
                                     $reason = trim((string) ($request['reason'] ?? ''));
                                     $message = trim((string) ($request['message'] ?? ''));
                                     $at = $log->created_at ? $log->created_at->format('Y-m-d H:i') : '-';
-                                    $action = $log->action === 'office_reactivated_with_reason' ? 'إعادة تفعيل' : 'إيقاف';
+                                    $action = match ($log->action) {
+                                        'office_reactivated_with_reason' => 'إعادة تفعيل',
+                                        'office_message_logged' => 'رسالة',
+                                        default => 'إيقاف',
+                                    };
 
                                     return [
                                         'created_at' => $at,
