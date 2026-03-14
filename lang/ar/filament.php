@@ -405,10 +405,6 @@ return [
             'label' => 'شركة تأمين',
             'plural_label' => 'شركات التأمين',
         ],
-        'city' => [
-            'label' => 'مدينة',
-            'plural_label' => 'المدن',
-        ],
         'office' => [
             'label' => 'مكتب',
             'plural_label' => 'المكاتب',
