@@ -13,11 +13,12 @@ class CheckOfficeActive
     public function handle(Request $request, Closure $next): Response
     {
         $panel = Filament::getPanel('office');
-        $path = $request->path();
+        $path = trim($request->path(), '/');
+        $panelPath = trim($panel->getPath(), '/');
 
-        if (str_starts_with($path, $panel->getPath() . '/login') ||
-            str_starts_with($path, $panel->getPath() . '/register') ||
-            str_starts_with($path, $panel->getPath() . '/password')) {
+        if (str_starts_with($path, $panelPath . '/login') ||
+            str_starts_with($path, $panelPath . '/register') ||
+            str_starts_with($path, $panelPath . '/password')) {
             return $next($request);
         }
 
@@ -39,9 +40,17 @@ class CheckOfficeActive
                 ->with('error', 'تم حظر حسابك. يرجى التواصل مع الإدارة.');
         }
 
-        if (!$office->active) {
+        $inactiveAllowedPaths = [
+            $panelPath . '/subscriptions',
+            $panelPath . '/profile',
+        ];
+
+        $isAllowedForInactive = collect($inactiveAllowedPaths)
+            ->contains(fn (string $allowedPath): bool => str_starts_with($path, $allowedPath));
+
+        if (!$office->active && ! $isAllowedForInactive) {
             return redirect()
-                ->to(\App\Filament\Office\Pages\Dashboard::getUrl())
+                ->to(url($panelPath . '/subscriptions'))
                 ->with('warning', 'حسابك قيد المراجعة. سيتم إشعارك عند تفعيل الحساب.');
         }
 
