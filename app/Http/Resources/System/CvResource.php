@@ -45,7 +45,7 @@ class CvResource extends JsonResource
                 'original'  => $this->file_original_name,
                 'url'       => $this->when(
                     $this->file_path,
-                    fn () => storage_signed_url($this->file_path, 3600)  // 1-hour signed link
+                    fn () => storage_url($this->file_path)
                 ),
             ],
 
