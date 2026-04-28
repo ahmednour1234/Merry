@@ -11,37 +11,39 @@
             <div class="form-page-title">تحقق من بريدك الإلكتروني</div>
             <div class="form-page-sub">لقد أرسلنا رمز التحقق إلى<br><strong style="color:#054F31;">{{ $maskedEmail ?? 'بريدك الإلكتروني' }}</strong></div>
 
-            @if(session('error'))  <div class="alert alert-error" style="margin-top:1rem;">{{ session('error') }}</div> @endif
+            @if(session('error'))   <div class="alert alert-error"   style="margin-top:1rem;">{{ session('error') }}</div>   @endif
             @if(session('success')) <div class="alert alert-success" style="margin-top:1rem;">{{ session('success') }}</div> @endif
+            @if(session('warning')) <div class="alert alert-warning" style="margin-top:1rem;">{{ session('warning') }}</div> @endif
 
-            <form method="POST" action="{{ route('office.otp.verify') }}" id="otpForm" style="margin-top:1.5rem;">
+            {{-- VERIFY FORM --}}
+            <form method="POST" action="{{ route('office.otp.verify') }}" id="otpForm" style="margin-top:1.5rem;" onsubmit="collectOtp()">
                 @csrf
                 <label class="form-label" style="text-align:center;display:block;margin-bottom:0.75rem;">أدخل رمز التحقق المكون من 4 أرقام</label>
                 <div class="otp-boxes" id="otpBoxes">
-                    @for($i=0;$i<4;$i++)
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" data-index="{{ $i }}">
-                    @endfor
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" data-index="0" autofocus>
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" data-index="1">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" data-index="2">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" data-index="3">
                 </div>
                 <input type="hidden" name="otp" id="otpHidden">
 
                 @error('otp') <div class="form-error" style="text-align:center;margin-bottom:0.75rem;">{{ $message }}</div> @enderror
 
-                @if(app()->environment(['local','dev','development','staging','testing']) || config('app.debug'))
+                @if(config('app.debug'))
                     <div style="text-align:center;font-size:0.75rem;color:#9ca3af;margin-bottom:0.75rem;">رمز التطوير: <strong>1111</strong></div>
                 @endif
 
-                <div style="text-align:center;font-size:0.82rem;color:#9ca3af;margin-bottom:1.25rem;">
-                    لم تصلك الرسالة؟
-                    <form method="POST" action="{{ route('office.otp.resend') }}" style="display:inline;">
-                        @csrf
-                        <button type="submit" style="background:none;border:none;color:#054F31;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;font-size:0.82rem;">إعادة إرسال الرمز</button>
-                    </form>
-                </div>
-
-                <button type="submit" class="btn-primary" onclick="collectOtp()">تحقق</button>
+                <button type="submit" class="btn-primary" style="margin-bottom:1rem;">تحقق</button>
             </form>
 
-            <div class="auth-link-row"><a href="{{ route('office.login') }}">← العودة لتسجيل الدخول</a></div>
+            {{-- RESEND FORM — outside verify form --}}
+            <form method="POST" action="{{ route('office.otp.resend') }}" style="text-align:center;">
+                @csrf
+                <span style="font-size:0.82rem;color:#9ca3af;">لم تصلك الرسالة؟ </span>
+                <button type="submit" style="background:none;border:none;color:#054F31;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;font-size:0.82rem;">إعادة إرسال الرمز</button>
+            </form>
+
+            <div class="auth-link-row" style="margin-top:1rem;"><a href="{{ route('office.login') }}">← العودة لتسجيل الدخول</a></div>
         </div>
     </div>
 
@@ -65,14 +67,14 @@
 
 @push('scripts')
 <script>
-const boxes = document.querySelectorAll('.otp-box');
+const boxes = document.querySelectorAll('#otpBoxes .otp-box');
 boxes.forEach((box, i) => {
     box.addEventListener('input', () => {
-        box.value = box.value.replace(/\D/g,'').slice(-1);
-        if (box.value && i < boxes.length - 1) boxes[i+1].focus();
+        box.value = box.value.replace(/\D/g, '').slice(-1);
+        if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
     });
     box.addEventListener('keydown', e => {
-        if (e.key === 'Backspace' && !box.value && i > 0) boxes[i-1].focus();
+        if (e.key === 'Backspace' && !box.value && i > 0) boxes[i - 1].focus();
     });
 });
 function collectOtp() {
