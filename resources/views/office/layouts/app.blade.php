@@ -69,7 +69,7 @@
 @php
     $__office = auth()->guard('office-panel')->user();
     try{
-        $__sub=\App\Models\OfficeSubscription::where('office_id',$__office?->id)->where('status','active')->with('plan')->orderByDesc('created_at')->first();
+        $__sub=\App\Models\OfficeSubscription::on('system')->where('office_id',$__office?->id)->where('status','active')->with('plan')->orderByDesc('created_at')->first();
         $__planName=$__sub?->plan?->name??'مجانية';
         $__planExpiry=$__sub?->ends_at?->format('Y-m-d');
         $__daysLeft=$__sub?->ends_at?->diffInDays(now(),false)*-1;
@@ -217,11 +217,11 @@
                 </a>
 
                 {{-- Bell --}}
+                @php
+                    try{$unreadCount=\App\Models\NotificationRecipient::where('channel','inapp')->where('recipient_type','office')->where('recipient_id',$__office?->id)->where('status','sent')->whereNull('read_at')->count();}catch(\Exception $e){$unreadCount=0;}
+                @endphp
                 <a href="{{ route('office.notifications.index') }}" style="position:relative;color:rgba(255,255,255,.85);text-decoration:none;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
-                    @php
-                        $unreadCount=\App\Models\NotificationRecipient::on('system')->where('channel','inapp')->where('recipient_type','office')->where('recipient_id',$__office?->id)->where('status','sent')->whereNull('read_at')->count();
-                    @endphp
                     @if($unreadCount>0)
                         <span style="position:absolute;top:-5px;right:-5px;width:17px;height:17px;background:#ef4444;color:#fff;font-size:.6rem;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;">{{ $unreadCount>9?'9+':$unreadCount }}</span>
                     @endif
