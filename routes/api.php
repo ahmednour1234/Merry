@@ -374,20 +374,41 @@ Route::prefix('v1/public')->group(function () {
     // Categories (public — no auth)
     Route::get('categories',            [\App\Http\Controllers\Api\EndUser\CatalogController::class, 'categories']);
 
-    // Public file serving — served through Laravel, no symlink required
+    // Public file serving — served through Laravel, no symlink required.
+    // Supports optional signed URLs: ?expires=<unix>&signature=<hmac-sha256>
+    // Generate signed URLs with: storage_signed_url('path/to/file.pdf')
     Route::get('files/{path}', function (\Illuminate\Http\Request $request, string $path) {
         $path = ltrim($path, '/');
+
+        // Block path traversal
         if (str_contains($path, '..')) {
             abort(403);
         }
+
+        // If expires/signature query params are present, verify them.
+        // If absent the file is served publicly (use storage_url() for public assets).
+        $expires   = $request->query('expires');
+        $signature = $request->query('signature');
+
+        if ($expires !== null || $signature !== null) {
+            $expires   = (int) $expires;
+            $signature = (string) $signature;
+
+            if (!verify_storage_signature($path, $expires, $signature)) {
+                abort(403, 'Invalid or expired file link.');
+            }
+        }
+
         if (!\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
             abort(404);
         }
+
         $fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($path);
         $mime     = mime_content_type($fullPath) ?: 'application/octet-stream';
+
         return response()->file($fullPath, [
             'Content-Type'  => $mime,
-            'Cache-Control' => 'public, max-age=86400',
+            'Cache-Control' => 'private, max-age=3600',
         ]);
     })->where('path', '.*')->name('public.file');
 });
