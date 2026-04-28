@@ -82,6 +82,9 @@
         .pagination-wrap a:hover { background: #f3f4f6; }
         .pagination-wrap .active-page { background: #054F31; color: #fff; border-color: #054F31; }
 
+        /* Sidebar sticky */
+        .sidebar { overflow-y: auto; height: 100vh; position: sticky; top: 0; }
+
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
@@ -90,7 +93,7 @@
     @stack('styles')
 </head>
 <body>
-<div style="min-height:100vh;display:flex;">
+<div style="height:100vh;display:flex;overflow:hidden;">
 
     <!-- Sidebar (right) -->
     <aside class="sidebar" id="sidebar">
@@ -167,7 +170,7 @@
     </aside>
 
     <!-- Main Content -->
-    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+    <div style="flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;">
 
         <!-- Topbar -->
         <header class="topbar" style="padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;">
