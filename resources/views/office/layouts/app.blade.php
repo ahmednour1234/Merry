@@ -201,16 +201,79 @@
             {{-- Left: hamburger + user + bell (RTL = last) --}}
             <div style="display:flex;align-items:center;gap:1rem;">
 
-                {{-- Bell (appears right of this group in RTL) --}}
+                {{-- Bell Dropdown --}}
                 @php
-                    try{$unreadCount=\App\Models\NotificationRecipient::where('channel','inapp')->where('recipient_type','office')->where('recipient_id',$__office?->id)->where('status','sent')->whereNull('read_at')->count();}catch(\Exception $e){$unreadCount=0;}
+                    try{
+                        $__notifs = \App\Models\NotificationRecipient::with('notification')
+                            ->where('channel','inapp')->where('recipient_type','office')
+                            ->where('recipient_id',$__office?->id)->where('status','sent')
+                            ->orderByDesc('created_at')->limit(6)->get();
+                        $unreadCount = $__notifs->whereNull('read_at')->count();
+                    }catch(\Exception $e){$__notifs=collect();$unreadCount=0;}
                 @endphp
-                <a href="{{ route('office.notifications.index') }}" style="position:relative;color:rgba(255,255,255,.85);text-decoration:none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
-                    @if($unreadCount>0)
-                        <span style="position:absolute;top:-5px;right:-5px;width:17px;height:17px;background:#ef4444;color:#fff;font-size:.6rem;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;">{{ $unreadCount>9?'9+':$unreadCount }}</span>
-                    @endif
-                </a>
+                <div style="position:relative;" id="notif-wrap">
+                    <button onclick="toggleNotif(event)" style="position:relative;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.85);padding:6px;border-radius:10px;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='transparent'">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px;display:block;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                        @if($unreadCount>0)
+                            <span style="position:absolute;top:2px;right:2px;width:16px;height:16px;background:#ef4444;color:#fff;font-size:.6rem;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #054F31;">{{ $unreadCount>9?'9+':$unreadCount }}</span>
+                        @endif
+                    </button>
+
+                    {{-- Dropdown Panel --}}
+                    <div id="notif-panel" style="display:none;position:absolute;top:calc(100% + 10px);left:0;width:340px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);z-index:999;overflow:hidden;border:1px solid #f3f4f6;">
+
+                        {{-- Header --}}
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-bottom:1px solid #f3f4f6;background:#fafafa;">
+                            <div style="display:flex;align-items:center;gap:.5rem;">
+                                <span style="font-size:.92rem;font-weight:800;color:#111827;">الإشعارات</span>
+                                @if($unreadCount>0)
+                                    <span style="background:#ef4444;color:#fff;font-size:.65rem;font-weight:700;padding:.1rem .45rem;border-radius:99px;">{{ $unreadCount }}</span>
+                                @endif
+                            </div>
+                            <a href="{{ route('office.notifications.index') }}" style="font-size:.75rem;color:#054F31;font-weight:700;text-decoration:none;">عرض الكل</a>
+                        </div>
+
+                        {{-- List --}}
+                        <div style="max-height:340px;overflow-y:auto;">
+                            @forelse($__notifs as $__nr)
+                                @php $__n = $__nr->notification; $__isUnread = is_null($__nr->read_at); @endphp
+                                <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.85rem 1.1rem;border-bottom:1px solid #f9fafb;background:{{ $__isUnread ? '#f0fdf4' : '#fff' }};transition:background .15s;cursor:pointer;" onmouseover="this.style.background='{{ $__isUnread ? '#dcfce7' : '#f9fafb' }}'" onmouseout="this.style.background='{{ $__isUnread ? '#f0fdf4' : '#fff' }}'">
+                                    {{-- Icon --}}
+                                    <div style="width:38px;height:38px;border-radius:12px;background:{{ $__isUnread ? '#dcfce7' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                                        @if($__isUnread)
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                                        @else
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9ca3af" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                                        @endif
+                                    </div>
+                                    {{-- Content --}}
+                                    <div style="flex:1;min-width:0;">
+                                        <div style="font-size:.82rem;font-weight:{{ $__isUnread ? '700' : '500' }};color:#111827;margin-bottom:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $__n?->title ?? 'إشعار جديد' }}</div>
+                                        <div style="font-size:.75rem;color:#6b7280;margin-bottom:.25rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{ Str::limit($__n?->body ?? '', 70) }}</div>
+                                        <div style="font-size:.7rem;color:#9ca3af;">{{ $__nr->created_at?->diffForHumans() }}</div>
+                                    </div>
+                                    @if($__isUnread)
+                                        <div style="width:8px;height:8px;background:#054F31;border-radius:50%;flex-shrink:0;margin-top:5px;"></div>
+                                    @endif
+                                </div>
+                            @empty
+                                <div style="padding:2.5rem 1rem;text-align:center;">
+                                    <div style="width:56px;height:56px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d1d5db" style="width:26px;height:26px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                                    </div>
+                                    <div style="font-size:.85rem;color:#9ca3af;font-weight:500;">لا توجد إشعارات</div>
+                                </div>
+                            @endforelse
+                        </div>
+
+                        {{-- Footer --}}
+                        @if($__notifs->isNotEmpty())
+                        <div style="padding:.7rem 1.1rem;background:#fafafa;border-top:1px solid #f3f4f6;text-align:center;">
+                            <a href="{{ route('office.notifications.index') }}" style="font-size:.8rem;color:#054F31;font-weight:700;text-decoration:none;">عرض جميع الإشعارات ←</a>
+                        </div>
+                        @endif
+                    </div>
+                </div>
 
                 {{-- User (appears left of bell in RTL) --}}
                 <a href="{{ route('office.profile.edit') }}" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;">
