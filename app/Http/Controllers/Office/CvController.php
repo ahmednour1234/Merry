@@ -51,33 +51,39 @@ class CvController extends Controller
             'gender'           => 'nullable|in:male,female',
             'has_experience'   => 'boolean',
             'is_muslim'        => 'boolean',
-            'file'             => 'required|file|mimes:pdf|max:10240',
+            'files'            => 'required|array|min:1|max:20',
+            'files.*'          => 'required|file|mimes:pdf|max:10240',
         ], [
             'nationality_code.required' => 'الجنسية مطلوبة',
-            'file.required'             => 'ملف السيرة الذاتية مطلوب',
-            'file.mimes'                => 'يجب أن يكون الملف بصيغة PDF',
-            'file.max'                  => 'حجم الملف يجب أن يكون أقل من 10 MB',
+            'files.required'            => 'يجب رفع ملف واحد على الأقل',
+            'files.max'                 => 'لا يمكن رفع أكثر من 20 ملف في المرة الواحدة',
+            'files.*.mimes'             => 'يجب أن تكون الملفات بصيغة PDF',
+            'files.*.max'               => 'حجم كل ملف يجب أن يكون أقل من 10 MB',
         ]);
 
-        $uploaded = $request->file('file');
-        $path     = $uploaded->store('cvs', 'private');
+        $count = 0;
+        foreach ($request->file('files') as $uploaded) {
+            $path = $uploaded->store('cvs', 'private');
 
-        Cv::on('system')->create([
-            'office_id'          => $office->id,
-            'category_id'        => $request->category_id,
-            'nationality_code'   => $request->nationality_code,
-            'gender'             => $request->gender,
-            'has_experience'     => $request->boolean('has_experience'),
-            'is_muslim'          => $request->boolean('is_muslim'),
-            'file_path'          => $path,
-            'file_mime'          => $uploaded->getMimeType(),
-            'file_size'          => $uploaded->getSize(),
-            'file_original_name' => $uploaded->getClientOriginalName(),
-            'status'             => 'pending',
-        ]);
+            Cv::on('system')->create([
+                'office_id'          => $office->id,
+                'category_id'        => $request->category_id,
+                'nationality_code'   => $request->nationality_code,
+                'gender'             => $request->gender,
+                'has_experience'     => $request->boolean('has_experience'),
+                'is_muslim'          => $request->boolean('is_muslim'),
+                'file_path'          => $path,
+                'file_mime'          => $uploaded->getMimeType(),
+                'file_size'          => $uploaded->getSize(),
+                'file_original_name' => $uploaded->getClientOriginalName(),
+                'status'             => 'pending',
+            ]);
+
+            $count++;
+        }
 
         return redirect()->route('office.cvs.index')
-            ->with('success', 'تم رفع السيرة الذاتية بنجاح. ستتم مراجعتها من الإدارة.');
+            ->with('success', "تم رفع {$count} سيرة ذاتية بنجاح. ستتم مراجعتها من الإدارة.");
     }
 
     public function edit($id)

@@ -127,11 +127,11 @@
                 </label>
             </div>
 
-            {{-- Section: الملف --}}
-            <div class="section-divider"><span>ملف السيرة الذاتية</span></div>
+            {{-- Section: الملفات --}}
+            <div class="section-divider"><span>ملفات السير الذاتية</span></div>
 
             <div class="field-group">
-                <label class="field-label">ملف PDF <span class="req">*</span></label>
+                <label class="field-label">ملفات PDF <span class="req">*</span></label>
                 <div class="drop-zone" id="dropZone"
                      onclick="document.getElementById('fileInput').click()"
                      ondragover="event.preventDefault();this.classList.add('drag')"
@@ -141,12 +141,15 @@
                         <div style="width:56px;height:56px;border-radius:16px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;margin:0 auto .875rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:28px;height:28px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/></svg>
                         </div>
-                        <div style="font-size:.9rem;font-weight:700;color:#111827;margin-bottom:.3rem;" id="fileLabel">اسحب الملف هنا أو اضغط للاختيار</div>
-                        <div style="font-size:.75rem;color:#9ca3af;">PDF فقط — الحجم الأقصى 10 MB</div>
+                        <div style="font-size:.9rem;font-weight:700;color:#111827;margin-bottom:.3rem;" id="fileLabel">اسحب الملفات هنا أو اضغط للاختيار</div>
+                        <div style="font-size:.75rem;color:#9ca3af;">PDF فقط — الحجم الأقصى 10 MB لكل ملف — يمكن رفع أكثر من ملف دفعة واحدة</div>
                     </div>
-                    <input type="file" id="fileInput" name="file" accept="application/pdf" style="display:none;" onchange="updateLabel(this)">
+                    <input type="file" id="fileInput" name="files[]" accept="application/pdf" multiple style="display:none;" onchange="updateLabel(this)">
                 </div>
-                @error('file') <div class="form-error" style="margin-top:.4rem;">{{ $message }}</div> @enderror
+                {{-- Files preview list --}}
+                <div id="files-list" style="margin-top:.75rem;display:flex;flex-direction:column;gap:.5rem;"></div>
+                @error('files')   <div class="form-error" style="margin-top:.4rem;">{{ $message }}</div> @enderror
+                @error('files.*') <div class="form-error" style="margin-top:.4rem;">{{ $message }}</div> @enderror
             </div>
 
         </div>{{-- end card body --}}
@@ -161,10 +164,15 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
                 الإجراءات
             </div>
+            {{-- File count badge --}}
+            <div id="file-count-badge" style="display:none;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:10px;padding:.6rem 1rem;margin-bottom:.875rem;display:none;align-items:center;justify-content:space-between;">
+                <span style="font-size:.78rem;font-weight:700;color:#065f46;">عدد الملفات المختارة</span>
+                <span id="file-count-num" style="font-size:1.1rem;font-weight:900;color:#054F31;">0</span>
+            </div>
             <button type="submit" style="width:100%;background:linear-gradient(135deg,#054F31,#0a6b42);color:#fff;border:none;border-radius:12px;padding:.85rem;font-size:.9rem;font-weight:800;cursor:pointer;margin-bottom:.75rem;transition:opacity .15s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
                 <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width:17px;height:17px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/></svg>
-                    رفع السيرة الذاتية
+                    رفع السير الذاتية
                 </div>
             </button>
             <a href="{{ route('office.cvs.index') }}" style="display:block;text-align:center;background:#f9fafb;color:#374151;border:1.5px solid #e5e7eb;border-radius:12px;padding:.75rem;font-size:.85rem;font-weight:600;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='#f9fafb'">
@@ -212,27 +220,53 @@ function toggleCard(el, key) {
     }
     return false;
 }
+
 function updateLabel(input) {
-    if(input.files && input.files[0]){
-        var f = input.files[0];
-        var sz = (f.size/1024/1024).toFixed(1);
-        document.getElementById('fileLabel').innerHTML =
-            '<span style="color:#054F31;font-weight:700;">'+f.name+'</span>';
-        document.getElementById('dropZone').classList.add('has-file');
-        document.getElementById('dropContent').insertAdjacentHTML('beforeend',
-            '<div style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;background:#d1fae5;color:#065f46;border-radius:8px;padding:.25rem .7rem;font-size:.75rem;font-weight:600;">'+
-            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:13px;height:13px;"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>'+
-            sz+' MB</div>');
-    }
+    renderFiles(input.files);
 }
+
 function handleDrop(e){
     e.preventDefault();
     document.getElementById('dropZone').classList.remove('drag');
     var files = e.dataTransfer.files;
     if(files.length){
         document.getElementById('fileInput').files = files;
-        updateLabel(document.getElementById('fileInput'));
+        renderFiles(files);
     }
+}
+
+function renderFiles(files) {
+    var list = document.getElementById('files-list');
+    var badge = document.getElementById('file-count-badge');
+    var countNum = document.getElementById('file-count-num');
+    list.innerHTML = '';
+
+    if (!files || !files.length) {
+        badge.style.display = 'none';
+        document.getElementById('dropZone').classList.remove('has-file');
+        document.getElementById('fileLabel').textContent = 'اسحب الملفات هنا أو اضغط للاختيار';
+        return;
+    }
+
+    document.getElementById('dropZone').classList.add('has-file');
+    document.getElementById('fileLabel').textContent = files.length + ' ملف تم اختيارها';
+    countNum.textContent = files.length;
+    badge.style.display = 'flex';
+
+    Array.from(files).forEach(function(f, i) {
+        var sz = (f.size / 1024 / 1024).toFixed(1);
+        var ok = f.size <= 10 * 1024 * 1024;
+        list.insertAdjacentHTML('beforeend',
+            '<div style="display:flex;align-items:center;gap:.75rem;background:' + (ok ? '#f0fdf4' : '#fef2f2') + ';border:1px solid ' + (ok ? '#bbf7d0' : '#fca5a5') + ';border-radius:10px;padding:.6rem .875rem;">'
+            + '<div style="width:32px;height:32px;background:' + (ok ? '#d1fae5' : '#fee2e2') + ';border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+            + '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="' + (ok ? '#054F31' : '#dc2626') + '" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>'
+            + '</div>'
+            + '<div style="flex:1;min-width:0;"><div style="font-size:.8rem;font-weight:600;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + f.name + '</div>'
+            + '<div style="font-size:.7rem;color:' + (ok ? '#6b7280' : '#dc2626') + ';">' + sz + ' MB' + (ok ? '' : ' — تجاوز الحد المسموح') + '</div></div>'
+            + '<span style="font-size:.68rem;font-weight:700;background:' + (ok ? '#d1fae5' : '#fee2e2') + ';color:' + (ok ? '#065f46' : '#991b1b') + ';border-radius:99px;padding:.15rem .55rem;">#' + (i+1) + '</span>'
+            + '</div>'
+        );
+    });
 }
 </script>
 @endpush
