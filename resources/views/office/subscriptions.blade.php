@@ -108,6 +108,19 @@
         <div style="font-size:.78rem;color:#9ca3af;">{{ $plans->count() }} باقة متاحة</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;">
+        @php
+            $featureLabels = [
+                'cv.limit'              => 'عدد السير الذاتية',
+                'bookings.limit'        => 'عدد الحجوزات',
+                'request.limit'         => 'طلبات شهرية',
+                'office.users.limit'    => 'مستخدمي المكتب',
+                'media.storage.gb'      => 'مساحة التخزين (GB)',
+                'support.priority'      => 'دعم أولوية',
+                'cv.freeze.allowed'     => 'تجميد السيرة الذاتية',
+                'exports.per_month'     => 'تصدير شهري',
+                'office.multi_branch'   => 'دعم تعدد الفروع',
+            ];
+        @endphp
         @foreach($plans as $plan)
         @php
             $pName = $plan->translations->where('lang_code','ar')->first()?->name
