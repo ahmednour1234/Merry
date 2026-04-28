@@ -27,6 +27,7 @@ use App\Http\Middleware\SetLocale;
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
 use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
 use App\Http\Middleware\TokenAuth;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -34,6 +35,10 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__ . '/../routes/api.php',
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
+        then: function () {
+            Route::middleware('web')
+                ->group(base_path('routes/office.php'));
+        },
     )
     ->withProviders([
         App\Providers\AppServiceProvider::class,
@@ -41,7 +46,7 @@ return Application::configure(basePath: dirname(__DIR__))
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ModulesServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
-        App\Providers\Filament\OfficePanelProvider::class,
+        // App\Providers\Filament\OfficePanelProvider::class, // replaced by custom Blade
     ])
     ->withMiddleware(function (Middleware $middleware): void {
 
