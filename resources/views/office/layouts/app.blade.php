@@ -103,7 +103,7 @@
         </div>
 
         {{-- Navigation --}}
-        <nav style="flex:1;overflow-y:auto;padding:.5rem 0;">
+        <nav style="flex:1;overflow-y:auto;padding:.5rem 0 1rem;">
             <a href="{{ route('office.dashboard') }}" class="nav-link {{ request()->routeIs('office.dashboard*')?'active':'' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
                 الرئيسية
@@ -135,7 +135,7 @@
         </nav>
 
         {{-- Bottom: Subscription + Support + Logout --}}
-        <div style="border-top:1px solid #f3f4f6;padding:.875rem;">
+        <div style="border-top:1px solid #f3f4f6;padding:1rem 1rem 1.25rem;">
 
             {{-- Subscription card --}}
             <div style="background:linear-gradient(135deg,#054F31 0%,#0a6b42 100%);border-radius:14px;padding:1rem;margin-bottom:.875rem;position:relative;overflow:hidden;">
@@ -198,25 +198,10 @@
                 </div>
             </div>
 
-            {{-- Left: hamburger + bell + user (RTL = last) --}}
+            {{-- Left: hamburger + user + bell (RTL = last) --}}
             <div style="display:flex;align-items:center;gap:1rem;">
 
-                {{-- User --}}
-                <a href="{{ route('office.profile.edit') }}" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;">
-                    <div style="text-align:right;">
-                        <div style="color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;">{{ $__office?->name }}</div>
-                        <div style="color:rgba(255,255,255,.5);font-size:.7rem;">مدير المكتب</div>
-                    </div>
-                    <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
-                        @if($__office?->image)
-                            <img src="{{ asset('storage/'.$__office->image) }}" style="width:38px;height:38px;object-fit:cover;" alt="">
-                        @else
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
-                        @endif
-                    </div>
-                </a>
-
-                {{-- Bell --}}
+                {{-- Bell (appears right of this group in RTL) --}}
                 @php
                     try{$unreadCount=\App\Models\NotificationRecipient::where('channel','inapp')->where('recipient_type','office')->where('recipient_id',$__office?->id)->where('status','sent')->whereNull('read_at')->count();}catch(\Exception $e){$unreadCount=0;}
                 @endphp
@@ -225,6 +210,21 @@
                     @if($unreadCount>0)
                         <span style="position:absolute;top:-5px;right:-5px;width:17px;height:17px;background:#ef4444;color:#fff;font-size:.6rem;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;">{{ $unreadCount>9?'9+':$unreadCount }}</span>
                     @endif
+                </a>
+
+                {{-- User (appears left of bell in RTL) --}}
+                <a href="{{ route('office.profile.edit') }}" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;">
+                    <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                        @if($__office?->image)
+                            <img src="{{ asset('storage/'.$__office->image) }}" style="width:38px;height:38px;object-fit:cover;" alt="">
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                        @endif
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;">{{ $__office?->name }}</div>
+                        <div style="color:rgba(255,255,255,.5);font-size:.7rem;">مدير المكتب</div>
+                    </div>
                 </a>
 
                 {{-- Hamburger (mobile) --}}
