@@ -36,7 +36,7 @@ class NationalityResource extends JsonResource
 			} elseif (!empty($meta['image'])) {
 				$dbImage = (string) $meta['image'];
 			} elseif (!empty($meta['image_path'])) {
-				$dbImage = asset('storage/' . ltrim((string)$meta['image_path'], '/'));
+				$dbImage = \Illuminate\Support\Facades\Storage::disk('public')->url(ltrim((string)$meta['image_path'], '/'));
 			}
 		}
 

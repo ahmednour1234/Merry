@@ -370,4 +370,7 @@ Route::prefix('v1/public')->group(function () {
     Route::get('offices/{id}',          [PublicOfficeController::class, 'show']);
     Route::get('offices/{id}/profile',  [PublicOfficeController::class, 'profile']);
     Route::get('offices/{id}/cvs',      [PublicOfficeController::class, 'cvs']);
+
+    // Categories (public — no auth)
+    Route::get('categories',            [\App\Http\Controllers\Api\EndUser\CatalogController::class, 'categories']);
 });
