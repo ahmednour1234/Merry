@@ -2,14 +2,22 @@
 
 if (!function_exists('storage_url')) {
     /**
-     * Generate a public URL for a stored file served through the Laravel API.
-     * No symlink required — works regardless of APP_URL configuration.
+     * Generate a standard /storage/{path} URL.
+     * Strips any trailing /public from APP_URL (shared-hosting artefact)
+     * so the URL is always correct regardless of server configuration.
      *
-     * e.g. storage_url('offices/file.png')
-     *   → https://mery.alemtayaz.com/public/api/v1/public/files/offices/file.png
+     * Files are served through the web /storage/{path} PHP route,
+     * bypassing symlink/permission issues entirely.
+     *
+     * e.g. APP_URL=https://mery.alemtayaz.com/public
+     *   storage_url('offices/file.png')
+     *   -> https://mery.alemtayaz.com/storage/offices/file.png
      */
     function storage_url(string $path): string
     {
-        return route('public.file', ['path' => ltrim($path, '/')]);
+        $base = rtrim((string) config('app.url'), '/');
+        $base = preg_replace('#/public$#i', '', $base);
+
+        return $base . '/storage/' . ltrim($path, '/');
     }
 }
