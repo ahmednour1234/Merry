@@ -57,6 +57,13 @@ class DashboardController extends Controller
             ->limit(10)
             ->get();
 
+        // ── Available nationalities ──────────────────────────────────────
+        $nationalities = Nationality::on('system')
+            ->where('active', 1)
+            ->with('translations')
+            ->orderBy('name')
+            ->get();
+
         // ── Recent uploaded files (CVs with files) ───────────────────────
         $recentFiles = Cv::on('system')
             ->where('office_id', $office->id)
@@ -78,6 +85,7 @@ class DashboardController extends Controller
         return view('office.dashboard', compact(
             'office',
             'totalCvs',
+            'nationalities',
             'pendingCvs',
             'totalBookings',
             'activeBookings',

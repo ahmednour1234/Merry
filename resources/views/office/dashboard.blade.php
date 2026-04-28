@@ -544,6 +544,40 @@
     </div>
 </div>
 
+{{-- ── Nationalities ── --}}
+@if($nationalities->count() > 0)
+<div class="stat-card" style="margin-top:1.25rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#054F31,#0a6b42);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" /></svg>
+            </div>
+            <div>
+                <div style="font-size:0.95rem;font-weight:700;color:#111827;">الجنسيات المتاحة</div>
+                <div style="font-size:0.72rem;color:#9ca3af;">{{ $nationalities->count() }} جنسية نشطة</div>
+            </div>
+        </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem;">
+        @foreach($nationalities as $nat)
+        @php
+            $arName = $nat->translations->where('lang_code','ar')->first()?->name
+                   ?? $nat->translations->first()?->name
+                   ?? $nat->name;
+            $flagUrl = $nat->image ?: 'https://flagcdn.com/w40/'.strtolower($nat->code).'.png';
+        @endphp
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;background:#f8fafc;border:1px solid #e8ecf0;border-radius:12px;padding:0.875rem 0.5rem;transition:all .15s;cursor:default;" onmouseover="this.style.background='#f0fdf4';this.style.borderColor='#86efac'" onmouseout="this.style.background='#f8fafc';this.style.borderColor='#e8ecf0'">
+            <img src="{{ $flagUrl }}" alt="{{ $arName }}"
+                 style="width:40px;height:28px;object-fit:cover;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.15);"
+                 onerror="this.style.display='none'">
+            <span style="font-size:0.78rem;font-weight:600;color:#374151;text-align:center;line-height:1.3;">{{ $arName }}</span>
+            <span style="font-size:0.65rem;color:#9ca3af;font-family:monospace;">{{ $nat->code }}</span>
+        </div>
+        @endforeach
+    </div>
+</div>
+@endif
+
 @endsection
 
 @push('scripts')
