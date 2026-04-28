@@ -220,56 +220,66 @@
                     </button>
 
                     {{-- Dropdown Panel --}}
-                    <div id="notif-panel" style="display:none;position:absolute;top:calc(100% + 10px);left:0;width:340px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);z-index:999;overflow:hidden;border:1px solid #f3f4f6;">
+                    <div id="notif-panel" style="display:none;position:absolute;top:calc(100% + 14px);right:0;width:360px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:9999;overflow:hidden;border:1px solid #e5e7eb;animation:notifSlide .18s ease;">
 
                         {{-- Header --}}
-                        <div style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-bottom:1px solid #f3f4f6;background:#fafafa;">
-                            <div style="display:flex;align-items:center;gap:.5rem;">
-                                <span style="font-size:.92rem;font-weight:800;color:#111827;">الإشعارات</span>
-                                @if($unreadCount>0)
-                                    <span style="background:#ef4444;color:#fff;font-size:.65rem;font-weight:700;padding:.1rem .45rem;border-radius:99px;">{{ $unreadCount }}</span>
-                                @endif
+                        <div style="background:linear-gradient(135deg,#054F31,#0a6b42);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;">
+                            <div style="display:flex;align-items:center;gap:.6rem;">
+                                <div style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                                </div>
+                                <div>
+                                    <div style="color:#fff;font-weight:800;font-size:.9rem;">الإشعارات</div>
+                                    @if($unreadCount>0)
+                                        <div style="color:rgba(255,255,255,.65);font-size:.7rem;">{{ $unreadCount }} إشعار غير مقروء</div>
+                                    @else
+                                        <div style="color:rgba(255,255,255,.65);font-size:.7rem;">كل الإشعارات مقروءة</div>
+                                    @endif
+                                </div>
                             </div>
-                            <a href="{{ route('office.notifications.index') }}" style="font-size:.75rem;color:#054F31;font-weight:700;text-decoration:none;">عرض الكل</a>
+                            <a href="{{ route('office.notifications.index') }}" style="background:rgba(255,255,255,.15);color:#fff;font-size:.72rem;font-weight:700;text-decoration:none;padding:.35rem .75rem;border-radius:8px;border:1px solid rgba(255,255,255,.2);">عرض الكل</a>
                         </div>
 
                         {{-- List --}}
-                        <div style="max-height:340px;overflow-y:auto;">
+                        <div style="max-height:360px;overflow-y:auto;">
                             @forelse($__notifs as $__nr)
                                 @php $__n = $__nr->notification; $__isUnread = is_null($__nr->read_at); @endphp
-                                <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.85rem 1.1rem;border-bottom:1px solid #f9fafb;background:{{ $__isUnread ? '#f0fdf4' : '#fff' }};transition:background .15s;cursor:pointer;" onmouseover="this.style.background='{{ $__isUnread ? '#dcfce7' : '#f9fafb' }}'" onmouseout="this.style.background='{{ $__isUnread ? '#f0fdf4' : '#fff' }}'">
+                                <a href="{{ route('office.notifications.index') }}" style="display:flex;align-items:flex-start;gap:.875rem;padding:.9rem 1.25rem;border-bottom:1px solid #f3f4f6;text-decoration:none;background:{{ $__isUnread ? '#f0fdf4' : '#fff' }};transition:background .15s;" onmouseover="this.style.background='{{ $__isUnread ? '#dcfce7' : '#f9fafb' }}'" onmouseout="this.style.background='{{ $__isUnread ? '#f0fdf4' : '#fff' }}'">
                                     {{-- Icon --}}
-                                    <div style="width:38px;height:38px;border-radius:12px;background:{{ $__isUnread ? '#dcfce7' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-                                        @if($__isUnread)
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
-                                        @else
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9ca3af" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
-                                        @endif
+                                    <div style="width:40px;height:40px;border-radius:14px;background:{{ $__isUnread ? '#d1fae5' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ $__isUnread ? '#054F31' : '#9ca3af' }}" style="width:19px;height:19px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
                                     </div>
                                     {{-- Content --}}
                                     <div style="flex:1;min-width:0;">
-                                        <div style="font-size:.82rem;font-weight:{{ $__isUnread ? '700' : '500' }};color:#111827;margin-bottom:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $__n?->title ?? 'إشعار جديد' }}</div>
-                                        <div style="font-size:.75rem;color:#6b7280;margin-bottom:.25rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{ Str::limit($__n?->body ?? '', 70) }}</div>
-                                        <div style="font-size:.7rem;color:#9ca3af;">{{ $__nr->created_at?->diffForHumans() }}</div>
+                                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem;">
+                                            <div style="font-size:.83rem;font-weight:{{ $__isUnread ? '700' : '500' }};color:{{ $__isUnread ? '#111827' : '#374151' }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;">{{ $__n?->title ?? 'إشعار جديد' }}</div>
+                                            @if($__isUnread)<div style="width:8px;height:8px;background:#054F31;border-radius:50%;flex-shrink:0;"></div>@endif
+                                        </div>
+                                        <div style="font-size:.75rem;color:#6b7280;line-height:1.45;margin-bottom:.3rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{ Str::limit($__n?->body ?? '', 75) }}</div>
+                                        <div style="display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:#9ca3af;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:11px;height:11px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                                            {{ $__nr->created_at?->diffForHumans() }}
+                                        </div>
                                     </div>
-                                    @if($__isUnread)
-                                        <div style="width:8px;height:8px;background:#054F31;border-radius:50%;flex-shrink:0;margin-top:5px;"></div>
-                                    @endif
-                                </div>
+                                </a>
                             @empty
-                                <div style="padding:2.5rem 1rem;text-align:center;">
-                                    <div style="width:56px;height:56px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d1d5db" style="width:26px;height:26px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                                <div style="padding:3rem 1rem;text-align:center;">
+                                    <div style="width:64px;height:64px;border-radius:20px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="#d1d5db" style="width:30px;height:30px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
                                     </div>
-                                    <div style="font-size:.85rem;color:#9ca3af;font-weight:500;">لا توجد إشعارات</div>
+                                    <div style="font-size:.9rem;font-weight:700;color:#374151;margin-bottom:.3rem;">لا توجد إشعارات</div>
+                                    <div style="font-size:.78rem;color:#9ca3af;">ستظهر هنا الإشعارات الجديدة</div>
                                 </div>
                             @endforelse
                         </div>
 
                         {{-- Footer --}}
                         @if($__notifs->isNotEmpty())
-                        <div style="padding:.7rem 1.1rem;background:#fafafa;border-top:1px solid #f3f4f6;text-align:center;">
-                            <a href="{{ route('office.notifications.index') }}" style="font-size:.8rem;color:#054F31;font-weight:700;text-decoration:none;">عرض جميع الإشعارات ←</a>
+                        <div style="padding:.875rem 1.25rem;background:#f9fafb;border-top:1px solid #f3f4f6;display:flex;align-items:center;justify-content:center;">
+                            <a href="{{ route('office.notifications.index') }}" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:#054F31;font-weight:700;text-decoration:none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"/></svg>
+                                عرض جميع الإشعارات
+                            </a>
                         </div>
                         @endif
                     </div>
@@ -312,7 +322,9 @@
         #hamburger{display:block!important}
         aside#sidebar{position:fixed!important;right:0;top:0;bottom:0;z-index:50;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
         aside#sidebar.open{transform:translateX(0)!important}
+        #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
     }
+    @keyframes notifSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 </style>
 <script>
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').style.display='block';}
