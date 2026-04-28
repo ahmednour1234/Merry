@@ -46,18 +46,7 @@ class Cv extends Model
             return null;
         }
 
-        // Use Storage temporaryUrl (signed URL) like Filament does
-        try {
-            return Storage::disk('public')->temporaryUrl(
-                $this->file_path,
-                now()->addHours(24)
-            );
-        } catch (\Exception $e) {
-            // Fallback to regular URL if temporaryUrl fails
-            $baseUrl = rtrim(config('app.url'), '/');
-            $filePath = 'public/storage/' . ltrim($this->file_path, '/');
-            return $baseUrl . '/' . ltrim($filePath, '/');
-        }
+        return \Illuminate\Support\Facades\Storage::disk('public')->url($this->file_path);
     }
 
     // Check if file exists - simplified since download works

@@ -182,4 +182,59 @@ class CvController extends ApiController
             'Resubmitted (pending)'
         );
     }
+
+    /**
+     * GET /api/v1/office/cvs/{id}/download
+     *
+     * Stream / download the PDF file of a CV owned by the authenticated office.
+     *
+     * @urlParam id int required The CV ID. Example: 1
+     */
+    public function download(\Illuminate\Http\Request $request, int $id): \Symfony\Component\HttpFoundation\StreamedResponse|\Illuminate\Http\Response
+    {
+        $cv = $this->repo->find($id);
+
+        if (!$cv || (int) $cv->office_id !== (int) $request->user()->id) {
+            abort(404, 'الملف غير موجود.');
+        }
+
+        if (empty($cv->file_path)) {
+            abort(404, 'الملف غير موجود.');
+        }
+
+        return $this->streamCvFile($cv);
+    }
+
+    /**
+     * Resolve the file from public or private disk and return a download response.
+     */
+    private function streamCvFile(\App\Models\Cv $cv): \Symfony\Component\HttpFoundation\StreamedResponse|\Illuminate\Http\Response
+    {
+        $fileName = $cv->file_original_name ?? basename($cv->file_path);
+
+        // Primary: public disk (where PdfUpload stores files)
+        if (\Illuminate\Support\Facades\Storage::disk('public')->exists($cv->file_path)) {
+            $fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($cv->file_path);
+            return response()->download($fullPath, $fileName, ['Content-Type' => 'application/pdf']);
+        }
+
+        // Fallback: private disk
+        if (\Illuminate\Support\Facades\Storage::disk('private')->exists($cv->file_path)) {
+            $fullPath = \Illuminate\Support\Facades\Storage::disk('private')->path($cv->file_path);
+            return response()->download($fullPath, $fileName, ['Content-Type' => 'application/pdf']);
+        }
+
+        // Fallback: direct filesystem path
+        $candidates = [
+            storage_path('app/public/' . ltrim($cv->file_path, '/')),
+            public_path('storage/' . ltrim($cv->file_path, '/')),
+        ];
+        foreach ($candidates as $path) {
+            if (file_exists($path)) {
+                return response()->download($path, $fileName, ['Content-Type' => 'application/pdf']);
+            }
+        }
+
+        abort(404, 'الملف غير موجود على الخادم.');
+    }
 }

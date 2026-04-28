@@ -27,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(SystemSettings::class, fn() => new SystemSettings());
         $this->app->singleton(LocaleService::class, fn($app) => new LocaleService($app->make(SystemSettings::class)));
+
+        // Repository bindings
+        $this->app->bind(
+            \App\Repositories\System\Contracts\OfficeRepositoryInterface::class,
+            \App\Repositories\System\OfficeRepository::class
+        );
     }
 
 

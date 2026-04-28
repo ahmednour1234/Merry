@@ -243,6 +243,51 @@ class CatalogController extends ApiController
 	}
 
 	/**
+	 * GET /api/v1/enduser/cvs/{id}/download
+	 *
+	 * Download / open the PDF of an approved CV.
+	 * No authentication required — same access level as viewing the CV listing.
+	 *
+	 * @urlParam id int required The CV ID. Example: 1
+	 */
+	public function downloadCv(Request $request, int $id): \Symfony\Component\HttpFoundation\StreamedResponse|\Illuminate\Http\Response
+	{
+		$cv = Cv::on('system')
+			->where('id', $id)
+			->where('status', 'approved')
+			->whereNull('deactivated_by_office_at')
+			->first();
+
+		if (!$cv || empty($cv->file_path)) {
+			abort(404, 'الملف غير موجود.');
+		}
+
+		$fileName = $cv->file_original_name ?? basename($cv->file_path);
+
+		if (\Illuminate\Support\Facades\Storage::disk('public')->exists($cv->file_path)) {
+			$fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($cv->file_path);
+			return response()->download($fullPath, $fileName, ['Content-Type' => 'application/pdf']);
+		}
+
+		if (\Illuminate\Support\Facades\Storage::disk('private')->exists($cv->file_path)) {
+			$fullPath = \Illuminate\Support\Facades\Storage::disk('private')->path($cv->file_path);
+			return response()->download($fullPath, $fileName, ['Content-Type' => 'application/pdf']);
+		}
+
+		$candidates = [
+			storage_path('app/public/' . ltrim($cv->file_path, '/')),
+			public_path('storage/' . ltrim($cv->file_path, '/')),
+		];
+		foreach ($candidates as $path) {
+			if (file_exists($path)) {
+				return response()->download($path, $fileName, ['Content-Type' => 'application/pdf']);
+			}
+		}
+
+		abort(404, 'الملف غير موجود على الخادم.');
+	}
+
+	/**
 	 * GET /api/v1/enduser/sliders
 	 * Public sliders list (active only), ordered by position asc, created_at desc
 	 */

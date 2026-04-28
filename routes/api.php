@@ -41,6 +41,7 @@ use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
 use App\Http\Controllers\Api\EndUser\FavouriteController;
+use App\Http\Controllers\Api\Public\OfficeController as PublicOfficeController;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -294,6 +295,7 @@ Route::prefix('v1/office')->group(function () {
         Route::put('cvs/{id}',            [OfficeCvController::class, 'update']);
         Route::post('cvs/{id}/toggle',    [OfficeCvController::class, 'toggleActive']);
         Route::post('cvs/{id}/resubmit',  [OfficeCvController::class, 'resubmit']);
+        Route::get('cvs/{id}/download',   [OfficeCvController::class, 'download']);
         Route::delete('cvs/{id}',         [OfficeCvController::class, 'destroy']);
 
         // Bookings (Office)
@@ -330,6 +332,7 @@ Route::prefix('v1/enduser')->group(function () {
 	Route::get('top-offices',          [CatalogController::class, 'topOffices']);
     Route::get('cvs',                   [CatalogController::class, 'cvs']);
 	Route::get('cvs/{id}',              [CatalogController::class, 'cv']);
+	Route::get('cvs/{id}/download',     [CatalogController::class, 'downloadCv']);
 	Route::get('sliders',               [CatalogController::class, 'sliders']);
 
     Route::middleware(['token_auth'])->group(function () {
@@ -355,4 +358,16 @@ Route::prefix('v1/enduser')->group(function () {
         Route::post('bookings/{id}/cancel',  [EndUserBookingController::class, 'cancel']);
         Route::get('bookings/stats',         [EndUserBookingController::class, 'stats']);
     });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Public API (no auth required)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('v1/public')->group(function () {
+    Route::get('offices',               [PublicOfficeController::class, 'index']);
+    Route::get('offices/{id}',          [PublicOfficeController::class, 'show']);
+    Route::get('offices/{id}/profile',  [PublicOfficeController::class, 'profile']);
+    Route::get('offices/{id}/cvs',      [PublicOfficeController::class, 'cvs']);
 });

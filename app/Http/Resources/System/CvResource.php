@@ -45,7 +45,7 @@ class CvResource extends JsonResource
                 'original'  => $this->file_original_name,
                 'url'       => $this->when(
                     $this->file_path,
-					fn () => asset('storage/' . ltrim($this->file_path, '/'))
+					fn () => \Illuminate\Support\Facades\Storage::disk('public')->url($this->file_path)
                 ),
             ],
 

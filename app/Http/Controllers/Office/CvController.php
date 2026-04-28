@@ -166,27 +166,32 @@ class CvController extends Controller
             abort(404, 'الملف غير موجود');
         }
 
-        // Try private disk first, then public fallback
-        if (Storage::disk('private')->exists($cv->file_path)) {
-            $fullPath = Storage::disk('private')->path($cv->file_path);
-        } else {
-            $possiblePaths = [
-                Storage::disk('public')->path($cv->file_path),
-                public_path('storage/'.ltrim($cv->file_path, '/')),
-                storage_path('app/public/'.ltrim($cv->file_path, '/')),
-            ];
-            $fullPath = null;
-            foreach ($possiblePaths as $p) {
-                if (file_exists($p)) { $fullPath = $p; break; }
-            }
-            if (!$fullPath) abort(404, 'الملف غير موجود');
-        }
-
         $fileName = $cv->file_original_name ?? basename($cv->file_path);
 
-        return response()->download($fullPath, $fileName, [
-            'Content-Type' => 'application/pdf',
-        ]);
+        // Primary: public disk (where PdfUpload stores files)
+        if (Storage::disk('public')->exists($cv->file_path)) {
+            $fullPath = Storage::disk('public')->path($cv->file_path);
+            return response()->download($fullPath, $fileName, ['Content-Type' => 'application/pdf']);
+        }
+
+        // Fallback: private disk
+        if (Storage::disk('private')->exists($cv->file_path)) {
+            $fullPath = Storage::disk('private')->path($cv->file_path);
+            return response()->download($fullPath, $fileName, ['Content-Type' => 'application/pdf']);
+        }
+
+        // Fallback: direct paths
+        $possiblePaths = [
+            storage_path('app/public/'.ltrim($cv->file_path, '/')),
+            public_path('storage/'.ltrim($cv->file_path, '/')),
+        ];
+        foreach ($possiblePaths as $p) {
+            if (file_exists($p)) {
+                return response()->download($p, $fileName, ['Content-Type' => 'application/pdf']);
+            }
+        }
+
+        abort(404, 'الملف غير موجود على الخادم');
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────
