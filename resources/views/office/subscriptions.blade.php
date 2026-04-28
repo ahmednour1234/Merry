@@ -133,9 +133,18 @@
                 <div style="position:absolute;top:-1px;right:1.25rem;background:linear-gradient(135deg,#054F31,#0a6b42);color:#fff;font-size:.68rem;font-weight:800;padding:.25rem .75rem;border-radius:0 0 10px 10px;">باقتك الحالية</div>
             @endif
             <div style="margin-bottom:1rem;">
-                <div style="font-size:1.05rem;font-weight:800;color:#111827;margin-bottom:.3rem;{{ $isCurrentPlan ? 'padding-top:.5rem;' : '' }}">{{ $pName }}</div>
-                @if($plan->price ?? false)
-                    <div style="font-size:.85rem;color:#6b7280;">{{ number_format($plan->price ?? 0, 2) }} <span style="font-size:.7rem;">{{ $plan->currency_code ?? 'USD' }}</span></div>
+                <div style="font-size:1.05rem;font-weight:800;color:#111827;margin-bottom:.4rem;{{ $isCurrentPlan ? 'padding-top:.5rem;' : '' }}">{{ $pName }}</div>
+                @if($plan->base_price == 0)
+                    <div style="display:flex;align-items:baseline;gap:.3rem;">
+                        <span style="font-size:1.5rem;font-weight:900;color:#054F31;">مجاناً</span>
+                    </div>
+                    <div style="font-size:.7rem;color:#9ca3af;margin-top:.15rem;">بدون رسوم</div>
+                @else
+                    <div style="display:flex;align-items:baseline;gap:.3rem;">
+                        <span style="font-size:1.5rem;font-weight:900;color:#111827;">{{ number_format($plan->base_price, 0) }}</span>
+                        <span style="font-size:.8rem;font-weight:700;color:#6b7280;">ريال</span>
+                    </div>
+                    <div style="font-size:.7rem;color:#9ca3af;margin-top:.15rem;">شهرياً</div>
                 @endif
             </div>
 
@@ -160,11 +169,7 @@
             @endif
 
             @if(!$isCurrentPlan)
-                <form method="POST" action="{{ route('office.subscriptions.subscribe') }}">
-                    @csrf
-                    <input type="hidden" name="plan_code" value="{{ $plan->code }}">
-                    <button type="submit" style="width:100%;background:linear-gradient(135deg,#054F31,#0a6b42);color:#fff;border:none;border-radius:10px;padding:.7rem;font-family:'Cairo',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">اشترك الآن</button>
-                </form>
+                <button onclick="openSubscribePopup('{{ $pName }}', '{{ $plan->base_price == 0 ? 'مجاناً' : number_format($plan->base_price,0).' ريال/شهر' }}', '{{ $plan->code }}')" style="width:100%;background:linear-gradient(135deg,#054F31,#0a6b42);color:#fff;border:none;border-radius:10px;padding:.7rem;font-family:'Cairo',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">اشترك الآن</button>
             @else
                 <button disabled style="width:100%;background:#f3f4f6;color:#9ca3af;border:none;border-radius:10px;padding:.7rem;font-family:'Cairo',sans-serif;font-size:.875rem;cursor:not-allowed;font-weight:600;">الباقة الحالية</button>
             @endif
@@ -221,5 +226,84 @@
     </div>
 </div>
 @endif
+
+{{-- ══ Subscribe Popup ══ --}}
+<div id="subscribe-popup" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:1rem;">
+    <div style="background:#fff;border-radius:24px;width:100%;max-width:440px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.25);animation:popupIn .25s ease;">
+        {{-- Header --}}
+        <div style="background:linear-gradient(135deg,#054F31,#0a6b42);padding:1.75rem 1.75rem 1.25rem;position:relative;">
+            <button onclick="closeSubscribePopup()" style="position:absolute;top:1rem;left:1rem;background:rgba(255,255,255,.15);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+            <div style="width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:26px;height:26px;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+            </div>
+            <div style="color:#fff;font-size:1.1rem;font-weight:800;">طلب الاشتراك</div>
+            <div style="color:rgba(255,255,255,.65);font-size:.8rem;margin-top:.25rem;">سيتم التواصل معك من فريقنا قريباً</div>
+        </div>
+
+        {{-- Body --}}
+        <div style="padding:1.5rem 1.75rem;">
+            {{-- Plan summary --}}
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                    <div style="font-size:.72rem;color:#6b7280;margin-bottom:.2rem;">الباقة المختارة</div>
+                    <div id="popup-plan-name" style="font-size:1rem;font-weight:800;color:#054F31;"></div>
+                </div>
+                <div style="text-align:left;">
+                    <div style="font-size:.72rem;color:#6b7280;margin-bottom:.2rem;">السعر</div>
+                    <div id="popup-plan-price" style="font-size:1rem;font-weight:800;color:#111827;"></div>
+                </div>
+            </div>
+
+            {{-- Message --}}
+            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.75rem;">
+                <div style="flex-shrink:0;margin-top:.1rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ea580c" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                </div>
+                <div>
+                    <div style="font-size:.85rem;font-weight:700;color:#c2410c;margin-bottom:.25rem;">سيتم التواصل معك!</div>
+                    <div style="font-size:.78rem;color:#9a3412;line-height:1.6;">سيقوم فريق الدعم لدينا بالتواصل معك على رقم الجوال المسجل في حسابك خلال <strong>24 ساعة</strong> لإتمام عملية الاشتراك.</div>
+                </div>
+            </div>
+
+            {{-- Buttons --}}
+            <div style="display:flex;gap:.75rem;">
+                <form method="POST" action="{{ route('office.subscriptions.subscribe') }}" style="flex:1;">
+                    @csrf
+                    <input type="hidden" name="plan_code" id="popup-plan-code" value="">
+                    <button type="submit" style="width:100%;background:linear-gradient(135deg,#054F31,#0a6b42);color:#fff;border:none;border-radius:12px;padding:.8rem;font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+                        تأكيد الطلب
+                    </button>
+                </form>
+                <button onclick="closeSubscribePopup()" style="flex:1;background:#f3f4f6;color:#374151;border:none;border-radius:12px;padding:.8rem;font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;">إلغاء</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('styles')
+<style>
+@keyframes popupIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+</style>
+@endpush
+
+@push('scripts')
+<script>
+function openSubscribePopup(name, price, code) {
+    document.getElementById('popup-plan-name').textContent  = name;
+    document.getElementById('popup-plan-price').textContent = price;
+    document.getElementById('popup-plan-code').value        = code;
+    const popup = document.getElementById('subscribe-popup');
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeSubscribePopup() {
+    document.getElementById('subscribe-popup').style.display = 'none';
+    document.body.style.overflow = '';
+}
+document.getElementById('subscribe-popup').addEventListener('click', function(e) {
+    if (e.target === this) closeSubscribePopup();
+});
+</script>
+@endpush
 
 @endsection
