@@ -373,4 +373,21 @@ Route::prefix('v1/public')->group(function () {
 
     // Categories (public — no auth)
     Route::get('categories',            [\App\Http\Controllers\Api\EndUser\CatalogController::class, 'categories']);
+
+    // Public file serving — bypasses symlink issues on shared hosting
+    Route::get('files/{path}', function (string $path) {
+        $path = ltrim($path, '/');
+        if (str_contains($path, '..')) {
+            abort(403);
+        }
+        if (!\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
+            abort(404);
+        }
+        $fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($path);
+        $mime     = mime_content_type($fullPath) ?: 'application/octet-stream';
+        return response()->file($fullPath, [
+            'Content-Type'  => $mime,
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
+    })->where('path', '.*');
 });
