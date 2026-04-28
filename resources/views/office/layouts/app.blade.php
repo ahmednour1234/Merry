@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'مكتب النخبة للاستقدام') - مري</title>
+    <title>@yield('title', 'نظام ميري') - نظام ميري</title>
 
     <!-- Google Fonts: Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
         body { background-color: #f4f6f9; margin: 0; padding: 0; }
 
         /* Sidebar */
-        .sidebar { width: 260px; background: #054F31; min-height: 100vh; flex-shrink: 0; }
+        .sidebar { width: 260px; background: #054F31; }
         .sidebar-logo { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .sidebar-nav a {
             display: flex; align-items: center; gap: 0.75rem;
@@ -82,8 +82,8 @@
         .pagination-wrap a:hover { background: #f3f4f6; }
         .pagination-wrap .active-page { background: #054F31; color: #fff; border-color: #054F31; }
 
-        /* Sidebar sticky */
-        .sidebar { overflow-y: auto; height: 100vh; position: sticky; top: 0; }
+        /* Sidebar fixed - no scroll */
+        .sidebar { height: 100vh; overflow: hidden; flex-shrink: 0; }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
@@ -106,8 +106,8 @@
                     </svg>
                 </div>
                 <div>
-                    <div style="color:#fff;font-weight:700;font-size:0.9rem;line-height:1.2;">مكتب النخبة</div>
-                    <div style="color:rgba(255,255,255,0.55);font-size:0.72rem;">للاستقدام</div>
+                    <div style="color:#fff;font-weight:700;font-size:0.9rem;line-height:1.2;">نظام ميري</div>
+                    <div style="color:rgba(255,255,255,0.55);font-size:0.72rem;">لإدارة الاستقدام</div>
                 </div>
             </div>
         </div>
@@ -211,7 +211,7 @@
         </header>
 
         <!-- Page Content -->
-        <main style="flex:1;overflow-y:auto;padding:1.5rem;">
+        <main style="flex:1;overflow-y:auto;padding:0 1.5rem 1.5rem;">
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
