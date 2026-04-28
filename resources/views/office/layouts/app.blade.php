@@ -15,8 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
-        * { font-family: 'Cairo', sans-serif; }
-        body { background-color: #f4f6f9; }
+        * { font-family: 'Cairo', sans-serif; box-sizing: border-box; }
+        body { background-color: #f4f6f9; margin: 0; padding: 0; }
 
         /* Sidebar */
         .sidebar { width: 260px; background: #054F31; min-height: 100vh; flex-shrink: 0; }
