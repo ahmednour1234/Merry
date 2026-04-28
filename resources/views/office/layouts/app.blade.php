@@ -89,9 +89,13 @@
 
         {{-- Office logo + name --}}
         <div style="padding:1.1rem 1.25rem;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:.875rem;">
-            <div style="width:44px;height:44px;border-radius:14px;background:#054F31;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+            <div style="width:44px;height:44px;border-radius:14px;background:#054F31;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;" id="sb-avatar">
                 @if($__office?->image)
-                    <img src="{{ $__office->image_url }}" style="width:44px;height:44px;object-fit:cover;" alt="">
+                    <img src="{{ $__office->image_url }}" style="width:44px;height:44px;object-fit:cover;" alt=""
+                         onerror="this.style.display='none';document.getElementById('sb-avatar-fallback').style.display='flex'">
+                    <span id="sb-avatar-fallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
+                    </span>
                 @else
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
                 @endif
@@ -186,7 +190,7 @@
                 <div style="width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
                 </div>
-                <div>
+                <div class="nav-brand-text">
                     <div style="color:#fff;font-weight:800;font-size:.95rem;line-height:1.2;">نظام ميري</div>
                     <div style="color:rgba(255,255,255,.5);font-size:.72rem;">لإدارة الاستقدام</div>
                 </div>
@@ -282,18 +286,22 @@
                 {{-- User Dropdown --}}
                 <div style="position:relative;" id="user-wrap">
                     <button onclick="toggleUser(event)" style="display:flex;align-items:center;gap:.625rem;background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:12px;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">
-                        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;" id="nav-avatar">
                             @if($__office?->image)
-                                <img src="{{ $__office->image_url }}" style="width:38px;height:38px;object-fit:cover;" alt="">
+                                <img src="{{ $__office->image_url }}" style="width:38px;height:38px;object-fit:cover;" alt=""
+                                     onerror="this.style.display='none';document.getElementById('nav-avatar-fallback').style.display='flex'">
+                                <span id="nav-avatar-fallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                                </span>
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
                             @endif
                         </div>
-                        <div style="text-align:right;">
+                        <div class="user-detail" style="text-align:right;">
                             <div style="color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;">{{ $__office?->name }}</div>
                             <div style="color:rgba(255,255,255,.5);font-size:.7rem;">مدير المكتب</div>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="rgba(255,255,255,.6)" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                        <svg class="user-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="rgba(255,255,255,.6)" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
                     </button>
 
                     {{-- User Dropdown Panel --}}
@@ -302,9 +310,13 @@
                         {{-- User info header --}}
                         <div style="padding:1rem 1.1rem;background:linear-gradient(135deg,#054F31,#0a6b42);">
                             <div style="display:flex;align-items:center;gap:.75rem;">
-                                <div style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                                <div style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;" id="dd-avatar">
                                     @if($__office?->image)
-                                        <img src="{{ $__office->image_url }}" style="width:42px;height:42px;object-fit:cover;" alt="">
+                                        <img src="{{ $__office->image_url }}" style="width:42px;height:42px;object-fit:cover;" alt=""
+                                             onerror="this.style.display='none';document.getElementById('dd-avatar-fallback').style.display='flex'">
+                                        <span id="dd-avatar-fallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:20px;height:20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                                        </span>
                                     @else
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:20px;height:20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
                                     @endif
@@ -361,9 +373,15 @@
 <style>
     @media(max-width:767px){
         #hamburger{display:block!important}
+        .nav-brand-text{display:none!important}
+        .user-detail{display:none!important}
+        .user-chevron{display:none!important}
         aside#sidebar{position:fixed!important;right:0;top:0;bottom:0;z-index:50;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
         aside#sidebar.open{transform:translateX(0)!important}
         #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
+        #user-panel{width:calc(100vw - 2rem)!important;left:1rem!important;}
+        header{padding:0 .875rem!important}
+        #user-wrap button{gap:.4rem!important}
     }
     @keyframes notifSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 </style>
