@@ -169,13 +169,7 @@
                 </div>
             </div>
 
-            {{-- Logout --}}
-            <a href="{{ route('office.logout') }}" onclick="return confirm('هل تريد تسجيل الخروج؟')"
-               style="display:flex;align-items:center;gap:.5rem;padding:.55rem .875rem;border-radius:10px;font-size:.82rem;font-weight:600;color:#dc2626;text-decoration:none;transition:background .15s;"
-               onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='transparent'">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"/></svg>
-                تسجيل الخروج
-            </a>
+
         </div>
     </aside>
 
@@ -185,7 +179,7 @@
     <div style="flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;">
 
         {{-- TOP NAVBAR --}}
-        <header style="flex-shrink:0;height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;">
+        <header style="flex-shrink:0;height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;position:relative;z-index:100;overflow:visible;">
 
             {{-- Right: logo text (RTL = first) --}}
             <div style="display:flex;align-items:center;gap:.875rem;">
@@ -220,7 +214,7 @@
                     </button>
 
                     {{-- Dropdown Panel --}}
-                    <div id="notif-panel" style="display:none;position:absolute;top:calc(100% + 14px);right:0;width:360px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:9999;overflow:hidden;border:1px solid #e5e7eb;animation:notifSlide .18s ease;">
+                    <div id="notif-panel" style="display:none;position:absolute;top:calc(100% + 14px);left:0;width:360px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:9999;overflow:hidden;border:1px solid #e5e7eb;animation:notifSlide .18s ease;">
 
                         {{-- Header --}}
                         <div style="background:linear-gradient(135deg,#054F31,#0a6b42);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;">
@@ -285,20 +279,67 @@
                     </div>
                 </div>
 
-                {{-- User (appears left of bell in RTL) --}}
-                <a href="{{ route('office.profile.edit') }}" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;">
-                    <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
-                        @if($__office?->image)
-                            <img src="{{ asset('storage/'.$__office->image) }}" style="width:38px;height:38px;object-fit:cover;" alt="">
-                        @else
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
-                        @endif
+                {{-- User Dropdown --}}
+                <div style="position:relative;" id="user-wrap">
+                    <button onclick="toggleUser(event)" style="display:flex;align-items:center;gap:.625rem;background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:12px;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">
+                        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                            @if($__office?->image)
+                                <img src="{{ asset('storage/'.$__office->image) }}" style="width:38px;height:38px;object-fit:cover;" alt="">
+                            @else
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                            @endif
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;">{{ $__office?->name }}</div>
+                            <div style="color:rgba(255,255,255,.5);font-size:.7rem;">مدير المكتب</div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="rgba(255,255,255,.6)" style="width:14px;height:14px;"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                    </button>
+
+                    {{-- User Dropdown Panel --}}
+                    <div id="user-panel" style="display:none;position:absolute;top:calc(100% + 10px);left:0;min-width:220px;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:9999;overflow:hidden;border:1px solid #e5e7eb;animation:notifSlide .18s ease;">
+
+                        {{-- User info header --}}
+                        <div style="padding:1rem 1.1rem;background:linear-gradient(135deg,#054F31,#0a6b42);">
+                            <div style="display:flex;align-items:center;gap:.75rem;">
+                                <div style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                                    @if($__office?->image)
+                                        <img src="{{ asset('storage/'.$__office->image) }}" style="width:42px;height:42px;object-fit:cover;" alt="">
+                                    @else
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:20px;height:20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                                    @endif
+                                </div>
+                                <div>
+                                    <div style="color:#fff;font-weight:800;font-size:.88rem;">{{ $__office?->name }}</div>
+                                    <div style="color:rgba(255,255,255,.6);font-size:.72rem;">{{ $__office?->email }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Menu items --}}
+                        <div style="padding:.4rem 0;">
+                            <a href="{{ route('office.profile.edit') }}" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1.1rem;text-decoration:none;color:#374151;font-size:.85rem;font-weight:500;transition:background .12s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">
+                                <div style="width:32px;height:32px;border-radius:9px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                                </div>
+                                الملف الشخصي
+                            </a>
+                            <a href="{{ route('office.settings.edit') }}" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1.1rem;text-decoration:none;color:#374151;font-size:.85rem;font-weight:500;transition:background .12s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">
+                                <div style="width:32px;height:32px;border-radius:9px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                                </div>
+                                الإعدادات
+                            </a>
+                            <div style="margin:.3rem .8rem;border-top:1px solid #f3f4f6;"></div>
+                            <a href="{{ route('office.logout') }}" onclick="return confirm('هل تريد تسجيل الخروج؟')" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1.1rem;text-decoration:none;color:#dc2626;font-size:.85rem;font-weight:600;transition:background .12s;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='transparent'">
+                                <div style="width:32px;height:32px;border-radius:9px;background:#fef2f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dc2626" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"/></svg>
+                                </div>
+                                تسجيل الخروج
+                            </a>
+                        </div>
                     </div>
-                    <div style="text-align:right;">
-                        <div style="color:#fff;font-weight:700;font-size:.875rem;line-height:1.2;">{{ $__office?->name }}</div>
-                        <div style="color:rgba(255,255,255,.5);font-size:.7rem;">مدير المكتب</div>
-                    </div>
-                </a>
+                </div>
 
                 {{-- Hamburger (mobile) --}}
                 <button onclick="openSidebar()" id="hamburger" style="color:#fff;background:none;border:none;cursor:pointer;display:none;padding:0;">
@@ -329,17 +370,23 @@
 <script>
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').style.display='block';}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').style.display='none';}
+function toggleUser(e){
+    e.stopPropagation();
+    var p=document.getElementById('user-panel');
+    var n=document.getElementById('notif-panel');
+    if(n) n.style.display='none';
+    p.style.display = p.style.display==='none'?'block':'none';
+}
 function toggleNotif(e){
     e.stopPropagation();
     var p=document.getElementById('notif-panel');
     p.style.display = p.style.display==='none'?'block':'none';
 }
 document.addEventListener('click',function(e){
-    var wrap=document.getElementById('notif-wrap');
-    if(wrap && !wrap.contains(e.target)){
-        var p=document.getElementById('notif-panel');
-        if(p) p.style.display='none';
-    }
+    var nw=document.getElementById('notif-wrap');
+    var uw=document.getElementById('user-wrap');
+    if(nw && !nw.contains(e.target)){var p=document.getElementById('notif-panel');if(p) p.style.display='none';}
+    if(uw && !uw.contains(e.target)){var p=document.getElementById('user-panel');if(p) p.style.display='none';}
 });
 </script>
 @stack('scripts')
