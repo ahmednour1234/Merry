@@ -176,7 +176,7 @@
     {{-- ══════════════════════════════════════════
          MAIN: navbar (dark green) + content
     ══════════════════════════════════════════ --}}
-    <div style="flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;">
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;background:#f4f6f9;">
 
         {{-- TOP NAVBAR --}}
         <header style="flex-shrink:0;height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;position:relative;z-index:100;overflow:visible;">
@@ -349,10 +349,10 @@
         </header>
 
         {{-- CONTENT --}}
-        <main style="flex:1;overflow-y:auto;padding:0 1.5rem 2rem;">
-            @if(session('success'))<div class="alert alert-success" style="margin-top:1.25rem;">{{ session('success') }}</div>@endif
-            @if(session('error'))<div class="alert alert-error" style="margin-top:1.25rem;">{{ session('error') }}</div>@endif
-            @if(session('warning'))<div class="alert alert-warning" style="margin-top:1.25rem;">{{ session('warning') }}</div>@endif
+        <main style="flex:1;overflow-y:auto;padding:1.25rem 1.5rem 2rem;background:#f4f6f9;">
+            @if(session('success'))<div class="alert alert-success" style="margin-bottom:1rem;">{{ session('success') }}</div>@endif
+            @if(session('error'))<div class="alert alert-error" style="margin-bottom:1rem;">{{ session('error') }}</div>@endif
+            @if(session('warning'))<div class="alert alert-warning" style="margin-bottom:1rem;">{{ session('warning') }}</div>@endif
             @yield('content')
         </main>
     </div>

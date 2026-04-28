@@ -46,7 +46,7 @@
 @section('content')
 
 {{-- ── Welcome ── --}}
-<div class="section-card" style="margin-top:1.25rem;margin-bottom:1.25rem;padding:1.25rem 1.5rem;">
+<div class="section-card" style="margin-bottom:1.25rem;padding:1.25rem 1.5rem;">
     <div style="font-size:1.3rem;font-weight:800;color:#111827;margin-bottom:0.2rem;">
         👋 مرحباً، <span style="color:#054F31;">{{ $office->name }}</span>
     </div>
