@@ -36,10 +36,10 @@ class OtpController extends Controller
     public function verifyLoginOtp(Request $request)
     {
         $request->validate([
-            'otp' => 'required|string|size:6',
+            'otp' => 'required|string|size:4',
         ], [
             'otp.required' => 'رمز التحقق مطلوب',
-            'otp.size'     => 'رمز التحقق يجب أن يكون 6 أرقام',
+            'otp.size'     => 'رمز التحقق يجب أن يكون 4 أرقام',
         ]);
 
         $officeId = session()->get('login_office_id');
@@ -76,7 +76,7 @@ class OtpController extends Controller
         }
 
         $isDevEnv    = app()->environment(['local', 'development', 'dev', 'staging', 'testing']) || config('app.debug');
-        $useBypass   = $isDevEnv && $request->otp === '111111';
+        $useBypass   = $isDevEnv && $request->otp === '1111';
 
         if (!$useBypass && !Hash::check($request->otp, $row->code_hash)) {
             DB::connection('system')->table('password_reset_tokens')
@@ -114,7 +114,7 @@ class OtpController extends Controller
     protected function sendOtp(Office $office): void
     {
         $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']) || config('app.debug');
-        $code     = $isDevEnv ? '111111' : (string) random_int(100000, 999999);
+        $code     = $isDevEnv ? '1111' : (string) random_int(1000, 9999);
         $hash     = Hash::make($code);
         $expiresAt = now()->addMinutes(15);
 
