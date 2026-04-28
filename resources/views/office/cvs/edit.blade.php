@@ -1,4 +1,4 @@
-@extends('office.layouts.app')
+﻿@extends('office.layouts.app')
 
 @section('title', 'تعديل سيرة ذاتية')
 @section('page-title', 'تعديل سيرة ذاتية')
@@ -102,7 +102,7 @@
                 @error('file') <div class="form-error">{{ $message }}</div> @enderror
             </div>
 
-            <div class="flex items-center gap-3">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
                 <button type="submit" class="btn-primary">حفظ التغييرات</button>
                 <a href="{{ route('office.cvs.index') }}" class="btn-secondary" style="text-decoration:none;">إلغاء</a>
             </div>

@@ -1,4 +1,4 @@
-@extends('office.layouts.auth')
+﻿@extends('office.layouts.auth')
 
 @section('title', 'تسجيل الدخول')
 @section('auth-subtitle', 'سجّل دخولك للوحة التحكم')

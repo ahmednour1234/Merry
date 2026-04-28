@@ -1,11 +1,11 @@
-@extends('office.layouts.app')
+﻿@extends('office.layouts.app')
 
 @section('title', 'الإشعارات')
 @section('page-title', 'الإشعارات')
 
 @section('content')
 
-<div class="flex items-center justify-between" style="margin-bottom:1.25rem;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
     <div>
         <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">الإشعارات</h2>
         <p style="color:#6b7280;font-size:0.82rem;margin:0.2rem 0 0;">إجمالي: {{ $notifications->total() }} إشعار</p>

@@ -1,4 +1,4 @@
-@extends('office.layouts.auth')
+﻿@extends('office.layouts.auth')
 
 @section('title', 'التحقق من الهوية - OTP')
 @section('auth-subtitle', 'أدخل رمز التحقق المرسل إلى بريدك')

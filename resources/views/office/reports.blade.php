@@ -1,4 +1,4 @@
-@extends('office.layouts.app')
+﻿@extends('office.layouts.app')
 
 @section('title', 'التقارير')
 @section('page-title', 'التقارير')

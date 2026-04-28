@@ -1,4 +1,4 @@
-@extends('office.layouts.auth')
+﻿@extends('office.layouts.auth')
 
 @section('title', 'إعادة تعيين كلمة المرور')
 @section('auth-subtitle', 'أدخل رمز التحقق وكلمة المرور الجديدة')

@@ -1,11 +1,11 @@
-@extends('office.layouts.app')
+﻿@extends('office.layouts.app')
 
 @section('title', 'الحجوزات')
 @section('page-title', 'الحجوزات')
 
 @section('content')
 
-<div class="flex items-center justify-between" style="margin-bottom:1.25rem;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
     <div>
         <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">قائمة الحجوزات</h2>
         <p style="color:#6b7280;font-size:0.82rem;margin:0.2rem 0 0;">إجمالي: {{ $bookings->total() }} حجز</p>
@@ -14,7 +14,7 @@
 
 {{-- Filter --}}
 <div style="background:#fff;border-radius:10px;padding:1rem 1.25rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:1rem;">
-    <form method="GET" action="{{ route('office.bookings.index') }}" class="flex items-center gap-3 flex-wrap">
+    <form method="GET" action="{{ route('office.bookings.index') }}" style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
         <select name="status" class="form-input" style="max-width:200px;">
             <option value="">جميع الحالات</option>
             <option value="pending"   {{ request('status') === 'pending'   ? 'selected' : '' }}>قيد الانتظار</option>

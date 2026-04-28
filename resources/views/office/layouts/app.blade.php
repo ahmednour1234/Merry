@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -90,13 +90,13 @@
     @stack('styles')
 </head>
 <body>
-<div class="flex" style="min-height:100vh;">
+<div style="min-height:100vh;display:flex;">
 
     <!-- Sidebar (right) -->
     <aside class="sidebar" id="sidebar">
         <!-- Logo -->
         <div class="sidebar-logo">
-            <div class="flex items-center gap-3">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
                 <div style="width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
@@ -111,7 +111,7 @@
 
         <!-- User mini -->
         <div style="padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.08);">
-            <div class="flex items-center gap-3">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
                 <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     @if(auth()->guard('office-panel')->user()?->image)
                         <img src="{{ asset('storage/'.auth()->guard('office-panel')->user()->image) }}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;" alt="">
@@ -170,13 +170,13 @@
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
 
         <!-- Topbar -->
-        <header class="topbar flex items-center justify-between" style="padding:0 1.5rem;">
-            <div class="flex items-center gap-3">
+        <header class="topbar" style="padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
                 <!-- Page title -->
                 <h1 style="font-size:1.1rem;font-weight:700;color:#111827;">@yield('page-title', 'الرئيسية')</h1>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div style="display:flex;align-items:center;gap:1rem;">
                 <!-- Notifications -->
                 <a href="{{ route('office.notifications.index') }}" style="position:relative;color:#6b7280;text-decoration:none;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:22px;height:22px;">

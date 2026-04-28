@@ -1,4 +1,4 @@
-@extends('office.layouts.app')
+﻿@extends('office.layouts.app')
 
 @section('title', 'السير الذاتية')
 @section('page-title', 'السير الذاتية')
@@ -6,7 +6,7 @@
 @section('content')
 
 {{-- Header --}}
-<div class="flex items-center justify-between" style="margin-bottom:1.25rem;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
     <div>
         <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">قائمة السير الذاتية</h2>
         <p style="color:#6b7280;font-size:0.82rem;margin:0.2rem 0 0;">إجمالي: {{ $cvs->total() }} سيرة ذاتية</p>
@@ -19,7 +19,7 @@
 
 {{-- Filters --}}
 <div style="background:#fff;border-radius:10px;padding:1rem 1.25rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:1rem;">
-    <form method="GET" action="{{ route('office.cvs.index') }}" class="flex items-center gap-3 flex-wrap">
+    <form method="GET" action="{{ route('office.cvs.index') }}" style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
         <input type="text" name="search" value="{{ request('search') }}" class="form-input" placeholder="بحث بـ ID..." style="max-width:200px;">
         <select name="status" class="form-input" style="max-width:180px;">
             <option value="">جميع الحالات</option>
@@ -84,7 +84,7 @@
                     <td><span class="badge {{ $st['class'] }}">{{ $st['label'] }}</span></td>
                     <td style="color:#6b7280;font-size:0.82rem;">{{ $cv->created_at->format('Y-m-d') }}</td>
                     <td>
-                        <div class="flex items-center gap-2">
+                        <div style="display:flex;align-items:center;gap:0.5rem;">
                             @if($cv->file_path)
                             <a href="{{ route('office.cvs.download', $cv->id) }}" title="تحميل" style="color:#2563eb;text-decoration:none;">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:17px;height:17px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>

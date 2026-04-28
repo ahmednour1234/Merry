@@ -1,4 +1,4 @@
-@extends('office.layouts.auth')
+﻿@extends('office.layouts.auth')
 
 @section('title', 'إنشاء حساب جديد')
 @section('auth-subtitle', 'أنشئ حساب مكتبك للاستقدام')

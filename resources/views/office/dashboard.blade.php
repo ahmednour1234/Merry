@@ -1,4 +1,4 @@
-@extends('office.layouts.app')
+﻿@extends('office.layouts.app')
 
 @section('title', 'الرئيسية - مكتب النخبة للاستقدام')
 @section('page-title', 'الرئيسية')
@@ -18,7 +18,7 @@
 
     {{-- CVs --}}
     <div class="stat-card">
-        <div class="flex items-center gap-3" style="margin-bottom:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
             <div class="icon-wrap" style="background:#ecfdf5;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
@@ -34,7 +34,7 @@
 
     {{-- Subscriptions --}}
     <div class="stat-card">
-        <div class="flex items-center gap-3" style="margin-bottom:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
             <div class="icon-wrap" style="background:#eff6ff;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2563eb">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
@@ -50,7 +50,7 @@
 
     {{-- Bookings --}}
     <div class="stat-card">
-        <div class="flex items-center gap-3" style="margin-bottom:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
             <div class="icon-wrap" style="background:#fff7ed;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ea580c">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -66,7 +66,7 @@
 
     {{-- Favorites --}}
     <div class="stat-card">
-        <div class="flex items-center gap-3" style="margin-bottom:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
             <div class="icon-wrap" style="background:#fdf2f8;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#db2777">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
@@ -93,22 +93,22 @@
                     <canvas id="subscriptionChart" style="max-width:180px;max-height:180px;"></canvas>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                    <div class="flex items-center gap-2" style="font-size:0.82rem;">
+                    <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;">
                         <span style="width:10px;height:10px;border-radius:50%;background:#10b981;flex-shrink:0;"></span>
                         <span style="color:#374151;">نشط</span>
                         <span style="margin-right:auto;font-weight:700;color:#111827;">{{ $subscriptionCounts['active'] }}</span>
                     </div>
-                    <div class="flex items-center gap-2" style="font-size:0.82rem;">
+                    <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;">
                         <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;flex-shrink:0;"></span>
                         <span style="color:#374151;">قيد الانتظار</span>
                         <span style="margin-right:auto;font-weight:700;color:#111827;">{{ $subscriptionCounts['pending'] }}</span>
                     </div>
-                    <div class="flex items-center gap-2" style="font-size:0.82rem;">
+                    <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;">
                         <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;flex-shrink:0;"></span>
                         <span style="color:#374151;">ملغي</span>
                         <span style="margin-right:auto;font-weight:700;color:#111827;">{{ $subscriptionCounts['cancelled'] }}</span>
                     </div>
-                    <div class="flex items-center gap-2" style="font-size:0.82rem;">
+                    <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;">
                         <span style="width:10px;height:10px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
                         <span style="color:#374151;">منتهي</span>
                         <span style="margin-right:auto;font-weight:700;color:#111827;">{{ $subscriptionCounts['expired'] }}</span>
@@ -128,7 +128,7 @@
             @if($recentFiles->count() > 0)
                 <div style="display:flex;flex-direction:column;gap:0.75rem;">
                     @foreach($recentFiles as $file)
-                        <div class="flex items-center gap-3">
+                        <div style="display:flex;align-items:center;gap:0.75rem;">
                             <div style="width:36px;height:36px;background:#fee2e2;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dc2626" style="width:18px;height:18px;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
@@ -164,7 +164,7 @@
 
         {{-- Recent CVs Table --}}
         <div class="stat-card" style="flex:1;">
-            <div class="flex items-center justify-between" style="margin-bottom:1rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
                 <h3 style="font-size:0.95rem;font-weight:700;color:#111827;margin:0;">آخر السير الذاتية المضافة</h3>
                 <a href="{{ route('office.cvs.create') }}" style="font-size:0.8rem;color:#054F31;font-weight:600;text-decoration:none;background:#ecfdf5;padding:0.3rem 0.75rem;border-radius:6px;">+ إضافة</a>
             </div>
