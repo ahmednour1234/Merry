@@ -61,7 +61,7 @@ class EndUser extends Authenticatable
             return null;
         }
 
-        return \Illuminate\Support\Facades\Storage::disk('public')->url(ltrim($this->avatar_path, '/'));
+        return storage_url(ltrim($this->avatar_path, '/'));
     }
 
     public function bookings()

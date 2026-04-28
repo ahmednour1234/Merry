@@ -46,7 +46,7 @@ class Cv extends Model
             return null;
         }
 
-        return \Illuminate\Support\Facades\Storage::disk('public')->url($this->file_path);
+        return storage_url($this->file_path);
     }
 
     // Check if file exists - simplified since download works

@@ -39,7 +39,7 @@ class SliderResource extends JsonResource
 
 		$image = $this->image;
 		if ($image && !str_starts_with($image, 'http')) {
-			$image = \Illuminate\Support\Facades\Storage::disk('public')->url(ltrim($image, '/'));
+			$image = storage_url(ltrim($image, '/'));
 		}
 
 		return [

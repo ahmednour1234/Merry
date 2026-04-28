@@ -31,7 +31,7 @@ class OfficeResource extends JsonResource
         // Image URL (prefers accessor if exists)
         $imageUrl = null;
         if (!empty($this->image)) {
-            $imageUrl = $this->image_url ?? \Illuminate\Support\Facades\Storage::disk('public')->url(ltrim($this->image, '/'));
+            $imageUrl = $this->image_url ?? storage_url(ltrim($this->image, '/'));
         }
 
         return [

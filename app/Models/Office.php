@@ -30,7 +30,7 @@ class Office extends Authenticatable
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->image) : null;
+        return $this->image ? storage_url($this->image) : null;
     }
 
     public function getNotificationConnection()
