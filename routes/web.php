@@ -17,6 +17,7 @@ Route::get('/docs/postman.json', function () {
  * Serve public storage files through PHP.
  * Bypasses symlink/server-permission issues entirely.
  * URL format: /storage/{path} — standard Laravel storage URL.
+ * Protected by temporary signed URLs.
  */
 Route::get('/storage/{path}', function (string $path) {
     $path = ltrim($path, '/');
@@ -32,5 +33,5 @@ Route::get('/storage/{path}', function (string $path) {
         'Content-Type'  => $mime,
         'Cache-Control' => 'public, max-age=86400',
     ]);
-})->where('path', '.*');
+})->where('path', '.*')->middleware('signed')->name('public.storage');
 
