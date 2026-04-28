@@ -11,34 +11,45 @@ class PlansSeeder extends Seeder
     {
         $db = DB::connection('system');
 
-        // خطط أساسية
+        // ══════════════════════════════════════════
+        //  الباقات — عملة ريال سعودي SAR
+        // ══════════════════════════════════════════
         $plans = [
             [
-                'code' => 'free',
-                'name' => 'Free',
-                'description' => 'Basic plan',
-                'base_currency' => 'USD',
-                'base_price' => 0,
+                'code'          => 'free',
+                'name'          => 'Free',
+                'description'   => 'الباقة المجانية للبدء',
+                'base_currency' => 'SAR',
+                'base_price'    => 0.00,
                 'billing_cycle' => 'monthly',
-                'active' => 1,
+                'active'        => 1,
             ],
             [
-                'code' => 'pro',
-                'name' => 'Pro',
-                'description' => 'For growing offices',
-                'base_currency' => 'USD',
-                'base_price' => 49.99,
+                'code'          => 'basic',
+                'name'          => 'Basic',
+                'description'   => 'للمكاتب الصغيرة',
+                'base_currency' => 'SAR',
+                'base_price'    => 99.00,
                 'billing_cycle' => 'monthly',
-                'active' => 1,
+                'active'        => 1,
             ],
             [
-                'code' => 'enterprise',
-                'name' => 'Enterprise',
-                'description' => 'Advanced features and support',
-                'base_currency' => 'USD',
-                'base_price' => 199.00,
+                'code'          => 'pro',
+                'name'          => 'Pro',
+                'description'   => 'للمكاتب النامية',
+                'base_currency' => 'SAR',
+                'base_price'    => 299.00,
                 'billing_cycle' => 'monthly',
-                'active' => 1,
+                'active'        => 1,
+            ],
+            [
+                'code'          => 'enterprise',
+                'name'          => 'Enterprise',
+                'description'   => 'للمكاتب الكبيرة — مزايا غير محدودة',
+                'base_currency' => 'SAR',
+                'base_price'    => 749.00,
+                'billing_cycle' => 'monthly',
+                'active'        => 1,
             ],
         ];
 
@@ -49,11 +60,14 @@ class PlansSeeder extends Seeder
             );
         }
 
-        // ترجمات عربية
+        // ══════════════════════════════════════════
+        //  الترجمات العربية
+        // ══════════════════════════════════════════
         $translations = [
-            ['plan_code'=>'free','lang_code'=>'ar','name'=>'مجانية','description'=>'باقة أساسية'],
-            ['plan_code'=>'pro','lang_code'=>'ar','name'=>'احترافية','description'=>'للمكاتب النامية'],
-            ['plan_code'=>'enterprise','lang_code'=>'ar','name'=>'مؤسسات','description'=>'مزايا ودعم متقدم'],
+            ['plan_code'=>'free',       'lang_code'=>'ar','name'=>'مجانية',    'description'=>'ابدأ مجاناً بدون بطاقة'],
+            ['plan_code'=>'basic',      'lang_code'=>'ar','name'=>'أساسية',    'description'=>'للمكاتب الصغيرة'],
+            ['plan_code'=>'pro',        'lang_code'=>'ar','name'=>'احترافية',   'description'=>'للمكاتب النامية'],
+            ['plan_code'=>'enterprise', 'lang_code'=>'ar','name'=>'مؤسسات',    'description'=>'للمكاتب الكبيرة'],
         ];
         foreach ($translations as $tr) {
             $db->table('plan_translations')->updateOrInsert(
@@ -62,24 +76,32 @@ class PlansSeeder extends Seeder
             );
         }
 
-        // خصائص
+        // ══════════════════════════════════════════
+        //  الميزات — cv.limit + bookings.limit
+        // ══════════════════════════════════════════
         $features = [
-            // Free
-            ['plan_code'=>'free','feature_key'=>'cv.limit','limit'=>50,'value'=>null,'active'=>1],
-            ['plan_code'=>'free','feature_key'=>'orders.limit','limit'=>5,'value'=>null,'active'=>1],
-            ['plan_code'=>'free','feature_key'=>'upload.allowed','limit'=>null,'value'=>json_encode(true),'active'=>1],
+            // ─── مجانية ───────────────────────────────────────
+            ['plan_code'=>'free', 'feature_key'=>'cv.limit',       'limit'=>10,   'value'=>null,              'active'=>1],
+            ['plan_code'=>'free', 'feature_key'=>'bookings.limit',  'limit'=>5,    'value'=>null,              'active'=>1],
+            ['plan_code'=>'free', 'feature_key'=>'upload.allowed',  'limit'=>null, 'value'=>json_encode(true), 'active'=>1],
 
-            // Pro
-            ['plan_code'=>'pro','feature_key'=>'cv.limit','limit'=>2000,'value'=>null,'active'=>1],
-            ['plan_code'=>'pro','feature_key'=>'orders.limit','limit'=>200,'value'=>null,'active'=>1],
-            ['plan_code'=>'pro','feature_key'=>'upload.allowed','limit'=>null,'value'=>json_encode(true),'active'=>1],
-            ['plan_code'=>'pro','feature_key'=>'support.priority','limit'=>null,'value'=>json_encode(true),'active'=>1],
+            // ─── أساسية ───────────────────────────────────────
+            ['plan_code'=>'basic', 'feature_key'=>'cv.limit',       'limit'=>100,  'value'=>null,              'active'=>1],
+            ['plan_code'=>'basic', 'feature_key'=>'bookings.limit',  'limit'=>50,   'value'=>null,              'active'=>1],
+            ['plan_code'=>'basic', 'feature_key'=>'upload.allowed',  'limit'=>null, 'value'=>json_encode(true), 'active'=>1],
 
-            // Enterprise
-            ['plan_code'=>'enterprise','feature_key'=>'cv.limit','limit'=>null,'value'=>null,'active'=>1], // unlimited
-            ['plan_code'=>'enterprise','feature_key'=>'orders.limit','limit'=>null,'value'=>null,'active'=>1],
-            ['plan_code'=>'enterprise','feature_key'=>'upload.allowed','limit'=>null,'value'=>json_encode(true),'active'=>1],
-            ['plan_code'=>'enterprise','feature_key'=>'support.priority','limit'=>null,'value'=>json_encode(true),'active'=>1],
+            // ─── احترافية ─────────────────────────────────────
+            ['plan_code'=>'pro', 'feature_key'=>'cv.limit',         'limit'=>500,  'value'=>null,              'active'=>1],
+            ['plan_code'=>'pro', 'feature_key'=>'bookings.limit',    'limit'=>300,  'value'=>null,              'active'=>1],
+            ['plan_code'=>'pro', 'feature_key'=>'upload.allowed',    'limit'=>null, 'value'=>json_encode(true), 'active'=>1],
+            ['plan_code'=>'pro', 'feature_key'=>'support.priority',  'limit'=>null, 'value'=>json_encode(true), 'active'=>1],
+
+            // ─── مؤسسات (غير محدود) ───────────────────────────
+            ['plan_code'=>'enterprise', 'feature_key'=>'cv.limit',        'limit'=>null, 'value'=>null,              'active'=>1],
+            ['plan_code'=>'enterprise', 'feature_key'=>'bookings.limit',   'limit'=>null, 'value'=>null,              'active'=>1],
+            ['plan_code'=>'enterprise', 'feature_key'=>'upload.allowed',   'limit'=>null, 'value'=>json_encode(true), 'active'=>1],
+            ['plan_code'=>'enterprise', 'feature_key'=>'support.priority', 'limit'=>null, 'value'=>json_encode(true), 'active'=>1],
+            ['plan_code'=>'enterprise', 'feature_key'=>'office.multi_branch','limit'=>null,'value'=>json_encode(true),'active'=>1],
         ];
 
         foreach ($features as $f) {
