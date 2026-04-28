@@ -16,9 +16,9 @@
 
             <form method="POST" action="{{ route('office.otp.verify') }}" id="otpForm" style="margin-top:1.5rem;">
                 @csrf
-                <label class="form-label" style="text-align:center;display:block;margin-bottom:0.75rem;">أدخل رمز التحقق المكون من 6 أرقام</label>
+                <label class="form-label" style="text-align:center;display:block;margin-bottom:0.75rem;">أدخل رمز التحقق المكون من 4 أرقام</label>
                 <div class="otp-boxes" id="otpBoxes">
-                    @for($i=0;$i<6;$i++)
+                    @for($i=0;$i<4;$i++)
                     <input class="otp-box" type="text" inputmode="numeric" maxlength="1" data-index="{{ $i }}">
                     @endfor
                 </div>
@@ -26,8 +26,8 @@
 
                 @error('otp') <div class="form-error" style="text-align:center;margin-bottom:0.75rem;">{{ $message }}</div> @enderror
 
-                @if(app()->environment(['local','dev','development','staging','testing']))
-                    <div style="text-align:center;font-size:0.75rem;color:#9ca3af;margin-bottom:0.75rem;">رمز التطوير: <strong>111111</strong></div>
+                @if(app()->environment(['local','dev','development','staging','testing']) || config('app.debug'))
+                    <div style="text-align:center;font-size:0.75rem;color:#9ca3af;margin-bottom:0.75rem;">رمز التطوير: <strong>1111</strong></div>
                 @endif
 
                 <div style="text-align:center;font-size:0.82rem;color:#9ca3af;margin-bottom:1.25rem;">
