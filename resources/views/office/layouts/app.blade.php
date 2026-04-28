@@ -57,14 +57,14 @@
         .pagination-wrap .active-page{background:#054F31;color:#fff;border-color:#054F31}
         /* MOBILE */
         @media(max-width:767px){
-            #sidebar{position:fixed;right:0;top:0;bottom:0;z-index:50;transform:translateX(110%);transition:transform .28s ease}
+            #sidebar{position:fixed;right:0;top:0;bottom:0;z-index:150;transform:translateX(110%);transition:transform .28s ease}
             #sidebar.open{transform:translateX(0)}
         }
     </style>
     @stack('styles')
 </head>
 <body>
-<div id="overlay" onclick="closeSidebar()" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45)"></div>
+<div id="overlay" onclick="closeSidebar()" style="display:none;position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.45)"></div>
 
 @php
     $__office = auth()->guard('office-panel')->user();
@@ -418,7 +418,7 @@
         .nav-brand-text{display:none!important}
         .user-detail{display:none!important}
         .user-chevron{display:none!important}
-        aside#sidebar{position:fixed!important;right:0;top:0;bottom:0;z-index:50;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
+        aside#sidebar{position:fixed!important;right:0;top:0;bottom:0;z-index:150;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
         aside#sidebar.open{transform:translateX(0)!important}
         #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
         #user-panel{width:calc(100vw - 2rem)!important;left:1rem!important;}
