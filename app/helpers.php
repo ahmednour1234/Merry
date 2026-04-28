@@ -2,15 +2,19 @@
 
 if (!function_exists('storage_url')) {
     /**
-     * Generate a public storage URL served through the Laravel API route.
-     * This bypasses any symlink/permission issues on the server entirely.
+     * Generate a signed temporary URL for a public storage file.
+     * Returns a URL with ?expires=...&signature=... query params.
+     * Files are served through the Laravel API — no symlink required.
      *
      * e.g. storage_url('offices/file.png')
-     *   → https://mery.alemtayaz.com/public/api/v1/public/files/offices/file.png
+     *   → https://mery.alemtayaz.com/public/api/v1/public/files/offices/file.png?expires=...&signature=...
      */
     function storage_url(string $path): string
     {
-        $base = rtrim((string) config('app.url'), '/');
-        return $base . '/api/v1/public/files/' . ltrim($path, '/');
+        return \Illuminate\Support\Facades\URL::temporarySignedRoute(
+            'public.file',
+            now()->addHours(24),
+            ['path' => ltrim($path, '/')]
+        );
     }
 }

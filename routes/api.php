@@ -374,8 +374,8 @@ Route::prefix('v1/public')->group(function () {
     // Categories (public — no auth)
     Route::get('categories',            [\App\Http\Controllers\Api\EndUser\CatalogController::class, 'categories']);
 
-    // Public file serving — bypasses symlink issues on shared hosting
-    Route::get('files/{path}', function (string $path) {
+    // Public file serving — signed temporary URL (expires + signature query params)
+    Route::get('files/{path}', function (\Illuminate\Http\Request $request, string $path) {
         $path = ltrim($path, '/');
         if (str_contains($path, '..')) {
             abort(403);
@@ -387,7 +387,7 @@ Route::prefix('v1/public')->group(function () {
         $mime     = mime_content_type($fullPath) ?: 'application/octet-stream';
         return response()->file($fullPath, [
             'Content-Type'  => $mime,
-            'Cache-Control' => 'public, max-age=86400',
+            'Cache-Control' => 'public, max-age=3600',
         ]);
-    })->where('path', '.*');
+    })->where('path', '.*')->middleware('signed')->name('public.file');
 });
