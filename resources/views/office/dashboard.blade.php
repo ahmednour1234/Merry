@@ -6,7 +6,7 @@
 @section('content')
 
 {{-- Welcome --}}
-<div style="background:#fff;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;box-shadow:0 1px 4px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:space-between;">
+<div style="background:#fff;border-radius:14px;padding:1.25rem 1.5rem;margin-top:1.25rem;margin-bottom:1.25rem;box-shadow:0 1px 4px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:space-between;">
     <div>
         <div style="font-size:1.2rem;font-weight:800;color:#111827;margin-bottom:0.2rem;">
             🌟 مرحباً، <span style="color:#054F31;">{{ $office->name }}</span>
