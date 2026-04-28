@@ -16,7 +16,7 @@
 
     <style>
         * { font-family: 'Cairo', sans-serif; box-sizing: border-box; }
-        body { background-color: #f4f6f9; margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; background-color: #f4f6f9; margin: 0; padding: 0; }
 
         /* Sidebar */
         .sidebar { width: 260px; background: #054F31; }
