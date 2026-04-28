@@ -88,11 +88,13 @@
         }
         .brand-features li span.icon svg { width: 15px; height: 15px; }
 
-        /* Single-column pages (OTP, forget, reset) */
+        /* Single-column pages (OTP, forget, reset, register) */
         .auth-shell.single-col {
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #054F31 0%, #0a7a4d 50%, #054F31 100%);
+            overflow-y: auto;
+            min-height: 100vh;
         }
         .auth-shell.single-col .auth-card-solo {
             background: #fff;
@@ -101,6 +103,7 @@
             width: 100%;
             max-width: 440px;
             box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+            margin: auto;
         }
         .solo-logo {
             text-align: center;
