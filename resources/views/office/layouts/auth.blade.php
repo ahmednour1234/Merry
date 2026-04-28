@@ -10,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Cairo', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #f1f5f4; min-height: 100vh; display: flex; align-items: stretch; }
+        body { background: #f1f5f4; height: 100vh; overflow: hidden; display: flex; align-items: stretch; }
 
         /* ── Two-column shell ── */
         .auth-shell {
             display: flex;
             width: 100%;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* Left panel (white form side) */
@@ -27,6 +28,8 @@
             justify-content: center;
             padding: 2rem;
             background: #fff;
+            height: 100vh;
+            overflow-y: auto;
         }
         .auth-form-inner {
             width: 100%;
@@ -35,7 +38,7 @@
 
         /* Right panel (dark green brand side) */
         .auth-brand-panel {
-            width: 380px;
+            width: 42%;
             flex-shrink: 0;
             background: linear-gradient(160deg, #054F31 0%, #0a6b42 60%, #043d26 100%);
             display: flex;
@@ -45,6 +48,7 @@
             padding: 2.5rem 2rem;
             position: relative;
             overflow: hidden;
+            height: 100vh;
         }
         .auth-brand-panel::before {
             content: '';
@@ -88,13 +92,13 @@
         }
         .brand-features li span.icon svg { width: 15px; height: 15px; }
 
-        /* Single-column pages (OTP, forget, reset, register) */
+        /* Single-column pages (OTP, forget, reset) */
         .auth-shell.single-col {
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #054F31 0%, #0a7a4d 50%, #054F31 100%);
             overflow-y: auto;
-            min-height: 100vh;
+            height: 100vh;
         }
         .auth-shell.single-col .auth-card-solo {
             background: #fff;
