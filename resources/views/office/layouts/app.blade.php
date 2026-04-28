@@ -83,15 +83,15 @@
 <div style="display:flex;height:100vh;overflow:hidden;">
 
     {{-- ══════════════════════════════════════════
-         SIDEBAR – white, right side (RTL)
+         SIDEBAR
     ══════════════════════════════════════════ --}}
-    <aside id="sidebar" style="width:260px;flex-shrink:0;display:flex;flex-direction:column;height:100vh;background:#fff;border-left:1px solid #e5e7eb;overflow:hidden;">
+    <aside id="sidebar" style="width:260px;flex-shrink:0;display:flex;flex-direction:column;height:100vh;background:#fff;border-left:1px solid #e8ecf0;overflow-y:auto;overflow-x:hidden;">
 
-        {{-- Office logo + name --}}
-        <div style="padding:1.1rem 1.25rem;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:.875rem;">
-            <div style="width:44px;height:44px;border-radius:14px;background:#054F31;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;" id="sb-avatar">
+        {{-- Office Header --}}
+        <div style="background:linear-gradient(135deg,#054F31,#0a6b42);padding:1.25rem;display:flex;align-items:center;gap:.875rem;">
+            <div style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;" id="sb-avatar">
                 @if($__office?->image)
-                    <img src="{{ $__office->image_url }}" style="width:44px;height:44px;object-fit:cover;" alt=""
+                    <img src="{{ $__office->image_url }}" style="width:46px;height:46px;object-fit:cover;" alt=""
                          onerror="this.style.display='none';document.getElementById('sb-avatar-fallback').style.display='flex'">
                     <span id="sb-avatar-fallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
@@ -100,79 +100,121 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
                 @endif
             </div>
-            <div style="overflow:hidden;">
-                <div style="font-weight:800;font-size:.9rem;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $__office?->name }}</div>
-                <div style="font-size:.72rem;color:#9ca3af;">مرحبا بك في لوحة التحكم</div>
+            <div style="overflow:hidden;flex:1;">
+                <div style="font-weight:800;font-size:.9rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $__office?->name }}</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.55);margin-top:.1rem;">لوحة التحكم</div>
             </div>
         </div>
 
         {{-- Navigation --}}
-        <nav style="padding:.5rem 0 .5rem;">
+        <nav style="padding:.75rem .75rem .5rem;">
+
+            {{-- Section label --}}
+            <div style="font-size:.68rem;font-weight:800;color:#9ca3af;letter-spacing:.06em;padding:.1rem .5rem .6rem;text-transform:uppercase;">القائمة الرئيسية</div>
+
             <a href="{{ route('office.dashboard') }}" class="nav-link {{ request()->routeIs('office.dashboard*')?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ request()->routeIs('office.dashboard*') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ request()->routeIs('office.dashboard*') ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                </div>
                 الرئيسية
             </a>
+
             <a href="{{ route('office.cvs.index') }}" class="nav-link {{ (request()->routeIs('office.cvs*')&&!request()->routeIs('office.cvs.create'))?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ (request()->routeIs('office.cvs*')&&!request()->routeIs('office.cvs.create')) ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ (request()->routeIs('office.cvs*')&&!request()->routeIs('office.cvs.create')) ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                </div>
                 السير الذاتية
             </a>
-            <a href="{{ route('office.cvs.create') }}" class="nav-link {{ request()->routeIs('office.cvs.create')?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
-                إضافة سيرة ذاتية
+
+            <a href="{{ route('office.cvs.create') }}" class="nav-link {{ request()->routeIs('office.cvs.create')?'active':'' }}" style="padding-right:1.6rem!important;">
+                <div style="width:24px;height:24px;border-radius:7px;background:{{ request()->routeIs('office.cvs.create') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f0fdf4' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="{{ request()->routeIs('office.cvs.create') ? 'white' : '#054F31' }}" style="width:13px;height:13px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                </div>
+                <span style="font-size:.82rem;color:{{ request()->routeIs('office.cvs.create') ? '#054F31' : '#6b7280' }};">إضافة سيرة ذاتية</span>
             </a>
+
             <a href="{{ route('office.bookings.index') }}" class="nav-link {{ request()->routeIs('office.bookings*')?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ request()->routeIs('office.bookings*') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ request()->routeIs('office.bookings*') ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+                </div>
                 العملاء
             </a>
+
             <a href="{{ route('office.subscriptions.index') }}" class="nav-link {{ request()->routeIs('office.subscriptions*')?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"/></svg>
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ request()->routeIs('office.subscriptions*') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ request()->routeIs('office.subscriptions*') ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"/></svg>
+                </div>
                 الاشتراكات
             </a>
+
             <a href="{{ route('office.reports.index') }}" class="nav-link {{ request()->routeIs('office.reports*')?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ request()->routeIs('office.reports*') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ request()->routeIs('office.reports*') ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
+                </div>
                 التقارير
             </a>
+
+            {{-- Divider --}}
+            <div style="margin:.75rem .5rem;border-top:1px solid #f3f4f6;"></div>
+            <div style="font-size:.68rem;font-weight:800;color:#9ca3af;letter-spacing:.06em;padding:.1rem .5rem .5rem;text-transform:uppercase;">الحساب</div>
+
             <a href="{{ route('office.settings.edit') }}" class="nav-link {{ request()->routeIs('office.settings*')?'active':'' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ request()->routeIs('office.settings*') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ request()->routeIs('office.settings*') ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                </div>
                 الإعدادات
             </a>
         </nav>
 
-        {{-- Bottom: Subscription + Support + Logout --}}
-        <div style="border-top:1px solid #f3f4f6;padding:1rem 1rem 1.25rem;">
+        {{-- Subscription + Support --}}
+        <div style="padding:.75rem .875rem 1.25rem;">
 
             {{-- Subscription card --}}
-            <div style="background:linear-gradient(135deg,#054F31 0%,#0a6b42 100%);border-radius:14px;padding:1rem;margin-bottom:.875rem;position:relative;overflow:hidden;">
-                <div style="position:absolute;top:-20px;left:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.07);"></div>
-                <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem;">
-                    <span style="font-size:.9rem;">👑</span>
-                    <span style="font-size:.72rem;color:rgba(255,255,255,.65);">الباقة الحالية</span>
+            <div style="background:linear-gradient(135deg,#054F31 0%,#0a6b42 100%);border-radius:16px;padding:1rem 1.1rem;margin-bottom:.75rem;position:relative;overflow:hidden;">
+                <div style="position:absolute;top:-25px;left:-25px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none;"></div>
+                <div style="position:absolute;bottom:-15px;right:-15px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;position:relative;">
+                    <div style="display:flex;align-items:center;gap:.4rem;">
+                        <div style="width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#fbbf24" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>
+                        </div>
+                        <span style="font-size:.68rem;color:rgba(255,255,255,.6);font-weight:600;">الباقة الحالية</span>
+                    </div>
+                    @if($__daysLeft !== null && $__daysLeft <= 10)
+                        <span style="background:rgba(239,68,68,.3);color:#fca5a5;font-size:.62rem;font-weight:700;padding:.15rem .5rem;border-radius:99px;border:1px solid rgba(239,68,68,.3);">{{ $__daysLeft }} أيام</span>
+                    @endif
                 </div>
-                <div style="font-size:1.05rem;font-weight:800;color:#fbbf24;margin-bottom:.25rem;">{{ $__planName }}</div>
+                <div style="font-size:1rem;font-weight:800;color:#fbbf24;margin-bottom:.2rem;position:relative;">{{ $__planName }}</div>
                 @if($__planExpiry)
-                    <div style="font-size:.72rem;color:rgba(255,255,255,.55);margin-bottom:.6rem;">تنتهي في {{ $__planExpiry }}</div>
+                    <div style="font-size:.68rem;color:rgba(255,255,255,.45);margin-bottom:.7rem;position:relative;">تنتهي في {{ $__planExpiry }}</div>
                 @endif
-                <a href="{{ route('office.subscriptions.index') }}" style="display:block;text-align:center;background:#fff;color:#054F31;border-radius:8px;padding:.4rem;font-size:.8rem;font-weight:800;text-decoration:none;">تجديد الاشتراك</a>
+                <a href="{{ route('office.subscriptions.index') }}" style="display:flex;align-items:center;justify-content:center;gap:.35rem;background:rgba(255,255,255,.95);color:#054F31;border-radius:9px;padding:.45rem;font-size:.78rem;font-weight:800;text-decoration:none;transition:background .15s;position:relative;" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='rgba(255,255,255,.95)'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#054F31" style="width:13px;height:13px;"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                    تجديد الاشتراك
+                </a>
             </div>
 
             {{-- Support --}}
-            <div style="background:#f9fafb;border-radius:12px;padding:.875rem;margin-bottom:.75rem;">
-                <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;">
-                    <div style="width:30px;height:30px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:15px;height:15px;"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+            <div style="background:#f8fafc;border:1px solid #e8ecf0;border-radius:14px;padding:.9rem;">
+                <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;">
+                    <div style="width:30px;height:30px;background:linear-gradient(135deg,#054F31,#0a6b42);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:15px;height:15px;"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
                     </div>
-                    <span style="font-size:.82rem;font-weight:700;color:#111827;">الدعم الفني</span>
+                    <span style="font-size:.82rem;font-weight:800;color:#111827;">الدعم الفني</span>
                 </div>
-                <div style="display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:#6b7280;margin-bottom:.35rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:13px;height:13px;flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
-                    {{ $__phone }}
-                </div>
-                <div style="display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:#6b7280;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:13px;height:13px;flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
-                    {{ $__supportEmail }}
-                </div>
+                <a href="tel:{{ preg_replace('/\s+/','',$__phone) }}" style="display:flex;align-items:center;gap:.6rem;text-decoration:none;padding:.45rem .6rem;border-radius:8px;transition:background .12s;margin-bottom:.3rem;" onmouseover="this.style.background='#f0fdf4'" onmouseout="this.style.background='transparent'">
+                    <div style="width:24px;height:24px;background:#e8f5e9;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:12px;height:12px;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+                    </div>
+                    <span style="font-size:.75rem;color:#374151;font-weight:600;">{{ $__phone }}</span>
+                </a>
+                <a href="mailto:{{ $__supportEmail }}" style="display:flex;align-items:center;gap:.6rem;text-decoration:none;padding:.45rem .6rem;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='#f0fdf4'" onmouseout="this.style.background='transparent'">
+                    <div style="width:24px;height:24px;background:#e8f5e9;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#054F31" style="width:12px;height:12px;"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+                    </div>
+                    <span style="font-size:.75rem;color:#374151;font-weight:600;">{{ $__supportEmail }}</span>
+                </a>
             </div>
-
 
         </div>
     </aside>
