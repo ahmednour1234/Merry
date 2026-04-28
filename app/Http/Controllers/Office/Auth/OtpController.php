@@ -75,7 +75,7 @@ class OtpController extends Controller
             return back()->with('error', 'عدد المحاولات كبير. تم إرسال رمز جديد');
         }
 
-        $isDevEnv    = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $isDevEnv    = app()->environment(['local', 'development', 'dev', 'staging', 'testing']) || config('app.debug');
         $useBypass   = $isDevEnv && $request->otp === '111111';
 
         if (!$useBypass && !Hash::check($request->otp, $row->code_hash)) {
@@ -113,7 +113,7 @@ class OtpController extends Controller
 
     protected function sendOtp(Office $office): void
     {
-        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']);
+        $isDevEnv = app()->environment(['local', 'development', 'dev', 'staging', 'testing']) || config('app.debug');
         $code     = $isDevEnv ? '111111' : (string) random_int(100000, 999999);
         $hash     = Hash::make($code);
         $expiresAt = now()->addMinutes(15);
