@@ -34,7 +34,7 @@
         .sidebar-nav a svg { width: 20px; height: 20px; flex-shrink: 0; }
 
         /* Topbar */
-        .topbar { background: #fff; border-bottom: 1px solid #e5e7eb; height: 64px; }
+        .topbar { background: #fff; border-bottom: 1px solid #e5e7eb; height: 64px; flex-shrink: 0; }
 
         /* Cards */
         .stat-card { background: #fff; border-radius: 12px; padding: 1.25rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
