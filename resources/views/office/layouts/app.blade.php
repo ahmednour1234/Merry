@@ -210,7 +210,7 @@
         </header>
 
         {{-- Page Content --}}
-        <main class="flex-1 overflow-y-auto" style="padding:1.5rem;">
+        <main class="flex-1 overflow-y-auto" style="padding:1rem 1.5rem 1.5rem;">
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
