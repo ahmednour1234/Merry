@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    @vite(['resources/css/app.css'])
-
     <style>
         * { font-family: 'Cairo', sans-serif; }
         body { background: linear-gradient(135deg, #054F31 0%, #0a7a4d 50%, #054F31 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
