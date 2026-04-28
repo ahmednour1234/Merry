@@ -4,95 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'تسجيل الدخول') - مكتب النخبة</title>
-
+    <title>@yield('title', 'تسجيل الدخول') - مري للاستقدام</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Cairo', sans-serif; }
-        body { background: linear-gradient(135deg, #054F31 0%, #0a7a4d 50%, #054F31 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+        * { font-family: 'Cairo', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #f1f5f4; min-height: 100vh; display: flex; align-items: stretch; }
 
-        .auth-card {
+        /* ── Two-column shell ── */
+        .auth-shell {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Left panel (white form side) */
+        .auth-form-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
             background: #fff;
-            border-radius: 16px;
+        }
+        .auth-form-inner {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* Right panel (dark green brand side) */
+        .auth-brand-panel {
+            width: 380px;
+            flex-shrink: 0;
+            background: linear-gradient(160deg, #054F31 0%, #0a6b42 60%, #043d26 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .auth-brand-panel::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 220px; height: 220px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .auth-brand-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; right: -40px;
+            width: 160px; height: 160px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .brand-logo {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .brand-logo img { width: 80px; height: 80px; object-fit: contain; }
+        .brand-title { color: #fff; font-size: 1.5rem; font-weight: 900; text-align: center; margin-bottom: 0.4rem; }
+        .brand-sub { color: rgba(255,255,255,0.65); font-size: 0.85rem; text-align: center; margin-bottom: 2rem; line-height: 1.6; }
+        .brand-features { list-style: none; width: 100%; }
+        .brand-features li {
+            display: flex; align-items: center; gap: 0.6rem;
+            color: rgba(255,255,255,0.85); font-size: 0.85rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .brand-features li:last-child { border-bottom: none; }
+        .brand-features li span.icon {
+            width: 28px; height: 28px; background: rgba(255,255,255,0.12);
+            border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .brand-features li span.icon svg { width: 15px; height: 15px; }
+
+        /* Single-column pages (OTP, forget, reset) */
+        .auth-shell.single-col {
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #054F31 0%, #0a7a4d 50%, #054F31 100%);
+        }
+        .auth-shell.single-col .auth-card-solo {
+            background: #fff;
+            border-radius: 20px;
             padding: 2.5rem;
             width: 100%;
             max-width: 440px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.25);
         }
-
-        .auth-logo {
+        .solo-logo {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
         }
-
-        .auth-logo-icon {
-            width: 64px; height: 64px;
-            background: #054F31;
-            border-radius: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.75rem;
+        .solo-logo-wrap {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: #f0fdf4; border: 3px solid #a7f3d0;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-bottom: 0.875rem; overflow: hidden;
         }
+        .solo-logo-wrap img { width: 58px; height: 58px; object-fit: contain; }
+        .solo-title { font-size: 1.3rem; font-weight: 800; color: #111827; margin-bottom: 0.3rem; }
+        .solo-sub { font-size: 0.85rem; color: #6b7280; }
 
-        .auth-logo-icon svg { width: 32px; height: 32px; }
-        .auth-logo h1 { font-size: 1.4rem; font-weight: 800; color: #054F31; margin: 0; }
-        .auth-logo p  { font-size: 0.85rem; color: #6b7280; margin: 0.25rem 0 0; }
-
-        .form-input {
-            width: 100%; border: 1px solid #d1d5db; border-radius: 8px;
-            padding: 0.65rem 0.875rem; font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem; color: #111827; outline: none;
-            transition: border-color 0.2s; box-sizing: border-box;
-        }
-        .form-input:focus { border-color: #054F31; box-shadow: 0 0 0 3px rgba(5,79,49,0.1); }
+        /* Form styles */
+        .form-group { margin-bottom: 1rem; }
         .form-label { display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 0.375rem; }
-        .form-error { color: #dc2626; font-size: 0.8rem; margin-top: 0.3rem; }
+        .form-input {
+            width: 100%; border: 1.5px solid #e5e7eb; border-radius: 10px;
+            padding: 0.7rem 2.5rem 0.7rem 0.875rem;
+            font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: #111827;
+            outline: none; transition: border-color 0.2s; background: #fafafa;
+        }
+        .form-input:focus { border-color: #054F31; background: #fff; box-shadow: 0 0 0 3px rgba(5,79,49,0.08); }
+        .input-wrap { position: relative; }
+        .input-icon {
+            position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%);
+            color: #9ca3af; pointer-events: none;
+        }
+        .input-icon svg { width: 17px; height: 17px; }
+        .form-error { color: #dc2626; font-size: 0.78rem; margin-top: 0.3rem; }
 
         .btn-primary {
             width: 100%; background: #054F31; color: #fff; border: none;
-            border-radius: 8px; padding: 0.75rem; cursor: pointer;
+            border-radius: 10px; padding: 0.8rem; cursor: pointer;
             font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
-            transition: background 0.2s; margin-top: 0.5rem;
+            transition: background 0.15s; margin-top: 0.5rem; letter-spacing: 0.01em;
         }
         .btn-primary:hover { background: #043d26; }
 
-        .auth-links { text-align: center; margin-top: 1.25rem; font-size: 0.875rem; color: #6b7280; }
-        .auth-links a { color: #054F31; font-weight: 600; text-decoration: none; }
-        .auth-links a:hover { text-decoration: underline; }
+        .auth-divider { text-align: center; margin: 1.1rem 0; font-size: 0.82rem; color: #9ca3af; }
+        .auth-link-row { text-align: center; margin-top: 1rem; font-size: 0.875rem; color: #6b7280; }
+        .auth-link-row a { color: #054F31; font-weight: 700; text-decoration: none; }
 
         .alert { padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.875rem; }
         .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
         .alert-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
         .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+
+        /* Page title above form */
+        .form-page-title { font-size: 1.4rem; font-weight: 900; color: #111827; margin-bottom: 0.3rem; }
+        .form-page-sub   { font-size: 0.85rem; color: #6b7280; margin-bottom: 1.75rem; }
+
+        /* OTP boxes */
+        .otp-boxes { display: flex; gap: 0.5rem; justify-content: center; direction: ltr; margin: 1.25rem 0; }
+        .otp-box {
+            width: 48px; height: 54px; border: 1.5px solid #e5e7eb; border-radius: 10px;
+            font-size: 1.3rem; font-weight: 800; color: #111827; text-align: center;
+            outline: none; background: #fafafa; transition: border-color 0.2s;
+        }
+        .otp-box:focus { border-color: #054F31; background: #fff; box-shadow: 0 0 0 3px rgba(5,79,49,0.08); }
+
+        @media (max-width: 768px) {
+            .auth-brand-panel { display: none; }
+        }
     </style>
+    @stack('auth-styles')
 </head>
 <body>
-    <div class="auth-card">
-        <div class="auth-logo">
-            <div class="auth-logo-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                </svg>
-            </div>
-            <h1>مكتب النخبة للاستقدام</h1>
-            <p>@yield('auth-subtitle', 'مرحباً بك في لوحة التحكم')</p>
-        </div>
-
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        @if(session('error'))
-            <div class="alert alert-error">{{ session('error') }}</div>
-        @endif
-        @if(session('warning'))
-            <div class="alert alert-warning">{{ session('warning') }}</div>
-        @endif
-
-        @yield('content')
-    </div>
+@yield('shell-content')
+@stack('scripts')
 </body>
 </html>
