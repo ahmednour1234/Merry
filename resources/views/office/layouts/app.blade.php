@@ -317,6 +317,18 @@
 <script>
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').style.display='block';}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').style.display='none';}
+function toggleNotif(e){
+    e.stopPropagation();
+    var p=document.getElementById('notif-panel');
+    p.style.display = p.style.display==='none'?'block':'none';
+}
+document.addEventListener('click',function(e){
+    var wrap=document.getElementById('notif-wrap');
+    if(wrap && !wrap.contains(e.target)){
+        var p=document.getElementById('notif-panel');
+        if(p) p.style.display='none';
+    }
+});
 </script>
 @stack('scripts')
 </body>
