@@ -74,6 +74,10 @@ class CategoryResource extends Resource
                     ->collapsible()
                     ->label('الترجمات')
                     ->addActionLabel('إضافة ترجمة'),
+                Forms\Components\FileUpload::make('icon')
+                    ->image()
+                    ->directory('categories/icons')
+                    ->label('الأيقونة / الصورة'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)
                     ->label('نشط'),
@@ -90,6 +94,9 @@ class CategoryResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('المعرف'),
+                Tables\Columns\ImageColumn::make('icon')
+                    ->label('الأيقونة')
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()

@@ -3,6 +3,7 @@
 namespace App\Http\Resources\System;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryResource extends JsonResource
 {
@@ -17,19 +18,27 @@ class CategoryResource extends JsonResource
             if ($tr) $name = $tr->name;
         }
 
+        $iconUrl = null;
+        if (!empty($this->icon)) {
+            $iconUrl = Storage::disk('public')->exists($this->icon)
+                ? Storage::disk('public')->url($this->icon)
+                : null;
+        }
+
         return [
-            'id'        => $this->id,
-            'parent_id' => $this->parent_id,
-            'slug'      => $this->slug,
-            'name'      => $name,
-            'active'    => (bool)$this->active,
+            'id'             => $this->id,
+            'parent_id'      => $this->parent_id,
+            'slug'           => $this->slug,
+            'name'           => $name,
+            'icon'           => $iconUrl,
+            'active'         => (bool) $this->active,
             'children_count' => $this->when(isset($this->children_count), $this->children_count),
-            'translations' => $this->whenLoaded('translations', function () {
+            'translations'   => $this->whenLoaded('translations', function () {
                 return $this->translations->mapWithKeys(fn($t) => [$t->lang_code => $t->name]);
             }),
-            'created_at'=> optional($this->created_at)->toIso8601String(),
-            'updated_at'=> optional($this->updated_at)->toIso8601String(),
-            'deleted_at'=> optional($this->deleted_at)->toIso8601String(),
+            'created_at' => optional($this->created_at)->toIso8601String(),
+            'updated_at' => optional($this->updated_at)->toIso8601String(),
+            'deleted_at' => optional($this->deleted_at)->toIso8601String(),
         ];
     }
 }

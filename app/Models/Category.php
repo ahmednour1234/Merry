@@ -12,7 +12,7 @@ class Category extends Model
     protected $connection = 'system';
     protected $table = 'categories';
 
-    protected $fillable = ['parent_id','slug','name','active','meta'];
+    protected $fillable = ['parent_id','slug','name','icon','active','meta'];
     protected $casts = ['active'=>'boolean','meta'=>'array'];
 
     public function parent()
