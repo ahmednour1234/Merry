@@ -44,7 +44,6 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('تطبيق ميري')
-            ->defaultFileUploadDisk('public')
             ->colors([
                 'primary' => Color::hex('#054F31'),
                 'success' => Color::hex('#10b981'),

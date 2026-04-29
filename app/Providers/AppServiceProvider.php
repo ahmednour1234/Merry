@@ -16,6 +16,7 @@ use App\Services\SystemSettings;
 use App\Services\LocaleService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Filament\Forms\Components\FileUpload;
 use Filament\Http\Middleware\Authenticate;
 
 class AppServiceProvider extends ServiceProvider
@@ -43,6 +44,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // Safety fallback for stale compiled blades that still reference $state.
         View::share('state', 'success');
+
+        // Force all Filament FileUpload components to use the public disk
+        FileUpload::configureUsing(function (FileUpload $fileUpload): void {
+            $fileUpload->disk('public')->visibility('public');
+        });
 
         // Register Filament search route
         Route::middleware(['web', Authenticate::class])
