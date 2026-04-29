@@ -76,7 +76,9 @@ class CategoryResource extends Resource
                     ->addActionLabel('إضافة ترجمة'),
                 Forms\Components\FileUpload::make('icon')
                     ->image()
+                    ->disk('public')
                     ->directory('categories/icons')
+                    ->visibility('public')
                     ->label('الأيقونة / الصورة'),
                 Forms\Components\Toggle::make('active')
                     ->default(true)

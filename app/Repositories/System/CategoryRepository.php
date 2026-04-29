@@ -33,7 +33,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function store(array $data): Category
     {
         $tr = $data['translations'] ?? null;
-        unset($data['translations']);
+        unset($data['translations'], $data['icon']);
 
         $row = Category::on('system')->create($data);
 
@@ -55,7 +55,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         if (!$row) return null;
 
         $tr = $data['translations'] ?? null;
-        unset($data['translations']);
+        unset($data['translations'], $data['icon']);
 
         $row->fill($data)->save();
 
