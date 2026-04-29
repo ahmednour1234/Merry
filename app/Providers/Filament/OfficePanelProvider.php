@@ -28,6 +28,7 @@ class OfficePanelProvider extends PanelProvider
             ->id('office')
             ->path('office')
             ->login(\App\Filament\Office\Pages\Auth\Login::class)
+            ->defaultFileUploadDisk('public')
             ->registration(\App\Filament\Office\Pages\Auth\Register::class)
             ->brandName('تطبيق ميري - المكتب')
             ->colors([
