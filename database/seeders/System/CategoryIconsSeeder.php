@@ -10,39 +10,20 @@ class CategoryIconsSeeder extends Seeder
     protected string $conn = 'system';
 
     /**
-     * Map each category slug → icon filename stored under storage/app/public/categories/icons/
-     * Place the matching files there, or swap these for full URLs if using a remote disk.
+     * Clear any placeholder icon paths so no broken URLs are returned.
+     * Upload real icons through the Filament admin panel → الفئات → تعديل → الأيقونة / الصورة
+     * or via API: POST /api/v1/admin/system/categories/{id}/icon
      */
-    protected array $icons = [
-        // parents
-        'domestic-workers' => 'categories/icons/domestic-workers.png',
-        'maintenance'      => 'categories/icons/maintenance.png',
-
-        // domestic-workers children
-        'housemaid'        => 'categories/icons/housemaid.png',
-        'nanny'            => 'categories/icons/nanny.png',
-        'cook'             => 'categories/icons/cook.png',
-
-        // maintenance children
-        'plumbing'         => 'categories/icons/plumbing.png',
-        'electrical'       => 'categories/icons/electrical.png',
-        'cleaning'         => 'categories/icons/cleaning.png',
-    ];
-
     public function run(): void
     {
-        $db = DB::connection($this->conn);
+        DB::connection($this->conn)
+            ->table('categories')
+            ->whereNull('deleted_at')
+            ->update([
+                'icon'       => null,
+                'updated_at' => now(),
+            ]);
 
-        foreach ($this->icons as $slug => $iconPath) {
-            $db->table('categories')
-                ->where('slug', $slug)
-                ->whereNull('deleted_at')
-                ->update([
-                    'icon'       => $iconPath,
-                    'updated_at' => now(),
-                ]);
-        }
-
-        $this->command->info('Category icons seeded successfully.');
+        $this->command->info('Category icons cleared. Upload real icons via the admin panel.');
     }
 }
