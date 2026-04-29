@@ -401,7 +401,7 @@ Route::prefix('v1/public')->group(function () {
         }
 
         if (!\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
-            abort(404);
+            return response('File not found.', 404, ['Content-Type' => 'text/plain']);
         }
 
         $fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($path);
