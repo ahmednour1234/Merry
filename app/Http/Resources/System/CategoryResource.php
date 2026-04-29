@@ -3,7 +3,6 @@
 namespace App\Http\Resources\System;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class CategoryResource extends JsonResource
 {
@@ -18,12 +17,7 @@ class CategoryResource extends JsonResource
             if ($tr) $name = $tr->name;
         }
 
-        $iconUrl = null;
-        if (!empty($this->icon)) {
-            $iconUrl = Storage::disk('public')->exists($this->icon)
-                ? Storage::disk('public')->url($this->icon)
-                : null;
-        }
+        $iconUrl = !empty($this->icon) ? storage_url($this->icon) : null;
 
         return [
             'id'             => $this->id,

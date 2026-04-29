@@ -251,6 +251,7 @@ Route::prefix('v1/admin/system')
         Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->middleware('perm:system.categories.destroy');
         Route::post('categories/{id}/toggle', [CategoryController::class, 'toggle'])->middleware('perm:system.categories.toggle');
         Route::post('categories/{id}/translations', [CategoryController::class, 'upsertTranslation'])->middleware('perm:system.categories.translations');
+        Route::post('categories/{id}/icon', [CategoryController::class, 'uploadIcon'])->middleware('perm:system.categories.update');
 
         // CVs (Admin)
         Route::get('cvs',                 [AdminCvController::class, 'index'])->middleware('perm:system.cvs.index');

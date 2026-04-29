@@ -19,6 +19,7 @@ class UpdateCategoryRequest extends FormRequest
             'name'      => ['sometimes','string','max:191'],
             'active'    => ['sometimes','boolean'],
             'meta'      => ['sometimes','array'],
+            'icon'      => ['sometimes','nullable','file','image','max:5120'],
 
             'translations' => ['sometimes','array'],
             'translations.*.lang_code' => ['required_with:translations','string','max:12'],

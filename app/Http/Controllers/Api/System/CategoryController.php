@@ -7,7 +7,9 @@ use App\Http\Requests\System\Category\StoreCategoryRequest;
 use App\Http\Requests\System\Category\UpdateCategoryRequest;
 use App\Http\Requests\System\Category\UpsertCategoryTranslationRequest;
 use App\Http\Resources\System\CategoryResource;
+use App\Models\Category;
 use App\Repositories\System\Contracts\CategoryRepositoryInterface as Repo;
+use App\Support\Uploads\ImageUploader;
 use Illuminate\Http\Request;
 
 /**
@@ -50,7 +52,11 @@ class CategoryController extends ApiController
      */
     public function store(StoreCategoryRequest $r)
     {
-        $row = $this->repo->store($r->validated());
+        $data = $r->validated();
+        if ($r->hasFile('icon')) {
+            $data['icon'] = ImageUploader::upload($r->file('icon'), 'categories/icons');
+        }
+        $row = $this->repo->store($data);
         return $this->responder->created(new CategoryResource($row), 'Category created');
     }
 
@@ -61,7 +67,15 @@ class CategoryController extends ApiController
      */
     public function update(UpdateCategoryRequest $r, int $id)
     {
-        $row = $this->repo->update($id, $r->validated());
+        $data = $r->validated();
+        if ($r->hasFile('icon')) {
+            $row = Category::on('system')->find($id);
+            if ($row?->icon) {
+                ImageUploader::deleteIfExists($row->icon);
+            }
+            $data['icon'] = ImageUploader::upload($r->file('icon'), 'categories/icons');
+        }
+        $row = $this->repo->update($id, $data);
         if (!$row) return $this->responder->fail('Category not found', 404);
         return $this->responder->ok(new CategoryResource($row), 'Category updated');
     }
@@ -101,5 +115,28 @@ class CategoryController extends ApiController
         $ok = $this->repo->upsertTranslation($id, $r->input('lang_code'), $r->input('name'));
         if (!$ok) return $this->responder->fail('Category not found',404);
         return $this->responder->ok(null, 'Translation saved');
+    }
+
+    /**
+     * Upload / replace category icon
+     * @urlParam id integer required
+     * @bodyParam icon file required Image file (jpg/png/svg/webp, max 5 MB)
+     */
+    public function uploadIcon(Request $r, int $id)
+    {
+        $r->validate(['icon' => ['required', 'file', 'image', 'max:5120']]);
+
+        $row = Category::on('system')->find($id);
+        if (!$row) return $this->responder->fail('Category not found', 404);
+
+        if ($row->icon) {
+            ImageUploader::deleteIfExists($row->icon);
+        }
+
+        $row->icon       = ImageUploader::upload($r->file('icon'), 'categories/icons');
+        $row->updated_at = now();
+        $row->save();
+
+        return $this->responder->ok(new CategoryResource($row->fresh(['translations'])->loadCount('children')), 'Icon uploaded');
     }
 }

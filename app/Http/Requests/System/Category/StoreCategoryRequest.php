@@ -16,6 +16,7 @@ class StoreCategoryRequest extends FormRequest
             'name'      => ['required','string','max:191'],
             'active'    => ['nullable','boolean'],
             'meta'      => ['nullable','array'],
+            'icon'      => ['nullable','file','image','max:5120'],
 
             'translations' => ['sometimes','array'],
             'translations.*.lang_code' => ['required_with:translations','string','max:12'],
