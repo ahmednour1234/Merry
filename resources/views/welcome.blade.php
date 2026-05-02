@@ -155,28 +155,46 @@
 
         /* ─── AUDIENCE ─── */
         .audience { background: var(--white); }
-        .audience-inner { display: grid; grid-template-columns: 1fr 1fr; }
-        .aud-panel { padding: 5rem 3.5rem; position: relative; overflow: hidden; }
-        .aud-panel-offices { background: var(--green-900); }
-        .aud-panel-users { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .audience-inner { display: flex; width: 100%; }
+        .aud-panel {
+            flex: 1; padding: 4rem 3.5rem 0; position: relative;
+            display: flex; flex-direction: column;
+        }
+        .aud-panel-offices {
+            background: var(--green-800);
+            background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+            order: 2; /* offices on RIGHT in RTL flex */
+        }
+        .aud-panel-users {
+            background: var(--white);
+            border: 1px solid var(--border);
+            order: 1; /* users on LEFT in RTL flex */
+        }
+        .aud-content { flex: 1; }
         .aud-tag {
             display: inline-flex; align-items: center; gap: .5rem;
-            padding: .35rem 1rem; border-radius: 50px; font-size: .82rem; font-weight: 700;
-            margin-bottom: 1rem;
+            padding: .3rem .9rem; border-radius: 50px; font-size: .82rem; font-weight: 700;
+            margin-bottom: 1.25rem;
         }
-        .aud-tag-offices { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); }
+        .aud-tag-offices { background: rgba(255,255,255,.15); color: rgba(255,255,255,.95); }
         .aud-tag-users { background: var(--green-100); color: var(--green-800); }
-        .aud-title { font-size: 1.6rem; font-weight: 800; margin-bottom: .75rem; }
+        .aud-title { font-size: 1.75rem; font-weight: 800; margin-bottom: 1.25rem; }
         .aud-title-offices { color: var(--white); }
         .aud-title-users { color: var(--text-dark); }
-        .aud-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2rem; }
-        .aud-list li { display: flex; align-items: flex-start; gap: .65rem; font-size: .9rem; line-height: 1.65; }
-        .aud-list-offices li { color: rgba(255,255,255,.82); }
+        .aud-list { list-style: none; display: flex; flex-direction: column; gap: .85rem; margin-bottom: 2rem; }
+        .aud-list li { display: flex; align-items: flex-start; gap: .7rem; font-size: .9rem; line-height: 1.65; }
+        .aud-list-offices li { color: rgba(255,255,255,.78); }
         .aud-list-users li { color: var(--text-mid); }
-        .aud-check { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .6rem; flex-shrink: 0; margin-top: .15rem; }
-        .aud-check-offices { background: var(--green-600); color: var(--white); }
-        .aud-check-users { background: var(--green-100); color: var(--green-800); }
-        .aud-img { width: 100%; display: block; margin-top: 2.5rem; }
+        .aud-check {
+            width: 22px; height: 22px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .65rem; flex-shrink: 0; margin-top: .15rem; font-weight: 700;
+        }
+        .aud-check-offices { background: var(--green-500); color: var(--white); }
+        .aud-check-users { background: var(--green-100); color: var(--green-700); }
+        .aud-img-wrap { margin-top: 2.5rem; line-height: 0; }
+        .aud-img { width: 100%; display: block; }
 
         /* ─── CTA ─── */
         .cta { padding: 80px 0; background: linear-gradient(135deg, var(--green-800), var(--green-700)); position: relative; overflow: hidden; }
