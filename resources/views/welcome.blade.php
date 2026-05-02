@@ -287,30 +287,101 @@
         .mobile-menu a { color: var(--text-dark); text-decoration: none; font-size: 1.05rem; font-weight: 600; padding: .75rem 0; border-bottom: 1px solid var(--border); }
 
         /* ─── RESPONSIVE ─── */
+
+        /* Tablet: 1024px */
         @media (max-width: 1024px) {
-            .features-grid { grid-template-columns: repeat(2,1fr); }
-            .about-cards { grid-template-columns: repeat(2,1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-cards { grid-template-columns: repeat(2, 1fr); }
             .footer-inner { grid-template-columns: 1fr 1fr; }
+            .audience-inner { flex-wrap: wrap; }
+            .aud-panel-users, .aud-panel-offices { flex: 1 1 calc(50% - 50px); min-width: 280px; }
+            .aud-center { order: 3; width: 100%; padding: 1.5rem; flex-direction: row; justify-content: center; }
+            .aud-center::before { display: none; }
+            .cta-stats { flex-wrap: wrap; gap: 0; }
+            .cta-stat { flex: 1 1 45%; border-left: none; border-top: 1px solid var(--border); padding: .75rem 1rem; }
+            .cta-stat:nth-child(odd) { border-right: 1px solid var(--border); }
+            .cta-divider { display: none; }
         }
+
+        /* Mobile: 768px */
         @media (max-width: 768px) {
+            /* Nav */
             .nav-links, .nav-cta { display: none; }
             .hamburger { display: flex; }
-            .hero-inner { grid-template-columns: 1fr; text-align: center; }
-            .hero-img-wrap { order: -1; }
+
+            /* Hero */
+            .hero { padding: 90px 0 40px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .hero-img-wrap { order: -1; max-width: 340px; margin: 0 auto; }
             .hero-actions { justify-content: center; }
-            .hero-stats { flex-wrap: wrap; }
-            .stat-item { flex: 1 1 40%; }
-            .features-grid { grid-template-columns: 1fr; }
-            .about-cards { grid-template-columns: 1fr 1fr; }
-            .how-steps { flex-direction: column; gap: 1.5rem; }
+            .hero-label { margin-bottom: 1rem; }
+            .hero-stats { flex-wrap: wrap; gap: 0; }
+            .stat-item { flex: 1 1 calc(50% - 1px); border-left: none; border-bottom: 1px solid var(--border); padding: .75rem; }
+            .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+            .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+
+            /* About */
+            .about { padding: 60px 0; }
+            .about-cards { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+            /* Features */
+            .features { padding: 60px 0; }
+            .features-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+            /* How */
+            .how { padding: 60px 0; }
+            .how-steps { flex-direction: column; gap: 1.25rem; }
             .how-steps::before { display: none; }
+            .how-step { display: flex; align-items: flex-start; text-align: right; gap: 1rem; padding: 0; }
+            .step-num { width: 52px; height: 52px; font-size: .95rem; flex-shrink: 0; margin: 0; }
+            .step-text { flex: 1; }
+
+            /* Audience */
+            .audience { padding: 40px 0; }
             .audience-inner { flex-direction: column; border-radius: var(--radius-lg); }
-            .aud-panel-users, .aud-panel-offices { flex-direction: column; padding: 2rem 1.5rem; }
-            .aud-img-wrap { width: 100%; max-width: 280px; margin: 0 auto; }
-            .aud-center { padding: 1.5rem 0; }
-            .aud-panel { padding: 3rem 1.5rem; }
-            .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-            .footer-bottom { flex-direction: column; text-align: center; }
+            .aud-panel-users, .aud-panel-offices {
+                flex-direction: column; align-items: flex-start;
+                padding: 1.75rem 1.25rem; gap: 1.25rem;
+            }
+            .aud-img-wrap { width: 100%; max-width: 260px; margin: 0 auto; }
+            .aud-center { width: 100%; padding: 1.25rem; flex-direction: row; }
+            .aud-center::before { display: none; }
+
+            /* CTA */
+            .cta { padding: 30px 0; }
+            .cta-card {
+                flex-direction: column; text-align: center;
+                padding: 1.75rem 1.25rem; gap: 1.25rem;
+            }
+            .cta-divider { display: none; }
+            .cta-stats { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+            .cta-stat {
+                border-left: none; border-top: 1px solid var(--border);
+                padding: .85rem .5rem;
+            }
+            .cta-stat:nth-child(odd) { border-right: 1px solid var(--border); }
+            .cta-stat-label, .cta-stat-desc { white-space: normal; text-align: center; }
+
+            /* Footer */
+            footer { padding: 40px 0 20px; }
+            .footer-inner { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: .5rem; }
+        }
+
+        /* Small Mobile: 480px */
+        @media (max-width: 480px) {
+            .container { padding: 0 1rem; }
+            .hero-title { font-size: 1.75rem; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .hero-actions .btn-solid, .hero-actions .btn-ghost { width: 100%; justify-content: center; }
+            .about-cards { grid-template-columns: 1fr; }
+            .section-head { margin-bottom: 2rem; }
+            .about { padding: 50px 0; }
+            .features { padding: 50px 0; }
+            .how { padding: 50px 0; }
+            .aud-panel-users, .aud-panel-offices { padding: 1.5rem 1rem; }
+            .cta-card { padding: 1.25rem 1rem; }
+            .stat-num { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -493,28 +564,38 @@
         <div class="how-steps">
             <div class="how-step">
                 <div class="step-num">05</div>
-                <div class="step-title">التقارير والتوصيات</div>
-                <div class="step-desc">استلام التقرير النهائي وتقييم الخدمة</div>
+                <div class="step-text">
+                    <div class="step-title">التقارير والتوصيات</div>
+                    <div class="step-desc">استلام التقرير النهائي وتقييم الخدمة</div>
+                </div>
             </div>
             <div class="how-step">
                 <div class="step-num">04</div>
-                <div class="step-title">إتمام الخدمة</div>
-                <div class="step-desc">إتمام جميع الإجراءات واستكمال المعاملات</div>
+                <div class="step-text">
+                    <div class="step-title">إتمام الخدمة</div>
+                    <div class="step-desc">إتمام جميع الإجراءات واستكمال المعاملات</div>
+                </div>
             </div>
             <div class="how-step">
                 <div class="step-num">03</div>
-                <div class="step-title">متابعة الحالة</div>
-                <div class="step-desc">تتبع لحظي لكل مرحلة من مراحل المعالجة</div>
+                <div class="step-text">
+                    <div class="step-title">متابعة الحالة</div>
+                    <div class="step-desc">تتبع لحظي لكل مرحلة من مراحل المعالجة</div>
+                </div>
             </div>
             <div class="how-step">
                 <div class="step-num">02</div>
-                <div class="step-title">دراسة الطلب</div>
-                <div class="step-desc">يراجع المكتب الطلب ويقيّم الاحتياجات</div>
+                <div class="step-text">
+                    <div class="step-title">دراسة الطلب</div>
+                    <div class="step-desc">يراجع المكتب الطلب ويقيّم الاحتياجات</div>
+                </div>
             </div>
             <div class="how-step">
                 <div class="step-num">01</div>
-                <div class="step-title">تقديم الطلب</div>
-                <div class="step-desc">يقدم المستخدم طلبه بكل سهولة عبر المنصة</div>
+                <div class="step-text">
+                    <div class="step-title">تقديم الطلب</div>
+                    <div class="step-desc">يقدم المستخدم طلبه بكل سهولة عبر المنصة</div>
+                </div>
             </div>
         </div>
     </div>
