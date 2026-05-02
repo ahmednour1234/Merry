@@ -53,17 +53,19 @@ class BookingController extends Controller
 
         $booking->update(['status' => BookingStatus::ACCEPTED->value]);
 
-        // Notify EndUser via FCM
-        $tokens = EndUserFcmToken::where('end_user_id', $booking->end_user_id)
-            ->pluck('token')->toArray();
-        if (!empty($tokens)) {
-            app(FcmService::class)->sendToTokens(
-                'تم قبول حجزك',
-                'تم قبول طلب الحجز الخاص بك للسيرة الذاتية رقم ' . $booking->cv_id,
-                $tokens,
-                ['type' => 'booking_accepted', 'booking_id' => $booking->id]
-            );
-        }
+        // Notify EndUser via FCM (silently skip if table not yet migrated)
+        try {
+            $tokens = EndUserFcmToken::where('end_user_id', $booking->end_user_id)
+                ->pluck('token')->toArray();
+            if (!empty($tokens)) {
+                app(FcmService::class)->sendToTokens(
+                    'تم قبول حجزك',
+                    'تم قبول طلب الحجز الخاص بك للسيرة الذاتية رقم ' . $booking->cv_id,
+                    $tokens,
+                    ['type' => 'booking_accepted', 'booking_id' => $booking->id]
+                );
+            }
+        } catch (\Throwable) {}
 
         return back()->with('success', 'تم قبول الحجز بنجاح.');
     }
@@ -81,17 +83,19 @@ class BookingController extends Controller
 
         $booking->update(['status' => BookingStatus::REJECTED->value]);
 
-        // Notify EndUser via FCM
-        $tokens = EndUserFcmToken::where('end_user_id', $booking->end_user_id)
-            ->pluck('token')->toArray();
-        if (!empty($tokens)) {
-            app(FcmService::class)->sendToTokens(
-                'تم رفض حجزك',
-                'تم رفض طلب الحجز الخاص بك للسيرة الذاتية رقم ' . $booking->cv_id,
-                $tokens,
-                ['type' => 'booking_rejected', 'booking_id' => $booking->id]
-            );
-        }
+        // Notify EndUser via FCM (silently skip if table not yet migrated)
+        try {
+            $tokens = EndUserFcmToken::where('end_user_id', $booking->end_user_id)
+                ->pluck('token')->toArray();
+            if (!empty($tokens)) {
+                app(FcmService::class)->sendToTokens(
+                    'تم رفض حجزك',
+                    'تم رفض طلب الحجز الخاص بك للسيرة الذاتية رقم ' . $booking->cv_id,
+                    $tokens,
+                    ['type' => 'booking_rejected', 'booking_id' => $booking->id]
+                );
+            }
+        } catch (\Throwable) {}
 
         return back()->with('success', 'تم رفض الحجز بنجاح.');
     }

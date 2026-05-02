@@ -123,20 +123,22 @@ class BookingController extends ApiController
 			'note' => $data['note'] ?? null,
 		]);
 
-		// Notify the office via FCM
-		$officeTokens = OfficeFcmToken::on('system')
-			->where('office_id', $cv->office_id)
-			->pluck('token')
-			->toArray();
+		// Notify the office via FCM (silently skip if table not yet migrated)
+		try {
+			$officeTokens = OfficeFcmToken::on('system')
+				->where('office_id', $cv->office_id)
+				->pluck('token')
+				->toArray();
 
-		if (!empty($officeTokens)) {
-			app(FcmService::class)->sendToTokens(
-				'حجز جديد',
-				'تم إرسال طلب حجز جديد لسيرة ذاتية رقم ' . $cv->id,
-				$officeTokens,
-				['type' => 'new_booking', 'booking_id' => $row->id, 'cv_id' => $cv->id]
-			);
-		}
+			if (!empty($officeTokens)) {
+				app(FcmService::class)->sendToTokens(
+					'حجز جديد',
+					'تم إرسال طلب حجز جديد لسيرة ذاتية رقم ' . $cv->id,
+					$officeTokens,
+					['type' => 'new_booking', 'booking_id' => $row->id, 'cv_id' => $cv->id]
+				);
+			}
+		} catch (\Throwable) {}
 
 		return $this->responder->created(['id' => $row->id], 'Booking created');
 	}
