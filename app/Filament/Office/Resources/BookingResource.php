@@ -6,6 +6,8 @@ use App\Enums\BookingStatus;
 use App\Filament\Office\Resources\BookingResource\Pages;
 use App\Models\Cv;
 use App\Models\CvBooking;
+use App\Models\Identity\EndUserFcmToken;
+use App\Services\FcmService;
 use BackedEnum;
 use Filament\Tables\Actions\Action as TableAction;
 use Filament\Forms;
@@ -176,6 +178,18 @@ class BookingResource extends Resource
                         $record->status = BookingStatus::ACCEPTED->value;
                         $record->save();
 
+                        // Notify EndUser via FCM
+                        $tokens = EndUserFcmToken::where('end_user_id', $record->end_user_id)
+                            ->pluck('token')->toArray();
+                        if (!empty($tokens)) {
+                            app(FcmService::class)->sendToTokens(
+                                'تم قبول حجزك',
+                                'تم قبول طلب الحجز الخاص بك للسيرة الذاتية رقم ' . $record->cv_id,
+                                $tokens,
+                                ['type' => 'booking_accepted', 'booking_id' => $record->id]
+                            );
+                        }
+
                         \Filament\Notifications\Notification::make()
                             ->title('تم قبول الحجز بنجاح')
                             ->success()
@@ -201,6 +215,18 @@ class BookingResource extends Resource
 
                         $record->status = BookingStatus::REJECTED->value;
                         $record->save();
+
+                        // Notify EndUser via FCM
+                        $tokens = EndUserFcmToken::where('end_user_id', $record->end_user_id)
+                            ->pluck('token')->toArray();
+                        if (!empty($tokens)) {
+                            app(FcmService::class)->sendToTokens(
+                                'تم رفض حجزك',
+                                'تم رفض طلب الحجز الخاص بك للسيرة الذاتية رقم ' . $record->cv_id,
+                                $tokens,
+                                ['type' => 'booking_rejected', 'booking_id' => $record->id]
+                            );
+                        }
 
                         \Filament\Notifications\Notification::make()
                             ->title('تم رفض الحجز')

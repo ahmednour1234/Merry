@@ -41,6 +41,7 @@ use App\Http\Controllers\Api\Office\CvController as OfficeCvController;
 use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
 use App\Http\Controllers\Api\EndUser\FavouriteController;
+use App\Http\Controllers\Api\EndUser\FcmTokenController as EndUserFcmTokenController;
 use App\Http\Controllers\Api\Public\OfficeController as PublicOfficeController;
 use App\Http\Controllers\Api\EndUser\OfficeReviewController as EndUserReviewController;
 use App\Http\Controllers\Api\System\OfficeReviewController as AdminReviewController;
@@ -370,6 +371,10 @@ Route::prefix('v1/enduser')->group(function () {
         Route::post('bookings',              [EndUserBookingController::class, 'store']);
         Route::post('bookings/{id}/cancel',  [EndUserBookingController::class, 'cancel']);
         Route::get('bookings/stats',         [EndUserBookingController::class, 'stats']);
+
+        // FCM tokens (EndUser)
+        Route::post('fcm-tokens',   [EndUserFcmTokenController::class, 'store']);
+        Route::delete('fcm-tokens', [EndUserFcmTokenController::class, 'destroy']);
     });
 });
 

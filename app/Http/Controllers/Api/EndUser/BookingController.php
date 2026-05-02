@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\System\CvResource;
 use App\Models\Cv;
 use App\Models\CvBooking;
+use App\Models\OfficeFcmToken;
+use App\Services\FcmService;
 use App\Services\SubscriptionLimitService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -120,6 +122,21 @@ class BookingController extends ApiController
 			'status' => BookingStatus::PENDING->value,
 			'note' => $data['note'] ?? null,
 		]);
+
+		// Notify the office via FCM
+		$officeTokens = OfficeFcmToken::on('system')
+			->where('office_id', $cv->office_id)
+			->pluck('token')
+			->toArray();
+
+		if (!empty($officeTokens)) {
+			app(FcmService::class)->sendToTokens(
+				'حجز جديد',
+				'تم إرسال طلب حجز جديد لسيرة ذاتية رقم ' . $cv->id,
+				$officeTokens,
+				['type' => 'new_booking', 'booking_id' => $row->id, 'cv_id' => $cv->id]
+			);
+		}
 
 		return $this->responder->created(['id' => $row->id], 'Booking created');
 	}
