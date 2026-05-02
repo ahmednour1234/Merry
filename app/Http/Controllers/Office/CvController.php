@@ -63,7 +63,7 @@ class CvController extends Controller
 
         $count = 0;
         foreach ($request->file('files') as $uploaded) {
-            $path = $uploaded->store('cvs', 'private');
+            $path = $uploaded->store('cvs', 'public');
 
             Cv::on('system')->create([
                 'office_id'          => $office->id,
@@ -124,12 +124,13 @@ class CvController extends Controller
         ];
 
         if ($request->hasFile('file') && $request->file('file')->isValid()) {
-            // Delete old file
+            // Delete old file from whichever disk it lives on
             if ($cv->file_path) {
+                Storage::disk('public')->delete($cv->file_path);
                 Storage::disk('private')->delete($cv->file_path);
             }
             $uploaded          = $request->file('file');
-            $data['file_path'] = $uploaded->store('cvs', 'private');
+            $data['file_path'] = $uploaded->store('cvs', 'public');
             $data['file_mime'] = $uploaded->getMimeType();
             $data['file_size'] = $uploaded->getSize();
             $data['file_original_name'] = $uploaded->getClientOriginalName();
@@ -148,6 +149,7 @@ class CvController extends Controller
         $cv     = Cv::on('system')->where('office_id', $office->id)->findOrFail($id);
 
         if ($cv->file_path) {
+            Storage::disk('public')->delete($cv->file_path);
             Storage::disk('private')->delete($cv->file_path);
         }
 
