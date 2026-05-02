@@ -55,12 +55,20 @@ class BookingController extends ApiController
 
 		$data = collect($p->items())->map(function ($row) use ($cvs) {
 			$cv = $cvs->get($row->cv_id);
+			$statusLabels = [
+				'pending'   => 'قيد الانتظار',
+				'accepted'  => 'مقبول',
+				'rejected'  => 'مرفوض',
+				'cancelled' => 'ملغي',
+			];
 			return [
-				'id' => $row->id,
-				'cv' => $cv ? new CvResource($cv) : null,
-				'status' => $row->status,
-				'note' => $row->note,
-				'created_at' => optional($row->created_at)->toIso8601String(),
+				'id'           => $row->id,
+				'cv'           => $cv ? new CvResource($cv) : null,
+				'status'       => $row->status,
+				'status_label' => $statusLabels[$row->status] ?? $row->status,
+				'note'         => $row->note,
+				'created_at'   => optional($row->created_at)->toIso8601String(),
+				'updated_at'   => optional($row->updated_at)->toIso8601String(),
 			];
 		});
 
