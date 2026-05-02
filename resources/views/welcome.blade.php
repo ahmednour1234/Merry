@@ -157,44 +157,44 @@
         .audience { background: var(--white); }
         .audience-inner { display: flex; width: 100%; }
         .aud-panel {
-            flex: 1; padding: 4rem 3.5rem 0; position: relative;
-            display: flex; flex-direction: column;
+            flex: 1; padding: 3.5rem;
+            display: flex; flex-direction: row; align-items: center; gap: 2rem;
         }
         .aud-panel-offices {
             background: var(--green-800);
             background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
             background-size: 28px 28px;
-            order: 2; /* offices on RIGHT in RTL flex */
+            order: 2;
         }
         .aud-panel-users {
             background: var(--white);
             border: 1px solid var(--border);
-            order: 1; /* users on LEFT in RTL flex */
+            order: 1;
         }
-        .aud-content { flex: 1; }
+        .aud-content { flex: 1; min-width: 0; }
         .aud-tag {
             display: inline-flex; align-items: center; gap: .5rem;
             padding: .3rem .9rem; border-radius: 50px; font-size: .82rem; font-weight: 700;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
         .aud-tag-offices { background: rgba(255,255,255,.15); color: rgba(255,255,255,.95); }
         .aud-tag-users { background: var(--green-100); color: var(--green-800); }
-        .aud-title { font-size: 1.75rem; font-weight: 800; margin-bottom: 1.25rem; }
+        .aud-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
         .aud-title-offices { color: var(--white); }
         .aud-title-users { color: var(--text-dark); }
-        .aud-list { list-style: none; display: flex; flex-direction: column; gap: .85rem; margin-bottom: 2rem; }
-        .aud-list li { display: flex; align-items: flex-start; gap: .7rem; font-size: .9rem; line-height: 1.65; }
+        .aud-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; margin-bottom: 1.75rem; }
+        .aud-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .87rem; line-height: 1.6; }
         .aud-list-offices li { color: rgba(255,255,255,.78); }
         .aud-list-users li { color: var(--text-mid); }
         .aud-check {
-            width: 22px; height: 22px; border-radius: 50%;
+            width: 20px; height: 20px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: .65rem; flex-shrink: 0; margin-top: .15rem; font-weight: 700;
+            font-size: .62rem; flex-shrink: 0; margin-top: .15rem; font-weight: 700;
         }
         .aud-check-offices { background: var(--green-500); color: var(--white); }
         .aud-check-users { background: var(--green-100); color: var(--green-700); }
-        .aud-img-wrap { margin-top: 2.5rem; line-height: 0; }
-        .aud-img { width: 100%; display: block; }
+        .aud-img-wrap { flex-shrink: 0; width: 220px; }
+        .aud-img { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); }
 
         /* ─── CTA ─── */
         .cta { padding: 80px 0; background: linear-gradient(135deg, var(--green-800), var(--green-700)); position: relative; overflow: hidden; }
@@ -267,7 +267,9 @@
             .about-cards { grid-template-columns: 1fr 1fr; }
             .how-steps { flex-direction: column; gap: 1.5rem; }
             .how-steps::before { display: none; }
-            .audience-inner { grid-template-columns: 1fr; }
+            .audience-inner { flex-direction: column; }
+            .aud-panel { flex-direction: column; padding: 2.5rem 1.5rem; }
+            .aud-img-wrap { width: 100%; max-width: 300px; margin: 0 auto; }
             .aud-panel { padding: 3rem 1.5rem; }
             .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
             .footer-bottom { flex-direction: column; text-align: center; }
@@ -485,31 +487,39 @@
     <div class="audience-inner">
         <!-- للمكاتب — dark green -->
         <div class="aud-panel aud-panel-offices">
-            <div class="aud-tag aud-tag-offices">🏢 للمكاتب</div>
-            <h2 class="aud-title aud-title-offices">حل متكامل لمكتبك</h2>
-            <ul class="aud-list aud-list-offices">
-                <li><div class="aud-check aud-check-offices">✓</div>لوحة تحكم متكاملة لإدارة جميع طلبات الاستقدام ومتابعتها لحظة بلحظة</li>
-                <li><div class="aud-check aud-check-offices">✓</div>أدوات متطورة لرفع السير الذاتية وإدارة قاعدة بيانات العمالة</li>
-                <li><div class="aud-check aud-check-offices">✓</div>تقارير مالية وإحصائية شاملة لمتابعة أداء المكتب ونموه</li>
-                <li><div class="aud-check aud-check-offices">✓</div>إشعارات فورية للطلبات الجديدة وتحديثات حالة كل معاملة</li>
-                <li><div class="aud-check aud-check-offices">✓</div>إدارة العروض الترويجية والكوبونات وخطط الاشتراكات</li>
-            </ul>
-            <a href="/office/login" class="btn-solid">ابدأ مع مكتبك</a>
-            <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم المكتب" class="aud-img">
+            <div class="aud-content">
+                <div class="aud-tag aud-tag-offices">🏢 للمكاتب</div>
+                <h2 class="aud-title aud-title-offices">حل متكامل لمكتبك</h2>
+                <ul class="aud-list aud-list-offices">
+                    <li><div class="aud-check aud-check-offices">✓</div>لوحة تحكم متكاملة لإدارة جميع طلبات الاستقدام ومتابعتها لحظة بلحظة</li>
+                    <li><div class="aud-check aud-check-offices">✓</div>أدوات متطورة لرفع السير الذاتية وإدارة قاعدة بيانات العمالة</li>
+                    <li><div class="aud-check aud-check-offices">✓</div>تقارير مالية وإحصائية شاملة لمتابعة أداء المكتب ونموه</li>
+                    <li><div class="aud-check aud-check-offices">✓</div>إشعارات فورية للطلبات الجديدة وتحديثات حالة كل معاملة</li>
+                    <li><div class="aud-check aud-check-offices">✓</div>إدارة العروض الترويجية والكوبونات وخطط الاشتراكات</li>
+                </ul>
+                <a href="/office/login" class="btn-solid">ابدأ مع مكتبك</a>
+            </div>
+            <div class="aud-img-wrap">
+                <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم المكتب" class="aud-img">
+            </div>
         </div>
         <!-- للمستخدمين — white -->
         <div class="aud-panel aud-panel-users">
-            <div class="aud-tag aud-tag-users">👤 للمستخدمين</div>
-            <h2 class="aud-title aud-title-users">تجربة سلسة للمستخدم</h2>
-            <ul class="aud-list aud-list-users">
-                <li><div class="aud-check aud-check-users">✓</div>تقديم طلبات الاستقدام بشكل سهل وسريع من أي مكان وأي وقت</li>
-                <li><div class="aud-check aud-check-users">✓</div>تصفح السير الذاتية واختيار أفضل المرشحين المناسبين</li>
-                <li><div class="aud-check aud-check-users">✓</div>متابعة حالة طلبك لحظة بلحظة مع إشعارات فورية</li>
-                <li><div class="aud-check aud-check-users">✓</div>تواصل مباشر مع المكتب واستلام الوثائق إلكترونياً</li>
-                <li><div class="aud-check aud-check-users">✓</div>سجل كامل بجميع معاملاتك السابقة وتقييمات مضمونة</li>
-            </ul>
-            <a href="#" class="btn-ghost">ابدأ كمستخدم</a>
-            <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" class="aud-img">
+            <div class="aud-content">
+                <div class="aud-tag aud-tag-users">👤 للمستخدمين</div>
+                <h2 class="aud-title aud-title-users">تجربة سلسة للمستخدم</h2>
+                <ul class="aud-list aud-list-users">
+                    <li><div class="aud-check aud-check-users">✓</div>تقديم طلبات الاستقدام بشكل سهل وسريع من أي مكان وأي وقت</li>
+                    <li><div class="aud-check aud-check-users">✓</div>تصفح السير الذاتية واختيار أفضل المرشحين المناسبين</li>
+                    <li><div class="aud-check aud-check-users">✓</div>متابعة حالة طلبك لحظة بلحظة مع إشعارات فورية</li>
+                    <li><div class="aud-check aud-check-users">✓</div>تواصل مباشر مع المكتب واستلام الوثائق إلكترونياً</li>
+                    <li><div class="aud-check aud-check-users">✓</div>سجل كامل بجميع معاملاتك السابقة وتقييمات مضمونة</li>
+                </ul>
+                <a href="#" class="btn-ghost">ابدأ كمستخدم</a>
+            </div>
+            <div class="aud-img-wrap">
+                <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" class="aud-img">
+            </div>
         </div>
     </div>
 </section>
