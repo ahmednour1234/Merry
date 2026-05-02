@@ -400,12 +400,16 @@ Route::prefix('v1/public')->group(function () {
             }
         }
 
-        if (!\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
+        // Check public disk first, then fall back to private disk (legacy uploads)
+        if (\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
+            $fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($path);
+        } elseif (\Illuminate\Support\Facades\Storage::disk('private')->exists($path)) {
+            $fullPath = \Illuminate\Support\Facades\Storage::disk('private')->path($path);
+        } else {
             return response('File not found.', 404, ['Content-Type' => 'text/plain']);
         }
 
-        $fullPath = \Illuminate\Support\Facades\Storage::disk('public')->path($path);
-        $mime     = mime_content_type($fullPath) ?: 'application/octet-stream';
+        $mime = mime_content_type($fullPath) ?: 'application/octet-stream';
 
         return response()->file($fullPath, [
             'Content-Type'  => $mime,
