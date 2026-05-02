@@ -7,7 +7,7 @@ use App\Filament\Office\Resources\BookingResource\Pages;
 use App\Models\Cv;
 use App\Models\CvBooking;
 use BackedEnum;
-use Filament\Actions\Action as BaseAction;
+use Filament\Tables\Actions\Action as TableAction;
 use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
@@ -143,11 +143,14 @@ class BookingResource extends Resource
                     ->label('تاريخ الحجز'),
             ])
             ->actions([
-                BaseAction::make('accept')
+                TableAction::make('accept')
                     ->label('قبول')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->requiresConfirmation()
+                    ->modalHeading('تأكيد قبول الحجز')
+                    ->modalDescription('هل أنت متأكد من قبول هذا الحجز؟')
+                    ->modalSubmitActionLabel('نعم، قبول')
                     ->action(function (CvBooking $record) {
                         if ($record->status !== BookingStatus::PENDING->value) {
                             \Filament\Notifications\Notification::make()
@@ -179,11 +182,14 @@ class BookingResource extends Resource
                             ->send();
                     })
                     ->visible(fn (CvBooking $record) => $record->status === BookingStatus::PENDING->value),
-                BaseAction::make('reject')
+                TableAction::make('reject')
                     ->label('رفض')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
                     ->requiresConfirmation()
+                    ->modalHeading('تأكيد رفض الحجز')
+                    ->modalDescription('هل أنت متأكد من رفض هذا الحجز؟')
+                    ->modalSubmitActionLabel('نعم، رفض')
                     ->action(function (CvBooking $record) {
                         if ($record->status !== BookingStatus::PENDING->value) {
                             \Filament\Notifications\Notification::make()
