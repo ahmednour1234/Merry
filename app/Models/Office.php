@@ -37,4 +37,14 @@ class Office extends Authenticatable
     {
         return 'system';
     }
+
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\OfficeReview::class, 'office_id');
+    }
+
+    public function activeReviews(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\OfficeReview::class, 'office_id')->where('is_active', true);
+    }
 }

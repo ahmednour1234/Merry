@@ -42,6 +42,8 @@ use App\Http\Controllers\Api\EndUser\AuthEndUserController;
 use App\Http\Controllers\Api\EndUser\CatalogController;
 use App\Http\Controllers\Api\EndUser\FavouriteController;
 use App\Http\Controllers\Api\Public\OfficeController as PublicOfficeController;
+use App\Http\Controllers\Api\EndUser\OfficeReviewController as EndUserReviewController;
+use App\Http\Controllers\Api\System\OfficeReviewController as AdminReviewController;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -253,6 +255,11 @@ Route::prefix('v1/admin/system')
         Route::post('categories/{id}/translations', [CategoryController::class, 'upsertTranslation'])->middleware('perm:system.categories.translations');
         Route::post('categories/{id}/icon', [CategoryController::class, 'uploadIcon'])->middleware('perm:system.categories.update');
 
+        // Office Reviews (Admin)
+        Route::get('office-reviews',                   [AdminReviewController::class, 'index']);
+        Route::delete('office-reviews/{id}',           [AdminReviewController::class, 'destroy']);
+        Route::post('office-reviews/{id}/toggle',      [AdminReviewController::class, 'toggle']);
+
         // CVs (Admin)
         Route::get('cvs',                 [AdminCvController::class, 'index'])->middleware('perm:system.cvs.index');
         Route::get('cvs-stats',           [AdminCvController::class, 'stats'])->middleware('perm:system.cvs.index');
@@ -352,6 +359,11 @@ Route::prefix('v1/enduser')->group(function () {
 		Route::get('favorites/cvs',             [FavouriteController::class, 'index']);
 		Route::post('favorites/cvs',            [FavouriteController::class, 'store']);
 		Route::delete('favorites/cvs/{cvId}',   [FavouriteController::class, 'destroy']);
+
+		// Office Reviews (EndUser)
+		Route::get('offices/{officeId}/reviews',    [EndUserReviewController::class, 'index']);
+		Route::post('offices/{officeId}/reviews',   [EndUserReviewController::class, 'store']);
+		Route::delete('offices/{officeId}/reviews', [EndUserReviewController::class, 'destroy']);
 
         // Bookings (EndUser)
         Route::get('bookings',               [EndUserBookingController::class, 'index']);
