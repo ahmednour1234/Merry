@@ -282,31 +282,19 @@
 
         /* Hero image */
         .hero-mockup-img {
-            width: 100%; display: block; border-radius: 16px;
-            box-shadow: 0 40px 100px rgba(0,0,0,.35);
+            width: 100%; display: block;
         }
 
         /* About section — image + text layout */
         .about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem; }
-        .about-img-wrap {
-            border-radius: var(--radius-xl);
-            background: var(--green-50);
-            box-shadow: 0 20px 40px rgba(5,79,49,.15);
-            text-align: center;
-            padding: 1rem;
-        }
-        .about-img-wrap img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: var(--radius-lg);
-        }
+        .about-img-wrap { text-align: center; }
+        .about-img-wrap img { width: 100%; height: auto; display: block; }
         .about-cards-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
 
         /* Multi-device section */
         .devices { padding: 100px 0; background: var(--white); }
         .devices-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .devices-img { width: 100%; display: block; border-radius: var(--radius-xl); background: var(--green-50); box-shadow: 0 20px 50px rgba(5,79,49,.2); padding: 1rem; }
+        .devices-img { width: 100%; display: block; }
 
         /* Responsive */
         @media (max-width: 1024px) {
