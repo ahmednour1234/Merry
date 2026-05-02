@@ -54,12 +54,12 @@ class PlanController extends ApiController
      * @bodyParam base_price number required Base price in base currency. Example: 49.99
      * @bodyParam billing_cycle string required monthly|annual. Example: monthly
      * @bodyParam active boolean Whether the plan is active. Example: 1
-     * @bodyParam meta object Arbitrary JSON metadata (send as JSON string in form-data). Example: {"color":"#1e88e5"}
+     * @bodyParam meta string Arbitrary JSON metadata (send as JSON string). Example: {"color":"#1e88e5"}
      *
      * @bodyParam features array Feature list (optional).
      * @bodyParam features[].feature_key string required One of PlanFeatureKey values. Example: cv.limit
      * @bodyParam features[].limit integer Limit if applicable. Example: 100
-     * @bodyParam features[].value mixed Arbitrary value (send JSON string if multipart). Example: {"upload":true}
+     * @bodyParam features[].value string Arbitrary value (send as JSON string). Example: {"upload":true}
      * @bodyParam features[].active boolean Whether the feature is active. Example: 1
      *
      * @response status=201 scenario="Created" {"status":"success","message":"Plan created","data":{"code":"pro","name":"Pro"}}
@@ -124,12 +124,12 @@ class PlanController extends ApiController
      * @bodyParam base_price number Base price. Example: 59.99
      * @bodyParam billing_cycle string monthly|annual. Example: annual
      * @bodyParam active boolean Active flag. Example: 0
-     * @bodyParam meta object JSON metadata (send as JSON string). Example: {"badge":"popular"}
+     * @bodyParam meta string JSON metadata (send as JSON string). Example: {"badge":"popular"}
      *
      * @bodyParam features array Feature list (optional, replaces existing).
      * @bodyParam features[].feature_key string required One of PlanFeatureKey values. Example: office.users.limit
      * @bodyParam features[].limit integer Limit if applicable. Example: 10
-     * @bodyParam features[].value mixed Arbitrary value (send JSON string if multipart). Example: true
+     * @bodyParam features[].value string Arbitrary value (send as JSON string). Example: true
      * @bodyParam features[].active boolean Whether the feature is active. Example: 1
      *
      * @response status=200 scenario="Updated" {"status":"success","message":"Plan updated"}

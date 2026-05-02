@@ -77,7 +77,7 @@ class CityController extends ApiController
      * @bodyParam slug string Unique slug. Example: riyadh
      * @bodyParam country_code string ISO-2. Example: SA
      * @bodyParam active boolean Example: true
-     * @bodyParam translations object required Map of lang_code=>name. Example: {"ar":"الرياض","en":"Riyadh"}
+     * @bodyParam translations string required JSON map of lang_code=>name. Example: {"ar":"الرياض","en":"Riyadh"}
      */
     public function store(StoreCityRequest $r)
     {

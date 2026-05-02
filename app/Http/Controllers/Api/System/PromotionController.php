@@ -52,7 +52,7 @@ class PromotionController extends ApiController
      * @bodyParam ends_at datetime End date (Y-m-d H:i:s). Must be after starts_at. Example: 2025-01-31 23:59:59
      * @bodyParam auto_apply boolean Automatically apply when eligible. Example: 1
      * @bodyParam active boolean Whether promo is active. Example: 1
-     * @bodyParam meta object Arbitrary JSON metadata (send JSON string in form-data). Example: {"channel":"web"}
+     * @bodyParam meta string Arbitrary JSON metadata (send as JSON string). Example: {"channel":"web"}
      *
      * @response status=201 scenario="Created" {"status":"success","message":"Promotion created","data":{"id":10,"name":"New Year 20%"}}
      */
@@ -93,7 +93,7 @@ class PromotionController extends ApiController
      * @bodyParam ends_at datetime End date (Y-m-d H:i:s), after starts_at. Example: 2025-03-31 23:59:59
      * @bodyParam auto_apply boolean Auto apply flag. Example: 0
      * @bodyParam active boolean Active flag. Example: 1
-     * @bodyParam meta object Arbitrary JSON metadata (send JSON string). Example: {"segment":"returning"}
+     * @bodyParam meta string Arbitrary JSON metadata (send as JSON string). Example: {"segment":"returning"}
      *
      * @response status=200 scenario="Updated" {"status":"success","message":"Promotion updated"}
      * @response status=404 scenario="Not found" {"status":"error","message":"Not found"}

@@ -52,7 +52,7 @@ class CouponController extends ApiController
      * @bodyParam max_redemptions integer Max total redemptions (null for unlimited). Example: 1000
      * @bodyParam per_office_limit integer Max redemptions per office (null for unlimited). Example: 1
      * @bodyParam active boolean Whether coupon is active. Example: 1
-     * @bodyParam meta object Free-form JSON metadata (send as JSON string in form-data). Example: {"note":"new year"}
+     * @bodyParam meta string Free-form JSON metadata (send as JSON string). Example: {"note":"new year"}
      *
      * @response status=201 scenario="Created" {"status":"success","message":"Coupon created","data":{"id":1,"code":"WELCOME10"}}
      */
@@ -92,7 +92,7 @@ class CouponController extends ApiController
      * @bodyParam max_redemptions integer Max total redemptions. Example: 500
      * @bodyParam per_office_limit integer Per-office limit. Example: 2
      * @bodyParam active boolean Active flag. Example: 0
-     * @bodyParam meta object Free-form JSON metadata (send as JSON string in form-data). Example: {"channel":"web"}
+     * @bodyParam meta string Free-form JSON metadata (send as JSON string). Example: {"channel":"web"}
      *
      * @response status=200 scenario="Updated" {"status":"success","message":"Coupon updated"}
      * @response status=404 scenario="Not found" {"status":"error","message":"Not found"}
