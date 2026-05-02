@@ -280,11 +280,28 @@
         .delay-3 { animation-delay: .45s; opacity: 0; }
         .delay-4 { animation-delay: .6s;  opacity: 0; }
 
+        /* Hero image */
+        .hero-mockup-img {
+            width: 100%; display: block; border-radius: 16px;
+            box-shadow: 0 40px 100px rgba(0,0,0,.35);
+        }
+
+        /* About section — image + text layout */
+        .about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem; }
+        .about-img-wrap img { width: 100%; border-radius: var(--radius-xl); filter: drop-shadow(0 20px 40px rgba(5,79,49,.15)); display: block; }
+        .about-cards-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
+
+        /* Multi-device section */
+        .devices { padding: 100px 0; background: var(--white); }
+        .devices-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .devices-img { width: 100%; display: block; filter: drop-shadow(0 20px 50px rgba(5,79,49,.2)); }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .features-grid { grid-template-columns: repeat(2,1fr); }
             .testimonials-grid { grid-template-columns: repeat(2,1fr); }
             .footer-inner { grid-template-columns: 1fr 1fr; }
+            .about-cards-row { grid-template-columns: repeat(2,1fr); }
         }
         @media (max-width: 768px) {
             .nav-links, .nav-cta { display: none; }
@@ -294,6 +311,9 @@
             .hero-actions { justify-content: center; }
             .hero-stats { justify-content: center; }
             .about-inner { grid-template-columns: 1fr; }
+            .about-top { grid-template-columns: 1fr; }
+            .about-cards-row { grid-template-columns: 1fr 1fr; }
+            .devices-inner { grid-template-columns: 1fr; }
             .features-grid { grid-template-columns: 1fr; }
             .how-steps { flex-direction: column; gap: 2rem; }
             .how-steps::before { display: none; }
@@ -395,54 +415,9 @@
                     </div>
                 </div>
 
-                <div class="dashboard-mockup">
-                    <div class="mockup-header">
-                        <div class="mockup-dots"><span></span><span></span><span></span></div>
-                        <div class="mockup-title-bar">لوحة تحكم - نظام ميري</div>
-                    </div>
-                    <div class="mockup-body">
-                        <div class="mockup-cards">
-                            <div class="mockup-card">
-                                <div class="mockup-card-icon" style="background:#e0f2fe">✔️</div>
-                                <div class="mockup-card-num" style="color:#0369a1">184</div>
-                                <div class="mockup-card-lbl">مكتملة</div>
-                            </div>
-                            <div class="mockup-card">
-                                <div class="mockup-card-icon" style="background:#fef3c7">📋</div>
-                                <div class="mockup-card-num" style="color:#92400e">64</div>
-                                <div class="mockup-card-lbl">قيد المعالجة</div>
-                            </div>
-                            <div class="mockup-card">
-                                <div class="mockup-card-icon" style="background:#dcfce7">👥</div>
-                                <div class="mockup-card-num" style="color:#054F31">248</div>
-                                <div class="mockup-card-lbl">إجمالي الطلبات</div>
-                            </div>
-                        </div>
-                        <div class="mockup-chart">
-                            <div style="font-size:.75rem;font-weight:700;color:#374151;margin-bottom:.75rem">نشاط الأسبوع</div>
-                            <div class="chart-bar-row">
-                                <div class="chart-label">الأحد</div>
-                                <div class="chart-bar-wrap"><div class="chart-bar" style="width:75%"></div></div>
-                            </div>
-                            <div class="chart-bar-row">
-                                <div class="chart-label">الاثنين</div>
-                                <div class="chart-bar-wrap"><div class="chart-bar" style="width:90%"></div></div>
-                            </div>
-                            <div class="chart-bar-row">
-                                <div class="chart-label">الثلاثاء</div>
-                                <div class="chart-bar-wrap"><div class="chart-bar" style="width:60%"></div></div>
-                            </div>
-                            <div class="chart-bar-row">
-                                <div class="chart-label">الأربعاء</div>
-                                <div class="chart-bar-wrap"><div class="chart-bar" style="width:85%"></div></div>
-                            </div>
-                            <div class="chart-bar-row">
-                                <div class="chart-label">الخميس</div>
-                                <div class="chart-bar-wrap"><div class="chart-bar" style="width:45%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img src="/images/dashboard-mockup.png"
+                     alt="نظام ميري - لوحة التحكم"
+                     class="hero-mockup-img">
 
                 <div class="floating-badge badge-b">
                     <div class="badge-icon" style="background:#fef3c7">⭐</div>
@@ -459,7 +434,10 @@
 <!-- ABOUT -->
 <section class="about" id="about">
     <div class="container">
-        <div class="about-inner">
+        <div class="about-top">
+            <div class="about-img-wrap">
+                <img src="/images/hero-users.png" alt="مستخدمو نظام ميري">
+            </div>
             <div>
                 <div class="section-badge">✨ عن التطبيق</div>
                 <h2 class="section-title">نظام شامل لكل ما تحتاجه</h2>
@@ -486,28 +464,27 @@
                     </div>
                 </div>
             </div>
-
-            <div class="about-cards">
-                <div class="about-card">
-                    <div class="card-icon-wrap" style="background:#dcfce7">📋</div>
-                    <div class="card-title">إدارة الطلبات</div>
-                    <div class="card-desc">متابعة كل طلبات الاستقدام من البداية إلى الإتمام النهائي</div>
-                </div>
-                <div class="about-card">
-                    <div class="card-icon-wrap" style="background:#dbeafe">🗄️</div>
-                    <div class="card-title">إدارة البيانات</div>
-                    <div class="card-desc">قاعدة بيانات موحدة لكل المعاملات والوثائق والسجلات</div>
-                </div>
-                <div class="about-card">
-                    <div class="card-icon-wrap" style="background:#fef3c7">🔔</div>
-                    <div class="card-title">متابعة الحالات</div>
-                    <div class="card-desc">إشعارات فورية وتتبع لحظي لكل مرحلة من مراحل الطلب</div>
-                </div>
-                <div class="about-card">
-                    <div class="card-icon-wrap" style="background:#fce7f3">📊</div>
-                    <div class="card-title">التقارير والإشعارات</div>
-                    <div class="card-desc">تقارير تفصيلية وإشعارات ذكية تبقيك على اطلاع دائم</div>
-                </div>
+        </div>
+        <div class="about-cards-row">
+            <div class="about-card">
+                <div class="card-icon-wrap" style="background:#dcfce7">📋</div>
+                <div class="card-title">إدارة الطلبات</div>
+                <div class="card-desc">متابعة كل طلبات الاستقدام من البداية إلى الإتمام النهائي</div>
+            </div>
+            <div class="about-card">
+                <div class="card-icon-wrap" style="background:#dbeafe">🗄️</div>
+                <div class="card-title">إدارة البيانات</div>
+                <div class="card-desc">قاعدة بيانات موحدة لكل المعاملات والوثائق والسجلات</div>
+            </div>
+            <div class="about-card">
+                <div class="card-icon-wrap" style="background:#fef3c7">🔔</div>
+                <div class="card-title">متابعة الحالات</div>
+                <div class="card-desc">إشعارات فورية وتتبع لحظي لكل مرحلة من مراحل الطلب</div>
+            </div>
+            <div class="about-card">
+                <div class="card-icon-wrap" style="background:#fce7f3">📊</div>
+                <div class="card-title">التقارير والإشعارات</div>
+                <div class="card-desc">تقارير تفصيلية وإشعارات ذكية تبقيك على اطلاع دائم</div>
             </div>
         </div>
     </div>
@@ -551,6 +528,43 @@
                 <div class="feature-icon" style="background:#ede9fe">🛡️</div>
                 <div class="feature-title">دعم فني متوفر</div>
                 <div class="feature-desc">فريق دعم متخصص على مدار الساعة لمساعدتك في أي وقت تحتاجه</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MULTI-DEVICE -->
+<section class="devices">
+    <div class="container">
+        <div class="devices-inner">
+            <div>
+                <div class="section-badge">📱 متعدد المنصات</div>
+                <h2 class="section-title">يعمل على جميع أجهزتك</h2>
+                <p class="section-sub">
+                    سواء كنت على الحاسوب أو الجوال أو الجهاز اللوحي، نظام ميري يوفر لك
+                    تجربة سلسة ومتكاملة في أي وقت ومن أي مكان.
+                </p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-top:1.5rem">
+                    <li style="display:flex;align-items:center;gap:.75rem;color:var(--text-mid);font-size:.95rem">
+                        <div style="width:24px;height:24px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green-700);font-size:.7rem;flex-shrink:0">✓</div>
+                        متوافق مع جميع أنواع الأجهزة والمتصفحات
+                    </li>
+                    <li style="display:flex;align-items:center;gap:.75rem;color:var(--text-mid);font-size:.95rem">
+                        <div style="width:24px;height:24px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green-700);font-size:.7rem;flex-shrink:0">✓</div>
+                        تصميم متجاوب يتكيف مع حجم شاشتك تلقائياً
+                    </li>
+                    <li style="display:flex;align-items:center;gap:.75rem;color:var(--text-mid);font-size:.95rem">
+                        <div style="width:24px;height:24px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green-700);font-size:.7rem;flex-shrink:0">✓</div>
+                        مزامنة فورية بين جميع أجهزتك في الوقت الحقيقي
+                    </li>
+                    <li style="display:flex;align-items:center;gap:.75rem;color:var(--text-mid);font-size:.95rem">
+                        <div style="width:24px;height:24px;background:var(--green-100);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green-700);font-size:.7rem;flex-shrink:0">✓</div>
+                        وصول سريع وآمن من أي مكان في العالم
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <img src="/images/multi-device.png" alt="نظام ميري على جميع الأجهزة" class="devices-img">
             </div>
         </div>
     </div>
