@@ -78,6 +78,7 @@
             justify-content: center; font-size: 1.3rem; font-weight: 900;
             color: var(--green-800); flex-shrink: 0;
         }
+        .logo-img { height: 44px; width: auto; display: block; filter: brightness(0) invert(1); }
         .logo-text { color: var(--white); font-size: 1.25rem; font-weight: 800; }
         .logo-sub { color: rgba(255,255,255,.6); font-size: .7rem; }
         .nav-links { display: flex; align-items: center; gap: .25rem; list-style: none; }
@@ -310,11 +311,7 @@
     <div class="container">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <div class="logo-icon">م</div>
-                <div>
-                    <div class="logo-text">نظام ميري</div>
-                    <div class="logo-sub">منصة الاستقدام الذكية</div>
-                </div>
+                <img src="/images/merry-logo.png" alt="نظام ميري" class="logo-img">
             </a>
 
             <ul class="nav-links">
@@ -707,9 +704,8 @@
     <div class="container">
         <div class="footer-inner">
             <div>
-                <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
-                    <div class="logo-icon" style="width:38px;height:38px;font-size:1.1rem">م</div>
-                    <div class="logo-text">نظام ميري</div>
+                <div style="margin-bottom:.5rem">
+                    <img src="/images/merry-logo.png" alt="نظام ميري" style="height:44px;width:auto;filter:brightness(0) invert(1)">
                 </div>
                 <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
                 <div class="footer-social">
