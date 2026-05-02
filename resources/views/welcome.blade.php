@@ -288,13 +288,26 @@
 
         /* About section — image + text layout */
         .about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem; }
-        .about-img-wrap img { width: 100%; border-radius: var(--radius-xl); filter: drop-shadow(0 20px 40px rgba(5,79,49,.15)); display: block; }
+        .about-img-wrap {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background: var(--green-50);
+            filter: drop-shadow(0 20px 40px rgba(5,79,49,.15));
+        }
+        .about-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: right center;
+            display: block;
+        }
         .about-cards-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
 
         /* Multi-device section */
         .devices { padding: 100px 0; background: var(--white); }
         .devices-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .devices-img { width: 100%; display: block; filter: drop-shadow(0 20px 50px rgba(5,79,49,.2)); }
+        .devices-img { width: 100%; display: block; border-radius: var(--radius-xl); background: var(--green-50); filter: drop-shadow(0 20px 50px rgba(5,79,49,.2)); }
 
         /* Responsive */
         @media (max-width: 1024px) {
