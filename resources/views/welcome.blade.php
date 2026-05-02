@@ -344,7 +344,7 @@
     <div class="container">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <img src="/images/merry-logo.png" alt="نظام ميري" class="logo-img">
+                <img src="/public/images/merry-logo.png" alt="نظام ميري" class="logo-img">
             </a>
 
             <ul class="nav-links">
@@ -428,7 +428,7 @@
                     </div>
                 </div>
 
-                <img src="/images/dashboard-mockup.png"
+                <img src="/public/images/dashboard-mockup.png"
                      alt="نظام ميري - لوحة التحكم"
                      class="hero-mockup-img">
 
@@ -449,7 +449,7 @@
     <div class="container">
         <div class="about-top">
             <div class="about-img-wrap">
-                <img src="/images/hero-users.png" alt="مستخدمو نظام ميري">
+                <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري">
             </div>
             <div>
                 <div class="section-badge">✨ عن التطبيق</div>
@@ -577,7 +577,7 @@
                 </ul>
             </div>
             <div>
-                <img src="/images/multi-device.png" alt="نظام ميري على جميع الأجهزة" class="devices-img">
+                <img src="/public/images/multi-device.png" alt="نظام ميري على جميع الأجهزة" class="devices-img">
             </div>
         </div>
     </div>
@@ -732,7 +732,7 @@
         <div class="footer-inner">
             <div>
                 <div style="margin-bottom:.5rem">
-                    <img src="/images/merry-logo.png" alt="نظام ميري" style="height:44px;width:auto;filter:brightness(0) invert(1)">
+                    <img src="/public/images/merry-logo.png" alt="نظام ميري" style="height:44px;width:auto;filter:brightness(0) invert(1)">
                 </div>
                 <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
                 <div class="footer-social">
@@ -815,3 +815,4 @@
 </script>
 </body>
 </html>
+
