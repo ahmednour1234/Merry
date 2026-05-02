@@ -181,7 +181,7 @@ class BookingResource extends Resource
                             ->success()
                             ->send();
                     })
-                    ->visible(fn (CvBooking $record) => $record->status === BookingStatus::PENDING->value),
+                    ->visible(fn ($record) => $record->status === BookingStatus::PENDING->value),
                 TableAction::make('reject')
                     ->label('رفض')
                     ->icon('heroicon-o-x-circle')
@@ -207,7 +207,7 @@ class BookingResource extends Resource
                             ->success()
                             ->send();
                     })
-                    ->visible(fn (CvBooking $record) => $record->status === BookingStatus::PENDING->value),
+                    ->visible(fn ($record) => $record->status === BookingStatus::PENDING->value),
             ])
             ->defaultSort('created_at', 'desc');
     }
