@@ -5,6 +5,17 @@
 
 @section('content')
 
+@if(session('success'))
+<div style="background:#d1fae5;border:1px solid #6ee7b7;color:#065f46;padding:0.75rem 1rem;border-radius:8px;margin-bottom:1rem;font-size:0.9rem;">
+    {{ session('success') }}
+</div>
+@endif
+@if(session('error'))
+<div style="background:#fee2e2;border:1px solid #fca5a5;color:#991b1b;padding:0.75rem 1rem;border-radius:8px;margin-bottom:1rem;font-size:0.9rem;">
+    {{ session('error') }}
+</div>
+@endif
+
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
     <div>
         <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">قائمة الحجوزات</h2>
@@ -70,10 +81,16 @@
                     <td style="color:#6b7280;font-size:0.82rem;">{{ $booking->created_at->format('Y-m-d') }}</td>
                     <td>
                         @if($booking->status === 'pending')
-                        <form method="POST" action="{{ route('office.bookings.reject', $booking->id) }}" onsubmit="return confirm('هل تريد رفض هذا الحجز؟')" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn-danger" style="padding:0.3rem 0.7rem;font-size:0.78rem;">رفض</button>
-                        </form>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                            <form method="POST" action="{{ route('office.bookings.accept', $booking->id) }}" onsubmit="return confirm('هل تريد قبول هذا الحجز؟')" style="display:inline;">
+                                @csrf
+                                <button type="submit" style="padding:0.3rem 0.7rem;font-size:0.78rem;background:#059669;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;">قبول</button>
+                            </form>
+                            <form method="POST" action="{{ route('office.bookings.reject', $booking->id) }}" onsubmit="return confirm('هل تريد رفض هذا الحجز؟')" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn-danger" style="padding:0.3rem 0.7rem;font-size:0.78rem;">رفض</button>
+                            </form>
+                        </div>
                         @else
                             <span style="color:#d1d5db;font-size:0.8rem;">—</span>
                         @endif

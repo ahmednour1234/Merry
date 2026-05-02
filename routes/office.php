@@ -68,6 +68,7 @@ Route::prefix('office')->name('office.')->group(function () {
         // Bookings
         Route::get('/bookings',              [BookingController::class, 'index'])->name('bookings.index');
         Route::post('/bookings/{id}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
+        Route::post('/bookings/{id}/accept', [BookingController::class, 'accept'])->name('bookings.accept');
 
         // Subscriptions (action routes already exist via web.php, keeping here too)
         Route::get('/subscriptions',                          [SubscriptionController::class, 'index'])->name('subscriptions.index');
