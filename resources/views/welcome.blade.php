@@ -197,19 +197,44 @@
         .aud-img { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); }
 
         /* ─── CTA ─── */
-        .cta { padding: 80px 0; background: linear-gradient(135deg, var(--green-800), var(--green-700)); position: relative; overflow: hidden; }
-        .cta::before { content: ''; position: absolute; width: 400px; height: 400px; background: rgba(255,255,255,.04); border-radius: 50%; top: -150px; left: -100px; }
-        .cta::after  { content: ''; position: absolute; width: 300px; height: 300px; background: rgba(255,255,255,.04); border-radius: 50%; bottom: -100px; right: -80px; }
-        .cta-inner { text-align: center; position: relative; z-index: 1; }
-        .cta-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .cta-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--white); margin-bottom: .75rem; }
-        .cta-sub { font-size: 1rem; color: rgba(255,255,255,.8); line-height: 1.85; margin-bottom: 2rem; }
-        .cta-actions { display: flex; justify-content: center; gap: .85rem; flex-wrap: wrap; }
-        .cta-btn-white { background: var(--white); color: var(--green-800); padding: .75rem 2rem; border-radius: 50px; font-size: .95rem; font-weight: 700; font-family: 'Tajawal',sans-serif; text-decoration: none; border: none; cursor: pointer; transition: all .25s; display: inline-flex; align-items: center; gap: .4rem; }
-        .cta-btn-white:hover { background: var(--green-100); transform: translateY(-2px); }
-        .cta-btn-outline { background: transparent; color: var(--white); padding: .75rem 2rem; border-radius: 50px; font-size: .95rem; font-weight: 700; font-family: 'Tajawal',sans-serif; text-decoration: none; border: 1.5px solid rgba(255,255,255,.5); cursor: pointer; transition: all .25s; display: inline-flex; align-items: center; gap: .4rem; }
-        .cta-btn-outline:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
-        .cta-note { margin-top: 1rem; font-size: .82rem; color: rgba(255,255,255,.4); }
+        .cta { padding: 40px 0; background: var(--green-50); }
+        .cta-card {
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 4px 24px rgba(5,79,49,.07);
+        }
+        .cta-shield {
+            flex-shrink: 0;
+            width: 64px; height: 64px;
+            background: var(--green-700);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+        }
+        .cta-text { flex: 1; min-width: 0; }
+        .cta-title { font-size: 1.25rem; font-weight: 900; color: var(--text-dark); margin-bottom: .3rem; }
+        .cta-sub { font-size: .87rem; color: var(--text-light); line-height: 1.65; }
+        .cta-divider { width: 1px; height: 60px; background: var(--border); flex-shrink: 0; }
+        .cta-stats { display: flex; align-items: center; gap: 0; flex-shrink: 0; }
+        .cta-stat {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 0 1.5rem; gap: .35rem;
+            border-left: 1px solid var(--border);
+        }
+        .cta-stat:last-child { border-left: none; }
+        .cta-stat-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem; margin-bottom: .15rem;
+        }
+        .cta-stat-label { font-size: .82rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; }
+        .cta-stat-desc { font-size: .75rem; color: var(--text-light); white-space: nowrap; }
 
         /* ─── FOOTER ─── */
         footer { background: var(--green-900); padding: 60px 0 28px; }
@@ -527,18 +552,35 @@
 <!-- CTA -->
 <section class="cta" id="contact">
     <div class="container">
-        <div class="cta-inner">
-            <div class="cta-icon">🛡️</div>
-            <h2 class="cta-title">نظام متكامل.. لإدارة أفضل</h2>
-            <p class="cta-sub">
-                انضم إلى أكثر من 500 مكتب استقدام يستخدمون نظام ميري يومياً<br>
-                وابدأ رحلتك نحو عمل أكثر احترافية وكفاءة
-            </p>
-            <div class="cta-actions">
-                <a href="#" class="cta-btn-white">🚀 ابدأ مجاناً الآن</a>
-                <a href="tel:+966000000000" class="cta-btn-outline">📞 تواصل معنا</a>
+        <div class="cta-card">
+            <div class="cta-shield">🛡️</div>
+            <div class="cta-text">
+                <h2 class="cta-title">نظام متكامل.. لإدارة أفضل</h2>
+                <p class="cta-sub">انضم إلى أكثر من 500 مكتب استقدام يستخدمون نظام ميري يومياً وابدأ رحلتك نحو عمل أكثر احترافية</p>
             </div>
-            <p class="cta-note">لا يلزم بطاقة ائتمانية · تجربة مجانية 14 يوم</p>
+            <div class="cta-divider"></div>
+            <div class="cta-stats">
+                <div class="cta-stat">
+                    <div class="cta-stat-icon" style="background:#dcfce7">👥</div>
+                    <span class="cta-stat-label">كامل الدعم</span>
+                    <span class="cta-stat-desc">فريق متخصص</span>
+                </div>
+                <div class="cta-stat">
+                    <div class="cta-stat-icon" style="background:#fef3c7">⏰</div>
+                    <span class="cta-stat-label">متاح طوال 24 سا</span>
+                    <span class="cta-stat-desc">دعم مستمر</span>
+                </div>
+                <div class="cta-stat">
+                    <div class="cta-stat-icon" style="background:#dbeafe">⚡</div>
+                    <span class="cta-stat-label">سهولة الاستخدام</span>
+                    <span class="cta-stat-desc">واجهة بسيطة</span>
+                </div>
+                <div class="cta-stat">
+                    <div class="cta-stat-icon" style="background:#f0fdf4">📊</div>
+                    <span class="cta-stat-label">تقارير شاملة</span>
+                    <span class="cta-stat-desc">بيانات دقيقة</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
