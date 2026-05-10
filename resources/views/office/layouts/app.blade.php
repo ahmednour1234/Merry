@@ -57,7 +57,7 @@
         .pagination-wrap .active-page{background:#054F31;color:#fff;border-color:#054F31}
         /* MOBILE */
         @media(max-width:767px){
-            #sidebar{position:fixed;right:0;top:0;bottom:0;z-index:150;transform:translateX(110%);transition:transform .28s ease}
+            #sidebar{z-index:150!important;transform:translateX(110%);transition:transform .28s ease}
             #sidebar.open{transform:translateX(0)}
         }
     </style>
@@ -80,12 +80,12 @@
     }catch(\Exception $e){$__phone='+966 50 123 4567';$__supportEmail='support@merry.com';}
 @endphp
 
-<div style="display:flex;height:100vh;overflow:hidden;">
+<div>
 
     {{-- ══════════════════════════════════════════
          SIDEBAR
     ══════════════════════════════════════════ --}}
-    <aside id="sidebar" style="width:260px;flex-shrink:0;display:flex;flex-direction:column;height:100vh;background:#fff;border-left:1px solid #e8ecf0;overflow-y:auto;overflow-x:hidden;">
+    <aside id="sidebar" style="position:fixed;right:0;top:0;width:260px;height:100vh;z-index:100;display:flex;flex-direction:column;background:#fff;border-left:1px solid #e8ecf0;overflow-y:auto;overflow-x:hidden;">
 
         {{-- Office Header --}}
         <div style="background:linear-gradient(135deg,#054F31,#0a6b42);padding:1.25rem;display:flex;align-items:center;gap:.875rem;">
@@ -222,7 +222,7 @@
     {{-- ══════════════════════════════════════════
          MAIN: navbar (dark green) + content
     ══════════════════════════════════════════ --}}
-    <div style="flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;background:#f4f6f9;">
+    <div id="main-wrapper" style="margin-right:260px;display:flex;flex-direction:column;height:100vh;overflow:hidden;background:#f4f6f9;">
 
         {{-- TOP NAVBAR --}}
         <header style="flex-shrink:0;height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;position:relative;z-index:100;overflow:visible;">
@@ -419,7 +419,8 @@
         .nav-brand-text{display:none!important}
         .user-detail{display:none!important}
         .user-chevron{display:none!important}
-        aside#sidebar{position:fixed!important;right:0;top:0;bottom:0;z-index:150;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
+        #main-wrapper{margin-right:0!important}
+        aside#sidebar{z-index:150!important;transform:translateX(110%);transition:transform .28s ease}
         aside#sidebar.open{transform:translateX(0)!important}
         #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
         #user-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
