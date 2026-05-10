@@ -49,7 +49,8 @@
                     <th>ID</th>
                     <th>رقم السيرة</th>
                     <th>الجنسية</th>
-                    <th>رقم العميل</th>
+                    <th>اسم العميل</th>
+                    <th>رقم الهاتف</th>
                     <th>الحالة</th>
                     <th>ملاحظة</th>
                     <th>التاريخ</th>
@@ -63,6 +64,8 @@
                             ?? $booking->cv?->nationality?->translations->first()?->name
                             ?? $booking->cv?->nationality_code;
 
+                    $endUser = $endUsers[$booking->end_user_id] ?? null;
+
                     $statusMap = [
                         'pending'   => ['label'=>'قيد الانتظار','class'=>'badge-warning'],
                         'accepted'  => ['label'=>'مقبول',       'class'=>'badge-success'],
@@ -75,7 +78,8 @@
                     <td style="font-weight:700;">{{ $booking->id }}</td>
                     <td>CV #{{ $booking->cv_id }}</td>
                     <td>{{ $natName ?? '—' }}</td>
-                    <td style="color:#6b7280;">#{{ $booking->end_user_id }}</td>
+                    <td style="font-weight:600;color:#111827;">{{ $endUser?->name ?? '—' }}</td>
+                    <td style="color:#6b7280;direction:ltr;text-align:right;">{{ $endUser?->phone ?? '—' }}</td>
                     <td><span class="badge {{ $st['class'] }}">{{ $st['label'] }}</span></td>
                     <td style="font-size:0.82rem;color:#6b7280;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ $booking->note ?? '—' }}</td>
                     <td style="color:#6b7280;font-size:0.82rem;">{{ $booking->created_at->format('Y-m-d') }}</td>

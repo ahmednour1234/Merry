@@ -28,7 +28,13 @@ class BookingController extends Controller
 
         $bookings = $query->paginate(15)->withQueryString();
 
-        return view('office.bookings.index', compact('bookings'));
+        // Fetch end-user data separately (different DB connection)
+        $endUserIds = $bookings->pluck('end_user_id')->filter()->unique()->values();
+        $endUsers = \App\Models\Identity\EndUser::whereIn('id', $endUserIds)
+            ->get(['id', 'name', 'phone'])
+            ->keyBy('id');
+
+        return view('office.bookings.index', compact('bookings', 'endUsers'));
     }
 
     public function accept($id)
