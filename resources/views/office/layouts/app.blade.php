@@ -154,6 +154,16 @@
                 التقارير
             </a>
 
+            <a href="{{ route('office.notifications.index') }}" class="nav-link {{ request()->routeIs('office.notifications*')?'active':'' }}">
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ request()->routeIs('office.notifications*') ? 'linear-gradient(135deg,#054F31,#0a6b42)' : '#f3f4f6' }};display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;position:relative;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="{{ request()->routeIs('office.notifications*') ? 'white' : '#6b7280' }}" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+                    @if(isset($unreadCount) && $unreadCount > 0)
+                        <span style="position:absolute;top:-3px;left:-3px;width:14px;height:14px;background:#ef4444;color:#fff;font-size:.55rem;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff;">{{ $unreadCount > 9 ? '9+' : $unreadCount }}</span>
+                    @endif
+                </div>
+                الإشعارات
+            </a>
+
         </nav>
 
         {{-- Subscription + Support --}}
@@ -217,8 +227,12 @@
         {{-- TOP NAVBAR --}}
         <header style="flex-shrink:0;height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;position:relative;z-index:100;overflow:visible;">
 
-            {{-- Right: logo text (RTL = first) --}}
+            {{-- Right: hamburger (mobile) + logo text (RTL = first) --}}
             <div style="display:flex;align-items:center;gap:.875rem;">
+                {{-- Hamburger button (mobile only) - placed on the RIGHT side in RTL --}}
+                <button onclick="openSidebar()" id="hamburger" style="color:#fff;background:none;border:none;cursor:pointer;display:none;padding:4px;border-radius:8px;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='transparent'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+                </button>
                 <div style="width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
                 </div>
@@ -385,10 +399,7 @@
                     </div>
                 </div>
 
-                {{-- Hamburger (mobile) --}}
-                <button onclick="openSidebar()" id="hamburger" style="color:#fff;background:none;border:none;cursor:pointer;display:none;padding:0;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:22px;height:22px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-                </button>
+
             </div>
         </header>
 
@@ -411,7 +422,7 @@
         aside#sidebar{position:fixed!important;right:0;top:0;bottom:0;z-index:150;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
         aside#sidebar.open{transform:translateX(0)!important}
         #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
-        #user-panel{width:calc(100vw - 2rem)!important;left:1rem!important;}
+        #user-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
         header{padding:0 .875rem!important}
         #user-wrap button{gap:.4rem!important}
     }
@@ -430,6 +441,8 @@ function toggleUser(e){
 function toggleNotif(e){
     e.stopPropagation();
     var p=document.getElementById('notif-panel');
+    var u=document.getElementById('user-panel');
+    if(u) u.style.display='none';
     p.style.display = p.style.display==='none'?'block':'none';
 }
 document.addEventListener('click',function(e){
@@ -437,6 +450,14 @@ document.addEventListener('click',function(e){
     var uw=document.getElementById('user-wrap');
     if(nw && !nw.contains(e.target)){var p=document.getElementById('notif-panel');if(p) p.style.display='none';}
     if(uw && !uw.contains(e.target)){var p=document.getElementById('user-panel');if(p) p.style.display='none';}
+});
+// Close sidebar on mobile when a nav link is clicked
+document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('#sidebar .nav-link').forEach(function(link){
+        link.addEventListener('click',function(){
+            if(window.innerWidth<=767) closeSidebar();
+        });
+    });
 });
 </script>
 @stack('scripts')
