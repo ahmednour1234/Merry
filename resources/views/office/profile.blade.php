@@ -5,13 +5,14 @@
 
 @section('content')
 
-<div style="max-width:700px;">
+<div style="display:flex;justify-content:center;padding-top:.5rem;">
+<div style="width:100%;max-width:700px;">
     <div style="background:#fff;border-radius:12px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
 
         {{-- Avatar & name header --}}
         <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid #f3f4f6;">
             @if($office->image)
-                <img src="{{ asset('storage/'.$office->image) }}" alt="{{ $office->name }}"
+                <img src="{{ $office->image_url }}" alt="{{ $office->name }}"
                      style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #054F31;">
             @else
                 <div style="width:72px;height:72px;border-radius:50%;background:#e8f5ef;display:flex;align-items:center;justify-content:center;border:3px solid #054F31;font-size:1.75rem;font-weight:800;color:#054F31;">
@@ -95,6 +96,5 @@
             </div>
         </form>
     </div>
+    </div>
 </div>
-
-@endsection
