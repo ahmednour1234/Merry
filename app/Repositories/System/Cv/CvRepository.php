@@ -121,8 +121,8 @@ class CvRepository implements CvRepositoryInterface
         if ($cv->office_id) {
             $notification = $this->notificationService->createNotification([
                 'type' => 'cv.approved',
-                'title' => 'CV Approved',
-                'body' => "Your CV has been approved.",
+                'title' => 'تمت الموافقة على السيرة الذاتية',
+                'body' => 'تمت الموافقة على السيرة الذاتية المرفوعة بنجاح.',
                 'data' => ['cv_id' => $cv->id],
                 'priority' => 'normal',
                 'created_by' => $adminId,
@@ -148,8 +148,8 @@ class CvRepository implements CvRepositoryInterface
         if ($cv->office_id) {
             $notification = $this->notificationService->createNotification([
                 'type' => 'cv.rejected',
-                'title' => 'CV Rejected',
-                'body' => "Your CV has been rejected. Reason: {$reason}",
+                'title' => 'تم رفض السيرة الذاتية',
+                'body' => "تم رفض السيرة الذاتية المرفوعة. السبب: {$reason}",
                 'data' => ['cv_id' => $cv->id, 'reason' => $reason],
                 'priority' => 'normal',
                 'created_by' => $adminId,
@@ -173,8 +173,8 @@ class CvRepository implements CvRepositoryInterface
         if ($cv->office_id) {
             $notification = $this->notificationService->createNotification([
                 'type' => 'cv.frozen',
-                'title' => 'CV Frozen',
-                'body' => "Your CV has been frozen.",
+                'title' => 'تم تجميد السيرة الذاتية',
+                'body' => 'تم تجميد السيرة الذاتية مؤقتاً من قِبل الإدارة.',
                 'data' => ['cv_id' => $cv->id],
                 'priority' => 'normal',
                 'created_by' => $adminId,
@@ -199,8 +199,8 @@ class CvRepository implements CvRepositoryInterface
         if ($cv->office_id) {
             $notification = $this->notificationService->createNotification([
                 'type' => 'cv.unfrozen',
-                'title' => 'CV Unfrozen',
-                'body' => "Your CV has been unfrozen and is pending review.",
+                'title' => 'تم إلغاء تجميد السيرة الذاتية',
+                'body' => 'تم إلغاء تجميد السيرة الذاتية وهي الآن قيد المراجعة.',
                 'data' => ['cv_id' => $cv->id],
                 'priority' => 'normal',
                 'created_by' => $adminId,

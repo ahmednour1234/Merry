@@ -23,6 +23,33 @@
     @php
         $isRead = $nr->status === 'read';
         $notif  = $nr->notification;
+
+        // Translation map for legacy English notifications stored in DB
+        $titleMap = [
+            'CV Approved'       => 'تمت الموافقة على السيرة الذاتية',
+            'CV Rejected'       => 'تم رفض السيرة الذاتية',
+            'CV Frozen'         => 'تم تجميد السيرة الذاتية',
+            'CV Unfrozen'       => 'تم إلغاء تجميد السيرة الذاتية',
+            'New CV Submitted'  => 'تم رفع سيرة ذاتية جديدة',
+            'Export ready'      => 'التصدير جاهز',
+        ];
+        $bodyMap = [
+            'Your CV has been approved.'                            => 'تمت الموافقة على السيرة الذاتية المرفوعة بنجاح.',
+            'Your CV has been frozen.'                              => 'تم تجميد السيرة الذاتية مؤقتاً من قِبل الإدارة.',
+            'Your CV has been unfrozen and is pending review.'      => 'تم إلغاء تجميد السيرة الذاتية وهي الآن قيد المراجعة.',
+            'A new CV has been submitted and is pending review.'    => 'تم رفع سيرة ذاتية جديدة وهي قيد المراجعة.',
+            'Your export is ready to download.'                     => 'ملف التصدير جاهز للتحميل.',
+        ];
+
+        $displayTitle = $titleMap[$notif?->title] ?? $notif?->title ?? 'إشعار';
+        $rawBody      = $notif?->body ?? '';
+        // Handle "CV Rejected" body which contains dynamic reason text
+        if (str_starts_with($rawBody, 'Your CV has been rejected. Reason:')) {
+            $reason       = trim(str_replace('Your CV has been rejected. Reason:', '', $rawBody));
+            $displayBody  = 'تم رفض السيرة الذاتية. السبب: ' . $reason;
+        } else {
+            $displayBody = $bodyMap[$rawBody] ?? $rawBody;
+        }
     @endphp
     <div style="background:#fff;border-radius:10px;padding:1.1rem 1.25rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);display:flex;align-items:flex-start;gap:1rem;border-right:4px solid {{ $isRead ? '#e5e7eb' : '#054F31' }};">
         <div style="flex:1;">
@@ -31,11 +58,11 @@
                     <span style="width:8px;height:8px;background:#054F31;border-radius:50%;flex-shrink:0;"></span>
                 @endif
                 <div style="font-size:0.95rem;font-weight:{{ $isRead ? '500' : '700' }};color:#111827;">
-                    {{ $notif?->title_ar ?? $notif?->title ?? 'إشعار' }}
+                    {{ $displayTitle }}
                 </div>
             </div>
-            @if($notif?->body_ar ?? $notif?->body)
-                <div style="font-size:0.85rem;color:#6b7280;line-height:1.6;">{{ $notif->body_ar ?? $notif->body }}</div>
+            @if($displayBody)
+                <div style="font-size:0.85rem;color:#6b7280;line-height:1.6;">{{ $displayBody }}</div>
             @endif
             <div style="font-size:0.77rem;color:#9ca3af;margin-top:0.4rem;">
                 {{ $nr->created_at?->diffForHumans() ?? '—' }}
