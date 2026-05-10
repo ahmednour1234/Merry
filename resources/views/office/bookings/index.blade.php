@@ -84,20 +84,27 @@
                     <td style="font-size:0.82rem;color:#6b7280;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ $booking->note ?? '—' }}</td>
                     <td style="color:#6b7280;font-size:0.82rem;">{{ $booking->created_at->format('Y-m-d') }}</td>
                     <td>
-                        @if($booking->status === 'pending')
-                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
-                            <form method="POST" action="{{ route('office.bookings.accept', $booking->id) }}" onsubmit="return confirm('هل تريد قبول هذا الحجز؟')" style="display:inline;">
-                                @csrf
-                                <button type="submit" style="padding:0.3rem 0.7rem;font-size:0.78rem;background:#059669;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;">قبول</button>
-                            </form>
-                            <form method="POST" action="{{ route('office.bookings.reject', $booking->id) }}" onsubmit="return confirm('هل تريد رفض هذا الحجز؟')" style="display:inline;">
-                                @csrf
-                                <button type="submit" class="btn-danger" style="padding:0.3rem 0.7rem;font-size:0.78rem;">رفض</button>
-                            </form>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
+                            @if($booking->cv_id)
+                                <a href="{{ route('office.cvs.download', $booking->cv_id) }}"
+                                   title="تحميل السيرة الذاتية"
+                                   style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.65rem;font-size:0.78rem;background:#e8f5e9;color:#054F31;border:1px solid #a7f3d0;border-radius:6px;font-weight:600;text-decoration:none;transition:background .15s;"
+                                   onmouseover="this.style.background='#d1fae5'" onmouseout="this.style.background='#e8f5e9'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:13px;height:13px;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                                    CV
+                                </a>
+                            @endif
+                            @if($booking->status === 'pending')
+                                <form method="POST" action="{{ route('office.bookings.accept', $booking->id) }}" onsubmit="return confirm('هل تريد قبول هذا الحجز؟')" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" style="padding:0.3rem 0.7rem;font-size:0.78rem;background:#059669;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;">قبول</button>
+                                </form>
+                                <form method="POST" action="{{ route('office.bookings.reject', $booking->id) }}" onsubmit="return confirm('هل تريد رفض هذا الحجز؟')" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn-danger" style="padding:0.3rem 0.7rem;font-size:0.78rem;">رفض</button>
+                                </form>
+                            @endif
                         </div>
-                        @else
-                            <span style="color:#d1d5db;font-size:0.8rem;">—</span>
-                        @endif
                     </td>
                 </tr>
                 @endforeach
