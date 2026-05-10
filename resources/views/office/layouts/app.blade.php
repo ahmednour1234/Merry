@@ -222,10 +222,10 @@
     {{-- ══════════════════════════════════════════
          MAIN: navbar (dark green) + content
     ══════════════════════════════════════════ --}}
-    <div id="main-wrapper" style="margin-right:260px;display:flex;flex-direction:column;height:100vh;overflow:hidden;background:#f4f6f9;">
+    <div id="main-wrapper">
 
-        {{-- TOP NAVBAR --}}
-        <header style="flex-shrink:0;height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;position:relative;z-index:100;overflow:visible;">
+        {{-- TOP NAVBAR: fixed beside the sidebar --}}
+        <header id="topnav" style="position:fixed;right:260px;top:0;width:calc(100% - 260px);height:64px;background:#054F31;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;z-index:99;overflow:visible;">
 
             {{-- Right: hamburger (mobile) + logo text (RTL = first) --}}
             <div style="display:flex;align-items:center;gap:.875rem;">
@@ -403,15 +403,14 @@
             </div>
         </header>
 
-        {{-- CONTENT --}}
-        <main style="flex:1;overflow-y:auto;padding:1.25rem 1.5rem 2rem;background:#f4f6f9;">
+        {{-- CONTENT: fixed beside sidebar, under header --}}
+        <main id="main-area" style="position:fixed;right:260px;top:64px;width:calc(100% - 260px);height:calc(100vh - 64px);overflow-y:auto;padding:1.25rem 1.5rem 2rem;background:#f4f6f9;">
             @if(session('success'))<div class="alert alert-success" style="margin-bottom:1rem;">{{ session('success') }}</div>@endif
             @if(session('error'))<div class="alert alert-error" style="margin-bottom:1rem;">{{ session('error') }}</div>@endif
             @if(session('warning'))<div class="alert alert-warning" style="margin-bottom:1rem;">{{ session('warning') }}</div>@endif
             @yield('content')
         </main>
     </div>
-</div>
 
 <style>
     @media(max-width:767px){
@@ -419,12 +418,13 @@
         .nav-brand-text{display:none!important}
         .user-detail{display:none!important}
         .user-chevron{display:none!important}
-        #main-wrapper{margin-right:0!important}
-        aside#sidebar{z-index:150!important;transform:translateX(110%);transition:transform .28s ease}
+        aside#sidebar{z-index:150!important;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
         aside#sidebar.open{transform:translateX(0)!important}
+        #topnav{right:0!important;width:100%!important}
+        #main-area{right:0!important;width:100%!important}
         #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
         #user-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
-        header{padding:0 .875rem!important}
+        #topnav{padding:0 .875rem!important}
         #user-wrap button{gap:.4rem!important}
     }
     @keyframes notifSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
