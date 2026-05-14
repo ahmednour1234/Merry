@@ -97,7 +97,71 @@
         .stat-item:last-child { border-left: none; }
         .stat-num { font-size: 1.6rem; font-weight: 900; color: var(--green-800); display: block; }
         .stat-label { font-size: .76rem; color: var(--text-light); margin-top: .1rem; display: block; }
-        .hero-img-wrap img { width: 100%; display: block; }
+        .hero-img-wrap { position: relative; }
+
+        /* ─── HERO DASHBOARD MOCKUP ─── */
+        .hero-dash-mockup {
+            background: var(--white); border-radius: var(--radius-xl);
+            box-shadow: 0 24px 60px rgba(5,79,49,.18);
+            overflow: hidden; border: 1.5px solid var(--border);
+            max-width: 420px; margin: 0 auto;
+        }
+        .hdm-bar {
+            background: var(--green-800); padding: .9rem 1.25rem;
+            display: flex; align-items: center; gap: .65rem;
+            color: var(--white); font-size: .9rem; font-weight: 700;
+        }
+        .hdm-logo {
+            width: 30px; height: 30px; background: var(--white); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .9rem; font-weight: 900; color: var(--green-800); flex-shrink: 0;
+        }
+        .hdm-dot { margin-right: auto; width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+        .hdm-stats {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            padding: .85rem; gap: .6rem; background: var(--green-50); border-bottom: 1px solid var(--border);
+        }
+        .hdm-stat {
+            text-align: center; padding: .6rem .4rem;
+            background: var(--white); border-radius: .75rem; border: 1px solid var(--green-100);
+        }
+        .hdm-stat span { display: block; font-size: 1.05rem; font-weight: 900; color: var(--green-800); }
+        .hdm-stat small { font-size: .65rem; color: var(--text-light); }
+        .hdm-card {
+            display: flex; align-items: center; gap: .8rem;
+            padding: .85rem 1.25rem; border-bottom: 1px solid var(--border);
+        }
+        .hdm-card-icon { font-size: 1.35rem; flex-shrink: 0; }
+        .hdm-card-body { flex: 1; min-width: 0; }
+        .hdm-card-body b { display: block; font-size: .88rem; font-weight: 700; color: var(--text-dark); }
+        .hdm-card-body small { font-size: .75rem; color: var(--text-light); }
+        .hdm-badge {
+            font-size: .7rem; font-weight: 700; color: var(--green-800);
+            background: var(--green-100); padding: .2rem .55rem; border-radius: 50px; flex-shrink: 0;
+        }
+        .hdm-badge-warn { background: #fef3c7; color: #92400e; }
+        .hdm-action {
+            margin: .9rem 1.25rem 1rem; background: var(--green-700); color: var(--white);
+            padding: .7rem 1rem; border-radius: 50px; text-align: center;
+            font-size: .9rem; font-weight: 700;
+        }
+
+        /* ─── AUDIENCE ILLUSTRATION CARDS ─── */
+        .aud-illus-card {
+            background: var(--green-50); border: 1.5px solid var(--green-100);
+            border-radius: var(--radius-lg); padding: 1.5rem 1rem; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: .85rem;
+            width: 100%; height: 100%;
+        }
+        .aud-illus-icon {
+            width: 72px; height: 72px; border-radius: 18px;
+            background: var(--green-700); display: flex; align-items: center;
+            justify-content: center; font-size: 2rem;
+        }
+        .aud-illus-card p { font-size: .88rem; color: var(--text-mid); line-height: 1.65; font-weight: 600; }
+        .aud-illus-card.dark { background: var(--green-800); border-color: var(--green-700); }
+        .aud-illus-card.dark p { color: rgba(255,255,255,.8); }
+        .aud-illus-card.dark .aud-illus-icon { background: rgba(255,255,255,.15); }
 
         /* ─── SECTION COMMONS ─── */
         .section-head { text-align: center; margin-bottom: 3.5rem; }
@@ -276,6 +340,11 @@
         .d2 { animation-delay: .24s; opacity:0; }
         .d3 { animation-delay: .36s; opacity:0; }
         .d4 { animation-delay: .48s; opacity:0; }
+        /* Ensure visibility when animation is disabled or not supported */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-up { animation: none !important; }
+            .d1, .d2, .d3, .d4 { opacity: 1 !important; }
+        }
 
         /* ─── MOBILE BOTTOM NAV ─── */
         .mobile-bottom-nav {
@@ -335,7 +404,7 @@
             /* Hero */
             .hero { padding: 84px 0 36px; }
             .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
-            .hero-img-wrap { order: -1; max-width: 280px; margin: 0 auto; }
+            .hero-img-wrap { order: -1; max-width: 360px; margin: 0 auto; }
             .hero-actions { justify-content: center; }
             .hero-label { margin-bottom: 1rem; }
             .hero-stats { flex-wrap: wrap; gap: 0; }
@@ -443,7 +512,7 @@
     <div class="container">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <img src="/public/images/merry-logo.png" alt="نظام ميري">
+                <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
                 <span class="nav-logo-text">نظام ميري</span>
             </a>
             <ul class="nav-links">
@@ -533,7 +602,34 @@
                 </div>
             </div>
             <div class="hero-img-wrap">
-                <img src="/public/images/multi-device.png" alt="نظام ميري على جميع الأجهزة">
+                <div class="hero-dash-mockup">
+                    <div class="hdm-bar">
+                        <div class="hdm-logo">م</div>
+                        <span>نظام ميري</span>
+                        <span class="hdm-dot"></span>
+                    </div>
+                    <div class="hdm-stats">
+                        <div class="hdm-stat"><span>+500</span><small>مكتب</small></div>
+                        <div class="hdm-stat"><span>+10K</span><small>طلب</small></div>
+                        <div class="hdm-stat"><span>99%</span><small>رضا</small></div>
+                    </div>
+                    <div class="hdm-card">
+                        <span class="hdm-card-icon">📋</span>
+                        <div class="hdm-card-body"><b>طلبات نشطة</b><small>12 طلب قيد المعالجة</small></div>
+                        <span class="hdm-badge">نشط</span>
+                    </div>
+                    <div class="hdm-card">
+                        <span class="hdm-card-icon">🔔</span>
+                        <div class="hdm-card-body"><b>إشعارات جديدة</b><small>3 إشعارات في انتظارك</small></div>
+                        <span class="hdm-badge hdm-badge-warn">3</span>
+                    </div>
+                    <div class="hdm-card">
+                        <span class="hdm-card-icon">📊</span>
+                        <div class="hdm-card-body"><b>التقرير الشهري</b><small>مايو 2026 — جاهز</small></div>
+                        <span class="hdm-badge">عرض</span>
+                    </div>
+                    <div class="hdm-action">🚀 فتح لوحة التحكم</div>
+                </div>
             </div>
         </div>
     </div>
@@ -675,7 +771,11 @@
             <!-- للمستخدمين — left panel -->
             <div class="aud-panel-users">
                 <div class="aud-img-wrap">
-                    <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" class="aud-img">
+                    <div class="aud-illus-card">
+                        <div class="aud-illus-icon">📱</div>
+                        <p>تابع طلبك
+                        في أي وقت ومكان</p>
+                    </div>
                 </div>
                 <div class="aud-content">
                     <h2 class="aud-title">للمستخدمين</h2>
@@ -709,7 +809,11 @@
                     </ul>
                 </div>
                 <div class="aud-img-wrap">
-                    <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم المكتب" class="aud-img">
+                    <div class="aud-illus-card dark">
+                        <div class="aud-illus-icon">🏢</div>
+                        <p>إدارة متكاملة
+                        لكل أعمالك</p>
+                    </div>
                 </div>
             </div>
 
@@ -759,7 +863,7 @@
         <div class="footer-inner">
             <div>
                 <div class="footer-logo">
-                    <img src="/public/images/merry-logo.png" alt="نظام ميري">
+                    <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
                     <span class="footer-logo-text">نظام ميري</span>
                 </div>
                 <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
