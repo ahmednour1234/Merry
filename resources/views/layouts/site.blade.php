@@ -176,17 +176,14 @@
                 <span class="nav-logo-text">نظام ميري</span>
             </a>
             <ul class="nav-links">
-                <li><a href="/">الرئيسية</a></li>
+                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">الرئيسية</a></li>
                 <li><a href="/#about">عن التطبيق</a></li>
                 <li><a href="/#features">الخدمات</a></li>
-                <li><a href="/#audience">للمكاتب</a></li>
-                <li><a href="/#audience">المستخدمين</a></li>
-                <li><a href="/#how">كيف يعمل النظام</a></li>
+                <li><a href="/#audience">لمن هو؟</a></li>
                 <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">تواصل معنا</a></li>
             </ul>
             <div class="nav-cta">
-                <a href="/office/login" class="nav-btn nav-btn-outline">دخول المكتب</a>
-                <a href="/download" class="nav-btn nav-btn-solid">📲 تنزيل التطبيق</a>
+                <a href="/office/login" class="nav-btn nav-btn-outline">انضم كمكتب</a>
             </div>
         </div>
     </div>
@@ -198,9 +195,13 @@
         <span class="mob-nav-icon">🏠</span>
         <span>الرئيسية</span>
     </a>
-    <a href="{{ route('about') }}" class="mob-nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
+    <a href="/#about" class="mob-nav-item">
         <span class="mob-nav-icon">✨</span>
         <span>التطبيق</span>
+    </a>
+    <a href="/#features" class="mob-nav-item">
+        <span class="mob-nav-icon">⚡</span>
+        <span>الخدمات</span>
     </a>
     <a href="{{ route('contact') }}" class="mob-nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
         <span class="mob-nav-icon">✉️</span>
@@ -208,9 +209,9 @@
     </a>
     <a href="/office/login" class="mob-nav-item {{ request()->is('office/login') ? 'active' : '' }}">
         <span class="mob-nav-icon">🏢</span>
-        <span>المكتب</span>
+        <span>انضم كمكتب</span>
     </a>
-    <a href="/download" class="mob-nav-item mob-nav-download {{ request()->routeIs('download') ? 'active' : '' }}">
+    <a href="#download" class="mob-nav-item mob-nav-download">
         <span class="mob-nav-icon">📲</span>
         <span>تنزيل</span>
     </a>

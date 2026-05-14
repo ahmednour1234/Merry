@@ -597,7 +597,7 @@
                 <li><a href="/contact">تواصل معنا</a></li>
             </ul>
             <div class="nav-cta">
-                <a href="/office/login" class="nav-btn nav-btn-outline">دخول المكتب</a>
+                <a href="/office/login" class="nav-btn nav-btn-outline">انضم كمكتب</a>
             </div>
         </div>
     </div>
@@ -623,7 +623,7 @@
     </a>
     <a href="/office/login" class="mob-nav-item">
         <span class="mob-nav-icon">🏢</span>
-        <span>المكتب</span>
+        <span>انضم كمكتب</span>
     </a>
     <a href="#download" class="mob-nav-item mob-nav-download">
         <span class="mob-nav-icon">📲</span>
