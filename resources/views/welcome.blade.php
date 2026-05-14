@@ -114,6 +114,7 @@
         /* ─── ABOUT ─── */
         /* ─── SECTION SPACING ─── */
         .about, .features, .how, .audience, .dl-section, .cta { margin-top: 32px; }
+        footer { margin-top: 48px; }
 
         .about { padding: 90px 0; background: var(--white); }
         .about-desc { font-size: .97rem; color: var(--text-mid); line-height: 1.9; max-width: 680px; margin: 0 auto 3rem; text-align: center; }
@@ -337,6 +338,7 @@
             width: 100%; height: auto; display: block;
             filter: drop-shadow(0 24px 48px rgba(0,0,0,.4));
         }
+        .cta { padding: 60px 0; background: var(--green-50); }
         .cta-card {
             background: var(--white);
             border: 1.5px solid var(--border);
@@ -455,6 +457,7 @@
 
             /* Spacing */
             .about, .features, .how, .audience, .dl-section, .cta { margin-top: 16px; }
+            footer { margin-top: 24px; }
 
             /* Hero */
             .hero { padding: 84px 0 36px; }
