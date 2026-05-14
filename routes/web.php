@@ -2,10 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Static pages
+Route::get('/about', fn () => view('pages.about'))->name('about');
+Route::get('/privacy', fn () => view('pages.privacy'))->name('privacy');
+Route::get('/terms', fn () => view('pages.terms'))->name('terms');
+Route::get('/security', fn () => view('pages.security'))->name('security');
+
+// Contact page + form submission
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/docs/postman.json', function () {
     $path = storage_path('app/private/scribe/collection.json');

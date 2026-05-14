@@ -402,6 +402,7 @@
                 <li><a href="#audience">للمكاتب</a></li>
                 <li><a href="#audience">المستخدمين</a></li>
                 <li><a href="#how">كيف يعمل النظام</a></li>
+                <li><a href="/contact">تواصل معنا</a></li>
             </ul>
             <div class="nav-cta">
                 <a href="/office/login" class="nav-btn nav-btn-outline">دخول المكتب</a>
@@ -421,6 +422,7 @@
     <a href="#features" onclick="toggleMenu()">الخدمات</a>
     <a href="#audience" onclick="toggleMenu()">للمكاتب</a>
     <a href="#how" onclick="toggleMenu()">كيف يعمل النظام</a>
+    <a href="/contact" onclick="toggleMenu()">تواصل معنا</a>
     <a href="/office/login">دخول المكتب</a>
     <a href="/admin/login">لوحة التحكم</a>
 </div>
@@ -707,21 +709,19 @@
             <div class="footer-col">
                 <h4>روابط سريعة</h4>
                 <ul>
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#about">عن التطبيق</a></li>
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/about">عن التطبيق</a></li>
                     <li><a href="#features">الخدمات</a></li>
                     <li><a href="#audience">للمكاتب</a></li>
                     <li><a href="#how">كيف يعمل</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>خدماتنا</h4>
+                <h4>القانوني</h4>
                 <ul>
-                    <li><a href="#">إدارة الطلبات</a></li>
-                    <li><a href="#">إدارة المكاتب</a></li>
-                    <li><a href="#">السير الذاتية</a></li>
-                    <li><a href="#">التقارير</a></li>
-                    <li><a href="#">الدعم الفني</a></li>
+                    <li><a href="/privacy">سياسة الخصوصية</a></li>
+                    <li><a href="/terms">الشروط والأحكام</a></li>
+                    <li><a href="/security">الأمان</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -735,9 +735,11 @@
         <div class="footer-bottom">
             <p>© جميع الحقوق محفوظة لنظام ميري 2026</p>
             <p>
-                <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none">سياسة الخصوصية</a>
+                <a href="/privacy" style="color:rgba(255,255,255,.3);text-decoration:none">سياسة الخصوصية</a>
                 &nbsp;·&nbsp;
-                <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none">الشروط والأحكام</a>
+                <a href="/terms" style="color:rgba(255,255,255,.3);text-decoration:none">الشروط والأحكام</a>
+                &nbsp;·&nbsp;
+                <a href="/security" style="color:rgba(255,255,255,.3);text-decoration:none">الأمان</a>
             </p>
         </div>
     </div>
