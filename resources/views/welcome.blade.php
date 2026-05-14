@@ -208,6 +208,70 @@
         .aud-img-wrap { flex-shrink: 0; width: 180px; }
         .aud-img { width: 100%; height: auto; display: block; }
 
+        /* ─── HERO DASHBOARD MOCKUP (replaces missing image) ─── */
+        .hero-dash {
+            background: var(--white); border-radius: 20px;
+            box-shadow: 0 24px 60px rgba(5,79,49,.18);
+            overflow: hidden; border: 1.5px solid var(--border);
+            max-width: 420px; margin: 0 auto;
+        }
+        .hdm-bar {
+            background: var(--green-800); padding: .9rem 1.2rem;
+            display: flex; align-items: center; gap: .65rem; color: var(--white); font-weight: 700; font-size: .9rem;
+        }
+        .hdm-logo {
+            width: 30px; height: 30px; background: var(--white); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .9rem; font-weight: 900; color: var(--green-800); flex-shrink: 0;
+        }
+        .hdm-dot { margin-right: auto; width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+        .hdm-kpis {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            padding: .8rem; gap: .6rem; background: var(--green-50); border-bottom: 1px solid var(--border);
+        }
+        .hdm-kpi {
+            background: var(--white); border-radius: 10px; border: 1px solid var(--green-100);
+            padding: .6rem .4rem; text-align: center;
+        }
+        .hdm-kpi b { display: block; font-size: 1rem; font-weight: 900; color: var(--green-800); }
+        .hdm-kpi small { font-size: .62rem; color: var(--text-light); }
+        .hdm-row {
+            display: flex; align-items: center; gap: .75rem;
+            padding: .75rem 1.2rem; border-bottom: 1px solid var(--border);
+        }
+        .hdm-row-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .hdm-row-info { flex: 1; min-width: 0; }
+        .hdm-row-info b { display: block; font-size: .85rem; font-weight: 700; color: var(--text-dark); }
+        .hdm-row-info small { font-size: .72rem; color: var(--text-light); }
+        .hdm-tag {
+            font-size: .68rem; font-weight: 700; padding: .2rem .55rem;
+            border-radius: 50px; flex-shrink: 0;
+            background: var(--green-100); color: var(--green-800);
+        }
+        .hdm-tag-y { background: #fef3c7; color: #92400e; }
+        .hdm-cta {
+            margin: .85rem 1.2rem 1rem; background: var(--green-700);
+            color: var(--white); border-radius: 50px; text-align: center;
+            padding: .65rem; font-size: .88rem; font-weight: 700;
+        }
+
+        /* ─── AUDIENCE ICON CARDS (replace missing images) ─── */
+        .aud-icon-card {
+            width: 160px; background: var(--green-50);
+            border: 1.5px solid var(--green-100); border-radius: 16px;
+            padding: 1.25rem 1rem; display: flex; flex-direction: column;
+            align-items: center; gap: .75rem; text-align: center;
+        }
+        .aud-icon-wrap {
+            width: 60px; height: 60px; border-radius: 15px;
+            background: var(--green-700); display: flex;
+            align-items: center; justify-content: center; font-size: 1.8rem;
+        }
+        .aud-icon-card p { font-size: .8rem; color: var(--text-mid); font-weight: 600; line-height: 1.5; }
+        .aud-icon-card.dark { background: var(--green-800); border-color: var(--green-700); }
+        .aud-icon-card.dark p { color: rgba(255,255,255,.75); }
+        .aud-icon-card.dark .aud-icon-wrap { background: rgba(255,255,255,.15); }
+
         /* ─── CTA ─── */
         .cta { padding: 40px 0; background: var(--green-50); }
         .cta-card {
@@ -270,12 +334,15 @@
 
         /* Animations */
         @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.6} }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-        .fade-up { animation: fadeUp .65s ease forwards; }
-        .d1 { animation-delay: .12s; opacity:0; }
-        .d2 { animation-delay: .24s; opacity:0; }
-        .d3 { animation-delay: .36s; opacity:0; }
-        .d4 { animation-delay: .48s; opacity:0; }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .fade-up { animation: fadeUp .6s ease both; }
+        .d1 { animation-delay: .1s; }
+        .d2 { animation-delay: .2s; }
+        .d3 { animation-delay: .3s; }
+        .d4 { animation-delay: .4s; }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-up { animation: none !important; }
+        }
 
         /* ─── MOBILE BOTTOM NAV ─── */
         .mobile-bottom-nav {
@@ -443,7 +510,7 @@
     <div class="container">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <img src="/public/images/merry-logo.png" alt="نظام ميري">
+                <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
                 <span class="nav-logo-text">نظام ميري</span>
             </a>
             <ul class="nav-links">
@@ -533,7 +600,34 @@
                 </div>
             </div>
             <div class="hero-img-wrap">
-                <img src="/public/images/multi-device.png" alt="نظام ميري على جميع الأجهزة">
+                <div class="hero-dash">
+                    <div class="hdm-bar">
+                        <div class="hdm-logo">م</div>
+                        <span>نظام ميري</span>
+                        <span class="hdm-dot"></span>
+                    </div>
+                    <div class="hdm-kpis">
+                        <div class="hdm-kpi"><b>+500</b><small>مكتب</small></div>
+                        <div class="hdm-kpi"><b>+10K</b><small>طلب</small></div>
+                        <div class="hdm-kpi"><b>99%</b><small>رضا</small></div>
+                    </div>
+                    <div class="hdm-row">
+                        <span class="hdm-row-icon">📋</span>
+                        <div class="hdm-row-info"><b>طلبات نشطة</b><small>12 طلب قيد المعالجة</small></div>
+                        <span class="hdm-tag">نشط</span>
+                    </div>
+                    <div class="hdm-row">
+                        <span class="hdm-row-icon">🔔</span>
+                        <div class="hdm-row-info"><b>إشعارات جديدة</b><small>3 إشعارات في انتظارك</small></div>
+                        <span class="hdm-tag hdm-tag-y">3</span>
+                    </div>
+                    <div class="hdm-row">
+                        <span class="hdm-row-icon">📊</span>
+                        <div class="hdm-row-info"><b>التقرير الشهري</b><small>مايو 2026 — جاهز</small></div>
+                        <span class="hdm-tag">عرض</span>
+                    </div>
+                    <div class="hdm-cta">🚀 فتح لوحة التحكم</div>
+                </div>
             </div>
         </div>
     </div>
@@ -675,7 +769,11 @@
             <!-- للمستخدمين — left panel -->
             <div class="aud-panel-users">
                 <div class="aud-img-wrap">
-                    <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" class="aud-img">
+                    <div class="aud-icon-card">
+                        <div class="aud-icon-wrap">📱</div>
+                        <p>تابع طلبك
+                        في أي وقت</p>
+                    </div>
                 </div>
                 <div class="aud-content">
                     <h2 class="aud-title">للمستخدمين</h2>
@@ -709,7 +807,11 @@
                     </ul>
                 </div>
                 <div class="aud-img-wrap">
-                    <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم المكتب" class="aud-img">
+                    <div class="aud-icon-card dark">
+                        <div class="aud-icon-wrap">🏢</div>
+                        <p>إدارة متكاملة
+                        لكل أعمالك</p>
+                    </div>
                 </div>
             </div>
 
@@ -759,7 +861,7 @@
         <div class="footer-inner">
             <div>
                 <div class="footer-logo">
-                    <img src="/public/images/merry-logo.png" alt="نظام ميري">
+                    <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
                     <span class="footer-logo-text">نظام ميري</span>
                 </div>
                 <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
