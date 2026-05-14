@@ -334,15 +334,6 @@
 
         /* Animations */
         @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.6} }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-        .fade-up { animation: fadeUp .6s ease both; }
-        .d1 { animation-delay: .1s; }
-        .d2 { animation-delay: .2s; }
-        .d3 { animation-delay: .3s; }
-        .d4 { animation-delay: .4s; }
-        @media (prefers-reduced-motion: reduce) {
-            .fade-up { animation: none !important; }
-        }
 
         /* ─── MOBILE BOTTOM NAV ─── */
         .mobile-bottom-nav {
@@ -563,24 +554,24 @@
     <div class="container">
         <div class="hero-inner">
             <div>
-                <div class="hero-label fade-up">
+                <div class="hero-label">
                     <span></span>
                     منصة موثوقة لأكثر من 500 مكتب
                 </div>
-                <h1 class="hero-title fade-up d1">
+                <h1 class="hero-title">
                     منصة متكاملة لإدارة<br>
                     <span class="hl">خدمات الاستقدام</span>
                 </h1>
-                <p class="hero-desc fade-up d2">
+                <p class="hero-desc">
                     نظام ميري يساعد مكاتب الاستقدام والمستخدمين في منظومة واحدة تضم
                     جميع خدمات ومتابعة الحالات وتنظيم البيانات والاطلاع على التقارير
                     بسهولة وكفاءة عالية.
                 </p>
-                <div class="hero-actions fade-up d3">
+                <div class="hero-actions">
                     <a href="#" class="btn-solid">🚀 ابدأ مجاناً</a>
                     <a href="#about" class="btn-ghost">تعرف على المزيد</a>
                 </div>
-                <div class="hero-stats fade-up d4">
+                <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-num">+500</span>
                         <span class="stat-label">مكتب استقدام</span>
