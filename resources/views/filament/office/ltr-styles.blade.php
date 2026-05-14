@@ -260,4 +260,137 @@
         border-radius: 14px !important;
         border: 1.5px solid #e5e7eb !important;
     }
+
+    /* ═══════════════════════════════════════════
+       MOBILE BOTTOM NAV BAR
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+        /* Hide Filament sidebar on mobile */
+        .fi-sidebar,
+        .fi-sidebar-nav,
+        aside.fi-sidebar {
+            display: none !important;
+        }
+
+        /* Remove left margin that compensates for sidebar */
+        .fi-main,
+        main.fi-main,
+        .fi-main-ctn {
+            margin-inline-start: 0 !important;
+            max-width: 100% !important;
+        }
+
+        /* Add bottom padding so content doesn't hide behind nav bar */
+        .fi-body,
+        body {
+            padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+    }
+
+    /* Bottom nav bar itself */
+    .office-mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 9999;
+        background: #fff;
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 -4px 20px rgba(0,0,0,.1);
+        height: 64px;
+        align-items: stretch;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        direction: rtl;
+    }
+
+    @media (max-width: 1024px) {
+        .office-mobile-nav { display: flex; }
+    }
+
+    .office-mob-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: .2rem;
+        text-decoration: none;
+        color: #9ca3af;
+        font-size: .6rem;
+        font-weight: 700;
+        font-family: 'Cairo', sans-serif;
+        transition: color .2s;
+        position: relative;
+        padding: .5rem .25rem;
+    }
+
+    .office-mob-item.active,
+    .office-mob-item:hover {
+        color: #054F31;
+    }
+
+    .office-mob-item.active::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 30px; height: 3px;
+        background: #054F31;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .office-mob-item svg {
+        width: 22px; height: 22px; display: block; flex-shrink: 0;
+    }
+
+    .office-mob-label {
+        display: block; white-space: nowrap; line-height: 1;
+    }
 </style>
+
+{{-- Mobile bottom nav bar HTML (injected via JS after body) --}}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var path = window.location.pathname;
+
+    function isActive(href) {
+        return path === href || path.startsWith(href + '/') ? 'active' : '';
+    }
+
+    var nav = document.createElement('nav');
+    nav.className = 'office-mobile-nav';
+    nav.setAttribute('aria-label', 'التنقل السريع');
+    nav.innerHTML = `
+        <a href="/office" class="office-mob-item ${path === '/office' ? 'active' : ''}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12L11.204 3.045a1.125 1.125 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <span class="office-mob-label">الرئيسية</span>
+        </a>
+        <a href="/office/cvs" class="office-mob-item ${isActive('/office/cvs')}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+            <span class="office-mob-label">السير الذاتية</span>
+        </a>
+        <a href="/office/bookings" class="office-mob-item ${isActive('/office/bookings')}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+            </svg>
+            <span class="office-mob-label">الحجوزات</span>
+        </a>
+        <a href="/office/subscriptions" class="office-mob-item ${isActive('/office/subscriptions')}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+            </svg>
+            <span class="office-mob-label">الاشتراكات</span>
+        </a>
+        <a href="/office/profile" class="office-mob-item ${isActive('/office/profile')}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            <span class="office-mob-label">حسابي</span>
+        </a>
+    `;
+    document.body.appendChild(nav);
+});
+</script>
