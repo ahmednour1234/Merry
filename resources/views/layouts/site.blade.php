@@ -138,7 +138,7 @@
         /* ─── MOBILE BOTTOM NAV ─── */
         .mobile-bottom-nav {
             display: none;
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+            position: fixed; top: auto; bottom: 0; left: 0; right: 0; z-index: 1000;
             background: #ffffff;
             border-top: 1px solid #e5e7eb;
             box-shadow: 0 -4px 20px rgba(0,0,0,.08);
