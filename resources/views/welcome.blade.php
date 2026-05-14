@@ -330,45 +330,13 @@
         .dl-btn-sub { font-size: .7rem; font-weight: 500; opacity: .7; display: block; }
         .dl-btn-label { display: flex; flex-direction: column; align-items: flex-start; }
         .dl-visual {
-            flex-shrink: 0; width: 220px;
+            flex-shrink: 0; width: 260px;
             display: flex; align-items: center; justify-content: center;
         }
-        .dl-phone-wrap {
-            width: 140px; height: 260px;
-            background: rgba(255,255,255,.08);
-            border: 2px solid rgba(255,255,255,.18);
-            border-radius: 32px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: flex-start;
-            padding: 1rem .75rem; gap: .6rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,.3);
-            position: relative;
+        .dl-visual img {
+            width: 100%; height: auto; display: block;
+            filter: drop-shadow(0 24px 48px rgba(0,0,0,.4));
         }
-        .dl-phone-notch {
-            width: 50px; height: 8px;
-            background: rgba(255,255,255,.25); border-radius: 4px;
-            margin-bottom: .4rem;
-        }
-        .dl-phone-screen {
-            width: 100%; flex: 1;
-            background: linear-gradient(160deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.05) 100%);
-            border-radius: 16px;
-            display: flex; flex-direction: column; gap: .5rem; padding: .75rem .6rem;
-        }
-        .dl-ps-bar {
-            height: 8px; border-radius: 4px;
-            background: rgba(255,255,255,.3);
-        }
-        .dl-ps-bar.short { width: 60%; }
-        .dl-ps-card {
-            height: 50px; border-radius: 10px;
-            background: rgba(255,255,255,.15);
-            display: flex; align-items: center; padding: 0 .5rem; gap: .4rem;
-        }
-        .dl-ps-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green-400); flex-shrink: 0; }
-        .dl-ps-lines { flex: 1; display: flex; flex-direction: column; gap: .3rem; }
-        .dl-ps-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,.25); }
-        .dl-ps-line.s { width: 55%; }
         .cta-card {
             background: var(--white);
             border: 1.5px solid var(--border);
@@ -905,34 +873,7 @@
                 </div>
             </div>
             <div class="dl-visual">
-                <div class="dl-phone-wrap">
-                    <div class="dl-phone-notch"></div>
-                    <div class="dl-phone-screen">
-                        <div class="dl-ps-bar"></div>
-                        <div class="dl-ps-bar short"></div>
-                        <div class="dl-ps-card">
-                            <div class="dl-ps-dot"></div>
-                            <div class="dl-ps-lines">
-                                <div class="dl-ps-line"></div>
-                                <div class="dl-ps-line s"></div>
-                            </div>
-                        </div>
-                        <div class="dl-ps-card">
-                            <div class="dl-ps-dot"></div>
-                            <div class="dl-ps-lines">
-                                <div class="dl-ps-line"></div>
-                                <div class="dl-ps-line s"></div>
-                            </div>
-                        </div>
-                        <div class="dl-ps-card">
-                            <div class="dl-ps-dot"></div>
-                            <div class="dl-ps-lines">
-                                <div class="dl-ps-line"></div>
-                                <div class="dl-ps-line s"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img src="/public/images/app-mockup.png" alt="شاشة تطبيق ميري" loading="lazy" decoding="async">
             </div>
         </div>
     </div>
