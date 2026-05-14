@@ -178,17 +178,17 @@
         .auth-mobile-header {
             display: none;
             background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
-            padding: 2.5rem 1.5rem 3.5rem;
+            padding: 1.25rem 1.5rem 2.75rem;
             text-align: center;
         }
         .auth-mobile-header .mob-logo-ring {
-            width: 72px; height: 72px; border-radius: 50%;
+            width: 56px; height: 56px; border-radius: 50%;
             background: #fff; display: inline-flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,.2); overflow: hidden; margin-bottom: 1rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,.2); overflow: hidden; margin-bottom: 0.6rem;
         }
-        .auth-mobile-header .mob-logo-ring img { width: 58px; height: 58px; object-fit: contain; }
-        .auth-mobile-header .mob-brand-name { color: #fff; font-size: 1.2rem; font-weight: 900; display: block; }
-        .auth-mobile-header .mob-brand-sub  { color: rgba(255,255,255,.65); font-size: 0.8rem; display: block; margin-top: .2rem; }
+        .auth-mobile-header .mob-logo-ring img { width: 44px; height: 44px; object-fit: contain; }
+        .auth-mobile-header .mob-brand-name { color: #fff; font-size: 1.1rem; font-weight: 900; display: block; }
+        .auth-mobile-header .mob-brand-sub  { display: none; }
 
         /* OTP boxes */
         .otp-boxes { display: flex; gap: 0.5rem; justify-content: center; direction: ltr; margin: 1.25rem 0; }
@@ -209,10 +209,10 @@
             .auth-form-panel {
                 min-height: unset;
                 border-radius: 24px 24px 0 0;
-                margin-top: -1.5rem;
+                margin-top: -2.25rem;
                 position: relative;
                 z-index: 2;
-                padding: 2rem 1.5rem 2.5rem;
+                padding: 1.75rem 1.5rem 2rem;
                 align-items: flex-start;
                 box-shadow: 0 -4px 32px rgba(0,0,0,.1);
             }
@@ -237,12 +237,11 @@
     @stack('auth-styles')
 </head>
 <body>
-<header class="auth-mobile-header" aria-hidden="true">
+<header class="auth-mobile-header">
     <div class="mob-logo-ring">
         <img src="/public/images/merry-logo.png" alt="نظام ميري">
     </div>
     <span class="mob-brand-name">نظام ميري</span>
-    <span class="mob-brand-sub">إدارة طلبات الاستقدام باحترافية</span>
 </header>
 @yield('shell-content')
 @stack('scripts')
