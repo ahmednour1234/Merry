@@ -225,7 +225,7 @@
                 border-radius: 24px 24px 0 0;
                 margin-top: 0;
                 position: relative; z-index: 2;
-                padding: 1.75rem 1.5rem 1.5rem;
+                padding: 1.75rem 1.5rem 3rem;
                 align-items: flex-start;
                 box-shadow: 0 -4px 32px rgba(0,0,0,.1);
                 overflow-y: auto;
@@ -234,7 +234,7 @@
             .form-page-title { font-size: 1.3rem; }
         }
         @media (max-width: 480px) {
-            .auth-form-panel { padding: 1.75rem 1.25rem 2.5rem; }
+            .auth-form-panel { padding: 1.75rem 1.25rem 3rem; }
             .auth-shell.single-col { padding: 1rem; align-items: flex-start; background: linear-gradient(160deg,#054F31 0%,#0a6b42 100%); }
             .auth-shell.single-col .auth-card-solo { padding: 1.75rem 1.25rem; margin: auto; border-radius: 16px; }
             .otp-box { width: 42px; height: 48px; font-size: 1.1rem; }
