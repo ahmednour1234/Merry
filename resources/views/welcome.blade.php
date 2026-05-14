@@ -60,9 +60,6 @@
         .nav-btn-outline:hover { background: var(--green-50); }
         .nav-btn-solid { background: var(--green-700); color: var(--white); border: 1.5px solid var(--green-700); }
         .nav-btn-solid:hover { background: var(--green-800); }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-        .hamburger span { display: block; width: 24px; height: 2px; background: var(--green-800); border-radius: 2px; }
-
         /* ─── HERO ─── */
         .hero {
             padding: 100px 0 60px;
@@ -335,7 +332,36 @@
         /* Animations */
         @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.6} }
 
-        /* ─── MOBILE BOTTOM NAV ─── */
+        /* ─── HAMBURGER & DRAWER (tablet) ─── */
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: .4rem;
+        }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--green-800); border-radius: 2px; transition: all .3s;
+        }
+        .nav-drawer {
+            display: none; flex-direction: column;
+            position: fixed; top: 68px; left: 0; right: 0; z-index: 999;
+            background: var(--white); border-top: 1px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0,0,0,.1);
+            padding: 1rem 1.5rem 1.5rem;
+        }
+        .nav-drawer.open { display: flex; }
+        .nav-drawer a {
+            padding: .75rem 0; color: var(--text-mid); text-decoration: none;
+            font-size: .95rem; font-weight: 600; border-bottom: 1px solid var(--border);
+        }
+        .nav-drawer a:hover { color: var(--green-700); }
+        .nav-drawer-btns { display: flex; gap: .75rem; margin-top: 1rem; }
+        .nav-drawer-btns a {
+            flex: 1; text-align: center; padding: .6rem 1rem; border-radius: 50px;
+            font-weight: 700; font-size: .9rem; text-decoration: none;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* ─── RESPONSIVE ─── */
         .mobile-bottom-nav {
             display: none;
             position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
@@ -370,6 +396,8 @@
 
         /* Tablet: 1024px */
         @media (max-width: 1024px) {
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
             .features-grid { grid-template-columns: repeat(2, 1fr); }
             .about-cards { grid-template-columns: repeat(2, 1fr); }
             .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -385,13 +413,16 @@
 
         /* Mobile: 768px */
         @media (max-width: 768px) {
-            /* Nav */
-            .nav-links, .nav-cta, .hamburger { display: none; }
-            body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+            /* Hide top navbar entirely — bottom nav replaces it */
+            nav#navbar { display: none !important; }
             .mobile-bottom-nav { display: flex; }
+            body {
+                padding-top: 0 !important;
+                padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+            }
 
-            /* Hero */
-            .hero { padding: 84px 0 36px; }
+            /* Hero — no navbar offset */
+            .hero { padding: 28px 0 36px; }
             .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
             .hero-img-wrap { order: -1; max-width: 280px; margin: 0 auto; }
             .hero-actions { justify-content: center; }
@@ -500,26 +531,42 @@
 <nav id="navbar">
     <div class="container">
         <div class="nav-inner">
-            <a href="#" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
                 <span class="nav-logo-text">نظام ميري</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="/" class="active">الرئيسية</a></li>
                 <li><a href="#about">عن التطبيق</a></li>
                 <li><a href="#features">الخدمات</a></li>
                 <li><a href="#audience">للمكاتب</a></li>
-                <li><a href="#audience">المستخدمين</a></li>
-                <li><a href="#how">كيف يعمل النظام</a></li>
+                <li><a href="#how">كيف يعمل</a></li>
                 <li><a href="/contact">تواصل معنا</a></li>
             </ul>
             <div class="nav-cta">
                 <a href="/office/login" class="nav-btn nav-btn-outline">دخول المكتب</a>
                 <a href="/download" class="nav-btn nav-btn-solid">📲 تنزيل التطبيق</a>
             </div>
+            <button class="hamburger" id="hamburger" aria-label="القائمة" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
 </nav>
+
+<!-- Tablet drawer menu -->
+<div class="nav-drawer" id="nav-drawer">
+    <a href="/">الرئيسية</a>
+    <a href="#about">عن التطبيق</a>
+    <a href="#features">الخدمات</a>
+    <a href="#audience">للمكاتب والمستخدمين</a>
+    <a href="#how">كيف يعمل النظام</a>
+    <a href="/contact">تواصل معنا</a>
+    <div class="nav-drawer-btns">
+        <a href="/office/login" style="border:1.5px solid var(--green-700);color:var(--green-800);">دخول المكتب</a>
+        <a href="/download" style="background:var(--green-700);color:var(--white);">📲 تنزيل التطبيق</a>
+    </div>
+</div>
 
 <!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-bottom-nav" aria-label="تنقل الجوال">
@@ -903,6 +950,24 @@
     </div>
 </footer>
 
+<script>
+(function(){
+    var btn = document.getElementById('hamburger');
+    var drawer = document.getElementById('nav-drawer');
+    if(!btn || !drawer) return;
+    btn.addEventListener('click', function(){
+        var open = drawer.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+    });
+    // Close drawer when any link is clicked
+    drawer.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){
+            drawer.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
+</script>
 
 </body>
 </html>
