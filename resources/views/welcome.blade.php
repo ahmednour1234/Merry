@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
@@ -411,31 +411,50 @@
         .mobile-bottom-nav {
             display: none;
             position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
-            background: var(--white);
-            border-top: 1.5px solid var(--border);
+            background: #ffffff;
+            border-top: 1px solid #e5e7eb;
             box-shadow: 0 -4px 20px rgba(0,0,0,.08);
-            padding-bottom: env(safe-area-inset-bottom);
+            height: 62px;
+            align-items: center;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
         .mob-nav-item {
-            flex: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: .5rem .15rem .45rem;
-            text-decoration: none; color: var(--text-light);
-            font-size: .6rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
-            gap: .15rem; transition: color .2s; min-height: 58px;
-            overflow: hidden;
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-decoration: none; color: #9ca3af;
+            font-size: .58rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
+            gap: .22rem; height: 100%; position: relative; transition: color .2s;
         }
-        .mob-nav-item span:not(.mob-nav-icon) {
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            max-width: 100%; display: block; text-align: center;
+        .mob-nav-item:hover, .mob-nav-item.active { color: #15803d; }
+        .mob-nav-item.active::before {
+            content: ''; position: absolute; top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 28px; height: 3px; border-radius: 0 0 4px 4px;
+            background: #15803d;
         }
-        .mob-nav-item:hover, .mob-nav-item.active { color: var(--green-700); }
-        .mob-nav-icon { font-size: 1.2rem; line-height: 1; display: block; flex-shrink: 0; }
-        .mob-nav-download { color: var(--green-700); font-weight: 800; }
-        .mob-nav-download .mob-nav-icon {
-            background: var(--green-700); color: var(--white);
-            width: 36px; height: 36px; border-radius: 10px;
+        .mob-nav-item svg { display: block; flex-shrink: 0; }
+        .mob-nav-label { white-space: nowrap; display: block; line-height: 1; }
+        /* centre CTA */
+        .mob-nav-cta {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-decoration: none; font-family: 'Tajawal', sans-serif;
+            gap: .22rem; height: 100%;
+        }
+        .mob-nav-cta-box {
+            width: 42px; height: 36px;
+            background: linear-gradient(145deg, #15803d, #16a34a);
+            border-radius: 11px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1rem; margin: 0 auto .1rem;
+            box-shadow: 0 3px 12px rgba(21,128,61,.35);
+            transition: transform .2s, box-shadow .2s; flex-shrink: 0;
+        }
+        .mob-nav-cta:hover .mob-nav-cta-box {
+            transform: translateY(-2px); box-shadow: 0 6px 18px rgba(21,128,61,.45);
+        }
+        .mob-nav-cta-label {
+            font-size: .55rem; font-weight: 800; color: #15803d;
+            white-space: nowrap; display: block; line-height: 1;
         }
 
         /* ─── RESPONSIVE ─── */
@@ -459,8 +478,9 @@
         @media (max-width: 768px) {
             /* Nav */
             .nav-links, .nav-cta, .hamburger { display: none; }
-            body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+            body { padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px)); }
             .mobile-bottom-nav { display: flex; }
+            footer { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
 
             /* Spacing */
             .about, .features, .how, .audience, .dl-section, .cta { margin-top: 16px; }
@@ -566,9 +586,11 @@
         /* Very Small Mobile: 360px */
         @media (max-width: 360px) {
             .container { padding: 0 .75rem; }
-            .mob-nav-item { font-size: .52rem; padding: .35rem .05rem .3rem; min-height: 52px; gap: .1rem; }
-            .mob-nav-icon { font-size: 1rem; }
-            .mob-nav-download .mob-nav-icon { width: 30px; height: 30px; font-size: .85rem; border-radius: 8px; }
+            .mob-nav-item { font-size: .52rem; gap: .16rem; }
+            .mob-nav-item svg { width: 18px; height: 18px; }
+            .mob-nav-cta-box { width: 36px; height: 32px; border-radius: 9px; }
+            .mob-nav-cta-box svg { width: 18px; height: 18px; }
+            .mob-nav-cta-label { font-size: .5rem; }
             .hero-title { font-size: 1.5rem; }
             .section-label { font-size: .75rem; }
             .cta-stats { grid-template-columns: 1fr; }
@@ -605,30 +627,52 @@
 
 <!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-bottom-nav" aria-label="تنقل الجوال">
+
     <a href="/" class="mob-nav-item active">
-        <span class="mob-nav-icon">🏠</span>
-        <span>الرئيسية</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+            <polyline points="9 21 9 12 15 12 15 21"/>
+        </svg>
+        <span class="mob-nav-label">الرئيسية</span>
     </a>
-    <a href="#about" class="mob-nav-item">
-        <span class="mob-nav-icon">✨</span>
-        <span>التطبيق</span>
+
+    <a href="/#features" class="mob-nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span class="mob-nav-label">الخدمات</span>
     </a>
-    <a href="#features" class="mob-nav-item">
-        <span class="mob-nav-icon">⚡</span>
-        <span>الخدمات</span>
+
+    <a href="/office/login" class="mob-nav-cta">
+        <div class="mob-nav-cta-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        </div>
+        <span class="mob-nav-cta-label">انضم كمكتب</span>
     </a>
+
     <a href="/contact" class="mob-nav-item">
-        <span class="mob-nav-icon">✉️</span>
-        <span>تواصل</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <span class="mob-nav-label">تواصل</span>
     </a>
-    <a href="/office/login" class="mob-nav-item">
-        <span class="mob-nav-icon">🏢</span>
-        <span>انضم كمكتب</span>
+
+    <a href="/download" class="mob-nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span class="mob-nav-label">تنزيل</span>
     </a>
-    <a href="#download" class="mob-nav-item mob-nav-download">
-        <span class="mob-nav-icon">📲</span>
-        <span>تنزيل</span>
-    </a>
+
 </nav>
 
 <!-- HERO -->
