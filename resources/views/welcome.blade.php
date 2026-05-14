@@ -276,8 +276,96 @@
         }
         .aud-illus-card.dark p { color: rgba(255,255,255,.85); }
 
-        /* ─── CTA ─── */
-        .cta { padding: 40px 0; background: var(--green-50); }
+        /* ─── DOWNLOAD SECTION ─── */
+        .dl-section {
+            padding: 70px 0;
+            background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 60%, var(--green-700) 100%);
+            position: relative; overflow: hidden;
+        }
+        .dl-section::before {
+            content: ''; position: absolute;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.06) 0%, transparent 70%);
+            top: -150px; left: -150px; pointer-events: none;
+        }
+        .dl-inner {
+            display: flex; align-items: center; gap: 3rem;
+            position: relative; z-index: 1;
+        }
+        .dl-text { flex: 1; min-width: 0; }
+        .dl-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: rgba(255,255,255,.12); color: var(--green-400);
+            border: 1px solid rgba(255,255,255,.15);
+            padding: .3rem .9rem; border-radius: 50px;
+            font-size: .8rem; font-weight: 700; margin-bottom: 1.2rem;
+        }
+        .dl-title {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900;
+            color: var(--white); line-height: 1.3; margin-bottom: .9rem;
+        }
+        .dl-title .hl { color: var(--green-400); }
+        .dl-desc {
+            font-size: .95rem; color: rgba(255,255,255,.75);
+            line-height: 1.85; margin-bottom: 2rem; max-width: 480px;
+        }
+        .dl-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .dl-btn {
+            display: inline-flex; align-items: center; gap: .75rem;
+            padding: .85rem 1.75rem; border-radius: 14px;
+            font-size: .95rem; font-weight: 800; text-decoration: none;
+            font-family: 'Tajawal', sans-serif; transition: transform .2s, box-shadow .2s;
+        }
+        .dl-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+        .dl-btn-ios {
+            background: var(--white); color: var(--green-900);
+        }
+        .dl-btn-android {
+            background: var(--green-500); color: var(--green-900);
+        }
+        .dl-btn-icon { font-size: 1.4rem; line-height: 1; }
+        .dl-btn-sub { font-size: .7rem; font-weight: 500; opacity: .7; display: block; }
+        .dl-btn-label { display: flex; flex-direction: column; align-items: flex-start; }
+        .dl-visual {
+            flex-shrink: 0; width: 220px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .dl-phone-wrap {
+            width: 140px; height: 260px;
+            background: rgba(255,255,255,.08);
+            border: 2px solid rgba(255,255,255,.18);
+            border-radius: 32px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start;
+            padding: 1rem .75rem; gap: .6rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,.3);
+            position: relative;
+        }
+        .dl-phone-notch {
+            width: 50px; height: 8px;
+            background: rgba(255,255,255,.25); border-radius: 4px;
+            margin-bottom: .4rem;
+        }
+        .dl-phone-screen {
+            width: 100%; flex: 1;
+            background: linear-gradient(160deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.05) 100%);
+            border-radius: 16px;
+            display: flex; flex-direction: column; gap: .5rem; padding: .75rem .6rem;
+        }
+        .dl-ps-bar {
+            height: 8px; border-radius: 4px;
+            background: rgba(255,255,255,.3);
+        }
+        .dl-ps-bar.short { width: 60%; }
+        .dl-ps-card {
+            height: 50px; border-radius: 10px;
+            background: rgba(255,255,255,.15);
+            display: flex; align-items: center; padding: 0 .5rem; gap: .4rem;
+        }
+        .dl-ps-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green-400); flex-shrink: 0; }
+        .dl-ps-lines { flex: 1; display: flex; flex-direction: column; gap: .3rem; }
+        .dl-ps-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,.25); }
+        .dl-ps-line.s { width: 55%; }
         .cta-card {
             background: var(--white);
             border: 1.5px solid var(--border);
@@ -455,6 +543,13 @@
             .cta-stat:nth-child(odd) { border-right: 1px solid var(--border); }
             .cta-stat-label, .cta-stat-desc { white-space: normal; text-align: center; }
 
+            /* Download */
+            .dl-section { padding: 50px 0; }
+            .dl-inner { flex-direction: column; gap: 2rem; text-align: center; }
+            .dl-desc { margin-left: auto; margin-right: auto; }
+            .dl-buttons { justify-content: center; }
+            .dl-visual { display: none; }
+
             /* Footer */
             footer { padding: 40px 0 calc(90px + env(safe-area-inset-bottom, 0px)); }
             .footer-inner { grid-template-columns: 1fr; gap: 1.75rem; }
@@ -518,7 +613,6 @@
             </ul>
             <div class="nav-cta">
                 <a href="/office/login" class="nav-btn nav-btn-outline">دخول المكتب</a>
-                <a href="/download" class="nav-btn nav-btn-solid">📲 تنزيل التطبيق</a>
             </div>
         </div>
     </div>
@@ -546,7 +640,7 @@
         <span class="mob-nav-icon">🏢</span>
         <span>المكتب</span>
     </a>
-    <a href="/download" class="mob-nav-item mob-nav-download">
+    <a href="#download" class="mob-nav-item mob-nav-download">
         <span class="mob-nav-icon">📲</span>
         <span>تنزيل</span>
     </a>
@@ -774,6 +868,65 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="dl-section" id="download">
+    <div class="container">
+        <div class="dl-inner">
+            <div class="dl-text">
+                <div class="dl-badge"><span>&#128241;</span> متاح للجميع</div>
+                <h2 class="dl-title">حمل تطبيق <span class="hl">ميري</span><br>وابدأ رحلتك اليوم</h2>
+                <p class="dl-desc">متاح على iOS و Android — تطبيق سهل وسريع يتيح لك متابعة طلباتك وإدارة مستنداتك في أي وقت ومن أي مكان.</p>
+                <div class="dl-buttons">
+                    <a href="/download" class="dl-btn dl-btn-ios">
+                        <span class="dl-btn-icon">&#xf8ff;</span>
+                        <span class="dl-btn-label">
+                            <span class="dl-btn-sub">تنزيل من</span>
+                            App Store
+                        </span>
+                    </a>
+                    <a href="/download" class="dl-btn dl-btn-android">
+                        <span class="dl-btn-icon">&#9654;</span>
+                        <span class="dl-btn-label">
+                            <span class="dl-btn-sub">تنزيل من</span>
+                            Google Play
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="dl-visual">
+                <div class="dl-phone-wrap">
+                    <div class="dl-phone-notch"></div>
+                    <div class="dl-phone-screen">
+                        <div class="dl-ps-bar"></div>
+                        <div class="dl-ps-bar short"></div>
+                        <div class="dl-ps-card">
+                            <div class="dl-ps-dot"></div>
+                            <div class="dl-ps-lines">
+                                <div class="dl-ps-line"></div>
+                                <div class="dl-ps-line s"></div>
+                            </div>
+                        </div>
+                        <div class="dl-ps-card">
+                            <div class="dl-ps-dot"></div>
+                            <div class="dl-ps-lines">
+                                <div class="dl-ps-line"></div>
+                                <div class="dl-ps-line s"></div>
+                            </div>
+                        </div>
+                        <div class="dl-ps-card">
+                            <div class="dl-ps-dot"></div>
+                            <div class="dl-ps-lines">
+                                <div class="dl-ps-line"></div>
+                                <div class="dl-ps-line s"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
