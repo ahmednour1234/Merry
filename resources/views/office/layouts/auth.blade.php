@@ -178,7 +178,7 @@
         .auth-mobile-header {
             display: none; flex-shrink: 0;
             background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
-            padding: 1.5rem 1.5rem 2.5rem;
+            padding: 1.5rem 1.5rem 4rem;
             text-align: center; position: relative; overflow: hidden;
         }
         .mob-deco { position: absolute; top: -8px; opacity: .13; width: 100px; }
