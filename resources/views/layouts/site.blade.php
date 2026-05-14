@@ -108,19 +108,24 @@
         }
         .mob-nav-item {
             flex: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: .5rem .2rem .45rem;
+            justify-content: center; padding: .5rem .15rem .45rem;
             text-decoration: none; color: var(--text-light);
-            font-size: .63rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
+            font-size: .6rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
             gap: .15rem; transition: color .2s; min-height: 58px;
+            overflow: hidden;
+        }
+        .mob-nav-item span:not(.mob-nav-icon) {
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            max-width: 100%; display: block; text-align: center;
         }
         .mob-nav-item:hover, .mob-nav-item.active { color: var(--green-700); }
-        .mob-nav-icon { font-size: 1.25rem; line-height: 1; display: block; }
+        .mob-nav-icon { font-size: 1.2rem; line-height: 1; display: block; flex-shrink: 0; }
         .mob-nav-download { color: var(--green-700); font-weight: 800; }
         .mob-nav-download .mob-nav-icon {
             background: var(--green-700); color: var(--white);
-            width: 38px; height: 38px; border-radius: 12px;
+            width: 36px; height: 36px; border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.05rem; margin: 0 auto .1rem;
+            font-size: 1rem; margin: 0 auto .1rem;
         }
 
         /* ─── RESPONSIVE ─── */
@@ -129,9 +134,9 @@
         }
         @media (max-width: 768px) {
             .nav-links, .nav-cta, .hamburger { display: none; }
-            body { padding-bottom: 68px; }
+            body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
             .mobile-bottom-nav { display: flex; }
-            footer { padding: 40px 0 90px; }
+            footer { padding: 40px 0 calc(90px + env(safe-area-inset-bottom, 0px)); }
             .footer-inner { grid-template-columns: 1fr; gap: 1.75rem; }
             .footer-bottom { flex-direction: column; text-align: center; gap: .5rem; }
             .page-header { padding: 88px 0 48px; }
@@ -143,10 +148,11 @@
             .page-header p { font-size: .92rem; }
         }
         @media (max-width: 360px) {
-            .mob-nav-item { font-size: .58rem; padding: .4rem .1rem .35rem; min-height: 54px; }
-            .mob-nav-icon { font-size: 1.1rem; }
-            .mob-nav-download .mob-nav-icon { width: 34px; height: 34px; font-size: .95rem; }
+            .mob-nav-item { font-size: .55rem; padding: .38rem .08rem .32rem; min-height: 52px; gap: .1rem; }
+            .mob-nav-icon { font-size: 1.05rem; }
+            .mob-nav-download .mob-nav-icon { width: 32px; height: 32px; font-size: .9rem; border-radius: 8px; }
             .container { padding: 0 .75rem; }
+            .page-header { padding: 78px 0 36px; }
         }
 
         @yield('styles')
@@ -187,7 +193,7 @@
     </a>
     <a href="{{ route('about') }}" class="mob-nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
         <span class="mob-nav-icon">✨</span>
-        <span>عن التطبيق</span>
+        <span>التطبيق</span>
     </a>
     <a href="{{ route('contact') }}" class="mob-nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
         <span class="mob-nav-icon">✉️</span>
