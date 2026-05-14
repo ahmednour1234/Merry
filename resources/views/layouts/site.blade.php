@@ -162,8 +162,8 @@
             .page-header { padding: calc(var(--nav-height) + 10px) 0 32px; }
         }
 
-        @yield('styles')
     </style>
+    @yield('styles')
 </head>
 <body>
 
