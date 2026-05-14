@@ -22,7 +22,7 @@
 
     {{-- Twitter / X Card --}}
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:site"        content="@merry_commercial">
+    <meta name="twitter:site"        content="@@merry_commercial">
     <meta name="twitter:title"       content="@yield('og_title', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام')">
     <meta name="twitter:description" content="@yield('og_description', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام للمكاتب والمستخدمين في المملكة العربية السعودية')">
     <meta name="twitter:image"       content="@yield('og_image', asset('images/merry-og.png'))">
