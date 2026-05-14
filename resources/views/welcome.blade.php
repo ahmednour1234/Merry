@@ -591,34 +591,7 @@
                 </div>
             </div>
             <div class="hero-img-wrap">
-                <div class="hero-dash">
-                    <div class="hdm-bar">
-                        <div class="hdm-logo">م</div>
-                        <span>نظام ميري</span>
-                        <span class="hdm-dot"></span>
-                    </div>
-                    <div class="hdm-kpis">
-                        <div class="hdm-kpi"><b>+500</b><small>مكتب</small></div>
-                        <div class="hdm-kpi"><b>+10K</b><small>طلب</small></div>
-                        <div class="hdm-kpi"><b>99%</b><small>رضا</small></div>
-                    </div>
-                    <div class="hdm-row">
-                        <span class="hdm-row-icon">📋</span>
-                        <div class="hdm-row-info"><b>طلبات نشطة</b><small>12 طلب قيد المعالجة</small></div>
-                        <span class="hdm-tag">نشط</span>
-                    </div>
-                    <div class="hdm-row">
-                        <span class="hdm-row-icon">🔔</span>
-                        <div class="hdm-row-info"><b>إشعارات جديدة</b><small>3 إشعارات في انتظارك</small></div>
-                        <span class="hdm-tag hdm-tag-y">3</span>
-                    </div>
-                    <div class="hdm-row">
-                        <span class="hdm-row-icon">📊</span>
-                        <div class="hdm-row-info"><b>التقرير الشهري</b><small>مايو 2026 — جاهز</small></div>
-                        <span class="hdm-tag">عرض</span>
-                    </div>
-                    <div class="hdm-cta">🚀 فتح لوحة التحكم</div>
-                </div>
+                <img src="{{ asset('images/multi-device.png') }}" alt="نظام ميري على جميع الأجهزة">
             </div>
         </div>
     </div>
