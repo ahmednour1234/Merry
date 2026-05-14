@@ -326,7 +326,7 @@
         .dl-btn-android {
             background: var(--green-500); color: var(--green-900);
         }
-        .dl-btn-icon { font-size: 1.4rem; line-height: 1; }
+        .dl-btn-icon { width: 36px; height: 36px; object-fit: contain; flex-shrink: 0; }
         .dl-btn-sub { font-size: .7rem; font-weight: 500; opacity: .7; display: block; }
         .dl-btn-label { display: flex; flex-direction: column; align-items: flex-start; }
         .dl-visual {
@@ -889,14 +889,14 @@
                 <p class="dl-desc">متاح على iOS و Android — تطبيق سهل وسريع يتيح لك متابعة طلباتك وإدارة مستنداتك في أي وقت ومن أي مكان.</p>
                 <div class="dl-buttons">
                     <a href="/download" class="dl-btn dl-btn-ios">
-                        <span class="dl-btn-icon">&#xf8ff;</span>
+                        <img src="/public/images/apple-store.png" alt="App Store" class="dl-btn-icon" loading="lazy">
                         <span class="dl-btn-label">
                             <span class="dl-btn-sub">تنزيل من</span>
                             App Store
                         </span>
                     </a>
                     <a href="/download" class="dl-btn dl-btn-android">
-                        <span class="dl-btn-icon">&#9654;</span>
+                        <img src="/public/images/google-play.png" alt="Google Play" class="dl-btn-icon" loading="lazy">
                         <span class="dl-btn-label">
                             <span class="dl-btn-sub">تنزيل من</span>
                             Google Play
