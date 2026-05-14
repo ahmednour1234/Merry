@@ -956,7 +956,7 @@
             </div>
             <div class="footer-col">
                 <h4>تواصل معنا</h4>
-                <div class="footer-contact-item"><span>📞</span><span>9200 00000</span></div>
+                <div class="footer-contact-item"><span>📞</span><span dir="ltr">+966 57 938 1480</span></div>
                 <div class="footer-contact-item"><span>✉️</span><span>info@mery.sa</span></div>
                 <div class="footer-contact-item"><span>📍</span><span>الرياض - المملكة العربية السعودية</span></div>
             </div>

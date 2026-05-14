@@ -4,14 +4,14 @@
 
 @section('styles')
 <style>
-    .contact-section { padding: 80px 0; }
+    .contact-section { padding: 64px 0; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: flex-start; }
 
     /* Info cards */
     .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
     .contact-info-card {
         background: var(--green-50); border: 1.5px solid var(--green-100);
-        border-radius: var(--radius-lg); padding: 1.5rem;
+        border-radius: var(--radius-lg); padding: 1.25rem;
         display: flex; align-items: flex-start; gap: 1rem;
     }
     .contact-info-icon {
@@ -21,11 +21,12 @@
     }
     .contact-info-body h3 { font-size: .95rem; font-weight: 700; color: var(--text-dark); margin-bottom: .25rem; }
     .contact-info-body p { font-size: .87rem; color: var(--text-mid); line-height: 1.6; }
+    .contact-info-body .contact-phone { direction: ltr; unicode-bidi: isolate; display: inline-block; }
 
     /* Form */
     .contact-form-wrap {
         background: var(--white); border: 1.5px solid var(--border);
-        border-radius: var(--radius-xl); padding: 2.5rem;
+        border-radius: var(--radius-xl); padding: 2rem;
         box-shadow: 0 4px 24px rgba(5,79,49,.07);
     }
     .contact-form-wrap h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: .4rem; }
@@ -61,16 +62,16 @@
     }
 
     @media (max-width: 768px) {
-        .contact-section { padding: 50px 0; }
+        .contact-section { padding: 44px 0; }
         .contact-grid { grid-template-columns: 1fr; gap: 1.75rem; }
-        .contact-form-wrap { order: -1; padding: 1.5rem; }
+        .contact-form-wrap { order: -1; padding: 1.35rem; }
         .form-row { grid-template-columns: 1fr; }
         .contact-info { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
         .contact-info-card { flex: 1 1 calc(50% - .5rem); }
     }
     @media (max-width: 480px) {
         .contact-info-card { flex: 1 1 100%; }
-        .contact-form-wrap { padding: 1.25rem 1rem; }
+        .contact-form-wrap { padding: 1.1rem .95rem; }
         .contact-form-wrap h2 { font-size: 1.2rem; }
         .btn-submit { font-size: .95rem; padding: .75rem; }
     }
@@ -98,7 +99,7 @@
                     <div class="contact-info-icon">📞</div>
                     <div class="contact-info-body">
                         <h3>الهاتف</h3>
-                        <p>9200 00000<br>متاح من 8 صباحاً - 10 مساءً</p>
+                        <p><span class="contact-phone">+966 57 938 1480</span><br>متاح من 8 صباحاً - 10 مساءً</p>
                     </div>
                 </div>
                 <div class="contact-info-card">
