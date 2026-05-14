@@ -178,7 +178,7 @@
         .auth-mobile-header {
             display: none;
             background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
-            padding:0px;
+            padding: 1.25rem 1.5rem 2.75rem;
             text-align: center;
         }
         .auth-mobile-header .mob-logo-ring {
@@ -200,21 +200,26 @@
         .otp-box:focus { border-color: #054F31; background: #fff; box-shadow: 0 0 0 3px rgba(5,79,49,0.08); }
 
         @media (max-width: 768px) {
-            body { background: #f1f5f4; display: block; }
-            .auth-mobile-header { display: block; }
-            .auth-brand-panel { display: none; }
-            .auth-shell {
-                display: block; min-height: 100vh;
+            html, body { height: 100%; overflow: hidden; }
+            body {
+                display: flex; flex-direction: column;
+                background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
             }
+            .auth-mobile-header {
+                display: flex; flex-direction: column; align-items: center;
+                padding: 1rem 1.5rem 2.5rem; flex-shrink: 0;
+            }
+            .auth-brand-panel { display: none; }
+            .auth-shell { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: unset; }
             .auth-form-panel {
-                min-height: unset;
+                flex: 1; min-height: unset;
                 border-radius: 24px 24px 0 0;
-                margin-top: -2.25rem;
-                position: relative;
-                z-index: 2;
-                padding: 1.75rem 1.5rem 2rem;
+                margin-top: 0;
+                position: relative; z-index: 2;
+                padding: 1.75rem 1.5rem 1.5rem;
                 align-items: flex-start;
                 box-shadow: 0 -4px 32px rgba(0,0,0,.1);
+                overflow-y: auto;
             }
             .auth-form-inner { max-width: 100%; }
             .form-page-title { font-size: 1.3rem; }
