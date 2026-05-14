@@ -55,8 +55,8 @@
         .pagination-wrap a,.pagination-wrap span{padding:.3rem .7rem;border-radius:6px;font-size:.82rem;border:1px solid #e5e7eb;color:#374151;text-decoration:none}
         .pagination-wrap a:hover{background:#f3f4f6}
         .pagination-wrap .active-page{background:#054F31;color:#fff;border-color:#054F31}
-        /* MOBILE */
-        @media(max-width:767px){
+        /* TABLET + MOBILE */
+        @media(max-width:1023px){
             #sidebar{z-index:150!important;transform:translateX(110%);transition:transform .28s ease}
             #sidebar.open{transform:translateX(0)}
         }
@@ -413,19 +413,22 @@
     </div>
 
 <style>
-    @media(max-width:767px){
+    @media(max-width:1023px){
         #hamburger{display:block!important}
-        .nav-brand-text{display:none!important}
-        .user-detail{display:none!important}
-        .user-chevron{display:none!important}
         aside#sidebar{z-index:150!important;transform:translateX(110%);transition:transform .28s ease;width:260px!important}
         aside#sidebar.open{transform:translateX(0)!important}
         #topnav{right:0!important;width:100%!important}
         #main-area{right:0!important;width:100%!important}
         #notif-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
         #user-panel{width:calc(100vw - 2rem)!important;right:auto!important;left:1rem!important;}
-        #topnav{padding:0 .875rem!important}
+        #topnav{padding:0 1rem!important}
+    }
+    @media(max-width:767px){
+        .nav-brand-text{display:none!important}
+        .user-detail{display:none!important}
+        .user-chevron{display:none!important}
         #user-wrap button{gap:.4rem!important}
+        #topnav{padding:0 .875rem!important}
     }
     @keyframes notifSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 </style>

@@ -30,12 +30,23 @@
     .stat-card .num { font-size: 2rem; font-weight: 900; color: var(--green-800); display: block; }
     .stat-card .lbl { font-size: .85rem; color: var(--text-light); margin-top: .3rem; display: block; }
     @media (max-width: 768px) {
+        .about-section { padding: 50px 0; }
         .values-grid { grid-template-columns: 1fr 1fr; }
         .stats-row { grid-template-columns: 1fr 1fr; }
         .mission-wrap { padding: 2rem 1.25rem; }
+        .mission-wrap h2 { font-size: 1.35rem; }
+        .about-lead { font-size: .95rem; margin-bottom: 2rem; }
     }
     @media (max-width: 480px) {
         .values-grid { grid-template-columns: 1fr; }
+        .value-card { padding: 1.5rem 1rem; }
+        .stat-card { padding: 1.25rem .75rem; }
+        .stat-card .num { font-size: 1.6rem; }
+        .mission-wrap { padding: 1.5rem 1rem; }
+        .mission-wrap h2 { font-size: 1.2rem; }
+    }
+    @media (max-width: 360px) {
+        .stats-row { grid-template-columns: 1fr; }
     }
 </style>
 @endsection

@@ -401,6 +401,18 @@
             .cta-card { padding: 1.25rem 1rem; }
             .stat-num { font-size: 1.3rem; }
         }
+
+        /* Very Small Mobile: 360px */
+        @media (max-width: 360px) {
+            .container { padding: 0 .75rem; }
+            .mob-nav-item { font-size: .55rem; padding: .4rem .05rem .35rem; min-height: 54px; }
+            .mob-nav-icon { font-size: 1.05rem; }
+            .mob-nav-download .mob-nav-icon { width: 32px; height: 32px; font-size: .9rem; }
+            .hero-title { font-size: 1.5rem; }
+            .section-label { font-size: .75rem; }
+            .cta-stats { grid-template-columns: 1fr; }
+            .cta-stat { border-right: none !important; border-top: 1px solid var(--border); }
+        }
     </style>
 </head>
 <body>

@@ -61,9 +61,18 @@
     }
 
     @media (max-width: 768px) {
-        .contact-grid { grid-template-columns: 1fr; }
+        .contact-section { padding: 50px 0; }
+        .contact-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+        .contact-form-wrap { order: -1; padding: 1.5rem; }
         .form-row { grid-template-columns: 1fr; }
-        .contact-form-wrap { padding: 1.5rem; }
+        .contact-info { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+        .contact-info-card { flex: 1 1 calc(50% - .5rem); }
+    }
+    @media (max-width: 480px) {
+        .contact-info-card { flex: 1 1 100%; }
+        .contact-form-wrap { padding: 1.25rem 1rem; }
+        .contact-form-wrap h2 { font-size: 1.2rem; }
+        .btn-submit { font-size: .95rem; padding: .75rem; }
     }
 </style>
 @endsection

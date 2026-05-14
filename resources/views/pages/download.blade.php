@@ -112,16 +112,31 @@
     .dl-cta p { font-size: .97rem; color: var(--text-mid); margin-bottom: 2.5rem; line-height: 1.8; max-width: 520px; margin-left: auto; margin-right: auto; }
 
     @media (max-width: 768px) {
-        .dl-mockup-inner { grid-template-columns: 1fr; text-align: center; }
+        .dl-mockup-section { padding: 50px 0; }
+        .dl-stats { padding: 50px 0; }
+        .dl-cta { padding: 50px 0; }
+        .dl-hero { padding: 80px 0 50px; }
+        .dl-mockup-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
         .dl-mockup-inner .dl-features { order: -1; }
         .dl-feat-item { text-align: right; }
         .dl-stats-grid { grid-template-columns: 1fr 1fr; }
         .dl-phone { width: 220px; }
+        .dl-features h2 { font-size: 1.4rem; }
+        .dl-cta h2 { font-size: 1.5rem; }
     }
     @media (max-width: 480px) {
         .dl-badges { flex-direction: column; align-items: center; }
         .dl-badge { width: 100%; max-width: 280px; justify-content: center; }
-        .dl-stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .dl-stats-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+        .dl-stat-card { padding: 1.25rem .75rem; }
+        .dl-stat-card .num { font-size: 1.7rem; }
+        .dl-phone { width: 200px; }
+    }
+    @media (max-width: 360px) {
+        .dl-stats-grid { grid-template-columns: 1fr; }
+        .dl-badge { max-width: 100%; }
+        .dl-phone { width: 180px; }
+        .dl-hero h1 { font-size: 1.6rem; }
     }
 </style>
 @endsection

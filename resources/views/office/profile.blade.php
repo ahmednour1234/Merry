@@ -3,6 +3,15 @@
 @section('title', 'الملف الشخصي')
 @section('page-title', 'الملف الشخصي')
 
+@push('styles')
+<style>
+    .profile-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    @media(max-width:600px){
+        .profile-2col{grid-template-columns:1fr!important}
+    }
+</style>
+@endpush
+
 @section('content')
 
 <div style="display:flex;justify-content:center;padding-top:.5rem;">
@@ -35,7 +44,7 @@
         <form method="POST" action="{{ route('office.profile.update') }}" enctype="multipart/form-data">
             @csrf
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+            <div class="profile-2col">
                 <div>
                     <label class="form-label">اسم المكتب *</label>
                     <input type="text" name="name" class="form-input" value="{{ old('name', $office->name) }}" required>
@@ -48,7 +57,7 @@
                 </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+            <div class="profile-2col">
                 <div>
                     <label class="form-label">رقم الهاتف *</label>
                     <input type="text" name="phone" class="form-input" value="{{ old('phone', $office->phone) }}" required>
@@ -78,7 +87,7 @@
 
             <div style="border-top:1px solid #f3f4f6;padding-top:1.25rem;margin-top:1.25rem;">
                 <h4 style="font-size:0.9rem;font-weight:700;color:#374151;margin:0 0 1rem;">تغيير كلمة المرور (اتركه فارغاً إذا لم ترد التغيير)</h4>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div class="profile-2col">
                     <div>
                         <label class="form-label">كلمة المرور الجديدة</label>
                         <input type="password" name="password" class="form-input" autocomplete="new-password">

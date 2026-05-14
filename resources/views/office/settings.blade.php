@@ -12,13 +12,22 @@
     .s-divider{display:flex;align-items:center;gap:.75rem;margin:1.75rem 0 1.25rem}
     .s-divider span{font-size:.78rem;font-weight:800;color:#054F31;white-space:nowrap;background:#e8f5e9;padding:.3rem .75rem;border-radius:99px}
     .s-divider:before,.s-divider:after{content:'';flex:1;height:1px;background:#e5e7eb}
+    .s-layout{display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start}
+    .s-form-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:900px){
+        .s-layout{grid-template-columns:1fr!important}
+        .s-layout > div:last-child{position:static!important}
+    }
+    @media(max-width:600px){
+        .s-form-2col{grid-template-columns:1fr!important}
+    }
 </style>
 @endpush
 
 @section('content')
 <form method="POST" action="{{ route('office.settings.update') }}">
 @csrf
-<div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start;">
+<div class="s-layout">
 
     {{-- Main Card --}}
     <div style="background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow:hidden;">
@@ -45,7 +54,7 @@
                 @error('name') <div class="form-error">{{ $message }}</div> @enderror
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="s-form-2col" style="margin-bottom:1.25rem;">
                 <div class="sfield-group">
                     <label class="sfield-label">البريد الإلكتروني <span class="req">*</span></label>
                     <input type="email" name="email" class="sfield-input" value="{{ old('email', $office->email) }}" required placeholder="example@domain.com">
@@ -77,7 +86,7 @@
                 @error('current_password') <div class="form-error">{{ $message }}</div> @enderror
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="s-form-2col" style="margin-bottom:1.25rem;">
                 <div class="sfield-group">
                     <label class="sfield-label">كلمة المرور الجديدة</label>
                     <div style="position:relative;">

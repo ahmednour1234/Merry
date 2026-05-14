@@ -10,14 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Cairo', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #f1f5f4; height: 100vh; overflow: hidden; display: flex; align-items: stretch; }
+        body { background: #f1f5f4; min-height: 100vh; display: flex; align-items: stretch; }
 
         /* ── Two-column shell ── */
         .auth-shell {
             display: flex;
             width: 100%;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
         /* Left panel (white form side) */
@@ -28,7 +27,7 @@
             justify-content: center;
             padding: 2rem;
             background: #fff;
-            height: 100vh;
+            min-height: 100vh;
             overflow-y: auto;
         }
         .auth-form-inner {
@@ -48,7 +47,7 @@
             padding: 2.5rem 2rem;
             position: relative;
             overflow: hidden;
-            height: 100vh;
+            min-height: 100vh;
         }
         .auth-brand-panel::before {
             content: '';
@@ -98,7 +97,7 @@
             justify-content: center;
             background: linear-gradient(135deg, #054F31 0%, #0a7a4d 50%, #054F31 100%);
             overflow-y: auto;
-            height: 100vh;
+            min-height: 100vh;
         }
         .auth-shell.single-col .auth-card-solo {
             background: #fff;
@@ -173,6 +172,22 @@
 
         @media (max-width: 768px) {
             .auth-brand-panel { display: none; }
+            .auth-form-panel { padding: 1.75rem 1.5rem; align-items: flex-start; padding-top: 2.5rem; }
+            .auth-form-inner { max-width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .auth-form-panel { padding: 1.5rem 1.25rem; }
+            .auth-shell.single-col { padding: 1rem; align-items: flex-start; }
+            .auth-shell.single-col .auth-card-solo { padding: 1.75rem 1.25rem; margin: auto; border-radius: 16px; }
+            .otp-box { width: 42px; height: 48px; font-size: 1.1rem; }
+            .otp-boxes { gap: 0.4rem; }
+            .form-page-title { font-size: 1.25rem; }
+        }
+        @media (max-width: 360px) {
+            .auth-form-panel { padding: 1.25rem 1rem; }
+            .auth-shell.single-col .auth-card-solo { padding: 1.5rem 1rem; }
+            .otp-box { width: 36px; height: 44px; font-size: 1rem; }
+            .otp-boxes { gap: 0.3rem; }
         }
     </style>
     @stack('auth-styles')

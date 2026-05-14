@@ -16,7 +16,7 @@
 </div>
 @endif
 
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.25rem;">
     <div>
         <h2 style="font-size:1.1rem;font-weight:700;color:#111827;margin:0;">قائمة الحجوزات</h2>
         <p style="color:#6b7280;font-size:0.82rem;margin:0.2rem 0 0;">إجمالي: {{ $bookings->total() }} حجز</p>
@@ -43,7 +43,8 @@
 {{-- Table --}}
 <div style="background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,0.06);overflow:hidden;">
     @if($bookings->count() > 0)
-        <table class="data-table">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table class="data-table" style="min-width:640px;">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -110,6 +111,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>{{-- end overflow-x:auto --}}
 
         @if($bookings->hasPages())
         <div style="padding:1rem 1.25rem;border-top:1px solid #f3f4f6;">

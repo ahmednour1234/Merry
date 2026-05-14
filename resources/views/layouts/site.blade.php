@@ -134,9 +134,19 @@
             footer { padding: 40px 0 90px; }
             .footer-inner { grid-template-columns: 1fr; gap: 1.75rem; }
             .footer-bottom { flex-direction: column; text-align: center; gap: .5rem; }
+            .page-header { padding: 88px 0 48px; }
+            .page-header h1 { font-size: clamp(1.5rem, 5vw, 2.4rem); }
         }
         @media (max-width: 480px) {
             .container { padding: 0 1rem; }
+            .page-header { padding: 80px 0 40px; }
+            .page-header p { font-size: .92rem; }
+        }
+        @media (max-width: 360px) {
+            .mob-nav-item { font-size: .58rem; padding: .4rem .1rem .35rem; min-height: 54px; }
+            .mob-nav-icon { font-size: 1.1rem; }
+            .mob-nav-download .mob-nav-icon { width: 34px; height: 34px; font-size: .95rem; }
+            .container { padding: 0 .75rem; }
         }
 
         @yield('styles')

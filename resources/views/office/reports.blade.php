@@ -3,9 +3,18 @@
 @section('title', 'التقارير')
 @section('page-title', 'التقارير')
 
+@push('styles')
+<style>
+    .report-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+    @media(max-width:700px){
+        .report-grid-2{grid-template-columns:1fr!important}
+    }
+</style>
+@endpush
+
 @section('content')
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;">
+<div class="report-grid-2">
 
     {{-- CVs by status --}}
     <div style="background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
