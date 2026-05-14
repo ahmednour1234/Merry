@@ -2,284 +2,259 @@
 
 @section('title', 'تنزيل تطبيق ميري')
 
-
 @section('styles')
 <style>
-/* ════════════════════════════════
-   DOWNLOAD PAGE — FULL REDESIGN
-════════════════════════════════ */
+/* ═══════════════════════════════
+   DOWNLOAD PAGE — REDESIGN v3
+═══════════════════════════════ */
 
 /* ── HERO ── */
 .dl-hero {
-    padding: calc(var(--nav-height) + 56px) 0 72px;
+    padding: calc(var(--nav-height) + 64px) 0 80px;
     background-color: #052e16;
-    background-image: linear-gradient(145deg, #052e16 0%, #0a5c30 55%, #15803d 100%);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 70% -10%, rgba(74,222,128,.13) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at -10% 80%, rgba(255,255,255,.04) 0%, transparent 55%),
+        linear-gradient(160deg, #052e16 0%, #083d20 45%, #0f5c2e 100%);
     text-align: center; position: relative; overflow: hidden;
 }
-/* decorative orbs */
-.dl-hero::before,
-.dl-hero::after {
-    content: ''; position: absolute; border-radius: 50%; pointer-events: none;
-}
+/* dot grid overlay */
 .dl-hero::before {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(74,222,128,.12) 0%, transparent 70%);
-    top: -120px; right: -100px;
-}
-.dl-hero::after {
-    width: 360px; height: 360px;
-    background: radial-gradient(circle, rgba(255,255,255,.06) 0%, transparent 70%);
-    bottom: -80px; left: -60px;
+    content: '';
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
 }
 .dl-hero-inner { position: relative; z-index: 1; }
 
+/* live badge */
 .dl-live-tag {
-    display: inline-flex; align-items: center; gap: .55rem;
-    background: rgba(74,222,128,.15); color: #4ade80;
-    border: 1px solid rgba(74,222,128,.3);
-    padding: .4rem 1.2rem; border-radius: 50px;
-    font-size: .82rem; font-weight: 700; margin-bottom: 1.75rem;
-    letter-spacing: .02em;
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(74,222,128,.12); color: #4ade80;
+    border: 1px solid rgba(74,222,128,.28);
+    padding: .38rem 1.1rem; border-radius: 50px;
+    font-size: .8rem; font-weight: 700; margin-bottom: 1.6rem;
+    letter-spacing: .03em; backdrop-filter: blur(4px);
 }
 .dl-live-dot {
-    width: 8px; height: 8px; background: #4ade80; border-radius: 50%;
-    animation: livePulse 2s ease-in-out infinite;
+    width: 7px; height: 7px; background: #4ade80; border-radius: 50%;
+    animation: livePulse 2s ease-in-out infinite; flex-shrink: 0;
 }
+
+/* heading */
 .dl-hero h1 {
-    font-size: clamp(2.1rem, 5.5vw, 3.6rem); font-weight: 900;
-    color: var(--white); line-height: 1.2; margin-bottom: 1.1rem;
+    font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 900;
+    color: #ffffff; line-height: 1.18; margin-bottom: 1rem;
+    letter-spacing: -.02em;
 }
-.dl-hero h1 .hl { color: #4ade80; }
-.dl-hero > .dl-hero-inner > p {
-    font-size: 1.05rem; color: rgba(255,255,255,.75);
-    line-height: 1.9; max-width: 520px; margin: 0 auto 2.75rem;
-}
-
-/* ── STORE BADGES ── */
-.dl-store-row { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-.dl-store-btn {
-    display: inline-flex; align-items: center; gap: .9rem;
-    padding: .85rem 2rem; border-radius: 16px;
-    text-decoration: none; font-family: 'Tajawal', sans-serif;
-    transition: transform .25s, box-shadow .25s;
-    min-width: 200px;
-}
-.dl-store-btn:hover { transform: translateY(-4px); }
-.dl-store-btn.ios {
-    background: var(--white); color: var(--text-dark);
-    box-shadow: 0 8px 32px rgba(0,0,0,.18);
-}
-.dl-store-btn.ios:hover { box-shadow: 0 16px 48px rgba(0,0,0,.25); }
-.dl-store-btn.android {
-    background: #1c1c1e; color: var(--white);
-    box-shadow: 0 8px 32px rgba(0,0,0,.35);
-}
-.dl-store-btn.android:hover { box-shadow: 0 16px 48px rgba(0,0,0,.45); }
-.store-icon { font-size: 2rem; flex-shrink: 0; }
-.store-text { display: flex; flex-direction: column; text-align: right; }
-.store-sub { font-size: .68rem; font-weight: 400; opacity: .65; }
-.store-name { font-size: 1.1rem; font-weight: 900; letter-spacing: -.01em; }
-.dl-store-btn.ios .store-name { color: var(--text-dark); }
-.dl-store-btn.android .store-name { color: var(--white); }
-
-/* rating strip below buttons */
-.dl-rating {
-    margin-top: 1.75rem;
-    display: flex; align-items: center; justify-content: center; gap: 1.5rem;
-    flex-wrap: wrap;
-}
-.dl-rating-item { display: flex; align-items: center; gap: .4rem; color: rgba(255,255,255,.55); font-size: .82rem; font-weight: 600; }
-.dl-rating-item .stars { color: #fbbf24; font-size: .9rem; }
-.dl-rating-divider { width: 1px; height: 16px; background: rgba(255,255,255,.2); }
-
-/* ── MOCKUP + FEATURES ── */
-.dl-mockup-section { padding: var(--page-section-padding) 0; background: var(--green-50); }
-.dl-mockup-grid {
-    display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center;
-}
-
-/* phone */
-.dl-phone-wrap { display: flex; justify-content: center; position: relative; }
-.dl-phone-glow {
-    position: absolute; inset: -30px; border-radius: 60px;
-    background: radial-gradient(circle at center, rgba(21,128,61,.18) 0%, transparent 70%);
-    pointer-events: none;
-}
-.dl-phone {
-    width: 270px; background: var(--green-900); border-radius: 44px;
-    padding: 14px; box-shadow: 0 48px 96px rgba(5,46,22,.4);
-    position: relative; z-index: 1;
-}
-.dl-phone-notch {
-    width: 90px; height: 24px; background: var(--green-900);
-    border-radius: 0 0 16px 16px; margin: 0 auto 6px;
-}
-.dl-phone-screen {
-    background: #f8fafc; border-radius: 32px;
-    overflow: hidden; aspect-ratio: 9/19.5;
-    display: flex; flex-direction: column;
-}
-.ph-header {
-    background: var(--green-800); padding: 1rem 1rem .8rem;
-    display: flex; align-items: center; gap: .6rem;
-}
-.ph-logo {
-    width: 30px; height: 30px; background: var(--white);
-    border-radius: 8px; display: flex; align-items: center;
-    justify-content: center; font-size: .85rem; font-weight: 900; color: var(--green-800);
-}
-.ph-title { color: var(--white); font-size: .82rem; font-weight: 800; }
-.ph-body { padding: .8rem; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
-.ph-greeting { font-size: .68rem; color: var(--text-light); font-weight: 600; padding: .2rem 0 .1rem; }
-.ph-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
-.ph-stat {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 12px; padding: .7rem .6rem; text-align: center;
-}
-.ph-stat-num { font-size: 1.05rem; font-weight: 900; color: var(--green-800); display: block; }
-.ph-stat-lbl { font-size: .52rem; color: var(--text-light); display: block; margin-top: .1rem; }
-.ph-card {
-    background: var(--white); border-radius: 12px; padding: .6rem .75rem;
-    display: flex; align-items: center; gap: .55rem;
-    border: 1px solid var(--border);
-}
-.ph-card-icon { font-size: 1rem; flex-shrink: 0; }
-.ph-card-body { flex: 1; min-width: 0; }
-.ph-card-title { font-size: .63rem; font-weight: 800; color: var(--text-dark); display: block; }
-.ph-card-sub { font-size: .54rem; color: var(--text-light); display: block; margin-top: .1rem; }
-.ph-card-badge {
-    font-size: .5rem; font-weight: 800; background: var(--green-100);
-    color: var(--green-800); padding: .15rem .4rem; border-radius: 50px; flex-shrink: 0;
-}
-.ph-btn {
-    background: linear-gradient(135deg, var(--green-700), var(--green-600));
-    color: var(--white); text-align: center; padding: .65rem;
-    border-radius: 12px; font-size: .7rem; font-weight: 800; margin-top: .15rem;
-    letter-spacing: .01em;
-}
-
-/* features list */
-.dl-features-col { }
-.dl-feat-eyebrow {
-    display: inline-block; background: var(--green-100); color: var(--green-800);
-    padding: .28rem .9rem; border-radius: 50px; font-size: .78rem; font-weight: 700;
-    margin-bottom: .9rem;
-}
-.dl-features-col h2 {
-    font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 900;
-    color: var(--text-dark); line-height: 1.3; margin-bottom: .65rem;
-}
-.dl-features-col > p {
-    font-size: .95rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 2rem;
-}
-.dl-feat-list { display: flex; flex-direction: column; gap: .85rem; }
-.dl-feat-item {
-    display: flex; align-items: flex-start; gap: 1rem;
-    background: var(--white); border: 1.5px solid var(--border);
-    border-radius: var(--radius-lg); padding: 1rem 1.1rem;
-    transition: border-color .2s, box-shadow .2s;
-}
-.dl-feat-item:hover { border-color: var(--green-400); box-shadow: 0 4px 16px rgba(21,128,61,.1); }
-.dl-feat-icon {
-    width: 46px; height: 46px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; flex-shrink: 0;
-}
-.dl-feat-item h3 { font-size: .92rem; font-weight: 800; color: var(--text-dark); margin-bottom: .2rem; }
-.dl-feat-item p { font-size: .83rem; color: var(--text-light); line-height: 1.65; }
-
-/* ── STATS BAND ── */
-.dl-stats {
-    padding: var(--page-section-padding) 0;
-    background: var(--green-900);
-    position: relative; overflow: hidden;
-}
-.dl-stats::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(74,222,128,.08) 0%, transparent 60%);
-    pointer-events: none;
-}
-.dl-stats-head { text-align: center; margin-bottom: 3rem; position: relative; z-index: 1; }
-.dl-stats-tag {
-    display: inline-block; background: rgba(74,222,128,.15); color: #4ade80;
-    border: 1px solid rgba(74,222,128,.3);
-    padding: .3rem .9rem; border-radius: 50px; font-size: .8rem; font-weight: 700;
-    margin-bottom: .8rem;
-}
-.dl-stats-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 900; color: var(--white); }
-.dl-stats-head p { font-size: .9rem; color: rgba(255,255,255,.5); margin-top: .4rem; }
-
-.dl-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; position: relative; z-index: 1; }
-.dl-stat-card {
-    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-    border-radius: var(--radius-lg); padding: 2rem 1.25rem; text-align: center;
-    transition: background .3s, transform .3s;
-}
-.dl-stat-card:hover { background: rgba(255,255,255,.09); transform: translateY(-4px); }
-.dl-stat-card .num {
-    font-size: 2.4rem; font-weight: 900; display: block; margin-bottom: .4rem;
+.dl-hero h1 .hl {
     background: linear-gradient(135deg, #4ade80, #86efac);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.dl-stat-card .lbl { font-size: .85rem; color: rgba(255,255,255,.5); }
-.dl-stat-card .stat-icon { font-size: 1.6rem; margin-bottom: .6rem; display: block; }
+.dl-hero-sub {
+    font-size: 1.05rem; color: rgba(255,255,255,.68);
+    line-height: 1.9; max-width: 500px; margin: 0 auto 2.8rem;
+}
+
+/* ── STORE BUTTONS ── */
+.dl-store-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: .9rem; flex-wrap: wrap;
+}
+.dl-store-btn {
+    display: inline-flex; align-items: center; gap: .85rem;
+    padding: .9rem 1.7rem; border-radius: 18px;
+    text-decoration: none; font-family: 'Tajawal', sans-serif;
+    transition: transform .25s ease, box-shadow .25s ease;
+    min-width: 190px; direction: ltr;
+}
+.dl-store-btn:hover { transform: translateY(-3px); }
+.dl-store-btn.ios {
+    background: #ffffff; color: #0f172a;
+    box-shadow: 0 6px 28px rgba(0,0,0,.22);
+}
+.dl-store-btn.ios:hover { box-shadow: 0 14px 44px rgba(0,0,0,.28); }
+.dl-store-btn.android {
+    background: #1a1a1a; color: #ffffff;
+    box-shadow: 0 6px 28px rgba(0,0,0,.4);
+}
+.dl-store-btn.android:hover { box-shadow: 0 14px 44px rgba(0,0,0,.5); }
+.store-svg { flex-shrink: 0; display: flex; align-items: center; }
+.store-text-col { display: flex; flex-direction: column; text-align: left; }
+.store-sub { font-size: .62rem; font-weight: 500; opacity: .6; line-height: 1; }
+.store-name { font-size: 1.05rem; font-weight: 900; line-height: 1.2; margin-top: .15rem; }
+
+/* ── TRUST STRIP ── */
+.dl-trust {
+    margin-top: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; flex-wrap: wrap;
+}
+.dl-trust-chip {
+    display: inline-flex; align-items: center; gap: .45rem;
+    background: rgba(255,255,255,.07); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: .38rem .9rem; border-radius: 50px;
+    color: rgba(255,255,255,.7); font-size: .77rem; font-weight: 600;
+}
+.dl-trust-chip .stars { color: #fbbf24; letter-spacing: -.05em; }
+.dl-trust-sep { width: 1px; height: 18px; background: rgba(255,255,255,.15); }
+
+/* ── FEATURES SECTION ── */
+.dl-features-section {
+    padding: var(--page-section-padding) 0;
+    background: #f8fffe;
+}
+.dl-section-head { text-align: center; margin-bottom: 3rem; }
+.dl-eyebrow {
+    display: inline-block; background: #dcfce7; color: #15803d;
+    padding: .3rem .95rem; border-radius: 50px;
+    font-size: .78rem; font-weight: 800; margin-bottom: .85rem; letter-spacing: .02em;
+}
+.dl-section-head h2 {
+    font-size: clamp(1.7rem, 3.5vw, 2.3rem); font-weight: 900;
+    color: #0f172a; line-height: 1.25; margin-bottom: .55rem;
+}
+.dl-section-head p { font-size: .97rem; color: #6b7280; line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.dl-feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+.dl-feat-card {
+    background: #ffffff; border: 1.5px solid #e5e7eb;
+    border-radius: 20px; padding: 1.6rem 1.4rem;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.dl-feat-card:hover {
+    border-color: #4ade80; transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(21,128,61,.1);
+}
+.dl-feat-card-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.1rem;
+}
+.dl-feat-card h3 { font-size: .97rem; font-weight: 800; color: #111827; margin-bottom: .4rem; }
+.dl-feat-card p { font-size: .84rem; color: #6b7280; line-height: 1.7; }
+
+/* ── STATS ── */
+.dl-stats {
+    padding: var(--page-section-padding) 0;
+    background: #052e16; position: relative; overflow: hidden;
+}
+.dl-stats::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(74,222,128,.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+.dl-stats::after {
+    content: ''; position: absolute;
+    width: 600px; height: 600px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(74,222,128,.1) 0%, transparent 65%);
+    top: -200px; right: -150px;
+}
+.dl-stats-head { text-align: center; margin-bottom: 2.75rem; position: relative; z-index: 1; }
+.dl-stats-tag {
+    display: inline-block; background: rgba(74,222,128,.14); color: #4ade80;
+    border: 1px solid rgba(74,222,128,.28);
+    padding: .3rem .95rem; border-radius: 50px; font-size: .79rem; font-weight: 700;
+    margin-bottom: .8rem;
+}
+.dl-stats-head h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; color: #ffffff; margin-bottom: .4rem;
+}
+.dl-stats-head p { font-size: .9rem; color: rgba(255,255,255,.45); }
+.dl-stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    position: relative; z-index: 1;
+}
+.dl-stat-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
+    border-radius: 20px; padding: 2rem 1rem; text-align: center;
+    transition: background .25s, transform .25s;
+}
+.dl-stat-card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+.dl-stat-icon { font-size: 1.7rem; display: block; margin-bottom: .65rem; }
+.dl-stat-num {
+    font-size: 2.3rem; font-weight: 900; display: block; margin-bottom: .3rem;
+    background: linear-gradient(135deg, #4ade80 0%, #86efac 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.dl-stat-lbl { font-size: .84rem; color: rgba(255,255,255,.45); display: block; }
 
 /* ── BOTTOM CTA ── */
-.dl-cta { padding: var(--page-section-padding) 0; background: var(--green-50); }
+.dl-cta { padding: var(--page-section-padding) 0; background: #f0fdf4; }
 .dl-cta-card {
-    background: linear-gradient(135deg, var(--green-900) 0%, #0a5c30 60%, var(--green-700) 100%);
-    border-radius: 28px; padding: 3.5rem 3rem;
-    text-align: center; position: relative; overflow: hidden;
-    box-shadow: 0 24px 64px rgba(5,46,22,.3);
+    background: linear-gradient(150deg, #052e16 0%, #0a5c30 55%, #15803d 100%);
+    border-radius: 28px; padding: 4rem 3rem; text-align: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 28px 80px rgba(5,46,22,.35);
 }
 .dl-cta-card::before {
-    content: ''; position: absolute;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 70%);
-    top: -150px; left: -100px; pointer-events: none;
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+.dl-cta-card::after {
+    content: ''; position: absolute; pointer-events: none;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,222,128,.1) 0%, transparent 70%);
+    top: -200px; left: -100px;
 }
 .dl-cta-card h2 {
-    font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 900; color: var(--white);
-    margin-bottom: .75rem; position: relative;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 900; color: #ffffff;
+    margin-bottom: .7rem; position: relative; z-index: 1; letter-spacing: -.01em;
 }
 .dl-cta-card p {
-    font-size: .97rem; color: rgba(255,255,255,.7); line-height: 1.85;
-    max-width: 500px; margin: 0 auto 2.5rem; position: relative;
+    font-size: .97rem; color: rgba(255,255,255,.65); line-height: 1.85;
+    max-width: 480px; margin: 0 auto 2.5rem; position: relative; z-index: 1;
+}
+.dl-cta-card .dl-store-row { position: relative; z-index: 1; }
+/* white store btn inside dark cta */
+.dl-cta-card .dl-store-btn.ios {
+    background: rgba(255,255,255,.95);
+    box-shadow: 0 6px 24px rgba(0,0,0,.25);
+}
+.dl-cta-card .dl-store-btn.android {
+    background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.15);
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-    .dl-mockup-grid { gap: 3rem; }
+    .dl-feat-grid { grid-template-columns: repeat(2, 1fr); }
+    .dl-stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-    .dl-hero { padding: calc(var(--nav-height) + 36px) 0 56px; }
-    .dl-mockup-section { padding: var(--page-section-padding-mobile) 0; }
+    .dl-hero { padding: calc(var(--nav-height) + 40px) 0 60px; }
+    .dl-features-section { padding: var(--page-section-padding-mobile) 0; }
     .dl-stats { padding: var(--page-section-padding-mobile) 0; }
     .dl-cta { padding: var(--page-section-padding-mobile) 0; }
-    .dl-mockup-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
-    .dl-features-col { order: -1; }
-    .dl-feat-item { text-align: right; }
-    .dl-stats-grid { grid-template-columns: 1fr 1fr; }
-    .dl-phone { width: 230px; }
-    .dl-cta-card { padding: 2.5rem 1.5rem; border-radius: 20px; }
+    .dl-cta-card { padding: 2.8rem 1.75rem; border-radius: 22px; }
+    .dl-feat-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 }
-@media (max-width: 480px) {
+@media (max-width: 520px) {
     .dl-store-row { flex-direction: column; align-items: center; }
-    .dl-store-btn { width: 100%; max-width: 280px; justify-content: center; }
-    .dl-stats-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
-    .dl-stat-card { padding: 1.5rem .75rem; }
-    .dl-stat-card .num { font-size: 1.9rem; }
-    .dl-phone { width: 210px; }
-    .dl-rating { gap: .75rem; }
-    .dl-rating-divider { display: none; }
+    .dl-store-btn { width: 100%; max-width: 300px; justify-content: center; }
+    .dl-feat-grid { grid-template-columns: 1fr 1fr; gap: .85rem; }
+    .dl-feat-card { padding: 1.25rem 1rem; }
+    .dl-feat-card-icon { width: 44px; height: 44px; font-size: 1.3rem; border-radius: 12px; }
+    .dl-feat-card h3 { font-size: .88rem; }
+    .dl-feat-card p { font-size: .78rem; }
+    .dl-stat-num { font-size: 1.9rem; }
+    .dl-trust { gap: .6rem; }
+    .dl-trust-sep { display: none; }
 }
-@media (max-width: 360px) {
-    .dl-stats-grid { grid-template-columns: 1fr; }
-    .dl-phone { width: 190px; }
+@media (max-width: 400px) {
+    .dl-hero h1 { font-size: 2rem; }
     .dl-store-btn { max-width: 100%; }
+    .dl-feat-grid { grid-template-columns: 1fr; }
+    .dl-stats-grid { grid-template-columns: 1fr 1fr; }
+    .dl-cta-card { padding: 2.2rem 1.25rem; border-radius: 18px; }
 }
 
-@keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+@keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
 </style>
 @endsection
 
@@ -292,144 +267,90 @@
             <span class="dl-live-dot"></span>
             متاح الآن للتنزيل المجاني
         </div>
+
         <h1>حمّل تطبيق <span class="hl">ميري</span><br>واستمتع بتجربة متكاملة</h1>
-        <p>إدارة طلبات الاستقدام، متابعة الحالات، والتواصل مع مكاتب الاستقدام — كل ذلك في راحة يدك</p>
+        <p class="dl-hero-sub">إدارة طلبات الاستقدام، متابعة الحالات، والتواصل مع مكاتب الاستقدام — كل ذلك في راحة يدك</p>
 
         <div class="dl-store-row">
+            <!-- App Store -->
             <a href="#" class="dl-store-btn ios">
-                <span class="store-icon">🍎</span>
-                <span class="store-text">
-                    <span class="store-sub">تنزيل من</span>
+                <span class="store-svg">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#000000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                </span>
+                <span class="store-text-col">
+                    <span class="store-sub">Download on the</span>
                     <span class="store-name">App Store</span>
                 </span>
             </a>
+            <!-- Google Play -->
             <a href="#" class="dl-store-btn android">
-                <span class="store-icon">▶</span>
-                <span class="store-text">
-                    <span class="store-sub">تنزيل من</span>
-                    <span class="store-name">Google Play</span>
+                <span class="store-svg">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.77A2 2 0 0 1 2 22V2c0-.43.13-.83.36-1.16L13 12 3.18 23.77z" fill="#EA4335"/><path d="M16.93 8.34l-3.3-3.3-9.47-4.8A2.04 2.04 0 0 1 5.25 0l11.68 8.34z" fill="#FBBC04"/><path d="M16.93 15.66L5.25 24a2.04 2.04 0 0 1-1.09-.24L13 12l3.93 3.66z" fill="#34A853"/><path d="M22 12c0 .88-.48 1.66-1.2 2.1l-3.87 2.19L13 12l4.93-4.29 3.87 2.19A2.45 2.45 0 0 1 22 12z" fill="#4285F4"/></svg>
+                </span>
+                <span class="store-text-col">
+                    <span class="store-sub" style="color:rgba(255,255,255,.6)">Get it on</span>
+                    <span class="store-name" style="color:#ffffff">Google Play</span>
                 </span>
             </a>
         </div>
 
-        <div class="dl-rating">
-            <div class="dl-rating-item">
+        <div class="dl-trust">
+            <div class="dl-trust-chip">
                 <span class="stars">★★★★★</span>
-                <span>4.9 تقييم App Store</span>
+                <span>4.9 — App Store</span>
             </div>
-            <div class="dl-rating-divider"></div>
-            <div class="dl-rating-item">
+            <div class="dl-trust-sep"></div>
+            <div class="dl-trust-chip">
                 <span class="stars">★★★★★</span>
-                <span>4.8 تقييم Google Play</span>
+                <span>4.8 — Google Play</span>
             </div>
-            <div class="dl-rating-divider"></div>
-            <div class="dl-rating-item">
+            <div class="dl-trust-sep"></div>
+            <div class="dl-trust-chip">
                 <span>+10,000 تنزيل</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══════════ MOCKUP + FEATURES ══════════ -->
-<section class="dl-mockup-section">
+<!-- ══════════ FEATURES GRID ══════════ -->
+<section class="dl-features-section">
     <div class="container">
-        <div class="dl-mockup-grid">
-
-            <!-- Phone mockup -->
-            <div class="dl-phone-wrap">
-                <div class="dl-phone-glow"></div>
-                <div class="dl-phone">
-                    <div class="dl-phone-notch"></div>
-                    <div class="dl-phone-screen">
-                        <div class="ph-header">
-                            <div class="ph-logo">م</div>
-                            <span class="ph-title">نظام ميري</span>
-                        </div>
-                        <div class="ph-body">
-                            <span class="ph-greeting">مرحباً، أحمد 👋</span>
-                            <div class="ph-stat-row">
-                                <div class="ph-stat">
-                                    <span class="ph-stat-num">12</span>
-                                    <span class="ph-stat-lbl">طلب نشط</span>
-                                </div>
-                                <div class="ph-stat">
-                                    <span class="ph-stat-num">98%</span>
-                                    <span class="ph-stat-lbl">نسبة الإنجاز</span>
-                                </div>
-                            </div>
-                            <div class="ph-card">
-                                <span class="ph-card-icon">📋</span>
-                                <div class="ph-card-body">
-                                    <span class="ph-card-title">طلبات الاستقدام</span>
-                                    <span class="ph-card-sub">3 طلبات تحت المراجعة</span>
-                                </div>
-                                <span class="ph-card-badge">جديد</span>
-                            </div>
-                            <div class="ph-card">
-                                <span class="ph-card-icon">🔔</span>
-                                <div class="ph-card-body">
-                                    <span class="ph-card-title">الإشعارات</span>
-                                    <span class="ph-card-sub">3 إشعارات غير مقروءة</span>
-                                </div>
-                                <span class="ph-card-badge">3</span>
-                            </div>
-                            <div class="ph-card">
-                                <span class="ph-card-icon">📊</span>
-                                <div class="ph-card-body">
-                                    <span class="ph-card-title">تقرير الأداء</span>
-                                    <span class="ph-card-sub">يناير — ديسمبر 2025</span>
-                                </div>
-                            </div>
-                            <div class="ph-btn">عرض جميع الطلبات ←</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="dl-section-head">
+            <span class="dl-eyebrow">✦ مميزات التطبيق</span>
+            <h2>كل ما تحتاجه في تطبيق واحد</h2>
+            <p>صمّمنا ميري ليكون بسيطاً وسريعاً — سواء كنت مستخدماً أو تدير مكتب استقدام</p>
+        </div>
+        <div class="dl-feat-grid">
+            <div class="dl-feat-card">
+                <div class="dl-feat-card-icon" style="background:#dcfce7">📋</div>
+                <h3>تتبع الطلبات لحظة بلحظة</h3>
+                <p>راقب حالة كل طلب من تقديمه حتى إتمامه بتحديثات فورية</p>
             </div>
-
-            <!-- Features -->
-            <div class="dl-features-col">
-                <span class="dl-feat-eyebrow">✦ مميزات التطبيق</span>
-                <h2>كل ما تحتاجه<br>في تطبيق واحد</h2>
-                <p>صمّمنا ميري ليكون بسيطاً وسريعاً — سواء كنت مستخدماً أو تدير مكتب استقدام</p>
-                <div class="dl-feat-list">
-                    <div class="dl-feat-item">
-                        <div class="dl-feat-icon" style="background:#dcfce7">📋</div>
-                        <div>
-                            <h3>تتبع الطلبات لحظة بلحظة</h3>
-                            <p>راقب حالة كل طلب من تقديمه حتى إتمامه بتحديثات فورية</p>
-                        </div>
-                    </div>
-                    <div class="dl-feat-item">
-                        <div class="dl-feat-icon" style="background:#dbeafe">🔔</div>
-                        <div>
-                            <h3>إشعارات Push فورية</h3>
-                            <p>لا تفوّتك أي تحديث — إشعارات ذكية لكل مستجد في طلبك</p>
-                        </div>
-                    </div>
-                    <div class="dl-feat-item">
-                        <div class="dl-feat-icon" style="background:#fef3c7">💬</div>
-                        <div>
-                            <h3>تواصل مباشر مع المكاتب</h3>
-                            <p>راسل المكتب واستلم الردود دون الحاجة للزيارة الشخصية</p>
-                        </div>
-                    </div>
-                    <div class="dl-feat-item">
-                        <div class="dl-feat-icon" style="background:#f0fdf4">🛡️</div>
-                        <div>
-                            <h3>حماية وأمان تام</h3>
-                            <p>بياناتك مشفرة وآمنة على مدار الساعة بأعلى معايير الحماية</p>
-                        </div>
-                    </div>
-                    <div class="dl-feat-item">
-                        <div class="dl-feat-icon" style="background:#ede9fe">📄</div>
-                        <div>
-                            <h3>إدارة المستندات بسهولة</h3>
-                            <p>رفع وتصفح جميع وثائقك من هاتفك في أي وقت ومن أي مكان</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="dl-feat-card">
+                <div class="dl-feat-card-icon" style="background:#dbeafe">🔔</div>
+                <h3>إشعارات Push فورية</h3>
+                <p>لا تفوّتك أي تحديث — إشعارات ذكية لكل مستجد في طلبك</p>
             </div>
-
+            <div class="dl-feat-card">
+                <div class="dl-feat-card-icon" style="background:#fef3c7">💬</div>
+                <h3>تواصل مباشر مع المكاتب</h3>
+                <p>راسل المكتب واستلم الردود دون الحاجة للزيارة الشخصية</p>
+            </div>
+            <div class="dl-feat-card">
+                <div class="dl-feat-card-icon" style="background:#f0fdf4">🛡️</div>
+                <h3>حماية وأمان تام</h3>
+                <p>بياناتك مشفرة وآمنة على مدار الساعة بأعلى معايير الحماية</p>
+            </div>
+            <div class="dl-feat-card">
+                <div class="dl-feat-card-icon" style="background:#ede9fe">📄</div>
+                <h3>إدارة المستندات</h3>
+                <p>رفع وتصفح جميع وثائقك من هاتفك في أي وقت ومكان</p>
+            </div>
+            <div class="dl-feat-card">
+                <div class="dl-feat-card-icon" style="background:#fff7ed">📊</div>
+                <h3>تقارير وإحصاءات</h3>
+                <p>اطّلع على تقارير أداء شاملة لمتابعة نشاطك باحترافية</p>
+            </div>
         </div>
     </div>
 </section>
@@ -444,24 +365,24 @@
         </div>
         <div class="dl-stats-grid">
             <div class="dl-stat-card">
-                <span class="stat-icon">🏢</span>
-                <span class="num">+500</span>
-                <span class="lbl">مكتب استقدام</span>
+                <span class="dl-stat-icon">🏢</span>
+                <span class="dl-stat-num">+500</span>
+                <span class="dl-stat-lbl">مكتب استقدام</span>
             </div>
             <div class="dl-stat-card">
-                <span class="stat-icon">📄</span>
-                <span class="num">+10K</span>
-                <span class="lbl">سيرة ذاتية</span>
+                <span class="dl-stat-icon">📄</span>
+                <span class="dl-stat-num">+10K</span>
+                <span class="dl-stat-lbl">سيرة ذاتية</span>
             </div>
             <div class="dl-stat-card">
-                <span class="stat-icon">⭐</span>
-                <span class="num">99%</span>
-                <span class="lbl">رضا المستخدمين</span>
+                <span class="dl-stat-icon">⭐</span>
+                <span class="dl-stat-num">99%</span>
+                <span class="dl-stat-lbl">رضا المستخدمين</span>
             </div>
             <div class="dl-stat-card">
-                <span class="stat-icon">🕐</span>
-                <span class="num">24/7</span>
-                <span class="lbl">دعم فني مستمر</span>
+                <span class="dl-stat-icon">🕐</span>
+                <span class="dl-stat-num">24/7</span>
+                <span class="dl-stat-lbl">دعم فني مستمر</span>
             </div>
         </div>
     </div>
@@ -475,17 +396,21 @@
             <p>انضم إلى آلاف المستخدمين الذين يديرون معاملاتهم بكل سهولة عبر تطبيق ميري — مجاناً تماماً</p>
             <div class="dl-store-row">
                 <a href="#" class="dl-store-btn ios">
-                    <span class="store-icon">🍎</span>
-                    <span class="store-text">
-                        <span class="store-sub">تنزيل من</span>
+                    <span class="store-svg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#000000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    </span>
+                    <span class="store-text-col">
+                        <span class="store-sub">Download on the</span>
                         <span class="store-name">App Store</span>
                     </span>
                 </a>
                 <a href="#" class="dl-store-btn android">
-                    <span class="store-icon">▶</span>
-                    <span class="store-text">
-                        <span class="store-sub">تنزيل من</span>
-                        <span class="store-name">Google Play</span>
+                    <span class="store-svg">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.77A2 2 0 0 1 2 22V2c0-.43.13-.83.36-1.16L13 12 3.18 23.77z" fill="#EA4335"/><path d="M16.93 8.34l-3.3-3.3-9.47-4.8A2.04 2.04 0 0 1 5.25 0l11.68 8.34z" fill="#FBBC04"/><path d="M16.93 15.66L5.25 24a2.04 2.04 0 0 1-1.09-.24L13 12l3.93 3.66z" fill="#34A853"/><path d="M22 12c0 .88-.48 1.66-1.2 2.1l-3.87 2.19L13 12l4.93-4.29 3.87 2.19A2.45 2.45 0 0 1 22 12z" fill="#4285F4"/></svg>
+                    </span>
+                    <span class="store-text-col">
+                        <span class="store-sub" style="color:rgba(255,255,255,.6)">Get it on</span>
+                        <span class="store-name" style="color:#ffffff">Google Play</span>
                     </span>
                 </a>
             </div>
