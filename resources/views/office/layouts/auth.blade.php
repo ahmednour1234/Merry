@@ -126,12 +126,12 @@
         .form-group { margin-bottom: 1rem; }
         .form-label { display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 0.375rem; }
         .form-input {
-            width: 100%; border: 1.5px solid #e5e7eb; border-radius: 10px;
-            padding: 0.7rem 2.5rem 0.7rem 0.875rem;
+            width: 100%; border: 1.5px solid #e5e7eb; border-radius: 12px;
+            padding: 0.8rem 2.6rem 0.8rem 0.9rem;
             font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: #111827;
-            outline: none; transition: border-color 0.2s; background: #fafafa;
+            outline: none; transition: all 0.2s; background: #fff;
         }
-        .form-input:focus { border-color: #054F31; background: #fff; box-shadow: 0 0 0 3px rgba(5,79,49,0.08); }
+        .form-input:focus { border-color: #15803d; background: #fff; box-shadow: 0 0 0 4px rgba(21,128,61,0.1); }
         .input-wrap { position: relative; }
         .input-icon {
             position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%);
@@ -141,16 +141,29 @@
         .form-error { color: #dc2626; font-size: 0.78rem; margin-top: 0.3rem; }
 
         .btn-primary {
-            width: 100%; background: #054F31; color: #fff; border: none;
-            border-radius: 10px; padding: 0.8rem; cursor: pointer;
-            font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
-            transition: background 0.15s; margin-top: 0.5rem; letter-spacing: 0.01em;
+            width: 100%;
+            background: linear-gradient(135deg, #15803d 0%, #054F31 100%);
+            color: #fff; border: none;
+            border-radius: 50px; padding: 0.875rem; cursor: pointer;
+            font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 800;
+            transition: all 0.2s; margin-top: 0.75rem; letter-spacing: 0.01em;
+            box-shadow: 0 4px 18px rgba(5,79,49,.35);
         }
-        .btn-primary:hover { background: #043d26; }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #16a34a 0%, #043d26 100%);
+            box-shadow: 0 6px 24px rgba(5,79,49,.45);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(5,79,49,.3); }
 
-        .auth-divider { text-align: center; margin: 1.1rem 0; font-size: 0.82rem; color: #9ca3af; }
+        .auth-divider { text-align: center; margin: 1.25rem 0; font-size: 0.82rem; color: #9ca3af; position: relative; }
+        .auth-divider::before, .auth-divider::after {
+            content: ''; position: absolute; top: 50%; width: 35%; height: 1px; background: #e5e7eb;
+        }
+        .auth-divider::before { left: 0; } .auth-divider::after { right: 0; }
         .auth-link-row { text-align: center; margin-top: 1rem; font-size: 0.875rem; color: #6b7280; }
-        .auth-link-row a { color: #054F31; font-weight: 700; text-decoration: none; }
+        .auth-link-row a { color: #054F31; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid transparent; transition: border-color 0.15s; }
+        .auth-link-row a:hover { border-bottom-color: #054F31; }
 
         .alert { padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.875rem; }
         .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
@@ -158,8 +171,24 @@
         .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
 
         /* Page title above form */
-        .form-page-title { font-size: 1.4rem; font-weight: 900; color: #111827; margin-bottom: 0.3rem; }
+        .form-page-title { font-size: 1.5rem; font-weight: 900; color: #111827; margin-bottom: 0.3rem; }
         .form-page-sub   { font-size: 0.85rem; color: #6b7280; margin-bottom: 1.75rem; }
+
+        /* Mobile branded header (hidden on desktop) */
+        .auth-mobile-header {
+            display: none;
+            background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
+            padding: 2.5rem 1.5rem 3.5rem;
+            text-align: center;
+        }
+        .auth-mobile-header .mob-logo-ring {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: #fff; display: inline-flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,.2); overflow: hidden; margin-bottom: 1rem;
+        }
+        .auth-mobile-header .mob-logo-ring img { width: 58px; height: 58px; object-fit: contain; }
+        .auth-mobile-header .mob-brand-name { color: #fff; font-size: 1.2rem; font-weight: 900; display: block; }
+        .auth-mobile-header .mob-brand-sub  { color: rgba(255,255,255,.65); font-size: 0.8rem; display: block; margin-top: .2rem; }
 
         /* OTP boxes */
         .otp-boxes { display: flex; gap: 0.5rem; justify-content: center; direction: ltr; margin: 1.25rem 0; }
@@ -171,20 +200,35 @@
         .otp-box:focus { border-color: #054F31; background: #fff; box-shadow: 0 0 0 3px rgba(5,79,49,0.08); }
 
         @media (max-width: 768px) {
+            body { background: #f1f5f4; display: block; }
+            .auth-mobile-header { display: block; }
             .auth-brand-panel { display: none; }
-            .auth-form-panel { padding: 1.75rem 1.5rem; align-items: flex-start; padding-top: 2.5rem; }
+            .auth-shell {
+                display: block; min-height: 100vh;
+            }
+            .auth-form-panel {
+                min-height: unset;
+                border-radius: 24px 24px 0 0;
+                margin-top: -1.5rem;
+                position: relative;
+                z-index: 2;
+                padding: 2rem 1.5rem 2.5rem;
+                align-items: flex-start;
+                box-shadow: 0 -4px 32px rgba(0,0,0,.1);
+            }
             .auth-form-inner { max-width: 100%; }
+            .form-page-title { font-size: 1.3rem; }
         }
         @media (max-width: 480px) {
-            .auth-form-panel { padding: 1.5rem 1.25rem; }
-            .auth-shell.single-col { padding: 1rem; align-items: flex-start; }
+            .auth-form-panel { padding: 1.75rem 1.25rem 2.5rem; }
+            .auth-shell.single-col { padding: 1rem; align-items: flex-start; background: linear-gradient(160deg,#054F31 0%,#0a6b42 100%); }
             .auth-shell.single-col .auth-card-solo { padding: 1.75rem 1.25rem; margin: auto; border-radius: 16px; }
             .otp-box { width: 42px; height: 48px; font-size: 1.1rem; }
             .otp-boxes { gap: 0.4rem; }
-            .form-page-title { font-size: 1.25rem; }
+            .form-page-title { font-size: 1.2rem; }
         }
         @media (max-width: 360px) {
-            .auth-form-panel { padding: 1.25rem 1rem; }
+            .auth-form-panel { padding: 1.5rem 1rem 2rem; }
             .auth-shell.single-col .auth-card-solo { padding: 1.5rem 1rem; }
             .otp-box { width: 36px; height: 44px; font-size: 1rem; }
             .otp-boxes { gap: 0.3rem; }
@@ -193,6 +237,13 @@
     @stack('auth-styles')
 </head>
 <body>
+<header class="auth-mobile-header" aria-hidden="true">
+    <div class="mob-logo-ring">
+        <img src="/public/images/merry-logo.png" alt="نظام ميري">
+    </div>
+    <span class="mob-brand-name">نظام ميري</span>
+    <span class="mob-brand-sub">إدارة طلبات الاستقدام باحترافية</span>
+</header>
 @yield('shell-content')
 @stack('scripts')
 </body>
