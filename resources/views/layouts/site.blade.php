@@ -109,30 +109,48 @@
             display: none;
             position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
             background: var(--white);
-            border-top: 1.5px solid var(--border);
-            box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -8px 32px rgba(0,0,0,.09);
             padding-bottom: env(safe-area-inset-bottom);
+            align-items: stretch;
         }
         .mob-nav-item {
             flex: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: .5rem .15rem .45rem;
+            justify-content: center; padding: .55rem .1rem .5rem;
             text-decoration: none; color: var(--text-light);
-            font-size: .6rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
-            gap: .15rem; transition: color .2s; min-height: 58px;
-            overflow: hidden;
+            font-size: .58rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
+            gap: .18rem; transition: color .2s; min-height: 60px;
+            position: relative;
         }
-        .mob-nav-item span:not(.mob-nav-icon) {
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            max-width: 100%; display: block; text-align: center;
+        .mob-nav-item svg { transition: transform .2s; }
+        .mob-nav-item:hover svg, .mob-nav-item.active svg { transform: translateY(-1px); }
+        .mob-nav-item:hover, .mob-nav-item.active { color: #15803d; }
+        .mob-nav-item.active::after {
+            content: ''; position: absolute; top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 24px; height: 3px; border-radius: 0 0 4px 4px;
+            background: #15803d;
         }
-        .mob-nav-item:hover, .mob-nav-item.active { color: var(--green-700); }
-        .mob-nav-icon { font-size: 1.2rem; line-height: 1; display: block; flex-shrink: 0; }
-        .mob-nav-download { color: var(--green-700); font-weight: 800; }
-        .mob-nav-download .mob-nav-icon {
-            background: var(--green-700); color: var(--white);
-            width: 36px; height: 36px; border-radius: 10px;
+        .mob-nav-label { white-space: nowrap; display: block; }
+        /* centre CTA */
+        .mob-nav-cta {
+            flex: 1.2; display: flex; flex-direction: column; align-items: center;
+            justify-content: flex-start; padding: 0 .1rem;
+            text-decoration: none; font-family: 'Tajawal', sans-serif;
+            gap: .18rem; min-height: 60px;
+        }
+        .mob-nav-cta-bubble {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(145deg, #15803d, #16a34a);
+            box-shadow: 0 4px 16px rgba(21,128,61,.4);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1rem; margin: 0 auto .1rem;
+            margin-top: -18px; transition: transform .2s, box-shadow .2s;
+            flex-shrink: 0;
+        }
+        .mob-nav-cta:hover .mob-nav-cta-bubble { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(21,128,61,.5); }
+        .mob-nav-cta-label {
+            font-size: .56rem; font-weight: 800; color: #15803d;
+            white-space: nowrap; display: block; margin-top: .05rem;
         }
 
         /* ─── RESPONSIVE ─── */
@@ -155,9 +173,9 @@
             .page-header p { font-size: .92rem; }
         }
         @media (max-width: 360px) {
-            .mob-nav-item { font-size: .55rem; padding: .38rem .08rem .32rem; min-height: 52px; gap: .1rem; }
-            .mob-nav-icon { font-size: 1.05rem; }
-            .mob-nav-download .mob-nav-icon { width: 32px; height: 32px; font-size: .9rem; border-radius: 8px; }
+            .mob-nav-item { font-size: .52rem; padding: .48rem .05rem .42rem; min-height: 54px; }
+            .mob-nav-cta-bubble { width: 42px; height: 42px; margin-top: -14px; }
+            .mob-nav-cta-label { font-size: .5rem; }
             .container { padding: 0 .75rem; }
             .page-header { padding: calc(var(--nav-height) + 10px) 0 32px; }
         }
@@ -191,30 +209,57 @@
 
 <!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-bottom-nav" aria-label="تنقل الجوال">
+
+    <!-- الرئيسية -->
     <a href="/" class="mob-nav-item {{ request()->is('/') ? 'active' : '' }}">
-        <span class="mob-nav-icon">🏠</span>
-        <span>الرئيسية</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+            <polyline points="9 21 9 12 15 12 15 21"/>
+        </svg>
+        <span class="mob-nav-label">الرئيسية</span>
     </a>
-    <a href="/#about" class="mob-nav-item">
-        <span class="mob-nav-icon">✨</span>
-        <span>التطبيق</span>
-    </a>
+
+    <!-- الخدمات -->
     <a href="/#features" class="mob-nav-item">
-        <span class="mob-nav-icon">⚡</span>
-        <span>الخدمات</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span class="mob-nav-label">الخدمات</span>
     </a>
+
+    <!-- انضم كمكتب — centre CTA -->
+    <a href="/office/login" class="mob-nav-cta">
+        <div class="mob-nav-cta-bubble">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        </div>
+        <span class="mob-nav-cta-label">انضم كمكتب</span>
+    </a>
+
+    <!-- تواصل معنا -->
     <a href="{{ route('contact') }}" class="mob-nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
-        <span class="mob-nav-icon">✉️</span>
-        <span>تواصل</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <span class="mob-nav-label">تواصل</span>
     </a>
-    <a href="/office/login" class="mob-nav-item {{ request()->is('office/login') ? 'active' : '' }}">
-        <span class="mob-nav-icon">🏢</span>
-        <span>انضم كمكتب</span>
+
+    <!-- تنزيل -->
+    <a href="{{ route('download') }}" class="mob-nav-item {{ request()->routeIs('download') ? 'active' : '' }}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span class="mob-nav-label">تنزيل</span>
     </a>
-    <a href="#download" class="mob-nav-item mob-nav-download">
-        <span class="mob-nav-icon">📲</span>
-        <span>تنزيل</span>
-    </a>
+
 </nav>
 
 @yield('content')
