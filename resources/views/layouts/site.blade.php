@@ -334,17 +334,6 @@
                 <span class="footer-logo-text">نظام ميري</span>
             </a>
 
-            <nav class="footer-nav">
-                <a href="/">الرئيسية</a>
-                <a href="{{ route('about') }}">عن التطبيق</a>
-                <a href="/#features">الخدمات</a>
-                <a href="/#how">كيف يعمل</a>
-                <a href="{{ route('contact') }}">تواصل</a>
-                <a href="{{ route('download') }}">تنزيل</a>
-                <a href="{{ route('privacy') }}">الخصوصية</a>
-                <a href="{{ route('security') }}">الأمان</a>
-            </nav>
-
             <div class="footer-social">
                 <a href="#" class="social-btn" aria-label="X">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
