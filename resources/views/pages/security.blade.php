@@ -4,7 +4,7 @@
 
 @section('styles')
 <style>
-    .security-section { padding: 80px 0; }
+    .security-section { padding: var(--page-section-padding) 0; }
     .security-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
     .security-card {
         background: var(--white); border: 1.5px solid var(--border);

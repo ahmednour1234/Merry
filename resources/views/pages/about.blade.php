@@ -4,7 +4,7 @@
 
 @section('styles')
 <style>
-    .about-section { padding: 80px 0; }
+    .about-section { padding: var(--page-section-padding) 0; }
     .about-lead { font-size: 1.05rem; color: var(--text-mid); line-height: 2; max-width: 760px; margin: 0 auto 3rem; text-align: center; }
     .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
     .value-card {
@@ -30,7 +30,7 @@
     .stat-card .num { font-size: 2rem; font-weight: 900; color: var(--green-800); display: block; }
     .stat-card .lbl { font-size: .85rem; color: var(--text-light); margin-top: .3rem; display: block; }
     @media (max-width: 768px) {
-        .about-section { padding: 50px 0; }
+        .about-section { padding: var(--page-section-padding-mobile) 0; }
         .values-grid { grid-template-columns: 1fr 1fr; }
         .stats-row { grid-template-columns: 1fr 1fr; }
         .mission-wrap { padding: 2rem 1.25rem; }

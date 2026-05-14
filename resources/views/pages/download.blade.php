@@ -44,7 +44,7 @@
     .dl-badge.dark .dl-badge-sub { color: rgba(255,255,255,.6); }
 
     /* Phone mockup */
-    .dl-mockup-section { padding: 80px 0; background: var(--green-50); }
+    .dl-mockup-section { padding: var(--page-section-padding) 0; background: var(--green-50); }
     .dl-mockup-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .dl-phone {
         width: 260px; margin: 0 auto;
@@ -95,7 +95,7 @@
     .dl-feat-item p { font-size: .85rem; color: var(--text-light); line-height: 1.65; }
 
     /* Stats */
-    .dl-stats { padding: 70px 0; background: var(--white); }
+    .dl-stats { padding: var(--page-section-padding) 0; background: var(--white); }
     .dl-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     .dl-stat-card {
         background: var(--green-50); border: 1.5px solid var(--green-100);
@@ -107,14 +107,14 @@
     .dl-stat-card .lbl { font-size: .85rem; color: var(--text-light); margin-top: .3rem; display: block; }
 
     /* CTA bottom */
-    .dl-cta { padding: 70px 0; background: var(--green-50); text-align: center; }
+    .dl-cta { padding: var(--page-section-padding) 0; background: var(--green-50); text-align: center; }
     .dl-cta h2 { font-size: 1.9rem; font-weight: 900; color: var(--green-900); margin-bottom: .75rem; }
     .dl-cta p { font-size: .97rem; color: var(--text-mid); margin-bottom: 2.5rem; line-height: 1.8; max-width: 520px; margin-left: auto; margin-right: auto; }
 
     @media (max-width: 768px) {
-        .dl-mockup-section { padding: 50px 0; }
-        .dl-stats { padding: 50px 0; }
-        .dl-cta { padding: 50px 0; }
+        .dl-mockup-section { padding: var(--page-section-padding-mobile) 0; }
+        .dl-stats { padding: var(--page-section-padding-mobile) 0; }
+        .dl-cta { padding: var(--page-section-padding-mobile) 0; }
         .dl-hero { padding: 80px 0 50px; }
         .dl-mockup-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
         .dl-mockup-inner .dl-features { order: -1; }

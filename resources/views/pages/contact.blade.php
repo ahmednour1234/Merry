@@ -4,7 +4,7 @@
 
 @section('styles')
 <style>
-    .contact-section { padding: 64px 0; }
+    .contact-section { padding: var(--page-section-padding) 0; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: flex-start; }
 
     /* Info cards */
@@ -62,7 +62,7 @@
     }
 
     @media (max-width: 768px) {
-        .contact-section { padding: 44px 0; }
+        .contact-section { padding: var(--page-section-padding-mobile) 0; }
         .contact-grid { grid-template-columns: 1fr; gap: 1.75rem; }
         .contact-form-wrap { order: -1; padding: 1.35rem; }
         .form-row { grid-template-columns: 1fr; }

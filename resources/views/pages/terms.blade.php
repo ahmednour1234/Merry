@@ -4,7 +4,7 @@
 
 @section('styles')
 <style>
-    .policy-section { padding: 80px 0; }
+    .policy-section { padding: var(--page-section-padding) 0; }
     .policy-wrap { max-width: 860px; margin: 0 auto; }
     .policy-updated { font-size: .85rem; color: var(--text-light); margin-bottom: 2rem; }
     .policy-block { margin-bottom: 2.5rem; }
