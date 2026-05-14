@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /office/
+Disallow: /api/
+Disallow: /storage/private/
+
+Sitemap: https://meery.sa/sitemap.xml

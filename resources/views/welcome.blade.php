@@ -1,6 +1,67 @@
 @extends('layouts.site')
 
 @section('title', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام')
+@section('meta_description', 'نظام ميري منصة رقمية متكاملة لإدارة خدمات الاستقدام بين المكاتب والمستخدمين في المملكة العربية السعودية. سهّل طلباتك، تتبّع حالتها لحظياً، واحصل على تقارير شاملة.')
+@section('canonical', url('/'))
+@section('og_title', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام')
+@section('og_description', 'نظام ميري منصة رقمية متكاملة لإدارة خدمات الاستقدام بين المكاتب والمستخدمين في المملكة العربية السعودية.')
+@section('og_image', asset('images/merry-og.png'))
+@section('og_type', 'website')
+
+@push('seo')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ url('/') }}/#organization",
+      "name": "نظام ميري",
+      "url": "{{ url('/') }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ asset('images/merry-logo.png') }}"
+      },
+      "sameAs": [
+        "https://www.tiktok.com/@merry_commercial",
+        "https://apps.apple.com/sa/app/meery-%D9%85%D9%8A%D8%B1%D9%8A/id6758953274",
+        "https://play.google.com/store/apps/details?id=com.mery.apppp"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ url('/') }}/#website",
+      "url": "{{ url('/') }}",
+      "name": "نظام ميري",
+      "inLanguage": "ar-SA",
+      "publisher": { "@id": "{{ url('/') }}/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ url('/') }}/#webpage",
+      "url": "{{ url('/') }}",
+      "name": "نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام",
+      "description": "نظام ميري منصة رقمية متكاملة لإدارة خدمات الاستقدام بين المكاتب والمستخدمين في المملكة العربية السعودية.",
+      "inLanguage": "ar-SA",
+      "isPartOf": { "@id": "{{ url('/') }}/#website" },
+      "about": { "@id": "{{ url('/') }}/#organization" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "نظام ميري",
+      "operatingSystem": ["iOS", "Android"],
+      "applicationCategory": "BusinessApplication",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SAR" },
+      "url": "{{ url('/') }}",
+      "downloadUrl": [
+        "https://apps.apple.com/sa/app/meery-%D9%85%D9%8A%D8%B1%D9%8A/id6758953274",
+        "https://play.google.com/store/apps/details?id=com.mery.apppp"
+      ]
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('styles')
 <style>

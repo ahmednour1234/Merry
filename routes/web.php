@@ -15,6 +15,21 @@ Route::get('/terms', fn () => view('pages.terms'))->name('terms');
 Route::get('/security', fn () => view('pages.security'))->name('security');
 Route::get('/download', fn () => view('pages.download'))->name('download');
 
+// Sitemap
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        ['loc' => url('/'),           'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => url('/about'),      'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => url('/download'),   'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => url('/contact'),    'priority' => '0.7', 'changefreq' => 'monthly'],
+        ['loc' => url('/privacy'),    'priority' => '0.4', 'changefreq' => 'yearly'],
+        ['loc' => url('/terms'),      'priority' => '0.4', 'changefreq' => 'yearly'],
+        ['loc' => url('/security'),   'priority' => '0.4', 'changefreq' => 'yearly'],
+    ];
+    return response()->view('sitemap', ['urls' => $urls])
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');
+
 // Contact page + form submission
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

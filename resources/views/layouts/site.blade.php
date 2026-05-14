@@ -3,7 +3,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'نظام ميري - منصة متكاملة')</title>
+    <title>@yield('title', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام')</title>
+    <meta name="description" content="@yield('meta_description', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام للمكاتب والمستخدمين في المملكة العربية السعودية')">
+    <meta name="robots" content="@yield('robots', 'index, follow')">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+
+    {{-- Open Graph --}}
+    <meta property="og:type"        content="@yield('og_type', 'website')">
+    <meta property="og:site_name"   content="نظام ميري">
+    <meta property="og:locale"      content="ar_SA">
+    <meta property="og:title"       content="@yield('og_title', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام')">
+    <meta property="og:description" content="@yield('og_description', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام للمكاتب والمستخدمين في المملكة العربية السعودية')">
+    <meta property="og:url"         content="@yield('canonical', url()->current())">
+    <meta property="og:image"       content="@yield('og_image', asset('images/merry-og.png'))">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"   content="نظام ميري">
+
+    {{-- Twitter / X Card --}}
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@merry_commercial">
+    <meta name="twitter:title"       content="@yield('og_title', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام')">
+    <meta name="twitter:description" content="@yield('og_description', 'نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام للمكاتب والمستخدمين في المملكة العربية السعودية')">
+    <meta name="twitter:image"       content="@yield('og_image', asset('images/merry-og.png'))">
+
+    {{-- Extra per-page SEO (JSON-LD, etc.) --}}
+    @stack('seo')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
