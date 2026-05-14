@@ -176,19 +176,31 @@
 
         /* Mobile branded header (hidden on desktop) */
         .auth-mobile-header {
-            display: none;
+            display: none; flex-shrink: 0;
             background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
-            padding: 1.25rem 1.5rem 2.75rem;
-            text-align: center;
+            padding: 1.5rem 1.5rem 2.5rem;
+            text-align: center; position: relative; overflow: hidden;
         }
+        .mob-deco { position: absolute; top: -8px; opacity: .13; width: 100px; }
+        .mob-deco-right { right: -14px; transform: rotate(12deg); }
+        .mob-deco-left  { left: -14px;  transform: rotate(-12deg) scaleX(-1); }
         .auth-mobile-header .mob-logo-ring {
-            width: 56px; height: 56px; border-radius: 50%;
+            width: 92px; height: 92px; border-radius: 50%;
             background: #fff; display: inline-flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,.2); overflow: hidden; margin-bottom: 0.6rem;
+            box-shadow: 0 6px 28px rgba(0,0,0,.28); overflow: hidden;
+            margin-bottom: 0.8rem; position: relative; z-index: 1;
         }
-        .auth-mobile-header .mob-logo-ring img { width: 44px; height: 44px; object-fit: contain; }
-        .auth-mobile-header .mob-brand-name { color: #fff; font-size: 1.1rem; font-weight: 900; display: block; }
-        .auth-mobile-header .mob-brand-sub  { display: none; }
+        .auth-mobile-header .mob-logo-ring img { width: 76px; height: 76px; object-fit: contain; }
+        .auth-mobile-header .mob-brand-name {
+            color: #fff; font-size: 1.65rem; font-weight: 900; display: block;
+            position: relative; z-index: 1; margin-bottom: 0.55rem; letter-spacing: -0.01em;
+        }
+        .mob-brand-line {
+            display: block; width: 44px; height: 3.5px;
+            background: linear-gradient(90deg, #c8920a, #f5c842, #c8920a);
+            border-radius: 2px; margin: 0 auto; position: relative; z-index: 1;
+        }
+        .auth-mobile-header .mob-brand-sub { display: none; }
 
         /* OTP boxes */
         .otp-boxes { display: flex; gap: 0.5rem; justify-content: center; direction: ltr; margin: 1.25rem 0; }
@@ -205,10 +217,7 @@
                 display: flex; flex-direction: column;
                 background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
             }
-            .auth-mobile-header {
-                display: flex; flex-direction: column; align-items: center;
-                padding: 1rem 1.5rem 2.5rem; flex-shrink: 0;
-            }
+            .auth-mobile-header { display: flex; flex-direction: column; align-items: center; }
             .auth-brand-panel { display: none; }
             .auth-shell { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: unset; }
             .auth-form-panel {
@@ -243,10 +252,21 @@
 </head>
 <body>
 <header class="auth-mobile-header">
+    <svg class="mob-deco mob-deco-right" viewBox="0 0 90 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M45 4C12 38 4 82 45 136C86 82 78 38 45 4Z" fill="white"/>
+        <path d="M62 18C88 56 84 98 45 136C56 96 68 56 62 18Z" fill="white"/>
+        <path d="M74 40C90 72 86 108 45 136C64 106 76 72 74 40Z" fill="white"/>
+    </svg>
+    <svg class="mob-deco mob-deco-left" viewBox="0 0 90 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M45 4C12 38 4 82 45 136C86 82 78 38 45 4Z" fill="white"/>
+        <path d="M62 18C88 56 84 98 45 136C56 96 68 56 62 18Z" fill="white"/>
+        <path d="M74 40C90 72 86 108 45 136C64 106 76 72 74 40Z" fill="white"/>
+    </svg>
     <div class="mob-logo-ring">
         <img src="/public/images/merry-logo.png" alt="نظام ميري">
     </div>
     <span class="mob-brand-name">نظام ميري</span>
+    <span class="mob-brand-line"></span>
 </header>
 @yield('shell-content')
 @stack('scripts')
