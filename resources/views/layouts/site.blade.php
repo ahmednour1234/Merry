@@ -97,23 +97,41 @@
         .footer-bottom a { color: rgba(255,255,255,.3); text-decoration: none; }
         .footer-bottom a:hover { color: var(--green-400); }
 
-        /* Mobile menu */
-        .mobile-menu {
-            display: none; position: fixed; inset: 0; z-index: 999;
-            background: var(--white); padding: 80px 1.5rem 2rem;
-            flex-direction: column; gap: 1rem; overflow-y: auto;
+        /* ─── MOBILE BOTTOM NAV ─── */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--white);
+            border-top: 1.5px solid var(--border);
+            box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+            padding-bottom: env(safe-area-inset-bottom);
         }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu a { color: var(--text-dark); text-decoration: none; font-size: 1.05rem; font-weight: 600; padding: .75rem 0; border-bottom: 1px solid var(--border); }
+        .mob-nav-item {
+            flex: 1; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: .5rem .2rem .45rem;
+            text-decoration: none; color: var(--text-light);
+            font-size: .63rem; font-weight: 700; font-family: 'Tajawal', sans-serif;
+            gap: .15rem; transition: color .2s; min-height: 58px;
+        }
+        .mob-nav-item:hover, .mob-nav-item.active { color: var(--green-700); }
+        .mob-nav-icon { font-size: 1.25rem; line-height: 1; display: block; }
+        .mob-nav-download { color: var(--green-700); font-weight: 800; }
+        .mob-nav-download .mob-nav-icon {
+            background: var(--green-700); color: var(--white);
+            width: 38px; height: 38px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.05rem; margin: 0 auto .1rem;
+        }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 1024px) {
             .footer-inner { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
-            .nav-links, .nav-cta { display: none; }
-            .hamburger { display: flex; }
-            footer { padding: 40px 0 20px; }
+            .nav-links, .nav-cta, .hamburger { display: none; }
+            body { padding-bottom: 68px; }
+            .mobile-bottom-nav { display: flex; }
+            footer { padding: 40px 0 90px; }
             .footer-inner { grid-template-columns: 1fr; gap: 1.75rem; }
             .footer-bottom { flex-direction: column; text-align: center; gap: .5rem; }
         }
@@ -145,26 +163,35 @@
             </ul>
             <div class="nav-cta">
                 <a href="/office/login" class="nav-btn nav-btn-outline">دخول المكتب</a>
-                <a href="/admin/login" class="nav-btn nav-btn-solid">لوحة التحكم</a>
-            </div>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
+                <a href="/download" class="nav-btn nav-btn-solid">📲 تنزيل التطبيق</a>
             </div>
         </div>
     </div>
 </nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-    <a href="/" onclick="toggleMenu()">الرئيسية</a>
-    <a href="/#about" onclick="toggleMenu()">عن التطبيق</a>
-    <a href="/#features" onclick="toggleMenu()">الخدمات</a>
-    <a href="/#audience" onclick="toggleMenu()">للمكاتب</a>
-    <a href="/#how" onclick="toggleMenu()">كيف يعمل النظام</a>
-    <a href="{{ route('contact') }}" onclick="toggleMenu()">تواصل معنا</a>
-    <a href="/office/login">دخول المكتب</a>
-    <a href="/admin/login">لوحة التحكم</a>
-</div>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-bottom-nav" aria-label="تنقل الجوال">
+    <a href="/" class="mob-nav-item {{ request()->is('/') ? 'active' : '' }}">
+        <span class="mob-nav-icon">🏠</span>
+        <span>الرئيسية</span>
+    </a>
+    <a href="{{ route('about') }}" class="mob-nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
+        <span class="mob-nav-icon">✨</span>
+        <span>عن التطبيق</span>
+    </a>
+    <a href="{{ route('contact') }}" class="mob-nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
+        <span class="mob-nav-icon">✉️</span>
+        <span>تواصل</span>
+    </a>
+    <a href="/office/login" class="mob-nav-item {{ request()->is('office/login') ? 'active' : '' }}">
+        <span class="mob-nav-icon">🏢</span>
+        <span>المكتب</span>
+    </a>
+    <a href="/download" class="mob-nav-item mob-nav-download {{ request()->routeIs('download') ? 'active' : '' }}">
+        <span class="mob-nav-icon">📲</span>
+        <span>تنزيل</span>
+    </a>
+</nav>
 
 @yield('content')
 
@@ -225,14 +252,10 @@
 </footer>
 
 <script>
-function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-}
-document.addEventListener('click', function(e) {
-    const menu = document.getElementById('mobileMenu');
-    const hamburger = document.querySelector('.hamburger');
-    if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
-        menu.classList.remove('open');
+// Mobile bottom nav active state
+document.querySelectorAll('.mob-nav-item').forEach(function(item) {
+    if (item.getAttribute('href') && window.location.pathname === item.getAttribute('href').split('?')[0]) {
+        item.classList.add('active');
     }
 });
 </script>
