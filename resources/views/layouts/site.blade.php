@@ -263,9 +263,6 @@
                 <li><a href="/#audience">لمن هو؟</a></li>
                 <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">تواصل معنا</a></li>
             </ul>
-            <div class="nav-cta">
-                <a href="/office/login" class="nav-btn nav-btn-outline">انضم كمكتب</a>
-            </div>
         </div>
     </div>
 </nav>
