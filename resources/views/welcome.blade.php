@@ -112,6 +112,9 @@
         .section-sub { font-size: .97rem; color: var(--text-light); line-height: 1.8; max-width: 580px; margin: 0 auto; }
 
         /* ─── ABOUT ─── */
+        /* ─── SECTION SPACING ─── */
+        .about, .features, .how, .audience, .dl-section, .cta { margin-top: 32px; }
+
         .about { padding: 90px 0; background: var(--white); }
         .about-desc { font-size: .97rem; color: var(--text-mid); line-height: 1.9; max-width: 680px; margin: 0 auto 3rem; text-align: center; }
         .about-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
@@ -156,7 +159,7 @@
         .step-desc { font-size: .82rem; color: var(--text-light); line-height: 1.7; }
 
         /* ─── AUDIENCE ─── */
-        .audience { background: var(--green-50); padding: 60px 0; }
+        .audience { background: var(--green-50); padding: 80px 0; }
         .audience-inner {
             display: flex; align-items: stretch; gap: 0;
             background: var(--white);
@@ -278,7 +281,7 @@
 
         /* ─── DOWNLOAD SECTION ─── */
         .dl-section {
-            padding: 70px 0;
+            padding: 90px 0;
             background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 60%, var(--green-700) 100%);
             position: relative; overflow: hidden;
         }
@@ -482,6 +485,9 @@
             body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
             .mobile-bottom-nav { display: flex; }
 
+            /* Spacing */
+            .about, .features, .how, .audience, .dl-section, .cta { margin-top: 16px; }
+
             /* Hero */
             .hero { padding: 84px 0 36px; }
             .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
@@ -516,7 +522,8 @@
             .step-desc { font-size: .8rem; }
 
             /* Audience */
-            .audience { padding: 36px 0; }
+            .audience { padding: 44px 0; }
+            .dl-section { padding: 60px 0; }
             .audience-inner { flex-direction: column; border-radius: var(--radius-lg); overflow: hidden; }
             .aud-panel-users, .aud-panel-offices {
                 flex-direction: column; align-items: flex-start;
