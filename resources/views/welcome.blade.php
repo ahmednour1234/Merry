@@ -207,12 +207,9 @@
             display: flex; align-items: center; justify-content: center;
             font-size: .58rem; flex-shrink: 0; margin-top: .18rem; font-weight: 900;
         }
-        .aud-img-wrap { flex-shrink: 0; width: 130px; }
+        .aud-img-wrap { flex-shrink: 0; width: 140px; }
         .aud-img-wrap img {
-            width: 130px; height: 150px; object-fit: cover;
-            border-radius: 14px;
-            box-shadow: 0 6px 24px rgba(5,79,49,.16);
-            display: block;
+            width: 100%; height: auto; display: block;
         }
 
         /* ─── HERO DASHBOARD MOCKUP (replaces missing image) ─── */
@@ -437,8 +434,8 @@
                 flex-direction: column; align-items: flex-start;
                 padding: 1.5rem 1.25rem; gap: 1rem;
             }
-            .aud-img-wrap { width: 100%; max-width: 140px; margin: 0 auto; }
-            .aud-img-wrap img { width: 100%; height: 130px; }
+            .aud-img-wrap { width: 100%; max-width: 150px; margin: 0 auto; }
+            .aud-img-wrap img { width: 100%; height: auto; }
             .aud-center { width: 100%; padding: 1rem 1.25rem; flex-direction: row; }
             .aud-center::before { display: none; }
             .aud-title { font-size: 1.1rem; }
@@ -739,7 +736,7 @@
             <!-- للمستخدمين — left panel -->
             <div class="aud-panel-users">
                 <div class="aud-img-wrap">
-                    <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" loading="lazy" decoding="async" width="130" height="150">
+                    <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" loading="lazy" decoding="async">
                 </div>
                 <div class="aud-content">
                     <h2 class="aud-title">للمستخدمين</h2>
@@ -773,7 +770,7 @@
                     </ul>
                 </div>
                 <div class="aud-img-wrap">
-                    <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم نظام ميري" loading="lazy" decoding="async" width="130" height="150">
+                    <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم نظام ميري" loading="lazy" decoding="async">
                 </div>
             </div>
 
