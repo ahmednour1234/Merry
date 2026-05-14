@@ -13,6 +13,7 @@ Route::get('/about', fn () => view('pages.about'))->name('about');
 Route::get('/privacy', fn () => view('pages.privacy'))->name('privacy');
 Route::get('/terms', fn () => view('pages.terms'))->name('terms');
 Route::get('/security', fn () => view('pages.security'))->name('security');
+Route::get('/download', fn () => view('pages.download'))->name('download');
 
 // Contact page + form submission
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

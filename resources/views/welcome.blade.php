@@ -745,6 +745,7 @@
                     <li><a href="#features">الخدمات</a></li>
                     <li><a href="#audience">للمكاتب</a></li>
                     <li><a href="#how">كيف يعمل</a></li>
+                    <li><a href="/download">تنزيل التطبيق</a></li>
                 </ul>
             </div>
             <div class="footer-col">
