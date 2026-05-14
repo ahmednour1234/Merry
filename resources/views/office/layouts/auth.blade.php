@@ -178,7 +178,7 @@
         .auth-mobile-header {
             display: none;
             background: linear-gradient(160deg, #054F31 0%, #0a6b42 100%);
-            padding: 1.25rem 1.5rem 2.75rem;
+            padding:0px;
             text-align: center;
         }
         .auth-mobile-header .mob-logo-ring {
