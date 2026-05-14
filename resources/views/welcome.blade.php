@@ -255,22 +255,22 @@
             padding: .65rem; font-size: .88rem; font-weight: 700;
         }
 
-        /* ─── AUDIENCE ICON CARDS (replace missing images) ─── */
-        .aud-icon-card {
-            width: 160px; background: var(--green-50);
-            border: 1.5px solid var(--green-100); border-radius: 16px;
-            padding: 1.25rem 1rem; display: flex; flex-direction: column;
-            align-items: center; gap: .75rem; text-align: center;
+        /* ─── AUDIENCE ILLUSTRATION CARDS ─── */
+        .aud-illus-card {
+            width: 170px; flex-shrink: 0;
+            background: linear-gradient(160deg, var(--green-50) 0%, #e0f2ea 100%);
+            border: 1.5px solid var(--green-100); border-radius: 20px;
+            padding: 1.5rem 1rem 1.2rem; display: flex; flex-direction: column;
+            align-items: center; gap: .85rem; text-align: center;
+            box-shadow: 0 4px 18px rgba(5,79,49,.10);
         }
-        .aud-icon-wrap {
-            width: 60px; height: 60px; border-radius: 15px;
-            background: var(--green-700); display: flex;
-            align-items: center; justify-content: center; font-size: 1.8rem;
+        .aud-illus-card svg { display: block; }
+        .aud-illus-card p { font-size: .82rem; color: var(--text-mid); font-weight: 700; line-height: 1.5; margin: 0; }
+        .aud-illus-card.dark {
+            background: linear-gradient(160deg, var(--green-800) 0%, #063d27 100%);
+            border-color: var(--green-700);
         }
-        .aud-icon-card p { font-size: .8rem; color: var(--text-mid); font-weight: 600; line-height: 1.5; }
-        .aud-icon-card.dark { background: var(--green-800); border-color: var(--green-700); }
-        .aud-icon-card.dark p { color: rgba(255,255,255,.75); }
-        .aud-icon-card.dark .aud-icon-wrap { background: rgba(255,255,255,.15); }
+        .aud-illus-card.dark p { color: rgba(255,255,255,.85); }
 
         /* ─── CTA ─── */
         .cta { padding: 40px 0; background: var(--green-50); }
@@ -733,10 +733,29 @@
             <!-- للمستخدمين — left panel -->
             <div class="aud-panel-users">
                 <div class="aud-img-wrap">
-                    <div class="aud-icon-card">
-                        <div class="aud-icon-wrap">📱</div>
-                        <p>تابع طلبك
-                        في أي وقت</p>
+                    <div class="aud-illus-card">
+                        <!-- User with phone SVG illustration -->
+                        <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Body background circle -->
+                            <circle cx="50" cy="55" r="44" fill="#dcfce7"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="30" r="14" fill="#15803d"/>
+                            <!-- Face highlights -->
+                            <circle cx="45" cy="27" r="2" fill="rgba(255,255,255,0.5)"/>
+                            <circle cx="55" cy="27" r="2" fill="rgba(255,255,255,0.5)"/>
+                            <path d="M44 34 Q50 39 56 34" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                            <!-- Shoulders / body -->
+                            <path d="M28 68 Q29 56 38 54 L50 58 L62 54 Q71 56 72 68" fill="#16a34a"/>
+                            <!-- Neck -->
+                            <rect x="45" y="43" width="10" height="12" rx="4" fill="#15803d"/>
+                            <!-- Phone in hand -->
+                            <rect x="56" y="62" width="18" height="29" rx="4" fill="#052e16"/>
+                            <rect x="58" y="65" width="14" height="20" rx="2" fill="#22c55e"/>
+                            <circle cx="65" cy="88" r="2" fill="rgba(255,255,255,0.4)"/>
+                            <!-- Left arm -->
+                            <path d="M38 57 Q26 62 28 74" stroke="#16a34a" stroke-width="8" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        <p>تابع طلبك في أي وقت</p>
                     </div>
                 </div>
                 <div class="aud-content">
@@ -771,10 +790,38 @@
                     </ul>
                 </div>
                 <div class="aud-img-wrap">
-                    <div class="aud-icon-card dark">
-                        <div class="aud-icon-wrap">🏢</div>
-                        <p>إدارة متكاملة
-                        لكل أعمالك</p>
+                    <div class="aud-illus-card dark">
+                        <!-- Office worker at desk SVG illustration -->
+                        <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background circle -->
+                            <circle cx="50" cy="55" r="44" fill="rgba(255,255,255,0.08)"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="26" r="13" fill="#4ade80"/>
+                            <!-- Face -->
+                            <circle cx="45" cy="23" r="1.8" fill="rgba(5,46,22,0.4)"/>
+                            <circle cx="55" cy="23" r="1.8" fill="rgba(5,46,22,0.4)"/>
+                            <path d="M44 30 Q50 35 56 30" stroke="rgba(5,46,22,0.5)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                            <!-- Neck -->
+                            <rect x="45" y="38" width="10" height="11" rx="4" fill="#4ade80"/>
+                            <!-- Suit / body -->
+                            <path d="M26 72 Q27 58 37 55 L50 60 L63 55 Q73 58 74 72" fill="#052e16"/>
+                            <!-- Tie -->
+                            <path d="M48 55 L50 70 L52 55" fill="#22c55e"/>
+                            <!-- Desk -->
+                            <rect x="14" y="78" width="72" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+                            <!-- Laptop on desk -->
+                            <rect x="30" y="62" width="40" height="16" rx="3" fill="rgba(255,255,255,0.15)"/>
+                            <rect x="32" y="64" width="36" height="12" rx="2" fill="#16a34a"/>
+                            <!-- Screen content -->
+                            <rect x="34" y="66" width="22" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
+                            <rect x="34" y="70" width="16" height="2" rx="1" fill="rgba(255,255,255,0.3)"/>
+                            <!-- Laptop base -->
+                            <rect x="26" y="78" width="48" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+                            <!-- Arms -->
+                            <path d="M37 58 Q30 64 32 72" stroke="#052e16" stroke-width="7" stroke-linecap="round" fill="none"/>
+                            <path d="M63 58 Q70 64 68 72" stroke="#052e16" stroke-width="7" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        <p>إدارة متكاملة لكل أعمالك</p>
                     </div>
                 </div>
             </div>
