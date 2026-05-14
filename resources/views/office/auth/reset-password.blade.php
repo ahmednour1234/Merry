@@ -7,7 +7,7 @@
 
     <div class="solo-logo">
         <div class="solo-logo-wrap">
-            <img src="{{ asset('images/merry-logo.png') }}" alt="مري">
+            <img src="/public/images/merry-logo.png" alt="مري">
         </div>
         <div class="solo-title">إعادة تعيين كلمة المرور</div>
         <div class="solo-sub">اختر كلمة مرور جديدة لحسابك</div>

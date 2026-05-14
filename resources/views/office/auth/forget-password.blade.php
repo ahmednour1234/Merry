@@ -41,7 +41,7 @@
     {{-- RIGHT: Brand --}}
     <div class="auth-brand-panel">
         <div class="brand-logo">
-            <img src="{{ asset('images/merry-logo.png') }}" alt="ميري">
+            <img src="/public/images/merry-logo.png" alt="ميري">
         </div>
         <div class="brand-title">نظام ميري</div>
         <div class="brand-sub">إدارة طلبات الاستقدام<br>بكفاءة واحترافية</div>

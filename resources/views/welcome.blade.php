@@ -501,7 +501,7 @@
     <div class="container">
         <div class="nav-inner">
             <a href="#" class="nav-logo">
-                <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
+                <img src="/public/images/merry-logo.png" alt="نظام ميري">
                 <span class="nav-logo-text">نظام ميري</span>
             </a>
             <ul class="nav-links">
@@ -591,7 +591,7 @@
                 </div>
             </div>
             <div class="hero-img-wrap">
-                <img src="{{ asset('images/multi-device.png') }}" alt="نظام ميري على جميع الأجهزة">
+                <img src="/public/images/multi-device.png" alt="نظام ميري على جميع الأجهزة">
             </div>
         </div>
     </div>
@@ -825,7 +825,7 @@
         <div class="footer-inner">
             <div>
                 <div class="footer-logo">
-                    <img src="{{ asset('images/merry-logo.png') }}" alt="نظام ميري">
+                    <img src="/public/images/merry-logo.png" alt="نظام ميري">
                     <span class="footer-logo-text">نظام ميري</span>
                 </div>
                 <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
