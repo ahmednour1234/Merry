@@ -30,6 +30,8 @@ class OfficePanelProvider extends PanelProvider
             ->login(\App\Filament\Office\Pages\Auth\Login::class)
             ->registration(\App\Filament\Office\Pages\Auth\Register::class)
             ->brandName('تطبيق ميري - المكتب')
+            ->brandLogo(asset('images/merry-logo.png'))
+            ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => Color::hex('#054F31'),
                 'success' => Color::hex('#10b981'),

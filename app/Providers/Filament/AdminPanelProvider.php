@@ -44,6 +44,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('تطبيق ميري')
+            ->brandLogo(asset('images/merry-logo.png'))
+            ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => Color::hex('#054F31'),
                 'success' => Color::hex('#10b981'),
