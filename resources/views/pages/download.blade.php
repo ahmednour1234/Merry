@@ -273,7 +273,7 @@
 
         <div class="dl-store-row">
             <!-- App Store -->
-            <a href="#" class="dl-store-btn ios">
+            <a href="https://apps.apple.com/sa/app/meery-%D9%85%D9%8A%D8%B1%D9%8A/id6758953274" target="_blank" rel="noopener" class="dl-store-btn ios">
                 <span class="store-svg">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="#000000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                 </span>
@@ -283,7 +283,7 @@
                 </span>
             </a>
             <!-- Google Play -->
-            <a href="#" class="dl-store-btn android">
+            <a href="https://play.google.com/store/apps/details?id=com.mery.apppp" target="_blank" rel="noopener" class="dl-store-btn android">
                 <span class="store-svg">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.77A2 2 0 0 1 2 22V2c0-.43.13-.83.36-1.16L13 12 3.18 23.77z" fill="#EA4335"/><path d="M16.93 8.34l-3.3-3.3-9.47-4.8A2.04 2.04 0 0 1 5.25 0l11.68 8.34z" fill="#FBBC04"/><path d="M16.93 15.66L5.25 24a2.04 2.04 0 0 1-1.09-.24L13 12l3.93 3.66z" fill="#34A853"/><path d="M22 12c0 .88-.48 1.66-1.2 2.1l-3.87 2.19L13 12l4.93-4.29 3.87 2.19A2.45 2.45 0 0 1 22 12z" fill="#4285F4"/></svg>
                 </span>
@@ -395,7 +395,7 @@
             <h2>جاهز للبداية؟ 🚀</h2>
             <p>انضم إلى آلاف المستخدمين الذين يديرون معاملاتهم بكل سهولة عبر تطبيق ميري — مجاناً تماماً</p>
             <div class="dl-store-row">
-                <a href="#" class="dl-store-btn ios">
+                <a href="https://apps.apple.com/sa/app/meery-%D9%85%D9%8A%D8%B1%D9%8A/id6758953274" target="_blank" rel="noopener" class="dl-store-btn ios">
                     <span class="store-svg">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#000000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                     </span>
@@ -404,7 +404,7 @@
                         <span class="store-name">App Store</span>
                     </span>
                 </a>
-                <a href="#" class="dl-store-btn android">
+                <a href="https://play.google.com/store/apps/details?id=com.mery.apppp" target="_blank" rel="noopener" class="dl-store-btn android">
                     <span class="store-svg">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.77A2 2 0 0 1 2 22V2c0-.43.13-.83.36-1.16L13 12 3.18 23.77z" fill="#EA4335"/><path d="M16.93 8.34l-3.3-3.3-9.47-4.8A2.04 2.04 0 0 1 5.25 0l11.68 8.34z" fill="#FBBC04"/><path d="M16.93 15.66L5.25 24a2.04 2.04 0 0 1-1.09-.24L13 12l3.93 3.66z" fill="#34A853"/><path d="M22 12c0 .88-.48 1.66-1.2 2.1l-3.87 2.19L13 12l4.93-4.29 3.87 2.19A2.45 2.45 0 0 1 22 12z" fill="#4285F4"/></svg>
                     </span>

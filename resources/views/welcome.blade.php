@@ -1041,24 +1041,10 @@
         </div>
         <div class="how-steps">
             <div class="how-step">
-                <div class="step-num">05</div>
+                <div class="step-num">01</div>
                 <div class="step-text">
-                    <div class="step-title">التقارير والتوصيات</div>
-                    <div class="step-desc">استلام التقرير النهائي وتقييم الخدمة</div>
-                </div>
-            </div>
-            <div class="how-step">
-                <div class="step-num">04</div>
-                <div class="step-text">
-                    <div class="step-title">إتمام الخدمة</div>
-                    <div class="step-desc">إتمام جميع الإجراءات واستكمال المعاملات</div>
-                </div>
-            </div>
-            <div class="how-step">
-                <div class="step-num">03</div>
-                <div class="step-text">
-                    <div class="step-title">متابعة الحالة</div>
-                    <div class="step-desc">تتبع لحظي لكل مرحلة من مراحل المعالجة</div>
+                    <div class="step-title">تقديم الطلب</div>
+                    <div class="step-desc">يقدم المستخدم طلبه بكل سهولة عبر المنصة</div>
                 </div>
             </div>
             <div class="how-step">
@@ -1069,10 +1055,24 @@
                 </div>
             </div>
             <div class="how-step">
-                <div class="step-num">01</div>
+                <div class="step-num">03</div>
                 <div class="step-text">
-                    <div class="step-title">تقديم الطلب</div>
-                    <div class="step-desc">يقدم المستخدم طلبه بكل سهولة عبر المنصة</div>
+                    <div class="step-title">متابعة الحالة</div>
+                    <div class="step-desc">تتبع لحظي لكل مرحلة من مراحل المعالجة</div>
+                </div>
+            </div>
+            <div class="how-step">
+                <div class="step-num">04</div>
+                <div class="step-text">
+                    <div class="step-title">إتمام الخدمة</div>
+                    <div class="step-desc">إتمام جميع الإجراءات واستكمال المعاملات</div>
+                </div>
+            </div>
+            <div class="how-step">
+                <div class="step-num">05</div>
+                <div class="step-text">
+                    <div class="step-title">التقارير والتوصيات</div>
+                    <div class="step-desc">استلام التقرير النهائي وتقييم الخدمة</div>
                 </div>
             </div>
         </div>
@@ -1138,14 +1138,14 @@
                 <h2 class="dl-title">حمل تطبيق <span class="hl">ميري</span><br>وابدأ رحلتك اليوم</h2>
                 <p class="dl-desc">متاح على iOS و Android — تطبيق سهل وسريع يتيح لك متابعة طلباتك وإدارة مستنداتك في أي وقت ومن أي مكان.</p>
                 <div class="dl-buttons">
-                    <a href="/download" class="dl-btn dl-btn-ios">
+                    <a href="https://apps.apple.com/sa/app/meery-%D9%85%D9%8A%D8%B1%D9%8A/id6758953274" target="_blank" rel="noopener" class="dl-btn dl-btn-ios">
                         <img src="/public/images/apple-store.png" alt="App Store" class="dl-btn-icon" loading="lazy">
                         <span class="dl-btn-label">
                             <span class="dl-btn-sub">تنزيل من</span>
                             App Store
                         </span>
                     </a>
-                    <a href="/download" class="dl-btn dl-btn-android">
+                    <a href="https://play.google.com/store/apps/details?id=com.mery.apppp" target="_blank" rel="noopener" class="dl-btn dl-btn-android">
                         <img src="/public/images/google-play.png" alt="Google Play" class="dl-btn-icon" loading="lazy">
                         <span class="dl-btn-label">
                             <span class="dl-btn-sub">تنزيل من</span>
