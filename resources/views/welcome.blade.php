@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام للمكاتب والمستخدمين في المملكة العربية السعودية">
     <title>نظام ميري - منصة متكاملة لإدارة خدمات الاستقدام</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet"></noscript>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -205,8 +207,13 @@
             display: flex; align-items: center; justify-content: center;
             font-size: .58rem; flex-shrink: 0; margin-top: .18rem; font-weight: 900;
         }
-        .aud-img-wrap { flex-shrink: 0; width: 180px; }
-        .aud-img { width: 100%; height: auto; display: block; }
+        .aud-img-wrap { flex-shrink: 0; width: 130px; }
+        .aud-img-wrap img {
+            width: 130px; height: 150px; object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(5,79,49,.16);
+            display: block;
+        }
 
         /* ─── HERO DASHBOARD MOCKUP (replaces missing image) ─── */
         .hero-dash {
@@ -430,7 +437,8 @@
                 flex-direction: column; align-items: flex-start;
                 padding: 1.5rem 1.25rem; gap: 1rem;
             }
-            .aud-img-wrap { width: 100%; max-width: 220px; margin: 0 auto; }
+            .aud-img-wrap { width: 100%; max-width: 140px; margin: 0 auto; }
+            .aud-img-wrap img { width: 100%; height: 130px; }
             .aud-center { width: 100%; padding: 1rem 1.25rem; flex-direction: row; }
             .aud-center::before { display: none; }
             .aud-title { font-size: 1.1rem; }
@@ -508,9 +516,7 @@
                 <li><a href="#" class="active">الرئيسية</a></li>
                 <li><a href="#about">عن التطبيق</a></li>
                 <li><a href="#features">الخدمات</a></li>
-                <li><a href="#audience">للمكاتب</a></li>
-                <li><a href="#audience">المستخدمين</a></li>
-                <li><a href="#how">كيف يعمل النظام</a></li>
+                <li><a href="#audience">لمن هو؟</a></li>
                 <li><a href="/contact">تواصل معنا</a></li>
             </ul>
             <div class="nav-cta">
@@ -591,7 +597,7 @@
                 </div>
             </div>
             <div class="hero-img-wrap">
-                <img src="/public/images/multi-device.png" alt="نظام ميري على جميع الأجهزة">
+                <img src="/public/images/multi-device.png" alt="نظام ميري على جميع الأجهزة" loading="eager" fetchpriority="high" decoding="async">
             </div>
         </div>
     </div>
@@ -733,7 +739,7 @@
             <!-- للمستخدمين — left panel -->
             <div class="aud-panel-users">
                 <div class="aud-img-wrap">
-                    <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري">
+                    <img src="/public/images/hero-users.png" alt="مستخدمو نظام ميري" loading="lazy" decoding="async" width="130" height="150">
                 </div>
                 <div class="aud-content">
                     <h2 class="aud-title">للمستخدمين</h2>
@@ -767,7 +773,7 @@
                     </ul>
                 </div>
                 <div class="aud-img-wrap">
-                    <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم نظام ميري">
+                    <img src="/public/images/dashboard-mockup.png" alt="لوحة تحكم نظام ميري" loading="lazy" decoding="async" width="130" height="150">
                 </div>
             </div>
 
