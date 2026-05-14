@@ -11,7 +11,8 @@
 /* ── HERO ── */
 .dl-hero {
     padding: calc(var(--nav-height) + 56px) 0 72px;
-    background: linear-gradient(145deg, var(--green-900) 0%, #0a5c30 55%, var(--green-700) 100%);
+    background-color: #052e16;
+    background-image: linear-gradient(145deg, #052e16 0%, #0a5c30 55%, #15803d 100%);
     text-align: center; position: relative; overflow: hidden;
 }
 /* decorative orbs */
