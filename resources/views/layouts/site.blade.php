@@ -84,24 +84,41 @@
 
         /* ─── FOOTER ─── */
         footer { background: var(--green-900); padding: var(--footer-padding-top) 0 var(--footer-padding-bottom); }
-        .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-        .footer-logo { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; }
+        .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+        .footer-logo { display: flex; align-items: center; gap: .65rem; margin-bottom: .9rem; }
         .footer-logo img { height: 38px; width: auto; }
         .footer-logo-text { font-size: 1.05rem; font-weight: 800; color: var(--white); }
         .footer-desc { font-size: .87rem; color: rgba(255,255,255,.5); line-height: 1.85; margin-bottom: 1.25rem; }
-        .footer-social { display: flex; gap: .5rem; }
-        .social-btn { width: 34px; height: 34px; background: rgba(255,255,255,.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.65); font-size: .85rem; text-decoration: none; transition: all .2s; }
-        .social-btn:hover { background: var(--green-700); color: var(--white); }
-        .footer-col h4 { color: var(--white); font-size: .95rem; font-weight: 700; margin-bottom: 1.1rem; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
-        .footer-col a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .87rem; transition: color .2s; }
+        /* social */
+        .footer-social { display: flex; gap: .45rem; }
+        .social-btn {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.55); text-decoration: none;
+            transition: background .2s, border-color .2s, color .2s;
+        }
+        .social-btn:hover { background: var(--green-700); border-color: var(--green-600); color: var(--white); }
+        .social-btn svg { display: block; flex-shrink: 0; }
+        /* columns */
+        .footer-col h4 { color: var(--white); font-size: .93rem; font-weight: 700; margin-bottom: 1.1rem; letter-spacing: .01em; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+        .footer-col a { color: rgba(255,255,255,.48); text-decoration: none; font-size: .87rem; transition: color .2s; display: inline-flex; align-items: center; gap: .35rem; }
+        .footer-col a::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green-700); flex-shrink: 0; transition: background .2s; }
         .footer-col a:hover { color: var(--green-400); }
-        .footer-contact-item { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .65rem; color: rgba(255,255,255,.5); font-size: .87rem; }
-        .footer-contact-item span:first-child { flex-shrink: 0; }
+        .footer-col a:hover::before { background: var(--green-400); }
+        /* contact */
+        .footer-contact-item { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: .7rem; color: rgba(255,255,255,.48); font-size: .87rem; }
+        .footer-contact-icon { width: 30px; height: 30px; background: rgba(255,255,255,.07); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .footer-contact-icon svg { display: block; }
+        .footer-contact-text { line-height: 1.5; padding-top: .3rem; }
+        /* divider & bottom */
         .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin-bottom: 1.25rem; }
         .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
-        .footer-bottom p { font-size: .82rem; color: rgba(255,255,255,.3); }
-        .footer-bottom a { color: rgba(255,255,255,.3); text-decoration: none; }
+        .footer-bottom p { font-size: .82rem; color: rgba(255,255,255,.28); }
+        .footer-bottom a { color: rgba(255,255,255,.28); text-decoration: none; transition: color .2s; }
         .footer-bottom a:hover { color: var(--green-400); }
 
         /* ─── MOBILE BOTTOM NAV ─── */
@@ -266,6 +283,8 @@
 <footer>
     <div class="container">
         <div class="footer-inner">
+
+            {{-- ─── Brand column ─── --}}
             <div>
                 <div class="footer-logo">
                     <img src="/public/images/merry-logo.png" alt="نظام ميري">
@@ -273,12 +292,34 @@
                 </div>
                 <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
                 <div class="footer-social">
-                    <a href="#" class="social-btn">𝕏</a>
-                    <a href="#" class="social-btn">in</a>
-                    <a href="#" class="social-btn">f</a>
-                    <a href="#" class="social-btn">▶</a>
+                    {{-- X (Twitter) --}}
+                    <a href="#" class="social-btn" aria-label="X">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.904-5.632Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/>
+                        </svg>
+                    </a>
+                    {{-- LinkedIn --}}
+                    <a href="#" class="social-btn" aria-label="LinkedIn">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    {{-- Instagram --}}
+                    <a href="#" class="social-btn" aria-label="Instagram">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                        </svg>
+                    </a>
+                    {{-- YouTube --}}
+                    <a href="#" class="social-btn" aria-label="YouTube">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
+
+            {{-- ─── Quick links ─── --}}
             <div class="footer-col">
                 <h4>روابط سريعة</h4>
                 <ul>
@@ -287,8 +328,11 @@
                     <li><a href="/#features">الخدمات</a></li>
                     <li><a href="/#audience">للمكاتب</a></li>
                     <li><a href="/#how">كيف يعمل</a></li>
+                    <li><a href="{{ route('download') }}">تنزيل التطبيق</a></li>
                 </ul>
             </div>
+
+            {{-- ─── Legal ─── --}}
             <div class="footer-col">
                 <h4>القانوني</h4>
                 <ul>
@@ -297,12 +341,38 @@
                     <li><a href="{{ route('security') }}">الأمان</a></li>
                 </ul>
             </div>
+
+            {{-- ─── Contact ─── --}}
             <div class="footer-col">
                 <h4>تواصل معنا</h4>
-                <div class="footer-contact-item"><span>📞</span><span dir="ltr">+966 57 938 1480</span></div>
-                <div class="footer-contact-item"><span>✉️</span><span>info@mery.sa</span></div>
-                <div class="footer-contact-item"><span>📍</span><span>الرياض - المملكة العربية السعودية</span></div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <span class="footer-contact-text" dir="ltr">+966 57 938 1480</span>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <span class="footer-contact-text">info@mery.sa</span>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <span class="footer-contact-text">الرياض، المملكة العربية السعودية</span>
+                </div>
             </div>
+
         </div>
         <hr class="footer-divider">
         <div class="footer-bottom">

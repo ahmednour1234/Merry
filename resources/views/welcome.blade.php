@@ -223,9 +223,7 @@
 </style>
 @endsection
 
-@section('content')
-
-{{-- ══ PLACEHOLDER — real head/body/nav/footer come from layouts.site ══ --}}
+@section('_junk_head_IGNORED')
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -901,6 +899,10 @@
 
 </nav>
 
+@endsection
+
+@section('content')
+
 <!-- HERO -->
 <section class="hero" id="home">
     <div class="container">
@@ -1195,63 +1197,4 @@
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-    <div class="container">
-        <div class="footer-inner">
-            <div>
-                <div class="footer-logo">
-                    <img src="/public/images/merry-logo.png" alt="نظام ميري">
-                    <span class="footer-logo-text">نظام ميري</span>
-                </div>
-                <p class="footer-desc">منصة متكاملة تربط مكاتب الاستقدام والمستخدمين في منظومة واحدة لتقديم خدمات الاستقدام باحترافية وسهولة.</p>
-                <div class="footer-social">
-                    <a href="#" class="social-btn">𝕏</a>
-                    <a href="#" class="social-btn">in</a>
-                    <a href="#" class="social-btn">f</a>
-                    <a href="#" class="social-btn">▶</a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>روابط سريعة</h4>
-                <ul>
-                    <li><a href="/">الرئيسية</a></li>
-                    <li><a href="/about">عن التطبيق</a></li>
-                    <li><a href="#features">الخدمات</a></li>
-                    <li><a href="#audience">للمكاتب</a></li>
-                    <li><a href="#how">كيف يعمل</a></li>
-                    <li><a href="/download">تنزيل التطبيق</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>القانوني</h4>
-                <ul>
-                    <li><a href="/privacy">سياسة الخصوصية</a></li>
-                    <li><a href="/terms">الشروط والأحكام</a></li>
-                    <li><a href="/security">الأمان</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>تواصل معنا</h4>
-                <div class="footer-contact-item"><span>📞</span><span dir="ltr">+966 57 938 1480</span></div>
-                <div class="footer-contact-item"><span>✉️</span><span>info@mery.sa</span></div>
-                <div class="footer-contact-item"><span>📍</span><span>الرياض - المملكة العربية السعودية</span></div>
-            </div>
-        </div>
-        <hr class="footer-divider">
-        <div class="footer-bottom">
-            <p>© جميع الحقوق محفوظة لنظام ميري 2026</p>
-            <p>
-                <a href="/privacy" style="color:rgba(255,255,255,.3);text-decoration:none">سياسة الخصوصية</a>
-                &nbsp;·&nbsp;
-                <a href="/terms" style="color:rgba(255,255,255,.3);text-decoration:none">الشروط والأحكام</a>
-                &nbsp;·&nbsp;
-                <a href="/security" style="color:rgba(255,255,255,.3);text-decoration:none">الأمان</a>
-            </p>
-        </div>
-    </div>
-</footer>
-
-
-</body>
-</html>
+@endsection
